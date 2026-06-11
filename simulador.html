@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Simulador Financiamento — Paulo Cotrim | Cury RJ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh}
+/* HEADER */
+.sim-hdr{background:#0d2040;padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.sim-hdr-logo img{height:44px;width:auto;display:block}.sim-hdr-logo{color:#fff;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;line-height:1.2}
+.sim-hdr-logo small{font-size:10px;opacity:.6;font-weight:500;letter-spacing:.08em;display:block}
+.sim-hdr-btns{display:flex;gap:10px}
+.btn-back{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-back:hover{background:rgba(255,255,255,.18)}
+.btn-wa-s{background:#16a34a;color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+/* HERO BAR */
+.sim-hero{background:linear-gradient(105deg,#0d2040 60%,#1e40af 100%);color:#fff;padding:32px;text-align:center}
+.sim-hero h1{font-size:clamp(22px,3vw,34px);font-weight:800;margin-bottom:8px}
+.sim-hero p{font-size:14px;opacity:.8;max-width:540px;margin:0 auto}
+.sim-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px}
+.chip{background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px}
+/* APP WRAP */
+.app-wrap{max-width:960px;margin:32px auto;padding:0 16px 48px}
+.sim-card{background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.08);overflow:hidden}
+/* simulator styles */
+.hdr2{background:#0F2544;padding:1.25rem 1.5rem 1rem}
+.hdr2-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.hdr2-left{display:flex;align-items:center;gap:14px}
+.av{width:50px;height:50px;border-radius:50%;background:#1B3A6B;border:2px solid #2563EB;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#93C5FD;flex-shrink:0;overflow:hidden}
+.av img{width:100%;height:100%;object-fit:cover}
+.hdr2-name{color:#fff;font-size:17px;font-weight:700;line-height:1.2}
+.hdr2-sub{color:#93C5FD;font-size:11px;margin-top:2px}
+.wa-btn2{display:flex;align-items:center;gap:7px;background:#15803D;color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
+.hdr2-div{height:.5px;background:#1B3A6B;margin:8px 0}
+.hdr2-meta{display:flex;gap:1.25rem;flex-wrap:wrap}
+.hdr2-meta span{display:flex;align-items:center;gap:5px;font-size:11px;color:#BFDBFE}
+.stabs{display:flex;gap:2px;background:#f1f5f9;padding:3px;border-radius:10px;margin:1rem 1.5rem;border:.5px solid #e2e8f0}
+.stab{flex:1;padding:7px 4px;font-size:11px;font-weight:600;border:none;border-radius:8px;cursor:pointer;background:transparent;color:#64748b;transition:all .15s}
+.stab.on{background:#fff;color:#1B3A6B;border:.5px solid #e2e8f0}
+.sim-body{padding:0 1.5rem 1.5rem}
+.sel-box{background:#fff;border:1.5px solid #2563EB;border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem}
+.sel-title{font-size:11px;font-weight:600;color:#1B3A6B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.g2s{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.g4s{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
+.fi2{display:flex;flex-direction:column;gap:3px}
+.fi2 label{font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
+.fi2 input,.fi2 select{font-size:13px;padding:7px 10px;border:.5px solid #e2e8f0;border-radius:7px;background:#f8fafc;color:#1e293b;width:100%}
+.fi2 input:focus,.fi2 select:focus{outline:none;border-color:#2563EB}
+.fi2.hl input{border-color:#15803D;background:#f0fdf4}.fi2.hl label{color:#15803D}
+.fi2.wn input{border-color:#C2410C;background:#fff7ed}.fi2.wn label{color:#C2410C}
+.pr2{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin-top:10px}
+.pi2{padding:10px 12px;border-radius:8px;display:flex;flex-direction:column;gap:3px}
+.pi2.b{background:#eff6ff;border:.5px solid #bfdbfe}.pi2.b .pv2{color:#1B3A6B}
+.pi2.g{background:#f0fdf4;border:.5px solid #bbf7d0}.pi2.g .pv2{color:#15803D}
+.pi2.o{background:#fff7ed;border:.5px solid #fed7aa}.pi2.o .pv2{color:#C2410C}
+.pi2.r{background:#fff1f1;border:.5px solid #fecaca}.pi2.r .pv2{color:#B91C1C}
+.pi2.v{background:#f5f3ff;border:.5px solid #ddd6fe}.pi2.v .pv2{color:#6D28D9}
+.pl2{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:#64748b}
+.pv2{font-size:14px;font-weight:700}
+.ps2{font-size:10px;color:#64748b;margin-top:1px}
+.ssec{background:#fff;border:.5px solid #e2e8f0;border-radius:11px;margin-bottom:.6rem;overflow:hidden}
+.ssh{padding:9px 1.2rem;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
+.ssh h3{font-size:12px;font-weight:600;color:#fff;flex:1;margin:0}
+.ssh .cv{font-size:13px;color:rgba(255,255,255,.8);transition:transform .2s}
+.ssh .cv.op{transform:rotate(180deg)}
+.ssb{padding:.9rem 1.2rem 1.1rem;border-top:.5px solid #e2e8f0}
+.s1x .ssh{background:#1D4ED8}.s2x .ssh{background:#15803D}
+.s3x .ssh{background:#C2410C}.scx .ssh{background:#0F2544}.skx .ssh{background:#0369A1}
+.mets2{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-top:9px}
+.mt2{background:#f8fafc;border-radius:7px;padding:9px 11px}
+.mt2 .ml{font-size:10px;color:#64748b;line-height:1.3}
+.mt2 .mv{font-size:13px;font-weight:700;margin-top:3px;color:#1e293b}
+.mt2.hi{background:#eff6ff;border:.5px solid #bfdbfe}.mt2.hi .mv{color:#1B3A6B}
+.mt2.gr{background:#f0fdf4;border:.5px solid #bbf7d0}.mt2.gr .mv{color:#15803D}
+.mt2.am{background:#fffbeb;border:.5px solid #fde68a}.mt2.am .mv{color:#B45309}
+.mt2.re{background:#fff1f1;border:.5px solid #fecaca}.mt2.re .mv{color:#B91C1C}
+.mt2.vi{background:#f5f3ff;border:.5px solid #ddd6fe}.mt2.vi .mv{color:#6D28D9}
+.tw2{overflow-x:auto;margin-top:7px}
+.st2{max-height:260px;overflow-y:auto}
+table{width:100%;border-collapse:collapse;font-size:11px}
+th{background:#f8fafc;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.3px;color:#64748b;padding:6px 7px;text-align:right;border-bottom:.5px solid #e2e8f0;position:sticky;top:0;z-index:1}
+th:first-child{text-align:left}
+td{padding:5px 7px;border-bottom:.5px solid #f1f5f9;text-align:right;color:#1e293b}
+td:first-child{text-align:left}
+tr:last-child td{border-bottom:none}
+tr.trx td{font-weight:700;background:#f8fafc}
+tr.s2rx td{background:#f8fafc}
+.is2{width:80px;font-size:11px;padding:3px 5px;border:.5px solid #e2e8f0;border-radius:4px;background:#f8fafc;color:#1e293b;text-align:right}
+.info-box2{background:#f8fafc;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12px;border-left:3px solid #2563EB}
+.info-box2 strong{color:#1B3A6B}
+.btn-pg{width:100%;padding:11px;background:#15803D;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:7px}
+.btn-pn{width:100%;padding:10px;background:#0F2544;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
+.or-div2{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:11px;color:#64748b}
+.or-div2::before,.or-div2::after{content:'';flex:1;height:.5px;background:#e2e8f0}
+.regra-tag2{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;margin-top:8px}
+.rt-sbpe2{background:#eff6ff;color:#1D4ED8;border:.5px solid #bfdbfe}
+.rt-mcmv2{background:#f0fdf4;color:#15803D;border:.5px solid #bbf7d0}
+.cb2{display:inline-flex;align-items:center;gap:4px;background:#fef9c3;color:#854D0E;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
+@media(max-width:600px){.g2s,.g4s,.pr2{grid-template-columns:1fr 1fr}.stabs{flex-wrap:wrap}}
+</style>
+<link rel="canonical" href="https://paulocotrim.com.br/simulador.html"/>
+<meta name="description" content="Simule seu financiamento imobiliário pelo Minha Casa Minha Vida. Calcule parcelas, entrada e FGTS em segundos. Paulo Cotrim · CRECI-RJ 77677-F."/>
+<meta property="og:title" content="Simulador MCMV — Paulo Cotrim | Cury RJ"/>
+<meta property="og:description" content="Simule seu financiamento Minha Casa Minha Vida em segundos. Parcelas, entrada e uso do FGTS calculados automaticamente."/>
+<meta property="og:url" content="https://paulocotrim.com.br/simulador.html"/>
+<meta property="og:image" content="https://paulocotrim.com.br/og-image.jpg"/>
+<meta property="og:type" content="website"/>
+
+</head>
+<body>
+<div class="sim-hdr">
+  <div class="sim-hdr-logo"><img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></div>
+  <div class="sim-hdr-btns">
+    <a href="index.html" class="btn-back">← Voltar ao site</a>
+    <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Fiz%20uma%20simulação%20e%20quero%20conversar." target="_blank"><button class="btn-wa-s">💬 WhatsApp</button></a>
+  </div>
+</div>
+<div class="sim-hero">
+  <h1>🧮 Simulador Profissional Cury</h1>
+  <p>Calcule aprovação Caixa, parcelamento de entrada, fase de obras e tabela direta. Preços atualizados Julho/2026.</p>
+  <div class="sim-chips">
+    <span class="chip">✅ 14 empreendimentos</span>
+    <span class="chip">📅 Julho/2026</span>
+    <span class="chip">📍 Rio de Janeiro</span>
+    <span class="chip">🏦 Caixa Econômica</span>
+  </div>
+</div>
+<div class="app-wrap">
+  <div class="sim-card">
+    <div id="sim-root"></div>
+  </div>
+
+  <!-- AVISO IMPORTANTE -->
+  <div style="
+    margin-top:20px;
+    background:#f8f8f8;
+    border:1px solid #e5e5e5;
+    border-radius:10px;
+    padding:16px 20px;
+    font-size:11.5px;
+    color:#555555;
+    line-height:1.4;
+    text-align:justify;
+    box-sizing:border-box;
+    width:100%;
+  ">
+    <p style="font-size:11.5px;font-weight:700;color:#333;margin-bottom:8px">⚠️ AVISO IMPORTANTE – INFORMAÇÕES, VALORES E CONDIÇÕES</p>
+
+    <p style="margin-bottom:8px">Os valores, parcelas, taxas de juros, condições de financiamento e valores de seguro apresentados nesta simulação são <strong>estimativas e valores prévios</strong>, elaborados com base em parâmetros de mercado, tabelas referenciais e na minha experiência de 17 anos no mercado imobiliário, sendo 8 anos de atuação exclusiva na Cury Construtora. Eles servem apenas como orientação, projeção e referência inicial para seu planejamento, <strong>podendo sofrer alterações, ajustes, variações ou divergências</strong> a qualquer momento, sem aviso prévio, conforme regras, políticas, normas e tabelas vigentes.</p>
+
+    <p style="margin-bottom:8px">✅ <strong>A confirmação dos valores reais, exatos, definitivos e válidos para contratação, assim como as condições finais de pagamento, taxas de juros efetivas, valores de prêmio de seguro, garantias, prazos, limites, documentação necessária e regras específicas de cada linha de crédito, produto ou serviço, será feita exclusivamente pela Cury Construtora e pela Caixa Econômica Federal</strong>, conforme suas políticas internas, normas legais, análise de crédito, perfil do cliente, regulamentações do Banco Central do Brasil, contratos vigentes e disposições aplicáveis ao Programa Minha Casa Minha Vida e demais modalidades de financiamento imobiliário.</p>
+
+    <p style="margin-bottom:8px">Todos os dados apresentados nesta ferramenta são apenas uma aproximação fundamentada no meu conhecimento prático, vivência, domínio dos processos e experiência consolidada junto à construtora e à instituição financeira, visando oferecer maior clareza, segurança e transparência na sua jornada de compra. Para todos os efeitos legais e contratuais, <strong>somente terão validade os valores, condições e informações constantes nos documentos oficiais, propostas formais, contratos e comunicações emitidas diretamente pela Cury Construtora e pela Caixa Econômica Federal</strong>, sendo esses os únicos que geram direitos e obrigações entre as partes.</p>
+
+    <p>Este simulador não constitui oferta, proposta vinculante, compromisso de venda, promessa de financiamento, garantia de aprovação de crédito ou contratação de seguro, servindo apenas como ferramenta de consulta e planejamento.</p>
+  </div>
+</div>
+
+<script>
+const BRL=v=>'R$ '+Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const PCT=v=>(v*100).toFixed(2)+'%';
+const N2=v=>Number(v).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+const parseBRL=v=>parseFloat(String(v).replace(/\./g,'').replace(',','.'))||0;
+
+const DB={
+"Parque Piedade":{c:true,tips:[
+  {n:"2Qts s/Vaga 38,5m²",p:263200,a:263200},{n:"2Qts s/Vaga 41,2m²",p:272000,a:272000},
+  {n:"2Qts c/Vaga 38,5m²",p:309473.50,a:289000},{n:"2Qts c/Vaga 41,2m²",p:329773.50,a:289000},
+  {n:"Garden 2Qts c/Vaga 52m²",p:345100,a:289000},{n:"Garden 2Qts c/Vaga 54,5m²",p:360223.50,a:289000}]},
+"Cartola I":{c:true,tips:[
+  {n:"1Qt s/Vaga 31m²",p:313946.04,a:337000},{n:"2Qts Meio c/Vaga 38m²",p:377000,a:360000},
+  {n:"2Qts Suíte c/Vaga 47m²",p:483379.95,a:397000},{n:"2Qts Suíte c/Vaga 52m²",p:531280.27,a:411000}]},
+"Cartola II":{c:true,tips:[
+  {n:"1Qt s/Vaga 31m²",p:302470,a:323000},{n:"2Qts s/Vaga 38m²",p:356265,a:384000},
+  {n:"2Qts Suíte s/Vaga 47m²",p:415033.50,a:460000},{n:"2Qts Suíte c/Vaga 47m²",p:474918.50,a:500000}]},
+"Caminhos da Guanabara":{c:false,tips:[
+  {n:"1Qt 32m²",p:334999,a:317000},{n:"2Qts 42m²",p:384327.43,a:400000},
+  {n:"2Qts Ponta 43m²",p:404891.20,a:400000},{n:"2Qts Suíte+Vaga 51m²",p:506627.76,a:484000}]},
+"Farol da Guanabara":{c:true,tips:[
+  {n:"Estúdio 32,6m² (10°-14°)",p:402875.37,a:393000},{n:"Estúdio 32,6m² (20°-25°)",p:413304.45,a:393000},
+  {n:"1Qt 32,8m² (5°-9°)",p:441671.55,a:394000},{n:"3Qts Suíte+Vaga 67,6m²",p:861442.02,a:600000}]},
+"Nova Norte (Ginga)":{c:true,tips:[
+  {n:"2Qts s/Vaga 39m²",p:270118.71,a:263200},{n:"2Qts Suíte+Vaga 55,8m²",p:427592.29,a:376100},
+  {n:"3Qts Suíte+Vaga 63,5m²",p:454707.89,a:421800}]},
+"Nova Norte (Raízes)":{c:true,tips:[
+  {n:"2Qts s/Vaga 36m²",p:270118.71,a:263000},{n:"2Qts Suíte+Vaga 52m²",p:398224.39,a:386000},
+  {n:"3Qts Suíte+Vaga 60m²",p:454074.86,a:423000}]},
+"Luzes do Rio Candeeiro":{c:false,tips:[
+  {n:"1Qt 32m²",p:361962.05,a:351000},{n:"2Qts 36m²",p:408659.43,a:385000},
+  {n:"2Qts 38m²",p:424225.22,a:398000}]},
+"Luzes do Rio Lamparina":{c:false,tips:[
+  {n:"1Qt s/Vaga 32m²",p:309067.50,a:341000},{n:"2Qts s/Vaga 38m²",p:359817.50,a:381000},
+  {n:"2Qts Suíte c/Vaga 52m²",p:492782.50,a:544000},{n:"Garden 2Qts c/Vaga 54m²",p:507500,a:484000}]},
+"Orla Recreio Reserva":{c:true,tips:[
+  {n:"2Qts 48m²",p:380000,a:339000},{n:"2Qts Suíte c/Vaga 52m²",p:501775.90,a:342800},
+  {n:"3Qts c/Vaga 67m²",p:586990.50,a:538000}]},
+"Porto Maravilha (Arcos)":{c:false,tips:[
+  {n:"2Qts s/Vaga 40m²",p:360588.50,a:315000},{n:"2Qts Suíte c/Vaga 45m²",p:480297.79,a:360000},
+  {n:"2Qts Suíte c/Vaga 45m² (16°-19°)",p:492320.27,a:404000}]},
+"Vargas 1140":{c:false,tips:[
+  {n:"Studio 31,65m²",p:329823.57,a:370000},{n:"1Qt 37,54m²",p:468044.95,a:430000},
+  {n:"2Qts 53,9m²",p:470708.50,a:600000}]},
+"My Jacarepaguá Life":{c:true,tips:[
+  {n:"2Qts s/Vaga 36m²",p:242379.74,a:226400},{n:"2Qts c/Vaga 38m²",p:257332.49,a:246200},
+  {n:"Garden 57m²",p:319535.64,a:274200}]},
+"Heitor dos Prazeres":{c:false,tips:[
+  {n:"2Qts s/Vaga 39m²",p:378387.56,a:373000},{n:"2Qts Suíte c/Vaga 53m²",p:552510.09,a:560000},
+  {n:"Garden 2Qts c/Vaga 70m²",p:615654.10,a:508800}]}
+};
+const NAMES=Object.keys(DB);
+
+let S={tab:0,cond:"Parque Piedade",tipIdx:2,valorImovel:309473.50,avaliacao:289000,modalidade:"mcmv",aprovacaoCaixa:231578.80,prestCaixa:1200,prazo:360,
+  s2:[{t:"À Vista",q:1,u:9996},{t:"Mensal",q:36,u:950},{t:"Anual",q:2,u:5000},{t:"Única",q:1,u:5000}],
+  s4:{vu:481540,ato:149800,pi:30000,pqm:23,pvm:2600,pqa:0,pva:0,chave:15000,oqm:48,ovm:6494.58,oqa:2,ova:10000},
+  open:{s1:true,s2:true,s3:false,s4:false,sk:false,sc:true}};
+
+function calcAprovacaoAuto(){return Math.min(S.avaliacao*(S.modalidade==='sbpe'?0.90:0.80),S.avaliacao)}
+function calc(){
+  const pctFin=S.modalidade==='sbpe'?0.90:0.80;
+  const avalMaxFin=S.avaliacao*pctFin;
+  const aprovado=S.aprovacaoCaixa;
+  const entrada=S.valorImovel-aprovado;
+  const tot=S.s2.reduce((a,r)=>a+r.q*r.u,0);
+  const men=S.s2.find(r=>r.t==="Mensal")?.u||0;
+  const pcts=Array.from({length:36},(_,i)=>0.2+(0.8/35)*i);
+  const rows=pcts.map((p,i)=>({m:i+1,p,seg:S.prestCaixa*p,men,tot:S.prestCaixa*p+men}));
+  const {ato,pi,pqm,pvm,pqa,pva,chave,oqm,ovm,oqa,ova,vu}=S.s4;
+  const tPreM=pqm*pvm,tPreA=pqa*pva,tPre=ato+pi+tPreM+tPreA+chave;
+  const tPosM=oqm*ovm,tPosA=oqa*ova,tPos=tPosM+tPosA;
+  return{pctFin,avalMaxFin,aprovado,entrada,tot,rows,men,tPreM,tPreA,tPre,tPosM,tPosA,tPos,saldo:vu-ato,rendMin30:S.prestCaixa/0.30,rendMin35:S.prestCaixa/0.35};
+}
+
+function tog(id){S.open[id]=!S.open[id];render()}
+function selC(v){S.cond=v;S.tipIdx=0;const t=DB[v].tips[0];S.valorImovel=t.p;S.avaliacao=t.a;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
+function selT(v){S.tipIdx=+v;const t=DB[S.cond].tips[S.tipIdx];S.valorImovel=t.p;S.avaliacao=t.a;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
+function setMod(v){S.modalidade=v;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
+function updF(k,v){S[k]=parseBRL(v);if(k==='avaliacao')S.aprovacaoCaixa=calcAprovacaoAuto();render()}
+function updAprov(v){S.aprovacaoCaixa=parseBRL(v);render()}
+function updS2(i,k,v){S.s2[i][k]=parseFloat(v)||0;render()}
+function updS4(k,v){S.s4[k]=parseFloat(v)||0;render()}
+
+function ssec(id,title,cls,fn){
+  const o=S.open[id];
+  return`<div class="ssec ${cls}"><div class="ssh" onclick="tog('${id}')"><h3>${title}</h3><span class="cv ${o?'op':''}">▼</span></div>${o?`<div class="ssb">${fn()}</div>`:''}</div>`;
+}
+function whatsappSim(){
+  const tip=DB[S.cond].tips[S.tipIdx];const c=calc();
+  const msg=`Olá Paulo! Fiz a simulação:\n\n🏠 *${S.cond}* — ${tip.n}\n💰 Preço: ${BRL(tip.p)}\n✅ Aprovação Caixa: ${BRL(c.aprovado)}\n📋 Entrada: ${BRL(c.entrada)}\n📅 Modalidade: ${S.modalidade.toUpperCase()}\n\nQuero saber mais!`;
+  // Envia lead para o CRM
+  if(window.enviarLeadCRM) enviarLeadCRM({
+    nome: 'Lead Simulador', telefone: '',
+    interesse: S.cond + ' — ' + tip.n,
+    renda: 'R$'+Math.round(S.renda),
+    regiao: S.cond,
+    origem: 'simulador',
+    extras: { preco: tip.p, entrada: c.entrada, aprovado: c.aprovado, modalidade: S.modalidade }
+  });
+  window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');
+}
+
+function renderSim(){
+  const c=calc();const isSBPE=S.modalidade==='sbpe';const tips=DB[S.cond].tips;
+  const fotoPaulo=localStorage.getItem('pc_foto_paulo')||'';
+  return`
+<div class="hdr2">
+  <div class="hdr2-top">
+    <div class="hdr2-left">
+      <div class="av">${fotoPaulo?`<img src="${fotoPaulo}" alt="Paulo"/>`:'PC'}</div>
+      <div><div class="hdr2-name">Paulo Cotrim</div><div class="hdr2-sub">Coordenador Cury — Simulador Profissional</div></div>
+    </div>
+    <button class="wa-btn2" onclick="whatsappSim()">📱 Enviar pelo WhatsApp</button>
+  </div>
+  <div class="hdr2-div"></div>
+  <div class="hdr2-meta">
+    <span>🏗 ${NAMES.length} empreendimentos</span><span>📅 Julho/2026</span><span>📍 Rio de Janeiro</span>
+  </div>
+</div>
+<div class="stabs">
+  <button class="stab ${S.tab===0?'on':''}" onclick="S.tab=0;render()">🏠 Simulação Caixa</button>
+  <button class="stab ${S.tab===1?'on':''}" onclick="S.tab=1;render()">💰 Tabela Direta</button>
+</div>
+<div class="sim-body">
+${S.tab===0?renderTabSim(c,isSBPE,tips):renderTabDireta(c)}
+</div>`;
+}
+
+function renderTabSim(c,isSBPE,tips){return`
+<div class="sel-box">
+  <div class="sel-title">🏢 Empreendimento &nbsp;<span style="color:#94a3b8;font-weight:400;font-size:10px">${NAMES.length} disponíveis — Julho 2026</span></div>
+  <div class="g2s" style="margin-bottom:10px">
+    <div class="fi2"><label>Condomínio</label><select onchange="selC(this.value)">${NAMES.map(n=>`<option value="${n}" ${n===S.cond?'selected':''}>${n}${DB[n].c?' ★':''}</option>`).join('')}</select></div>
+    <div class="fi2"><label>Tipologia</label><select onchange="selT(this.value)">${tips.map((t,i)=>`<option value="${i}" ${i===S.tipIdx?'selected':''}>${t.n}</option>`).join('')}</select></div>
+  </div>
+  <div class="g2s">
+    <div class="fi2"><label>Modalidade</label><select onchange="setMod(this.value)"><option value="mcmv" ${S.modalidade==='mcmv'?'selected':''}>MCMV — até R$ 12.000 (financia 80%)</option><option value="sbpe" ${S.modalidade==='sbpe'?'selected':''}>SBPE — acima de R$ 12.000 (financia 90%)</option></select></div>
+    <div style="display:flex;align-items:center;padding-top:18px"><span class="regra-tag2 ${isSBPE?'rt-sbpe2':'rt-mcmv2'}">${isSBPE?'SBPE — máx. 90%':'MCMV — máx. 80%'}</span></div>
+  </div>
+  <div class="pr2">
+    <div class="pi2 b"><span class="pl2">Preço</span><span class="pv2">${BRL(S.valorImovel)}</span></div>
+    <div class="pi2 o"><span class="pl2">Avaliação</span><span class="pv2">${BRL(S.avaliacao)}</span></div>
+    <div class="pi2 v"><span class="pl2">Máx. financiável</span><span class="pv2">${BRL(c.avalMaxFin)}</span></div>
+    <div class="pi2 g"><span class="pl2">Aprovação Caixa</span><span class="pv2">${BRL(c.aprovado)}</span></div>
+    <div class="pi2 r"><span class="pl2">Entrada</span><span class="pv2">${BRL(c.entrada)}</span></div>
+  </div>
+  ${DB[S.cond].c?`<span class="cb2">⭐ Campanha Julho 2026</span>`:''}
+</div>
+${ssec('s1','Seção 1 — Dados do financiamento','ssec s1x',()=>`
+<div class="info-box2"><strong>Como funciona:</strong> Entrada = Preço − Aprovação Caixa (${isSBPE?'90%':'80%'} da avaliação = ${BRL(c.avalMaxFin)}). Edite abaixo se necessário.</div>
+<div class="g2s" style="margin-bottom:9px">
+  <div class="fi2"><label>Preço do imóvel (R$)</label><input type="text" value="${N2(S.valorImovel)}" oninput="updF('valorImovel',this.value)"></div>
+  <div class="fi2"><label>Avaliação banco (R$)</label><input type="text" value="${N2(S.avaliacao)}" oninput="updF('avaliacao',this.value)"></div>
+  <div class="fi2 hl"><label>Aprovação Caixa — liberado (R$)</label><input type="text" value="${N2(S.aprovacaoCaixa)}" oninput="updAprov(this.value)"></div>
+  <div class="fi2 wn"><label>Prestação Caixa — base seguro (R$)</label><input type="text" value="${N2(S.prestCaixa)}" oninput="updF('prestCaixa',this.value)"></div>
+</div>
+<div class="mets2">
+  <div class="mt2 hi"><div class="ml">Financiamento máx.</div><div class="mv">${BRL(c.avalMaxFin)}</div></div>
+  <div class="mt2 gr"><div class="ml">Aprovação Caixa</div><div class="mv">${BRL(c.aprovado)}</div></div>
+  <div class="mt2 re"><div class="ml">Entrada necessária</div><div class="mv">${BRL(c.entrada)}</div></div>
+  <div class="mt2 am"><div class="ml">Seguro inicial (20%)</div><div class="mv">${BRL(S.prestCaixa*0.2)}</div></div>
+  <div class="mt2 vi"><div class="ml">Seguro na entrega</div><div class="mv">${BRL(S.prestCaixa)}</div></div>
+</div>`)}
+${ssec('sk','Renda mínima necessária','ssec skx',()=>`
+<div class="mets2"><div class="mt2 am"><div class="ml">Renda mínima (30%)</div><div class="mv">${BRL(c.rendMin30)}</div></div><div class="mt2 gr"><div class="ml">Renda mínima (35%)</div><div class="mv">${BRL(c.rendMin35)}</div></div></div>
+<p style="font-size:10px;color:#94a3b8;margin-top:8px">Baseado na prestação de ${BRL(S.prestCaixa)}. Renda pode ser composta com familiares.</p>`)}
+${ssec('s2','Seção 2 — Parcelamento da entrada (Cury)','ssec s2x',()=>`
+<p style="font-size:11px;color:#64748b;margin-bottom:8px">Entrada: <strong style="color:#B91C1C">${BRL(c.entrada)}</strong> &nbsp;|&nbsp; Total: <strong>${BRL(c.tot)}</strong> ${c.tot<c.entrada?`<span style="color:#B91C1C">⚠ faltam ${BRL(c.entrada-c.tot)}</span>`:`<span style="color:#15803D">✓ coberta</span>`}</p>
+<div class="tw2"><table><thead><tr><th>Tipo</th><th>Qtd</th><th>Valor unit.</th><th>Total</th></tr></thead>
+<tbody>${S.s2.map((r,i)=>`<tr class="${i%2?'s2rx':''}"><td>${r.t}</td><td><input class="is2" type="number" value="${r.q}" oninput="updS2(${i},'q',this.value)"></td><td><input class="is2" style="width:90px" type="number" value="${r.u}" oninput="updS2(${i},'u',this.value)"></td><td>${BRL(r.q*r.u)}</td></tr>`).join('')}
+<tr class="trx"><td colspan="3">TOTAL ENTRADA</td><td>${BRL(c.tot)}</td></tr></tbody></table></div>`)}
+${ssec('s3','Seção 3 — Fase de obras (36 meses)','ssec s3x',()=>`
+<div class="info-box2" style="border-left-color:#C2410C"><strong>Seguro progressivo:</strong> 20% → 100% da prestação Caixa (${BRL(S.prestCaixa)}) em 36 meses.</div>
+<div class="tw2"><div class="st2"><table><thead><tr><th style="text-align:center">Mês</th><th>% Seguro</th><th>Seguro</th><th>Entrada</th><th>Total/mês</th></tr></thead>
+<tbody>${c.rows.map((r,i)=>`<tr class="${i%2?'s2rx':''}"><td style="text-align:center">${r.m}</td><td style="text-align:center">${PCT(r.p)}</td><td>${BRL(r.seg)}</td><td>${BRL(r.men)}</td><td style="font-weight:700;color:#1B3A6B">${BRL(r.tot)}</td></tr>`).join('')}</tbody></table></div></div>`)}
+${ssec('sc','Quero iniciar minha aprovação de crédito','ssec scx',()=>{
+  const tip=DB[S.cond].tips[S.tipIdx];
+  return`<div style="border:1.5px solid #0F2544;border-radius:10px;padding:1.1rem">
+  <div style="background:#f8fafc;border-radius:7px;padding:8px 10px;margin-bottom:12px;font-size:11px">
+    <strong>${S.cond}</strong> — ${tip.n} — <span style="color:#1B3A6B;font-weight:700">${BRL(tip.p)}</span> &nbsp;|&nbsp; <strong>${S.modalidade.toUpperCase()}</strong>
+  </div>
+  <div class="g2s" style="margin-bottom:10px">
+    <div class="fi2"><label>Nome completo</label><input type="text" id="cf-nome" placeholder="Seu nome"></div>
+    <div class="fi2"><label>WhatsApp</label><input type="text" id="cf-tel" placeholder="(21) 99999-9999"></div>
+  </div>
+  <button class="btn-pg" onclick="whatsappSim()">📱 Falar com Paulo no WhatsApp</button></div>`;
+})}`;
+}
+
+function renderTabDireta(c){
+  const {ato,pi,pqm,pvm,chave,oqm,ovm,oqa,ova,vu}=S.s4;
+  return`<div class="sel-box">
+  <div class="sel-title">📋 Tabela Direta Cury — sem financiamento</div>
+  <div class="g2s" style="margin-bottom:12px">
+    <div class="fi2"><label>Valor total (R$)</label><input type="number" value="${vu}" oninput="updS4('vu',this.value)"></div>
+    <div class="fi2"><label>Ato / Entrada (R$)</label><input type="number" value="${ato}" oninput="updS4('ato',this.value)"></div>
+  </div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div style="border:.5px solid #e2e8f0;border-radius:8px;overflow:hidden">
+      <div style="background:#6D28D9;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pré-chaves — 3 anos</div>
+      <div style="padding:9px 11px">
+        <div class="g2s" style="gap:6px;margin-bottom:8px">
+          <div class="fi2"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${pqm}" oninput="updS4('pqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
+          <div class="fi2"><label style="font-size:10px">Vl mensal</label><input type="number" value="${pvm}" oninput="updS4('pvm',this.value)" style="font-size:12px;padding:5px 8px"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Ato</span><span style="font-weight:600">${BRL(ato)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Mensais (${pqm}×)</span><span style="font-weight:600">${BRL(c.tPreM)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0"><span style="color:#64748b">Chave</span><span style="font-weight:600">${BRL(chave)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0"><span>Total pré-chaves</span><span style="color:#6D28D9">${BRL(c.tPre)}</span></div>
+      </div>
+    </div>
+    <div style="border:.5px solid #e2e8f0;border-radius:8px;overflow:hidden">
+      <div style="background:#C2410C;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pós-chaves — 4 anos</div>
+      <div style="padding:9px 11px">
+        <div class="g2s" style="gap:6px;margin-bottom:8px">
+          <div class="fi2"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${oqm}" oninput="updS4('oqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
+          <div class="fi2"><label style="font-size:10px">Vl mensal</label><input type="number" value="${ovm}" oninput="updS4('ovm',this.value)" style="font-size:12px;padding:5px 8px"></div>
+        </div>
+        <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Mensais (${oqm}×)</span><span style="font-weight:600">${BRL(c.tPosM)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0"><span>Total pós-chaves</span><span style="color:#C2410C">${BRL(c.tPos)}</span></div>
+        <div style="margin-top:9px;padding:9px;background:#f8fafc;border-radius:7px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;border-top:.5px solid #e2e8f0;padding-top:6px;margin-top:6px"><span>Total geral</span><span style="color:#6D28D9">${BRL(c.tPre+c.tPos)}</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>`;
+}
+
+function render(){document.getElementById('sim-root').innerHTML=renderSim()}
+render();
+</script>
+<script src="crm-config.js"></script>
+<script src="admin-panel.js" defer></script>
+
+<!-- WhatsApp FAB -->
+<style>
+.wa-fab{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.wa-fab a{background:#25d366;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;white-space:nowrap;text-decoration:none}
+.wa-fab a:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,.5)}
+.wa-fab-pulse{width:56px;height:56px;border-radius:50%;padding:0;justify-content:center;font-size:24px}
+@media(max-width:600px){.wa-fab-label{display:none}}
+</style>
+<div class="wa-fab">
+  <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Fiz%20uma%20simulação%20de%20financiamento%20e%20quero%20evoluir." target="_blank" rel="noopener">
+    <span>💬</span><span class="wa-fab-label">Falar com Paulo</span>
+  </a>
+</div>
+</body>
+</html>

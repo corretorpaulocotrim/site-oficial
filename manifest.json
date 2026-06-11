@@ -1,0 +1,50 @@
+{
+  "name": "Paulo Cotrim — Especialista Cury Porto Maravilha",
+  "short_name": "Paulo Cotrim",
+  "description": "Especialista em imóveis no Porto Maravilha. +700 famílias atendidas. Aprovação em 48h.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#060f1e",
+  "theme_color": "#060f1e",
+  "orientation": "portrait-primary",
+  "lang": "pt-BR",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "01.jpeg",
+      "sizes": "1280x720",
+      "type": "image/jpeg"
+    }
+  ],
+  "categories": ["real estate", "business"],
+  "shortcuts": [
+    {
+      "name": "WhatsApp Paulo",
+      "short_name": "WhatsApp",
+      "description": "Falar diretamente com Paulo Cotrim",
+      "url": "https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo!%20Vim%20pelo%20site.",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Simulador",
+      "short_name": "Simular",
+      "description": "Simular financiamento imobiliário",
+      "url": "/simulador.html",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    },
+    {
+      "name": "Aprovação 48h",
+      "short_name": "Aprovação",
+      "description": "Iniciar pré-aprovação expressa",
+      "url": "/aprovacao-expressa.html",
+      "icons": [{ "src": "favicon.svg", "sizes": "any" }]
+    }
+  ]
+}

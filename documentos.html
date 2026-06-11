@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Documentos & Ferramentas — Paulo Cotrim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=DM+Serif+Display:ital@0;1&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0F2544;--navy2:#091530;--blue:#2563EB;--green:#16a34a;
+  --purple:#6D28D9;--orange:#C2410C;--gold:#B45309;
+  --text:#0F172A;--muted:#64748B;--light:#F8FAFC;--border:#E2E8F0;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--light);color:var(--text);min-height:100vh}
+a{text-decoration:none;color:inherit}
+
+/* ── HEADER ── */
+.hdr{background:var(--navy);padding:0 40px;height:66px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.07)}
+.hdr-logo{color:#fff;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;line-height:1.2}
+.hdr-logo small{font-size:10px;opacity:.6;font-weight:500;display:block;letter-spacing:.08em}
+.hdr-right{display:flex;gap:10px}
+.btn-back{color:rgba(255,255,255,.8);font-size:13px;font-weight:600;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.15);padding:8px 16px;border-radius:7px;cursor:pointer;transition:all .2s}
+.btn-back:hover{background:rgba(255,255,255,.15);color:#fff}
+
+/* ── HERO ── */
+.hero{background:linear-gradient(135deg,var(--navy) 0%,#1e3a8a 60%,#1e40af 100%);padding:56px 40px 48px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")}
+.hero-tag{display:inline-flex;align-items:center;gap:7px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:11px;font-weight:700;padding:5px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:18px}
+.hero h1{font-family:'DM Serif Display',serif;font-size:clamp(32px,4vw,48px);color:#fff;line-height:1.1;margin-bottom:12px}
+.hero h1 em{color:#93C5FD;font-style:normal}
+.hero p{font-size:15px;color:rgba(255,255,255,.75);max-width:520px;margin:0 auto;line-height:1.65}
+
+/* ── MAIN ── */
+.main{max-width:1100px;margin:0 auto;padding:48px 32px 80px}
+
+/* ── SECTION HEADER ── */
+.sec-hdr{display:flex;align-items:center;gap:12px;margin-bottom:22px}
+.sec-hdr-line{flex:1;height:1px;background:var(--border)}
+.sec-hdr-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);white-space:nowrap;padding:0 4px}
+
+/* ── TOOL CARDS ── */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px;margin-bottom:52px}
+
+.tool-card{background:#fff;border-radius:16px;border:1.5px solid var(--border);overflow:hidden;transition:transform .22s,box-shadow .22s;cursor:pointer;display:flex;flex-direction:column}
+.tool-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1)}
+
+.tool-card-top{padding:24px 24px 20px;flex:1}
+.tool-icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:16px;flex-shrink:0}
+.ic-blue{background:#EFF6FF}
+.ic-purple{background:#F5F3FF}
+.ic-green{background:#F0FDF4}
+.ic-orange{background:#FFF7ED}
+.ic-gold{background:#FEFCE8}
+.ic-navy{background:#EFF6FF}
+
+.tool-tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.tag-blue{background:#EFF6FF;color:#1D4ED8}
+.tag-purple{background:#F5F3FF;color:#6D28D9}
+.tag-green{background:#F0FDF4;color:#15803D}
+.tag-orange{background:#FFF7ED;color:#C2410C}
+.tag-gold{background:#FEFCE8;color:#B45309}
+
+.tool-card-top h3{font-size:17px;font-weight:700;color:var(--navy);margin-bottom:8px;line-height:1.2}
+.tool-card-top p{font-size:13px;color:#475569;line-height:1.6}
+
+.tool-card-bottom{padding:14px 24px 20px;border-top:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.tool-meta{font-size:11px;color:var(--muted)}
+.btn-abrir{padding:9px 18px;border-radius:8px;font-size:13px;font-weight:700;border:none;cursor:pointer;transition:all .2s;font-family:inherit;display:flex;align-items:center;gap:6px}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{background:#1D4ED8}
+.btn-purple{background:var(--purple);color:#fff}.btn-purple:hover{background:#5B21B6}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{background:#15803d}
+.btn-orange{background:var(--orange);color:#fff}.btn-orange:hover{background:#9A3412}
+.btn-gold{background:var(--gold);color:#fff}.btn-gold:hover{background:#92400E}
+.btn-navy{background:var(--navy);color:#fff}.btn-navy:hover{background:#1B3A6B}
+
+/* ── FEATURED (TABELA DIRETA) ── */
+.featured-card{background:var(--navy);border-radius:18px;padding:32px;display:flex;gap:28px;align-items:center;margin-bottom:52px;position:relative;overflow:hidden}
+.featured-card::before{content:'';position:absolute;right:-40px;top:-40px;width:220px;height:220px;background:rgba(255,255,255,.04);border-radius:50%}
+.featured-card::after{content:'';position:absolute;right:30px;bottom:-60px;width:160px;height:160px;background:rgba(255,255,255,.03);border-radius:50%}
+.feat-icon{font-size:52px;flex-shrink:0}
+.feat-body{flex:1;position:relative;z-index:1}
+.feat-tag{display:inline-block;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.9);font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;text-transform:uppercase;letter-spacing:.1em;margin-bottom:12px}
+.feat-body h2{font-family:'DM Serif Display',serif;font-size:26px;color:#fff;margin-bottom:8px;line-height:1.15}
+.feat-body p{font-size:14px;color:rgba(255,255,255,.75);line-height:1.6;margin-bottom:20px}
+.feat-btns{display:flex;gap:10px;flex-wrap:wrap}
+.btn-feat-primary{background:#fff;color:var(--navy);padding:12px 24px;border-radius:9px;font-size:14px;font-weight:800;border:none;cursor:pointer;transition:opacity .2s;display:flex;align-items:center;gap:7px}
+.btn-feat-primary:hover{opacity:.92}
+.btn-feat-secondary{background:rgba(255,255,255,.12);color:#fff;padding:12px 20px;border-radius:9px;font-size:14px;font-weight:600;border:1px solid rgba(255,255,255,.25);cursor:pointer;transition:background .2s}
+.btn-feat-secondary:hover{background:rgba(255,255,255,.2)}
+
+/* ── QUICK ACCESS ── */
+.quick-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:14px;margin-bottom:52px}
+.quick-card{background:#fff;border:1.5px solid var(--border);border-radius:12px;padding:18px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;cursor:pointer;transition:all .2s}
+.quick-card:hover{border-color:var(--navy);transform:translateY(-2px);box-shadow:0 8px 20px rgba(0,0,0,.08)}
+.quick-card .qi{font-size:28px}
+.quick-card .ql{font-size:12px;font-weight:700;color:var(--navy)}
+.quick-card .qs{font-size:11px;color:var(--muted)}
+
+/* ── FOOTER ── */
+.doc-footer{background:var(--navy2);color:rgba(255,255,255,.5);text-align:center;padding:24px;font-size:13px}
+.doc-footer strong{color:rgba(255,255,255,.8)}
+
+/* ── RESPONSIVE ── */
+@media(max-width:768px){
+  .hdr{padding:0 16px}
+  .hero{padding:40px 20px 36px}
+  .main{padding:32px 16px 60px}
+  .featured-card{flex-direction:column;padding:24px}
+  .tools-grid{grid-template-columns:1fr}
+  .quick-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+<link rel="canonical" href="https://paulocotrim.com.br/documentos.html"/>
+<meta name="description" content="Checklists, documentos e ferramentas para aprovação de financiamento imobiliário. Paulo Cotrim · CRECI-RJ 77677-F."/>
+<meta property="og:title" content="Documentos & Ferramentas — Paulo Cotrim"/>
+<meta property="og:description" content="Checklists completos para compra de imóvel, financiamento e uso do FGTS. Paulo Cotrim, especialista Cury no Rio de Janeiro."/>
+<meta property="og:url" content="https://paulocotrim.com.br/documentos.html"/>
+<meta property="og:image" content="https://paulocotrim.com.br/og-image.jpg"/>
+<meta property="og:type" content="website"/>
+
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="hdr">
+  <a href="index.html" class="hdr-logo"><img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></a>
+  <div class="hdr-right">
+    <a href="index.html"><button class="btn-back">← Voltar ao site</button></a>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-tag">📁 Central de Ferramentas</div>
+  <h1>Documentos &<br><em>Ferramentas Profissionais</em></h1>
+  <p>Acesso rápido a todas as ferramentas criadas para otimizar seus atendimentos, simulações e apresentações.</p>
+</div>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- FEATURED: TABELA DIRETA -->
+  <div class="featured-card">
+    <div class="feat-icon">📊</div>
+    <div class="feat-body">
+      <div class="feat-tag">⭐ Ferramenta Principal</div>
+      <h2>Tabela do Investidor Cury</h2>
+      <p>Calcule e apresente condições de pagamento da tabela direta da Cury ao cliente — pré-chaves, pós-chaves, ato e resumo consolidado. Visual profissional pronto para impressão.</p>
+      <div class="feat-btns">
+        <a href="investidor.html" target="_blank">
+          <button class="btn-feat-primary">📊 Abrir Tabela do Investidor</button>
+        </a>
+        <a href="simulador.html">
+          <button class="btn-feat-secondary">🧮 Abrir Simulador Caixa</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ACESSO RÁPIDO -->
+  <div class="sec-hdr">
+    <div class="sec-hdr-line"></div>
+    <div class="sec-hdr-label">Acesso Rápido</div>
+    <div class="sec-hdr-line"></div>
+  </div>
+  <div class="quick-grid">
+    <a href="investidor.html" target="_blank">
+      <div class="quick-card"><div class="qi">📊</div><div class="ql">Tabela do Investidor</div><div class="qs">Cury — Direta</div></div>
+    </a>
+    <a href="simulador.html">
+      <div class="quick-card"><div class="qi">🧮</div><div class="ql">Simulador</div><div class="qs">Caixa — MCMV/SBPE</div></div>
+    </a>
+    <a href="admin.html">
+      <div class="quick-card"><div class="qi">⚙️</div><div class="ql">Admin</div><div class="qs">Editar site</div></div>
+    </a>
+    <a href="index.html">
+      <div class="quick-card"><div class="qi">🌐</div><div class="ql">Site Principal</div><div class="qs">paulocotrim.com</div></div>
+    </a>
+    <a href="https://wa.me/5521989150864" target="_blank">
+      <div class="quick-card"><div class="qi">💬</div><div class="ql">WhatsApp</div><div class="qs">(21) 98915-0864</div></div>
+    </a>
+    <a href="https://instagram.com/corretor.paulocotrim" target="_blank">
+      <div class="quick-card"><div class="qi">📷</div><div class="ql">Instagram</div><div class="qs">@corretor.paulocotrim</div></div>
+    </a>
+  </div>
+
+  <!-- FERRAMENTAS -->
+  <div class="sec-hdr">
+    <div class="sec-hdr-line"></div>
+    <div class="sec-hdr-label">Ferramentas de Simulação</div>
+    <div class="sec-hdr-line"></div>
+  </div>
+  <div class="tools-grid">
+
+    <div class="tool-card" onclick="window.open('investidor.html#tabela-julho','_blank')">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-purple">📊</div>
+        <div class="tool-tag tag-purple">Tabela do Investidor</div>
+        <h3>Tabela do Investidor Cury v2</h3>
+        <p>Calculadora profissional de tabela direta — pré-chaves, pós-chaves, ato de pagamento e resumo consolidado. Visual premium para apresentação ao cliente.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">🗓 Maio 2026</span>
+        <button class="btn-abrir btn-purple">Abrir ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='simulador.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-blue">🧮</div>
+        <div class="tool-tag tag-blue">Simulador Caixa</div>
+        <h3>Simulador Profissional Cury</h3>
+        <p>Simulador completo com 14 empreendimentos, aprovação Caixa, parcelamento de entrada, fase de obras (36 meses) e tabela direta. Atualizado Maio/2026.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">🏗 14 empreendimentos</span>
+        <button class="btn-abrir btn-blue">Abrir ↗</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- IMÓVEIS -->
+  <div class="sec-hdr">
+    <div class="sec-hdr-line"></div>
+    <div class="sec-hdr-label">Páginas dos Imóveis</div>
+    <div class="sec-hdr-line"></div>
+  </div>
+  <div class="tools-grid">
+
+    <div class="tool-card" onclick="window.location.href='orla-central.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-navy">🏙️</div>
+        <div class="tool-tag tag-blue">Lançamento · Centro</div>
+        <h3>Orla Central</h3>
+        <p>1, 2 e 3 quartos com varanda, suíte e rooftop. Página completa com tipologias, amenidades e simulador integrado.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 Centro, RJ</span>
+        <button class="btn-abrir btn-navy">Ver página ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='luzes-do-rio-lamparina.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-gold">🏛️</div>
+        <div class="tool-tag tag-gold">Lançamento · São Cristóvão</div>
+        <h3>Luzes do Rio — Lamparina</h3>
+        <p>1 e 2 quartos com suíte, garden e 1 Bike LEV por apartamento. Infraestrutura completa.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 Imperial de São Cristóvão</span>
+        <button class="btn-abrir btn-gold">Ver página ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='parque-piedade.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-green">🌳</div>
+        <div class="tool-tag tag-green">Lançamento · MCMV</div>
+        <h3>Parque Piedade — Aquarela</h3>
+        <p>2 quartos com garden, lazer completo e condições especiais do Minha Casa Minha Vida.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 Piedade, RJ</span>
+        <button class="btn-abrir btn-green">Ver página ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='farol-da-guanabara.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-blue">🗼</div>
+        <div class="tool-tag tag-blue">Lançamento · Santo Cristo</div>
+        <h3>Farol da Guanabara</h3>
+        <p>Studio, 1 e 3 quartos com rooftop exclusivo na zona portuária revitalizada.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 Santo Cristo, RJ</span>
+        <button class="btn-abrir btn-blue">Ver página ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='arcos-do-porto.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-orange">⚓</div>
+        <div class="tool-tag tag-orange">Em Obras · Porto Maravilha</div>
+        <h3>Arcos do Porto</h3>
+        <p>Studio, 1 e 2 quartos com garden e lazer completo na zona portuária do Rio.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 Porto Maravilha, RJ</span>
+        <button class="btn-abrir btn-orange">Ver página ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='caminhos-da-guanabara.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-blue">⛵</div>
+        <div class="tool-tag tag-blue">Em Obras · Niterói</div>
+        <h3>Caminhos da Guanabara</h3>
+        <p>1 e 2 quartos com rooftop e vista para a Baía de Guanabara em Niterói.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 Niterói, RJ</span>
+        <button class="btn-abrir btn-blue">Ver página ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='cartola-ii.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-purple">🎩</div>
+        <div class="tool-tag tag-purple">Lançamento · São Cristóvão</div>
+        <h3>Residencial Cartola II</h3>
+        <p>1 e 2 quartos com varanda e suíte em São Cristóvão, bairro com ótima infraestrutura.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 São Cristóvão, RJ</span>
+        <button class="btn-abrir btn-purple">Ver página ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" onclick="window.location.href='luzes-do-rio-candeeiro.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-gold">🕯️</div>
+        <div class="tool-tag tag-gold">Lançamento · São Cristóvão</div>
+        <h3>Luzes do Rio — Candeeiro</h3>
+        <p>1 e 2 quartos com pet place, pet care e lazer completo. Financiamento facilitado.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">📍 Imperial de São Cristóvão</span>
+        <button class="btn-abrir btn-gold">Ver página ↗</button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ADMIN -->
+  <div class="sec-hdr">
+    <div class="sec-hdr-line"></div>
+    <div class="sec-hdr-label">Administração</div>
+    <div class="sec-hdr-line"></div>
+  </div>
+  <div class="tools-grid" style="grid-template-columns:repeat(auto-fill,minmax(340px,1fr))">
+
+    <div class="tool-card" onclick="window.location.href='admin.html'">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-navy">⚙️</div>
+        <div class="tool-tag tag-blue">Área Admin</div>
+        <h3>Painel Administrativo</h3>
+        <p>Edite imagens do hero, cards dos imóveis e sua foto de perfil. Acesso: <strong>paulocotrim</strong> / senha admin.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">🔒 Acesso restrito</span>
+        <button class="btn-abrir btn-navy">Acessar ↗</button>
+      </div>
+    </div>
+
+    <div class="tool-card" style="opacity:.65;cursor:default">
+      <div class="tool-card-top">
+        <div class="tool-icon ic-purple">🤖</div>
+        <div class="tool-tag tag-purple">Em Desenvolvimento</div>
+        <h3>CRM Inteligente</h3>
+        <p>Plataforma própria com IA: gestão de leads, discador, WhatsApp Business, OCR de listas e recomendação automática de imóveis.</p>
+      </div>
+      <div class="tool-card-bottom">
+        <span class="tool-meta">🚀 Em breve</span>
+        <button class="btn-abrir btn-purple" disabled style="opacity:.5;cursor:not-allowed">Em breve</button>
+      </div>
+    </div>
+
+
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="doc-footer">
+  <strong>Paulo Cotrim — Coordenador Cury</strong> &nbsp;·&nbsp; Central de Ferramentas &nbsp;·&nbsp;
+  <  <a href="index.html" style="color:rgba(255,255,255,.5)">Voltar ao site →</a>
+</div>
+
+<script src="crm-config.js"></script>
+<script src="admin-panel.js" defer></script>
+
+<!-- WhatsApp FAB -->
+<style>
+.wa-fab{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
+.wa-fab a{background:#25d366;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;white-space:nowrap;text-decoration:none}
+.wa-fab a:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,.5)}
+@media(max-width:600px){.wa-fab-label{display:none}}
+</style>
+<div class="wa-fab">
+  <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Tenho%20dúvidas%20sobre%20a%20documentação%20para%20financiamento." target="_blank" rel="noopener">
+    <span>💬</span><span class="wa-fab-label">Falar com Paulo</span>
+  </a>
+</div>
+
+</body>
+</html>

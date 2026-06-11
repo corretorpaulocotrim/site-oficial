@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Admin — Paulo Cotrim</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Inter',system-ui,sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh}
+
+/* LOGIN */
+#login-screen{position:fixed;inset:0;background:linear-gradient(135deg,#0d2040 0%,#1e40af 100%);display:flex;align-items:center;justify-content:center;z-index:9999}
+#login-screen.hide{display:none}
+.login-box{background:#fff;border-radius:20px;padding:44px 40px;width:100%;max-width:380px;box-shadow:0 24px 60px rgba(0,0,0,.4)}
+.login-logo{text-align:center;margin-bottom:28px}
+.login-logo .name{font-size:20px;font-weight:800;color:#0d2040;text-transform:uppercase;letter-spacing:.06em}
+.login-logo .sub{font-size:11px;color:#64748b;margin-top:3px;letter-spacing:.08em}
+.login-box h2{font-size:18px;font-weight:700;color:#0d2040;margin-bottom:6px;text-align:center}
+.login-box p{font-size:13px;color:#64748b;text-align:center;margin-bottom:22px}
+.l-inp{width:100%;padding:12px 14px;border:1.5px solid #e2e8f0;border-radius:9px;font-size:14px;font-family:inherit;outline:none;margin-bottom:12px;transition:border .2s}
+.l-inp:focus{border-color:#0d2040}
+.l-btn{width:100%;padding:13px;background:#0d2040;color:#fff;border:none;border-radius:9px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit}
+.l-btn:hover{background:#1e3a6e}
+.l-err{color:#dc2626;font-size:12px;text-align:center;margin-top:8px;display:none}
+
+/* ADMIN LAYOUT */
+#admin-app{display:none}
+#admin-app.show{display:flex;min-height:100vh}
+.sidebar{width:240px;background:#0d2040;color:#fff;padding:24px 0;flex-shrink:0;display:flex;flex-direction:column}
+.sidebar-logo{padding:0 20px 24px;border-bottom:1px solid rgba(255,255,255,.1)}
+.sidebar-logo .name{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.sidebar-logo .sub{font-size:10px;opacity:.6;margin-top:3px;letter-spacing:.08em}
+.sidebar-badge{margin:8px 20px 0;background:rgba(255,255,255,.1);border-radius:6px;padding:5px 10px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:rgba(255,255,255,.7);display:inline-block}
+nav.sn{padding:16px 0}
+nav.sn a{display:flex;align-items:center;gap:10px;padding:11px 20px;color:rgba(255,255,255,.75);font-size:13px;font-weight:500;cursor:pointer;transition:all .2s;text-decoration:none}
+nav.sn a:hover,nav.sn a.active{background:rgba(255,255,255,.1);color:#fff;border-right:3px solid #3b82f6}
+.sidebar-bottom{margin-top:auto;padding:20px}
+.btn-logout{width:100%;padding:10px;background:rgba(255,255,255,.08);color:rgba(255,255,255,.7);border:1px solid rgba(255,255,255,.15);border-radius:8px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-logout:hover{background:rgba(255,255,255,.15)}
+
+.main-content{flex:1;padding:32px;overflow-y:auto}
+.top-bar{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.top-bar h1{font-size:22px;font-weight:800;color:#0d2040}
+.top-bar span{font-size:13px;color:#64748b}
+
+.panel{display:none}
+.panel.active{display:block}
+
+/* CARDS */
+.admin-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;margin-bottom:32px}
+.admin-card{background:#fff;border-radius:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.06)}
+.admin-card .card-preview{height:160px;overflow:hidden;position:relative;background:#f1f5f9;cursor:pointer}
+.admin-card .card-preview img{width:100%;height:100%;object-fit:cover}
+.card-preview .overlay{position:absolute;inset:0;background:rgba(0,0,0,.5);display:flex;align-items:center;justify-content:center;opacity:0;transition:opacity .2s}
+.admin-card:hover .overlay{opacity:1}
+.overlay-text{color:#fff;font-size:13px;font-weight:600;text-align:center}
+.admin-card .card-info{padding:16px}
+.admin-card .card-info h3{font-size:14px;font-weight:700;color:#0d2040;margin-bottom:8px}
+.card-info label{font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:5px}
+.card-info input[type=text]{width:100%;padding:8px 10px;border:1.5px solid #e2e8f0;border-radius:7px;font-size:12px;font-family:inherit;outline:none}
+.card-info input[type=text]:focus{border-color:#0d2040}
+.card-actions{display:flex;gap:8px;margin-top:10px}
+.btn-save{flex:1;padding:8px;background:#0d2040;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-save:hover{background:#1e3a6e}
+.btn-reset{padding:8px 12px;background:#f1f5f9;color:#64748b;border:none;border-radius:7px;font-size:12px;font-weight:600;cursor:pointer;font-family:inherit}
+.btn-reset:hover{background:#e2e8f0}
+.btn-upload{flex:1;padding:8px;background:#3b82f6;color:#fff;border:none;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;font-family:inherit}
+.btn-upload:hover{background:#2563eb}
+.saved-badge{display:none;background:#dcfce7;color:#15803d;font-size:11px;font-weight:600;padding:4px 10px;border-radius:20px;margin-top:6px;text-align:center}
+
+/* FOTO PAULO */
+.foto-wrap{display:flex;gap:24px;align-items:flex-start;background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.06);margin-bottom:24px}
+.foto-preview{width:160px;height:180px;border-radius:12px;overflow:hidden;flex-shrink:0;background:#f1f5f9;border:2px dashed #e2e8f0;display:flex;align-items:center;justify-content:center}
+.foto-preview img{width:100%;height:100%;object-fit:cover}
+.foto-inputs{flex:1}
+.foto-inputs h3{font-size:16px;font-weight:700;color:#0d2040;margin-bottom:14px}
+.foto-inputs label{font-size:11px;font-weight:600;color:#64748b;text-transform:uppercase;letter-spacing:.04em;display:block;margin-bottom:6px;margin-top:14px}
+.foto-inputs input{width:100%;padding:10px 12px;border:1.5px solid #e2e8f0;border-radius:8px;font-size:13px;font-family:inherit;outline:none}
+.foto-inputs input:focus{border-color:#0d2040}
+
+/* UPLOAD FILE */
+.file-zone{border:2px dashed #bfdbfe;border-radius:10px;padding:24px;text-align:center;cursor:pointer;transition:all .2s;background:#eff6ff;margin-top:10px}
+.file-zone:hover{border-color:#3b82f6;background:#dbeafe}
+.file-zone p{font-size:13px;color:#1e40af;font-weight:600}
+.file-zone small{font-size:11px;color:#64748b}
+input[type=file]{display:none}
+
+/* STATS */
+.stats-row2{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-bottom:28px}
+.stat2{background:#fff;border-radius:12px;padding:20px;box-shadow:0 2px 8px rgba(0,0,0,.05);text-align:center}
+.stat2 .n{font-size:32px;font-weight:800;color:#0d2040}
+.stat2 .l{font-size:12px;color:#64748b;margin-top:4px}
+
+/* SECTION HEADERS */
+.section-hdr{display:flex;align-items:center;gap:10px;margin-bottom:18px}
+.section-hdr h2{font-size:18px;font-weight:700;color:#0d2040}
+.section-hdr .count{background:#eff6ff;color:#1e40af;font-size:11px;font-weight:700;padding:3px 10px;border-radius:20px}
+
+/* ALERT */
+.alert-success{background:#dcfce7;border:1px solid #bbf7d0;color:#15803d;padding:12px 16px;border-radius:8px;font-size:13px;font-weight:600;margin-bottom:16px;display:none}
+
+@media(max-width:768px){#admin-app.show{flex-direction:column}.sidebar{width:100%;flex-direction:row;padding:12px 16px}.main-content{padding:16px}.stats-row2{grid-template-columns:1fr 1fr}}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<div id="login-screen">
+  <div class="login-box">
+    <div class="login-logo">
+      <div class="name">Paulo Cotrim</div>
+      <div class="sub">Área Administrativa</div>
+    </div>
+    <h2>Acesso Restrito</h2>
+    <p>Entre com suas credenciais de administrador</p>
+    <input class="l-inp" type="text" id="l-user" placeholder="Usuário" autocomplete="username"/>
+    <input class="l-inp" type="password" id="l-pass" placeholder="Senha" autocomplete="current-password" onkeydown="if(event.key==='Enter')doLogin()"/>
+    <button class="l-btn" onclick="doLogin()">Entrar no Admin</button>
+    <p class="l-err" id="l-err">Usuário ou senha incorretos.</p>
+  </div>
+</div>
+
+<!-- ADMIN APP -->
+<div id="admin-app">
+  <div class="sidebar">
+    <div class="sidebar-logo">
+      <div class="name">Paulo Cotrim</div>
+      <div class="sub">Coordenador Cury</div>
+    </div>
+    <span class="sidebar-badge">⚙ Admin</span>
+    <nav class="sn">
+      <a onclick="showPanel('dashboard')" class="active">📊 Dashboard</a>
+      <a onclick="showPanel('slides')">🖼 Imagens do Hero</a>
+      <a onclick="showPanel('condominios')">🏠 Imagens dos Imóveis</a>
+      <a onclick="showPanel('foto')">👤 Minha Foto</a>
+      <a href="index.html" target="_blank">🌐 Ver Site</a>
+      <a href="simulador.html" target="_blank">🧮 Simulador</a>
+    </nav>
+    <div class="sidebar-bottom">
+      <button class="btn-logout" onclick="doLogout()">← Sair do Admin</button>
+    </div>
+  </div>
+
+  <div class="main-content">
+
+    <!-- DASHBOARD -->
+    <div class="panel active" id="panel-dashboard">
+      <div class="top-bar">
+        <h1>Dashboard</h1>
+        <span id="admin-user-name">Bem-vindo, Paulo!</span>
+      </div>
+      <div class="stats-row2">
+        <div class="stat2"><div class="n">3</div><div class="l">Slides do Hero</div></div>
+        <div class="stat2"><div class="n">8</div><div class="l">Imóveis cadastrados</div></div>
+        <div class="stat2"><div class="n">14</div><div class="l">Empreendimentos no simulador</div></div>
+        <div class="stat2"><div class="n">RJ</div><div class="l">Estado de atuação</div></div>
+      </div>
+      <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
+        <h2 style="font-size:16px;font-weight:700;color:#0d2040;margin-bottom:14px">Acesso rápido</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
+          <button onclick="showPanel('slides')" style="padding:16px;background:#eff6ff;border:none;border-radius:10px;color:#1e40af;font-size:13px;font-weight:700;cursor:pointer">🖼 Editar Slides</button>
+          <button onclick="showPanel('condominios')" style="padding:16px;background:#f0fdf4;border:none;border-radius:10px;color:#15803d;font-size:13px;font-weight:700;cursor:pointer">🏠 Editar Imóveis</button>
+          <button onclick="showPanel('foto')" style="padding:16px;background:#fdf4ff;border:none;border-radius:10px;color:#7c3aed;font-size:13px;font-weight:700;cursor:pointer">👤 Trocar Foto</button>
+        </div>
+      </div>
+      <div style="margin-top:20px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px;font-size:13px;color:#92400e">
+        <strong>💡 Dica:</strong> As imagens são salvas no navegador. Para trocar uma imagem, cole a URL ou faça upload de um arquivo nas seções ao lado.
+      </div>
+    </div>
+
+    <!-- SLIDES -->
+    <div class="panel" id="panel-slides">
+      <div class="top-bar"><h1>Imagens do Hero (Carrossel)</h1><span>3 slides configuráveis</span></div>
+      <div class="alert-success" id="alert-slides">✅ Imagem salva com sucesso!</div>
+      <div class="admin-grid">
+
+        <div class="admin-card">
+          <div class="card-preview" onclick="document.getElementById('f-slide0').click()">
+            <img id="prev-slide0" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Slide 1"/>
+            <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+          </div>
+          <div class="card-info">
+            <h3>Slide 1 — Orla Central</h3>
+            <label>URL da imagem de fundo</label>
+            <input type="text" id="url-slide0" placeholder="https://...jpg" onchange="previewUrl('slide0',this.value)"/>
+            <div class="file-zone" onclick="document.getElementById('f-slide0').click()">
+              <p>📁 Ou clique para fazer upload</p>
+              <small>JPG, PNG — máx. 5MB</small>
+            </div>
+            <input type="file" id="f-slide0" accept="image/*" onchange="uploadImg('slide0',this)"/>
+            <div class="card-actions">
+              <button class="btn-save" onclick="saveSlide(0)">💾 Salvar</button>
+              <button class="btn-reset" onclick="resetSlide(0)">↺ Padrão</button>
+            </div>
+            <div class="saved-badge" id="saved-slide0">✓ Salvo!</div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="card-preview" onclick="document.getElementById('f-slide1').click()">
+            <img id="prev-slide1" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Slide 2"/>
+            <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+          </div>
+          <div class="card-info">
+            <h3>Slide 2 — Luzes do Rio</h3>
+            <label>URL da imagem de fundo</label>
+            <input type="text" id="url-slide1" placeholder="https://...jpg" onchange="previewUrl('slide1',this.value)"/>
+            <div class="file-zone" onclick="document.getElementById('f-slide1').click()">
+              <p>📁 Ou clique para fazer upload</p>
+              <small>JPG, PNG — máx. 5MB</small>
+            </div>
+            <input type="file" id="f-slide1" accept="image/*" onchange="uploadImg('slide1',this)"/>
+            <div class="card-actions">
+              <button class="btn-save" onclick="saveSlide(1)">💾 Salvar</button>
+              <button class="btn-reset" onclick="resetSlide(1)">↺ Padrão</button>
+            </div>
+            <div class="saved-badge" id="saved-slide1">✓ Salvo!</div>
+          </div>
+        </div>
+
+        <div class="admin-card">
+          <div class="card-preview" onclick="document.getElementById('f-slide2').click()">
+            <img id="prev-slide2" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="Slide 3"/>
+            <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+          </div>
+          <div class="card-info">
+            <h3>Slide 3 — Parque Piedade</h3>
+            <label>URL da imagem de fundo</label>
+            <input type="text" id="url-slide2" placeholder="https://...jpg" onchange="previewUrl('slide2',this.value)"/>
+            <div class="file-zone" onclick="document.getElementById('f-slide2').click()">
+              <p>📁 Ou clique para fazer upload</p>
+              <small>JPG, PNG — máx. 5MB</small>
+            </div>
+            <input type="file" id="f-slide2" accept="image/*" onchange="uploadImg('slide2',this)"/>
+            <div class="card-actions">
+              <button class="btn-save" onclick="saveSlide(2)">💾 Salvar</button>
+              <button class="btn-reset" onclick="resetSlide(2)">↺ Padrão</button>
+            </div>
+            <div class="saved-badge" id="saved-slide2">✓ Salvo!</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- CONDOMÍNIOS -->
+    <div class="panel" id="panel-condominios">
+      <div class="top-bar"><h1>Imagens dos Imóveis</h1><span>8 cards configuráveis</span></div>
+      <div class="alert-success" id="alert-cond">✅ Imagem salva com sucesso!</div>
+      <div class="admin-grid" id="cond-grid"></div>
+    </div>
+
+    <!-- FOTO -->
+    <div class="panel" id="panel-foto">
+      <div class="top-bar"><h1>Minha Foto</h1><span>Seção "Sobre"</span></div>
+      <div class="alert-success" id="alert-foto">✅ Foto salva com sucesso!</div>
+      <div class="foto-wrap">
+        <div class="foto-preview"><img id="prev-foto" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Paulo Cotrim"/></div>
+        <div class="foto-inputs">
+          <h3>Foto de perfil — Seção Sobre</h3>
+          <label>URL da foto</label>
+          <input type="text" id="url-foto" placeholder="https://...jpg" oninput="previewUrlFoto(this.value)"/>
+          <div class="file-zone" onclick="document.getElementById('f-foto').click()" style="margin-top:12px">
+            <p>📁 Ou clique para fazer upload da sua foto</p>
+            <small>JPG, PNG — recomendado 400×500px ou maior</small>
+          </div>
+          <input type="file" id="f-foto" accept="image/*" onchange="uploadFoto(this)"/>
+          <div style="display:flex;gap:10px;margin-top:14px">
+            <button class="btn-save" onclick="saveFoto()" style="padding:11px 20px">💾 Salvar foto</button>
+            <button class="btn-reset" onclick="resetFoto()" style="padding:11px 16px">↺ Padrão</button>
+          </div>
+          <div class="saved-badge" id="saved-foto" style="text-align:left;margin-top:10px">✓ Foto salva!</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+// ── AUTH ──
+const ADMIN_USER='paulocotrim';
+const ADMIN_PASS='COTRIMPAULO';
+
+function doLogin(){
+  const u=document.getElementById('l-user').value.trim();
+  const p=document.getElementById('l-pass').value;
+  if(u===ADMIN_USER&&p===ADMIN_PASS){
+    sessionStorage.setItem('admin','1');
+    document.getElementById('login-screen').classList.add('hide');
+    document.getElementById('admin-app').classList.add('show');
+    initAdmin();
+  }else{
+    document.getElementById('l-err').style.display='block';
+    document.getElementById('l-pass').value='';
+  }
+}
+function doLogout(){sessionStorage.removeItem('admin');location.reload()}
+document.getElementById('l-pass').addEventListener('keydown',e=>{if(e.key==='Enter')doLogin()});
+if(sessionStorage.getItem('admin')==='1'){
+  document.getElementById('login-screen').classList.add('hide');
+  document.getElementById('admin-app').classList.add('show');
+  initAdmin();
+}
+
+// ── PANELS ──
+function showPanel(id){
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  document.querySelectorAll('nav.sn a').forEach(a=>a.classList.remove('active'));
+  event.target.classList.add('active');
+}
+
+// ── INIT ──
+const DEFAULTS={
+  slide0:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=1600&q=80',
+  slide1:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1600&q=80',
+  slide2:'https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=1600&q=80',
+  foto:'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80'
+};
+const CONDS=[
+  {id:'orla',label:'Orla Central',def:'https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=700&q=80'},
+  {id:'lamparina',label:'Luzes do Rio — Lamparina',def:'https://images.unsplash.com/photo-1486325212027-8081e485255e?w=700&q=80'},
+  {id:'piedade',label:'Parque Piedade — Aquarela',def:'https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=700&q=80'},
+  {id:'farol',label:'Farol da Guanabara',def:'https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=700&q=80'},
+  {id:'arcos',label:'Arcos do Porto',def:'https://images.unsplash.com/photo-1582063289852-62e3ba2747f8?w=700&q=80'},
+  {id:'caminhos',label:'Caminhos da Guanabara',def:'https://images.unsplash.com/photo-1622015663319-e97e697503ee?w=700&q=80'},
+  {id:'cartola',label:'Residencial Cartola II',def:'https://images.unsplash.com/photo-1494526585095-c41746248156?w=700&q=80'},
+  {id:'candeeiro',label:'Luzes do Rio — Candeeiro',def:'https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=700&q=80'},
+];
+
+function initAdmin(){
+  // Load saved slides into previews
+  [0,1,2].forEach(i=>{
+    const saved=localStorage.getItem('pc_slide'+i);
+    if(saved){
+      document.getElementById('prev-slide'+i).src=saved;
+      document.getElementById('url-slide'+i).value=saved;
+    }
+  });
+  // Load foto
+  const savedFoto=localStorage.getItem('pc_foto_paulo');
+  if(savedFoto){document.getElementById('prev-foto').src=savedFoto;document.getElementById('url-foto').value=savedFoto}
+  // Build cond grid
+  const grid=document.getElementById('cond-grid');
+  grid.innerHTML=CONDS.map(c=>{
+    const saved=localStorage.getItem('pc_img_'+c.id)||c.def;
+    return`<div class="admin-card">
+      <div class="card-preview" onclick="document.getElementById('fc-${c.id}').click()">
+        <img id="prev-c-${c.id}" src="${saved}" alt="${c.label}"/>
+        <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+      </div>
+      <div class="card-info">
+        <h3>${c.label}</h3>
+        <label>URL da imagem</label>
+        <input type="text" id="url-c-${c.id}" value="${saved!==c.def?saved:''}" placeholder="https://...jpg" onchange="previewCond('${c.id}',this.value)"/>
+        <div class="file-zone" onclick="document.getElementById('fc-${c.id}').click()">
+          <p>📁 Ou clique para fazer upload</p>
+          <small>JPG, PNG — máx. 5MB</small>
+        </div>
+        <input type="file" id="fc-${c.id}" accept="image/*" onchange="uploadCond('${c.id}',this)"/>
+        <div class="card-actions">
+          <button class="btn-save" onclick="saveCond('${c.id}')">💾 Salvar</button>
+          <button class="btn-reset" onclick="resetCond('${c.id}','${c.def}')">↺ Padrão</button>
+        </div>
+        <div class="saved-badge" id="saved-c-${c.id}">✓ Salvo!</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+// ── SLIDES ──
+function previewUrl(id,url){if(url)document.getElementById('prev-'+id).src=url}
+function uploadImg(id,input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{const url=e.target.result;document.getElementById('prev-'+id).src=url;document.getElementById('url-'+id).value='(arquivo carregado)';localStorage.setItem('pc_'+id,url);}
+  reader.readAsDataURL(file);
+}
+function saveSlide(i){
+  const url=document.getElementById('url-slide'+i).value.trim();
+  const src=document.getElementById('prev-slide'+i).src;
+  const val=url&&url!=='(arquivo carregado)'?url:src;
+  localStorage.setItem('pc_slide'+i,val);
+  showBadge('saved-slide'+i);
+}
+function resetSlide(i){
+  const def=DEFAULTS['slide'+i];
+  localStorage.removeItem('pc_slide'+i);
+  document.getElementById('prev-slide'+i).src=def;
+  document.getElementById('url-slide'+i).value='';
+  showBadge('saved-slide'+i,'↺ Redefinido para padrão');
+}
+
+// ── CONDOMÍNIOS ──
+function previewCond(id,url){if(url)document.getElementById('prev-c-'+id).src=url}
+function uploadCond(id,input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{const url=e.target.result;document.getElementById('prev-c-'+id).src=url;document.getElementById('url-c-'+id).value='(arquivo carregado)';localStorage.setItem('pc_img_'+id,url);}
+  reader.readAsDataURL(file);
+}
+function saveCond(id){
+  const url=document.getElementById('url-c-'+id).value.trim();
+  const src=document.getElementById('prev-c-'+id).src;
+  const val=url&&url!=='(arquivo carregado)'?url:src;
+  localStorage.setItem('pc_img_'+id,val);
+  showBadge('saved-c-'+id);
+}
+function resetCond(id,def){
+  localStorage.removeItem('pc_img_'+id);
+  document.getElementById('prev-c-'+id).src=def;
+  document.getElementById('url-c-'+id).value='';
+  showBadge('saved-c-'+id,'↺ Redefinido');
+}
+
+// ── FOTO ──
+function previewUrlFoto(url){if(url)document.getElementById('prev-foto').src=url}
+function uploadFoto(input){
+  const file=input.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=e=>{const url=e.target.result;document.getElementById('prev-foto').src=url;localStorage.setItem('pc_foto_paulo',url);}
+  reader.readAsDataURL(file);
+}
+function saveFoto(){
+  const url=document.getElementById('url-foto').value.trim();
+  const src=document.getElementById('prev-foto').src;
+  const val=url&&url!=='(arquivo carregado)'?url:src;
+  localStorage.setItem('pc_foto_paulo',val);
+  showBadge('saved-foto');
+}
+function resetFoto(){
+  localStorage.removeItem('pc_foto_paulo');
+  document.getElementById('prev-foto').src=DEFAULTS.foto;
+  document.getElementById('url-foto').value='';
+  showBadge('saved-foto','↺ Redefinido');
+}
+
+function showBadge(id,msg='✓ Salvo!'){
+  const el=document.getElementById(id);
+  if(!el)return;
+  el.textContent=msg;el.style.display='block';
+  setTimeout(()=>el.style.display='none',2500);
+}
+</script>
+</body>
+</html>

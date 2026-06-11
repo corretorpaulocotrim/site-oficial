@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Obras e Decorados · Cury Rio · Paulo Cotrim CRECI 77677</title>
+<meta name="description" content="Acompanhe em tempo real as obras Cury no Rio de Janeiro e veja os apartamentos decorados. Vídeos oficiais, fotos e prova social de 700+ famílias.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#060f1e;--navy2:#0a1628;--navy3:#0d2040;
+  --gold:#c9993a;--gold2:#e8b84b;--green:#16a34a;
+  --text:#1e293b;
+}
+h1,h2,h3,.sec-h2,.hero-h1{font-family:'Outfit',system-ui,sans-serif;letter-spacing:-.02em}
+body{font-family:'Inter',system-ui,sans-serif;background:#fff;color:var(--text);font-size:15px;line-height:1.6}
+
+/* ── HEADER ── */
+#hdr{position:fixed;top:0;left:0;right:0;z-index:900;height:64px;
+  background:rgba(6,15,30,.97);backdrop-filter:blur(16px);
+  display:flex;align-items:center;justify-content:space-between;padding:0 32px;
+  border-bottom:1px solid rgba(201,153,58,.15)}
+.hdr-logo{text-decoration:none;display:flex;align-items:center}.hdr-logo img{height:44px;width:auto;display:block}
+.hdr-logo-name{color:#fff;font-size:15px;font-weight:800;letter-spacing:-.01em}
+.hdr-logo-sub{color:rgba(255,255,255,.5);font-size:10px;font-weight:500}
+.hdr-creci{color:var(--gold);font-weight:700}
+nav{display:flex;gap:4px;align-items:center}
+nav a{color:rgba(255,255,255,.75);text-decoration:none;font-size:13px;font-weight:500;
+  padding:6px 12px;border-radius:8px;transition:all .2s;white-space:nowrap}
+nav a:hover,nav a.active{color:#fff;background:rgba(255,255,255,.08)}
+.nav-hot{color:var(--gold2)!important;border:1px solid rgba(201,153,58,.35)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;background:none;border:none;padding:6px}
+.hamburger span{width:22px;height:2px;background:#fff;border-radius:2px;transition:all .3s}
+.btn-hdr{padding:9px 18px;background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#060f1e;border:none;border-radius:9px;font-size:12px;font-weight:800;cursor:pointer}
+
+/* ── HERO ── */
+.od-hero{
+  background:linear-gradient(135deg,var(--navy) 0%,var(--navy3) 100%);
+  padding:120px 40px 80px;text-align:center;position:relative;overflow:hidden;
+}
+.od-hero::before{
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(201,153,58,.08),transparent);
+}
+.od-tag{display:inline-flex;align-items:center;gap:8px;
+  background:rgba(201,153,58,.12);border:1px solid rgba(201,153,58,.3);
+  color:var(--gold2);font-size:10px;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;padding:6px 16px;border-radius:30px;margin-bottom:20px}
+.od-h1{color:#fff;font-size:clamp(32px,4.5vw,56px);font-weight:900;line-height:1.08;margin-bottom:18px}
+.od-h1 span{color:var(--gold2)}
+.od-sub{color:rgba(255,255,255,.7);font-size:clamp(15px,2vw,18px);max-width:580px;margin:0 auto 32px}
+.od-stats{display:flex;gap:32px;justify-content:center;flex-wrap:wrap;margin-top:40px;position:relative;z-index:1}
+.od-stat{text-align:center}
+.od-stat .n{display:block;color:#fff;font-size:28px;font-weight:900;font-family:'Outfit',sans-serif}
+.od-stat .l{display:block;color:rgba(255,255,255,.55);font-size:11px;margin-top:2px}
+
+/* ── SECTION BASE ── */
+.sec{padding:80px 40px}
+.sec-max{max-width:1200px;margin:0 auto}
+.sec-center{text-align:center;margin-bottom:52px}
+.tag{display:inline-block;font-size:10px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.12em;padding:5px 14px;border-radius:20px;margin-bottom:16px}
+.tag-gold{background:rgba(201,153,58,.12);color:var(--gold2);border:1px solid rgba(201,153,58,.3)}
+.tag-blue{background:rgba(30,64,175,.1);color:#2563eb;border:1px solid rgba(30,64,175,.2)}
+.tag-green{background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.25)}
+.sec-h2{font-size:clamp(26px,3.5vw,40px);font-weight:800;line-height:1.1;margin-bottom:14px}
+.sec-h2 span{color:var(--gold2)}
+.sec-p{color:#64748b;font-size:15px;max-width:560px;margin:0 auto}
+
+/* ── VIDEO GRID ── */
+.vid-section{background:#f8fafc;padding:80px 40px}
+.vid-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:1100px;margin:0 auto}
+.vid-card{background:#fff;border-radius:18px;overflow:hidden;
+  box-shadow:0 4px 24px rgba(0,0,0,.08);border:1px solid #e8edf2;transition:all .3s}
+.vid-card:hover{transform:translateY(-4px);box-shadow:0 12px 40px rgba(0,0,0,.14)}
+.vid-embed{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;width:100%;cursor:pointer}
+.vid-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:block}
+/* thumbnail player */
+.yt-thumb{position:relative;aspect-ratio:16/9;overflow:hidden;background:#000;cursor:pointer;display:block;text-decoration:none}
+.yt-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .4s;display:block}
+.yt-thumb:hover img{transform:scale(1.04)}
+.yt-play{position:absolute;inset:0;display:flex;align-items:center;justify-content:center}
+.yt-play-btn{width:72px;height:72px;background:rgba(255,0,0,.92);border-radius:50%;display:flex;align-items:center;justify-content:center;transition:transform .2s,background .2s;box-shadow:0 4px 24px rgba(0,0,0,.5)}
+.yt-thumb:hover .yt-play-btn{transform:scale(1.12);background:#ff0000}
+.yt-play-btn svg{margin-left:5px}
+.yt-label{position:absolute;bottom:14px;left:14px;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;padding:5px 12px;border-radius:20px;backdrop-filter:blur(6px)}
+.yt-duration{position:absolute;bottom:14px;right:14px;background:rgba(0,0,0,.72);color:#fff;font-size:11px;font-weight:700;padding:4px 8px;border-radius:6px}
+.vid-info{padding:20px 24px}
+.vid-badge{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.1em;padding:3px 10px;border-radius:20px;margin-bottom:10px}
+.vid-badge.obra{background:rgba(201,153,58,.12);color:var(--gold2);border:1px solid rgba(201,153,58,.25)}
+.vid-badge.decorado{background:rgba(22,163,74,.1);color:var(--green);border:1px solid rgba(22,163,74,.2)}
+.vid-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:6px;line-height:1.3}
+.vid-desc{font-size:13px;color:#64748b;line-height:1.5}
+.vid-meta{display:flex;align-items:center;gap:8px;margin-top:12px;font-size:12px;color:#94a3b8}
+.vid-meta strong{color:var(--gold);font-weight:700}
+
+/* ── FEATURED VIDEO ── */
+.vid-featured{max-width:1100px;margin:0 auto 40px;background:#fff;border-radius:20px;
+  overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.12);border:1px solid #e2e8f0}
+.vid-featured .vid-embed,.vid-featured .yt-thumb{aspect-ratio:2/1}
+.vid-featured-info{padding:28px 32px;display:flex;align-items:flex-start;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.vid-featured-left{}
+.vid-featured-badge{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;
+  letter-spacing:.12em;padding:4px 12px;border-radius:20px;margin-bottom:12px;
+  background:linear-gradient(135deg,rgba(201,153,58,.15),rgba(232,184,75,.08));
+  color:var(--gold2);border:1px solid rgba(201,153,58,.3)}
+.vid-featured-title{font-size:22px;font-weight:800;color:var(--text);margin-bottom:8px;font-family:'Outfit',sans-serif}
+.vid-featured-desc{color:#475569;font-size:14px;line-height:1.6;max-width:540px}
+.vid-cta{flex-shrink:0;display:flex;flex-direction:column;gap:10px;align-items:flex-end}
+
+/* ── PROVA SOCIAL FOTOS ── */
+.ps-section{background:var(--navy);padding:80px 40px}
+.ps-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:20px;
+  max-width:1100px;margin:0 auto}
+.ps-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);
+  border-radius:16px;overflow:hidden;transition:all .3s;cursor:pointer}
+.ps-card:hover{border-color:rgba(201,153,58,.4);background:rgba(255,255,255,.07)}
+.ps-img{height:220px;overflow:hidden;position:relative}
+.ps-img img{width:100%;height:100%;object-fit:cover;object-position:top center;transition:transform .4s}
+.ps-card:hover .ps-img img{transform:scale(1.04)}
+.ps-img-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(6,15,30,.8) 0%,transparent 50%)}
+.ps-img-badge{position:absolute;bottom:12px;left:12px;
+  background:var(--gold);color:#060f1e;font-size:9px;font-weight:800;
+  text-transform:uppercase;letter-spacing:.1em;padding:4px 10px;border-radius:20px}
+.ps-body{padding:16px 18px}
+.ps-name{color:#fff;font-size:14px;font-weight:700;margin-bottom:3px}
+.ps-city{color:rgba(255,255,255,.5);font-size:12px}
+.ps-quote{color:rgba(255,255,255,.7);font-size:12px;margin-top:8px;font-style:italic;line-height:1.5}
+.ps-stars{color:var(--gold2);font-size:12px;margin-top:6px}
+
+/* ── CTA ── */
+.cta-section{background:linear-gradient(135deg,var(--navy2) 0%,var(--navy3) 100%);
+  padding:80px 40px;text-align:center;position:relative;overflow:hidden}
+.cta-section::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 60% 80% at 50% 100%,rgba(201,153,58,.1),transparent)}
+.cta-h2{color:#fff;font-size:clamp(28px,4vw,44px);font-weight:900;margin-bottom:16px}
+.cta-h2 span{color:var(--gold2)}
+.cta-sub{color:rgba(255,255,255,.65);font-size:15px;margin-bottom:36px;max-width:520px;margin-left:auto;margin-right:auto}
+.cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold2));
+  color:#060f1e;border:none;border-radius:10px;padding:14px 28px;
+  font-size:14px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px}
+.btn-ghost{background:transparent;border:1.5px solid rgba(255,255,255,.3);
+  color:#fff;border-radius:10px;padding:13px 28px;font-size:14px;font-weight:600;
+  cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:8px;transition:all .2s}
+.btn-ghost:hover{border-color:rgba(255,255,255,.6);background:rgba(255,255,255,.06)}
+
+/* ── OBRAS INFO ── */
+.obras-info{padding:80px 40px;background:#fff}
+.obras-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;max-width:1100px;margin:0 auto}
+.obra-card{background:#f8fafc;border-radius:16px;padding:28px;border:1px solid #e8edf2;text-align:center}
+.obra-icon{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;margin:0 auto 16px;
+  background:linear-gradient(135deg,rgba(201,153,58,.12),rgba(232,184,75,.06));
+  border:1px solid rgba(201,153,58,.2)}
+.obra-title{font-size:17px;font-weight:700;color:var(--text);margin-bottom:8px}
+.obra-desc{font-size:13px;color:#64748b;line-height:1.5}
+
+/* ── FOOTER ── */
+footer{background:var(--navy);padding:40px;text-align:center;border-top:1px solid rgba(255,255,255,.06)}
+footer p{color:rgba(255,255,255,.4);font-size:12px}
+footer a{color:var(--gold2);text-decoration:none}
+
+/* ── WA FAB ── */
+.wa-float{position:fixed;bottom:24px;right:24px;z-index:800;
+  width:58px;height:58px;background:#25d366;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 20px rgba(37,211,102,.4);cursor:pointer;text-decoration:none;transition:transform .2s}
+.wa-float:hover{transform:scale(1.1)}
+
+/* ── MOB NAV ── */
+#mob-nav{display:none;position:fixed;inset:0;z-index:950;
+  background:rgba(6,15,30,.97);backdrop-filter:blur(16px);
+  flex-direction:column;align-items:center;justify-content:center;gap:8px}
+#mob-nav a{color:#fff;text-decoration:none;font-size:20px;font-weight:700;padding:10px 20px}
+.mob-close{background:none;border:none;color:#fff;font-size:24px;cursor:pointer;
+  position:absolute;top:20px;right:24px}
+
+/* ── MOBILE ── */
+@media(max-width:1024px){
+  nav{display:none}.hamburger{display:flex}
+}
+@media(max-width:768px){
+  .od-hero{padding:100px 20px 60px}
+  .vid-section{padding:52px 16px}.sec{padding:52px 16px}
+  .vid-grid{grid-template-columns:1fr}
+  .obras-grid{grid-template-columns:1fr}
+  .ps-grid{grid-template-columns:1fr 1fr}
+  .vid-featured-info{flex-direction:column}
+  .vid-cta{align-items:flex-start}
+}
+@media(max-width:480px){
+  .ps-grid{grid-template-columns:1fr}
+  .cta-btns{flex-direction:column;align-items:center}
+  #hdr{padding:0 16px}
+}
+</style>
+<link rel="canonical" href="https://paulocotrim.com.br/obras-decorados.html"/>
+<meta property="og:title" content="Obras & Decorados Cury RJ — Paulo Cotrim CRECI 77677"/>
+<meta property="og:description" content="Acompanhe em tempo real as obras Cury no Rio de Janeiro. Vídeos, fotos e depoimentos de 700+ famílias atendidas."/>
+<meta property="og:url" content="https://paulocotrim.com.br/obras-decorados.html"/>
+<meta property="og:image" content="https://paulocotrim.com.br/og-image.jpg"/>
+<meta property="og:type" content="website"/>
+
+</head>
+<body>
+
+<!-- MOB NAV -->
+<div id="mob-nav">
+  <button class="mob-close" onclick="document.getElementById('mob-nav').style.display='none'">✕</button>
+  <a href="index.html">Home</a>
+  <a href="porto-maravilha.html">Porto Maravilha</a>
+  <a href="index.html#imoveis">Empreendimentos</a>
+  <a href="obras-decorados.html" style="color:var(--gold2)">Obras e Decorados</a>
+  <a href="investidor.html">Investidor</a>
+  <a href="aprovacao-expressa.html">Aprovação 48h</a>
+  <a href="simulador.html">Simulador</a>
+  <a href="index.html#contato">Contato</a>
+</div>
+
+<!-- HEADER -->
+<header id="hdr">
+  <a href="index.html" class="hdr-logo"><img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></a>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="porto-maravilha.html">Porto Maravilha</a>
+    <a href="index.html#imoveis">Empreendimentos</a>
+    <a href="obras-decorados.html" class="active">Obras e Decorados</a>
+    <a href="investidor.html">Investidor</a>
+    <a href="aprovacao-expressa.html" class="nav-hot">Aprovação 48h</a>
+    <a href="simulador.html">Simulador</a>
+    <a href="index.html#contato">Contato</a>
+  </nav>
+  <div style="display:flex;gap:10px;align-items:center">
+    <button class="btn-hdr" onclick="location.href='https://wa.me/5521989150864?text=Vi+as+obras+e+quero+saber+mais'">WhatsApp</button>
+    <button class="hamburger" onclick="document.getElementById('mob-nav').style.display='flex'" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="od-hero">
+  <div class="od-tag">Transparência total · Cury Rio de Janeiro</div>
+  <h1 class="od-h1">Veja a obra <span>em tempo real</span><br>antes de assinar</h1>
+  <p class="od-sub">Acompanhamento de obra em vídeo, apartamentos decorados e 700+ famílias que já entregaram chaves. Compre com confiança.</p>
+  <div class="od-stats">
+    <div class="od-stat"><span class="n">700+</span><span class="l">chaves entregues</span></div>
+    <div class="od-stat"><span class="n">18 anos</span><span class="l">com a Cury Rio</span></div>
+    <div class="od-stat"><span class="n">100%</span><span class="l">digital · sem visita</span></div>
+    <div class="od-stat"><span class="n">48h</span><span class="l">aprovação expressa</span></div>
+  </div>
+</section>
+
+<!-- COMO FUNCIONA SEM VISITAR -->
+<section class="obras-info">
+  <div class="sec-max">
+    <div class="sec-center">
+      <span class="tag tag-gold">Compra 100% digital</span>
+      <h2 class="sec-h2">Você escolhe o imóvel<br><span>sem sair de casa</span></h2>
+      <p class="sec-p">Paulo cuida de tudo — documentação, aprovação e contrato — você recebe tudo pelo WhatsApp.</p>
+    </div>
+    <div class="obras-grid">
+      <div class="obra-card">
+        <div class="obra-icon">🎥</div>
+        <div class="obra-title">Tour em vídeo</div>
+        <div class="obra-desc">Vídeos oficiais da obra e decorados diretamente pelo WhatsApp. Veja cada detalhe do apartamento antes de decidir.</div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-icon">📋</div>
+        <div class="obra-title">Contrato digital Cury</div>
+        <div class="obra-desc">Contrato enviado por Paulo. Você assina digitalmente pelo celular, sem precisar ir até a construtora ou ao imóvel.</div>
+      </div>
+      <div class="obra-card">
+        <div class="obra-icon">🔑</div>
+        <div class="obra-title">Entrega pessoal</div>
+        <div class="obra-desc">Paulo acompanha cada etapa e entrega as chaves pessoalmente quando o imóvel fica pronto. Você escolhe, ele resolve.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VÍDEOS DE OBRA -->
+<section class="vid-section">
+  <div class="sec-max">
+    <div class="sec-center">
+      <span class="tag tag-gold">Vídeos oficiais Cury</span>
+      <h2 class="sec-h2">Obras e decorados em<br><span>vídeo real</span></h2>
+      <p class="sec-p">Drone, visita guiada e acompanhamento mensal de obra. Transparência que você merece antes de investir.</p>
+    </div>
+
+    <!-- FEATURED VIDEO 1 -->
+    <div class="vid-featured">
+      <a class="yt-thumb" href="https://www.youtube.com/watch?v=xSbgov5yPD0" target="_blank" rel="noopener" aria-label="Ver vídeo no YouTube">
+        <img src="https://img.youtube.com/vi/xSbgov5yPD0/maxresdefault.jpg" alt="Arcos do Porto — Vídeo Drone Março 2026" onerror="this.src='https://img.youtube.com/vi/xSbgov5yPD0/hqdefault.jpg'">
+        <div class="yt-play"><div class="yt-play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="yt-label">▶ Ver no YouTube</div>
+        <div class="yt-duration">Drone · Março 2026</div>
+      </a>
+      <div class="vid-featured-info">
+        <div class="vid-featured-left">
+          <div class="vid-featured-badge">Drone · Acompanhamento de Obra · Março 2026</div>
+          <div class="vid-featured-title">Arcos do Porto — Porto Maravilha</div>
+          <div class="vid-featured-desc">Vídeo drone exclusivo do Arcos do Porto, um dos empreendimentos mais aguardados do Porto Maravilha. Acompanhe o andamento da obra em março de 2026 e veja o quanto está avançada. Lançamento Cury com infraestrutura completa no coração do novo Rio.</div>
+        </div>
+        <div class="vid-cta">
+          <a href="https://wa.me/5521989150864?text=Vi+o+vídeo+do+Arcos+do+Porto+e+quero+saber+mais" class="btn-primary">Quero saber mais →</a>
+          <a href="aprovacao-expressa.html" class="btn-ghost">Aprovação em 48h</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- FEATURED VIDEO 2 -->
+    <div class="vid-featured">
+      <a class="yt-thumb" href="https://www.youtube.com/watch?v=ju5qxUvgewU" target="_blank" rel="noopener" aria-label="Ver vídeo no YouTube">
+        <img src="https://img.youtube.com/vi/ju5qxUvgewU/maxresdefault.jpg" alt="Residencial Pixinguinha — Tour no Decorado" onerror="this.src='https://img.youtube.com/vi/ju5qxUvgewU/hqdefault.jpg'" loading="lazy"/>
+        <div class="yt-play"><div class="yt-play-btn"><svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>
+        <div class="yt-label">▶ Ver no YouTube</div>
+        <div class="yt-duration">Tour Decorado</div>
+      </a>
+      <div class="vid-featured-info">
+        <div class="vid-featured-left">
+          <div class="vid-featured-badge" style="background:rgba(22,163,74,.1);color:#16a34a;border-color:rgba(22,163,74,.25)">Decorado · Tour Completo · Residencial Pixinguinha</div>
+          <div class="vid-featured-title">Residencial Pixinguinha — Tour no Decorado</div>
+          <div class="vid-featured-desc">Tour completo pelo apartamento decorado do Residencial Pixinguinha. Veja a planta, acabamento, dimensões reais e como ficam os ambientes. Este é o nível de qualidade que você receberá na entrega das chaves — sem surpresas.</div>
+        </div>
+        <div class="vid-cta">
+          <a href="https://wa.me/5521989150864?text=Vi+o+decorado+do+Pixinguinha+e+quero+simular" class="btn-primary">Simular financiamento →</a>
+          <a href="simulador.html" class="btn-ghost">Ver simulador</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- More videos placeholder grid -->
+    <div class="vid-grid" style="margin-top:28px">
+      <div class="vid-card">
+        <a class="yt-thumb" href="https://www.youtube.com/watch?v=xSbgov5yPD0" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/xSbgov5yPD0/maxresdefault.jpg" alt="Porto Maravilha — Acompanhamento Obra" onerror="this.src='https://img.youtube.com/vi/xSbgov5yPD0/hqdefault.jpg'" loading="lazy"/>
+          <div class="yt-play"><div class="yt-play-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <div class="yt-label">▶ Ver no YouTube</div>
+        </a>
+        <div class="vid-info">
+          <div class="vid-badge obra">Acompanhamento de Obra</div>
+          <div class="vid-title">Porto Maravilha · Progresso da Construção</div>
+          <div class="vid-desc">Cada empreendimento Cury tem acompanhamento fotográfico e em vídeo mensalmente. Paulo recebe todas as atualizações e repassa ao cliente.</div>
+          <div class="vid-meta">Atualizado mensalmente · <strong>Cury Rio</strong></div>
+        </div>
+      </div>
+      <div class="vid-card">
+        <a class="yt-thumb" href="https://www.youtube.com/watch?v=ju5qxUvgewU" target="_blank" rel="noopener">
+          <img src="https://img.youtube.com/vi/ju5qxUvgewU/maxresdefault.jpg" alt="Pixinguinha — Tour Decorado" onerror="this.src='https://img.youtube.com/vi/ju5qxUvgewU/hqdefault.jpg'" loading="lazy"/>
+          <div class="yt-play"><div class="yt-play-btn"><svg width="24" height="24" viewBox="0 0 24 24" fill="#fff"><path d="M8 5v14l11-7z"/></svg></div></div>
+          <div class="yt-label">▶ Ver no YouTube</div>
+        </a>
+        <div class="vid-info">
+          <div class="vid-badge decorado">Apartamento Decorado</div>
+          <div class="vid-title">Pixinguinha · Planta e Acabamento Real</div>
+          <div class="vid-desc">Acabamento de alto padrão, planta inteligente e metragem real. O que você vê no decorado é exatamente o que você recebe.</div>
+          <div class="vid-meta">Tour completo disponível · <strong>Cury Rio</strong></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROVA SOCIAL: FOTOS COM CHAVE -->
+<section class="ps-section">
+  <div style="max-width:1200px;margin:0 auto">
+    <div class="sec-center" style="margin-bottom:44px">
+      <span class="tag tag-gold">Prova social real</span>
+      <h2 class="sec-h2" style="color:#fff">Famílias que compraram<br><span>sem visitar o imóvel</span></h2>
+      <p class="sec-p" style="color:rgba(255,255,255,.55)">100% digital. Paulo enviou o contrato pelo WhatsApp, acompanhou tudo e entregou as chaves pessoalmente.</p>
+    </div>
+    <div class="ps-grid" id="ps-grid"></div>
+    <div style="text-align:center;margin-top:40px">
+      <a href="https://wa.me/5521989150864?text=Vi+as+conquistas+e+quero+comprar+meu+imóvel" class="btn-primary" style="font-size:14px;padding:14px 28px">Quero ser a próxima conquista →</a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <h2 class="cta-h2">Pronto para ver seu<br><span>apartamento em vídeo?</span></h2>
+  <p class="cta-sub">Paulo envia vídeo da obra, planta, decorado e tabela de preços diretamente no seu WhatsApp. Você decide sem pressão.</p>
+  <div class="cta-btns">
+    <a href="https://wa.me/5521989150864?text=Quero+ver+vídeo+e+tabela+de+imóveis+Cury" class="btn-primary" style="font-size:15px;padding:15px 32px">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="#060f1e"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.116 1.535 5.845L.057 23.428a.5.5 0 0 0 .611.612l5.701-1.494A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+      Ver vídeo e tabela agora
+    </a>
+    <a href="aprovacao-expressa.html" class="btn-ghost" style="font-size:15px;padding:14px 32px">Aprovação em 48h →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>Paulo Cotrim · CRECI 77677 · Coordenador Cury Vendas · Porto Maravilha, Rio de Janeiro</p>
+  <p style="margin-top:6px"><a href="index.html">Home</a> · <a href="investidor.html">Investidor</a> · <a href="simulador.html">Simulador</a> · <a href="index.html#contato">Contato</a></p>
+</footer>
+
+<!-- WA FAB -->
+<a href="https://wa.me/5521989150864?text=Vi+obras+e+decorados+e+quero+saber+mais" class="wa-float" target="_blank" aria-label="WhatsApp">
+  <svg width="28" height="28" viewBox="0 0 24 24" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.558 4.116 1.535 5.845L.057 23.428a.5.5 0 0 0 .611.612l5.701-1.494A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+</a>
+
+<script>
+// Populate prova social grid
+const photos=[
+  {n:36,name:'Família Silva',city:'Porto Maravilha',q:'Comprei pelo WhatsApp, Paulo enviou tudo. Na entrega ele estava lá com as chaves!'},
+  {n:34,name:'Carlos e Marta',city:'Parque Piedade',q:'Nunca visitei o imóvel antes de comprar. Paulo mandou vídeo e eu confiei. Valeu a pena.'},
+  {n:32,name:'Fernanda R.',city:'São Cristóvão',q:'O contrato chegou pelo WhatsApp em 48h. Assinei no celular mesmo.'},
+  {n:30,name:'Roberto M.',city:'Centro RJ',q:'Paulo acompanhou a obra todo mês e me atualizava. Fui buscar as chaves com ele.'},
+  {n:28,name:'Ana Paula S.',city:'Niterói',q:'Processo 100% digital. Paulo resolveu tudo, eu só assinei e esperei.'},
+  {n:26,name:'Família Carvalho',city:'Irajá',q:'Aprovação em 2 dias como ele prometeu. Casa própria era sonho, agora é realidade.'},
+];
+const grid=document.getElementById('ps-grid');
+if(grid){
+  grid.innerHTML=photos.map(p=>`
+    <div class="ps-card">
+      <div class="ps-img">
+        <img src="conquista-${p.n}.jpg" alt="${p.name} com chave na mão" loading="lazy"/>
+        <div class="ps-img-overlay"></div>
+        <div class="ps-img-badge">✓ Chave entregue</div>
+      </div>
+      <div class="ps-body">
+        <div class="ps-name">${p.name}</div>
+        <div class="ps-city">${p.city} · Rio de Janeiro</div>
+        <div class="ps-stars">★★★★★</div>
+        <div class="ps-quote">"${p.q}"</div>
+      </div>
+    </div>
+  `).join('');
+}
+</script>
+<script src="admin-panel.js" defer></script>
+</body>
+</html>
