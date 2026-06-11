@@ -81,15 +81,19 @@ img{display:block;max-width:100%}
 #hdr{
   position:fixed;top:0;left:0;right:0;z-index:900;
   display:flex;align-items:center;justify-content:space-between;
-  padding:0 40px;height:64px;
-  background:rgba(6,15,30,.96);backdrop-filter:blur(16px);
-  border-bottom:1px solid rgba(201,153,58,.15);
+  padding:0 40px;height:68px;
+  background:rgba(6,15,30,.97);backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(201,153,58,.2);
   transition:all .3s;
 }
-#hdr.scrolled{height:56px;background:rgba(6,15,30,.99)}
-.hdr-logo{display:flex;align-items:center}
-.hdr-logo-img{height:48px;width:auto;display:block}
-@media(max-width:768px){.hdr-logo-img{height:38px}}
+#hdr.scrolled{height:60px;background:rgba(6,15,30,.99)}
+.hdr-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
+.hdr-logo-img{height:46px;width:46px;border-radius:10px;object-fit:cover;display:block;border:1.5px solid rgba(201,153,58,.3);box-shadow:0 2px 12px rgba(0,0,0,.4)}
+.hdr-logo-text{display:flex;flex-direction:column;gap:1px;line-height:1}
+.hdr-logo-name{color:#fff;font-size:15px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
+.hdr-logo-sub{color:var(--gold2);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
+@media(max-width:1024px){.hdr-logo-sub{display:none}}
+@media(max-width:768px){.hdr-logo-img{height:38px;width:38px;border-radius:8px}.hdr-logo-name{font-size:13px}}
 nav{display:flex;gap:4px;align-items:center}
 nav a{
   color:rgba(255,255,255,.72);font-size:12px;font-weight:500;
@@ -629,15 +633,15 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
 .hsr-sel option{background:#fff;color:#1e293b}
 .hsr-btn{
   padding:13px 28px;
-  background:linear-gradient(135deg,var(--gold) 0%,var(--gold2) 100%);
-  color:#060f1e;border:none;border-radius:10px;font-size:14px;font-weight:800;
+  background:linear-gradient(135deg,#16a34a 0%,#15803d 100%);
+  color:#fff;border:none;border-radius:10px;font-size:14px;font-weight:800;
   cursor:pointer;white-space:nowrap;letter-spacing:.02em;align-self:stretch;
   display:flex;align-items:center;gap:8px;flex-shrink:0;
   transition:transform .15s,box-shadow .15s;min-height:48px;
-  box-shadow:0 4px 18px rgba(201,153,58,.4);
+  box-shadow:0 4px 18px rgba(22,163,74,.4);
 }
-.hsr-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,153,58,.55)}
-.hsr-btn svg{width:15px;height:15px;stroke:#060f1e;flex-shrink:0}
+.hsr-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(22,163,74,.55)}
+.hsr-btn svg{width:15px;height:15px;stroke:#fff;flex-shrink:0}
 .hsr-links{display:flex;gap:16px;flex-wrap:wrap;justify-content:center}
 .hsr-link{font-size:12px;color:rgba(255,255,255,.85);font-weight:600;text-decoration:none;transition:color .2s;letter-spacing:.04em;border-bottom:1px solid rgba(201,153,58,.5);padding-bottom:2px;text-shadow:0 1px 6px rgba(0,0,0,.6)}
 .hsr-link:hover{color:var(--gold2);border-bottom-color:var(--gold2)}
@@ -725,7 +729,11 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
 <!-- HEADER -->
 <header id="hdr">
   <a href="#inicio" class="hdr-logo">
-    <img src="logo-header.png" alt="Paulo Cotrim — Coordenador Cury" class="hdr-logo-img"/>
+    <img src="logo-header.png" alt="Paulo Cotrim" class="hdr-logo-img"/>
+    <div class="hdr-logo-text">
+      <span class="hdr-logo-name">Paulo Cotrim</span>
+      <span class="hdr-logo-sub">Especialista Cury · RJ</span>
+    </div>
   </a>
   <nav aria-label="Navegação principal">
     <a href="#inicio" class="active">Home</a>

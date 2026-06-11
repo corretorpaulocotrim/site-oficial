@@ -43,7 +43,13 @@ function render(){
 
   document.getElementById('imovel-root').innerHTML = `
   <header class="im-hdr">
-    <a href="index.html" class="im-hdr-logo"><img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></a>
+    <a href="index.html" class="im-hdr-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none">
+      <img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:44px;border-radius:9px;object-fit:cover;border:1.5px solid rgba(201,153,58,.3);box-shadow:0 2px 10px rgba(0,0,0,.35)"/>
+      <div style="display:flex;flex-direction:column;gap:1px;line-height:1">
+        <span style="color:#fff;font-size:14px;font-weight:800;letter-spacing:-.01em;white-space:nowrap">Paulo Cotrim</span>
+        <span style="color:#e8b84b;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Especialista Cury · RJ</span>
+      </div>
+    </a>
     <div class="im-hdr-right">
       <a href="index.html"><button class="btn-back">← Voltar</button></a>
       <a href="${waLink()}" target="_blank"><button class="btn-wa-im">${WA_SVG} WhatsApp</button></a>
@@ -144,6 +150,35 @@ function render(){
         </div>
       </div>
 
+      <!-- ═══ BAIXAR PROPOSTA ═══ -->
+      <div class="section-block proposta-section">
+        <div class="proposta-banner">
+          <div class="proposta-banner-badge">📥 DOWNLOAD GRATUITO</div>
+          <h2 class="proposta-banner-title">Baixe a proposta do <span>${PROP.nome}</span></h2>
+          <p class="proposta-banner-sub">Escolha o formato ideal para você. Leve todas as informações do empreendimento para analisar com calma.</p>
+          <div class="proposta-options">
+            <div class="proposta-card" onclick="baixarPropostaSimples()">
+              <div class="proposta-card-icon">📋</div>
+              <div class="proposta-card-body">
+                <div class="proposta-card-title">Proposta Resumo</div>
+                <div class="proposta-card-desc">Tipologias, preços, localização e condições de financiamento em um PDF limpo e objetivo.</div>
+                <button class="btn-proposta-simples">⬇ Baixar agora (sem apresentação)</button>
+              </div>
+            </div>
+            <div class="proposta-card proposta-card-destaque" onclick="solicitarPropostaCompleta()">
+              <div class="proposta-card-badge">⭐ MAIS COMPLETO</div>
+              <div class="proposta-card-icon">💼</div>
+              <div class="proposta-card-body">
+                <div class="proposta-card-title">Apresentação Completa</div>
+                <div class="proposta-card-desc">Catálogo oficial do empreendimento com plantas, perspectivas, área de lazer e tabela de preços atualizada.</div>
+                <button class="btn-proposta-completa">${WA_SVG} Receber apresentação completa</button>
+              </div>
+            </div>
+          </div>
+          <p class="proposta-nota">✓ Material gratuito · ✓ Sem compromisso · ✓ Resposta em minutos</p>
+        </div>
+      </div>
+
     </div>
 
     <div class="im-sidebar">
@@ -161,9 +196,14 @@ function render(){
         <a href="simulador.html" style="display:block;margin-bottom:10px">
           <button class="btn-sim-sid">🧮 Simular financiamento</button>
         </a>
-        <a href="${waLink('Quero%20receber%20a%20planta%20baixa%20do%20'+encodeURIComponent(PROP.nome))}" target="_blank" style="display:block">
+        <a href="${waLink('Quero%20receber%20a%20planta%20baixa%20do%20'+encodeURIComponent(PROP.nome))}" target="_blank" style="display:block;margin-bottom:10px">
           <button class="btn-planta-sid">📐 Receber planta</button>
         </a>
+        <div style="border-top:1px solid #f1f5f9;padding-top:10px;margin-top:2px">
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:8px">📥 Baixar proposta</div>
+          <button class="btn-proposta-sid-simples" onclick="baixarPropostaSimples()" style="display:flex;align-items:center;gap:6px;width:100%;margin-bottom:6px;padding:9px 12px;background:#f8fafc;border:1.5px solid #e2e8f0;border-radius:8px;font-size:12px;font-weight:700;color:#1e293b;cursor:pointer;font-family:inherit">⬇ Resumo (sem apresentação)</button>
+          <button class="btn-proposta-sid-completa" onclick="solicitarPropostaCompleta()" style="display:flex;align-items:center;gap:6px;width:100%;padding:9px 12px;background:linear-gradient(135deg,#16a34a,#15803d);border:none;border-radius:8px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit">💼 Com apresentação PDF</button>
+        </div>
       </div>
 
       <div class="sid-card">
@@ -253,3 +293,85 @@ document.addEventListener('DOMContentLoaded', render);
   s.src = 'crm-config.js';
   document.head.appendChild(s);
 })();
+
+// ═══ PROPOSTA: BAIXAR RESUMO (SEM APRESENTAÇÃO) ═══
+window.baixarPropostaSimples = function(){
+  const p = window.PROP || {};
+  const tipos = (p.tipologias||[]).map(t=>`
+    <tr>
+      <td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:600;color:#1e293b">${t.n}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#64748b">${t.m2}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#16a34a">${t.preco}</td>
+    </tr>`).join('');
+  const amens = (p.amenidades||[]).map(a=>`<li style="margin-bottom:4px">✓ ${a}</li>`).join('');
+  const w = window.open('','_blank');
+  w.document.write(`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/>
+  <title>Proposta — ${p.nome}</title>
+  <style>
+    *{box-sizing:border-box;margin:0;padding:0}
+    body{font-family:'Arial',sans-serif;color:#1e293b;background:#fff}
+    .pg{max-width:800px;margin:0 auto;padding:40px 32px}
+    .hdr{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #16a34a;padding-bottom:20px;margin-bottom:28px}
+    .hdr-name{font-size:22px;font-weight:900;color:#060f1e}
+    .hdr-sub{font-size:11px;color:#64748b;margin-top:3px;letter-spacing:.05em;text-transform:uppercase}
+    .hdr-creci{font-size:11px;color:#94a3b8;font-weight:700}
+    .badge{display:inline-block;background:#f0fdf4;color:#16a34a;border:1px solid #bbf7d0;border-radius:20px;font-size:11px;font-weight:700;padding:4px 12px;margin-bottom:16px;letter-spacing:.05em;text-transform:uppercase}
+    h1{font-size:28px;font-weight:900;color:#060f1e;margin-bottom:6px}
+    .bairro{font-size:14px;color:#64748b;margin-bottom:24px}
+    h2{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid #f1f5f9}
+    table{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border:1px solid #f1f5f9;border-radius:8px;overflow:hidden}
+    th{background:#060f1e;color:#fff;padding:10px 14px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+    ul{list-style:none;columns:2;gap:12px;font-size:13px;color:#475569}
+    .desc{font-size:14px;line-height:1.7;color:#475569}
+    .cta-box{background:linear-gradient(135deg,#060f1e,#0d2040);color:#fff;border-radius:12px;padding:24px;margin-top:32px;text-align:center}
+    .cta-box h3{font-size:20px;font-weight:900;margin-bottom:8px}
+    .cta-box p{font-size:13px;opacity:.8;margin-bottom:16px}
+    .cta-wa{display:inline-block;background:#25d366;color:#fff;font-weight:800;font-size:14px;padding:12px 28px;border-radius:8px;text-decoration:none}
+    .footer{margin-top:40px;padding-top:16px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8;text-align:center}
+    @media print{.cta-box a{color:#fff!important}.no-print{display:none}}
+  </style></head><body>
+  <div class="pg">
+    <div class="hdr">
+      <div>
+        <div class="hdr-name">Paulo Cotrim</div>
+        <div class="hdr-sub">Coordenador Cury · Especialista MCMV · RJ</div>
+      </div>
+      <div class="hdr-creci">CRECI-RJ 77677-F<br>📞 (21) 98915-0864</div>
+    </div>
+    <div class="badge">${p.tipo||'Empreendimento'}</div>
+    <h1>${p.nome}</h1>
+    <div class="bairro">📍 ${p.bairro} · ${p.cidade||'Rio de Janeiro'}</div>
+    <h2>Sobre o empreendimento</h2>
+    <p class="desc">${p.desc||''}</p>
+    <h2>Tipologias e preços</h2>
+    <table><thead><tr><th>Tipologia</th><th>Área</th><th>Preço</th></tr></thead><tbody>${tipos}</tbody></table>
+    <h2>Lazer e amenidades</h2>
+    <ul>${amens}</ul>
+    <div class="cta-box">
+      <h3>Pronto para dar o próximo passo?</h3>
+      <p>Paulo Cotrim cuida de toda a documentação e aprovação do seu financiamento em até 48h.</p>
+      <a class="cta-wa" href="https://wa.me/5521989150864?text=Tenho%20interesse%20no%20${encodeURIComponent(p.nome)}!" target="_blank">💬 Falar com Paulo no WhatsApp</a>
+    </div>
+    <div class="footer">Proposta gerada em ${new Date().toLocaleDateString('pt-BR')} · paulocotrim.com.br · corretorpaulocotrim@gmail.com</div>
+  </div>
+  <script>window.onload=function(){window.print()}<\/script>
+  </body></html>`);
+  w.document.close();
+  if(window.trackEvent) trackEvent('proposta_simples','download',p.nome);
+};
+
+// ═══ PROPOSTA: SOLICITAR COMPLETA COM APRESENTAÇÃO PDF ═══
+window.solicitarPropostaCompleta = function(){
+  const p = window.PROP || {};
+  if(p.pdf){
+    const a = document.createElement('a');
+    a.href = p.pdf;
+    a.download = (p.nome||'proposta').replace(/\s+/g,'-').toLowerCase()+'-apresentacao.pdf';
+    a.target = '_blank';
+    a.click();
+  } else {
+    const msg = encodeURIComponent('Olá Paulo! Quero receber a apresentação completa (PDF) do ' + (p.nome||'empreendimento') + '. Pode me enviar?');
+    window.open('https://wa.me/5521989150864?text=' + msg, '_blank');
+  }
+  if(window.trackEvent) trackEvent('proposta_completa','download',p.nome);
+};

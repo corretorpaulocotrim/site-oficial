@@ -152,3 +152,65 @@ img{display:block;max-width:100%}
   .im-hero-content{padding:16px}
   .im-hero-gallery-btn{display:none}
 }
+
+/* ═══ PROPOSTA SECTION ═══ */
+.proposta-section{padding:0}
+.proposta-banner{
+  background:linear-gradient(135deg,#060f1e 0%,#0d2040 50%,#0a1a35 100%);
+  border-radius:20px;padding:36px 32px;border:1px solid rgba(201,153,58,.2);
+  position:relative;overflow:hidden;
+}
+.proposta-banner::before{
+  content:'';position:absolute;top:-60px;right:-60px;width:240px;height:240px;
+  border-radius:50%;background:radial-gradient(circle,rgba(22,163,74,.1) 0%,transparent 70%);
+  pointer-events:none;
+}
+.proposta-banner-badge{
+  display:inline-flex;align-items:center;gap:6px;
+  background:rgba(22,163,74,.15);border:1px solid rgba(22,163,74,.3);
+  color:#4ade80;font-size:10px;font-weight:800;letter-spacing:.14em;
+  text-transform:uppercase;padding:5px 14px;border-radius:30px;margin-bottom:14px;
+}
+.proposta-banner-title{color:#fff;font-size:22px;font-weight:900;margin-bottom:8px;line-height:1.2}
+.proposta-banner-title span{color:#e8b84b}
+.proposta-banner-sub{color:rgba(255,255,255,.65);font-size:14px;line-height:1.6;margin-bottom:24px;max-width:540px}
+.proposta-options{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.proposta-card{
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);
+  border-radius:14px;padding:22px;cursor:pointer;transition:all .2s;
+  display:flex;flex-direction:column;gap:14px;position:relative;
+}
+.proposta-card:hover{background:rgba(255,255,255,.09);border-color:rgba(255,255,255,.2);transform:translateY(-2px)}
+.proposta-card-destaque{background:rgba(22,163,74,.08);border-color:rgba(22,163,74,.3)}
+.proposta-card-destaque:hover{background:rgba(22,163,74,.14);border-color:rgba(22,163,74,.5)}
+.proposta-card-badge{
+  position:absolute;top:-10px;right:16px;
+  background:linear-gradient(135deg,#16a34a,#15803d);color:#fff;
+  font-size:9px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  padding:4px 10px;border-radius:30px;
+}
+.proposta-card-icon{font-size:28px;line-height:1}
+.proposta-card-body{display:flex;flex-direction:column;gap:8px}
+.proposta-card-title{color:#fff;font-size:15px;font-weight:800}
+.proposta-card-desc{color:rgba(255,255,255,.6);font-size:12px;line-height:1.6}
+.btn-proposta-simples{
+  display:flex;align-items:center;gap:7px;width:100%;margin-top:4px;
+  padding:11px 16px;background:rgba(255,255,255,.08);border:1.5px solid rgba(255,255,255,.2);
+  border-radius:9px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;
+  font-family:inherit;transition:all .2s;
+}
+.btn-proposta-simples:hover{background:rgba(255,255,255,.14);border-color:rgba(255,255,255,.35)}
+.btn-proposta-completa{
+  display:flex;align-items:center;gap:7px;width:100%;margin-top:4px;
+  padding:11px 16px;background:linear-gradient(135deg,#16a34a,#15803d);border:none;
+  border-radius:9px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;
+  font-family:inherit;transition:all .2s;box-shadow:0 4px 14px rgba(22,163,74,.3);
+}
+.btn-proposta-completa:hover{box-shadow:0 6px 20px rgba(22,163,74,.45);transform:translateY(-1px)}
+.btn-proposta-completa svg{width:14px;height:14px;flex-shrink:0}
+.proposta-nota{color:rgba(255,255,255,.45);font-size:11px;text-align:center;letter-spacing:.04em}
+@media(max-width:640px){
+  .proposta-options{grid-template-columns:1fr}
+  .proposta-banner{padding:24px 18px}
+  .proposta-banner-title{font-size:18px}
+}
