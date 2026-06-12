@@ -424,9 +424,9 @@ function initImovelMap(){
   var mainMarker = L.marker([PROP.lat, PROP.lng], {icon:mainIcon, zIndexOffset:1000})
     .addTo(map)
     .bindPopup(
-      '<div style="font-family:'Outfit',Inter,sans-serif;min-width:180px">'
+      '<div style="font-family:Outfit,Inter,sans-serif;min-width:180px">'
       +'<div style="font-size:13px;font-weight:800;color:#060f1e;margin-bottom:4px">'+PROP.nome+'</div>'
-      +'<div style="font-size:11px;color:#64748b;line-height:1.4">'+( PROP.endereco||PROP.bairro+' · '+PROP.cidade)+'</div>'
+      +'<div style="font-size:11px;color:#64748b;line-height:1.4">'+(PROP.endereco||PROP.bairro+' · '+PROP.cidade)+'</div>'
       +'</div>',
       {maxWidth:240, closeButton:false}
     );
@@ -454,7 +454,7 @@ function initImovelMap(){
     var m = L.marker([im.lat, im.lng], {icon:smallIcon, zIndexOffset:100})
       .addTo(map)
       .bindPopup(
-        '<div style="font-family:'Outfit',Inter,sans-serif;min-width:180px">'
+        '<div style="font-family:Outfit,Inter,sans-serif;min-width:180px">'
         +'<div style="font-size:13px;font-weight:800;color:#060f1e;margin-bottom:3px">'+im.nome+'</div>'
         +'<div style="font-size:11px;color:#64748b;margin-bottom:6px">'+im.regiao+'</div>'
         +'<div style="font-size:12px;color:#94a3b8;margin-bottom:8px">'+im.preco+'</div>'
