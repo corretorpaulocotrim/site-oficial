@@ -1096,124 +1096,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
   </div>
 </section>
 
-<script>
-(function(){
-  // Load Leaflet then init
-  var L_LOADED = false;
-  function waitForLeaflet(cb){
-    if(typeof L !== 'undefined' && L.map){ cb(); return; }
-    var s = document.createElement('script');
-    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
-    s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=';
-    s.crossOrigin = '';
-    s.onload = cb;
-    document.head.appendChild(s);
-  }
 
-  var imoveis = [
-    {id:"orla-central",nome:"Orla Central",lat:-22.9035,lng:-43.1248,url:"orla-central.html",regiao:"Centro · Niterói · RJ",preco:"R$ 402k",img:"https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg"},
-    {id:"farol",nome:"Farol da Guanabara",lat:-22.8977,lng:-43.2113,url:"farol-da-guanabara.html",regiao:"Santo Cristo · Porto Maravilha",preco:"R$ 320k",img:"https://cury.net/storage/images/products/gallery/68fb2e2116ccc.jpeg"},
-    {id:"arcos",nome:"Arcos do Porto",lat:-22.8935,lng:-43.2028,url:"arcos-do-porto.html",regiao:"Porto Maravilha · RJ",preco:"R$ 350k",img:"https://cury.net/storage/images/products/gallery/68db8ae3f3f07.jpeg"},
-    {id:"piedade",nome:"Parque Piedade – Aquarela",lat:-22.8658,lng:-43.3012,url:"parque-piedade.html",regiao:"Piedade · Zona Norte · RJ",preco:"R$ 220k",img:"https://cury.net/storage/images/products/gallery/68e9c24e76e39.jpeg"},
-    {id:"lamparina",nome:"Luzes do Rio – Lamparina",lat:-22.9002,lng:-43.2223,url:"luzes-do-rio-lamparina.html",regiao:"São Cristóvão · RJ",preco:"R$ 290k",img:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg"},
-    {id:"caminhos",nome:"Caminhos da Guanabara",lat:-22.8741,lng:-43.1098,url:"caminhos-da-guanabara.html",regiao:"Pendotiba · Niterói · RJ",preco:"R$ 260k",img:"https://cury.net/storage/images/products/gallery/68c1a4a97e5a5.jpeg"},
-    {id:"cartola",nome:"Residencial Cartola II",lat:-22.9041,lng:-43.2301,url:"cartola-ii.html",regiao:"São Cristóvão · RJ",preco:"R$ 280k",img:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg"},
-    {id:"candeeiro",nome:"Luzes do Rio – Candeeiro",lat:-22.8998,lng:-43.2198,url:"luzes-do-rio-candeeiro.html",regiao:"São Cristóvão · RJ",preco:"R$ 295k",img:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg"}
-  ];
-
-  var activeId = null;
-  var markers = {};
-  var map = null;
-
-  function activatePin(id){
-    if(!map) return;
-    // Deactivate previous
-    if(activeId){
-      var prevEl = document.querySelector('#card-' + activeId);
-      if(prevEl) prevEl.classList.remove('active');
-      var prevM = markers[activeId];
-      if(prevM) prevM.getElement().querySelector('.price-tag').classList.remove('active');
-    }
-    activeId = id;
-    // Activate card
-    var card = document.querySelector('#card-' + id);
-    if(card){
-      card.classList.add('active');
-      card.scrollIntoView({behavior:'smooth',block:'nearest'});
-    }
-    // Activate marker
-    var marker = markers[id];
-    if(marker){
-      marker.getElement().querySelector('.price-tag').classList.add('active');
-      map.setView(marker.getLatLng(), Math.max(map.getZoom(), 14), {animate:true});
-    }
-  }
-
-  function initMap(){
-    var el = document.getElementById('orulo-map');
-    if(!el || typeof L === 'undefined') return;
-
-    map = L.map('orulo-map',{
-      center:[-22.895,-43.205],
-      zoom:12,
-      scrollWheelZoom:false,
-      zoomControl:true,
-      attributionControl:false
-    });
-
-    // Light professional tile layer
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-      subdomains:'abcd', maxZoom:19
-    }).addTo(map);
-
-    L.control.attribution({position:'bottomright',prefix:''})
-      .addAttribution('© <a href="https://openstreetmap.org">OpenStreetMap</a> © <a href="https://carto.com">CARTO</a>')
-      .addTo(map);
-
-    imoveis.forEach(function(im){
-      var icon = L.divIcon({
-        className: '',
-        html: '<div class="price-tag" id="pin-'+im.id+'">'+im.preco+'</div>',
-        iconSize: null,
-        iconAnchor: [30, 16]
-      });
-
-      var m = L.marker([im.lat, im.lng], {icon:icon, zIndexOffset:100});
-      m.addTo(map);
-      markers[im.id] = m;
-
-      m.on('click', function(){
-        activatePin(im.id);
-      });
-
-      // Card hover activates pin
-      var card = document.getElementById('card-'+im.id);
-      if(card){
-        card.addEventListener('mouseenter', function(){
-          var el2 = document.getElementById('pin-'+im.id);
-          if(el2) el2.classList.add('active');
-        });
-        card.addEventListener('mouseleave', function(){
-          if(activeId !== im.id){
-            var el2 = document.getElementById('pin-'+im.id);
-            if(el2) el2.classList.remove('active');
-          }
-        });
-      }
-    });
-
-    // Activate first card by default
-    if(imoveis.length > 0) activatePin(imoveis[0].id);
-  }
-
-  // Init when DOM is ready
-  if(document.readyState === 'loading'){
-    document.addEventListener('DOMContentLoaded', function(){ waitForLeaflet(initMap); });
-  } else {
-    waitForLeaflet(initMap);
-  }
-})();
-</script>
 
 
 <!-- EMPREENDIMENTOS -->
@@ -1980,5 +1863,87 @@ if('serviceWorker' in navigator){
 }
 </script>
 
+
+<!-- Leaflet: sync load (no defer/async) so L is available for initMap -->
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+/* ═══ MAPA ÓRULO ═══ */
+(function(){
+  var imoveis=[
+    {id:"orla-central",   nome:"Orla Central",             lat:-22.9035,lng:-43.1248,url:"orla-central.html",         regiao:"Centro · Niterói · RJ",        preco:"R$ 402k"},
+    {id:"farol",          nome:"Farol da Guanabara",        lat:-22.8977,lng:-43.2113,url:"farol-da-guanabara.html",   regiao:"Santo Cristo · Porto Maravilha",preco:"R$ 320k"},
+    {id:"arcos",          nome:"Arcos do Porto",            lat:-22.8935,lng:-43.2028,url:"arcos-do-porto.html",       regiao:"Porto Maravilha · RJ",          preco:"R$ 350k"},
+    {id:"piedade",        nome:"Parque Piedade – Aquarela", lat:-22.8658,lng:-43.3012,url:"parque-piedade.html",       regiao:"Piedade · Zona Norte · RJ",     preco:"R$ 220k"},
+    {id:"lamparina",      nome:"Luzes do Rio – Lamparina",  lat:-22.9002,lng:-43.2223,url:"luzes-do-rio-lamparina.html",regiao:"São Cristóvão · RJ",           preco:"R$ 290k"},
+    {id:"caminhos",       nome:"Caminhos da Guanabara",     lat:-22.8741,lng:-43.1098,url:"caminhos-da-guanabara.html",regiao:"Pendotiba · Niterói · RJ",      preco:"R$ 260k"},
+    {id:"cartola",        nome:"Residencial Cartola II",    lat:-22.9041,lng:-43.2301,url:"cartola-ii.html",           regiao:"São Cristóvão · RJ",            preco:"R$ 280k"},
+    {id:"candeeiro",      nome:"Luzes do Rio – Candeeiro",  lat:-22.8998,lng:-43.2198,url:"luzes-do-rio-candeeiro.html",regiao:"São Cristóvão · RJ",          preco:"R$ 295k"}
+  ];
+  var activeId=null, markers={}, map=null;
+
+  function setActive(id){
+    // Deactivate previous
+    if(activeId){
+      var prevCard=document.getElementById("card-"+activeId);
+      if(prevCard) prevCard.classList.remove("active");
+      var prevPin=document.getElementById("pin-"+activeId);
+      if(prevPin) prevPin.classList.remove("active");
+    }
+    activeId=id;
+    // Activate card
+    var card=document.getElementById("card-"+id);
+    if(card){card.classList.add("active");card.scrollIntoView({behavior:"smooth",block:"nearest"});}
+    // Activate pin
+    var pin=document.getElementById("pin-"+id);
+    if(pin) pin.classList.add("active");
+    // Pan map
+    var im=imoveis.find(function(x){return x.id===id;});
+    if(im && map) map.setView([im.lat,im.lng],Math.max(map.getZoom(),14),{animate:true,duration:.5});
+  }
+
+  function initMap(){
+    var el=document.getElementById("orulo-map");
+    if(!el||typeof L==="undefined") return;
+    map=L.map("orulo-map",{center:[-22.895,-43.205],zoom:12,scrollWheelZoom:false,zoomControl:true,attributionControl:true});
+    L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{
+      attribution:"© <a href='https://openstreetmap.org'>OSM</a> © <a href='https://carto.com'>CARTO</a>",
+      subdomains:"abcd",maxZoom:19
+    }).addTo(map);
+
+    imoveis.forEach(function(im){
+      var icon=L.divIcon({
+        className:"",
+        html:'<div class="price-tag" id="pin-'+im.id+'">'+im.preco+"</div>",
+        iconSize:null,iconAnchor:[28,14]
+      });
+      var m=L.marker([im.lat,im.lng],{icon:icon,zIndexOffset:100});
+      m.addTo(map);
+      markers[im.id]=m;
+      m.on("click",function(){setActive(im.id);});
+
+      // Card hover
+      var card=document.getElementById("card-"+im.id);
+      if(card){
+        card.addEventListener("mouseenter",function(){
+          if(activeId!==im.id){var p=document.getElementById("pin-"+im.id);if(p)p.classList.add("active");}
+        });
+        card.addEventListener("mouseleave",function(){
+          if(activeId!==im.id){var p=document.getElementById("pin-"+im.id);if(p)p.classList.remove("active");}
+        });
+      }
+    });
+
+    // Activate first by default
+    if(imoveis.length) setActive(imoveis[0].id);
+  }
+
+  // DOM ready
+  if(document.readyState==="loading"){
+    document.addEventListener("DOMContentLoaded",initMap);
+  } else {
+    initMap();
+  }
+})();
+</script>
 </body>
 </html>
