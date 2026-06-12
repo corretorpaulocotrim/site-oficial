@@ -37,7 +37,6 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
 <!-- Google Analytics GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
@@ -706,7 +705,111 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
   .pcard-img{height:160px}
 }
 /* ══ END MOBILE ══ */
+
+/* ═══════════════════════════════════════════════════════════════
+   MAPA ÓRULO — seção principal de empreendimentos
+═══════════════════════════════════════════════════════════════ */
+#orulo-section {
+  background:#f8fafc;
+  padding: 0;
+  border-top: 1px solid #e2e8f0;
+}
+#orulo-header {
+  max-width:1280px;margin:0 auto;
+  padding:40px 32px 24px;
+  display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+#orulo-header h2 {
+  font-family:'Outfit',system-ui,sans-serif;
+  font-size:clamp(22px,3vw,36px);font-weight:900;
+  color:var(--navy3);margin:0;letter-spacing:-.02em;
+}
+#orulo-header p {
+  font-size:14px;color:var(--muted);margin:6px 0 0;
+}
+#orulo-body {
+  display:grid;
+  grid-template-columns:380px 1fr;
+  height:580px;
+  max-width:1280px;margin:0 auto;
+  border-radius:20px;overflow:hidden;
+  border:1px solid #e2e8f0;
+  box-shadow:0 8px 40px rgba(0,0,0,.10);
+  margin:0 32px 48px;
+}
+#orulo-cards {
+  background:#fff;
+  overflow-y:auto;
+  border-right:1px solid #e2e8f0;
+}
+#orulo-cards::-webkit-scrollbar{width:4px}
+#orulo-cards::-webkit-scrollbar-thumb{background:#e2e8f0;border-radius:4px}
+.orulo-card {
+  padding:14px 16px;
+  border-bottom:1px solid #f1f5f9;
+  cursor:pointer;
+  transition:background .18s;
+  display:flex;gap:12px;align-items:flex-start;
+}
+.orulo-card:hover, .orulo-card.active {
+  background:#f8fafc;
+}
+.orulo-card.active {
+  border-left:3px solid var(--gold);
+  background:#fffbf0;
+}
+.orulo-card-img {
+  width:80px;height:64px;border-radius:9px;object-fit:cover;flex-shrink:0;
+}
+.orulo-card-body { flex:1;min-width:0; }
+.orulo-card-nome {
+  font-size:13px;font-weight:800;color:var(--navy3);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px;
+}
+.orulo-card-loc {
+  font-size:11px;color:var(--muted);margin-bottom:4px;
+}
+.orulo-card-preco {
+  font-size:13px;font-weight:700;color:var(--gold);margin-bottom:6px;
+}
+.orulo-card-btn {
+  background:var(--navy3);color:#fff;border:none;border-radius:6px;
+  padding:5px 10px;font-size:11px;font-weight:700;cursor:pointer;
+  font-family:inherit;transition:background .2s;
+}
+.orulo-card-btn:hover { background:var(--gold); }
+#orulo-map {
+  flex:1;position:relative;
+}
+.price-tag {
+  background:#fff;
+  border:2px solid #c9993a;
+  border-radius:20px;
+  padding:4px 10px;
+  font-size:12px;font-weight:800;
+  color:#060f1e;
+  white-space:nowrap;
+  cursor:pointer;
+  transition:all .2s;
+  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  font-family:'Outfit',Inter,sans-serif;
+}
+.price-tag:hover, .price-tag.active {
+  background:var(--gold,#c9993a);
+  color:#fff;
+  transform:scale(1.1);
+  box-shadow:0 4px 16px rgba(201,153,58,.4);
+  z-index:1000!important;
+}
+@media(max-width:768px){
+  #orulo-body{grid-template-columns:1fr;grid-template-rows:340px 300px;height:640px;margin:0 16px 32px}
+  #orulo-cards{order:2;border-right:none;border-top:1px solid #e2e8f0}
+  #orulo-map{order:1}
+  #orulo-header{padding:32px 16px 20px}
+}
+
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
 </head>
 <body>
 
@@ -900,22 +1003,225 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
   </div>
 </div>
 
+
+<!-- ═══════════════════════════════════════════════
+     MAPA EMPREENDIMENTOS — estilo Órulo
+════════════════════════════════════════════════ -->
+<section id="orulo-section">
+  <div id="orulo-header">
+    <div>
+      <span style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:8px">🗺️ Explore no mapa</span>
+      <h2>Empreendimentos <span style="color:var(--gold)">Cury</span> no Rio de Janeiro</h2>
+      <p>Clique em um imóvel no mapa ou na lista para conhecer o empreendimento</p>
+    </div>
+    <a href="#imoveis-grid" style="font-size:13px;font-weight:600;color:var(--navy3);text-decoration:none;border:1px solid #e2e8f0;padding:8px 16px;border-radius:8px;background:#fff">Ver todos os cards ↓</a>
+  </div>
+  <div id="orulo-body">
+    <div id="orulo-cards">
+
+    <div class="orulo-card" id="card-orla-central" onclick="window.location.href='orla-central.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg" alt="Orla Central" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Orla Central</div>
+        <div class="orulo-card-loc">📍 Centro · Niterói · RJ</div>
+        <div class="orulo-card-preco">A partir de R$ 402.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='orla-central.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="orulo-card" id="card-farol" onclick="window.location.href='farol-da-guanabara.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68fb2e2116ccc.jpeg" alt="Farol da Guanabara" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Farol da Guanabara</div>
+        <div class="orulo-card-loc">📍 Santo Cristo · Porto Maravilha</div>
+        <div class="orulo-card-preco">A partir de R$ 320.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='farol-da-guanabara.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="orulo-card" id="card-arcos" onclick="window.location.href='arcos-do-porto.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db8ae3f3f07.jpeg" alt="Arcos do Porto" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Arcos do Porto</div>
+        <div class="orulo-card-loc">📍 Porto Maravilha · RJ</div>
+        <div class="orulo-card-preco">A partir de R$ 350.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='arcos-do-porto.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="orulo-card" id="card-piedade" onclick="window.location.href='parque-piedade.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68e9c24e76e39.jpeg" alt="Parque Piedade – Aquarela" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Parque Piedade – Aquarela</div>
+        <div class="orulo-card-loc">📍 Piedade · Zona Norte · RJ</div>
+        <div class="orulo-card-preco">A partir de R$ 220.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='parque-piedade.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="orulo-card" id="card-lamparina" onclick="window.location.href='luzes-do-rio-lamparina.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg" alt="Luzes do Rio – Lamparina" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Luzes do Rio – Lamparina</div>
+        <div class="orulo-card-loc">📍 São Cristóvão · RJ</div>
+        <div class="orulo-card-preco">A partir de R$ 290.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='luzes-do-rio-lamparina.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="orulo-card" id="card-caminhos" onclick="window.location.href='caminhos-da-guanabara.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68c1a4a97e5a5.jpeg" alt="Caminhos da Guanabara" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Caminhos da Guanabara</div>
+        <div class="orulo-card-loc">📍 Pendotiba · Niterói · RJ</div>
+        <div class="orulo-card-preco">A partir de R$ 260.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='caminhos-da-guanabara.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="orulo-card" id="card-cartola" onclick="window.location.href='cartola-ii.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg" alt="Residencial Cartola II" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Residencial Cartola II</div>
+        <div class="orulo-card-loc">📍 São Cristóvão · RJ</div>
+        <div class="orulo-card-preco">A partir de R$ 280.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='cartola-ii.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    <div class="orulo-card" id="card-candeeiro" onclick="window.location.href='luzes-do-rio-candeeiro.html'">
+      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg" alt="Luzes do Rio – Candeeiro" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <div class="orulo-card-body">
+        <div class="orulo-card-nome">Luzes do Rio – Candeeiro</div>
+        <div class="orulo-card-loc">📍 São Cristóvão · RJ</div>
+        <div class="orulo-card-preco">A partir de R$ 295.000</div>
+        <button class="orulo-card-btn" onclick="event.stopPropagation();window.location.href='luzes-do-rio-candeeiro.html'">Ver detalhes →</button>
+      </div>
+    </div>
+    </div>
+    <div id="orulo-map"></div>
+  </div>
+</section>
+
+<script>
+(function(){
+  // Load Leaflet then init
+  var L_LOADED = false;
+  function waitForLeaflet(cb){
+    if(typeof L !== 'undefined' && L.map){ cb(); return; }
+    var s = document.createElement('script');
+    s.src = 'https://unpkg.com/leaflet@1.9.4/dist/leaflet.js';
+    s.integrity = 'sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=';
+    s.crossOrigin = '';
+    s.onload = cb;
+    document.head.appendChild(s);
+  }
+
+  var imoveis = [
+    {id:"orla-central",nome:"Orla Central",lat:-22.9035,lng:-43.1248,url:"orla-central.html",regiao:"Centro · Niterói · RJ",preco:"R$ 402k",img:"https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg"},
+    {id:"farol",nome:"Farol da Guanabara",lat:-22.8977,lng:-43.2113,url:"farol-da-guanabara.html",regiao:"Santo Cristo · Porto Maravilha",preco:"R$ 320k",img:"https://cury.net/storage/images/products/gallery/68fb2e2116ccc.jpeg"},
+    {id:"arcos",nome:"Arcos do Porto",lat:-22.8935,lng:-43.2028,url:"arcos-do-porto.html",regiao:"Porto Maravilha · RJ",preco:"R$ 350k",img:"https://cury.net/storage/images/products/gallery/68db8ae3f3f07.jpeg"},
+    {id:"piedade",nome:"Parque Piedade – Aquarela",lat:-22.8658,lng:-43.3012,url:"parque-piedade.html",regiao:"Piedade · Zona Norte · RJ",preco:"R$ 220k",img:"https://cury.net/storage/images/products/gallery/68e9c24e76e39.jpeg"},
+    {id:"lamparina",nome:"Luzes do Rio – Lamparina",lat:-22.9002,lng:-43.2223,url:"luzes-do-rio-lamparina.html",regiao:"São Cristóvão · RJ",preco:"R$ 290k",img:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg"},
+    {id:"caminhos",nome:"Caminhos da Guanabara",lat:-22.8741,lng:-43.1098,url:"caminhos-da-guanabara.html",regiao:"Pendotiba · Niterói · RJ",preco:"R$ 260k",img:"https://cury.net/storage/images/products/gallery/68c1a4a97e5a5.jpeg"},
+    {id:"cartola",nome:"Residencial Cartola II",lat:-22.9041,lng:-43.2301,url:"cartola-ii.html",regiao:"São Cristóvão · RJ",preco:"R$ 280k",img:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg"},
+    {id:"candeeiro",nome:"Luzes do Rio – Candeeiro",lat:-22.8998,lng:-43.2198,url:"luzes-do-rio-candeeiro.html",regiao:"São Cristóvão · RJ",preco:"R$ 295k",img:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg"}
+  ];
+
+  var activeId = null;
+  var markers = {};
+  var map = null;
+
+  function activatePin(id){
+    if(!map) return;
+    // Deactivate previous
+    if(activeId){
+      var prevEl = document.querySelector('#card-' + activeId);
+      if(prevEl) prevEl.classList.remove('active');
+      var prevM = markers[activeId];
+      if(prevM) prevM.getElement().querySelector('.price-tag').classList.remove('active');
+    }
+    activeId = id;
+    // Activate card
+    var card = document.querySelector('#card-' + id);
+    if(card){
+      card.classList.add('active');
+      card.scrollIntoView({behavior:'smooth',block:'nearest'});
+    }
+    // Activate marker
+    var marker = markers[id];
+    if(marker){
+      marker.getElement().querySelector('.price-tag').classList.add('active');
+      map.setView(marker.getLatLng(), Math.max(map.getZoom(), 14), {animate:true});
+    }
+  }
+
+  function initMap(){
+    var el = document.getElementById('orulo-map');
+    if(!el || typeof L === 'undefined') return;
+
+    map = L.map('orulo-map',{
+      center:[-22.895,-43.205],
+      zoom:12,
+      scrollWheelZoom:false,
+      zoomControl:true,
+      attributionControl:false
+    });
+
+    // Light professional tile layer
+    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+      subdomains:'abcd', maxZoom:19
+    }).addTo(map);
+
+    L.control.attribution({position:'bottomright',prefix:''})
+      .addAttribution('© <a href="https://openstreetmap.org">OpenStreetMap</a> © <a href="https://carto.com">CARTO</a>')
+      .addTo(map);
+
+    imoveis.forEach(function(im){
+      var icon = L.divIcon({
+        className: '',
+        html: '<div class="price-tag" id="pin-'+im.id+'">'+im.preco+'</div>',
+        iconSize: null,
+        iconAnchor: [30, 16]
+      });
+
+      var m = L.marker([im.lat, im.lng], {icon:icon, zIndexOffset:100});
+      m.addTo(map);
+      markers[im.id] = m;
+
+      m.on('click', function(){
+        activatePin(im.id);
+      });
+
+      // Card hover activates pin
+      var card = document.getElementById('card-'+im.id);
+      if(card){
+        card.addEventListener('mouseenter', function(){
+          var el2 = document.getElementById('pin-'+im.id);
+          if(el2) el2.classList.add('active');
+        });
+        card.addEventListener('mouseleave', function(){
+          if(activeId !== im.id){
+            var el2 = document.getElementById('pin-'+im.id);
+            if(el2) el2.classList.remove('active');
+          }
+        });
+      }
+    });
+
+    // Activate first card by default
+    if(imoveis.length > 0) activatePin(imoveis[0].id);
+  }
+
+  // Init when DOM is ready
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', function(){ waitForLeaflet(initMap); });
+  } else {
+    waitForLeaflet(initMap);
+  }
+})();
+</script>
+
+
 <!-- EMPREENDIMENTOS -->
-<section class="props-section" id="imoveis">
+<section class="props-section" id="imoveis-grid">
   <div class="sec-center fade-in">
     <span class="tag tag-blue">Portfólio exclusivo</span>
     <h2 class="sec-h2">Lançamentos <span>Cury</span> no Rio de Janeiro</h2>
     <p class="sec-p">Paulo seleciona os empreendimentos com maior potencial de valorização e financiamento facilitado. Cada imóvel, uma oportunidade estratégica.</p>
-  </div>
-
-  <!-- MAPA INTERATIVO -->
-  <div style="max-width:1200px;margin:0 auto 0;padding:0 24px 48px">
-    <div style="text-align:center;margin-bottom:28px">
-      <span style="font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:10px">🗺️ Localização dos empreendimentos</span>
-      <h2 style="font-family:Outfit,system-ui,sans-serif;font-size:clamp(22px,3vw,34px);font-weight:900;color:var(--navy3);margin:0 0 8px;letter-spacing:-.02em">Mapa dos Condomínios Cury no Rio</h2>
-      <p style="color:var(--muted);font-size:14px;margin:0">Clique em qualquer marcador para conhecer o empreendimento</p>
-    </div>
-    <div id="mapa-empreendimentos" style="width:100%;height:480px;border-radius:20px;overflow:hidden;border:1px solid #e2e8f0;box-shadow:0 8px 40px rgba(0,0,0,.10)"></div>
   </div>
 
   <div class="props-grid">
@@ -1674,38 +1980,5 @@ if('serviceWorker' in navigator){
 }
 </script>
 
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
-<script>
-(function(){
-  var el = document.getElementById('mapa-empreendimentos');
-  if(!el) return;
-  var map = L.map('mapa-empreendimentos',{center:[-22.895,-43.215],zoom:11,scrollWheelZoom:false});
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-    attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
-  }).addTo(map);
-  var imoveis=[
-    {nome:'Orla Central',lat:-22.9035,lng:-43.1248,url:'orla-central.html',regiao:'Centro · Niterói · RJ',preco:'A partir de R$ 402.000'},
-    {nome:'Farol da Guanabara',lat:-22.8977,lng:-43.2113,url:'farol-da-guanabara.html',regiao:'Santo Cristo · Porto Maravilha',preco:'A partir de R$ 320.000'},
-    {nome:'Arcos do Porto',lat:-22.8935,lng:-43.2028,url:'arcos-do-porto.html',regiao:'Porto Maravilha · RJ',preco:'A partir de R$ 350.000'},
-    {nome:'Parque Piedade – Aquarela',lat:-22.8658,lng:-43.3012,url:'parque-piedade.html',regiao:'Piedade · Zona Norte · RJ',preco:'A partir de R$ 220.000'},
-    {nome:'Luzes do Rio – Lamparina',lat:-22.9002,lng:-43.2223,url:'luzes-do-rio-lamparina.html',regiao:'Imperial São Cristóvão · RJ',preco:'A partir de R$ 290.000'},
-    {nome:'Caminhos da Guanabara',lat:-22.8741,lng:-43.1098,url:'caminhos-da-guanabara.html',regiao:'Niterói · RJ',preco:'A partir de R$ 260.000'},
-    {nome:'Residencial Cartola II',lat:-22.9041,lng:-43.2301,url:'cartola-ii.html',regiao:'São Cristóvão · RJ',preco:'A partir de R$ 280.000'},
-    {nome:'Luzes do Rio – Candeeiro',lat:-22.8998,lng:-43.2198,url:'luzes-do-rio-candeeiro.html',regiao:'Imperial São Cristóvão · RJ',preco:'A partir de R$ 295.000'}
-  ];
-  imoveis.forEach(function(im){
-    var icon=L.divIcon({className:'',
-      html:'<div style="background:#060f1e;width:14px;height:14px;border-radius:50%;border:3px solid #c9993a;box-shadow:0 2px 8px rgba(0,0,0,.35);cursor:pointer" onmouseover="this.style.transform=\'scale(1.5)\'" onmouseout="this.style.transform=\'scale(1)\'"></div>',
-      iconSize:[14,14],iconAnchor:[7,7],popupAnchor:[0,-10]});
-    var popup='<div style="font-family:Outfit,Inter,sans-serif;min-width:190px">'
-      +'<strong style="font-size:14px;color:#060f1e;display:block;margin-bottom:3px">'+im.nome+'</strong>'
-      +'<span style="font-size:11px;color:#64748b;display:block;margin-bottom:5px">📍 '+im.regiao+'</span>'
-      +'<span style="font-size:12px;color:#c9993a;font-weight:700;display:block;margin-bottom:9px">'+im.preco+'</span>'
-      +'<a href="'+im.url+'" style="background:#060f1e;color:#fff;padding:6px 14px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600">Ver empreendimento →</a>'
-      +'</div>';
-    L.marker([im.lat,im.lng],{icon:icon}).addTo(map).bindPopup(popup,{maxWidth:260});
-  });
-})();
-</script>
 </body>
 </html>
