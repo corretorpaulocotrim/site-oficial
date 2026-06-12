@@ -36,7 +36,9 @@
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
 <!-- Google Analytics GA4 -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
@@ -88,12 +90,12 @@ img{display:block;max-width:100%}
 }
 #hdr.scrolled{height:60px;background:rgba(6,15,30,.99)}
 .hdr-logo{display:flex;align-items:center;gap:11px;text-decoration:none}
-.hdr-logo-img{height:46px;width:46px;border-radius:10px;object-fit:cover;display:block;border:1.5px solid rgba(201,153,58,.3);box-shadow:0 2px 12px rgba(0,0,0,.4)}
-.hdr-logo-text{display:flex;flex-direction:column;gap:1px;line-height:1}
+.hdr-logo-img{height:40px;width:auto;max-width:260px;border-radius:7px;object-fit:contain;display:block;filter:brightness(1.1)}
+.hdr-logo-text{display:none}
 .hdr-logo-name{color:#fff;font-size:15px;font-weight:800;letter-spacing:-.01em;white-space:nowrap}
 .hdr-logo-sub{color:var(--gold2);font-size:9.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.9}
 @media(max-width:1024px){.hdr-logo-sub{display:none}}
-@media(max-width:768px){.hdr-logo-img{height:38px;width:38px;border-radius:8px}.hdr-logo-name{font-size:13px}}
+@media(max-width:768px){.hdr-logo-img{height:32px;max-width:200px;border-radius:6px}.hdr-logo-name{font-size:13px}}
 nav{display:flex;gap:4px;align-items:center}
 nav a{
   color:rgba(255,255,255,.72);font-size:12px;font-weight:500;
@@ -157,7 +159,7 @@ nav a.nav-hot:hover{background:rgba(201,153,58,.22)}
 .hero-proof-item .n{color:#fff;font-size:22px;font-weight:800;line-height:1}
 .hero-proof-item .l{color:rgba(255,255,255,.55);font-size:11px;font-weight:500;letter-spacing:.04em}
 .hero-nav{
-  position:absolute;bottom:28px;left:80px;right:80px;z-index:10;
+  position:absolute;bottom:28px;left:80px;right:80px;z-index:1;
   display:flex;align-items:center;justify-content:space-between;
 }
 .hero-dots{display:flex;gap:8px}
@@ -301,8 +303,8 @@ nav a.nav-hot:hover{background:rgba(201,153,58,.22)}
   padding:10px 16px;border-radius:9px;font-size:13px;font-weight:700;
   border:1.5px solid;transition:all .2s;
 }
-.sl-ig{background:#fdf2f8;border-color:#f0abfc;color:#86198f}
-.sl-ig:hover{background:#fce7f3}
+.sl-ig{background:rgba(6,15,30,.06);border-color:rgba(6,15,30,.2);color:var(--navy3)}
+.sl-ig:hover{background:rgba(6,15,30,.1);border-color:rgba(201,153,58,.5)}
 .sl-wa{background:#f0fdf4;border-color:#86efac;color:#15803d}
 .sl-wa:hover{background:#dcfce7}
 .sl-em{background:#eff6ff;border-color:#93c5fd;color:#1d4ed8}
@@ -596,11 +598,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
 
 
-  .hs-group{border-right:none;border-bottom:1px solid #e8edf2;padding:12px 16px 10px}
-  .hs-btn-wrap{justify-content:center;padding:12px 16px}
-  .hs-btn{width:100%;border-radius:10px;height:46px;gap:8px}
-  .hs-btn::after{content:'Buscar imóveis';color:#060f1e;font-size:14px;font-weight:700}
-}
+
 
 
 /* ── HERO SEARCH BAR ── */
@@ -613,13 +611,13 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
 #hero-inner,.hero-inner{
   width:100%;max-width:760px;text-align:center;
 }
-/* PESQUISA: fundo branco claro para máxima legibilidade */
+/* PESQUISA: barra de busca abaixo do hero */
 .hero-search-row{
   display:flex;align-items:center;gap:12px;flex-wrap:wrap;
-  background:rgba(255,255,255,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  border:none;border-radius:18px;
-  padding:18px 24px;max-width:1000px;width:100%;justify-content:center;
-  box-shadow:0 12px 48px rgba(0,0,0,.35),0 0 0 1px rgba(201,153,58,.2);
+  background:rgba(255,255,255,.97);
+  border:none;border-radius:14px;
+  padding:16px 20px;width:100%;justify-content:center;
+  box-shadow:0 4px 24px rgba(0,0,0,.12);
 }
 .hsr-field{display:flex;flex-direction:column;gap:5px;flex:1;min-width:150px}
 .hsr-label{font-size:9px;font-weight:800;color:#0d2040;text-transform:uppercase;letter-spacing:.12em}
@@ -773,8 +771,26 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       <div class="hero-eyebrow">Porto Maravilha · Centro · Rio de Janeiro</div>
       <h1 class="hero-h1" id="hero-h1">O endereço que vai<br><span class="gold">transformar sua vida</span></h1>
     </div>
-    <!-- BUSCA -->
-    <div class="hero-search-row" id="hero-search-card">
+
+  </div>
+  <div class="hero-nav">
+    <div class="hero-dots" id="hero-dots"></div>
+    <div class="hero-arrows">
+      <button class="hero-arr" onclick="prevSlide()" aria-label="Anterior">‹</button>
+      <button class="hero-arr" onclick="nextSlide()" aria-label="Próximo">›</button>
+    </div>
+  </div>
+</div>
+</section>
+
+
+<!-- BUSCA IMÓVEIS -->
+<div id="busca-section" style="background:var(--navy2);padding:28px 40px 32px;border-bottom:1px solid rgba(201,153,58,.15)">
+  <div style="max-width:1100px;margin:0 auto">
+    <div style="text-align:center;margin-bottom:18px">
+      <span style="font-size:11px;font-weight:700;color:var(--gold2);letter-spacing:.12em;text-transform:uppercase">🔍 Encontre seu imóvel ideal</span>
+    </div>
+    <div class="hero-search-row" id="hero-search-card" style="max-width:1000px;margin:0 auto">
       <div class="hsr-field">
         <label class="hsr-label">Região</label>
         <select class="hsr-sel" id="hs-regiao" onchange="filtrarImoveis()">
@@ -809,22 +825,8 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
         Buscar imóveis
       </button>
     </div>
-    <div class="hsr-links">
-      <a href="match.html" class="hsr-link">Imóvel ideal →</a>
-      <a href="aprovacao-expressa.html" class="hsr-link">Aprovação em 48h →</a>
-      <a href="investidor.html" class="hsr-link">Simuladores →</a>
-    </div>
-  </div>
-  <div class="hero-nav">
-    <div class="hero-dots" id="hero-dots"></div>
-    <div class="hero-arrows">
-      <button class="hero-arr" onclick="prevSlide()" aria-label="Anterior">‹</button>
-      <button class="hero-arr" onclick="nextSlide()" aria-label="Próximo">›</button>
-    </div>
   </div>
 </div>
-</section>
-
 
 <!-- TRUST BAR -->
 <div class="trust-bar">
@@ -916,7 +918,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       <div class="pcard-urgency"><span class="urg-dot"></span>🏆 Alta procura · tabela válida até 30/jul</div>
       <div class="pcard-body">
         <h3>Orla Central</h3>
-        <div class="pcard-loc">📍 Centro · Porto Maravilha · RJ</div>
+        <div class="pcard-loc">📍 Centro · Niterói · RJ</div>
         <div class="pcard-price">a partir de <strong>R$ 402.000</strong></div>
         <div class="pcard-amen"><span class="amen">Rooftop</span><span class="amen">Beach Tênis</span><span class="amen">Piscinas</span><span class="amen">Horta</span><span class="amen">1–3 dorms.</span></div>
         <div class="pcard-cta"><span class="pcard-dorms">🛏 1, 2 e 3 quartos</span><div class="pcard-btns"><button class="btn-card" onclick="event.stopPropagation();location.href='orla-central.html'">Ver preços →</button><button class="btn-card-sim" onclick="event.stopPropagation();location.href='aprovacao-expressa.html'">⚡ Simule aqui</button></div></div>
@@ -1298,6 +1300,70 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
   </div>
   <div style="max-width:760px;margin:0 auto" id="faq-list"></div>
 </section>
+
+<!-- MAPA DOS EMPREENDIMENTOS -->
+<section id="mapa-paulo" style="background:#060f1e;padding:64px 0 0">
+  <div style="max-width:1200px;margin:0 auto;padding:0 40px 40px">
+    <div style="text-align:center;margin-bottom:36px">
+      <span style="font-size:11px;font-weight:700;color:#c9993a;letter-spacing:.14em;text-transform:uppercase;display:block;margin-bottom:12px">📍 Presença Territorial</span>
+      <h2 style="font-family:Outfit,system-ui,sans-serif;font-size:clamp(26px,4vw,40px);font-weight:800;color:#fff;margin:0 0 12px;letter-spacing:-.02em">Mapa dos Empreendimentos</h2>
+      <p style="color:rgba(255,255,255,.5);font-size:15px;margin:0">Clique em qualquer marcador para conhecer o condomínio</p>
+    </div>
+    <div id="mapa-rj" style="width:100%;height:520px;border-radius:20px;overflow:hidden;border:1px solid rgba(201,153,58,.2);box-shadow:0 24px 64px rgba(0,0,0,.5)"></div>
+  </div>
+</section>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/WLs=" crossorigin=""></script>
+<script>
+(function(){
+  var map = L.map('mapa-rj', {
+    center: [-22.88, -43.29],
+    zoom: 11,
+    zoomControl: true,
+    scrollWheelZoom: false
+  });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+    attribution: '© OpenStreetMap © CARTO',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  var goldIcon = L.divIcon({
+    className: '',
+    html: '<div style="background:#c9993a;width:16px;height:16px;border-radius:50%;border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.5);cursor:pointer"></div>',
+    iconSize: [16,16],
+    iconAnchor: [8,8],
+    popupAnchor: [0,-12]
+  });
+
+  var imoveis = [
+    {nome:'Orla Central', lat:-22.8955, lng:-43.1175, url:'orla-central.html', regiao:'Centro · Niterói · RJ', preco:'A partir de R$ 280.000'},
+    {nome:'Farol da Guanabara', lat:-22.8977, lng:-43.2113, url:'farol-da-guanabara.html', regiao:'Santo Cristo · Porto Maravilha · RJ', preco:'A partir de R$ 320.000'},
+    {nome:'Arcos do Porto', lat:-22.8935, lng:-43.2028, url:'arcos-do-porto.html', regiao:'Porto Maravilha · Rio de Janeiro', preco:'A partir de R$ 350.000'},
+    {nome:'Parque Piedade – Aquarela', lat:-22.8658, lng:-43.3012, url:'parque-piedade.html', regiao:'Piedade · Zona Norte · RJ', preco:'A partir de R$ 220.000'},
+    {nome:'Luzes do Rio – Lamparina', lat:-22.9002, lng:-43.2223, url:'luzes-do-rio-lamparina.html', regiao:'Imperial São Cristóvão · RJ', preco:'A partir de R$ 290.000'},
+    {nome:'Caminhos da Guanabara', lat:-22.8741, lng:-43.1098, url:'caminhos-da-guanabara.html', regiao:'Niterói · Rio de Janeiro', preco:'A partir de R$ 260.000'},
+    {nome:'Nova Norte Samba', lat:-22.8301, lng:-43.3412, url:'#contato', regiao:'Irajá · Zona Norte · RJ', preco:'Lançamento breve'},
+    {nome:'Nova Norte Ginga', lat:-22.8278, lng:-43.3389, url:'#contato', regiao:'Irajá · Zona Norte · RJ', preco:'Lançamento breve'},
+    {nome:'Nova Olaria I e II', lat:-22.8456, lng:-43.2678, url:'#contato', regiao:'Olaria · Zona Norte · RJ', preco:'Lançamento breve'}
+  ];
+
+  imoveis.forEach(function(im){
+    var popup = '<div style="font-family:Outfit,Inter,sans-serif;min-width:200px">'
+      + '<strong style="font-size:14px;color:#060f1e;display:block;margin-bottom:4px">' + im.nome + '</strong>'
+      + '<span style="font-size:11px;color:#666;display:block;margin-bottom:6px">📍 ' + im.regiao + '</span>'
+      + '<span style="font-size:12px;color:#c9993a;font-weight:700;display:block;margin-bottom:10px">' + im.preco + '</span>'
+      + '<a href="' + im.url + '" style="background:#060f1e;color:#fff;padding:6px 14px;border-radius:8px;text-decoration:none;font-size:12px;font-weight:600">Ver empreendimento →</a>'
+      + '</div>';
+    L.marker([im.lat, im.lng], {icon: goldIcon})
+      .addTo(map)
+      .bindPopup(popup, {maxWidth:280})
+      .on('click', function(){ this.openPopup(); });
+  });
+})();
+</script>
+
 <footer>
   <div class="footer-top">
     <div class="f-brand">
@@ -1489,7 +1555,8 @@ function filtrarImoveis(scroll){
     // São Cristóvão: Luzes do Rio Lamparina (Imperial São Cristóvão)
     // Niterói: Caminhos da Guanabara
     let okR = true;
-    if(regiao==='porto')      okR = loc.includes('porto') || loc.includes('centro') || loc.includes('santo cristo');
+    if(regiao==='porto')      okR = loc.includes('porto') || loc.includes('santo cristo');
+    else if(regiao==='niteroi_extra')    okR = false;
     else if(regiao==='piedade')    okR = loc.includes('piedade');
     else if(regiao==='cristovao')  okR = loc.includes('cristóvão') || loc.includes('cristovao');
     else if(regiao==='niteroi')    okR = loc.includes('niterói') || loc.includes('niteroi');
@@ -1653,24 +1720,4 @@ function cookieConsent(type){
 
 /* Service Worker PWA */
 if('serviceWorker' in navigator){
-  window.addEventListener('load',function(){
-    navigator.serviceWorker.register('sw.js')
-      .then(function(r){console.log('SW:',r.scope)})
-      .catch(function(){});
-  });
-}
-
-/* GA4 — rastrear cliques WhatsApp */
-document.querySelectorAll('a[href*="wa.me"]').forEach(function(a){
-  a.addEventListener('click',function(){
-    if(typeof trackEvent==='function') trackEvent('whatsapp_click','engagement','WhatsApp CTA');
-  });
-});
-/* GA4 — rastrear submit formulário */
-var ctBtn=document.getElementById('ct-submit-btn');
-if(ctBtn) ctBtn.addEventListener('click',function(){
-  if(typeof trackEvent==='function') trackEvent('form_submit','lead','Formulário Contato');
-});
-</script>
-</body>
-</html>
+  window.addEventListener('load',fu
