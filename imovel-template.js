@@ -6,14 +6,14 @@ const WA_SVG=`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.3
 
 // Todos os empreendimentos — para mapa cruzado nas páginas individuais
 const ALL_IMOVEIS = [
-  {id:"orla-central",nome:"Orla Central",lat:-22.9035,lng:-43.1248,url:"orla-central.html",regiao:"Centro · Niterói · RJ",preco:"A partir de R$ 402.000"},
-  {id:"farol",nome:"Farol da Guanabara",lat:-22.8977,lng:-43.2113,url:"farol-da-guanabara.html",regiao:"Santo Cristo · Porto Maravilha",preco:"A partir de R$ 320.000"},
-  {id:"arcos",nome:"Arcos do Porto",lat:-22.8935,lng:-43.2028,url:"arcos-do-porto.html",regiao:"Porto Maravilha · RJ",preco:"A partir de R$ 350.000"},
-  {id:"piedade",nome:"Parque Piedade – Aquarela",lat:-22.8658,lng:-43.3012,url:"parque-piedade.html",regiao:"Piedade · Zona Norte · RJ",preco:"A partir de R$ 220.000"},
-  {id:"lamparina",nome:"Luzes do Rio – Lamparina",lat:-22.9002,lng:-43.2223,url:"luzes-do-rio-lamparina.html",regiao:"Imperial São Cristóvão · RJ",preco:"A partir de R$ 290.000"},
-  {id:"caminhos",nome:"Caminhos da Guanabara",lat:-22.8741,lng:-43.1098,url:"caminhos-da-guanabara.html",regiao:"Niterói · RJ",preco:"A partir de R$ 260.000"},
-  {id:"cartola",nome:"Residencial Cartola II",lat:-22.9041,lng:-43.2301,url:"cartola-ii.html",regiao:"São Cristóvão · RJ",preco:"A partir de R$ 280.000"},
-  {id:"candeeiro",nome:"Luzes do Rio – Candeeiro",lat:-22.8998,lng:-43.2198,url:"luzes-do-rio-candeeiro.html",regiao:"Imperial São Cristóvão · RJ",preco:"A partir de R$ 295.000"}
+  {id:"orla-central", nome:"Orla Central",            lat:-22.8990,lng:-43.1248, url:"orla-central.html",          regiao:"Centro · Niterói · RJ",         preco:"A partir de R$ 402.000"},
+  {id:"farol",        nome:"Farol da Guanabara",       lat:-22.8958,lng:-43.2103, url:"farol-da-guanabara.html",    regiao:"Santo Cristo · Porto Maravilha", preco:"A partir de R$ 403.000"},
+  {id:"arcos",        nome:"Arcos do Porto",            lat:-22.8912,lng:-43.2013, url:"arcos-do-porto.html",        regiao:"Porto Maravilha · RJ",           preco:"A partir de R$ 361.000"},
+  {id:"piedade",      nome:"Parque Piedade – Aquarela", lat:-22.8672,lng:-43.2885, url:"parque-piedade.html",        regiao:"Piedade · Zona Norte · RJ",      preco:"A partir de R$ 263.000"},
+  {id:"lamparina",    nome:"Luzes do Rio – Lamparina",  lat:-22.9008,lng:-43.2238, url:"luzes-do-rio-lamparina.html",regiao:"São Cristóvão · RJ",             preco:"A partir de R$ 309.000"},
+  {id:"caminhos",     nome:"Caminhos da Guanabara",     lat:-22.8748,lng:-43.1105, url:"caminhos-da-guanabara.html",regiao:"Pendotiba · Niterói · RJ",        preco:"A partir de R$ 335.000"},
+  {id:"cartola",      nome:"Residencial Cartola II",    lat:-22.9015,lng:-43.2295, url:"cartola-ii.html",            regiao:"São Cristóvão · RJ",             preco:"A partir de R$ 302.000"},
+  {id:"candeeiro",    nome:"Luzes do Rio – Candeeiro",  lat:-22.9000,lng:-43.2220, url:"luzes-do-rio-candeeiro.html",regiao:"São Cristóvão · RJ",            preco:"A partir de R$ 362.000"}
 ];
 
 function waLink(msg){ return `https://wa.me/5521989150864?text=${msg||PROP.wa}`; }
@@ -393,32 +393,94 @@ window.solicitarPropostaCompleta = function(){
 function initImovelMap(){
   var el = document.getElementById('map-imovel');
   if(!el || typeof L === 'undefined' || !PROP.lat) return;
-  var map = L.map('map-imovel',{center:[PROP.lat,PROP.lng],zoom:15,scrollWheelZoom:false});
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
-    attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
-  }).addTo(map);
-  // Big marker for current property
-  var mainIcon = L.divIcon({className:'',
-    html:'<div style="background:#c9993a;width:22px;height:22px;border-radius:50%;border:4px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.4)"></div>',
-    iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-14]});
-  L.marker([PROP.lat,PROP.lng],{icon:mainIcon}).addTo(map)
-    .bindPopup('<strong>'+PROP.nome+'</strong><br><span style="font-size:11px;color:#64748b">'+( PROP.endereco||PROP.bairro)+'</span>')
-    .openPopup();
-  // Small markers for other properties
-  var smallIcon = L.divIcon({className:'',
-    html:'<div style="background:#1e293b;width:10px;height:10px;border-radius:50%;border:2px solid #c9993a;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer"></div>',
-    iconSize:[10,10],iconAnchor:[5,5],popupAnchor:[0,-8]});
-  (ALL_IMOVEIS||[]).forEach(function(im){
-    if(im.id===PROP.id) return;
-    L.marker([im.lat,im.lng],{icon:smallIcon}).addTo(map)
-      .bindPopup('<div style="font-family:Inter,sans-serif">'
-        +'<strong style="font-size:13px;color:#060f1e">'+im.nome+'</strong>'
-        +'<br><span style="font-size:11px;color:#64748b">'+im.regiao+'</span>'
-        +'<br><a href="'+im.url+'" style="font-size:12px;color:#c9993a;font-weight:700;text-decoration:none">Ver empreendimento →</a>'
-        +'</div>',{maxWidth:220})
-      .on('click',function(){ window.location.href=im.url; });
+
+  /* ── Mapa centrado na propriedade atual ── */
+  var map = L.map('map-imovel', {
+    center:[PROP.lat, PROP.lng],
+    zoom: 16,
+    scrollWheelZoom: false,
+    zoomControl: true
   });
+
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'&copy; <a href="https://openstreetmap.org">OSM</a> &copy; <a href="https://carto.com">CARTO</a>',
+    subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+
+  /* ── Marcador GRANDE — empreendimento atual ── */
+  var mainIcon = L.divIcon({
+    className:'',
+    html: '<div style="'
+      +'background:#c9993a;'
+      +'width:30px;height:30px;'
+      +'border-radius:50%;'
+      +'border:4px solid #fff;'
+      +'box-shadow:0 4px 16px rgba(201,153,58,.55);'
+      +'cursor:default;'
+      +'"></div>',
+    iconSize:[30,30], iconAnchor:[15,15], popupAnchor:[0,-20]
+  });
+
+  var mainMarker = L.marker([PROP.lat, PROP.lng], {icon:mainIcon, zIndexOffset:1000})
+    .addTo(map)
+    .bindPopup(
+      '<div style="font-family:'Outfit',Inter,sans-serif;min-width:180px">'
+      +'<div style="font-size:13px;font-weight:800;color:#060f1e;margin-bottom:4px">'+PROP.nome+'</div>'
+      +'<div style="font-size:11px;color:#64748b;line-height:1.4">'+( PROP.endereco||PROP.bairro+' · '+PROP.cidade)+'</div>'
+      +'</div>',
+      {maxWidth:240, closeButton:false}
+    );
+  mainMarker.openPopup();
+
+  /* ── Marcadores PEQUENOS — outros empreendimentos ── */
+  var smallIcon = L.divIcon({
+    className:'',
+    html: '<div style="'
+      +'background:#1e293b;'
+      +'width:12px;height:12px;'
+      +'border-radius:50%;'
+      +'border:2.5px solid #c9993a;'
+      +'box-shadow:0 1px 6px rgba(0,0,0,.35);'
+      +'cursor:pointer;'
+      +'"></div>',
+    iconSize:[12,12], iconAnchor:[6,6], popupAnchor:[0,-10]
+  });
+
+  var group = L.featureGroup();
+  group.addLayer(mainMarker);
+
+  (ALL_IMOVEIS||[]).forEach(function(im){
+    if(im.id === PROP.id) return;
+    var m = L.marker([im.lat, im.lng], {icon:smallIcon, zIndexOffset:100})
+      .addTo(map)
+      .bindPopup(
+        '<div style="font-family:'Outfit',Inter,sans-serif;min-width:180px">'
+        +'<div style="font-size:13px;font-weight:800;color:#060f1e;margin-bottom:3px">'+im.nome+'</div>'
+        +'<div style="font-size:11px;color:#64748b;margin-bottom:6px">'+im.regiao+'</div>'
+        +'<div style="font-size:12px;color:#94a3b8;margin-bottom:8px">'+im.preco+'</div>'
+        +'<a href="'+im.url+'" style="display:inline-block;background:#c9993a;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;text-decoration:none">Ver empreendimento →</a>'
+        +'</div>',
+        {maxWidth:240}
+      );
+    group.addLayer(m);
+  });
+
+  /* Ao clicar no pequeno → navega direto */
+  map.on('popupopen', function(e){
+    var el = e.popup.getElement();
+    if(!el) return;
+    var link = el.querySelector('a[href]');
+    if(link) link.addEventListener('click', function(ev){
+      ev.preventDefault();
+      window.location.href = link.getAttribute('href');
+    });
+  });
+
+  /* Zoom inicial: foca na propriedade atual com contexto das vizinhas */
+  var propBounds = L.latLng(PROP.lat, PROP.lng).toBounds(1800); /* 1.8km radius */
+  map.fitBounds(propBounds, {padding:[20,20], maxZoom:16});
 }
+
 // Call after DOM is ready
 if(document.readyState==='loading'){
   document.addEventListener('DOMContentLoaded', function(){ setTimeout(initImovelMap,300); });
