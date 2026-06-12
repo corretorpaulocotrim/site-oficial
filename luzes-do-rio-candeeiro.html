@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Luzes do Rio — Candeeiro | Paulo Cotrim Cury</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin=""/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;600;700;800;900&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="imovel-template.css"/>
 <script>
 const PROP={
@@ -18,10 +21,15 @@ const PROP={
   ],
   imgDefault:'https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=1400&q=80',
   imgs:['https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=800&q=80','https://images.unsplash.com/photo-1486325212027-8081e485255e?w=800&q=80','https://images.unsplash.com/photo-1494526585095-c41746248156?w=800&q=80'],
+  lat:-22.8998,lng:-43.2198,
+  endereco:'Rua Campo de São Cristóvão, Imperial São Cristóvão — Rio de Janeiro, RJ',
   wa:'Quero%20saber%20mais%20sobre%20o%20Luzes%20do%20Rio%20Candeeiro!'
 };
 </script>
 <script src="imovel-template.js" defer></script>
+<meta name="theme-color" content="#060f1e"/>
+<meta name="robots" content="index, follow"/>
 </head>
-<body><div id="imovel-root">Carregando...</div></body>
+<body><div id="imovel-root">Carregando...</div><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+</body>
 </html>

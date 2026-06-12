@@ -214,3 +214,6 @@ img{display:block;max-width:100%}
   .proposta-banner{padding:24px 18px}
   .proposta-banner-title{font-size:18px}
 }
+
+#map-imovel{z-index:1;position:relative}
+.leaflet-container{font-family:'Inter',system-ui,sans-serif!important}

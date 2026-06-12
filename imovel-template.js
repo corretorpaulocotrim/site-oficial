@@ -3,6 +3,19 @@
 
 const WA_SVG=`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
 
+
+// Todos os empreendimentos — para mapa cruzado nas páginas individuais
+const ALL_IMOVEIS = [
+  {id:"orla-central",nome:"Orla Central",lat:-22.9035,lng:-43.1248,url:"orla-central.html",regiao:"Centro · Niterói · RJ",preco:"A partir de R$ 402.000"},
+  {id:"farol",nome:"Farol da Guanabara",lat:-22.8977,lng:-43.2113,url:"farol-da-guanabara.html",regiao:"Santo Cristo · Porto Maravilha",preco:"A partir de R$ 320.000"},
+  {id:"arcos",nome:"Arcos do Porto",lat:-22.8935,lng:-43.2028,url:"arcos-do-porto.html",regiao:"Porto Maravilha · RJ",preco:"A partir de R$ 350.000"},
+  {id:"piedade",nome:"Parque Piedade – Aquarela",lat:-22.8658,lng:-43.3012,url:"parque-piedade.html",regiao:"Piedade · Zona Norte · RJ",preco:"A partir de R$ 220.000"},
+  {id:"lamparina",nome:"Luzes do Rio – Lamparina",lat:-22.9002,lng:-43.2223,url:"luzes-do-rio-lamparina.html",regiao:"Imperial São Cristóvão · RJ",preco:"A partir de R$ 290.000"},
+  {id:"caminhos",nome:"Caminhos da Guanabara",lat:-22.8741,lng:-43.1098,url:"caminhos-da-guanabara.html",regiao:"Niterói · RJ",preco:"A partir de R$ 260.000"},
+  {id:"cartola",nome:"Residencial Cartola II",lat:-22.9041,lng:-43.2301,url:"cartola-ii.html",regiao:"São Cristóvão · RJ",preco:"A partir de R$ 280.000"},
+  {id:"candeeiro",nome:"Luzes do Rio – Candeeiro",lat:-22.8998,lng:-43.2198,url:"luzes-do-rio-candeeiro.html",regiao:"Imperial São Cristóvão · RJ",preco:"A partir de R$ 295.000"}
+];
+
 function waLink(msg){ return `https://wa.me/5521989150864?text=${msg||PROP.wa}`; }
 
 function trackLeadCRM(origem){
@@ -44,7 +57,7 @@ function render(){
   document.getElementById('imovel-root').innerHTML = `
   <header class="im-hdr">
     <a href="index.html" class="im-hdr-logo" style="display:flex;align-items:center;gap:10px;text-decoration:none">
-      <img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:44px;border-radius:9px;object-fit:cover;border:1.5px solid rgba(201,153,58,.3);box-shadow:0 2px 10px rgba(0,0,0,.35)"/>
+      <img src="logo-header.png" alt="Paulo Cotrim" style="height:38px;width:auto;max-width:230px;border-radius:7px;object-fit:contain;filter:brightness(1.05)"/>
       <div style="display:flex;flex-direction:column;gap:1px;line-height:1">
         <span style="color:#fff;font-size:14px;font-weight:800;letter-spacing:-.01em;white-space:nowrap">Paulo Cotrim</span>
         <span style="color:#e8b84b;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Especialista Cury · RJ</span>
@@ -128,9 +141,8 @@ function render(){
 
       <div class="section-block">
         <h2>Localização</h2>
-        <div class="im-map-wrap">
-          <iframe class="im-map" src="https://maps.google.com/maps?q=${mapQ}&output=embed&hl=pt-BR&z=15" allowfullscreen loading="lazy" title="Mapa ${PROP.nome}"></iframe>
-        </div>
+        ${PROP.endereco?`<p style="font-size:13px;color:#64748b;margin:0 0 14px;display:flex;align-items:flex-start;gap:6px"><span style="font-size:16px">📍</span><span><strong style="color:#1e293b">${PROP.nome}</strong><br>${PROP.endereco}</span></p>`:''}
+        <div id="map-imovel" style="width:100%;height:360px;border-radius:16px;overflow:hidden;border:1px solid #e2e8f0;margin-bottom:14px"></div>
         ${nearby.length?`<div class="im-nearby">
           <span class="nearby-label">Próximo a:</span>
           ${nearby.map(p=>`<span class="nearby-pill">${p}</span>`).join('')}
@@ -187,6 +199,7 @@ function render(){
         <div class="sid-info">
           <div class="sid-row"><span class="sid-label">Empreendimento</span><span class="sid-value">${PROP.nome}</span></div>
           <div class="sid-row"><span class="sid-label">Bairro</span><span class="sid-value">${PROP.bairro}</span></div>
+          <div class="sid-row"><span class="sid-label">Endereço</span><span class="sid-value" style="font-size:11px;line-height:1.4">${PROP.endereco||PROP.bairro+' · '+PROP.cidade}</span></div>
           <div class="sid-row"><span class="sid-label">Quartos</span><span class="sid-value">${PROP.quartos}</span></div>
           <div class="sid-row"><span class="sid-label">Status</span><span class="sid-value" style="color:#16a34a">${PROP.tipo}</span></div>
         </div>
@@ -375,3 +388,40 @@ window.solicitarPropostaCompleta = function(){
   }
   if(window.trackEvent) trackEvent('proposta_completa','download',p.nome);
 };
+
+// Init Leaflet map on property page
+function initImovelMap(){
+  var el = document.getElementById('map-imovel');
+  if(!el || typeof L === 'undefined' || !PROP.lat) return;
+  var map = L.map('map-imovel',{center:[PROP.lat,PROP.lng],zoom:15,scrollWheelZoom:false});
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{
+    attribution:'© OpenStreetMap © CARTO',subdomains:'abcd',maxZoom:19
+  }).addTo(map);
+  // Big marker for current property
+  var mainIcon = L.divIcon({className:'',
+    html:'<div style="background:#c9993a;width:22px;height:22px;border-radius:50%;border:4px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.4)"></div>',
+    iconSize:[22,22],iconAnchor:[11,11],popupAnchor:[0,-14]});
+  L.marker([PROP.lat,PROP.lng],{icon:mainIcon}).addTo(map)
+    .bindPopup('<strong>'+PROP.nome+'</strong><br><span style="font-size:11px;color:#64748b">'+( PROP.endereco||PROP.bairro)+'</span>')
+    .openPopup();
+  // Small markers for other properties
+  var smallIcon = L.divIcon({className:'',
+    html:'<div style="background:#1e293b;width:10px;height:10px;border-radius:50%;border:2px solid #c9993a;box-shadow:0 1px 4px rgba(0,0,0,.3);cursor:pointer"></div>',
+    iconSize:[10,10],iconAnchor:[5,5],popupAnchor:[0,-8]});
+  (ALL_IMOVEIS||[]).forEach(function(im){
+    if(im.id===PROP.id) return;
+    L.marker([im.lat,im.lng],{icon:smallIcon}).addTo(map)
+      .bindPopup('<div style="font-family:Inter,sans-serif">'
+        +'<strong style="font-size:13px;color:#060f1e">'+im.nome+'</strong>'
+        +'<br><span style="font-size:11px;color:#64748b">'+im.regiao+'</span>'
+        +'<br><a href="'+im.url+'" style="font-size:12px;color:#c9993a;font-weight:700;text-decoration:none">Ver empreendimento →</a>'
+        +'</div>',{maxWidth:220})
+      .on('click',function(){ window.location.href=im.url; });
+  });
+}
+// Call after DOM is ready
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', function(){ setTimeout(initImovelMap,300); });
+} else {
+  setTimeout(initImovelMap,300);
+}
