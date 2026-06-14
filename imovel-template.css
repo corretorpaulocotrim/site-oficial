@@ -217,3 +217,18 @@ img{display:block;max-width:100%}
 
 #map-imovel{z-index:1;position:relative}
 .leaflet-container{font-family:'Inter',system-ui,sans-serif!important}
+
+/* ═══ VIZINHANÇA ═══ */
+.viz-grid{display:flex;flex-direction:column;gap:20px}
+.viz-row-2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.viz-cat{background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:16px 20px}
+.viz-cat-title{font-size:13px;font-weight:800;color:#0d2040;text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.viz-list{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:6px}
+.viz-list li{font-size:13px;color:#334155;line-height:1.4;padding-left:14px;position:relative}
+.viz-list li::before{content:'›';position:absolute;left:0;color:#16a34a;font-weight:900}
+.viz-row-3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.viz-item{display:flex;align-items:flex-start;gap:10px;background:#f8fafc;border:1px solid #e2e8f0;border-radius:12px;padding:14px}
+.viz-icon{font-size:22px;flex-shrink:0;line-height:1}
+.viz-item-label{font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#94a3b8;margin-bottom:3px}
+.viz-item-val{font-size:13px;color:#334155;font-weight:600;line-height:1.4}
+@media(max-width:700px){.viz-row-3{grid-template-columns:1fr 1fr}.viz-row-2{grid-template-columns:1fr}}

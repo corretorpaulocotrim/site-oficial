@@ -150,6 +150,23 @@ function render(){
         <a href="https://www.google.com/maps/search/?api=1&query=${mapQ}" target="_blank" class="im-maps-link">Abrir no Google Maps →</a>
       </div>
 
+      ${PROP.vizinhanca ? `
+      <div class="section-block">
+        <h2>🏘️ O bairro para a sua família</h2>
+        <div class="viz-grid">
+          <div class="viz-row-2">
+            ${PROP.vizinhanca.escolas ? `<div class="viz-cat"><div class="viz-cat-title">🏫 Escolas de Renome</div><ul class="viz-list">${PROP.vizinhanca.escolas.map(e=>`<li>${e}</li>`).join('')}</ul></div>` : ''}
+            ${PROP.vizinhanca.padarias ? `<div class="viz-cat"><div class="viz-cat-title">🥐 Padarias & Cafés</div><ul class="viz-list">${PROP.vizinhanca.padarias.map(p=>`<li>${p}</li>`).join('')}</ul></div>` : ''}
+          </div>
+          <div class="viz-row-3">
+            ${PROP.vizinhanca.banco ? `<div class="viz-item"><span class="viz-icon">🏦</span><div><div class="viz-item-label">Banco</div><div class="viz-item-val">${PROP.vizinhanca.banco}</div></div></div>` : ''}
+            ${PROP.vizinhanca.combustivel ? `<div class="viz-item"><span class="viz-icon">⛽</span><div><div class="viz-item-label">Combustível</div><div class="viz-item-val">${PROP.vizinhanca.combustivel}</div></div></div>` : ''}
+            ${PROP.vizinhanca.hospital ? `<div class="viz-item"><span class="viz-icon">🏥</span><div><div class="viz-item-label">Saúde</div><div class="viz-item-val">${PROP.vizinhanca.hospital}</div></div></div>` : ''}
+          </div>
+          ${PROP.vizinhanca.transporte ? `<div class="viz-cat"><div class="viz-cat-title">🚌 Como se locomover</div><ul class="viz-list">${PROP.vizinhanca.transporte.map(t=>`<li>${t}</li>`).join('')}</ul></div>` : ''}
+        </div>
+      </div>` : ''}
+
       <div class="section-block">
         <h2>Financiamento</h2>
         <div class="fin-box">
