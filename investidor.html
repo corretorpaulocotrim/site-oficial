@@ -230,6 +230,23 @@ a{color:inherit;text-decoration:none}
 .val-hero-sub{font-size:13px;color:rgba(255,255,255,.5)}
 .val-hero-gain{font-size:15px;font-weight:700;color:#4ade80;margin-top:8px}
 
+
+/* ── CAROUSEL DE FOTOS ── */
+.cond-carousel{position:relative;overflow:hidden;height:340px;background:#060f1e}
+.cc-track{display:flex;height:100%;transition:transform .6s cubic-bezier(.25,.46,.45,.94);will-change:transform}
+.cc-slide{min-width:100%;height:100%;position:relative;flex-shrink:0}
+.cc-slide img{width:100%;height:100%;object-fit:cover;display:block}
+.cc-slide::after{content:'';position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,15,30,.15) 0%,rgba(6,15,30,.65) 100%)}
+.cc-caption{position:absolute;bottom:24px;left:32px;z-index:2;color:#fff}
+.cc-caption-name{font-size:20px;font-weight:900;margin-bottom:4px;text-shadow:0 2px 8px rgba(0,0,0,.5)}
+.cc-caption-loc{font-size:12px;color:rgba(255,255,255,.7);font-weight:600;text-transform:uppercase;letter-spacing:.06em}
+.cc-dots{position:absolute;bottom:20px;right:24px;z-index:2;display:flex;gap:6px}
+.cc-dot{width:6px;height:6px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:all .2s}
+.cc-dot.active{background:var(--gold);width:20px;border-radius:3px}
+.cc-prev,.cc-next{position:absolute;top:50%;transform:translateY(-50%);z-index:2;width:40px;height:40px;border-radius:50%;background:rgba(6,15,30,.6);border:1px solid rgba(255,255,255,.15);color:#fff;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;backdrop-filter:blur(4px)}
+.cc-prev{left:16px}.cc-next{right:16px}
+.cc-prev:hover,.cc-next:hover{background:rgba(201,153,58,.4);border-color:var(--gold)}
+@media(max-width:600px){.cond-carousel{height:220px}.cc-caption{left:16px;bottom:14px}.cc-caption-name{font-size:15px}.cc-prev,.cc-next{width:32px;height:32px;font-size:14px}}
 </style>
 <link rel="canonical" href="https://paulocotrim.com.br/investidor.html"/>
 <meta property="og:title" content="Calculadora do Investidor Imobiliário — 5 Simuladores Premium"/>
@@ -249,6 +266,26 @@ a{color:inherit;text-decoration:none}
   </div>
 </header>
 
+
+<div class="cond-carousel" id="cc">
+  <div class="cc-track" id="cc-track">
+    <div class="cc-slide"><img src="prop-cury-1.jpg" loading="eager" alt="Porto Maravilha"/><div class="cc-caption"><div class="cc-caption-name">Porto Maravilha</div><div class="cc-caption-loc">📍 Zona Portuária · Rio de Janeiro</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-2.jpg" loading="lazy" alt="Farol da Guanabara"/><div class="cc-caption"><div class="cc-caption-name">Farol da Guanabara</div><div class="cc-caption-loc">📍 Santo Cristo · Porto Maravilha</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-3.jpg" loading="lazy" alt="Arcos do Porto"/><div class="cc-caption"><div class="cc-caption-name">Arcos do Porto</div><div class="cc-caption-loc">📍 Gamboa · Porto Maravilha</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-4.jpg" loading="lazy" alt="Orla Central Niterói"/><div class="cc-caption"><div class="cc-caption-name">Orla Central</div><div class="cc-caption-loc">📍 Centro · Niterói · RJ</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-5.jpg" loading="lazy" alt="Parque Piedade"/><div class="cc-caption"><div class="cc-caption-name">Parque Piedade</div><div class="cc-caption-loc">📍 Piedade · Zona Norte</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-6.jpg" loading="lazy" alt="Luzes do Rio"/><div class="cc-caption"><div class="cc-caption-name">Luzes do Rio</div><div class="cc-caption-loc">📍 São Cristóvão · Zona Norte</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-7.jpg" loading="lazy" alt="Caminhos da Guanabara"/><div class="cc-caption"><div class="cc-caption-name">Caminhos da Guanabara</div><div class="cc-caption-loc">📍 Centro · Niterói</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-8.jpg" loading="lazy" alt="Empreendimentos Cury"/><div class="cc-caption"><div class="cc-caption-name">Empreendimentos Cury</div><div class="cc-caption-loc">📍 Rio de Janeiro</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-9.jpg" loading="lazy" alt="Empreendimentos Cury"/><div class="cc-caption"><div class="cc-caption-name">Empreendimentos Cury</div><div class="cc-caption-loc">📍 Rio de Janeiro</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-10.jpg" loading="lazy" alt="Empreendimentos Cury"/><div class="cc-caption"><div class="cc-caption-name">Empreendimentos Cury</div><div class="cc-caption-loc">📍 Rio de Janeiro</div></div></div>
+    <div class="cc-slide"><img src="prop-cury-11.jpg" loading="lazy" alt="Empreendimentos Cury"/><div class="cc-caption"><div class="cc-caption-name">Empreendimentos Cury</div><div class="cc-caption-loc">📍 Rio de Janeiro</div></div></div>
+  </div>
+  <button class="cc-prev" onclick="ccMove(-1)" aria-label="Anterior">‹</button>
+  <button class="cc-next" onclick="ccMove(1)" aria-label="Próximo">›</button>
+  <div class="cc-dots" id="cc-dots"></div>
+</div>
+
 <div class="inv-hero fade-in">
   <div class="inv-tag">📊 Ferramentas do Investidor</div>
   <h1 class="inv-h1">Calcule seu retorno<br><span>antes de investir</span></h1>
@@ -267,12 +304,12 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <div class="tab-nav">
-  <button class="tab-btn active" onclick="showSim(0)">🛎️ Airbnb</button>
+  <button class="tab-btn tab-btn-featured active" onclick="showSim(5)">📋 Tabela Direta <span class="tab-new">DESTAQUE</span></button>
+  <button class="tab-btn" onclick="showSim(0)">🛎️ Airbnb</button>
   <button class="tab-btn" onclick="showSim(1)">📈 Valorização</button>
   <button class="tab-btn" onclick="showSim(2)">💰 Retorno Total</button>
   <button class="tab-btn" onclick="showSim(3)">🏦 FGTS + Entrada</button>
   <button class="tab-btn" onclick="showSim(4)">🗺️ Radar</button>
-  <button class="tab-btn tab-btn-featured" onclick="showSim(5)">📋 Tabela Direta <span class="tab-new">NOVO</span></button>
 </div>
 
 <div class="sim-wrap">
@@ -761,6 +798,8 @@ a{color:inherit;text-decoration:none}
 <script>
 // Tab navigation
 function showSim(n){
+  var labels=['airbnb','valorizacao','retorno','fgts','radar','tabela_direta'];
+  if(window.leadCapture && n>=0 && n<labels.length) window.leadCapture('simulador_usado',{simulador:labels[n]});
   document.querySelectorAll('.sim-panel').forEach((p,i)=>p.classList.toggle('active',i===n));
   document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===n));
 }
@@ -1141,6 +1180,52 @@ function tdBaixarProposta(){
     <span>💬</span><span class="wa-fab-label">Falar com Paulo</span>
   </a>
 </div>
+
+<script>
+/* ── CAROUSEL ── */
+(function(){
+  var slides=[], dots=[], cur=0, total=0, timer=null;
+
+  window.ccInit=function(){
+    var track=document.getElementById('cc-track');
+    if(!track) return;
+    slides=track.querySelectorAll('.cc-slide');
+    total=slides.length;
+    var dotsEl=document.getElementById('cc-dots');
+    for(var i=0;i<total;i++){
+      var d=document.createElement('div');
+      d.className='cc-dot'+(i===0?' active':'');
+      d.setAttribute('data-i',i);
+      d.onclick=(function(idx){return function(){ccGo(idx)}})(i);
+      dotsEl.appendChild(d);
+    }
+    dots=dotsEl.querySelectorAll('.cc-dot');
+    timer=setInterval(function(){ccMove(1)},4200);
+  };
+
+  window.ccMove=function(dir){
+    ccGo((cur+dir+total)%total);
+  };
+
+  function ccGo(idx){
+    cur=idx;
+    document.getElementById('cc-track').style.transform='translateX(-'+cur*100+'%)';
+    for(var i=0;i<dots.length;i++) dots[i].classList.toggle('active',i===cur);
+    clearInterval(timer);
+    timer=setInterval(function(){ccMove(1)},4200);
+  }
+
+  // Pause on hover
+  document.addEventListener('DOMContentLoaded',function(){
+    var cc=document.getElementById('cc');
+    if(cc){
+      cc.addEventListener('mouseenter',function(){clearInterval(timer)});
+      cc.addEventListener('mouseleave',function(){timer=setInterval(function(){ccMove(1)},4200)});
+    }
+  });
+})();
+</script>
+<script src="leads.js" defer></script>
 </body></html>';
   const blob=new Blob([html],{type:'text/html'});
   const url=URL.createObjectURL(blob);
@@ -1151,6 +1236,10 @@ document.addEventListener('DOMContentLoaded',function(){
   tdPopulaCond();tdPopulaTip();
   TDS.vu=TDDB[TDS.cond].tips[TDS.tipIdx].p;
   tdAutoCalc();tdSyncInputs();tdRender();
+  // Default: open Tabela Direta
+  showSim(5);
+  // Init carousel
+  ccInit();
 });
 
 // Fade-in

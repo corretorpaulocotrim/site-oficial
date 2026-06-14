@@ -64,9 +64,9 @@ function trackEvent(action,category,label){gtag('event',action,{event_category:c
   --text:#1e293b;--muted:#64748b;--light:#f1f5f9;--white:#fff;
   --radius:12px;--radius-lg:18px;
 }
-h1,h2,.hero-h1,.sec-h2{font-family:'Outfit',system-ui,sans-serif;letter-spacing:-.02em}
+h1,h2,.hero-h1,.sec-h2{font-family:'Outfit',system-ui,sans-serif;letter-spacing:-.025em;font-weight:900}
 html{scroll-behavior:smooth}
-body{font-family:'Inter',system-ui,sans-serif;color:var(--text);overflow-x:hidden;padding-bottom:56px;background:#fff}
+body{font-family:'Outfit',system-ui,sans-serif;color:var(--text);overflow-x:hidden;padding-bottom:56px;background:#fff}
 a{text-decoration:none;color:inherit}
 img{display:block;max-width:100%}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
@@ -120,8 +120,8 @@ nav a.nav-hot:hover{background:rgba(201,153,58,.22)}
 /* ── HERO ── */
 #hero{position:relative;height:100vh;min-height:680px;overflow:hidden;margin-top:64px;background:var(--navy)}
 /* overlay leve: imagem fica visível no topo, escurece gradualmente abaixo */
-.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,15,30,.04) 0%,rgba(6,15,30,.12) 30%,rgba(6,15,30,.52) 65%,rgba(6,15,30,.78) 100%);z-index:1}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 30%;transition:opacity 1s ease}
+.hero-overlay{position:absolute;inset:0;background:linear-gradient(to bottom,rgba(6,15,30,.18) 0%,rgba(6,15,30,.28) 35%,rgba(6,15,30,.55) 65%,rgba(6,15,30,.80) 100%);z-index:1}
+.hero-bg{position:absolute;inset:0;background-size:cover;background-position:center 25%;transition:opacity 1.2s ease;z-index:0;background-image:url('01.jpeg')}
 
 /* hero-content moved to hero-card section below */
 /* hero-inner moved to hero-card section below */
@@ -410,7 +410,7 @@ nav a.nav-hot:hover{background:rgba(201,153,58,.22)}
 .dep-card::before{
   content:'❝';position:absolute;top:16px;right:20px;
   font-size:48px;color:rgba(201,153,58,.12);line-height:1;
-  font-family:Georgia,serif;
+  font-family:'Outfit',system-ui,sans-serif;font-style:italic;
 }
 .dep-card:hover{box-shadow:0 12px 36px rgba(0,0,0,.08);transform:translateY(-4px)}
 .dep-stars{color:#f59e0b;font-size:14px;margin-bottom:12px;letter-spacing:2px}
@@ -892,7 +892,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
   <button class="mob-close" onclick="toggleNav()">✕</button>
   <a href="#inicio" onclick="toggleNav()">Início</a>
   <a href="porto-maravilha.html" onclick="toggleNav()">Porto Maravilha</a>
-  <a href="#imoveis" onclick="toggleNav()">Empreendimentos</a>
+  <a href="#imoveis-grid" onclick="toggleNav()">Empreendimentos</a>
   <a href="investidor.html" onclick="toggleNav()">Investidor</a>
   <a href="obras-decorados.html" onclick="toggleNav()">🎥 Obras e Decorados</a>
   <a href="aprovacao-expressa.html" onclick="toggleNav()">⚡ Aprovação 48h</a>
@@ -913,7 +913,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
   <nav aria-label="Navegação principal">
     <a href="#inicio" class="active">Home</a>
     <a href="porto-maravilha.html">Porto Maravilha</a>
-    <a href="#imoveis">Empreendimentos</a>
+    <a href="#imoveis-grid">Empreendimentos</a>
     <a href="obras-decorados.html">Obras e Decorados</a>
     <a href="investidor.html">Investidor</a>
     <a href="aprovacao-expressa.html" class="nav-hot">⚡ Aprovação 48h</a>
@@ -1094,7 +1094,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
     <div id="orulo-cards">
 
     <div class="orulo-card" id="card-orla-central" onclick="window.location.href='orla-central.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg" alt="Orla Central" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="img-niteroi.jpg" alt="Orla Central" loading="lazy" onerror="this.src='img-porto.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Orla Central</div>
         <div class="orulo-card-loc">📍 Centro · Niterói · RJ</div>
@@ -1103,7 +1103,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       </div>
     </div>
     <div class="orulo-card" id="card-farol" onclick="window.location.href='farol-da-guanabara.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68fb2e2116ccc.jpeg" alt="Farol da Guanabara" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="img-porto.jpg" alt="Farol da Guanabara" loading="lazy" onerror="this.src='img-porto.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Farol da Guanabara</div>
         <div class="orulo-card-loc">📍 Santo Cristo · Porto Maravilha</div>
@@ -1112,7 +1112,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       </div>
     </div>
     <div class="orulo-card" id="card-arcos" onclick="window.location.href='arcos-do-porto.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db8ae3f3f07.jpeg" alt="Arcos do Porto" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="prop-cury-1.jpg" alt="Arcos do Porto" loading="lazy" onerror="this.src='img-porto.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Arcos do Porto</div>
         <div class="orulo-card-loc">📍 Porto Maravilha · RJ</div>
@@ -1121,7 +1121,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       </div>
     </div>
     <div class="orulo-card" id="card-piedade" onclick="window.location.href='parque-piedade.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68e9c24e76e39.jpeg" alt="Parque Piedade – Aquarela" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="img-piedade.jpg" alt="Parque Piedade – Aquarela" loading="lazy" onerror="this.src='img-porto.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Parque Piedade – Aquarela</div>
         <div class="orulo-card-loc">📍 Piedade · Zona Norte · RJ</div>
@@ -1130,7 +1130,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       </div>
     </div>
     <div class="orulo-card" id="card-lamparina" onclick="window.location.href='luzes-do-rio-lamparina.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg" alt="Luzes do Rio – Lamparina" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="img-cristovao.jpg" alt="Luzes do Rio – Lamparina" loading="lazy" onerror="this.src='img-porto.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Luzes do Rio – Lamparina</div>
         <div class="orulo-card-loc">📍 São Cristóvão · RJ</div>
@@ -1139,7 +1139,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       </div>
     </div>
     <div class="orulo-card" id="card-caminhos" onclick="window.location.href='caminhos-da-guanabara.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68c1a4a97e5a5.jpeg" alt="Caminhos da Guanabara" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="img-niteroi.jpg" alt="Caminhos da Guanabara" loading="lazy" onerror="this.src='img-porto.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Caminhos da Guanabara</div>
         <div class="orulo-card-loc">📍 Pendotiba · Niterói · RJ</div>
@@ -1192,7 +1192,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
 
 
 <!-- EMPREENDIMENTOS -->
-<section class="props-section" id="imoveis-grid">
+<section class="props-section" id="imoveis-grid" data-anchor="imoveis">
   <div class="sec-center fade-in">
     <span class="tag tag-blue">Portfólio exclusivo</span>
     <h2 class="sec-h2">Lançamentos <span>Cury</span> no Rio de Janeiro</h2>
@@ -1203,7 +1203,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
 
     <article class="pcard fade-in" onclick="location.href='orla-central.html'">
       <div class="pcard-img">
-        <img src="img-luzes.jpg" alt="Orla Central — Apartamentos 1 2 3 quartos Centro Rio de Janeiro" loading="lazy"/>
+        <img src="img-niteroi.jpg" alt="Orla Central — Apartamentos 1 2 3 quartos Centro Rio de Janeiro" loading="lazy"/>
         <div class="pcard-badges"><span class="pb pb-lanc">Lançamento</span><span class="pb pb-hot">⭐ Destaque</span></div>
         <div class="pcard-roi">📈 Alto potencial</div>
       </div>
@@ -1963,12 +1963,12 @@ if('serviceWorker' in navigator){
 /* ═══ MAPA ÓRULO — God Mode ═══ */
 (function(){
   var imoveis=[
-    {id:"orla-central",  nome:"Orla Central",             lat:-22.8990, lng:-43.1248, url:"orla-central.html",           regiao:"Centro · Niterói · RJ",          preco:"R$ 402k", thumb:"https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg",  wa:"Olá Paulo! Vi o Orla Central no mapa e tenho interesse. Pode me enviar mais informações?"},
-    {id:"farol",         nome:"Farol da Guanabara",        lat:-22.8958, lng:-43.2103, url:"farol-da-guanabara.html",     regiao:"Santo Cristo · Porto Maravilha", preco:"R$ 403k", thumb:"https://cury.net/storage/images/products/gallery/68fb2e2116ccc.jpeg",  wa:"Olá Paulo! Vi o Farol da Guanabara no mapa e tenho interesse. Pode me enviar mais informações?"},
-    {id:"arcos",         nome:"Arcos do Porto",             lat:-22.8912, lng:-43.2013, url:"arcos-do-porto.html",         regiao:"Porto Maravilha · RJ",           preco:"R$ 361k", thumb:"https://cury.net/storage/images/products/gallery/68db8ae3f3f07.jpeg",  wa:"Olá Paulo! Vi os Arcos do Porto no mapa e tenho interesse. Pode me enviar mais informações?"},
-    {id:"piedade",       nome:"Parque Piedade – Aquarela", lat:-22.8672, lng:-43.2885, url:"parque-piedade.html",         regiao:"Piedade · Zona Norte · RJ",      preco:"R$ 263k", thumb:"https://cury.net/storage/images/products/gallery/68e9c24e76e39.jpeg",  wa:"Olá Paulo! Vi o Parque Piedade Aquarela no mapa e tenho interesse. Pode me enviar mais informações?"},
-    {id:"lamparina",     nome:"Luzes do Rio – Lamparina",  lat:-22.9008, lng:-43.2238, url:"luzes-do-rio-lamparina.html", regiao:"São Cristóvão · RJ",             preco:"R$ 309k", thumb:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg",  wa:"Olá Paulo! Vi o Luzes do Rio Lamparina no mapa e tenho interesse. Pode me enviar mais informações?"},
-    {id:"caminhos",      nome:"Caminhos da Guanabara",     lat:-22.8748, lng:-43.1105, url:"caminhos-da-guanabara.html", regiao:"Pendotiba · Niterói · RJ",       preco:"R$ 335k", thumb:"https://cury.net/storage/images/products/gallery/68c1a4a97e5a5.jpeg",  wa:"Olá Paulo! Vi o Caminhos da Guanabara no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"orla-central",  nome:"Orla Central",             lat:-22.8990, lng:-43.1248, url:"orla-central.html",           regiao:"Centro · Niterói · RJ",          preco:"R$ 402k", thumb:"img-niteroi.jpg",  wa:"Olá Paulo! Vi o Orla Central no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"farol",         nome:"Farol da Guanabara",        lat:-22.8958, lng:-43.2103, url:"farol-da-guanabara.html",     regiao:"Santo Cristo · Porto Maravilha", preco:"R$ 403k", thumb:"img-porto.jpg",  wa:"Olá Paulo! Vi o Farol da Guanabara no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"arcos",         nome:"Arcos do Porto",             lat:-22.8912, lng:-43.2013, url:"arcos-do-porto.html",         regiao:"Porto Maravilha · RJ",           preco:"R$ 361k", thumb:"prop-cury-1.jpg",  wa:"Olá Paulo! Vi os Arcos do Porto no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"piedade",       nome:"Parque Piedade – Aquarela", lat:-22.8672, lng:-43.2885, url:"parque-piedade.html",         regiao:"Piedade · Zona Norte · RJ",      preco:"R$ 263k", thumb:"img-piedade.jpg",  wa:"Olá Paulo! Vi o Parque Piedade Aquarela no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"lamparina",     nome:"Luzes do Rio – Lamparina",  lat:-22.9008, lng:-43.2238, url:"luzes-do-rio-lamparina.html", regiao:"São Cristóvão · RJ",             preco:"R$ 309k", thumb:"img-cristovao.jpg",  wa:"Olá Paulo! Vi o Luzes do Rio Lamparina no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"caminhos",      nome:"Caminhos da Guanabara",     lat:-22.8748, lng:-43.1105, url:"caminhos-da-guanabara.html", regiao:"Pendotiba · Niterói · RJ",       preco:"R$ 335k", thumb:"img-niteroi.jpg",  wa:"Olá Paulo! Vi o Caminhos da Guanabara no mapa e tenho interesse. Pode me enviar mais informações?"},
     {id:"cartola",       nome:"Residencial Cartola II",    lat:-22.9015, lng:-43.2295, url:"cartola-ii.html",             regiao:"São Cristóvão · RJ",             preco:"R$ 302k", thumb:"https://images.unsplash.com/photo-1494526585095-c41746248156?w=160&q=80", wa:"Olá Paulo! Vi o Residencial Cartola II no mapa e tenho interesse. Pode me enviar mais informações?"},
     {id:"candeeiro",     nome:"Luzes do Rio – Candeeiro",  lat:-22.9000, lng:-43.2220, url:"luzes-do-rio-candeeiro.html",regiao:"São Cristóvão · RJ",             preco:"R$ 362k", thumb:"https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=160&q=80", wa:"Olá Paulo! Vi o Luzes do Rio Candeeiro no mapa e tenho interesse. Pode me enviar mais informações?"}
   ];
@@ -2008,6 +2008,7 @@ if('serviceWorker' in navigator){
     if(!im) return;
 
     updateCta(im);
+    if(window.leadCapture) window.leadCapture('mapa_imovel_clicado',{imovel:im.nome});
 
     if(panMap && map){
       /* Zoom 17 = nível de rua, igual Google Maps */
@@ -2083,11 +2084,4 @@ if('serviceWorker' in navigator){
   }
 
   if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoaded",initMap);
-  } else {
-    initMap();
-  }
-})();
-</script>
-</body>
-</html>
+    document.addEventListener("DOMContentLoad
