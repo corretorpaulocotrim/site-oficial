@@ -2084,4 +2084,12 @@ if('serviceWorker' in navigator){
   }
 
   if(document.readyState==="loading"){
-    document.addEventListener("DOMContentLoad
+    document.addEventListener("DOMContentLoaded",initMap);
+  } else {
+    initMap();
+  }
+})();
+</script>
+<script src="leads.js" defer></script>
+</body>
+</html>
