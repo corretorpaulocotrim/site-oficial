@@ -781,28 +781,102 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
 #orulo-map {
   flex:1;position:relative;
 }
+/* ── Price tag com triângulo apontando para coordenada exata ── */
 .price-tag {
   background:#fff;
   border:2px solid #c9993a;
   border-radius:20px;
-  padding:4px 10px;
+  padding:5px 12px;
   font-size:12px;font-weight:800;
   color:#060f1e;
   white-space:nowrap;
   cursor:pointer;
-  transition:all .2s;
-  box-shadow:0 2px 8px rgba(0,0,0,.15);
+  transition:all .18s cubic-bezier(.4,0,.2,1);
+  box-shadow:0 3px 10px rgba(0,0,0,.18);
   font-family:'Outfit',Inter,sans-serif;
+  position:relative;
+  /* Centraliza horizontalmente e posiciona ACIMA da coordenada */
+  transform:translate(-50%, calc(-100% - 10px));
+  display:inline-block;
 }
-.price-tag:hover, .price-tag.active {
+.price-tag::after {
+  content:'';
+  position:absolute;
+  bottom:-9px; left:50%;
+  transform:translateX(-50%);
+  border:5px solid transparent;
+  border-top-color:#c9993a;
+  transition:border-top-color .18s;
+}
+.price-tag:hover {
+  background:#f0c050;
+  border-color:#b8822a;
+  transform:translate(-50%, calc(-100% - 13px));
+  box-shadow:0 6px 18px rgba(201,153,58,.45);
+  z-index:900!important;
+}
+.price-tag:hover::after { border-top-color:#b8822a; }
+.price-tag.active {
   background:var(--gold,#c9993a);
   color:#fff;
-  transform:scale(1.1);
-  box-shadow:0 4px 16px rgba(201,153,58,.4);
+  border-color:#b8822a;
+  transform:translate(-50%, calc(-100% - 13px)) scale(1.12);
+  box-shadow:0 6px 22px rgba(201,153,58,.6);
   z-index:1000!important;
 }
+.price-tag.active::after { border-top-color:#b8822a; }
+
+/* ── Card ativo: destaque visual forte ── */
+.orulo-card.active {
+  border-left:5px solid var(--gold)!important;
+  background:linear-gradient(100deg,#fffbf0 0%,#fff9ec 40%,#fff 100%)!important;
+  box-shadow:0 0 0 1px rgba(201,153,58,.25), 0 4px 20px rgba(201,153,58,.15)!important;
+}
+.orulo-card.active .orulo-card-nome { color:#8a5f10; }
+.orulo-card.active .orulo-card-preco { color:#b8822a; font-size:14px; }
+.orulo-card.active .orulo-card-img { transform:scale(1.03); box-shadow:0 4px 12px rgba(0,0,0,.2); }
+.orulo-card.active .orulo-card-btn { background:var(--gold); }
+
+/* ── Painel CTA que aparece ao selecionar imóvel ── */
+#orulo-cta {
+  max-width:1280px;
+  margin:0 32px 48px;
+  background:linear-gradient(100deg,#fffbf0,#fff);
+  border:1.5px solid rgba(201,153,58,.35);
+  border-radius:16px;
+  padding:18px 24px;
+  display:flex;align-items:center;gap:20px;flex-wrap:wrap;
+  box-shadow:0 4px 24px rgba(201,153,58,.13);
+  animation:ctaSlide .35s ease;
+}
+@keyframes ctaSlide { from{opacity:0;transform:translateY(-10px)} to{opacity:1;transform:translateY(0)} }
+#orulo-cta-thumb { width:72px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0; }
+#orulo-cta-info { flex:1;min-width:160px; }
+#orulo-cta-nome { font-size:15px;font-weight:800;color:#060f1e;margin-bottom:2px; }
+#orulo-cta-loc  { font-size:12px;color:#64748b;margin-bottom:2px; }
+#orulo-cta-preco{ font-size:13px;font-weight:700;color:var(--gold); }
+.orulo-cta-btns { display:flex;gap:10px;flex-wrap:wrap; }
+.orulo-cta-wa {
+  background:linear-gradient(135deg,#25D366,#128C7E);
+  color:#fff;border:none;border-radius:10px;
+  padding:11px 20px;font-size:13px;font-weight:800;
+  cursor:pointer;font-family:inherit;
+  display:flex;align-items:center;gap:7px;
+  box-shadow:0 3px 12px rgba(37,211,102,.35);
+  transition:transform .15s,box-shadow .15s;
+  text-decoration:none;
+}
+.orulo-cta-wa:hover { transform:translateY(-2px);box-shadow:0 6px 20px rgba(37,211,102,.45); }
+.orulo-cta-det {
+  background:#060f1e;color:#fff;border:none;border-radius:10px;
+  padding:11px 18px;font-size:13px;font-weight:700;
+  cursor:pointer;font-family:inherit;transition:background .18s;
+  text-decoration:none;display:flex;align-items:center;gap:6px;
+}
+.orulo-cta-det:hover { background:#c9993a; }
 @media(max-width:768px){
-  #orulo-body{grid-template-columns:1fr;grid-template-rows:340px 300px;height:640px;margin:0 16px 32px}
+  #orulo-cta{margin:0 16px 32px;padding:14px 16px;}
+  #orulo-body{grid-template-columns:1fr;grid-template-rows:320px 300px;height:620px;margin:0 16px 0}
   #orulo-cards{order:2;border-right:none;border-top:1px solid #e2e8f0}
   #orulo-map{order:1}
   #orulo-header{padding:32px 16px 20px}
@@ -1074,7 +1148,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       </div>
     </div>
     <div class="orulo-card" id="card-cartola" onclick="window.location.href='cartola-ii.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg" alt="Residencial Cartola II" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="https://images.unsplash.com/photo-1494526585095-c41746248156?w=160&q=80" alt="Residencial Cartola II" loading="lazy" onerror="this.src='img-cristovao.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Residencial Cartola II</div>
         <div class="orulo-card-loc">📍 São Cristóvão · RJ</div>
@@ -1083,7 +1157,7 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
       </div>
     </div>
     <div class="orulo-card" id="card-candeeiro" onclick="window.location.href='luzes-do-rio-candeeiro.html'">
-      <img class="orulo-card-img" src="https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg" alt="Luzes do Rio – Candeeiro" loading="lazy" onerror="this.src='img-porto.jpg'"/>
+      <img class="orulo-card-img" src="https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=160&q=80" alt="Luzes do Rio – Candeeiro" loading="lazy" onerror="this.src='prop-cury-2.jpg'"/>
       <div class="orulo-card-body">
         <div class="orulo-card-nome">Luzes do Rio – Candeeiro</div>
         <div class="orulo-card-loc">📍 São Cristóvão · RJ</div>
@@ -1094,6 +1168,24 @@ footer{background:var(--navy);color:#fff;padding:60px 40px 28px}
     </div>
     <div id="orulo-map"></div>
   </div>
+
+  <!-- Painel CTA: aparece ao clicar em um imóvel -->
+  <div id="orulo-cta" style="display:none">
+    <img id="orulo-cta-thumb" src="" alt=""/>
+    <div id="orulo-cta-info">
+      <div id="orulo-cta-nome">—</div>
+      <div id="orulo-cta-loc">—</div>
+      <div id="orulo-cta-preco">—</div>
+    </div>
+    <div class="orulo-cta-btns">
+      <a id="orulo-cta-wa-btn" href="#" target="_blank" rel="noopener" class="orulo-cta-wa">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+        Falar com Paulo
+      </a>
+      <a id="orulo-cta-det-btn" href="#" class="orulo-cta-det">Ver detalhes →</a>
+    </div>
+  </div>
+
 </section>
 
 
@@ -1858,78 +1950,47 @@ function cookieConsent(type){
 /* Service Worker PWA */
 if('serviceWorker' in navigator){
   window.addEventListener('load',function(){
-    navigator.serviceWorker.register('sw.js').catch(function(){});
+    navigator.serviceWorker.register('sw.js')    navigator.serviceWorker.register('sw.js')
+      .then(function(r){console.log('SW registered');})
+      .catch(function(e){console.log('SW error',e);});
   });
 }
 </script>
 
-
-<!-- Leaflet: sync load -->
+<!-- Leaflet: load síncrono antes do init -->
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
-/* ═══ MAPA ÓRULO ═══ */
+/* ═══ MAPA ÓRULO — God Mode ═══ */
 (function(){
-  /* Coordenadas verificadas rua a rua */
   var imoveis=[
-    {id:"orla-central", nome:"Orla Central",
-     lat:-22.8990, lng:-43.1248,
-     url:"orla-central.html",
-     regiao:"Centro · Niterói · RJ",
-     preco:"R$ 402k",
-     endereco:"Rua Saldanha Marinho, Centro — Niterói"},
-
-    {id:"farol", nome:"Farol da Guanabara",
-     lat:-22.8958, lng:-43.2103,
-     url:"farol-da-guanabara.html",
-     regiao:"Santo Cristo · Porto Maravilha",
-     preco:"R$ 403k",
-     endereco:"Rua Sacadura Cabral, 103 — Santo Cristo"},
-
-    {id:"arcos", nome:"Arcos do Porto",
-     lat:-22.8912, lng:-43.2013,
-     url:"arcos-do-porto.html",
-     regiao:"Porto Maravilha · RJ",
-     preco:"R$ 361k",
-     endereco:"Av. Rodrigues Alves — Porto Maravilha"},
-
-    {id:"piedade", nome:"Parque Piedade – Aquarela",
-     lat:-22.8672, lng:-43.2885,
-     url:"parque-piedade.html",
-     regiao:"Piedade · Zona Norte · RJ",
-     preco:"R$ 263k",
-     endereco:"Rua Piedade — Piedade, Zona Norte"},
-
-    {id:"lamparina", nome:"Luzes do Rio – Lamparina",
-     lat:-22.9008, lng:-43.2238,
-     url:"luzes-do-rio-lamparina.html",
-     regiao:"São Cristóvão · RJ",
-     preco:"R$ 309k",
-     endereco:"Rua Campo de São Cristóvão — São Cristóvão"},
-
-    {id:"caminhos", nome:"Caminhos da Guanabara",
-     lat:-22.8748, lng:-43.1105,
-     url:"caminhos-da-guanabara.html",
-     regiao:"Pendotiba · Niterói · RJ",
-     preco:"R$ 335k",
-     endereco:"Est. Caetano Monteiro — Pendotiba, Niterói"},
-
-    {id:"cartola", nome:"Residencial Cartola II",
-     lat:-22.9015, lng:-43.2295,
-     url:"cartola-ii.html",
-     regiao:"São Cristóvão · RJ",
-     preco:"R$ 302k",
-     endereco:"Rua São Luís Gonzaga — São Cristóvão"},
-
-    {id:"candeeiro", nome:"Luzes do Rio – Candeeiro",
-     lat:-22.9000, lng:-43.2220,
-     url:"luzes-do-rio-candeeiro.html",
-     regiao:"São Cristóvão · RJ",
-     preco:"R$ 362k",
-     endereco:"Rua Campo de São Cristóvão — São Cristóvão"}
+    {id:"orla-central",  nome:"Orla Central",             lat:-22.8990, lng:-43.1248, url:"orla-central.html",           regiao:"Centro · Niterói · RJ",          preco:"R$ 402k", thumb:"https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg",  wa:"Olá Paulo! Vi o Orla Central no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"farol",         nome:"Farol da Guanabara",        lat:-22.8958, lng:-43.2103, url:"farol-da-guanabara.html",     regiao:"Santo Cristo · Porto Maravilha", preco:"R$ 403k", thumb:"https://cury.net/storage/images/products/gallery/68fb2e2116ccc.jpeg",  wa:"Olá Paulo! Vi o Farol da Guanabara no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"arcos",         nome:"Arcos do Porto",             lat:-22.8912, lng:-43.2013, url:"arcos-do-porto.html",         regiao:"Porto Maravilha · RJ",           preco:"R$ 361k", thumb:"https://cury.net/storage/images/products/gallery/68db8ae3f3f07.jpeg",  wa:"Olá Paulo! Vi os Arcos do Porto no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"piedade",       nome:"Parque Piedade – Aquarela", lat:-22.8672, lng:-43.2885, url:"parque-piedade.html",         regiao:"Piedade · Zona Norte · RJ",      preco:"R$ 263k", thumb:"https://cury.net/storage/images/products/gallery/68e9c24e76e39.jpeg",  wa:"Olá Paulo! Vi o Parque Piedade Aquarela no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"lamparina",     nome:"Luzes do Rio – Lamparina",  lat:-22.9008, lng:-43.2238, url:"luzes-do-rio-lamparina.html", regiao:"São Cristóvão · RJ",             preco:"R$ 309k", thumb:"https://cury.net/storage/images/products/gallery/68db6b53c1e5a.jpeg",  wa:"Olá Paulo! Vi o Luzes do Rio Lamparina no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"caminhos",      nome:"Caminhos da Guanabara",     lat:-22.8748, lng:-43.1105, url:"caminhos-da-guanabara.html", regiao:"Pendotiba · Niterói · RJ",       preco:"R$ 335k", thumb:"https://cury.net/storage/images/products/gallery/68c1a4a97e5a5.jpeg",  wa:"Olá Paulo! Vi o Caminhos da Guanabara no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"cartola",       nome:"Residencial Cartola II",    lat:-22.9015, lng:-43.2295, url:"cartola-ii.html",             regiao:"São Cristóvão · RJ",             preco:"R$ 302k", thumb:"https://images.unsplash.com/photo-1494526585095-c41746248156?w=160&q=80", wa:"Olá Paulo! Vi o Residencial Cartola II no mapa e tenho interesse. Pode me enviar mais informações?"},
+    {id:"candeeiro",     nome:"Luzes do Rio – Candeeiro",  lat:-22.9000, lng:-43.2220, url:"luzes-do-rio-candeeiro.html",regiao:"São Cristóvão · RJ",             preco:"R$ 362k", thumb:"https://images.unsplash.com/photo-1567496898669-ee935f5f647a?w=160&q=80", wa:"Olá Paulo! Vi o Luzes do Rio Candeeiro no mapa e tenho interesse. Pode me enviar mais informações?"}
   ];
 
   var activeId=null, markers={}, map=null;
 
+  /* ── Atualiza painel CTA abaixo do mapa ── */
+  function updateCta(im){
+    var cta=document.getElementById("orulo-cta");
+    if(!cta||!im) return;
+    document.getElementById("orulo-cta-thumb").src=im.thumb||"";
+    document.getElementById("orulo-cta-thumb").alt=im.nome;
+    document.getElementById("orulo-cta-nome").textContent=im.nome;
+    document.getElementById("orulo-cta-loc").textContent="📍 "+im.regiao;
+    document.getElementById("orulo-cta-preco").textContent="A partir de "+im.preco;
+    var msg=encodeURIComponent(im.wa||"Olá Paulo! Tenho interesse em um imóvel.");
+    document.getElementById("orulo-cta-wa-btn").href="https://wa.me/5521989150864?text="+msg;
+    document.getElementById("orulo-cta-det-btn").href=im.url;
+    cta.style.display="flex";
+  }
+
+  /* ── Ativa card + pin + painel + zoom rua ── */
   function setActive(id, panMap){
     if(activeId){
       var pc=document.getElementById("card-"+activeId);
@@ -1942,9 +2003,15 @@ if('serviceWorker' in navigator){
     if(card){card.classList.add("active");card.scrollIntoView({behavior:"smooth",block:"nearest"});}
     var pin=document.getElementById("pin-"+id);
     if(pin) pin.classList.add("active");
+
+    var im=imoveis.find(function(x){return x.id===id;});
+    if(!im) return;
+
+    updateCta(im);
+
     if(panMap && map){
-      var im=imoveis.find(function(x){return x.id===id;});
-      if(im) map.flyTo([im.lat,im.lng],15,{animate:true,duration:.6});
+      /* Zoom 17 = nível de rua, igual Google Maps */
+      map.flyTo([im.lat,im.lng],17,{animate:true,duration:.7});
     }
   }
 
@@ -1953,61 +2020,66 @@ if('serviceWorker' in navigator){
     if(!el||typeof L==="undefined") return;
 
     map=L.map("orulo-map",{
-      scrollWheelZoom:false,
+      scrollWheelZoom:false,   /* mouse wheel desativado para não travar scroll da página */
+      touchZoom:true,          /* pinch-to-zoom habilitado no celular */
+      doubleClickZoom:true,
+      tap:false,               /* evita conflito de toque iOS */
       zoomControl:true,
       attributionControl:true
     });
 
+    /* Tiles CartoDB Light — limpos e rápidos */
     L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{
       attribution:'&copy; <a href="https://openstreetmap.org">OSM</a> &copy; <a href="https://carto.com">CARTO</a>',
-      subdomains:"abcd",maxZoom:19
+      subdomains:"abcd", maxZoom:19
     }).addTo(map);
 
     var group=L.featureGroup();
 
     imoveis.forEach(function(im){
+      /* iconAnchor [0,0] + CSS transform:translate(-50%, calc(-100% - 10px))
+         faz o triângulo do price-tag apontar EXATAMENTE para a coordenada */
       var icon=L.divIcon({
         className:"",
         html:'<div class="price-tag" id="pin-'+im.id+'">'+im.preco+'</div>',
-        iconSize:null,
-        iconAnchor:[28,14]
+        iconSize:[1,1],
+        iconAnchor:[0,0]
       });
-      var m=L.marker([im.lat,im.lng],{icon:icon,zIndexOffset:100});
+      var m=L.marker([im.lat,im.lng],{icon:icon,zIndexOffset:100,riseOnHover:true});
       m.addTo(map);
       m.addTo(group);
       markers[im.id]=m;
 
-      m.on("click",function(){
-        setActive(im.id, true);
-      });
+      m.on("click",function(e){ L.DomEvent.stopPropagation(e); setActive(im.id,true); });
 
       var card=document.getElementById("card-"+im.id);
       if(card){
-        card.addEventListener("click",function(){
-          setActive(im.id, true);
+        card.addEventListener("click",function(e){
+          e.stopPropagation();
+          setActive(im.id,true);
         });
         card.addEventListener("mouseenter",function(){
           if(activeId!==im.id){
             var p=document.getElementById("pin-"+im.id);
-            if(p)p.classList.add("active");
+            if(p) p.style.background="#f0c050";
           }
         });
         card.addEventListener("mouseleave",function(){
           if(activeId!==im.id){
             var p=document.getElementById("pin-"+im.id);
-            if(p)p.classList.remove("active");
+            if(p) p.style.background="";
           }
         });
       }
     });
 
-    /* Zoom automático para mostrar todos os pinos */
+    /* Zoom automático para mostrar TODOS os pinos */
     if(group.getLayers().length>0){
-      map.fitBounds(group.getBounds().pad(0.18));
+      map.fitBounds(group.getBounds().pad(0.15));
     }
 
-    /* Ativa primeiro card (sem pan — mapa já mostra tudo) */
-    if(imoveis.length) setActive(imoveis[0].id, false);
+    /* Seleciona o primeiro card sem mover o mapa */
+    if(imoveis.length) setActive(imoveis[0].id,false);
   }
 
   if(document.readyState==="loading"){
