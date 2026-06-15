@@ -60,6 +60,17 @@ img{display:block;max-width:100%}
 .tipo-cta{background:var(--navy);color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;font-family:inherit;transition:background .2s}
 .tipo-cta:hover{background:#1e3a6e}
 
+/* GALERIA COMPLETA */
+.galeria-section h2{margin-bottom:18px}
+.galeria-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px;margin-bottom:12px}
+.galeria-thumb{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:10px;cursor:pointer;background:#f1f5f9}
+.galeria-thumb img{width:100%;height:100%;object-fit:cover;transition:transform .35s,opacity .25s}
+.galeria-thumb:hover img{transform:scale(1.06);opacity:.88}
+.galeria-overlay{position:absolute;inset:0;background:rgba(9,21,48,.45);opacity:0;transition:opacity .25s;display:flex;align-items:center;justify-content:center;border-radius:10px}
+.galeria-overlay span{font-size:22px;color:#fff}
+.galeria-thumb:hover .galeria-overlay{opacity:1}
+.galeria-hint{text-align:center;font-size:12px;color:#94a3b8;margin-top:4px}
+
 /* PLANTA BAIXA */
 .im-planta-img{width:100%;border-radius:12px;border:1px solid #e2e8f0;box-shadow:0 4px 20px rgba(0,0,0,.08)}
 .planta-cta-box{display:flex;gap:20px;align-items:flex-start;background:linear-gradient(135deg,#f8faff 0%,#eef3ff 100%);border:1.5px solid #d0dbff;border-radius:14px;padding:28px}

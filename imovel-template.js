@@ -48,11 +48,12 @@ const amenIcons={
 
 function render(){
   const savedImg = localStorage.getItem('pc_img_' + PROP.id) || PROP.imgDefault;
-  const allImgs = [savedImg, ...(PROP.imgs||[]).slice(1)];
+  const allImgs = [savedImg, ...(PROP.imgs||[]).slice(0,7)];
+  const galeria = PROP.galeria || allImgs;
   const fotoCoord = localStorage.getItem('pc_foto_paulo') || '';
   const mapQ = PROP.mapQuery || encodeURIComponent((PROP.nome+' '+PROP.bairro+' Rio de Janeiro'));
   const nearby = NEARBY[PROP.bairro] || [];
-  const totalFotos = allImgs.length;
+  const totalFotos = galeria.length;
 
   document.getElementById('imovel-root').innerHTML = `
   <header class="im-hdr">
@@ -85,9 +86,9 @@ function render(){
 
   <div class="im-gallery-wrap">
     <div class="im-gallery" id="im-gallery">
-      ${allImgs.map((src,i)=>`<div class="im-gthumb${i===0?' im-gthumb-main':''}" onclick="openLightbox(${i})"><img src="${src}" alt="${PROP.nome} foto ${i+1}" loading="${i?'lazy':'eager'}"/></div>`).join('')}
+      ${allImgs.slice(0,4).map((src,i)=>`<div class="im-gthumb${i===0?' im-gthumb-main':''}" onclick="openGaleriaLb(${i})"><img src="${src}" alt="${PROP.nome} foto ${i+1}" loading="${i?'lazy':'eager'}"/></div>`).join('')}
     </div>
-    <button class="im-gallery-all-btn" onclick="openLightbox(0)">📷 Ver todas as ${totalFotos} fotos</button>
+    <button class="im-gallery-all-btn" onclick="openGaleriaLb(0)">📷 Ver todas as ${totalFotos} fotos</button>
   </div>
 
   <div class="im-layout">
@@ -120,6 +121,14 @@ function render(){
             </div>
           </div>`).join('')}
         </div>
+      </div>
+
+      <div class="section-block galeria-section">
+        <h2>Galeria de imagens</h2>
+        <div class="galeria-grid">
+          ${galeria.map((src,i)=>`<div class="galeria-thumb" onclick="openGaleriaLb(${i})" title="Ampliar foto ${i+1}"><img src="${src}" alt="${PROP.nome} — foto ${i+1}" loading="lazy"/><div class="galeria-overlay"><span>🔍</span></div></div>`).join('')}
+        </div>
+        <p class="galeria-hint">Clique em qualquer foto para ampliar · ${galeria.length} fotos disponíveis</p>
       </div>
 
       <div class="section-block">
@@ -272,10 +281,20 @@ function render(){
   </div>
   `;
 
-  window._lbImgs = allImgs;
+  window._lbImgs = galeria;
   window._lbIdx = 0;
 }
 
+window.openGaleriaLb = function(i){
+  window._lbIdx = i;
+  const lb = document.getElementById('im-lightbox');
+  const img = document.getElementById('lb-img');
+  const ctr = document.getElementById('lb-counter');
+  img.src = window._lbImgs[i];
+  ctr.textContent = (i+1) + ' / ' + window._lbImgs.length;
+  lb.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+};
 window.openLightbox = function(i){
   window._lbIdx = i;
   const lb = document.getElementById('im-lightbox');
