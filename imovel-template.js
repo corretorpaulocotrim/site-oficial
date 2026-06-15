@@ -6,9 +6,9 @@ const WA_SVG=`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.3
 
 // Todos os empreendimentos — para mapa cruzado nas páginas individuais
 const ALL_IMOVEIS = [
-  {id:"orla-central", nome:"Orla Central",            lat:-22.8990,lng:-43.1248, url:"orla-central.html",          regiao:"Centro · Niterói · RJ",         preco:"A partir de R$ 402.000"},
-  {id:"farol",        nome:"Farol da Guanabara",       lat:-22.8958,lng:-43.2103, url:"farol-da-guanabara.html",    regiao:"Santo Cristo · Porto Maravilha", preco:"A partir de R$ 403.000"},
-  {id:"arcos",        nome:"Arcos do Porto",            lat:-22.8912,lng:-43.2013, url:"arcos-do-porto.html",        regiao:"Porto Maravilha · RJ",           preco:"A partir de R$ 361.000"},
+  {id:"orla-central", nome:"Orla Central",            lat:-22.8960,lng:-43.1255, url:"orla-central.html",          regiao:"Centro · Niterói · RJ",         preco:"A partir de R$ 402.000"},
+  {id:"farol",        nome:"Farol da Guanabara",       lat:-22.8972,lng:-43.2072, url:"farol-da-guanabara.html",    regiao:"Santo Cristo · Porto Maravilha", preco:"A partir de R$ 403.000"},
+  {id:"arcos",        nome:"Arcos do Porto",            lat:-22.8942,lng:-43.1988, url:"arcos-do-porto.html",        regiao:"Porto Maravilha · RJ",           preco:"A partir de R$ 361.000"},
   {id:"piedade",      nome:"Parque Piedade – Aquarela", lat:-22.8672,lng:-43.2885, url:"parque-piedade.html",        regiao:"Piedade · Zona Norte · RJ",      preco:"A partir de R$ 263.000"},
   {id:"lamparina",    nome:"Luzes do Rio – Lamparina",  lat:-22.9008,lng:-43.2238, url:"luzes-do-rio-lamparina.html",regiao:"São Cristóvão · RJ",             preco:"A partir de R$ 309.000"},
   {id:"caminhos",     nome:"Caminhos da Guanabara",     lat:-22.8748,lng:-43.1105, url:"caminhos-da-guanabara.html",regiao:"Pendotiba · Niterói · RJ",        preco:"A partir de R$ 335.000"},
