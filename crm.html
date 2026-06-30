@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>CRM | Paulo Cotrim — Coordenador Cury</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#060f1e;--navy2:#0a1628;--navy3:#0d2040;--gold:#c9993a;--gold2:#e8b84b;--green:#16a34a;--green2:#15803d;--red:#dc2626;--text:#1e293b;--muted:#64748b;--white:#fff;--border:#e2e8f0;--radius:10px;--radius-lg:16px;--sidebar:260px}
+html,body{height:100%}
+body{font-family:"Inter",sans-serif;color:var(--text);background:#f0f4f8;min-height:100vh;display:flex;flex-direction:column}
+button,input,select,textarea{font-family:inherit}
+button{cursor:pointer}
+#sidebar{position:fixed;top:0;left:0;bottom:0;width:var(--sidebar);background:var(--navy);z-index:200;display:flex;flex-direction:column;border-right:1px solid rgba(201,153,58,.12);transition:transform .3s}
+.sb-logo{padding:20px 20px 16px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px}
+.sb-mark{width:36px;height:36px;border-radius:9px;background:linear-gradient(135deg,#c9993a,#e8b84b);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:900;color:var(--navy);flex-shrink:0}
+.sb-name{font-size:13px;font-weight:800;color:#fff}
+.sb-sub{font-size:9px;color:#e8b84b;font-weight:600;letter-spacing:.1em;text-transform:uppercase}
+.sb-nav{flex:1;padding:12px 10px;overflow-y:auto;display:flex;flex-direction:column;gap:2px}
+.sb-sec{font-size:9px;font-weight:700;color:rgba(255,255,255,.25);letter-spacing:.12em;text-transform:uppercase;padding:14px 10px 6px}
+.sb-link{display:flex;align-items:center;gap:10px;padding:9px 12px;border-radius:8px;font-size:13px;font-weight:500;color:rgba(255,255,255,.62);transition:all .2s;cursor:pointer;user-select:none}
+.sb-link:hover{color:#fff;background:rgba(255,255,255,.07)}
+.sb-link.active{color:#fff;background:rgba(201,153,58,.14);border:1px solid rgba(201,153,58,.2)}
+.sb-icon{font-size:16px;width:20px;text-align:center;flex-shrink:0}
+.sb-badge{margin-left:auto;background:#ef4444;color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:20px}
+.sb-footer{padding:14px 16px;border-top:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px}
+.sb-av{width:34px;height:34px;border-radius:50%;background:linear-gradient(135deg,#c9993a,#e8b84b);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--navy);flex-shrink:0}
+.sb-uname{font-size:12px;font-weight:700;color:#fff}
+.sb-urole{font-size:10px;color:rgba(255,255,255,.4)}
+#main{margin-left:var(--sidebar);display:flex;flex-direction:column;min-height:100vh}
+.topbar{background:#fff;border-bottom:1px solid var(--border);padding:0 28px;height:60px;display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:100}
+.topbar-title{font-size:16px;font-weight:700;color:var(--navy3)}
+.tsearch{flex:1;max-width:340px;margin-left:16px;display:flex;align-items:center;gap:8px;background:#f8fafc;border:1px solid var(--border);border-radius:8px;padding:0 12px;height:36px}
+.tsearch input{border:none;background:none;font-size:13px;width:100%;outline:none}
+.tactions{margin-left:auto;display:flex;align-items:center;gap:10px}
+.btn-primary{background:linear-gradient(135deg,#c9993a,#e8b84b);color:var(--navy);border:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:800;display:flex;align-items:center;gap:6px;transition:all .2s;white-space:nowrap;cursor:pointer}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,153,58,.35)}
+.page{padding:24px 28px;display:none}
+.page.active{display:block}
+.kpi-row{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:24px}
+.kpi{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden}
+.kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.kpi.gold::before{background:linear-gradient(90deg,#c9993a,#e8b84b)}
+.kpi.green::before{background:linear-gradient(90deg,#16a34a,#22c55e)}
+.kpi.blue::before{background:linear-gradient(90deg,#1e40af,#3b82f6)}
+.kpi.red::before{background:linear-gradient(90deg,#dc2626,#ef4444)}
+.kpi-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
+.kpi-val{font-size:26px;font-weight:900;color:var(--navy3);line-height:1}
+.kpi-delta{font-size:11px;margin-top:6px;font-weight:600}
+.kpi-delta.up{color:var(--green)}
+.kpi-icon{position:absolute;top:16px;right:16px;font-size:22px;opacity:.14}
+.card{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;margin-bottom:14px}
+.card-header{padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.card-title{font-size:14px;font-weight:700;color:var(--navy3)}
+.card-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.card-body{padding:20px}
+.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
+.lead-table{width:100%;border-collapse:collapse}
+.lead-table th{text-align:left;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);padding:10px 14px;border-bottom:1px solid var(--border);white-space:nowrap}
+.lead-table td{padding:11px 14px;border-bottom:1px solid #f1f5f9;font-size:13px;vertical-align:middle}
+.lead-table tr:last-child td{border-bottom:none}
+.lead-table tr:hover td{background:#fafbfc}
+.lead-name{font-weight:700;color:var(--navy3)}
+.lead-phone{font-size:12px;color:var(--muted)}
+.temp-badge{display:inline-flex;align-items:center;gap:5px;font-size:10px;font-weight:800;padding:3px 10px;border-radius:20px;white-space:nowrap}
+.temp-quente{background:rgba(220,38,38,.1);color:#dc2626;border:1px solid rgba(220,38,38,.2)}
+.temp-morno{background:rgba(234,179,8,.1);color:#a16207;border:1px solid rgba(234,179,8,.25)}
+.temp-frio{background:rgba(59,130,246,.1);color:#1e40af;border:1px solid rgba(59,130,246,.2)}
+.status-badge{display:inline-flex;font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px}
+.status-novo{background:#eff6ff;color:#1e40af}
+.status-contato{background:#f0fdf4;color:#15803d}
+.status-proposta{background:rgba(201,153,58,.1);color:#c9993a}
+.status-visita{background:#fdf4ff;color:#7e22ce}
+.status-fechado{background:#f0fdf4;color:#15803d;font-weight:800}
+.status-perdido{background:#fef2f2;color:#dc2626}
+.origin-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:#f1f5f9;color:var(--muted);white-space:nowrap}
+.btn-sm{font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:#fff;transition:all .2s;white-space:nowrap;cursor:pointer}
+.btn-sm:hover{background:#f8fafc;border-color:#94a3b8}
+.btn-sm.green{background:#16a34a;color:#fff;border-color:#16a34a}
+.btn-sm.green:hover{background:#15803d}
+.btn-sm.gold{background:linear-gradient(135deg,#c9993a,#e8b84b);color:var(--navy);border:none}
+.btn-sm.red{background:#dc2626;color:#fff;border-color:#dc2626}
+.filter-row{display:flex;align-items:center;gap:10px;margin-bottom:16px;flex-wrap:wrap}
+.filter-btn{font-size:11px;font-weight:700;padding:6px 14px;border-radius:20px;border:1px solid var(--border);background:#fff;color:var(--muted);transition:all .2s;cursor:pointer}
+.filter-btn:hover,.filter-btn.active{background:var(--navy3);color:#fff;border-color:var(--navy3)}
+.filter-select{font-size:12px;font-weight:600;padding:6px 10px;border-radius:8px;border:1px solid var(--border);background:#fff;outline:none}
+.pipeline{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;align-items:start}
+.pipe-col{background:#f8fafc;border-radius:var(--radius-lg);padding:12px}
+.pipe-col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid transparent}
+.pipe-col-header.novo{border-color:#3b82f6}
+.pipe-col-header.contato{border-color:#16a34a}
+.pipe-col-header.proposta{border-color:#e8b84b}
+.pipe-col-header.visita{border-color:#7c3aed}
+.pipe-col-header.fechado{border-color:var(--navy3)}
+.pipe-col-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy3)}
+.pipe-count{font-size:10px;font-weight:700;background:rgba(0,0,0,.06);padding:2px 7px;border-radius:20px;color:var(--muted)}
+.pipe-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;transition:all .2s;cursor:pointer}
+.pipe-card:hover{border-color:#94a3b8;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.pipe-card-name{font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:3px}
+.pipe-card-empr{font-size:11px;color:var(--muted);margin-bottom:6px}
+.pipe-card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
+.imovel-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.icard{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s}
+.icard:hover{transform:translateY(-4px);box-shadow:0 12px 32px rgba(0,0,0,.1)}
+.icard-img{height:160px;background:linear-gradient(135deg,#0a1628,#0d2040);display:flex;align-items:center;justify-content:center;font-size:44px;position:relative}
+.icard-badges{position:absolute;top:10px;left:10px;display:flex;gap:6px}
+.icard-badge{font-size:9px;font-weight:800;text-transform:uppercase;padding:3px 9px;border-radius:20px}
+.ib-lanc{background:#0d2040;color:#fff}
+.ib-obras{background:#92400e;color:#fff}
+.ib-pronto{background:#c9993a;color:#060f1e}
+.ib-mcmv{background:#065f46;color:#fff}
+.icard-roi{position:absolute;bottom:10px;right:10px;background:rgba(6,15,30,.82);color:#e8b84b;font-size:10px;font-weight:700;padding:4px 9px;border-radius:7px}
+.icard-body{padding:14px 16px}
+.icard-title{font-size:14px;font-weight:800;color:var(--navy3);margin-bottom:2px}
+.icard-loc{font-size:11px;color:var(--muted);margin-bottom:6px}
+.icard-price{font-size:17px;font-weight:900;color:var(--navy3)}
+.icard-tags{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
+.itag{background:#f1f5f9;color:#475569;font-size:9px;font-weight:600;padding:2px 8px;border-radius:4px}
+.icard-foot{display:flex;gap:7px;margin-top:10px}
+.btn-icard{flex:1;padding:8px;border-radius:8px;font-size:11px;font-weight:700;border:none;transition:all .2s;cursor:pointer}
+.btn-icard.dark{background:var(--navy3);color:#fff}
+.btn-icard.outline{background:#fff;color:var(--navy3);border:1px solid var(--border)}
+.price-table{width:100%;border-collapse:collapse}
+.price-table th{background:var(--navy3);color:#fff;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:10px 14px;text-align:left}
+.price-table td{padding:11px 14px;border-bottom:1px solid #f1f5f9;font-size:13px}
+.price-table tr:nth-child(even) td{background:#fafbfc}
+.price-from{color:#c9993a;font-weight:800}
+.avail-badge{display:inline-flex;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
+.avail-ok{background:#f0fdf4;color:#15803d}
+.avail-low{background:rgba(220,38,38,.08);color:#dc2626}
+.avail-none{background:#f1f5f9;color:var(--muted)}
+.form-group{margin-bottom:16px}
+.form-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin-bottom:6px;display:block}
+.form-input{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;color:var(--text);outline:none;transition:border .2s;background:#fff}
+.form-input:focus{border-color:#c9993a;box-shadow:0 0 0 3px rgba(201,153,58,.1)}
+.form-select{width:100%;padding:10px 14px;border:1.5px solid var(--border);border-radius:9px;font-size:14px;color:var(--text);outline:none;background:#fff;transition:border .2s}
+.form-select:focus{border-color:#c9993a}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.form-actions{display:flex;gap:10px;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)}
+.btn-cancel{padding:10px 20px;border:1.5px solid var(--border);border-radius:9px;background:#fff;font-size:13px;font-weight:700;color:var(--muted);cursor:pointer}
+.btn-submit{flex:1;padding:11px;border-radius:9px;border:none;background:linear-gradient(135deg,#c9993a,#e8b84b);color:var(--navy);font-size:14px;font-weight:800;cursor:pointer;transition:all .2s}
+.btn-submit:hover{transform:translateY(-1px);box-shadow:0 6px 20px rgba(201,153,58,.3)}
+.act-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f1f5f9}
+.act-item:last-child{border-bottom:none}
+.act-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px}
+.act-dot.green{background:rgba(22,163,74,.1);color:#16a34a}
+.act-dot.gold{background:rgba(201,153,58,.12);color:#c9993a}
+.act-dot.blue{background:rgba(30,64,175,.1);color:#1e40af}
+.funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.funnel-label{font-size:11px;font-weight:600;color:var(--muted);width:90px;text-align:right;flex-shrink:0}
+.funnel-bar-wrap{flex:1;height:30px;background:#f1f5f9;border-radius:6px;overflow:hidden}
+.funnel-bar{height:100%;border-radius:6px;display:flex;align-items:center;padding-left:12px;font-size:11px;font-weight:800;color:#fff}
+.funnel-count{font-size:11px;font-weight:700;color:var(--muted);width:30px;text-align:right;flex-shrink:0}
+.modal-bg{position:fixed;inset:0;background:rgba(6,15,30,.65);backdrop-filter:blur(6px);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-bg.open{display:flex}
+.modal{background:#fff;border-radius:var(--radius-lg);width:100%;max-width:580px;max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.3)}
+.modal-top-bar{height:4px;background:linear-gradient(90deg,#060f1e,#c9993a)}
+.modal-header{padding:18px 24px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;background:#fff;z-index:1}
+.modal-title{font-size:15px;font-weight:800;color:var(--navy3)}
+.modal-close{width:30px;height:30px;border-radius:50%;border:1px solid var(--border);background:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--muted);cursor:pointer}
+.modal-close:hover{background:#f1f5f9}
+.modal-body{padding:22px 24px}
+.eyebrow{display:inline-flex;align-items:center;gap:6px;background:rgba(201,153,58,.1);border:1px solid rgba(201,153,58,.25);color:#c9993a;font-size:9px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;padding:4px 12px;border-radius:20px;margin-bottom:10px}
+#toast{position:fixed;bottom:24px;right:24px;z-index:999;background:var(--navy3);color:#fff;padding:13px 18px;border-radius:10px;font-size:13px;font-weight:700;display:none;align-items:center;gap:8px;box-shadow:0 8px 28px rgba(0,0,0,.25);border:1px solid rgba(201,153,58,.25);max-width:320px}
+#toast.show{display:flex;animation:slideUp .3s ease}
+@keyframes slideUp{from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1}}
+.urgency-strip{background:linear-gradient(90deg,#dc2626,#ef4444);color:#fff;font-size:10px;font-weight:800;text-align:center;padding:5px 10px;display:flex;align-items:center;justify-content:center;gap:5px}
+.urg-dot{width:5px;height:5px;background:#fff;border-radius:50%;animation:blink 1s infinite;display:inline-block}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.3}}
+.empty-state{text-align:center;padding:40px 20px;color:var(--muted)}
+.empty-state .icon{font-size:36px;margin-bottom:10px;opacity:.5}
+.empty-state p{font-size:14px;font-weight:600}
+.empty-state small{font-size:12px}
+.lp-row{display:grid;grid-template-columns:110px 1fr;gap:6px;margin-bottom:8px;font-size:13px}
+.lp-key{color:var(--muted);font-weight:600}
+.tl-item{display:flex;gap:10px;margin-bottom:12px}
+.tl-dot{width:24px;height:24px;border-radius:50%;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;margin-top:1px}
+.tl-action{font-size:12px;font-weight:700;color:var(--navy3)}
+.tl-detail{font-size:11px;color:var(--muted)}
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:rgba(0,0,0,.15);border-radius:10px}
+.mob-toggle{display:none;position:fixed;top:10px;left:10px;z-index:300;background:var(--navy);border:1px solid rgba(255,255,255,.12);border-radius:8px;width:38px;height:38px;align-items:center;justify-content:center;font-size:18px;color:#fff;cursor:pointer}
+@media(max-width:900px){#sidebar{transform:translateX(-100%)}#sidebar.open{transform:translateX(0)}#main{margin-left:0}.mob-toggle{display:flex!important}.kpi-row{grid-template-columns:1fr 1fr}.pipeline{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<button class="mob-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">&#9776;</button>
+<nav id="sidebar">
+  <div class="sb-logo"><div class="sb-mark">PC</div><div><div class="sb-name">Paulo Cotrim</div><div class="sb-sub">CRM Imobiliario</div></div></div>
+  <div class="sb-nav">
+    <div class="sb-sec">Principal</div>
+    <div class="sb-link active" onclick="goPage('dashboard')"><span class="sb-icon">&#128202;</span> Dashboard</div>
+    <div class="sb-link" onclick="goPage('leads')"><span class="sb-icon">&#128101;</span> Leads <span class="sb-badge" id="badge-leads">0</span></div>
+    <div class="sb-link" onclick="goPage('pipeline')"><span class="sb-icon">&#128260;</span> Pipeline</div>
+    <div class="sb-sec">Portfolio</div>
+    <div class="sb-link" onclick="goPage('imoveis')"><span class="sb-icon">&#127970;</span> Empreendimentos</div>
+    <div class="sb-link" onclick="goPage('tabelas')"><span class="sb-icon">&#128176;</span> Tabelas de Precos</div>
+    <div class="sb-link" onclick="goPage('cadastro-imovel')"><span class="sb-icon">&#10133;</span> Cadastrar Imovel</div>
+    <div class="sb-sec">Captacao</div>
+    <div class="sb-link" onclick="goPage('novo-lead')"><span class="sb-icon">&#9998;</span> Novo Lead</div>
+    <div class="sb-link" onclick="goPage('discador')"><span class="sb-icon">&#128222;</span> Discador</div>
+    <div class="sb-sec">Relatorios</div>
+    <div class="sb-link" onclick="goPage('metricas')"><span class="sb-icon">&#128200;</span> Metricas</div>
+    <div class="sb-link" onclick="goPage('campanhas')"><span class="sb-icon">&#127919;</span> Campanhas</div>
+  </div>
+  <div class="sb-footer">
+    <div class="sb-av">PC</div>
+    <div><div class="sb-uname">Paulo Cotrim</div><div class="sb-urole">Coordenador Cury</div></div>
+  </div>
+</nav>
+<div id="main">
+  <div class="topbar">
+    <span class="topbar-title" id="topbar-title">Dashboard</span>
+    <div class="tsearch"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg><input placeholder="Buscar lead, telefone..." oninput="searchLeads(this.value)"/></div>
+    <div class="tactions"><button class="btn-primary" onclick="openModal('modal-lead')">+ Novo Lead</button></div>
+  </div>
+
+  <!-- DASHBOARD -->
+  <div class="page active" id="page-dashboard">
+    <div style="margin-bottom:20px"><div class="eyebrow">Visao geral</div><div style="font-size:22px;font-weight:900;color:var(--navy3)">Bom dia, Paulo! &#128075;</div><div style="font-size:13px;color:var(--muted);margin-top:3px" id="dash-subtitle">Carregando...</div></div>
+    <div class="kpi-row">
+      <div class="kpi gold"><div class="kpi-label">Total de Leads</div><div class="kpi-val" id="kpi-total">0</div><div class="kpi-delta up" id="kpi-sub1">—</div><div class="kpi-icon">&#128101;</div></div>
+      <div class="kpi green"><div class="kpi-label">Leads Quentes</div><div class="kpi-val" id="kpi-quentes">0</div><div class="kpi-delta up">&#128293; Prioridade maxima</div><div class="kpi-icon">&#128293;</div></div>
+      <div class="kpi blue"><div class="kpi-label">Propostas</div><div class="kpi-val" id="kpi-propostas">0</div><div class="kpi-delta up">Em andamento</div><div class="kpi-icon">&#128196;</div></div>
+      <div class="kpi red"><div class="kpi-label">Fechamentos</div><div class="kpi-val" id="kpi-fechados">0</div><div class="kpi-delta up">Parabens! &#127881;</div><div class="kpi-icon">&#9989;</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><div class="card-header"><div><div class="card-title">Funil de Leads</div><div class="card-sub">Distribuicao por etapa</div></div></div><div class="card-body" id="funil-body"></div></div>
+      <div class="card"><div class="card-header"><div><div class="card-title">Atividade Recente</div><div class="card-sub">Ultimos cadastros</div></div></div><div class="card-body" style="padding:14px 20px" id="atividade-body"></div></div>
+    </div>
+    <div class="card">
+      <div class="card-header"><div><div class="card-title">&#128293; Leads Quentes &mdash; Acao Imediata</div><div class="card-sub">Contate agora</div></div><button class="btn-sm gold" onclick="goPage('leads')">Ver todos &rarr;</button></div>
+      <div class="card-body" style="padding:0"><table class="lead-table"><thead><tr><th>Nome</th><th>Telefone</th><th>Interesse</th><th>Origem</th><th>Status</th><th></th></tr></thead><tbody id="dash-quentes"></tbody></table></div>
+    </div>
+  </div>
+
+  <!-- LEADS -->
+  <div class="page" id="page-leads">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+      <div><div class="eyebrow">Gestao</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Todos os Leads</div></div>
+      <div style="display:flex;gap:10px"><button class="btn-sm" onclick="exportCSV()">&#11015; Exportar CSV</button><button class="btn-primary" onclick="openModal('modal-lead')">+ Novo Lead</button></div>
+    </div>
+    <div class="filter-row">
+      <button class="filter-btn active" onclick="filtrar('todos',this)">Todos</button>
+      <button class="filter-btn" onclick="filtrar('quente',this)">&#128293; Quentes</button>
+      <button class="filter-btn" onclick="filtrar('morno',this)">&#9898; Mornos</button>
+      <button class="filter-btn" onclick="filtrar('frio',this)">&#10052; Frios</button>
+      <select class="filter-select" id="filter-origem" onchange="renderLeads()">
+        <option value="">Todas as origens</option>
+        <option>Meta Ads</option><option>Google Ads</option><option>Site</option><option>WhatsApp</option><option>Indicacao</option><option>Foto/Documento</option><option>Outro</option>
+      </select>
+    </div>
+    <div class="card"><div class="card-body" style="padding:0"><table class="lead-table"><thead><tr><th>Lead</th><th>Temp.</th><th>Interesse</th><th>Origem</th><th>Status</th><th>Cadastro</th><th>Acoes</th></tr></thead><tbody id="leads-tbody"></tbody></table></div></div>
+  </div>
+
+  <!-- PIPELINE -->
+  <div class="page" id="page-pipeline">
+    <div style="margin-bottom:20px"><div class="eyebrow">Kanban</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Pipeline de Vendas</div></div>
+    <div class="pipeline" id="pipeline-board"></div>
+  </div>
+
+  <!-- IMOVEIS -->
+  <div class="page" id="page-imoveis">
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
+      <div><div class="eyebrow">Portfolio</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Empreendimentos</div></div>
+      <button class="btn-primary" onclick="goPage('cadastro-imovel')">+ Cadastrar Imovel</button>
+    </div>
+    <div class="imovel-grid" id="imovel-grid"></div>
+  </div>
+
+  <!-- TABELAS -->
+  <div class="page" id="page-tabelas">
+    <div style="margin-bottom:20px"><div class="eyebrow">Precos</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Tabelas de Precos</div></div>
+    <div class="card"><div class="card-header"><div><div class="card-title">Orla Central</div><div class="card-sub" style="color:#dc2626;font-weight:700">&#9888; Tabela valida ate 30/jul/2025</div></div><button class="btn-sm" onclick="toast('&#128228; Enviando tabela...')">&#128228; WhatsApp</button></div>
+    <div class="card-body" style="padding:0"><table class="price-table"><thead><tr><th>Tipologia</th><th>Area</th><th>Valor</th><th>Parcela Obra</th><th>Parcela Chaves</th><th>Disponibilidade</th></tr></thead><tbody>
+    <tr><td>Studio</td><td>24m2</td><td class="price-from">R$ 402.000</td><td>R$ 2.890</td><td>R$ 1.440</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
+    <tr><td>1 Quarto</td><td>38m2</td><td class="price-from">R$ 487.000</td><td>R$ 3.210</td><td>R$ 1.750</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
+    <tr><td>2 Quartos</td><td>58m2</td><td class="price-from">R$ 583.000</td><td>R$ 3.890</td><td>R$ 2.100</td><td><span class="avail-badge avail-low">&#128308; Ultimas 4</span></td></tr>
+    <tr><td>2Q + Suite</td><td>67m2</td><td class="price-from">R$ 648.000</td><td>R$ 4.320</td><td>R$ 2.330</td><td><span class="avail-badge avail-low">&#128308; Ultimas 2</span></td></tr>
+    <tr><td>3 Quartos</td><td>88m2</td><td class="price-from">R$ 861.000</td><td>R$ 5.740</td><td>R$ 3.100</td><td><span class="avail-badge avail-none">&#9899; Vendido</span></td></tr>
+    </tbody></table></div></div>
+    <div class="card"><div class="card-header"><div><div class="card-title">Farol da Guanabara</div><div class="card-sub" style="color:#c9993a;font-weight:700">&#127942; Copa Cury &mdash; condicoes especiais</div></div><button class="btn-sm" onclick="toast('&#128228; Enviando...')">&#128228; WhatsApp</button></div>
+    <div class="card-body" style="padding:0"><table class="price-table"><thead><tr><th>Tipologia</th><th>Area</th><th>Valor</th><th>Parcela Obra</th><th>Parcela Chaves</th><th>Disponibilidade</th></tr></thead><tbody>
+    <tr><td>Studio</td><td>22m2</td><td class="price-from">R$ 402.000</td><td>R$ 2.750</td><td>R$ 1.400</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
+    <tr><td>1 Quarto</td><td>36m2</td><td class="price-from">R$ 478.000</td><td>R$ 3.180</td><td>R$ 1.720</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
+    <tr><td>3 Quartos</td><td>82m2</td><td class="price-from">R$ 798.000</td><td>R$ 5.320</td><td>R$ 2.870</td><td><span class="avail-badge avail-low">&#128308; Ultimas 3</span></td></tr>
+    </tbody></table></div></div>
+    <div class="card"><div class="card-header"><div><div class="card-title">Parque Piedade &mdash; Aquarela (MCMV)</div><div class="card-sub" style="color:#16a34a;font-weight:700">&#128176; Subsidio de ate R$ 47.000</div></div><button class="btn-sm" onclick="toast('&#128228; Enviando...')">&#128228; WhatsApp</button></div>
+    <div class="card-body" style="padding:0"><table class="price-table"><thead><tr><th>Tipologia</th><th>Area</th><th>Valor Bruto</th><th>Subsidio</th><th>Valor Final</th><th>Parcela</th><th>Disponibilidade</th></tr></thead><tbody>
+    <tr><td>2Q Padrao</td><td>45m2</td><td>R$ 310.200</td><td style="color:#16a34a;font-weight:700">&minus;R$ 47.000</td><td class="price-from">R$ 263.200</td><td>R$ 1.640</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
+    <tr><td>2Q Garden</td><td>60m2</td><td>R$ 340.000</td><td style="color:#16a34a;font-weight:700">&minus;R$ 47.000</td><td class="price-from">R$ 293.000</td><td>R$ 1.820</td><td><span class="avail-badge avail-low">&#128308; Ultimas 2</span></td></tr>
+    </tbody></table></div></div>
+  </div>
+
+  <!-- CADASTRO IMOVEL -->
+  <div class="page" id="page-cadastro-imovel">
+    <div style="margin-bottom:20px"><div class="eyebrow">Portfolio</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Cadastrar Empreendimento</div></div>
+    <div class="card"><div class="modal-top-bar"></div><div class="card-body">
+      <div class="form-row"><div class="form-group"><label class="form-label">Nome</label><input class="form-input" id="ci-nome" placeholder="Ex: Orla Central"/></div><div class="form-group"><label class="form-label">Construtora</label><input class="form-input" id="ci-const" placeholder="Ex: Cury"/></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">Localizacao</label><input class="form-input" id="ci-loc" placeholder="Bairro, Cidade"/></div><div class="form-group"><label class="form-label">Status</label><select class="form-select" id="ci-status"><option>Lancamento</option><option>Em obras</option><option>Pronto para morar</option></select></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">Preco minimo</label><input class="form-input" id="ci-preco" placeholder="R$ 000.000"/></div><div class="form-group"><label class="form-label">ROI / Destaque</label><input class="form-input" id="ci-roi" placeholder="Ex: ROI acima de 12%"/></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">Programa</label><select class="form-select" id="ci-prog"><option>SBPE</option><option>MCMV Faixa 2</option><option>MCMV Faixa 3</option></select></div><div class="form-group"><label class="form-label">Urgencia / Destaque</label><input class="form-input" id="ci-urg" placeholder="Ex: Ultimas unidades!"/></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">Tipologias</label><input class="form-input" id="ci-tipo" placeholder="Ex: Studio, 1Q, 2Q"/></div><div class="form-group"><label class="form-label">Amenidades</label><input class="form-input" id="ci-tags" placeholder="Ex: Rooftop, Piscinas"/></div></div>
+      <div class="form-group"><label class="form-label">Emoji do card (opcional)</label><input class="form-input" id="ci-icon" placeholder="Ex: &#127754; &#128214;" style="font-size:20px"/></div>
+      <div class="form-actions"><button class="btn-cancel" onclick="goPage('imoveis')">Cancelar</button><button class="btn-submit" onclick="salvarImovel()">Cadastrar empreendimento</button></div>
+    </div></div>
+  </div>
+
+  <!-- NOVO LEAD -->
+  <div class="page" id="page-novo-lead">
+    <div style="margin-bottom:20px"><div class="eyebrow">Captacao manual</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Cadastrar Novo Lead</div></div>
+    <div class="card"><div class="modal-top-bar"></div><div class="card-body" id="form-lead-pag"></div></div>
+  </div>
+
+  <!-- DISCADOR -->
+  <div class="page" id="page-discador">
+    <div style="margin-bottom:20px"><div class="eyebrow">Automacao</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Discador Automatico</div></div>
+    <div class="grid-2">
+      <div class="card"><div class="card-header"><div class="card-title">&#128203; Fila de discagem</div></div><div class="card-body">
+        <div class="form-group"><label class="form-label">Lista</label><select class="form-select" id="disc-lista" onchange="carregarFila()"><option value="quente">&#128293; Quentes</option><option value="morno">&#9898; Mornos</option><option value="frio">&#10052; Frios</option></select></div>
+        <div style="background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Proximo na fila</div><div style="font-size:15px;font-weight:800;color:var(--navy3)" id="disc-nome">—</div><div style="font-size:13px;color:var(--muted)" id="disc-fone">—</div></div>
+        <button class="btn-submit" onclick="ligarProximo()">&#128222; Ligar agora</button>
+        <div style="display:flex;gap:8px;margin-top:12px"><button class="btn-sm green" onclick="regStatus('contato')">&#10003; Atendeu</button><button class="btn-sm" onclick="regStatus('nao-atendeu')">&#10007; Nao atendeu</button><button class="btn-sm" onclick="zapProximo()">&#128172; WhatsApp</button></div>
+      </div></div>
+      <div class="card"><div class="card-header"><div class="card-title">&#9889; Regras ativas</div></div><div class="card-body">
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <div style="background:#f0fdf4;border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:#16a34a;margin-bottom:5px">&#10003; REGRA ATIVA</div><div style="font-size:13px;font-weight:700">1a tentativa sem atendimento</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Status: Nao atendido + reagendar</div></div>
+          <div style="background:#fff9f0;border:1px solid rgba(201,153,58,.25);border-radius:10px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:#c9993a;margin-bottom:5px">&#10003; REGRA ATIVA</div><div style="font-size:13px;font-weight:700">2a tentativa sem atendimento</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Status: Enviar WhatsApp automatico</div></div>
+          <div style="background:#fef2f2;border:1px solid rgba(220,38,38,.2);border-radius:10px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:#dc2626;margin-bottom:5px">&#10003; REGRA ATIVA</div><div style="font-size:13px;font-weight:700">Lead quente sem contato em 1h</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Alerta vermelho no painel</div></div>
+        </div>
+      </div></div>
+    </div>
+  </div>
+
+  <!-- METRICAS -->
+  <div class="page" id="page-metricas">
+    <div style="margin-bottom:20px"><div class="eyebrow">Analise</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Metricas e KPIs</div></div>
+    <div class="kpi-row">
+      <div class="kpi gold"><div class="kpi-label">Total de Leads</div><div class="kpi-val" id="m-total">0</div><div class="kpi-icon">&#128101;</div></div>
+      <div class="kpi green"><div class="kpi-label">Taxa Conversao</div><div class="kpi-val" id="m-taxa">0%</div><div class="kpi-icon">&#128202;</div></div>
+      <div class="kpi blue"><div class="kpi-label">Propostas</div><div class="kpi-val" id="m-prop">0</div><div class="kpi-icon">&#128196;</div></div>
+      <div class="kpi red"><div class="kpi-label">Fechamentos</div><div class="kpi-val" id="m-fech">0</div><div class="kpi-icon">&#9989;</div></div>
+    </div>
+    <div class="grid-2">
+      <div class="card"><div class="card-header"><div class="card-title">Leads por origem</div></div><div class="card-body" id="chart-origem"></div></div>
+      <div class="card"><div class="card-header"><div class="card-title">Leads por temperatura</div></div><div class="card-body" id="chart-temp"></div></div>
+    </div>
+  </div>
+
+  <!-- CAMPANHAS -->
+  <div class="page" id="page-campanhas">
+    <div style="margin-bottom:20px"><div class="eyebrow">Midia paga</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Campanhas Ativas</div></div>
+    <div class="card"><div class="card-body" style="padding:0"><table class="lead-table"><thead><tr><th>Campanha</th><th>Plataforma</th><th>Empreendimento</th><th>Leads</th><th>CPA</th><th>Fechamentos</th><th>Status</th></tr></thead><tbody>
+    <tr><td class="lead-name">Copa Cury &mdash; Orla Central</td><td><span class="origin-tag">Meta Ads</span></td><td>Orla Central</td><td style="font-weight:700">34</td><td style="font-weight:700;color:#16a34a">R$ 78</td><td style="font-weight:800;color:#16a34a">3</td><td><span style="background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
+    <tr><td class="lead-name">Farol &mdash; Studio Lancamento</td><td><span class="origin-tag">Meta Ads</span></td><td>Farol Guanabara</td><td style="font-weight:700">23</td><td style="font-weight:700;color:#16a34a">R$ 91</td><td style="font-weight:800;color:#16a34a">2</td><td><span style="background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
+    <tr><td class="lead-name">MCMV Piedade &mdash; Subsidio 47k</td><td><span class="origin-tag">Google Ads</span></td><td>Parque Piedade</td><td style="font-weight:700">19</td><td style="font-weight:700;color:#16a34a">R$ 63</td><td style="font-weight:800;color:#16a34a">3</td><td><span style="background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
+    </tbody></table></div></div>
+  </div>
+</div>
+
+<!-- MODAL LEAD -->
+<div class="modal-bg" id="modal-lead">
+  <div class="modal"><div class="modal-top-bar"></div>
+    <div class="modal-header"><span class="modal-title">+ Cadastrar Novo Lead</span><button class="modal-close" onclick="closeModal('modal-lead')">&#10005;</button></div>
+    <div class="modal-body" id="modal-lead-body"></div>
+  </div>
+</div>
+
+<!-- MODAL PERFIL -->
+<div class="modal-bg" id="modal-profile">
+  <div class="modal"><div class="modal-top-bar"></div>
+    <div class="modal-header"><div><div class="modal-title" id="p-name">—</div><div style="font-size:12px;color:var(--muted)" id="p-sub">—</div></div><button class="modal-close" onclick="closeModal('modal-profile')">&#10005;</button></div>
+    <div class="modal-body" id="modal-profile-body"></div>
+  </div>
+</div>
+
+<div id="toast"><span id="toast-msg"></span></div>
+
+<script>
+var currentFilter="todos";
+var filaAtual=[],filaIdx=0;
+
+// STORAGE
+function getLeads(){try{return JSON.parse(localStorage.getItem("crm_leads")||"[]")}catch{return[]}}
+function saveLeads(a){localStorage.setItem("crm_leads",JSON.stringify(a))}
+
+// CAPTURA AUTOMATICA - chamada pelo script instalado no site
+window.capturarLeadDoSite=function(dados){
+  var leads=getLeads();
+  var temp="morno";
+  if(dados.simulou||dados.renda)temp="quente";
+  if(!dados.tel&&!dados.email)temp="frio";
+  leads.unshift({
+    id:Date.now(),
+    nome:dados.nome||"Visitante sem nome",
+    tel:dados.tel||dados.whatsapp||"",
+    email:dados.email||"",
+    origem:dados.origem||"Site",
+    interesse:dados.interesse||dados.empreendimento||"A definir",
+    temp:temp,
+    status:"novo",
+    orcamento:dados.renda||dados.faixa||"",
+    obs:dados.obs||("Capturado automaticamente via "+(dados.formulario||"site")+" em "+window.location.pathname),
+    data:new Date().toLocaleDateString("pt-BR"),
+    hora:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),
+    hist:[{a:"Lead capturado automaticamente pelo site",d:"Formulario: "+(dados.formulario||"contato")+" | Pagina: "+window.location.pathname,t:new Date().toLocaleString("pt-BR")}]
+  });
+  saveLeads(leads);
+  if(typeof updateBadge==="function")updateBadge();
+  return true;
+};
+function getImoveis(){try{return JSON.parse(localStorage.getItem("crm_imoveis")||"[]")}catch{return[]}}
+function saveImoveis(a){localStorage.setItem("crm_imoveis",JSON.stringify(a))}
+
+// DEFAULT IMOVEIS
+var defaultIm=[
+  {id:1,nome:"Orla Central",loc:"Porto Maravilha, RJ",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.000",roi:"Potencial alto",urg:"Copa Cury - tabela ate 30/jul",tags:["Rooftop","Piscinas","1-3 dorms"],icon:"&#127754;"},
+  {id:2,nome:"Farol da Guanabara",loc:"Santo Cristo, RJ",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.000",roi:"Porto Maravilha",urg:"Copa Cury ativa",tags:["Rooftop","Zen","Studio-3"],icon:"&#128332;"},
+  {id:3,nome:"Arcos do Porto",loc:"Porto Maravilha, RJ",status:"Em Obras",badge:"ib-obras",preco:"Consultar",roi:"Em valorizacao",urg:"",tags:["Piscina","Studio-2"],icon:"&#127959;"},
+  {id:4,nome:"Parque Piedade - Aquarela",loc:"Piedade, RJ",status:"Lancamento",badge:"ib-mcmv",preco:"R$ 263.200",roi:"Subsidio R$47k",urg:"Subsidio de R$ 47.000",tags:["MCMV","2 dorms"],icon:"&#127807;"},
+  {id:5,nome:"Luzes do Rio - Lamparina",loc:"Sao Cristovao, RJ",status:"Lancamento",badge:"ib-lanc",preco:"R$ 359.000",roi:"Bike LEV inclusa",urg:"Copa Cury ativa",tags:["Bike LEV","1-2 dorms"],icon:"&#128161;"},
+  {id:6,nome:"Caminhos da Guanabara",loc:"Niteroi, RJ",status:"Em Obras",badge:"ib-obras",preco:"R$ 334.999",roi:"Vista Guanabara",urg:"",tags:["Rooftop","1-2 dorms"],icon:"&#9973;"},
+  {id:7,nome:"Nova Norte Samba",loc:"Iraja, RJ",status:"Pronto",badge:"ib-pronto",preco:"R$ 349.000",roi:"Entrega imediata",urg:"Tabela ate 30/jul",tags:["Garden","2 dorms"],icon:"&#127968;"},
+  {id:8,nome:"Nova Norte Ginga",loc:"Iraja, RJ",status:"Lancamento",badge:"ib-mcmv",preco:"R$ 270.118",roi:"12+ tipologias",urg:"Copa Cury ativa",tags:["MCMV","Multi"],icon:"&#127928;"}
+];
+if(!localStorage.getItem("crm_imoveis"))saveImoveis(defaultIm);
+
+// NAV
+function goPage(id){
+  document.querySelectorAll(".page").forEach(function(p){p.classList.remove("active")});
+  document.querySelectorAll(".sb-link").forEach(function(l){l.classList.remove("active")});
+  var pg=document.getElementById("page-"+id);
+  if(pg)pg.classList.add("active");
+  var titles={dashboard:"Dashboard",leads:"Leads",pipeline:"Pipeline",imoveis:"Empreendimentos",tabelas:"Tabelas de Precos","cadastro-imovel":"Cadastrar Imovel","novo-lead":"Novo Lead",discador:"Discador",metricas:"Metricas",campanhas:"Campanhas"};
+  document.getElementById("topbar-title").textContent=titles[id]||id;
+  document.querySelectorAll(".sb-link").forEach(function(l){if((l.getAttribute("onclick")||"").includes("'"+id+"'"))l.classList.add("active")});
+  document.getElementById("sidebar").classList.remove("open");
+  if(id==="dashboard")renderDash();
+  if(id==="leads")renderLeads();
+  if(id==="pipeline")renderPipeline();
+  if(id==="imoveis")renderImoveis();
+  if(id==="metricas")renderMetricas();
+  if(id==="discador")carregarFila();
+  if(id==="novo-lead")renderFormLead("form-lead-pag",false);
+}
+
+// FORM LEAD
+function imovelOpts(){return getImoveis().map(function(i){return"<option>"+i.nome+"</option>"}).join("")}
+function formHTML(){
+  return"<div class='form-row'><div class='form-group'><label class='form-label'>Nome completo *</label><input class='form-input' id='fl-nome' placeholder='Nome do cliente'/></div><div class='form-group'><label class='form-label'>WhatsApp *</label><input class='form-input' id='fl-tel' type='tel' placeholder='(21) 99999-9999'/></div></div><div class='form-row'><div class='form-group'><label class='form-label'>E-mail</label><input class='form-input' id='fl-email' type='email' placeholder='email@exemplo.com'/></div><div class='form-group'><label class='form-label'>Origem *</label><select class='form-select' id='fl-origem'><option>Meta Ads</option><option>Google Ads</option><option>Site</option><option>WhatsApp</option><option>Indicacao</option><option>Foto/Documento</option><option>Outro</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Empreendimento</label><select class='form-select' id='fl-inter'>"+imovelOpts()+"</select></div><div class='form-group'><label class='form-label'>Tipologia</label><select class='form-select' id='fl-tipo'><option>Studio</option><option>1 Quarto</option><option>2 Quartos</option><option>3 Quartos</option><option>A definir</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Temperatura</label><select class='form-select' id='fl-temp'><option value='frio'>Frio</option><option value='morno'>Morno</option><option value='quente'>Quente</option></select></div><div class='form-group'><label class='form-label'>Status</label><select class='form-select' id='fl-status'><option value='novo'>Novo</option><option value='contato'>Contatado</option><option value='proposta'>Proposta</option><option value='visita'>Visita</option><option value='fechado'>Fechado</option><option value='perdido'>Perdido</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Orcamento</label><select class='form-select' id='fl-orc'><option>Ate R$ 300k</option><option>R$ 300k-R$ 450k</option><option>R$ 450k-R$ 600k</option><option>R$ 600k-R$ 900k</option><option>Acima de R$ 900k</option></select></div><div class='form-group'><label class='form-label'>Observacoes</label><input class='form-input' id='fl-obs' placeholder='Notas sobre o lead...'/></div></div>";
+}
+function renderFormLead(tid,modal){
+  var el=document.getElementById(tid);if(!el)return;
+  el.innerHTML=formHTML()+"<div class='form-actions'>"+(modal?"<button class='btn-cancel' onclick='closeModal("modal-lead")'>Cancelar</button>":"<button class='btn-cancel' onclick='goPage("leads")'>Cancelar</button>")+"<button class='btn-submit' onclick='salvarLead("+modal+")'>Cadastrar Lead</button></div>";
+}
+function salvarLead(modal){
+  var nome=document.getElementById("fl-nome").value.trim();
+  var tel=document.getElementById("fl-tel").value.trim();
+  if(!nome||!tel){toast("Nome e WhatsApp sao obrigatorios");return}
+  var leads=getLeads();
+  leads.unshift({id:Date.now(),nome:nome,tel:tel,email:document.getElementById("fl-email").value,origem:document.getElementById("fl-origem").value,interesse:document.getElementById("fl-inter").value+" - "+document.getElementById("fl-tipo").value,temp:document.getElementById("fl-temp").value,status:document.getElementById("fl-status").value,orcamento:document.getElementById("fl-orc").value,obs:document.getElementById("fl-obs").value,data:new Date().toLocaleDateString("pt-BR"),hora:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),hist:[{a:"Lead cadastrado",d:"Origem: "+document.getElementById("fl-origem").value,t:new Date().toLocaleString("pt-BR")}]});
+  saveLeads(leads);updateBadge();toast("Lead cadastrado com sucesso!");
+  if(modal){closeModal("modal-lead");renderDash()}else goPage("leads");
+}
+
+// RENDER LEADS
+function renderLeads(){
+  var leads=getLeads();
+  var f=currentFilter;
+  var o=document.getElementById("filter-origem")?document.getElementById("filter-origem").value:"";
+  var data=leads.filter(function(l){return(f==="todos"||l.temp===f)&&(!o||l.origem===o)});
+  var tb=document.getElementById("leads-tbody");if(!tb)return;
+  if(!data.length){tb.innerHTML="<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128101;</div><p>Nenhum lead encontrado</p><small>Cadastre um novo lead</small></div></td></tr>";return}
+  tb.innerHTML=data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td style='font-size:12px'>"+(l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td style='font-size:11px;color:var(--muted)'>"+(l.data||"—")+" "+(l.hora||"")+"</td><td><div style='display:flex;gap:5px'><button class='btn-sm green' onclick='ligar("+l.id+")'>&#128222;</button><button class='btn-sm' onclick='verPerfil("+l.id+")'>&#128100;</button><button class='btn-sm' onclick='zap("+l.id+")'>&#128172;</button><button class='btn-sm red' onclick='del("+l.id+")'>&#128465;</button></div></td></tr>"}).join("");
+}
+function filtrar(t,el){document.querySelectorAll(".filter-btn").forEach(function(b){b.classList.remove("active")});el.classList.add("active");currentFilter=t;renderLeads()}
+function sLbl(s){return{novo:"Novo",contato:"Contatado",proposta:"Proposta",visita:"Visita",fechado:"Fechado",perdido:"Perdido"}[s]||"Novo"}
+function searchLeads(v){
+  if(!v.trim()){renderLeads();return}
+  var data=getLeads().filter(function(l){return l.nome.toLowerCase().includes(v.toLowerCase())||l.tel.includes(v)||(l.interesse||"").toLowerCase().includes(v.toLowerCase())});
+  goPage("leads");
+  var tb=document.getElementById("leads-tbody");if(!tb)return;
+  tb.innerHTML=data.length?data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td>"+( l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td>"+(l.data||"—")+"</td><td><button class='btn-sm' onclick='verPerfil("+l.id+")'>Ver</button></td></tr>"}).join(""):"<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128269;</div><p>Sem resultados para ""+v+""</p></div></td></tr>";
+}
+
+// LEAD ACTIONS
+function ligar(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;toast("Ligando para "+l.nome+"...");var ls=getLeads();var i=ls.findIndex(function(x){return x.id===id});if(i>-1){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Ligacao realizada",d:"",t:new Date().toLocaleString("pt-BR")});saveLeads(ls)}}
+function zap(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;var tel=l.tel.replace(/\D/g,"");var msg=encodeURIComponent("Ola "+l.nome.split(" ")[0]+"! Aqui e o Paulo Cotrim, da Cury. Podemos conversar sobre "+l.interesse+"?");window.open("https://wa.me/55"+tel+"?text="+msg,"_blank")}
+function del(id){if(!confirm("Deletar este lead?"))return;saveLeads(getLeads().filter(function(x){return x.id!==id}));renderLeads();updateBadge();toast("Lead removido")}
+function verPerfil(id){
+  var l=getLeads().find(function(x){return x.id===id});if(!l)return;
+  document.getElementById("p-name").textContent=l.nome;
+  document.getElementById("p-sub").textContent=l.interesse||"—";
+  var hist=(l.hist||[]).map(function(h){return"<div class='tl-item'><div class='tl-dot act-dot gold'>&#11088;</div><div><div class='tl-action'>"+h.a+"</div><div class='tl-detail'>"+(h.d||"")+" &middot; "+h.t+"</div></div></div>"}).join("");
+  document.getElementById("modal-profile-body").innerHTML="<div style='display:flex;gap:8px;margin-bottom:16px'><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><span class='origin-tag'>"+(l.origem||"—")+"</span><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></div><div style='background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:16px'><div class='lp-row'><span class='lp-key'>WhatsApp</span><span>"+l.tel+"</span></div><div class='lp-row'><span class='lp-key'>E-mail</span><span>"+(l.email||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Orcamento</span><span>"+(l.orcamento||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Cadastro</span><span>"+(l.data||"—")+" "+(l.hora||"")+"</span></div>"+(l.obs?"<div class='lp-row'><span class='lp-key'>Obs.</span><span>"+l.obs+"</span></div>":"")+"</div><div style='font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px'>Historico</div><div>"+(hist||"<div style='font-size:13px;color:var(--muted)'>Sem registros</div>")+"</div><div style='display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9'><button class='btn-submit' style='flex:1' onclick='ligar("+l.id+");closeModal("modal-profile")'>&#128222; Ligar</button><button class='btn-sm green' onclick='zap("+l.id+")'>&#128172; WhatsApp</button><button class='btn-sm' onclick='editStatus("+l.id+")'>&#9998; Status</button></div>";
+  openModal("modal-profile");
+}
+function editStatus(id){
+  var ls=getLeads();var i=ls.findIndex(function(x){return x.id===id});if(i<0)return;
+  var s=prompt("Novo status:
+novo / contato / proposta / visita / fechado / perdido",ls[i].status||"novo");
+  if(!s)return;
+  ls[i].status=s;ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Status: "+s,d:"",t:new Date().toLocaleString("pt-BR")});
+  saveLeads(ls);closeModal("modal-profile");renderLeads();toast("Status atualizado!");
+}
+function exportCSV(){
+  var ls=getLeads();if(!ls.length){toast("Nenhum lead para exportar");return}
+  var rows=[["Nome","Telefone","Email","Origem","Interesse","Temperatura","Status","Orcamento","Data"].join(",")];
+  ls.forEach(function(l){rows.push([l.nome,l.tel,l.email||"",l.origem||"",l.interesse||"",l.temp,l.status||"",l.orcamento||"",l.data||""].map(function(v){return"""+v+"""}).join(","))});
+  var a=document.createElement("a");a.href="data:text/csv;charset=utf-8,﻿"+encodeURIComponent(rows.join("
+"));a.download="leads-"+new Date().toLocaleDateString("pt-BR").replace(/\//g,"-")+".csv";a.click();toast("CSV exportado!");
+}
+
+// DASHBOARD
+function renderDash(){
+  var ls=getLeads();
+  var tot=ls.length,qt=ls.filter(function(l){return l.temp==="quente"}).length,mn=ls.filter(function(l){return l.temp==="morno"}).length,pr=ls.filter(function(l){return l.status==="proposta"}).length,fc=ls.filter(function(l){return l.status==="fechado"}).length,ct=ls.filter(function(l){return l.status==="contato"}).length;
+  document.getElementById("kpi-total").textContent=tot;
+  document.getElementById("kpi-quentes").textContent=qt;
+  document.getElementById("kpi-propostas").textContent=pr;
+  document.getElementById("kpi-fechados").textContent=fc;
+  document.getElementById("kpi-sub1").textContent=qt>0?qt+" lead"+(qt!==1?"s":"")+" quente"+(qt!==1?"s":""):"Sem quentes ainda";
+  document.getElementById("dash-subtitle").textContent=tot>0?"Voce tem "+qt+" lead"+(qt!==1?"s":"")+" quente"+(qt!==1?"s":"")+" aguardando contato.":"Cadastre seu primeiro lead para comecar.";
+  var steps=[{l:"Captados",v:tot,c:"linear-gradient(90deg,#060f1e,#0d2040)"},{l:"Contatados",v:ct+pr+fc,c:"linear-gradient(90deg,#1e40af,#3b82f6)"},{l:"Qualificados",v:qt+mn,c:"linear-gradient(90deg,#c9993a,#e8b84b)"},{l:"Propostas",v:pr,c:"linear-gradient(90deg,#7c3aed,#a78bfa)"},{l:"Fechados",v:fc,c:"linear-gradient(90deg,#16a34a,#22c55e)"}];
+  document.getElementById("funil-body").innerHTML=steps.map(function(s){return"<div class='funnel-row'><div class='funnel-label'>"+s.l+"</div><div class='funnel-bar-wrap'><div class='funnel-bar' style='width:"+( s.v&&tot?Math.max(6,Math.round(s.v/tot*100)):0)+"%;background:"+s.c+"'>"+s.v+"</div></div><div class='funnel-count'>"+s.v+"</div></div>"}).join("")+"<div style='margin-top:14px;padding-top:12px;border-top:1px solid #f1f5f9;display:flex;gap:20px'><div><div style='font-size:20px;font-weight:900;color:var(--navy3)'>"+(tot?Math.round(fc/tot*100):0)+"%</div><div style='font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em'>Taxa de conversao</div></div><div><div style='font-size:20px;font-weight:900;color:var(--gold)'>"+pr+"</div><div style='font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em'>Propostas abertas</div></div></div>";
+  var rec=ls.slice(0,5);
+  document.getElementById("atividade-body").innerHTML=rec.length?rec.map(function(l){return"<div class='act-item'><div class='act-dot "+(l.temp==="quente"?"gold":l.temp==="frio"?"blue":"green")+"'>"+(l.temp==="quente"?"&#128293;":l.temp==="frio"?"&#10052;":"&#9898;")+"</div><div><div class='act-text'><strong>"+l.nome+"</strong> &mdash; "+(l.origem||"Manual")+"</div><div class='act-time'>"+(l.data||"—")+" "+(l.hora||"")+" &middot; "+(l.interesse||"—")+"</div></div></div>"}).join(""):"<div class='empty-state' style='padding:24px'><div class='icon'>&#128203;</div><p>Nenhuma atividade ainda</p></div>";
+  var hot=ls.filter(function(l){return l.temp==="quente"}).slice(0,5);
+  document.getElementById("dash-quentes").innerHTML=hot.length?hot.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div></td><td style='font-size:12px'>"+l.tel+"</td><td style='font-size:12px'>"+(l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></td><td><button class='btn-sm green' onclick='ligar("+l.id+")'>&#128222; Ligar</button></td></tr>"}).join(""):"<tr><td colspan='6'><div class='empty-state' style='padding:24px'><div class='icon'>&#128293;</div><p>Nenhum lead quente ainda</p></div></td></tr>";
+}
+
+// PIPELINE
+function renderPipeline(){
+  var ls=getLeads();
+  var etapas=[{k:"novo",l:"Novo",c:"novo"},{k:"contato",l:"Contatado",c:"contato"},{k:"proposta",l:"Proposta",c:"proposta"},{k:"visita",l:"Visita",c:"visita"},{k:"fechado",l:"Fechado",c:"fechado"}];
+  document.getElementById("pipeline-board").innerHTML=etapas.map(function(e){var cols=ls.filter(function(l){return(l.status||"novo")===e.k});return"<div class='pipe-col'><div class='pipe-col-header "+e.c+"'><span class='pipe-col-name'>"+e.l+"</span><span class='pipe-count'>"+cols.length+"</span></div>"+(cols.length?cols.map(function(l){return"<div class='pipe-card' onclick='verPerfil("+l.id+")'><div class='pipe-card-name'>"+l.nome+"</div><div class='pipe-card-empr'>"+(l.interesse||"—")+"</div><span class='temp-badge temp-"+l.temp+"' style='margin-bottom:6px;display:inline-flex'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><div class='pipe-card-foot'><span style='font-size:11px;font-weight:800;color:var(--navy3)'>"+(l.orcamento||"—")+"</span><span style='font-size:10px;color:var(--muted)'>"+(l.data||"")+"</span></div></div>"}).join(""):"<div style='text-align:center;padding:20px;color:var(--muted);font-size:12px'>Nenhum lead</div>")+"</div>"}).join("");
+}
+
+// IMOVEIS
+function renderImoveis(){
+  var ims=getImoveis();var grid=document.getElementById("imovel-grid");if(!grid)return;
+  if(!ims.length){grid.innerHTML="<div class='empty-state'><div class='icon'>&#127970;</div><p>Nenhum imovel cadastrado</p></div>";return}
+  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'><span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span><div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage("tabelas")'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast("Enviando por WhatsApp...")'>&#128228; Enviar</button></div></div></div>"}).join("");
+}
+function salvarImovel(){
+  var nome=document.getElementById("ci-nome").value.trim();if(!nome){toast("Nome obrigatorio");return}
+  var ims=getImoveis();var st=document.getElementById("ci-status").value;
+  ims.push({id:Date.now(),nome:nome,construtora:document.getElementById("ci-const").value,loc:document.getElementById("ci-loc").value,status:st,badge:st==="Lancamento"?"ib-lanc":st==="Em obras"?"ib-obras":"ib-pronto",preco:document.getElementById("ci-preco").value,roi:document.getElementById("ci-roi").value,urg:document.getElementById("ci-urg").value,tags:(document.getElementById("ci-tags").value||"").split(","),icon:document.getElementById("ci-icon").value||"&#127970;"});
+  saveImoveis(ims);toast("Empreendimento cadastrado!");goPage("imoveis");
+}
+
+// METRICAS
+function renderMetricas(){
+  var ls=getLeads();var tot=ls.length,pr=ls.filter(function(l){return l.status==="proposta"}).length,fc=ls.filter(function(l){return l.status==="fechado"}).length;
+  document.getElementById("m-total").textContent=tot;document.getElementById("m-taxa").textContent=(tot?Math.round(fc/tot*100):0)+"%";document.getElementById("m-prop").textContent=pr;document.getElementById("m-fech").textContent=fc;
+  var og={};ls.forEach(function(l){var o=l.origem||"Outro";og[o]=(og[o]||0)+1});
+  document.getElementById("chart-origem").innerHTML=Object.entries(og).sort(function(a,b){return b[1]-a[1]}).map(function(e){return"<div style='display:flex;align-items:center;justify-content:space-between;margin-bottom:10px'><span style='font-size:13px;font-weight:600'>"+e[0]+"</span><div style='display:flex;align-items:center;gap:8px'><div style='width:100px;height:8px;background:#f1f5f9;border-radius:4px'><div style='width:"+(tot?Math.round(e[1]/tot*100):0)+"%;height:100%;background:linear-gradient(90deg,#c9993a,#e8b84b);border-radius:4px'></div></div><span style='font-size:12px;font-weight:700;color:var(--navy3)'>"+e[1]+"</span></div></div>"}).join("")||"<div class='empty-state' style='padding:20px'><div class='icon'>&#128202;</div><p>Sem dados ainda</p></div>";
+  var temps=[{l:"&#128293; Quentes",v:ls.filter(function(l){return l.temp==="quente"}).length,c:"linear-gradient(90deg,#dc2626,#ef4444)"},{l:"&#9898; Mornos",v:ls.filter(function(l){return l.temp==="morno"}).length,c:"linear-gradient(90deg,#ca8a04,#eab308)"},{l:"&#10052; Frios",v:ls.filter(function(l){return l.temp==="frio"}).length,c:"linear-gradient(90deg,#1e40af,#3b82f6)"}];
+  document.getElementById("chart-temp").innerHTML=temps.map(function(t){return"<div style='display:flex;align-items:center;justify-content:space-between;margin-bottom:10px'><span style='font-size:13px;font-weight:600'>"+t.l+"</span><div style='display:flex;align-items:center;gap:8px'><div style='width:100px;height:8px;background:#f1f5f9;border-radius:4px'><div style='width:"+(tot?Math.round(t.v/tot*100):0)+"%;height:100%;background:"+t.c+";border-radius:4px'></div></div><span style='font-size:12px;font-weight:700;color:var(--navy3)'>"+t.v+"</span></div></div>"}).join("");
+}
+
+// DISCADOR
+function carregarFila(){var v=document.getElementById("disc-lista");if(!v)return;filaAtual=getLeads().filter(function(l){return l.temp===v.value});filaIdx=0;mostrarProx()}
+function mostrarProx(){var l=filaAtual[filaIdx];document.getElementById("disc-nome").textContent=l?l.nome:"Fila vazia";document.getElementById("disc-fone").textContent=l?l.tel+" - "+(l.interesse||"—"):""}
+function ligarProximo(){var l=filaAtual[filaIdx];if(!l){toast("Nenhum lead na fila");return}toast("Ligando para "+l.nome+"...");ligar(l.id)}
+function regStatus(s){var l=filaAtual[filaIdx];if(!l)return;var ls=getLeads();var i=ls.findIndex(function(x){return x.id===l.id});if(i>-1){if(s==="nao-atendeu"){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Nao atendeu",d:"",t:new Date().toLocaleString("pt-BR")});toast("Nao atendeu - registrado")}else{ls[i].status=s;toast("Status: "+s)};saveLeads(ls)}filaIdx++;mostrarProx()}
+function zapProximo(){var l=filaAtual[filaIdx];if(!l){toast("Nenhum lead na fila");return}zap(l.id);filaIdx++;mostrarProx()}
+
+// BADGE
+function updateBadge(){document.getElementById("badge-leads").textContent=getLeads().length}
+
+// MODAL
+function openModal(id){document.getElementById(id).classList.add("open");if(id==="modal-lead")renderFormLead("modal-lead-body",true)}
+function closeModal(id){document.getElementById(id).classList.remove("open")}
+document.querySelectorAll(".modal-bg").forEach(function(m){m.addEventListener("click",function(e){if(e.target===m)m.classList.remove("open")})});
+
+// TOAST
+var toastTimer;
+function toast(msg){clearTimeout(toastTimer);var t=document.getElementById("toast");document.getElementById("toast-msg").textContent=msg;t.classList.add("show");toastTimer=setTimeout(function(){t.classList.remove("show")},3200)}
+
+// INIT
+updateBadge();renderDash();
+</script>
+</body>
+</html>
