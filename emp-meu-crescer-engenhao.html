@@ -50,8 +50,15 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.85);backdr
 .hero-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:14.5px;color:rgba(255,255,255,.8);margin-bottom:30px}
 .hero-meta b{color:#fff;font-weight:600}
 .hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
-.btn-wa-hero{display:inline-flex;align-items:center;gap:9px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);color:#fff;padding:14px 24px;border-radius:12px;font-size:14px;font-weight:600;backdrop-filter:blur(8px);transition:.2s}
-.btn-wa-hero:hover{background:rgba(255,255,255,.2)}
+.btn-wa-hero{display:inline-flex;align-items:center;gap:9px;background:var(--gold);border:1px solid rgba(255,255,255,.3);color:#fff;padding:14px 26px;border-radius:12px;font-size:14.5px;font-weight:700;box-shadow:0 8px 24px rgba(184,135,58,.35);transition:.2s}
+.btn-wa-hero:hover{background:#a5772e;transform:translateY(-2px)}
+.related-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.related-card{display:flex;gap:12px;align-items:center;background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px;transition:.18s}
+.related-card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.related-card img{width:64px;height:64px;border-radius:9px;object-fit:cover;flex-shrink:0;background:var(--mist)}
+.related-card .rc-name{font-size:14px;font-weight:600;color:var(--ink)}
+.related-card .rc-loc{font-size:12px;color:var(--gray);margin-top:2px}
+@media(max-width:640px){.related-grid{grid-template-columns:1fr}}
 .section{padding:64px 0}
 .section-mist{background:var(--mist)}
 .eyebrow{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
@@ -156,6 +163,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <a class="btn-wa-hero" href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%21%20Vi%20sua%20an%C3%A1lise%20do%20Meu%20Crescer%20Engenh%C3%A3o%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es."><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Falar com Paulo</a>
     </div>
     <div class="trust-bar">
+      <span><b>★★★★★ 5.0</b> (430 clientes)</span>
       <span><b>18 anos</b> de mercado</span>
       <span><b>CRECI-RJ 77677-F</b></span>
       <span><b>700+</b> famílias atendidas</span>
@@ -255,6 +263,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
   </div>
 </section>
 
+
 <section class="section section-mist">
   <div class="wrap" style="max-width:800px">
     <div class="eyebrow reveal">Perguntas frequentes</div>
@@ -290,4 +299,5 @@ function tf(b){var a=b.nextElementSibling,o=b.classList.contains('open');documen
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 </script>
-</body></html>
+</body>
+</html>

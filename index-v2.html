@@ -40,8 +40,13 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.85);backdr
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:16px;letter-spacing:-.02em;color:var(--ink)}
 .brand-mark{width:30px;height:30px;border-radius:8px;background:var(--petrol);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:600;font-size:15px}
 .brand small{display:block;font-size:10px;font-weight:500;color:var(--gray);letter-spacing:.02em;margin-top:-2px}
-.nav-links{display:flex;align-items:center;gap:4px}
-.nav-links a{padding:8px 14px;font-size:13.5px;font-weight:500;color:var(--gray);border-radius:8px;transition:all .18s}
+.nav-links{display:flex;align-items:center;gap:6px}
+.nav-links a{padding:9px 15px;font-size:13.5px;font-weight:500;color:var(--gray);border-radius:8px;transition:all .18s;position:relative}
+.nav-links a:hover{color:var(--ink);background:var(--mist)}
+.nav-links a.nav-highlight{color:var(--gold);font-weight:600}
+.nav-links a.nav-highlight:hover{background:var(--petrol-soft)}
+.nav-dot{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--gold);margin-left:6px;vertical-align:middle;animation:navPulse 2s ease-in-out infinite}
+@keyframes navPulse{0%,100%{opacity:1}50%{opacity:.35}}
 .nav-links a:hover{color:var(--ink);background:var(--mist)}
 .nav-cta{display:inline-flex;align-items:center;gap:7px;background:var(--ink);color:#fff!important;padding:9px 16px!important;border-radius:9px;font-weight:600!important}
 .nav-cta:hover{background:var(--ink2)!important}
@@ -127,9 +132,29 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.85);backdr
 @media(max-width:900px){.map-shell{grid-template-columns:1fr;height:auto}#map{height:400px}.map-panel{border-left:none;border-top:1px solid var(--line);max-height:520px}}
 
 /* leaflet marker */
-.pin{background:var(--petrol);color:#fff;font-size:12px;font-weight:600;padding:5px 10px;border-radius:20px;white-space:nowrap;box-shadow:0 2px 8px rgba(15,46,54,.25);border:2px solid #fff;cursor:pointer;transition:transform .15s}
-.pin:hover{transform:scale(1.08)}
-.pin.sel{background:var(--gold);z-index:1000!important}
+.pin{width:13px;height:13px;border-radius:50%;background:var(--petrol);border:2.5px solid #fff;box-shadow:0 1px 4px rgba(15,46,54,.35),0 0 0 1px rgba(15,46,54,.1);cursor:pointer;transition:transform .15s ease}
+.pin:hover{transform:scale(1.5)}
+.pin.sel{background:var(--gold);transform:scale(1.5);z-index:1000!important}
+.pin-preview{background:#fff;border-radius:12px;box-shadow:0 8px 30px rgba(15,46,54,.18);padding:0;overflow:hidden;border:none;width:180px}
+.pin-preview::before{display:none}
+.leaflet-tooltip.pin-preview{opacity:0;transform:translateY(4px);transition:opacity .15s ease,transform .15s ease}
+.leaflet-tooltip.pin-preview.pin-preview-in{opacity:1;transform:translateY(0)}
+.pp-img{width:100%;height:96px;object-fit:cover;display:block;background:var(--mist)}
+.pp-body{padding:10px 12px}
+.pp-name{font-size:12.5px;font-weight:700;color:var(--ink);line-height:1.3;margin-bottom:2px}
+.pp-loc{font-size:11px;color:var(--gray)}
+.pp-price{font-size:11.5px;font-weight:600;color:var(--gold);margin-top:4px}
+
+/* CONSULTORIA */
+.edu-acc{max-width:820px;margin:0 auto}
+.edu-item{border-bottom:1px solid var(--line)}
+.edu-item summary{list-style:none;cursor:pointer;padding:20px 4px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:15.5px;font-weight:600;color:var(--ink)}
+.edu-item summary::-webkit-details-marker{display:none}
+.edu-item summary .edu-plus{width:22px;height:22px;border-radius:50%;background:var(--petrol-soft);color:var(--petrol);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .2s}
+.edu-item[open] summary .edu-plus{transform:rotate(45deg)}
+.edu-item p{padding:0 4px 20px;font-size:14px;color:var(--gray);line-height:1.65;max-width:66ch}
+.edu-item p b{color:var(--ink);font-weight:600}
+.edu-note{font-size:12.5px;color:var(--gray);text-align:center;margin-top:20px}
 
 /* SOLUTIONS */
 .sol-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
@@ -166,9 +191,9 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.85);backdr
 .brand-chip:hover{color:var(--ink);border-color:var(--ink)}
 
 /* AUTHORITY strip */
-.auth{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
-.auth-img{border-radius:var(--r);overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
-.auth-img img{width:100%;height:100%;object-fit:cover}
+.auth{display:grid;grid-template-columns:.85fr 1fr;gap:48px;align-items:center}
+.auth-img{border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;max-width:340px;background:var(--mist);box-shadow:var(--shadow)}
+.auth-img img{width:100%;height:100%;object-fit:cover;object-position:center 12%}
 .auth h2{font-size:clamp(24px,3.2vw,34px);line-height:1.15;letter-spacing:-.02em;margin-bottom:18px;color:var(--ink)}
 .auth p{font-size:15.5px;color:var(--gray);line-height:1.65;margin-bottom:16px}
 .auth-sign{display:flex;align-items:center;gap:12px;margin-top:24px}
@@ -347,6 +372,48 @@ footer{border-top:1px solid var(--line);padding:48px 0 32px}
   </div>
 </section>
 
+<!-- CONSULTORIA DIGITAL -->
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Consultoria digital</div>
+      <h2 class="sec-title display">Antes de olhar imóveis, entenda o processo</h2>
+      <p class="sec-sub">Respostas diretas para as dúvidas mais comuns de quem está pensando em comprar. Informativo e neutro — sua situação pode ter particularidades, então confirme sempre com uma análise pessoal.</p>
+    </div>
+    <div class="edu-acc reveal">
+      <details class="edu-item">
+        <summary>Quando eu já posso comprar um imóvel novo?<span class="edu-plus"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Depende da sua renda comprovada, do valor de entrada disponível e do seu momento de vida. Não existe uma regra única — por isso a primeira conversa costuma ser sobre entender seu perfil antes de indicar qualquer imóvel.</p>
+      </details>
+      <details class="edu-item">
+        <summary>Como posso usar o FGTS no financiamento?<span class="edu-plus"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>O FGTS pode, dependendo do seu enquadramento, ser usado na entrada, na amortização do saldo devedor ou para reduzir prazo ou parcela — sujeito às regras vigentes da Caixa e ao seu histórico de contribuição. Vale confirmar o saldo disponível antes de simular.</p>
+      </details>
+      <details class="edu-item">
+        <summary>O que é o Minha Casa Minha Vida (MCMV)?<span class="edu-plus"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>É o programa habitacional que pode oferecer subsídio (parte do valor do imóvel abatida pelo governo) e juros reduzidos para quem se enquadra nas faixas de renda do programa. A elegibilidade e o valor do subsídio dependem da renda familiar e da faixa vigente no momento da contratação.</p>
+      </details>
+      <details class="edu-item">
+        <summary>Como funciona o financiamento na prática?<span class="edu-plus"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Em linhas gerais: avaliação inicial do seu perfil, envio de documentos, análise de crédito pelo banco (normalmente Caixa, no caso de MCMV/SBPE) e, se aprovado, contratação e assinatura. O prazo de resposta varia por banco e pela complexidade da documentação enviada.</p>
+      </details>
+      <details class="edu-item">
+        <summary>Quais documentos normalmente são pedidos para iniciar uma análise?<span class="edu-plus"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Em geral: <b>RG ou CNH, CPF, comprovante de endereço, certidão de nascimento ou casamento, comprovante de renda</b> e, se for usar, <b>extrato do FGTS</b>. Bancos podem pedir documentos adicionais conforme o seu perfil (autônomo, MEI, casado em regime de comunhão, etc.).</p>
+      </details>
+      <details class="edu-item">
+        <summary>O que mais pesa na aprovação de crédito?<span class="edu-plus"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>De forma geral, os bancos avaliam renda comprovada, comprometimento de renda com outras dívidas, histórico de crédito (restrições em nome do comprador) e a relação entre valor financiado e valor do imóvel. Cada instituição tem seus próprios critérios internos.</p>
+      </details>
+      <details class="edu-item">
+        <summary>Como comparar empreendimentos antes de decidir?<span class="edu-plus"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg></span></summary>
+        <p>Olhe além do preço de tabela: construtora, prazo de entrega, localização, valorização esperada da região e o que está incluso (lazer, vagas, acabamento). O <a href="#mapa" style="color:var(--gold);font-weight:600">mapa comparativo abaixo</a> reúne isso lado a lado para os principais lançamentos do Rio.</p>
+      </details>
+    </div>
+    <p class="edu-note">Conteúdo informativo e geral — não substitui uma análise de crédito ou aconselhamento financeiro individual. <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo!%20Quero%20entender%20melhor%20o%20processo%20de%20compra." style="color:var(--gold);font-weight:600">Fale com Paulo</a> para uma leitura do seu caso específico.</p>
+  </div>
+</section>
+
 <!-- CATALOG -->
 <section class="section" id="empreendimentos">
   <div class="wrap">
@@ -469,14 +536,16 @@ function initMap(){
   map=L.map("map",{scrollWheelZoom:false,zoomControl:true}).setView([-22.9,-43.2],11);
   L.tileLayer("https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",{maxZoom:19,attribution:"©OpenStreetMap ©CARTO"}).addTo(map);
   EMP.forEach(function(e,i){
-    var icon=L.divIcon({className:"",html:'<div class="pin" style="background:'+e.cor+'">'+shortPrice(e)+'</div>',iconSize:[1,1]});
+    var icon=L.divIcon({className:"",html:'<div class="pin"></div>',iconSize:[13,13]});
     var m=L.marker([e.lat,e.lng],{icon:icon}).addTo(map);
+    var previewHtml='<img class="pp-img" src="'+e.img+'" alt="" onerror="this.style.display=\'none\'"/><div class="pp-body"><div class="pp-name">'+e.nome+'</div><div class="pp-loc">'+e.bairro+'</div><div class="pp-price">'+e.preco+'</div></div>';
+    m.bindTooltip(previewHtml,{className:"pin-preview",direction:"top",offset:[0,-8],opacity:1,sticky:false});
+    m.on("tooltipopen",function(ev){setTimeout(function(){var el=ev.tooltip.getElement();if(el)el.classList.add("pin-preview-in");},10);});
     m.on("click",function(){openDetail(i);highlightPin(i);});
     markers[i]=m;
   });
   fitVisible();
 }
-function shortPrice(e){if(e.preco&&e.preco.indexOf("R$")>=0){return e.preco.replace(".000","k").replace("R$ ","R$");}return"Ver";}
 function highlightPin(i){document.querySelectorAll(".pin").forEach(function(p){p.classList.remove("sel");});var m=markers[i];if(m){var el=m.getElement();if(el){var p=el.querySelector(".pin");if(p)p.classList.add("sel");}}}
 function fitVisible(){
   var g=[];EMP.forEach(function(e,i){if(visible(e)&&markers[i])g.push(markers[i].getLatLng());});
