@@ -9,6 +9,7 @@
 <link rel="canonical" href="https://paulocotrim.com.br/emp-beon-porto.html"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "Beon Porto Residencial", "address": {"@type": "PostalAddress", "addressLocality": "Porto Maravilha · Centro", "addressRegion": "RJ", "addressCountry": "BR"}, "review": {"@type": "Review", "reviewRating": {"@type": "Rating", "ratingValue": "8.1", "bestRating": "10"}, "author": {"@type": "Person", "name": "Paulo Cotrim"}}}</script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--ink2:#12252b;--gold:#b8873a;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--maxw:1100px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06)}
@@ -29,7 +30,17 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.85);backdr
 .nav-links a{padding:7px 13px;font-size:13px;font-weight:500;color:var(--gray);border-radius:8px;transition:.16s}
 .nav-links a:hover{color:var(--ink);background:var(--mist)}
 .nav-cta{background:var(--ink);color:#fff!important;font-weight:600!important}
-@media(max-width:820px){.nav-links a:not(.nav-cta){display:none}}
+.burger{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:6px}
+@media(max-width:820px){.nav-links a:not(.nav-cta){display:none}.burger{display:block}}
+#mnav a{display:block;padding:10px 0;color:var(--gray);font-size:14px}
+.trust-bar{display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.75);margin-top:4px}
+.trust-bar b{color:#fff;font-weight:700}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:700;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(15,46,54,.12);display:none;gap:10px;padding:10px 14px;align-items:center}
+.sticky-cta .txt{flex:1;min-width:0}
+.sticky-cta .txt b{display:block;font-size:13px;color:var(--ink)}
+.sticky-cta .txt span{font-size:11.5px;color:var(--gray)}
+.sticky-cta a{background:var(--gold);color:#fff;padding:11px 18px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap}
+@media(max-width:760px){.sticky-cta{display:flex}body{padding-bottom:70px}}
 .hero{position:relative;min-height:82vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden}
 .hero-bg{position:absolute;inset:0;background:url('emp-img/beon-porto.jpg') center/cover;transform:scale(1.05)}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,20,24,.92) 0%,rgba(9,20,24,.4) 45%,rgba(9,20,24,.55) 100%)}
@@ -118,7 +129,17 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <a href="investidor.html">Investidor</a>
     <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%21%20Vi%20sua%20an%C3%A1lise%20do%20Beon%20Porto%20Residencial%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es." class="nav-links nav-cta" style="padding:8px 15px;border-radius:9px">Falar comigo</a>
   </nav>
-</div></header>
+  <button class="burger" onclick="document.getElementById('mnav').style.display=document.getElementById('mnav').style.display==='block'?'none':'block'" aria-label="Menu">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</div>
+<div id="mnav" style="display:none;border-top:1px solid var(--line);padding:12px 20px;background:#fff">
+  <a href="index-v2.html#mapa">Mapa</a>
+  <a href="index-v2.html#empreendimentos">Empreendimentos</a>
+  <a href="investidor.html">Investidor</a>
+  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%21%20Vi%20sua%20an%C3%A1lise%20do%20Beon%20Porto%20Residencial%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es.">Falar comigo</a>
+</div>
+</header>
 
 <section class="hero">
   <div class="hero-bg"></div><div class="hero-shade"></div>
@@ -134,13 +155,18 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <div class="hero-actions">
       <a class="btn-wa-hero" href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%21%20Vi%20sua%20an%C3%A1lise%20do%20Beon%20Porto%20Residencial%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es."><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Falar com Paulo</a>
     </div>
+    <div class="trust-bar">
+      <span><b>18 anos</b> de mercado</span>
+      <span><b>CRECI-RJ 77677-F</b></span>
+      <span><b>700+</b> famílias atendidas</span>
+    </div>
   </div>
 </section>
 
 <section class="section">
   <div class="wrap">
     <div class="analise reveal">
-      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim"/></div>
+      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
       <div>
         <div class="eyebrow">A análise de Paulo Cotrim</div>
         <p class="analise-quote">O que chama atenção no Beon Porto é a proposta de plantas inteligentes: dois quartos pelo custo de um studio comum, com unidades entre 32m² e 39m². Isso é relevante porque no Porto Maravilha, região que segue em processo de reurbanização e valorização, o metro quadrado tende a subir — comprar uma planta compacta e bem resolvida aqui pode ser uma entrada de menor ticket numa das áreas mais estratégicas do Centro, com fácil acesso à Av. Brasil e à Linha Vermelha.</p>
@@ -257,6 +283,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 </div></footer>
 
 <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%21%20Vi%20sua%20an%C3%A1lise%20do%20Beon%20Porto%20Residencial%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es." class="wafloat" aria-label="WhatsApp"><svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></a>
+
+<div class="sticky-cta">
+  <div class="txt"><b>Fale com Paulo agora</b><span>Tabela oficial e disponibilidade do Beon Porto Residencial</span></div>
+  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%21%20Vi%20sua%20an%C3%A1lise%20do%20Beon%20Porto%20Residencial%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es.">WhatsApp</a>
+</div>
 
 <script>
 function tf(b){var a=b.nextElementSibling,o=b.classList.contains('open');document.querySelectorAll('.faq-q').forEach(function(x){x.classList.remove('open');x.nextElementSibling.classList.remove('open')});if(!o){b.classList.add('open');a.classList.add('open')}}
