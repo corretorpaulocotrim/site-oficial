@@ -4,103 +4,108 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Simulador Financiamento — Paulo Cotrim | Cury RJ</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'Inter',system-ui,sans-serif;background:#f1f5f9;color:#1e293b;min-height:100vh}
+body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;min-height:100vh;-webkit-font-smoothing:antialiased}
 /* HEADER */
-.sim-hdr{background:#0d2040;padding:14px 32px;display:flex;align-items:center;justify-content:space-between}
+.sim-hdr{background:rgba(15,46,54,.92);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(255,255,255,.06),0 12px 30px -18px rgba(0,0,0,.4)}
 .sim-hdr-logo img{height:44px;width:auto;display:block}.sim-hdr-logo{color:#fff;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;line-height:1.2}
 .sim-hdr-logo small{font-size:10px;opacity:.6;font-weight:500;letter-spacing:.08em;display:block}
 .sim-hdr-btns{display:flex;gap:10px}
-.btn-back{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
+.btn-back{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background-color .3s cubic-bezier(.16,1,.3,1)}
 .btn-back:hover{background:rgba(255,255,255,.18)}
-.btn-wa-s{background:#16a34a;color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn-wa-s{background:#b8873a;color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(184,135,58,.3);transition:background-color .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}
+.btn-wa-s:hover{background:#a5772e;transform:translateY(-1px)}
 /* HERO BAR */
-.sim-hero{background:linear-gradient(105deg,#0d2040 60%,#1e40af 100%);color:#fff;padding:32px;text-align:center}
-.sim-hero h1{font-size:clamp(22px,3vw,34px);font-weight:800;margin-bottom:8px}
+.sim-hero{background:linear-gradient(105deg,#0f2e36 55%,#12252b 100%);color:#fff;padding:32px;text-align:center}
+.sim-hero h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(22px,3vw,34px);font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
 .sim-hero p{font-size:14px;opacity:.8;max-width:540px;margin:0 auto}
 .sim-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px}
 .chip{background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px}
 /* APP WRAP */
 .app-wrap{max-width:960px;margin:32px auto;padding:0 16px 48px}
-.sim-card{background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.08);overflow:hidden}
+.sim-card{background:#fff;border-radius:16px;box-shadow:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);overflow:hidden}
 /* simulator styles */
-.hdr2{background:#0F2544;padding:1.25rem 1.5rem 1rem}
+.hdr2{background:var(--navy);padding:1.25rem 1.5rem 1rem}
 .hdr2-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .hdr2-left{display:flex;align-items:center;gap:14px}
-.av{width:50px;height:50px;border-radius:50%;background:#1B3A6B;border:2px solid #2563EB;display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:#93C5FD;flex-shrink:0;overflow:hidden}
+.av{width:50px;height:50px;border-radius:50%;background:var(--navy2);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--gold2);flex-shrink:0;overflow:hidden}
 .av img{width:100%;height:100%;object-fit:cover}
-.hdr2-name{color:#fff;font-size:17px;font-weight:700;line-height:1.2}
-.hdr2-sub{color:#93C5FD;font-size:11px;margin-top:2px}
-.wa-btn2{display:flex;align-items:center;gap:7px;background:#15803D;color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap}
-.hdr2-div{height:.5px;background:#1B3A6B;margin:8px 0}
+.hdr2-name{font-family:'Fraunces',Georgia,serif;color:#fff;font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+.hdr2-sub{color:var(--gold2);font-size:11px;margin-top:2px;letter-spacing:.02em}
+.wa-btn2{display:flex;align-items:center;gap:7px;background:var(--green);color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background-color .3s var(--ease)}
+.wa-btn2:hover{background:var(--green2)}
+.hdr2-div{height:.5px;background:rgba(255,255,255,.14);margin:8px 0}
 .hdr2-meta{display:flex;gap:1.25rem;flex-wrap:wrap}
-.hdr2-meta span{display:flex;align-items:center;gap:5px;font-size:11px;color:#BFDBFE}
-.stabs{display:flex;gap:2px;background:#f1f5f9;padding:3px;border-radius:10px;margin:1rem 1.5rem;border:.5px solid #e2e8f0}
-.stab{flex:1;padding:7px 4px;font-size:11px;font-weight:600;border:none;border-radius:8px;cursor:pointer;background:transparent;color:#64748b;transition:all .15s}
-.stab.on{background:#fff;color:#1B3A6B;border:.5px solid #e2e8f0}
+.hdr2-meta span{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.62)}
+.stabs{display:flex;gap:2px;background:var(--bg);padding:3px;border-radius:10px;margin:1rem 1.5rem;border:.5px solid var(--border)}
+.stab{flex:1;padding:7px 4px;font-size:11px;font-weight:600;border:none;border-radius:8px;cursor:pointer;background:transparent;color:var(--text2);transition:all .2s var(--ease)}
+.stab.on{background:#fff;color:var(--navy);border:.5px solid var(--border);box-shadow:0 1px 3px rgba(15,46,54,.08)}
 .sim-body{padding:0 1.5rem 1.5rem}
-.sel-box{background:#fff;border:1.5px solid #2563EB;border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem}
-.sel-title{font-size:11px;font-weight:600;color:#1B3A6B;text-transform:uppercase;letter-spacing:.5px;margin-bottom:10px}
+.sel-box{background:#fff;border:1.5px solid var(--gold);border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem;box-shadow:0 2px 10px rgba(184,135,58,.08)}
+.sel-title{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
 .g2s{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .g4s{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
 .fi2{display:flex;flex-direction:column;gap:3px}
-.fi2 label{font-size:10px;color:#64748b;font-weight:600;text-transform:uppercase;letter-spacing:.4px}
-.fi2 input,.fi2 select{font-size:13px;padding:7px 10px;border:.5px solid #e2e8f0;border-radius:7px;background:#f8fafc;color:#1e293b;width:100%}
-.fi2 input:focus,.fi2 select:focus{outline:none;border-color:#2563EB}
-.fi2.hl input{border-color:#15803D;background:#f0fdf4}.fi2.hl label{color:#15803D}
-.fi2.wn input{border-color:#C2410C;background:#fff7ed}.fi2.wn label{color:#C2410C}
+.fi2 label{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
+.fi2 input,.fi2 select{font-size:13px;padding:7px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);width:100%;font-family:inherit}
+.fi2 input:focus,.fi2 select:focus{outline:none;border-color:var(--gold)}
+.fi2.hl input{border-color:var(--green);background:#f0f9f3}.fi2.hl label{color:var(--green)}
+.fi2.wn input{border-color:#a5691f;background:#fbf3e4}.fi2.wn label{color:#a5691f}
 .pr2{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin-top:10px}
 .pi2{padding:10px 12px;border-radius:8px;display:flex;flex-direction:column;gap:3px}
-.pi2.b{background:#eff6ff;border:.5px solid #bfdbfe}.pi2.b .pv2{color:#1B3A6B}
-.pi2.g{background:#f0fdf4;border:.5px solid #bbf7d0}.pi2.g .pv2{color:#15803D}
-.pi2.o{background:#fff7ed;border:.5px solid #fed7aa}.pi2.o .pv2{color:#C2410C}
-.pi2.r{background:#fff1f1;border:.5px solid #fecaca}.pi2.r .pv2{color:#B91C1C}
-.pi2.v{background:#f5f3ff;border:.5px solid #ddd6fe}.pi2.v .pv2{color:#6D28D9}
-.pl2{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.3px;color:#64748b}
+.pi2.b{background:var(--bg);border:.5px solid var(--border)}.pi2.b .pv2{color:var(--navy)}
+.pi2.g{background:#f0f9f3;border:.5px solid #bfe3cc}.pi2.g .pv2{color:var(--green)}
+.pi2.o{background:#fbf3e4;border:.5px solid #e9d4ab}.pi2.o .pv2{color:#a5691f}
+.pi2.r{background:#fbf0ee;border:.5px solid #edc9c1}.pi2.r .pv2{color:#a5432f}
+.pi2.v{background:#fbf7ee;border:.5px solid #ecdfba}.pi2.v .pv2{color:var(--gold)}
+.pl2{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--text2)}
 .pv2{font-size:14px;font-weight:700}
-.ps2{font-size:10px;color:#64748b;margin-top:1px}
-.ssec{background:#fff;border:.5px solid #e2e8f0;border-radius:11px;margin-bottom:.6rem;overflow:hidden}
+.ps2{font-size:10px;color:var(--text2);margin-top:1px}
+.ssec{background:#fff;border:.5px solid var(--border);border-radius:11px;margin-bottom:.6rem;overflow:hidden}
 .ssh{padding:9px 1.2rem;display:flex;align-items:center;gap:8px;cursor:pointer;user-select:none}
 .ssh h3{font-size:12px;font-weight:600;color:#fff;flex:1;margin:0}
 .ssh .cv{font-size:13px;color:rgba(255,255,255,.8);transition:transform .2s}
 .ssh .cv.op{transform:rotate(180deg)}
-.ssb{padding:.9rem 1.2rem 1.1rem;border-top:.5px solid #e2e8f0}
-.s1x .ssh{background:#1D4ED8}.s2x .ssh{background:#15803D}
-.s3x .ssh{background:#C2410C}.scx .ssh{background:#0F2544}.skx .ssh{background:#0369A1}
+.ssb{padding:.9rem 1.2rem 1.1rem;border-top:.5px solid var(--border)}
+.s1x .ssh{background:var(--navy)}.s2x .ssh{background:var(--green)}
+.s3x .ssh{background:#9a6621}.scx .ssh{background:var(--gold)}.skx .ssh{background:var(--navy2)}
 .mets2{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-top:9px}
-.mt2{background:#f8fafc;border-radius:7px;padding:9px 11px}
-.mt2 .ml{font-size:10px;color:#64748b;line-height:1.3}
-.mt2 .mv{font-size:13px;font-weight:700;margin-top:3px;color:#1e293b}
-.mt2.hi{background:#eff6ff;border:.5px solid #bfdbfe}.mt2.hi .mv{color:#1B3A6B}
-.mt2.gr{background:#f0fdf4;border:.5px solid #bbf7d0}.mt2.gr .mv{color:#15803D}
-.mt2.am{background:#fffbeb;border:.5px solid #fde68a}.mt2.am .mv{color:#B45309}
-.mt2.re{background:#fff1f1;border:.5px solid #fecaca}.mt2.re .mv{color:#B91C1C}
-.mt2.vi{background:#f5f3ff;border:.5px solid #ddd6fe}.mt2.vi .mv{color:#6D28D9}
+.mt2{background:var(--bg);border-radius:7px;padding:9px 11px}
+.mt2 .ml{font-size:10px;color:var(--text2);line-height:1.3}
+.mt2 .mv{font-size:13px;font-weight:700;margin-top:3px;color:var(--text)}
+.mt2.hi{background:var(--bg);border:.5px solid var(--border)}.mt2.hi .mv{color:var(--navy)}
+.mt2.gr{background:#f0f9f3;border:.5px solid #bfe3cc}.mt2.gr .mv{color:var(--green)}
+.mt2.am{background:#fbf3e4;border:.5px solid #e9d4ab}.mt2.am .mv{color:#a5691f}
+.mt2.re{background:#fbf0ee;border:.5px solid #edc9c1}.mt2.re .mv{color:#a5432f}
+.mt2.vi{background:#fbf7ee;border:.5px solid #ecdfba}.mt2.vi .mv{color:var(--gold)}
 .tw2{overflow-x:auto;margin-top:7px}
 .st2{max-height:260px;overflow-y:auto}
 table{width:100%;border-collapse:collapse;font-size:11px}
-th{background:#f8fafc;font-weight:600;font-size:10px;text-transform:uppercase;letter-spacing:.3px;color:#64748b;padding:6px 7px;text-align:right;border-bottom:.5px solid #e2e8f0;position:sticky;top:0;z-index:1}
+th{background:var(--bg);font-weight:700;font-size:10px;text-transform:uppercase;letter-spacing:.05em;color:var(--text2);padding:6px 7px;text-align:right;border-bottom:.5px solid var(--border);position:sticky;top:0;z-index:1}
 th:first-child{text-align:left}
-td{padding:5px 7px;border-bottom:.5px solid #f1f5f9;text-align:right;color:#1e293b}
+td{padding:5px 7px;border-bottom:.5px solid var(--bg);text-align:right;color:var(--text)}
 td:first-child{text-align:left}
 tr:last-child td{border-bottom:none}
-tr.trx td{font-weight:700;background:#f8fafc}
-tr.s2rx td{background:#f8fafc}
-.is2{width:80px;font-size:11px;padding:3px 5px;border:.5px solid #e2e8f0;border-radius:4px;background:#f8fafc;color:#1e293b;text-align:right}
-.info-box2{background:#f8fafc;border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12px;border-left:3px solid #2563EB}
-.info-box2 strong{color:#1B3A6B}
-.btn-pg{width:100%;padding:11px;background:#15803D;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:7px}
-.btn-pn{width:100%;padding:10px;background:#0F2544;color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px}
-.or-div2{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:11px;color:#64748b}
-.or-div2::before,.or-div2::after{content:'';flex:1;height:.5px;background:#e2e8f0}
+tr.trx td{font-weight:700;background:var(--bg)}
+tr.s2rx td{background:var(--bg)}
+.is2{width:80px;font-size:11px;padding:3px 5px;border:.5px solid var(--border);border-radius:4px;background:var(--bg);color:var(--text);text-align:right}
+.info-box2{background:var(--bg);border-radius:8px;padding:10px 12px;margin-bottom:10px;font-size:12px;border-left:3px solid var(--gold)}
+.info-box2 strong{color:var(--navy)}
+.btn-pg{width:100%;padding:11px;background:var(--green);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-top:7px;transition:background-color .3s var(--ease)}
+.btn-pg:hover{background:var(--green2)}
+.btn-pn{width:100%;padding:10px;background:var(--navy);color:#fff;border:none;border-radius:8px;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:background-color .3s var(--ease)}
+.btn-pn:hover{background:var(--navy2)}
+.or-div2{display:flex;align-items:center;gap:8px;margin:8px 0;font-size:11px;color:var(--text2)}
+.or-div2::before,.or-div2::after{content:'';flex:1;height:.5px;background:var(--border)}
 .regra-tag2{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;margin-top:8px}
-.rt-sbpe2{background:#eff6ff;color:#1D4ED8;border:.5px solid #bfdbfe}
-.rt-mcmv2{background:#f0fdf4;color:#15803D;border:.5px solid #bbf7d0}
-.cb2{display:inline-flex;align-items:center;gap:4px;background:#fef9c3;color:#854D0E;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
+.rt-sbpe2{background:var(--bg);color:var(--navy);border:.5px solid var(--border)}
+.rt-mcmv2{background:#f0f9f3;color:var(--green);border:.5px solid #bfe3cc}
+.cb2{display:inline-flex;align-items:center;gap:4px;background:#fbf3e4;color:#8a5c1c;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
 @media(max-width:600px){.g2s,.g4s,.pr2{grid-template-columns:1fr 1fr}.stabs{flex-wrap:wrap}}
 </style>
 <link rel="canonical" href="https://paulocotrim.com.br/simulador.html"/>
@@ -114,20 +119,20 @@ tr.s2rx td{background:#f8fafc}
 </head>
 <body>
 <div class="sim-hdr">
-  <div class="sim-hdr-logo"><img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></div>
+  <div class="sim-hdr-logo"><img src="logo-wordmark.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></div>
   <div class="sim-hdr-btns">
     <a href="index.html" class="btn-back">← Voltar ao site</a>
-    <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Fiz%20uma%20simulação%20e%20quero%20conversar." target="_blank"><button class="btn-wa-s">💬 WhatsApp</button></a>
+    <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Fiz%20uma%20simulação%20e%20quero%20conversar." target="_blank"><button class="btn-wa-s"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg>WhatsApp</button></a>
   </div>
 </div>
 <div class="sim-hero">
-  <h1>🧮 Simulador Profissional Cury</h1>
+  <h1><svg viewBox="0 0 24 24" style="width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="8" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="8" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r=".6" fill="currentColor" stroke="none"/></svg>Simulador Profissional Cury</h1>
   <p>Calcule aprovação Caixa, parcelamento de entrada, fase de obras e tabela direta. Preços atualizados Julho/2026.</p>
   <div class="sim-chips">
-    <span class="chip">✅ 14 empreendimentos</span>
-    <span class="chip">📅 Julho/2026</span>
-    <span class="chip">📍 Rio de Janeiro</span>
-    <span class="chip">🏦 Caixa Econômica</span>
+    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>14 empreendimentos</span>
+    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Julho/2026</span>
+    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Rio de Janeiro</span>
+    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 21h18M4 21V10l8-6 8 6v11M8 14v3M12 14v3M16 14v3"/></svg>Caixa Econômica</span>
   </div>
 </div>
 <div class="app-wrap">
@@ -138,22 +143,22 @@ tr.s2rx td{background:#f8fafc}
   <!-- AVISO IMPORTANTE -->
   <div style="
     margin-top:20px;
-    background:#f8f8f8;
-    border:1px solid #e5e5e5;
+    background:#f5f6f7;
+    border:1px solid #e8eaed;
     border-radius:10px;
     padding:16px 20px;
     font-size:11.5px;
-    color:#555555;
+    color:#6b7280;
     line-height:1.4;
     text-align:justify;
     box-sizing:border-box;
     width:100%;
   ">
-    <p style="font-size:11.5px;font-weight:700;color:#333;margin-bottom:8px">⚠️ AVISO IMPORTANTE – INFORMAÇÕES, VALORES E CONDIÇÕES</p>
+    <p style="font-size:11.5px;font-weight:700;color:#0f2e36;margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>AVISO IMPORTANTE – INFORMAÇÕES, VALORES E CONDIÇÕES</p>
 
     <p style="margin-bottom:8px">Os valores, parcelas, taxas de juros, condições de financiamento e valores de seguro apresentados nesta simulação são <strong>estimativas e valores prévios</strong>, elaborados com base em parâmetros de mercado, tabelas referenciais e na minha experiência de 17 anos no mercado imobiliário, sendo 8 anos de atuação exclusiva na Cury Construtora. Eles servem apenas como orientação, projeção e referência inicial para seu planejamento, <strong>podendo sofrer alterações, ajustes, variações ou divergências</strong> a qualquer momento, sem aviso prévio, conforme regras, políticas, normas e tabelas vigentes.</p>
 
-    <p style="margin-bottom:8px">✅ <strong>A confirmação dos valores reais, exatos, definitivos e válidos para contratação, assim como as condições finais de pagamento, taxas de juros efetivas, valores de prêmio de seguro, garantias, prazos, limites, documentação necessária e regras específicas de cada linha de crédito, produto ou serviço, será feita exclusivamente pela Cury Construtora e pela Caixa Econômica Federal</strong>, conforme suas políticas internas, normas legais, análise de crédito, perfil do cliente, regulamentações do Banco Central do Brasil, contratos vigentes e disposições aplicáveis ao Programa Minha Casa Minha Vida e demais modalidades de financiamento imobiliário.</p>
+    <p style="margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg><strong>A confirmação dos valores reais, exatos, definitivos e válidos para contratação, assim como as condições finais de pagamento, taxas de juros efetivas, valores de prêmio de seguro, garantias, prazos, limites, documentação necessária e regras específicas de cada linha de crédito, produto ou serviço, será feita exclusivamente pela Cury Construtora e pela Caixa Econômica Federal</strong>, conforme suas políticas internas, normas legais, análise de crédito, perfil do cliente, regulamentações do Banco Central do Brasil, contratos vigentes e disposições aplicáveis ao Programa Minha Casa Minha Vida e demais modalidades de financiamento imobiliário.</p>
 
     <p style="margin-bottom:8px">Todos os dados apresentados nesta ferramenta são apenas uma aproximação fundamentada no meu conhecimento prático, vivência, domínio dos processos e experiência consolidada junto à construtora e à instituição financeira, visando oferecer maior clareza, segurança e transparência na sua jornada de compra. Para todos os efeitos legais e contratuais, <strong>somente terão validade os valores, condições e informações constantes nos documentos oficiais, propostas formais, contratos e comunicações emitidas diretamente pela Cury Construtora e pela Caixa Econômica Federal</strong>, sendo esses os únicos que geram direitos e obrigações entre as partes.</p>
 
@@ -250,7 +255,7 @@ function ssec(id,title,cls,fn){
 }
 function whatsappSim(){
   const tip=DB[S.cond].tips[S.tipIdx];const c=calc();
-  const msg=`Olá Paulo! Fiz a simulação:\n\n🏠 *${S.cond}* — ${tip.n}\n💰 Preço: ${BRL(tip.p)}\n✅ Aprovação Caixa: ${BRL(c.aprovado)}\n📋 Entrada: ${BRL(c.entrada)}\n📅 Modalidade: ${S.modalidade.toUpperCase()}\n\nQuero saber mais!`;
+  const msg=`Olá Paulo! Fiz a simulação:\n\n*${S.cond}* — ${tip.n}\nPreço: ${BRL(tip.p)}\nAprovação Caixa: ${BRL(c.aprovado)}\nEntrada: ${BRL(c.entrada)}\nModalidade: ${S.modalidade.toUpperCase()}\n\nQuero saber mais!`;
   // Envia lead para o CRM
   if(window.enviarLeadCRM) enviarLeadCRM({
     nome: 'Lead Simulador', telefone: '',
@@ -273,16 +278,16 @@ function renderSim(){
       <div class="av">${fotoPaulo?`<img src="${fotoPaulo}" alt="Paulo"/>`:'PC'}</div>
       <div><div class="hdr2-name">Paulo Cotrim</div><div class="hdr2-sub">Coordenador Cury — Simulador Profissional</div></div>
     </div>
-    <button class="wa-btn2" onclick="whatsappSim()">📱 Enviar pelo WhatsApp</button>
+    <button class="wa-btn2" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Enviar pelo WhatsApp</button>
   </div>
   <div class="hdr2-div"></div>
   <div class="hdr2-meta">
-    <span>🏗 ${NAMES.length} empreendimentos</span><span>📅 Julho/2026</span><span>📍 Rio de Janeiro</span>
+    <span><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M4 21V9l6-5v17"/><path d="M10 6h9v4h-4"/><line x1="15" y1="10" x2="15" y2="21"/></svg>${NAMES.length} empreendimentos</span><span><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Julho/2026</span><span><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Rio de Janeiro</span>
   </div>
 </div>
 <div class="stabs">
-  <button class="stab ${S.tab===0?'on':''}" onclick="S.tab=0;render()">🏠 Simulação Caixa</button>
-  <button class="stab ${S.tab===1?'on':''}" onclick="S.tab=1;render()">💰 Tabela Direta</button>
+  <button class="stab ${S.tab===0?'on':''}" onclick="S.tab=0;render()"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>Simulação Caixa</button>
+  <button class="stab ${S.tab===1?'on':''}" onclick="S.tab=1;render()"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20.59 13.41 13 21l-9-9V4h8z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/></svg>Tabela Direta</button>
 </div>
 <div class="sim-body">
 ${S.tab===0?renderTabSim(c,isSBPE,tips):renderTabDireta(c)}
@@ -291,9 +296,9 @@ ${S.tab===0?renderTabSim(c,isSBPE,tips):renderTabDireta(c)}
 
 function renderTabSim(c,isSBPE,tips){return`
 <div class="sel-box">
-  <div class="sel-title">🏢 Empreendimento &nbsp;<span style="color:#94a3b8;font-weight:400;font-size:10px">${NAMES.length} disponíveis — Julho 2026</span></div>
+  <div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="1"/><line x1="8" y1="6" x2="8" y2="6"/><line x1="12" y1="6" x2="12" y2="6"/><line x1="16" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="16" y2="14"/><line x1="8" y1="18" x2="16" y2="18"/></svg>Empreendimento &nbsp;<span style="color:#94a3b8;font-weight:400;font-size:10px">${NAMES.length} disponíveis — Julho 2026</span></div>
   <div class="g2s" style="margin-bottom:10px">
-    <div class="fi2"><label>Condomínio</label><select onchange="selC(this.value)">${NAMES.map(n=>`<option value="${n}" ${n===S.cond?'selected':''}>${n}${DB[n].c?' ★':''}</option>`).join('')}</select></div>
+    <div class="fi2"><label>Condomínio</label><select onchange="selC(this.value)">${NAMES.map(n=>`<option value="${n}" ${n===S.cond?'selected':''}>${n}${DB[n].c?' · Tabela Direta':''}</option>`).join('')}</select></div>
     <div class="fi2"><label>Tipologia</label><select onchange="selT(this.value)">${tips.map((t,i)=>`<option value="${i}" ${i===S.tipIdx?'selected':''}>${t.n}</option>`).join('')}</select></div>
   </div>
   <div class="g2s">
@@ -328,39 +333,39 @@ ${ssec('sk','Renda mínima necessária','ssec skx',()=>`
 <div class="mets2"><div class="mt2 am"><div class="ml">Renda mínima (30%)</div><div class="mv">${BRL(c.rendMin30)}</div></div><div class="mt2 gr"><div class="ml">Renda mínima (35%)</div><div class="mv">${BRL(c.rendMin35)}</div></div></div>
 <p style="font-size:10px;color:#94a3b8;margin-top:8px">Baseado na prestação de ${BRL(S.prestCaixa)}. Renda pode ser composta com familiares.</p>`)}
 ${ssec('s2','Seção 2 — Parcelamento da entrada (Cury)','ssec s2x',()=>`
-<p style="font-size:11px;color:#64748b;margin-bottom:8px">Entrada: <strong style="color:#B91C1C">${BRL(c.entrada)}</strong> &nbsp;|&nbsp; Total: <strong>${BRL(c.tot)}</strong> ${c.tot<c.entrada?`<span style="color:#B91C1C">⚠ faltam ${BRL(c.entrada-c.tot)}</span>`:`<span style="color:#15803D">✓ coberta</span>`}</p>
+<p style="font-size:11px;color:#64748b;margin-bottom:8px">Entrada: <strong style="color:#B91C1C">${BRL(c.entrada)}</strong> &nbsp;|&nbsp; Total: <strong>${BRL(c.tot)}</strong> ${c.tot<c.entrada?`<span style="color:#B91C1C"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>faltam ${BRL(c.entrada-c.tot)}</span>`:`<span style="color:#15803D"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>coberta</span>`}</p>
 <div class="tw2"><table><thead><tr><th>Tipo</th><th>Qtd</th><th>Valor unit.</th><th>Total</th></tr></thead>
 <tbody>${S.s2.map((r,i)=>`<tr class="${i%2?'s2rx':''}"><td>${r.t}</td><td><input class="is2" type="number" value="${r.q}" oninput="updS2(${i},'q',this.value)"></td><td><input class="is2" style="width:90px" type="number" value="${r.u}" oninput="updS2(${i},'u',this.value)"></td><td>${BRL(r.q*r.u)}</td></tr>`).join('')}
 <tr class="trx"><td colspan="3">TOTAL ENTRADA</td><td>${BRL(c.tot)}</td></tr></tbody></table></div>`)}
 ${ssec('s3','Seção 3 — Fase de obras (36 meses)','ssec s3x',()=>`
-<div class="info-box2" style="border-left-color:#C2410C"><strong>Seguro progressivo:</strong> 20% → 100% da prestação Caixa (${BRL(S.prestCaixa)}) em 36 meses.</div>
+<div class="info-box2" style="border-left-color:#9a6621"><strong>Seguro progressivo:</strong> 20% → 100% da prestação Caixa (${BRL(S.prestCaixa)}) em 36 meses.</div>
 <div class="tw2"><div class="st2"><table><thead><tr><th style="text-align:center">Mês</th><th>% Seguro</th><th>Seguro</th><th>Entrada</th><th>Total/mês</th></tr></thead>
-<tbody>${c.rows.map((r,i)=>`<tr class="${i%2?'s2rx':''}"><td style="text-align:center">${r.m}</td><td style="text-align:center">${PCT(r.p)}</td><td>${BRL(r.seg)}</td><td>${BRL(r.men)}</td><td style="font-weight:700;color:#1B3A6B">${BRL(r.tot)}</td></tr>`).join('')}</tbody></table></div></div>`)}
+<tbody>${c.rows.map((r,i)=>`<tr class="${i%2?'s2rx':''}"><td style="text-align:center">${r.m}</td><td style="text-align:center">${PCT(r.p)}</td><td>${BRL(r.seg)}</td><td>${BRL(r.men)}</td><td style="font-weight:700;color:#0f2e36">${BRL(r.tot)}</td></tr>`).join('')}</tbody></table></div></div>`)}
 ${ssec('sc','Quero iniciar minha aprovação de crédito','ssec scx',()=>{
   const tip=DB[S.cond].tips[S.tipIdx];
-  return`<div style="border:1.5px solid #0F2544;border-radius:10px;padding:1.1rem">
-  <div style="background:#f8fafc;border-radius:7px;padding:8px 10px;margin-bottom:12px;font-size:11px">
-    <strong>${S.cond}</strong> — ${tip.n} — <span style="color:#1B3A6B;font-weight:700">${BRL(tip.p)}</span> &nbsp;|&nbsp; <strong>${S.modalidade.toUpperCase()}</strong>
+  return`<div style="border:1.5px solid #0f2e36;border-radius:10px;padding:1.1rem">
+  <div style="background:#f5f6f7;border-radius:7px;padding:8px 10px;margin-bottom:12px;font-size:11px">
+    <strong>${S.cond}</strong> — ${tip.n} — <span style="color:#0f2e36;font-weight:700">${BRL(tip.p)}</span> &nbsp;|&nbsp; <strong>${S.modalidade.toUpperCase()}</strong>
   </div>
   <div class="g2s" style="margin-bottom:10px">
     <div class="fi2"><label>Nome completo</label><input type="text" id="cf-nome" placeholder="Seu nome"></div>
     <div class="fi2"><label>WhatsApp</label><input type="text" id="cf-tel" placeholder="(21) 99999-9999"></div>
   </div>
-  <button class="btn-pg" onclick="whatsappSim()">📱 Falar com Paulo no WhatsApp</button></div>`;
+  <button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com nossa equipe no WhatsApp</button></div>`;
 })}`;
 }
 
 function renderTabDireta(c){
   const {ato,pi,pqm,pvm,chave,oqm,ovm,oqa,ova,vu}=S.s4;
   return`<div class="sel-box">
-  <div class="sel-title">📋 Tabela Direta Cury — sem financiamento</div>
+  <div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/></svg>Tabela Direta Cury — sem financiamento</div>
   <div class="g2s" style="margin-bottom:12px">
     <div class="fi2"><label>Valor total (R$)</label><input type="number" value="${vu}" oninput="updS4('vu',this.value)"></div>
     <div class="fi2"><label>Ato / Entrada (R$)</label><input type="number" value="${ato}" oninput="updS4('ato',this.value)"></div>
   </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
     <div style="border:.5px solid #e2e8f0;border-radius:8px;overflow:hidden">
-      <div style="background:#6D28D9;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pré-chaves — 3 anos</div>
+      <div style="background:#0f2e36;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pré-chaves — 3 anos</div>
       <div style="padding:9px 11px">
         <div class="g2s" style="gap:6px;margin-bottom:8px">
           <div class="fi2"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${pqm}" oninput="updS4('pqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
@@ -369,20 +374,20 @@ function renderTabDireta(c){
         <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Ato</span><span style="font-weight:600">${BRL(ato)}</span></div>
         <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Mensais (${pqm}×)</span><span style="font-weight:600">${BRL(c.tPreM)}</span></div>
         <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0"><span style="color:#64748b">Chave</span><span style="font-weight:600">${BRL(chave)}</span></div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0"><span>Total pré-chaves</span><span style="color:#6D28D9">${BRL(c.tPre)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0"><span>Total pré-chaves</span><span style="color:#0f2e36">${BRL(c.tPre)}</span></div>
       </div>
     </div>
     <div style="border:.5px solid #e2e8f0;border-radius:8px;overflow:hidden">
-      <div style="background:#C2410C;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pós-chaves — 4 anos</div>
+      <div style="background:#9a6621;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pós-chaves — 4 anos</div>
       <div style="padding:9px 11px">
         <div class="g2s" style="gap:6px;margin-bottom:8px">
           <div class="fi2"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${oqm}" oninput="updS4('oqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
           <div class="fi2"><label style="font-size:10px">Vl mensal</label><input type="number" value="${ovm}" oninput="updS4('ovm',this.value)" style="font-size:12px;padding:5px 8px"></div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Mensais (${oqm}×)</span><span style="font-weight:600">${BRL(c.tPosM)}</span></div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0"><span>Total pós-chaves</span><span style="color:#C2410C">${BRL(c.tPos)}</span></div>
-        <div style="margin-top:9px;padding:9px;background:#f8fafc;border-radius:7px">
-          <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;border-top:.5px solid #e2e8f0;padding-top:6px;margin-top:6px"><span>Total geral</span><span style="color:#6D28D9">${BRL(c.tPre+c.tPos)}</span></div>
+        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0"><span>Total pós-chaves</span><span style="color:#9a6621">${BRL(c.tPos)}</span></div>
+        <div style="margin-top:9px;padding:9px;background:#f5f6f7;border-radius:7px">
+          <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;border-top:.5px solid #e2e8f0;padding-top:6px;margin-top:6px"><span>Total geral</span><span style="color:#b8873a">${BRL(c.tPre+c.tPos)}</span></div>
         </div>
       </div>
     </div>
@@ -399,15 +404,4 @@ render();
 <!-- WhatsApp FAB -->
 <style>
 .wa-fab{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.wa-fab a{background:#25d366;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;white-space:nowrap;text-decoration:none}
-.wa-fab a:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,.5)}
-.wa-fab-pulse{width:56px;height:56px;border-radius:50%;padding:0;justify-content:center;font-size:24px}
-@media(max-width:600px){.wa-fab-label{display:none}}
-</style>
-<div class="wa-fab">
-  <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Fiz%20uma%20simulação%20de%20financiamento%20e%20quero%20evoluir." target="_blank" rel="noopener">
-    <span>💬</span><span class="wa-fab-label">Falar com Paulo</span>
-  </a>
-</div>
-</body>
-</html>
+.wa-fab a{background:#b8873a;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(184,135,58,.35);display:flex;align-items:center;gap:8px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1);wh
