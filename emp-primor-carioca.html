@@ -70,8 +70,8 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .eyebrow{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
 .stitle{font-size:clamp(24px,3.4vw,36px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
 .ssub{font-size:16px;color:var(--gray);max-width:60ch;line-height:1.65}
-.analise{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center}
-.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;background:var(--mist);box-shadow:var(--shadow-lg)}
+.analise{display:grid;grid-template-columns:180px 1fr;gap:36px;align-items:center}
+.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow-lg)}
 .analise-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .analise-photo:hover img{transform:scale(1.045)}
 .analise-quote{font-family:'Fraunces',serif;font-size:clamp(19px,2.2vw,25px);line-height:1.4;color:var(--ink);letter-spacing:-.01em;margin-bottom:22px;font-weight:500}
@@ -79,7 +79,33 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .analise-sign{display:flex;align-items:center;gap:12px}
 .analise-sign-line{width:32px;height:1px;background:var(--gold)}
 .analise-sign b{font-size:14px}.analise-sign span{font-size:12.5px;color:var(--gray);display:block}
-@media(max-width:760px){.analise{grid-template-columns:1fr;gap:28px}.analise-photo{max-width:240px}}
+@media(max-width:760px){.analise{grid-template-columns:1fr;gap:22px}.analise-photo{max-width:130px}}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);border:1.5px solid var(--line);padding:12.5px 24px;border-radius:12px;font-size:14.5px;font-weight:600;cursor:pointer;transition:border-color .3s var(--ease),transform .3s var(--ease),box-shadow .3s var(--ease)}
+.btn-ghost:hover{border-color:var(--gold);transform:translateY(-2px);box-shadow:var(--shadow)}
+/* SIMULADOR DE FINANCIAMENTO */
+.sim-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:32px;max-width:900px;margin:0 auto}
+.sim-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap;margin-bottom:22px}
+.sim-badge{display:inline-flex;align-items:center;gap:7px;background:var(--petrol-soft);color:var(--petrol);font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px;margin-bottom:22px}
+.sim-field label{display:block;font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px}
+.sim-field input[type=text],.sim-field select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit;background:#fff}
+.sim-field input[type=text]:focus,.sim-field select:focus{outline:none;border-color:var(--gold)}
+.sim-toggle{display:flex;align-items:center;gap:10px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer;user-select:none}
+.sim-toggle input{accent-color:var(--gold);width:17px;height:17px}
+.sim-range{width:100%;accent-color:var(--gold)}
+.sim-range-val{font-size:12.5px;color:var(--gray);margin-top:4px}
+.sim-out{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.sim-out-card{background:var(--mist);border-radius:12px;padding:16px}
+.sim-out-card.hl{background:var(--petrol);color:#fff}
+.sim-out-card .l{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--gray);margin-bottom:5px}
+.sim-out-card.hl .l{color:rgba(255,255,255,.65)}
+.sim-out-card .v{font-family:'Fraunces',serif;font-size:19px;font-weight:600}
+.sim-note{font-size:12px;color:var(--gray);line-height:1.6;background:var(--petrol-soft);padding:12px 15px;border-radius:10px;margin-bottom:18px}
+.sim-warn{background:#fdf3e7!important;color:#8a5a1c!important}
+.sim-actions{display:flex;gap:10px;flex-wrap:wrap}
+.sim-check-row{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink);margin:14px 0}
+.sim-check-row input{accent-color:var(--gold);width:16px;height:16px}
+@media(max-width:640px){.sim-grid{grid-template-columns:1fr}.sim-out{grid-template-columns:1fr 1fr}}
 .nota-head{display:flex;gap:28px;align-items:center;margin-bottom:40px;flex-wrap:wrap}
 .nota-score{background:var(--petrol);color:#fff;border-radius:20px;padding:26px 32px;text-align:center;min-width:150px;box-shadow:0 20px 46px -12px rgba(15,46,54,.45)}
 .nota-score .big{font-family:'Fraunces',serif;font-size:52px;line-height:1;font-weight:600}
@@ -244,19 +270,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 
 <section class="section">
   <div class="wrap">
-    <div class="analise reveal">
-      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
-      <div>
-        <div class="eyebrow">A análise de Paulo Cotrim</div>
-        <p class="analise-quote">O Primor Carioca é um condomínio de escala considerável — 500 unidades, 3 elevadores por torre — na Av. Pastor Martin Luther King Jr, em Inhaúma. As plantas de 2 quartos vão de 35m² a pouco mais de 40m², com opção de varanda, e há unidades PCD dedicadas. O pagamento facilitado em até 12x após a entrega das chaves é um diferencial que ajuda quem está organizando o orçamento para a mudança. É produto de entrada pensado para quem quer sair do aluguel na Zona Norte.</p>
-        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap">
     <div class="constr-strip reveal">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>
       <div class="constr-body">
@@ -298,54 +311,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <p style="font-size:14.5px;color:var(--gray)">Condomínio de grande porte (500 unidades, 3 torres) perto das estações Inhaúma e Del Castilho, com fácil acesso à Linha Amarela.</p>
   </div>
 </section>
-<section class="section section-mist">
-  <div class="wrap">
-    <div class="nota-head reveal">
-      <div class="nota-score">
-        <div class="tier">Bom</div><div class="of">avaliação geral</div>
-      </div>
-      <div class="nota-intro">
-        <div class="eyebrow">Metodologia Paulo Cotrim</div>
-        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
-        <p>Avalio cada empreendimento em critérios que realmente importam na hora de comprar — de localização a custo-benefício. Sem achismo: cada critério tem um porquê.</p>
-      </div>
-    </div>
-    <div class="crit-grid reveal"><div class="crit">
-      <div class="crit-top"><span class="crit-name">Localização</span></div>
-      <div class="crit-bar"><span style="width:70.0%"></span></div>
-      <p class="crit-desc">Av. Pastor Martin Luther King Jr, Inhaúma, com boa conexão viária.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">Condomínio fechado com elevadores e estrutura de lazer, incluindo piscina.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Construtora</span></div>
-      <div class="crit-bar"><span style="width:70.0%"></span></div>
-      <p class="crit-desc">MRV é a maior construtora do Brasil em unidades entregues no segmento econômico.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
-      <div class="crit-bar"><span style="width:70.0%"></span></div>
-      <p class="crit-desc">Bairro residencial com demanda estável de locação.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Tipologia</span></div>
-      <div class="crit-bar"><span style="width:70.0%"></span></div>
-      <p class="crit-desc">1 e 2 quartos, de 35,32m² (unidade PCD, 1 quarto) a 40,85m², com opção de varanda nas de 2 quartos.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Escala do empreendimento</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">500 unidades — condomínio de grande porte com 3 elevadores por torre.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Facilidade de pagamento</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">Até 12x após a entrega das chaves — ajuda no planejamento financeiro.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">Segmento econômico com boa relação entre preço e infraestrutura entregue.</p>
-    </div></div>
-  </div>
-</section>
-
 <section class="section">
   <div class="wrap">
     <div class="eyebrow reveal">Ficha técnica</div>
@@ -361,14 +326,59 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     </div>
     <p style="font-size:11.5px;color:var(--gray);margin-top:8px">Valor de tabela pública para a planta de entrada — sujeito a alteração e disponibilidade.</p>
     <p style="font-size:13px;color:var(--gray);margin-top:16px;background:var(--petrol-soft);padding:14px 18px;border-radius:12px">Tabela de preços e disponibilidade de unidades atualizadas diariamente — <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20sua%20an%C3%A1lise%20do%20Primor%20Carioca%20%E2%80%94%20Fase%202%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es." style="color:var(--gold);font-weight:600">peça a tabela oficial no WhatsApp</a>.</p>
-    <div class="manual-cta reveal">
-      <button class="btn-ghost" onclick="document.getElementById('manualModal').style.display='flex'" style="display:inline-flex;align-items:center;gap:8px">
+    <div class="manual-cta reveal" style="display:flex;gap:12px;flex-wrap:wrap">
+      <button class="btn-ghost" onclick="abrirManualModal()">
         <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-        Baixar manual em PDF
+        Baixar tabela de vendas em PDF
       </button>
+      <a class="btn-ghost" href="aprovacao-expressa.html">
+        <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3l7 4v5c0 5-3.5 8.5-7 9-3.5-.5-7-4-7-9V7z"/></svg>
+        Aprovação Expressa
+      </a>
     </div>
   </div>
 </section>
+
+<section class="section section-mist" id="simulador">
+  <div class="wrap">
+    <div class="eyebrow reveal">Aprovação Expressa · Simulação</div>
+    <h2 class="stitle display reveal" style="margin-bottom:12px">Faça sua simulação do Primor Carioca — Fase 2</h2>
+    <p class="ssub reveal" style="margin-bottom:28px">Informe sua renda e veja o financiamento estimado, a entrada e as opções de parcelamento — inclusive a possibilidade de ir para as chaves sem precisar de entrada à vista. Simulação educativa e não vinculante; a <a href="aprovacao-expressa.html" style="color:var(--gold);font-weight:600">Aprovação Expressa</a> com o Paulo confirma os valores reais direto com a Caixa.</p>
+    <div class="sim-card reveal">
+      <div class="sim-top">
+        <span class="sim-badge" id="simModBadge">MCMV · financia 80% da unidade</span>
+        <span style="font-size:13px;color:var(--gray)">Unidade simulada: <b style="color:var(--ink)">Apartamento (PCD), 1 quarto — R$ 262.990</b></span>
+      </div>
+      <div class="sim-grid">
+        <div class="sim-field"><label>Sua renda familiar mensal (R$)</label><input type="text" id="simRenda" value="3.000" oninput="simuUpdate()"></div>
+        <div class="sim-field"><label>Modalidade</label><select id="simMod" onchange="simuUpdate()"><option value="auto" selected>Automática (pela renda)</option><option value="mcmv">MCMV — financia 80%</option><option value="sbpe">SBPE — financia 90%</option></select></div>
+        <div class="sim-field"><label>Valor de entrada que você quer dar (R$) <span style="font-weight:400">— opcional</span></label><input type="text" id="simEntrada" placeholder="Deixe em branco para calcular automaticamente" oninput="simuUpdate()"></div>
+        <div class="sim-field"><label>Parcelar a entrada em quantos meses?</label><input type="range" min="1" max="36" value="24" class="sim-range" id="simParcelas" oninput="simuUpdate()"><div class="sim-range-val"><span id="simParcelasVal">24</span>x, até a entrega das chaves</div></div>
+        <div class="sim-field">
+          <label class="sim-toggle"><input type="checkbox" id="simFgts" onchange="simuUpdate()"> Tenho FGTS para usar na entrada</label>
+          <input type="text" id="simFgtsValor" placeholder="Valor disponível de FGTS (R$)" style="margin-top:8px;display:none" oninput="simuUpdate()">
+        </div>
+        <div class="sim-field"><label>Reforço a cada dezembro (opcional)</label><input type="text" id="simReforco" placeholder="R$ 0" oninput="simuUpdate()"></div>
+      </div>
+      <div class="sim-out" id="simOut"></div>
+      <div class="sim-note" id="simNote"></div>
+      <div class="sim-check-row">
+        <input type="checkbox" id="simIncluirPdf" checked> <label for="simIncluirPdf">Incluir esta simulação no PDF da tabela de vendas</label>
+      </div>
+      <div class="sim-actions">
+        <button class="btn-gold" onclick="whatsappSimu()">
+          <svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+          Confirmar esta simulação com Paulo
+        </button>
+        <button class="btn-ghost" onclick="abrirManualModal()">
+          <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
+          Baixar tabela + simulação em PDF
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section section-mist">
   <div class="wrap">
     <div class="eyebrow reveal">Localização</div>
@@ -397,7 +407,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 <div id="manualModal" class="manual-modal" style="display:none">
   <div class="manual-modal-inner">
     <button class="manual-close" onclick="document.getElementById('manualModal').style.display='none'" aria-label="Fechar">×</button>
-    <h3>Manual — Primor Carioca — Fase 2</h3>
+    <h3>Tabela de vendas — Primor Carioca — Fase 2</h3>
     <div class="manual-preview">
       <div><b>Construtora</b><span>MRV</span></div>
       <div><b>Produto</b><span>Primor Carioca — Fase 2</span></div>
@@ -406,7 +416,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div><b>Status</b><span>Lançamento</span></div>
       <div><b>Entrega</b><span>A definir</span></div>
     </div>
-    <p class="manual-note">Preço, entrada e forma de pagamento variam por unidade e mudam com frequência — o manual em PDF traz um QR code para você voltar a esta página e pedir a tabela atualizada com o Paulo, inclusive mostrando pelo celular a quem estiver com você.</p>
+    <div class="sim-check-row" id="modalSimCheckRow" style="display:none">
+      <input type="checkbox" id="simIncluirPdfModal" checked onchange="document.getElementById('simIncluirPdf').checked=this.checked">
+      <label for="simIncluirPdfModal">Incluir a simulação de financiamento que você fez</label>
+    </div>
+    <p class="manual-note">Preço, entrada e forma de pagamento variam por unidade e mudam com frequência — o PDF traz um QR code para você voltar a esta página e pedir a tabela atualizada com o Paulo, inclusive mostrando pelo celular a quem estiver com você.</p>
     <button class="btn-gold" onclick="baixarManualPDF()" style="width:100%;justify-content:center">Confirmar e baixar PDF</button>
   </div>
 </div>
@@ -459,6 +473,67 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div class="depo-photo"><img src="clientes-img/cliente-18.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-21.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-25.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="nota-head reveal">
+      <div class="nota-score">
+        <div class="tier">Bom</div><div class="of">avaliação geral</div>
+      </div>
+      <div class="nota-intro">
+        <div class="eyebrow">Metodologia Paulo Cotrim</div>
+        <h2 class="display">Minha avaliação, critério por critério</h2>
+        <p>Avalio cada empreendimento nos critérios que realmente pesam na hora de comprar — de localização a custo-benefício. Sem achismo: cada nota tem um porquê, que eu explico abaixo.</p>
+      </div>
+    </div>
+    <div class="crit-grid reveal"><div class="crit">
+      <div class="crit-top"><span class="crit-name">Localização</span></div>
+      <div class="crit-bar"><span style="width:70.0%"></span></div>
+      <p class="crit-desc">Av. Pastor Martin Luther King Jr, Inhaúma, com boa conexão viária.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">Condomínio fechado com elevadores e estrutura de lazer, incluindo piscina.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Construtora</span></div>
+      <div class="crit-bar"><span style="width:70.0%"></span></div>
+      <p class="crit-desc">MRV é a maior construtora do Brasil em unidades entregues no segmento econômico.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
+      <div class="crit-bar"><span style="width:70.0%"></span></div>
+      <p class="crit-desc">Bairro residencial com demanda estável de locação.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Tipologia</span></div>
+      <div class="crit-bar"><span style="width:70.0%"></span></div>
+      <p class="crit-desc">1 e 2 quartos, de 35,32m² (unidade PCD, 1 quarto) a 40,85m², com opção de varanda nas de 2 quartos.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Escala do empreendimento</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">500 unidades — condomínio de grande porte com 3 elevadores por torre.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Facilidade de pagamento</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">Até 12x após a entrega das chaves — ajuda no planejamento financeiro.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">Segmento econômico com boa relação entre preço e infraestrutura entregue.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="analise reveal">
+      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
+      <div>
+        <div class="eyebrow">A minha análise final, direto ao ponto</div>
+        <p class="analise-quote">Eu não recomendo o Primor Carioca pra todo mundo — recomendo pra quem quer sair do aluguel na Zona Norte sem complicar. É simples: 500 unidades, condomínio grande, com estrutura de lazer completa e 3 elevadores por torre, num bairro que respira perto das estações de Inhaúma e Del Castilho. O que me convence de verdade é o pagamento facilitado em até 12x depois da entrega das chaves — na prática, isso segura seu bolso no momento mais apertado, que é a mudança. As plantas são compactas, de 35 a 40m², então se você precisa de mais espaço eu já aviso: não é pra você. Mas se o seu objetivo é ter a chave na mão com o mínimo de sufoco financeiro, esse é um dos produtos de entrada mais honestos que eu acompanho hoje.</p>
+        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
+      </div>
     </div>
   </div>
 </section>
@@ -538,32 +613,151 @@ function pdfNav(delta){
 </script>
 <script>
 function tf(b){var a=b.nextElementSibling,o=b.classList.contains('open');document.querySelectorAll('.faq-q').forEach(function(x){x.classList.remove('open');x.nextElementSibling.classList.remove('open')});if(!o){b.classList.add('open');a.classList.add('open')}}
+
+/* ===== SIMULADOR DE FINANCIAMENTO — Primor Carioca ===== */
+var SIMU_PRECO = 262990;
+var SIMU_UNIDADE = "Apartamento (PCD), 1 quarto";
+var SIMU_LAST = null; // guarda o último resultado calculado, usado pelo PDF
+
+function parseBRLnum(v){
+  if(!v) return 0;
+  v = String(v).replace(/[R$\s]/g,'').replace(/\./g,'').replace(',', '.');
+  var n = parseFloat(v);
+  return isNaN(n) ? 0 : n;
+}
+function fmtBRL(n){
+  return 'R$ ' + (n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+
+function simuCalc(){
+  var renda = parseBRLnum(document.getElementById('simRenda').value);
+  var modSel = document.getElementById('simMod').value;
+  var mod = modSel==='auto' ? (renda>12000?'sbpe':'mcmv') : modSel;
+  var pctFin = mod==='sbpe' ? 0.90 : 0.80;
+  var preco = SIMU_PRECO;
+  var aprovado = Math.min(preco*pctFin, preco);
+  var entradaCalc = Math.max(0, preco-aprovado);
+  var entradaInput = document.getElementById('simEntrada').value;
+  var entrada = entradaInput.trim()!=='' ? Math.max(0,parseBRLnum(entradaInput)) : entradaCalc;
+  var limite20 = preco*0.20;
+  var parcelavel = Math.min(entrada, limite20);
+  var aVista = Math.max(0, entrada-limite20);
+  var temFgts = document.getElementById('simFgts').checked;
+  var fgtsValor = temFgts ? parseBRLnum(document.getElementById('simFgtsValor').value) : 0;
+  var fgtsAplicado = Math.min(fgtsValor, aVista);
+  var aVistaFinal = Math.max(0, aVista-fgtsAplicado);
+  var parcelas = parseInt(document.getElementById('simParcelas').value,10) || 1;
+  var reforcoDez = parseBRLnum(document.getElementById('simReforco').value);
+  var anos = Math.max(1, Math.ceil(parcelas/12));
+  var totalReforcos = Math.min(parcelavel, reforcoDez*anos);
+  var baseMensal = Math.max(0, parcelavel-totalReforcos);
+  var parcelaMensal = parcelas>0 ? baseMensal/parcelas : 0;
+  var parcelaChavesMax = renda*0.30;
+  var valorChavesMax12x = parcelaChavesMax*12;
+  var semEntradaAVista = (aVistaFinal<=0.005);
+  return {renda:renda,mod:mod,pctFin:pctFin,preco:preco,aprovado:aprovado,entrada:entrada,limite20:limite20,
+    parcelavel:parcelavel,aVista:aVista,fgtsAplicado:fgtsAplicado,aVistaFinal:aVistaFinal,parcelas:parcelas,
+    reforcoDez:reforcoDez,totalReforcos:totalReforcos,parcelaMensal:parcelaMensal,parcelaChavesMax:parcelaChavesMax,
+    valorChavesMax12x:valorChavesMax12x,semEntradaAVista:semEntradaAVista};
+}
+
+function simuUpdate(){
+  document.getElementById('simFgtsValor').style.display = document.getElementById('simFgts').checked ? 'block' : 'none';
+  document.getElementById('simParcelasVal').textContent = document.getElementById('simParcelas').value;
+  var c = simuCalc();
+  SIMU_LAST = c;
+  document.getElementById('simModBadge').textContent = (c.mod==='sbpe' ? 'SBPE · financia 90% da unidade' : 'MCMV · financia 80% da unidade');
+
+  var out = ''
+    +'<div class="sim-out-card hl"><div class="l">Financiamento estimado</div><div class="v">'+fmtBRL(c.aprovado)+'</div></div>'
+    +'<div class="sim-out-card"><div class="l">Entrada total</div><div class="v">'+fmtBRL(c.entrada)+'</div></div>'
+    +'<div class="sim-out-card"><div class="l">Parcelável (até 20% do imóvel)</div><div class="v">'+fmtBRL(c.parcelavel)+'</div></div>'
+    +'<div class="sim-out-card'+(c.semEntradaAVista?'':' sim-warn')+'"><div class="l">Entrada à vista necessária</div><div class="v">'+fmtBRL(c.aVistaFinal)+'</div></div>'
+    +'<div class="sim-out-card"><div class="l">Parcela da entrada ('+c.parcelas+'x)</div><div class="v">'+fmtBRL(c.parcelaMensal)+'</div></div>'
+    +'<div class="sim-out-card"><div class="l">FGTS aplicado</div><div class="v">'+fmtBRL(c.fgtsAplicado)+'</div></div>';
+  document.getElementById('simOut').innerHTML = out;
+
+  var note = '';
+  if(c.semEntradaAVista){
+    note += '<strong>Você pode ir para as chaves sem dar entrada à vista</strong> — toda a sua entrada de '+fmtBRL(c.entrada)+' cabe dentro dos 20% do valor do imóvel parceláveis em até '+c.parcelas+'x. ';
+  } else {
+    note += 'Sua entrada de '+fmtBRL(c.entrada)+' é maior que os 20% do valor do imóvel que podem ser parcelados ('+fmtBRL(c.limite20)+'). O que exceder — '+fmtBRL(c.aVistaFinal)+' — precisa ser pago à vista'+(c.fgtsAplicado>0?' mesmo depois de usar o FGTS':'')+'. ';
+  }
+  if(c.totalReforcos>0){
+    note += 'Considerado reforço de '+fmtBRL(c.reforcoDez)+' em cada dezembro ao longo de '+Math.max(1,Math.ceil(c.parcelas/12))+' ano(s), reduzindo a parcela mensal. ';
+  }
+  note += 'Na entrega das chaves, o valor cobrado deve caber na sua renda: com '+fmtBRL(c.renda)+' de renda familiar, a parcela das chaves não deveria passar de <strong>'+fmtBRL(c.parcelaChavesMax)+'/mês</strong>, ou seja, até <strong>'+fmtBRL(c.valorChavesMax12x)+'</strong> parcelado em até 12x pós-chaves. ';
+  note += '<br><span style="opacity:.85">Simulação educativa com base no valor de tabela pública ('+fmtBRL(c.preco)+') — a prestação real do financiamento e as condições finais são calculadas pela Caixa na Aprovação Expressa com o Paulo.</span>';
+  document.getElementById('simNote').innerHTML = note;
+}
+
+function whatsappSimu(){
+  var c = SIMU_LAST || simuCalc();
+  var msg = 'Olá Paulo! Fiz a simulação do Primor Carioca — Fase 2 ('+SIMU_UNIDADE+'):\n\n'
+    +'Renda: '+fmtBRL(c.renda)+'\nModalidade: '+c.mod.toUpperCase()+'\nFinanciamento estimado: '+fmtBRL(c.aprovado)+'\nEntrada total: '+fmtBRL(c.entrada)
+    +'\nParcelável (20%): '+fmtBRL(c.parcelavel)+' em '+c.parcelas+'x de '+fmtBRL(c.parcelaMensal)
+    +'\nEntrada à vista: '+fmtBRL(c.aVistaFinal)+(c.fgtsAplicado>0?'\nFGTS usado: '+fmtBRL(c.fgtsAplicado):'')
+    +'\n\nQuero confirmar esses valores com você!';
+  if(window.enviarLeadCRM) enviarLeadCRM({
+    nome:'Lead Simulador Primor Carioca', telefone:'', interesse:'Primor Carioca — Fase 2', renda:fmtBRL(c.renda),
+    regiao:'Inhaúma · Zona Norte', origem:'simulador-imovel',
+    extras:{preco:c.preco, entrada:c.entrada, aprovado:c.aprovado, modalidade:c.mod}
+  });
+  window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');
+}
+(function(){ if(document.getElementById('simRenda')) simuUpdate(); })();
+
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 function openHeroLb(){document.getElementById('heroLb').classList.add('open');document.body.style.overflow='hidden'}
 function closeHeroLb(){document.getElementById('heroLb').classList.remove('open');document.body.style.overflow=''}
 
+function abrirManualModal(){
+  var row = document.getElementById('modalSimCheckRow');
+  if(row) row.style.display = SIMU_LAST ? 'flex' : 'none';
+  document.getElementById('manualModal').style.display = 'flex';
+}
 function baixarManualPDF(){
   var url="https://paulocotrim.com.br/emp-primor-carioca.html";
   var qr="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(url);
-  var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Manual — Primor Carioca — Fase 2</title>'
+  var incluirSim = document.getElementById('simIncluirPdf') && document.getElementById('simIncluirPdf').checked;
+  var c = incluirSim ? (SIMU_LAST || (document.getElementById('simRenda') ? simuCalc() : null)) : null;
+
+  var simBlock = '';
+  if(c){
+    simBlock = '<div class="simh">Sua simulação de financiamento</div>'
+      +'<div class="row"><span class="rk">Unidade simulada</span><span class="rv">'+SIMU_UNIDADE+' — '+fmtBRL(c.preco)+'</span></div>'
+      +'<div class="row"><span class="rk">Renda informada</span><span class="rv">'+fmtBRL(c.renda)+'</span></div>'
+      +'<div class="row"><span class="rk">Modalidade</span><span class="rv">'+c.mod.toUpperCase()+' — financia '+Math.round(c.pctFin*100)+'%</span></div>'
+      +'<div class="row"><span class="rk">Financiamento estimado</span><span class="rv">'+fmtBRL(c.aprovado)+'</span></div>'
+      +'<div class="row"><span class="rk">Entrada total</span><span class="rv">'+fmtBRL(c.entrada)+'</span></div>'
+      +'<div class="row"><span class="rk">Parcelável (até 20% do imóvel)</span><span class="rv">'+fmtBRL(c.parcelavel)+' em '+c.parcelas+'x de '+fmtBRL(c.parcelaMensal)+'</span></div>'
+      +'<div class="row"><span class="rk">Entrada à vista necessária</span><span class="rv">'+fmtBRL(c.aVistaFinal)+'</span></div>'
+      +(c.fgtsAplicado>0 ? '<div class="row"><span class="rk">FGTS aplicado</span><span class="rv">'+fmtBRL(c.fgtsAplicado)+'</span></div>' : '')
+      +'<div class="row"><span class="rk">Parcela máxima nas chaves (renda)</span><span class="rv">'+fmtBRL(c.parcelaChavesMax)+'/mês</span></div>'
+      +'<div class="note">Simulação educativa e não vinculante, com base no valor de tabela pública. A prestação real e as condições finais são calculadas pela Caixa na Aprovação Expressa com o Paulo.</div>';
+  }
+
+  var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Tabela de vendas — Primor Carioca — Fase 2</title>'
     +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
     +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
     +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:28px}'
-    +'.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e8eaed;font-size:14px}.rk{color:#6b7280}.rv{font-weight:600}'
+    +'.row{display:flex;justify-content:space-between;gap:14px;padding:10px 0;border-bottom:1px solid #e8eaed;font-size:14px}.rk{color:#6b7280}.rv{font-weight:600;text-align:right}'
+    +'.simh{font-family:Fraunces,serif;font-size:16px;color:#b8873a;margin:26px 0 8px;padding-top:18px;border-top:2px solid #b8873a}'
     +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
     +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e8eaed}'
     +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
     +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
-    +'<h1>Primor Carioca — Fase 2</h1><div class="sub">Manual do empreendimento · Paulo Cotrim · CRECI-RJ 77677-F</div>'
+    +'<h1>Primor Carioca — Fase 2</h1><div class="sub">Tabela de vendas · Paulo Cotrim · CRECI-RJ 77677-F</div>'
     +'<div class="row"><span class="rk">Construtora</span><span class="rv">MRV</span></div>'
     +'<div class="row"><span class="rk">Bairro</span><span class="rv">Inhaúma · Zona Norte</span></div>'
     +'<div class="row"><span class="rk">Tipologia</span><span class="rv">1 e 2 quartos</span></div>'
+    +'<div class="row"><span class="rk">Unidade de entrada</span><span class="rv">Apartamento (PCD), 1 quarto — R$ 262.990</span></div>'
     +'<div class="row"><span class="rk">Status</span><span class="rv">Lançamento</span></div>'
     +'<div class="row"><span class="rk">Entrega</span><span class="rv">A definir</span></div>'
-    +'<div class="note">Preço, entrada e forma de pagamento variam por unidade disponível e por data — confirme a tabela atualizada diretamente com o Paulo antes de decidir.</div>'
-    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à página</b>Reveja fotos, vídeo, mapa e fale com o Paulo pelo WhatsApp direto do celular.</div></div>'
-    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Documento informativo, não substitui a tabela oficial</div>'
+    +simBlock
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à página</b>Reveja fotos, vídeo, mapa, refaça a simulação e fale com o Paulo pelo WhatsApp direto do celular.</div></div>'
+    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Documento informativo, não substitui a tabela oficial nem a proposta da Caixa</div>'
     +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
