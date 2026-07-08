@@ -70,8 +70,8 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .eyebrow{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
 .stitle{font-size:clamp(24px,3.4vw,36px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
 .ssub{font-size:16px;color:var(--gray);max-width:60ch;line-height:1.65}
-.analise{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center}
-.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;background:var(--mist);box-shadow:var(--shadow-lg)}
+.analise{display:grid;grid-template-columns:180px 1fr;gap:36px;align-items:center}
+.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow-lg)}
 .analise-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .analise-photo:hover img{transform:scale(1.045)}
 .analise-quote{font-family:'Fraunces',serif;font-size:clamp(19px,2.2vw,25px);line-height:1.4;color:var(--ink);letter-spacing:-.01em;margin-bottom:22px;font-weight:500}
@@ -79,7 +79,7 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .analise-sign{display:flex;align-items:center;gap:12px}
 .analise-sign-line{width:32px;height:1px;background:var(--gold)}
 .analise-sign b{font-size:14px}.analise-sign span{font-size:12.5px;color:var(--gray);display:block}
-@media(max-width:760px){.analise{grid-template-columns:1fr;gap:28px}.analise-photo{max-width:240px}}
+@media(max-width:760px){.analise{grid-template-columns:1fr;gap:22px}.analise-photo{max-width:130px}}
 .nota-head{display:flex;gap:28px;align-items:center;margin-bottom:40px;flex-wrap:wrap}
 .nota-score{background:var(--petrol);color:#fff;border-radius:20px;padding:26px 32px;text-align:center;min-width:150px;box-shadow:0 20px 46px -12px rgba(15,46,54,.45)}
 .nota-score .big{font-family:'Fraunces',serif;font-size:52px;line-height:1;font-weight:600}
@@ -164,9 +164,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .manual-preview div span{color:var(--ink);font-weight:600;text-align:right}
 .manual-note{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
-.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:640px){.depo-grid{grid-template-columns:repeat(2,1fr)}}
-.depo-photo{border-radius:14px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow-lg)}
+.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px}
+@media(max-width:640px){.depo-grid{grid-template-columns:repeat(4,1fr);max-width:280px}}
+.depo-photo{border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow)}
 .depo-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
 .depo-photo:hover img{transform:scale(1.06)}
 .im-map-route-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
@@ -242,18 +242,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="analise reveal">
-      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
-      <div>
-        <div class="eyebrow">A análise de Paulo Cotrim</div>
-        <p class="analise-quote">O CTV Beat Residencial fica no coração de Madureira, o maior polo comercial da Zona Norte — perto do Mercadão e do Parque Madureira. São 168 unidades em 2 blocos: apartamentos de 2 quartos com cerca de 50m² e coberturas de até 110m², com opção de vaga e lazer completo (mais de 15 itens, segundo a construtora). É um produto de bairro tradicional e alta liquidez de locação, com preços a partir de R$ 229.000 — uma das entradas mais acessíveis entre os lançamentos que analiso.</p>
-        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="section">
   <div class="wrap">
@@ -298,53 +287,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <p style="font-size:14.5px;color:var(--gray)">A construtora descreve o lazer como "completo, com mais de 15 itens" — condomínio fechado numa área residencial protegida, próximo ao Mercadão de Madureira e ao Parque Madureira.</p>
   </div>
 </section>
-<section class="section section-mist">
-  <div class="wrap">
-    <div class="nota-head reveal">
-      <div class="nota-score">
-        <div class="tier">Bom</div><div class="of">avaliação geral</div>
-      </div>
-      <div class="nota-intro">
-        <div class="eyebrow">Metodologia Paulo Cotrim</div>
-        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
-        <p>Avalio cada empreendimento em critérios que realmente importam na hora de comprar — de localização a custo-benefício. Sem achismo: cada critério tem um porquê.</p>
-      </div>
-    </div>
-    <div class="crit-grid reveal"><div class="crit">
-      <div class="crit-top"><span class="crit-name">Localização</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">Madureira, o coração comercial da Zona Norte, perto do Mercadão e do Parque Madureira.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">Lazer completo com mais de 15 itens: piscina, salão de festas, parquinho e mais.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Construtora</span></div>
-      <div class="crit-bar"><span style="width:70.0%"></span></div>
-      <p class="crit-desc">CTV com atuação consolidada em produtos residenciais na Zona Norte.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">Madureira tem forte demanda de locação por ser polo comercial e residencial.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Eficiência de planta</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">2 quartos de 50m² e coberturas de até 110m² — opção de vaga.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Mobilidade</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">Madureira é ponto de conexão entre Zona Norte e Zona Oeste, perto de estações de trem.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Valorização</span></div>
-      <div class="crit-bar"><span style="width:65.0%"></span></div>
-      <p class="crit-desc">Região estável, com valorização atrelada à dinâmica geral da Zona Norte.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">Boa relação entre metragem oferecida e localização na via principal.</p>
-    </div></div>
-  </div>
-</section>
+
 
 <section class="section">
   <div class="wrap">
@@ -468,10 +411,67 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div class="depo-photo"><img src="clientes-img/cliente-3.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-7.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-9.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-11.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-18.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-21.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-25.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="nota-head reveal">
+      <div class="nota-score">
+        <div class="tier">Bom</div><div class="of">avaliação geral</div>
+      </div>
+      <div class="nota-intro">
+        <div class="eyebrow">Metodologia Paulo Cotrim</div>
+        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
+        <p>Avalio cada empreendimento em critérios que realmente importam na hora de comprar — de localização a custo-benefício. Sem achismo: cada critério tem um porquê.</p>
+      </div>
+    </div>
+    <div class="crit-grid reveal"><div class="crit">
+      <div class="crit-top"><span class="crit-name">Localização</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">Madureira, o coração comercial da Zona Norte, perto do Mercadão e do Parque Madureira.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">Lazer completo com mais de 15 itens: piscina, salão de festas, parquinho e mais.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Construtora</span></div>
+      <div class="crit-bar"><span style="width:70.0%"></span></div>
+      <p class="crit-desc">CTV com atuação consolidada em produtos residenciais na Zona Norte.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">Madureira tem forte demanda de locação por ser polo comercial e residencial.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Eficiência de planta</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">2 quartos de 50m² e coberturas de até 110m² — opção de vaga.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Mobilidade</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">Madureira é ponto de conexão entre Zona Norte e Zona Oeste, perto de estações de trem.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Valorização</span></div>
+      <div class="crit-bar"><span style="width:65.0%"></span></div>
+      <p class="crit-desc">Região estável, com valorização atrelada à dinâmica geral da Zona Norte.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">Boa relação entre metragem oferecida e localização na via principal.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="analise reveal">
+      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
+      <div>
+        <div class="eyebrow">A análise de Paulo Cotrim</div>
+        <p class="analise-quote">O CTV Beat Residencial fica no coração de Madureira, o maior polo comercial da Zona Norte — perto do Mercadão e do Parque Madureira. São 168 unidades em 2 blocos: apartamentos de 2 quartos com cerca de 50m² e coberturas de até 110m², com opção de vaga e lazer completo (mais de 15 itens, segundo a construtora). É um produto de bairro tradicional e alta liquidez de locação, com preços a partir de R$ 229.000 — uma das entradas mais acessíveis entre os lançamentos que analiso.</p>
+        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
+      </div>
     </div>
   </div>
 </section>

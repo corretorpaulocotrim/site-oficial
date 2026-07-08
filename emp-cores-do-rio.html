@@ -70,15 +70,15 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.85);backdr
 .stitle{font-size:clamp(24px,3.4vw,36px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
 .ssub{font-size:16px;color:var(--gray);max-width:60ch;line-height:1.6}
 /* ANÁLISE PESSOAL */
-.analise{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center}
-.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;background:var(--mist);box-shadow:var(--shadow)}
+.analise{display:grid;grid-template-columns:180px 1fr;gap:36px;align-items:center}
+.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow)}
 .analise-photo img{width:100%;height:100%;object-fit:cover}
 .analise-quote{font-family:'Fraunces',serif;font-size:clamp(20px,2.4vw,27px);line-height:1.4;color:var(--ink);letter-spacing:-.01em;margin-bottom:22px;font-weight:500}
 .analise-quote::before{content:'"';color:var(--gold);font-size:1.4em;line-height:0;vertical-align:-.3em;margin-right:.06em}
 .analise-sign{display:flex;align-items:center;gap:12px}
 .analise-sign-line{width:32px;height:1px;background:var(--gold)}
 .analise-sign b{font-size:14px}.analise-sign span{font-size:12.5px;color:var(--gray);display:block}
-@media(max-width:760px){.analise{grid-template-columns:1fr;gap:28px}.analise-photo{max-width:240px}}
+@media(max-width:760px){.analise{grid-template-columns:1fr;gap:22px}.analise-photo{max-width:130px}}
 /* NOTA */
 .nota-head{display:flex;gap:28px;align-items:center;margin-bottom:40px;flex-wrap:wrap}
 .nota-score{background:var(--petrol);color:#fff;border-radius:20px;padding:26px 32px;text-align:center;min-width:150px}
@@ -155,9 +155,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.6,.2,1),transform .6s cubic-bezier(.2,.6,.2,1)}
 .reveal.in{opacity:1;transform:none}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
-.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:640px){.depo-grid{grid-template-columns:repeat(2,1fr)}}
-.depo-photo{border-radius:14px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow-lg)}
+.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px}
+@media(max-width:640px){.depo-grid{grid-template-columns:repeat(4,1fr);max-width:280px}}
+.depo-photo{border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow)}
 .depo-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
 .depo-photo:hover img{transform:scale(1.06)}
 .im-map-route-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
@@ -231,18 +231,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 </section>
 
 <!-- ANÁLISE PESSOAL -->
-<section class="section">
-  <div class="wrap">
-    <div class="analise reveal">
-      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim"/></div>
-      <div>
-        <div class="eyebrow">A análise de Paulo Cotrim</div>
-        <p class="analise-quote">Se eu fosse comprar no Centro hoje, o Cores do Rio estaria no topo da minha lista. É um dos poucos prontos para morar numa região que está sendo reconstruída pelo programa Reviver Centro — o que significa comprar antes da valorização plena. Para quem quer renda de locação, os studios aqui praticamente não ficam vagos: a demanda de quem trabalha no Centro é constante. E o fato de já sair com armários de cozinha reduz seu investimento inicial. É um imóvel para quem pensa em patrimônio e liquidez, não só em morar.</p>
-        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="section">
   <div class="wrap">
@@ -258,57 +247,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 </section>
 
 <!-- NOTA PAULO COTRIM -->
-<section class="section section-mist">
-  <div class="wrap">
-    <div class="nota-head reveal">
-      <div class="nota-score">
-        <div class="tier">Excelente</div><div class="of">avaliação geral</div>
-      </div>
-      <div class="nota-intro">
-        <div class="eyebrow">Metodologia Paulo Cotrim</div>
-        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
-        <p>Avalio cada empreendimento em 9 dimensões que realmente importam na hora de comprar — de localização a custo-benefício. Sem achismo: cada critério tem um porquê.</p>
-      </div>
-    </div>
-    <div class="crit-grid reveal"><div class="crit">
-      <div class="crit-top"><span class="crit-name">Localização</span></div>
-      <div class="crit-bar"><span style="width:95.0%"></span></div>
-      <p class="crit-desc">No coração do Centro, a 5 min do VLT e da Central. Tudo a pé.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
-      <div class="crit-bar"><span style="width:90.0%"></span></div>
-      <p class="crit-desc">Comércio, bancos, hospitais e serviços consolidados no entorno.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Construtora</span></div>
-      <div class="crit-bar"><span style="width:85.0%"></span></div>
-      <p class="crit-desc">W3 com histórico de entregas no Centro e no programa Reviver Centro.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
-      <div class="crit-bar"><span style="width:90.0%"></span></div>
-      <p class="crit-desc">Studios no Centro têm altíssima demanda de locação e revenda.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Valorização</span></div>
-      <div class="crit-bar"><span style="width:95.0%"></span></div>
-      <p class="crit-desc">Programa Reviver Centro impulsiona a região; forte potencial.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Mobilidade</span></div>
-      <div class="crit-bar"><span style="width:95.0%"></span></div>
-      <p class="crit-desc">VLT, metrô, trem e ônibus — um dos melhores nós de transporte do Rio.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Lazer</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">Pátio central, academia, espaço gourmet, home office e sala de reunião.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Acabamento</span></div>
-      <div class="crit-bar"><span style="width:85.0%"></span></div>
-      <p class="crit-desc">Entregue com armários de cozinha; padrão acima do econômico.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
-      <div class="crit-bar"><span style="width:90.0%"></span></div>
-      <p class="crit-desc">Pronto para morar com renda de locação imediata — raro no Centro.</p>
-    </div></div>
-  </div>
-</section>
+
 
 <!-- VIDEO -->
 <section class="section" id="video">
@@ -455,15 +394,76 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div class="depo-photo"><img src="clientes-img/cliente-3.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-7.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-9.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-11.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-18.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-21.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-25.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
     </div>
   </div>
 </section>
 
 <!-- CTA -->
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="nota-head reveal">
+      <div class="nota-score">
+        <div class="tier">Excelente</div><div class="of">avaliação geral</div>
+      </div>
+      <div class="nota-intro">
+        <div class="eyebrow">Metodologia Paulo Cotrim</div>
+        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
+        <p>Avalio cada empreendimento em 9 dimensões que realmente importam na hora de comprar — de localização a custo-benefício. Sem achismo: cada critério tem um porquê.</p>
+      </div>
+    </div>
+    <div class="crit-grid reveal"><div class="crit">
+      <div class="crit-top"><span class="crit-name">Localização</span></div>
+      <div class="crit-bar"><span style="width:95.0%"></span></div>
+      <p class="crit-desc">No coração do Centro, a 5 min do VLT e da Central. Tudo a pé.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
+      <div class="crit-bar"><span style="width:90.0%"></span></div>
+      <p class="crit-desc">Comércio, bancos, hospitais e serviços consolidados no entorno.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Construtora</span></div>
+      <div class="crit-bar"><span style="width:85.0%"></span></div>
+      <p class="crit-desc">W3 com histórico de entregas no Centro e no programa Reviver Centro.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
+      <div class="crit-bar"><span style="width:90.0%"></span></div>
+      <p class="crit-desc">Studios no Centro têm altíssima demanda de locação e revenda.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Valorização</span></div>
+      <div class="crit-bar"><span style="width:95.0%"></span></div>
+      <p class="crit-desc">Programa Reviver Centro impulsiona a região; forte potencial.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Mobilidade</span></div>
+      <div class="crit-bar"><span style="width:95.0%"></span></div>
+      <p class="crit-desc">VLT, metrô, trem e ônibus — um dos melhores nós de transporte do Rio.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Lazer</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">Pátio central, academia, espaço gourmet, home office e sala de reunião.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Acabamento</span></div>
+      <div class="crit-bar"><span style="width:85.0%"></span></div>
+      <p class="crit-desc">Entregue com armários de cozinha; padrão acima do econômico.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
+      <div class="crit-bar"><span style="width:90.0%"></span></div>
+      <p class="crit-desc">Pronto para morar com renda de locação imediata — raro no Centro.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="analise reveal">
+      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim"/></div>
+      <div>
+        <div class="eyebrow">A análise de Paulo Cotrim</div>
+        <p class="analise-quote">Se eu fosse comprar no Centro hoje, o Cores do Rio estaria no topo da minha lista. É um dos poucos prontos para morar numa região que está sendo reconstruída pelo programa Reviver Centro — o que significa comprar antes da valorização plena. Para quem quer renda de locação, os studios aqui praticamente não ficam vagos: a demanda de quem trabalha no Centro é constante. E o fato de já sair com armários de cozinha reduz seu investimento inicial. É um imóvel para quem pensa em patrimônio e liquidez, não só em morar.</p>
+        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="section">
   <div class="wrap">
     <div class="cta-band reveal">

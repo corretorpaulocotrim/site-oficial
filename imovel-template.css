@@ -110,9 +110,9 @@ img{display:block;max-width:100%}
 .im-loc-pt-links a:hover{color:var(--navy)}
 
 /* DEPOIMENTOS — fotos reais de entrega de chaves */
-.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:760px){.depo-grid{grid-template-columns:repeat(2,1fr)}}
-.depo-photo{border-radius:14px;overflow:hidden;aspect-ratio:1/1;background:var(--light);box-shadow:var(--shadow-lg)}
+.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px}
+@media(max-width:760px){.depo-grid{grid-template-columns:repeat(4,1fr);max-width:280px}}
+.depo-photo{border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--light);box-shadow:var(--shadow-lg)}
 .depo-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
 .depo-photo:hover img{transform:scale(1.06)}
 

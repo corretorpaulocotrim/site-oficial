@@ -252,7 +252,7 @@ function render(){
         <h2><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><path d="M20.42 4.58a5.4 5.4 0 00-7.65 0L12 5.35l-.77-.77a5.4 5.4 0 00-7.65 7.65L12 20.5l8.42-8.27a5.4 5.4 0 000-7.65z"/></svg>Famílias que já receberam as chaves</h2>
         <p class="im-desc" style="margin-bottom:16px">Mais de 700 famílias já aprovadas e com as chaves em mãos. Alguns momentos reais de entrega, com nossa equipe:</p>
         <div class="depo-grid">
-          ${['cliente-2','cliente-3','cliente-7','cliente-9','cliente-11','cliente-18','cliente-21','cliente-25'].map(function(f){
+          ${['cliente-2','cliente-3','cliente-7','cliente-9'].map(function(f){
             return `<div class="depo-photo"><img src="clientes-img/${f}.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>`;
           }).join('')}
         </div>

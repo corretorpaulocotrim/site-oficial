@@ -95,6 +95,22 @@ a{color:inherit;text-decoration:none}
 .wa-fab a:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(184,135,58,.42)}
 @media(max-width:600px){.steps-outer{padding:32px 16px 60px}.step-card{padding:20px 16px;gap:14px}.step-num{width:44px;height:44px;font-size:18px}}
 @media(max-width:480px){#uploadFormBox>div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}}
+.step-mini{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:14px 18px;margin-bottom:8px;display:flex;align-items:center;gap:14px;transition:border-color .3s var(--ease),box-shadow .3s var(--ease)}
+.step-mini:hover{border-color:rgba(184,135,58,.3);box-shadow:0 1px 4px rgba(15,46,54,.05)}
+.step-mini.done{border-color:rgba(22,163,74,.2);background:linear-gradient(135deg,#f7fdf9,#fff)}
+.step-mini-num{width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;background:var(--bg);border:1.5px solid var(--border);font-size:13px;font-weight:700;color:var(--text2)}
+.step-mini.done .step-mini-num{background:#dcfce7;border-color:#86efac;color:var(--green)}
+.step-mini-title{font-size:13.5px;font-weight:700;color:var(--text);flex:1;min-width:0}
+.step-mini-tag{font-size:10.5px;color:var(--text3);font-weight:600;white-space:nowrap}
+.steps-toggle{text-align:center;margin:18px 0 4px}
+.steps-toggle button{background:none;border:1px solid var(--border);border-radius:20px;padding:8px 18px;font-size:12px;font-weight:700;color:var(--text2);cursor:pointer;transition:.3s var(--ease)}
+.steps-toggle button:hover{border-color:var(--gold);color:var(--gold)}
+.file-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:6px 0}
+.file-row-name{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.file-row-status{flex-shrink:0;font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px}
+.file-row-status.pending{color:var(--text3)}
+.file-row-status.ok{color:var(--green)}
+.file-row-status.err{color:#b91c1c}
 </style>
 <link rel="canonical" href="https://paulocotrim.com.br/aprovacao-expressa.html"/>
 <meta property="og:title" content="Aprovação Expressa 48h — Financiamento Sem Burocracia"/>
@@ -187,6 +203,10 @@ a{color:inherit;text-decoration:none}
     <div class="step-badge active">Você está aqui</div>
   </div>
 
+  <div class="steps-toggle">
+    <button type="button" onclick="var r=document.getElementById('stepsRest');var open=r.style.display!=='none';r.style.display=open?'none':'block';this.textContent=open?'Ver o restante da jornada (etapas 3 a 8) ↓':'Ocultar etapas ↑';">Ver o restante da jornada (etapas 3 a 8) ↓</button>
+  </div>
+  <div id="stepsRest" style="display:none">
   <div class="step-card fade-in">
     <div class="step-num"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--navy);fill:none;stroke-width:2"><path d="M3 21h18M6 21V10l6-4 6 4v11M10 21v-6h4v6"/></svg></div>
     <div class="step-body">
@@ -252,6 +272,7 @@ a{color:inherit;text-decoration:none}
     </div>
     <div class="step-badge final">Seu sonho realizado</div>
   </div>
+  </div>
 </div>
 
 <section class="cta-section">
@@ -291,15 +312,22 @@ document.addEventListener('googleLoginSucesso', function(e){
 });
 
 window._docFiles = [];
+function renderFileRows(){
+  var list = document.getElementById('uploadFilesList');
+  list.innerHTML = window._docFiles.map(function(f,i){
+    return '<div class="file-row" id="filerow-'+i+'">'
+      +'<span class="file-row-name">'+f.name+' &nbsp;<span style="color:var(--text3)">('+(f.size/1024/1024).toFixed(1)+'MB)</span></span>'
+      +'<span class="file-row-status pending" id="filestatus-'+i+'">aguardando envio</span>'
+      +'</div>';
+  }).join('');
+}
 function onDocFilesSelected(fileList){
   window._docFiles = Array.from(fileList);
   var list = document.getElementById('uploadFilesList');
   var formBox = document.getElementById('uploadFormBox');
   if(!window._docFiles.length){ list.style.display='none'; formBox.style.display='none'; return; }
   list.style.display = 'block';
-  list.innerHTML = window._docFiles.map(function(f){
-    return '<div style="padding:2px 0">'+f.name+' &nbsp;('+(f.size/1024/1024).toFixed(1)+'MB)</div>';
-  }).join('');
+  renderFileRows();
   formBox.style.display = 'block';
 }
 async function enviarDocsReal(){
@@ -317,18 +345,28 @@ async function enviarDocsReal(){
 
   status.textContent = 'Enviando '+window._docFiles.length+' arquivo(s)...';
   status.style.color = 'var(--text2)';
+  window._docFiles.forEach(function(f,i){
+    var el = document.getElementById('filestatus-'+i);
+    if(el){ el.textContent='enviando…'; el.className='file-row-status pending'; }
+  });
 
   var itens = window._docFiles.map(function(f){ return {file:f, tipoDoc:f.name}; });
   var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa'}, itens);
 
   if(res && res.ok){
-    status.textContent = 'Documentos enviados com sucesso! Nossa equipe já foi avisada.';
+    window._docFiles.forEach(function(f,i){
+      var el = document.getElementById('filestatus-'+i);
+      if(el){ el.innerHTML='✓ enviado'; el.className='file-row-status ok'; }
+    });
+    status.textContent = 'Todos os documentos foram enviados com sucesso! Nossa equipe já foi avisada.';
     status.style.color = '#15803d';
     document.getElementById('docFileInput').value = '';
     window._docFiles = [];
-    document.getElementById('uploadFilesList').innerHTML = '';
-    document.getElementById('uploadFilesList').style.display = 'none';
   } else {
+    window._docFiles.forEach(function(f,i){
+      var el = document.getElementById('filestatus-'+i);
+      if(el){ el.innerHTML='✗ falhou'; el.className='file-row-status err'; }
+    });
     status.textContent = 'Não deu para enviar agora. Tente novamente ou use o WhatsApp abaixo.';
     status.style.color = '#b91c1c';
   }

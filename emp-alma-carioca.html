@@ -70,8 +70,8 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .eyebrow{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
 .stitle{font-size:clamp(24px,3.4vw,36px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
 .ssub{font-size:16px;color:var(--gray);max-width:60ch;line-height:1.65}
-.analise{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center}
-.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:3/4;background:var(--mist);box-shadow:var(--shadow-lg)}
+.analise{display:grid;grid-template-columns:180px 1fr;gap:36px;align-items:center}
+.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow-lg)}
 .analise-photo img{width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .analise-photo:hover img{transform:scale(1.045)}
 .analise-quote{font-family:'Fraunces',serif;font-size:clamp(19px,2.2vw,25px);line-height:1.4;color:var(--ink);letter-spacing:-.01em;margin-bottom:22px;font-weight:500}
@@ -79,7 +79,7 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .analise-sign{display:flex;align-items:center;gap:12px}
 .analise-sign-line{width:32px;height:1px;background:var(--gold)}
 .analise-sign b{font-size:14px}.analise-sign span{font-size:12.5px;color:var(--gray);display:block}
-@media(max-width:760px){.analise{grid-template-columns:1fr;gap:28px}.analise-photo{max-width:240px}}
+@media(max-width:760px){.analise{grid-template-columns:1fr;gap:22px}.analise-photo{max-width:130px}}
 .nota-head{display:flex;gap:28px;align-items:center;margin-bottom:40px;flex-wrap:wrap}
 .nota-score{background:var(--petrol);color:#fff;border-radius:20px;padding:26px 32px;text-align:center;min-width:150px;box-shadow:0 20px 46px -12px rgba(15,46,54,.45)}
 .nota-score .big{font-family:'Fraunces',serif;font-size:52px;line-height:1;font-weight:600}
@@ -164,9 +164,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .manual-preview div span{color:var(--ink);font-weight:600;text-align:right}
 .manual-note{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
-.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:640px){.depo-grid{grid-template-columns:repeat(2,1fr)}}
-.depo-photo{border-radius:14px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow-lg)}
+.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px}
+@media(max-width:640px){.depo-grid{grid-template-columns:repeat(4,1fr);max-width:280px}}
+.depo-photo{border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow)}
 .depo-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
 .depo-photo:hover img{transform:scale(1.06)}
 .im-map-route-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
@@ -242,18 +242,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
   </div>
 </section>
 
-<section class="section">
-  <div class="wrap">
-    <div class="analise reveal">
-      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
-      <div>
-        <div class="eyebrow">A análise de Paulo Cotrim</div>
-        <p class="analise-quote">A Emccamp está no mercado desde 1977 — quase 50 anos — e já entregou mais de 75 mil unidades no Brasil, o que pesa a favor de quem quer previsibilidade na entrega. O Alma Carioca é um condomínio grande — 4 torres, 480 unidades, todas de 2 quartos — na Vila Valqueire, bairro predominantemente residencial da Zona Norte, o que normalmente significa mais liquidez de locação e revenda do que empreendimentos pequenos e isolados. Para quem busca 2 quartos com infraestrutura de lazer completa e não quer pagar o prêmio da Zona Sul, é uma opção que merece estar na lista de comparação.</p>
-        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
+
 
 <section class="section">
   <div class="wrap">
@@ -291,53 +280,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <p style="font-size:13.5px;color:var(--gray);line-height:1.6">Com 480 unidades distribuídas em 4 torres, o Alma Carioca tem escala suficiente para diluir o custo do condomínio sem abrir mão de lazer completo — uma vantagem real de empreendimentos grandes sobre prédios pequenos e isolados.</p>
   </div>
 </section>
-<section class="section section-mist">
-  <div class="wrap">
-    <div class="nota-head reveal">
-      <div class="nota-score">
-        <div class="tier">Muito bom</div><div class="of">avaliação geral</div>
-      </div>
-      <div class="nota-intro">
-        <div class="eyebrow">Metodologia Paulo Cotrim</div>
-        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
-        <p>Avalio cada empreendimento em critérios que realmente importam na hora de comprar — de localização a custo-benefício. Sem achismo: cada critério tem um porquê.</p>
-      </div>
-    </div>
-    <div class="crit-grid reveal"><div class="crit">
-      <div class="crit-top"><span class="crit-name">Localização</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">Vila Valqueire, bairro residencial consolidado da Zona Norte, bem servido de comércio.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">Área de lazer completa, guarita e segurança em condomínio de grande porte.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Construtora</span></div>
-      <div class="crit-bar"><span style="width:85.0%"></span></div>
-      <p class="crit-desc">Emccamp tem histórico de mais de 75 mil unidades entregues em quase 50 anos de mercado.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">Condomínio grande em bairro residencial tende a ter boa demanda de locação.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Valorização</span></div>
-      <div class="crit-bar"><span style="width:70.0%"></span></div>
-      <p class="crit-desc">Região estável, sem grandes gatilhos de valorização acelerada no curto prazo.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Tamanho do condomínio</span></div>
-      <div class="crit-bar"><span style="width:75.0%"></span></div>
-      <p class="crit-desc">480 unidades — escala que dilui custo de condomínio, mas exige boa gestão.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Lazer</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">Estrutura de lazer completa para um condomínio deste porte.</p>
-    </div><div class="crit">
-      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
-      <div class="crit-bar"><span style="width:80.0%"></span></div>
-      <p class="crit-desc">Preço mais acessível que a Zona Sul para a tipologia de 2 quartos.</p>
-    </div></div>
-  </div>
-</section>
+
 
 <section class="section">
   <div class="wrap">
@@ -448,10 +391,67 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div class="depo-photo"><img src="clientes-img/cliente-3.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-7.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
       <div class="depo-photo"><img src="clientes-img/cliente-9.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-11.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-18.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-21.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-25.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="nota-head reveal">
+      <div class="nota-score">
+        <div class="tier">Muito bom</div><div class="of">avaliação geral</div>
+      </div>
+      <div class="nota-intro">
+        <div class="eyebrow">Metodologia Paulo Cotrim</div>
+        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
+        <p>Avalio cada empreendimento em critérios que realmente importam na hora de comprar — de localização a custo-benefício. Sem achismo: cada critério tem um porquê.</p>
+      </div>
+    </div>
+    <div class="crit-grid reveal"><div class="crit">
+      <div class="crit-top"><span class="crit-name">Localização</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">Vila Valqueire, bairro residencial consolidado da Zona Norte, bem servido de comércio.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Infraestrutura</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">Área de lazer completa, guarita e segurança em condomínio de grande porte.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Construtora</span></div>
+      <div class="crit-bar"><span style="width:85.0%"></span></div>
+      <p class="crit-desc">Emccamp tem histórico de mais de 75 mil unidades entregues em quase 50 anos de mercado.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Liquidez</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">Condomínio grande em bairro residencial tende a ter boa demanda de locação.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Valorização</span></div>
+      <div class="crit-bar"><span style="width:70.0%"></span></div>
+      <p class="crit-desc">Região estável, sem grandes gatilhos de valorização acelerada no curto prazo.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Tamanho do condomínio</span></div>
+      <div class="crit-bar"><span style="width:75.0%"></span></div>
+      <p class="crit-desc">480 unidades — escala que dilui custo de condomínio, mas exige boa gestão.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Lazer</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">Estrutura de lazer completa para um condomínio deste porte.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Custo-benefício</span></div>
+      <div class="crit-bar"><span style="width:80.0%"></span></div>
+      <p class="crit-desc">Preço mais acessível que a Zona Sul para a tipologia de 2 quartos.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="analise reveal">
+      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
+      <div>
+        <div class="eyebrow">A análise de Paulo Cotrim</div>
+        <p class="analise-quote">A Emccamp está no mercado desde 1977 — quase 50 anos — e já entregou mais de 75 mil unidades no Brasil, o que pesa a favor de quem quer previsibilidade na entrega. O Alma Carioca é um condomínio grande — 4 torres, 480 unidades, todas de 2 quartos — na Vila Valqueire, bairro predominantemente residencial da Zona Norte, o que normalmente significa mais liquidez de locação e revenda do que empreendimentos pequenos e isolados. Para quem busca 2 quartos com infraestrutura de lazer completa e não quer pagar o prêmio da Zona Sul, é uma opção que merece estar na lista de comparação.</p>
+        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
+      </div>
     </div>
   </div>
 </section>
