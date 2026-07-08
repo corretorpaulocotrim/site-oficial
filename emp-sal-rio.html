@@ -192,6 +192,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .constr-strip .constr-body span{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em}
 .constr-strip .constr-body b{color:var(--ink);font-size:14.5px;display:block;margin-top:2px;margin-bottom:6px}
 .constr-strip .constr-body p{font-size:12.5px;color:var(--gray);line-height:1.5}
+.hero-bg{cursor:zoom-in}
+.hlb{position:fixed;inset:0;z-index:950;background:rgba(9,20,24,.94);display:none;align-items:center;justify-content:center;padding:24px}
+.hlb.open{display:flex}
+.hlb img{max-width:min(92vw,1100px);max-height:88vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.hlb-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.hlb-close:hover{background:rgba(255,255,255,.22)}
 </style></head>
 <body>
 <header><div class="wrap nav">
@@ -215,7 +221,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 </header>
 
 <section class="hero">
-  <div class="hero-bg"></div><div class="hero-shade"></div>
+  <div class="hero-bg" onclick="openHeroLb()"></div><div class="hero-shade"></div><div class="hlb" id="heroLb" onclick="if(event.target===this)closeHeroLb()"><button class="hlb-close" onclick="closeHeroLb()" aria-label="Fechar">&times;</button><img src="emp-img/sal-rio.jpg" alt="Sal Rio Residencial"/></div>
   <div class="wrap hero-c">
     <span class="hero-status" style="background:#0F6E8C">Lançamento</span>
     <h1 class="display">Sal Rio Residencial</h1>
@@ -463,10 +469,4 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
   <span>© 2026 Paulo Cotrim · CRECI-RJ 77677-F · Análise independente</span>
   <a href="index.html" style="color:var(--gold)">← Voltar ao mapa</a>
 </div>
-<div class="wrap" style="padding-top:0"><p style="font-size:10.5px;color:var(--gray);opacity:.75;max-width:640px;line-height:1.6;margin:0 auto">Valores, condições de pagamento, disponibilidade e prazos de entrega são fornecidos pela construtora e estão sujeitos a alteração sem aviso prévio. Consulte sempre a tabela oficial atualizada com nossa equipe antes de decidir.</p></div></footer>
-
-<div class="wa-msg" id="wa-msg">Atendimento direto com Paulo Cotrim. Clique no WhatsApp para receber valores atualizados, disponibilidade e condições de pagamento.</div>
-<a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20sua%20an%C3%A1lise%20do%20Sal%20Rio%20Residencial%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es." class="wafloat" aria-label="WhatsApp"><svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></a>
-
-<div class="sticky-cta">
-  <div class="txt"><b>Fale com Paulo agora</b><span>Tabela oficial e disponibilidade do Sal Rio Residencial</sp
+<div class="wrap" style="padding-top:0"><p style="font-size:10.5px;color:var(--gray);opacity:.75;max-width:640px;line-height:1.6;margin:0 auto">Valores, condições de pagamento, disponibilidade e praz

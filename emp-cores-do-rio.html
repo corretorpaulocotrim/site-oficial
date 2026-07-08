@@ -183,6 +183,12 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .constr-strip .constr-body span{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em}
 .constr-strip .constr-body b{color:var(--ink);font-size:14.5px;display:block;margin-top:2px;margin-bottom:6px}
 .constr-strip .constr-body p{font-size:12.5px;color:var(--gray);line-height:1.5}
+.hero-bg{cursor:zoom-in}
+.hlb{position:fixed;inset:0;z-index:950;background:rgba(9,20,24,.94);display:none;align-items:center;justify-content:center;padding:24px}
+.hlb.open{display:flex}
+.hlb img{max-width:min(92vw,1100px);max-height:88vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.hlb-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.hlb-close:hover{background:rgba(255,255,255,.22)}
 </style></head>
 <body>
 <header><div class="wrap nav">
@@ -207,7 +213,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 
 <!-- HERO cinematográfico -->
 <section class="hero">
-  <div class="hero-bg"></div><div class="hero-shade"></div>
+  <div class="hero-bg" onclick="openHeroLb()"></div><div class="hero-shade"></div><div class="hlb" id="heroLb" onclick="if(event.target===this)closeHeroLb()"><button class="hlb-close" onclick="closeHeroLb()" aria-label="Fechar">&times;</button><img src="emp-img/cores-do-rio.jpg" alt="Cores do Rio"/></div>
   <div class="wrap hero-c">
     <span class="hero-status" style="background:#3E8E5A">Pronto para morar</span>
     <h1 class="display">Cores do Rio</h1>
@@ -426,13 +432,4 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
   <div class="wrap">
     <div class="eyebrow reveal">Para quem é indicado</div>
     <h2 class="stitle display reveal" style="margin-bottom:32px">Esse imóvel faz sentido para você?</h2>
-    <div class="perfil-grid reveal"><div class="perfil-card"><h4>Investidor</h4><p>Renda de locação imediata e alta liquidez no Centro.</p></div><div class="perfil-card"><h4>Primeiro imóvel</h4><p>Studios acessíveis, prontos, com uso de FGTS.</p></div><div class="perfil-card"><h4>Renda de aluguel</h4><p>Demanda constante de quem trabalha na região.</p></div></div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="section section-mist">
-  <div class="wrap" style="max-width:800px">
-    <div class="eyebrow reveal">Perguntas frequentes</div>
-    <h2 class="stitle display reveal" style="margin-bottom:24px">Tudo que você quer saber</h2>
-    <div class="reveal"><div class="faq-item"><button class="faq-q" onclick="tf(this)">O Cores do Rio está pronto mesmo?<svg class="ic ic-sm faq-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Sim, é pronto para morar — chaves
+    <div class="perfil-grid reveal"><div class="perfil-card"
