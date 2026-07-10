@@ -166,7 +166,7 @@ function calcularSimulacao(p){
 /* Sugere um plano dentro do teto de R$1.500/mês: quantos meses são necessários,
    e quanto precisa ir para reforço de dezembro se mesmo no máximo de meses não bastar. */
 function fsimSugerirPlano(preco, entradaAlvo, mesesMax){
-  mesesMax = mesesMax || 48;
+  mesesMax = mesesMax || 120;
   var MAX_MENSAL = 1500;
   if(entradaAlvo<=0) return {meses:1, reforco:0, cabeSemReforco:true};
   var mesesNecessarios = Math.ceil(entradaAlvo / MAX_MENSAL);
@@ -209,7 +209,7 @@ function fsimHTML(nome, precoConhecido, precoInicial, apresentacao){
     +'    </div>'
     +'    <div class="sim-grid" style="margin-bottom:10px">'
     +'      <div class="sim-field"><label>Ato de entrada — pago na assinatura (R$)</label><input type="text" id="fsimAto" placeholder="R$ 0" oninput="fsimUpdate()"></div>'
-    +'      <div class="sim-field"><label>Parcelar o restante em quantos meses?</label><input type="range" min="1" max="48" value="24" class="sim-range" id="fsimParcelas" oninput="fsimUpdate()"><div class="sim-range-val"><span id="fsimParcelasVal">24</span>x até a entrega das chaves</div></div>'
+    +'      <div class="sim-field"><label>Parcelar o restante em quantos meses?</label><input type="range" min="1" max="120" value="24" class="sim-range" id="fsimParcelas" oninput="fsimUpdate()"><div class="sim-range-val"><span id="fsimParcelasVal">24</span>x até a entrega das chaves</div></div>'
     +'      <div class="sim-field"><label>Reforço a cada dezembro (opcional)</label><input type="text" id="fsimReforco" placeholder="R$ 0" oninput="fsimUpdate()"></div>'
     +'      <div class="sim-field"><label>Valor extra na entrega das chaves (opcional)</label><input type="text" id="fsimValorChave" placeholder="R$ 0" oninput="fsimUpdate()"></div>'
     +'    </div>'
@@ -227,6 +227,7 @@ function fsimHTML(nome, precoConhecido, precoInicial, apresentacao){
     +'    </button>'
     + btnApresentacao
     +'  </div>'
+    +'  <div style="font-size:11px;color:var(--gray);margin-top:10px">Esta é uma simulação inicial. A aprovação oficial depende da análise da construtora e da instituição financeira.</div>'
     +'</div>';
 }
 
@@ -352,7 +353,7 @@ function fsimMontarAuto(){
   // roda uma simulação base (sem parcelas ainda) só pra saber o valor a distribuir
   var base = calcularSimulacao({preco:preco, renda:renda, fgtsValor:fgtsValor, entradaManual:entradaManual, atoEntrada:atoAtual, valorChave:valorChave, parcelasObra:1, reforcoDez:0, construtora:FSIM_CONSTRUTORA});
   var alvo = base.parcelavelObra;
-  var sugestao = fsimSugerirPlano(preco, alvo, 48);
+  var sugestao = fsimSugerirPlano(preco, alvo, 120);
 
   document.getElementById('fsimParcelas').value = sugestao.meses;
   document.getElementById('fsimReforco').value = sugestao.reforco>0 ? Math.ceil(sugestao.reforco).toString() : '';
@@ -430,8 +431,4 @@ function fsimDownload(nome){
     +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à página</b>Reveja fotos, mapa e fale com o Paulo pelo WhatsApp direto do celular.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
     +'<div class="legal">Documento meramente informativo e educativo, sem valor contratual. Valores, prazos, condições de pagamento e disponibilidade de unidades são de responsabilidade da construtora/incorporadora e da instituição financeira, podendo ser alterados sem aviso prévio. A aprovação de crédito depende de análise cadastral própria do agente financeiro. Consulte sempre a tabela oficial atualizada e formalize as condições finais com Paulo Cotrim antes de tomar qualquer decisão.</div>'
-    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Financiamento Imobiliário</div>'
-    +'</body></html>';
-  var win=window.open('','_blank');
-  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
-}
+    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Finan

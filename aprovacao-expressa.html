@@ -462,8 +462,16 @@ async function enviarItemDoc(key){
   if(!nome || !tel){ alert('Preencha seu nome e WhatsApp no topo antes de enviar cada documento.'); return; }
   if(!file){ return; }
   if(!window.DOC_UPLOAD_CONFIG || !window.DOC_UPLOAD_CONFIG.uploadUrl || !window.enviarDocumentos){
-    st.innerHTML = 'envio automático inativo';
-    st.style.color = '#8a6526';
+    var tipoDoc = ITEM_DOC_TYPES.find(function(t){ return t.key===key; });
+    var labelDoc = tipoDoc ? tipoDoc.label : key;
+    var msgWa = 'Oi Paulo! Vou te mandar aqui meu(minha) '+labelDoc+' para a Aprovação Expressa. Nome: '+nome+'.';
+    window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msgWa), '_blank');
+    st.textContent = 'enviado via WhatsApp ✓';
+    st.style.color = '#15803d';
+    if(row) row.classList.add('done');
+    if(chk){ chk.classList.remove('ready'); chk.classList.add('ok'); }
+    window._itemDone[key] = true;
+    atualizarProgressoItens();
     return;
   }
   st.textContent = 'enviando…';
@@ -520,18 +528,4 @@ function renderFileRows(){
   list.innerHTML = window._docFiles.map(function(f,i){
     return '<div class="file-row" id="filerow-'+i+'">'
       +'<span class="file-row-name">'+f.name+' &nbsp;<span style="color:var(--text3)">('+(f.size/1024/1024).toFixed(1)+'MB)</span></span>'
-      +'<span class="file-row-status pending" id="filestatus-'+i+'">aguardando envio</span>'
-      +'</div>';
-  }).join('');
-}
-function onDocFilesSelected(fileList){
-  window._docFiles = Array.from(fileList);
-  var list = document.getElementById('uploadFilesList');
-  var formBox = document.getElementById('uploadFormBox');
-  if(!window._docFiles.length){ list.style.display='none'; formBox.style.display='none'; return; }
-  list.style.display = 'block';
-  renderFileRows();
-  formBox.style.display = 'block';
-}
-async function enviarDocsReal(){
-  var nome = document.getElementById('do
+      +'<span class="file-row-status pending" id="filestatus-'+i+'">aguardand
