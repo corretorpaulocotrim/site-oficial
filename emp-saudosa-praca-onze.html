@@ -13,6 +13,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "Saudosa Praça Onze", "address": {"@type": "PostalAddress", "streetAddress": "Rua Benedito Hipólito, 218", "addressLocality": "Centro", "addressRegion": "RJ", "addressCountry": "BR"}}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="financing-sim.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--ink2:#12252b;--gold:#b8873a;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--maxw:1100px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
@@ -142,12 +144,18 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .manual-preview div b{color:var(--gray);font-weight:500}
 .manual-preview div span{color:var(--ink);font-weight:600;text-align:right}
 .manual-note{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
-.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px}
-@media(max-width:640px){.depo-grid{grid-template-columns:repeat(4,1fr);max-width:280px}}
-.depo-photo{border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow)}
-.depo-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
-.depo-photo:hover img{transform:scale(1.06)}
+.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:720px}
+@media(max-width:760px){.depo-grid{grid-template-columns:repeat(3,1fr);gap:8px}}
+@media(max-width:480px){.depo-grid{grid-template-columns:repeat(1,1fr);max-width:320px;margin:0 auto}}
+.depo-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;position:relative;background:var(--mist);box-shadow:var(--shadow-lg),inset 0 0 55px rgba(15,46,54,.16);transition:transform .5s var(--ease)}
+.depo-photo:hover{transform:translateY(-5px)}
+.depo-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) saturate(1.06) brightness(1.02);transition:transform 1.2s var(--ease)}
+.depo-photo:hover img{transform:scale(1.045)}
+.depo-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,46,54,.55) 0%,transparent 45%);pointer-events:none}
+.depo-tag{position:absolute;left:12px;bottom:12px;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.depo-tag svg{width:14px;height:14px;stroke:#cf9f4f;fill:none;stroke-width:2.2}
+
+
 .im-map-route-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
 @media(max-width:860px){.im-map-route-wrap{grid-template-columns:1fr}}
 .im-map-route-wrap #map-imovel{margin-bottom:0}
@@ -177,6 +185,28 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .hlb img{max-width:min(92vw,1100px);max-height:88vh;border-radius:10px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .hlb-close{position:absolute;top:20px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.25);color:#fff;font-size:22px;cursor:pointer;display:flex;align-items:center;justify-content:center}
 .hlb-close:hover{background:rgba(255,255,255,.22)}
+.sim-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:32px;max-width:900px;margin:0 auto}
+.sim-badge{display:inline-flex;align-items:center;gap:7px;background:var(--petrol-soft);color:var(--petrol);font-size:12px;font-weight:700;padding:6px 13px;border-radius:999px}
+.sim-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px 22px;margin-bottom:22px}
+.sim-field label{display:block;font-size:12px;font-weight:600;color:var(--gray);margin-bottom:6px}
+.sim-field input[type=text],.sim-field select{width:100%;padding:11px 13px;border:1px solid var(--line);border-radius:9px;font-size:14px;font-family:inherit;background:#fff}
+.sim-field input[type=text]:focus,.sim-field select:focus{outline:none;border-color:var(--gold)}
+.sim-range{width:100%;accent-color:var(--gold)}
+.sim-range-val{font-size:12.5px;color:var(--gray);margin-top:4px}
+.sim-out{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:18px}
+.sim-out-card{background:var(--mist);border-radius:12px;padding:16px}
+.sim-out-card.hl{background:var(--petrol);color:#fff}
+.sim-out-card .l{font-size:11px;text-transform:uppercase;letter-spacing:.04em;color:var(--gray);margin-bottom:5px}
+.sim-out-card.hl .l{color:rgba(255,255,255,.65)}
+.sim-out-card .v{font-family:'Fraunces',serif;font-size:19px;font-weight:600}
+.sim-note{font-size:12px;color:var(--gray);line-height:1.6;background:var(--petrol-soft);padding:12px 15px;border-radius:10px;margin-bottom:18px}
+.sim-warn{background:#fdf3e7!important;color:#8a5a1c!important}
+.sim-actions{display:flex;gap:10px;flex-wrap:wrap}
+.sim-check-row{display:flex;align-items:center;gap:9px;font-size:13px;color:var(--ink);margin:14px 0}
+.sim-check-row input{accent-color:var(--gold);width:16px;height:16px}
+@media(max-width:640px){.sim-grid{grid-template-columns:1fr}.sim-out{grid-template-columns:1fr 1fr}}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);color:var(--ink);padding:13px 22px;border-radius:12px;font-size:14.5px;font-weight:600;transition:.2s}
+.btn-ghost:hover{background:var(--mist);border-color:var(--gold)}
 </style></head>
 <body>
 <header><div class="wrap nav">
@@ -296,14 +326,30 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     </div>
     <p style="font-size:11.5px;color:var(--gray);margin-top:8px">Valores da tabela financiada com repasse imediato, válida de 02/07/2026 a 03/08/2026 — sujeitos a alteração e disponibilidade. Financiamento pelo Minha Casa Minha Vida via Caixa, ITBI e RGI grátis, entrada parcelada durante a obra.</p>
     <p style="font-size:13px;color:var(--gray);margin-top:16px;background:var(--petrol-soft);padding:14px 18px;border-radius:12px">Tabela completa por andar e posição, plantas e disponibilidade atualizada — <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20sua%20an%C3%A1lise%20do%20Saudosa%20Pra%C3%A7a%20Onze%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es." style="color:var(--gold);font-weight:600">peça a tabela oficial no WhatsApp</a>.</p>
-    <div class="manual-cta reveal">
-      <button class="btn-ghost" onclick="document.getElementById('manualModal').style.display='flex'" style="display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--line);border-radius:10px;padding:11px 20px;font-size:13.5px;font-weight:600;color:var(--ink);cursor:pointer">
-        <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-        Baixar manual em PDF
-      </button>
+        <div class="manual-cta reveal" style="display:flex;gap:10px;flex-wrap:wrap">
+      <a href="simulador.html" class="btn-gold" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+        <svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>
+        Simular financiamento agora
+      </a>
+      <a href="aprovacao-expressa.html" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+        <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>
+        Aprovação Expressa em 48h
+      </a>
     </div>
   </div>
 </section>
+
+<section class="section section-mist" id="simulador">
+  <div class="wrap">
+    <div class="sec-eyebrow reveal" style="text-align:center">Simulação Expressa</div>
+    <h2 class="stitle display reveal" style="text-align:center;margin:0 auto 12px;max-width:32ch">Simule agora seu financiamento no Saudosa Praça Onze</h2>
+    <p class="reveal" style="text-align:center;color:var(--gray);font-size:14.5px;margin:0 auto 28px;max-width:60ch">Informe sua renda e veja entrada, parcelas na obra e — se aplicável — parcelamento pós-chaves. Sem compromisso.</p>
+    <div id="fsimEmbed"></div>
+  </div>
+</section>
+<script>
+initSimuladorEmbed('fsimEmbed', {preco:285000, construtora:'Cury', nome:'Saudosa Praça Onze', bairro:'Praça Onze · Centro'});
+</script>
 <section class="section section-mist">
   <div class="wrap">
     <div class="eyebrow reveal">Localização</div>
@@ -314,7 +360,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div class="im-route-card reveal">
         <div class="im-route-title"><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:var(--gold)"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Calcule sua rota até aqui</div>
         <div class="im-route-sub">Digite seu endereço e veja se o deslocamento até aqui é viável no seu dia a dia.</div>
-        <input type="text" id="rotaOrigem" class="im-route-input" placeholder="Seu endereço de partida"/>
+        <input type="text" id="rotaOrigem" class="im-route-input" placeholder="Seu endereço de partida" onkeypress="if(event.key==='Enter'){event.preventDefault();calcularRota();}"/>
         <div class="im-route-modes">
           <button type="button" class="im-route-mode on" onclick="setRotaModo('driving',this)">De carro</button>
           <button type="button" class="im-route-mode" onclick="setRotaModo('walking',this)">A pé</button>
@@ -328,23 +374,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
   </div>
 </section>
 
-
-<div id="manualModal" class="manual-modal" style="display:none">
-  <div class="manual-modal-inner">
-    <button class="manual-close" onclick="document.getElementById('manualModal').style.display='none'" aria-label="Fechar">×</button>
-    <h3>Manual — Saudosa Praça Onze</h3>
-    <div class="manual-preview">
-      <div><b>Construtora</b><span>Cury</span></div>
-      <div><b>Produto</b><span>Saudosa Praça Onze</span></div>
-      <div><b>Tipologia</b><span>Studio a 2 quartos suíte</span></div>
-      <div><b>Bairro</b><span>Praça Onze · Centro</span></div>
-      <div><b>Status</b><span>Lançamento</span></div>
-      <div><b>Unidades</b><span>495</span></div>
-    </div>
-    <p class="manual-note">Preço, entrada e forma de pagamento variam por unidade, andar e posição, e mudam com frequência — o manual em PDF traz um QR code para você voltar a esta página e pedir a tabela atualizada com o Paulo, inclusive mostrando pelo celular a quem estiver com você.</p>
-    <button class="btn-gold" onclick="baixarManualPDF()" style="width:100%;justify-content:center">Confirmar e baixar PDF</button>
-  </div>
-</div>
 
 <section class="section section-mist">
   <div class="wrap">
@@ -386,10 +415,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <h2 class="stitle display reveal" style="margin-bottom:20px">Famílias que já receberam as chaves</h2>
     <p class="reveal" style="color:var(--gray);margin-bottom:20px;max-width:640px">Mais de 700 famílias já aprovadas e com as chaves em mãos. Alguns momentos reais de entrega, com nossa equipe:</p>
     <div class="depo-grid reveal">
-      <div class="depo-photo"><img src="clientes-img/cliente-2.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-3.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-7.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-9.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
+      <div class="depo-photo"><img src="clientes-img/cliente-7.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div>
+      <div class="depo-photo"><img src="clientes-img/cliente-25.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div>
+      <div class="depo-photo"><img src="clientes-img/cliente-18.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div>
     </div>
   </div>
 </section>
@@ -486,31 +514,6 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 function openHeroLb(){document.getElementById('heroLb').classList.add('open');document.body.style.overflow='hidden'}
 function closeHeroLb(){document.getElementById('heroLb').classList.remove('open');document.body.style.overflow=''}
 
-function baixarManualPDF(){
-  var url="https://paulocotrim.com.br/emp-saudosa-praca-onze.html";
-  var qr="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(url);
-  var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Manual — Saudosa Praça Onze</title>'
-    +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
-    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
-    +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:28px}'
-    +'.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e8eaed;font-size:14px}.rk{color:#6b7280}.rv{font-weight:600}'
-    +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
-    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e8eaed}'
-    +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
-    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
-    +'<h1>Saudosa Praça Onze</h1><div class="sub">Manual do empreendimento · Paulo Cotrim · CRECI-RJ 77677-F</div>'
-    +'<div class="row"><span class="rk">Construtora</span><span class="rv">Cury</span></div>'
-    +'<div class="row"><span class="rk">Bairro</span><span class="rv">Praça Onze · Centro</span></div>'
-    +'<div class="row"><span class="rk">Tipologia</span><span class="rv">Studio a 2 quartos suíte</span></div>'
-    +'<div class="row"><span class="rk">Status</span><span class="rv">Lançamento</span></div>'
-    +'<div class="row"><span class="rk">Unidades</span><span class="rv">495</span></div>'
-    +'<div class="note">Preço, entrada e forma de pagamento variam por unidade, andar e posição — confirme a tabela atualizada diretamente com o Paulo antes de decidir.</div>'
-    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à página</b>Reveja fotos, mapa e fale com o Paulo pelo WhatsApp direto do celular.</div></div>'
-    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Documento informativo, não substitui a tabela oficial</div>'
-    +'</body></html>';
-  var win=window.open('','_blank');
-  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
-}
 </script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
@@ -532,6 +535,8 @@ function baixarManualPDF(){
     '<div style="font-family:Inter,sans-serif;min-width:170px"><div style="font-size:13px;font-weight:800;color:#0f2e36;margin-bottom:3px">Saudosa Praça Onze</div><div style="font-size:11px;color:#6b7280">Praça Onze · Centro</div></div>',
     {maxWidth:230, closeButton:false}
   ).openPopup();
+  setTimeout(function(){ map.invalidateSize(); map.setView([lat,lng], 15); }, 300);
+  window.addEventListener('load', function(){ setTimeout(function(){ map.invalidateSize(); }, 200); });
 })();
 </script>
 <script>
@@ -550,5 +555,6 @@ function calcularRota(){
 }
 </script>
 <script src="leads.js" defer></script>
+
 </body>
 </html>

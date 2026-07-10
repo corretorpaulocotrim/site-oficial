@@ -12,28 +12,28 @@
 <meta property="og:url" content="https://paulocotrim.com.br/match.html"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#060f1e;--navy3:#0d2040;--gold:#c9993a;--gold2:#e8b84b;--green:#16a34a;--muted:#64748b}
-body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height:100vh}
+:root{--navy:#0a1f26;--navy3:#0f2e36;--gold:#b8873a;--gold2:#cf9f4f;--green:#3E8E5A;--green2:#6BAE85;--muted:#9ca3af;--ease:cubic-bezier(.16,1,.3,1)}
+body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height:100vh;-webkit-font-smoothing:antialiased}
 
 /* HEADER */
-.mh{background:rgba(6,15,30,.95);backdrop-filter:blur(12px);position:sticky;top:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(255,255,255,.06)}
+.mh{background:rgba(15,46,54,.92);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);position:sticky;top:0;z-index:100;padding:16px 40px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(255,255,255,.06),0 12px 30px -18px rgba(0,0,0,.4)}
 .mh-logo img{height:44px;width:auto;display:block}.mh-logo{font-size:16px;font-weight:800;color:#fff;text-decoration:none}
 .mh-logo small{display:block;font-size:10px;font-weight:500;color:var(--gold);letter-spacing:.06em;text-transform:uppercase}
-.mh-back{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;display:flex;align-items:center;gap:6px}
+.mh-back{color:rgba(255,255,255,.5);text-decoration:none;font-size:13px;display:flex;align-items:center;gap:6px;transition:color .3s var(--ease)}
 .mh-back:hover{color:#fff}
 
 /* HERO */
-.match-hero{text-align:center;padding:60px 20px 40px;background:linear-gradient(180deg,rgba(13,32,64,.8) 0%,transparent 100%)}
+.match-hero{text-align:center;padding:60px 20px 40px;background:linear-gradient(180deg,rgba(15,46,54,.8) 0%,transparent 100%)}
 .match-tag{display:inline-block;background:rgba(201,153,58,.15);color:var(--gold);font-size:11px;font-weight:700;padding:6px 16px;border-radius:30px;border:1px solid rgba(201,153,58,.3);letter-spacing:.06em;text-transform:uppercase;margin-bottom:20px}
-.match-h1{font-size:clamp(28px,5vw,48px);font-weight:900;line-height:1.15;margin-bottom:16px}
+.match-h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,5vw,48px);font-weight:600;letter-spacing:-.02em;line-height:1.12;margin-bottom:16px}
 .match-h1 span{color:var(--gold2)}
 .match-sub{font-size:16px;color:rgba(255,255,255,.6);max-width:520px;margin:0 auto 32px;line-height:1.6}
 .match-steps-bar{display:flex;align-items:center;justify-content:center;gap:0;max-width:400px;margin:0 auto}
 .msb-step{display:flex;flex-direction:column;align-items:center;gap:4px;flex:1}
-.msb-dot{width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.3);transition:all .3s;position:relative;z-index:1;background:var(--navy)}
+.msb-dot{width:32px;height:32px;border-radius:50%;border:2px solid rgba(255,255,255,.15);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:rgba(255,255,255,.3);transition:border-color .4s var(--ease),color .4s var(--ease),background-color .4s var(--ease);position:relative;z-index:1;background:var(--navy)}
 .msb-dot.active{border-color:var(--gold);color:var(--gold);background:rgba(201,153,58,.1)}
 .msb-dot.done{border-color:var(--green);background:var(--green);color:#fff}
 .msb-line{height:2px;background:rgba(255,255,255,.1);flex:1;margin:0 -1px;margin-bottom:20px}
@@ -46,12 +46,12 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 .quiz-step{display:none}
 .quiz-step.active{display:block;animation:fadeUp .35s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.qs-title{font-size:22px;font-weight:800;margin-bottom:8px;line-height:1.3}
+.qs-title{font-family:'Fraunces',Georgia,serif;font-size:23px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px;line-height:1.3}
 .qs-sub{font-size:14px;color:rgba(255,255,255,.5);margin-bottom:28px}
 .q-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:28px}
-.q-card{background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 16px;cursor:pointer;transition:all .2s;text-align:left}
-.q-card:hover{background:rgba(201,153,58,.08);border-color:rgba(201,153,58,.3)}
-.q-card.selected{background:rgba(201,153,58,.12);border-color:var(--gold);box-shadow:0 0 0 3px rgba(201,153,58,.15)}
+.q-card{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:18px 16px;cursor:pointer;transition:background-color .35s var(--ease),border-color .35s var(--ease),transform .35s var(--ease);text-align:left}
+.q-card:hover{background:rgba(184,135,58,.08);border-color:rgba(184,135,58,.3);transform:translateY(-2px)}
+.q-card.selected{background:rgba(184,135,58,.12);border-color:var(--gold);box-shadow:0 0 0 3px rgba(184,135,58,.15)}
 .q-card .q-icon{font-size:24px;margin-bottom:8px;display:block}
 .q-card .q-label{font-size:14px;font-weight:700;margin-bottom:3px}
 .q-card .q-sub{font-size:11px;color:rgba(255,255,255,.45)}
@@ -62,24 +62,24 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 .q-field{margin-bottom:16px}
 .q-select{width:100%;padding:13px 16px;background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.12);border-radius:12px;color:#fff;font-size:14px;font-family:inherit;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none;transition:border .2s}
 .q-select:focus{border-color:var(--gold)}
-.q-select option{background:#0d2040}
-.btn-next{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#060f1e;border:none;border-radius:12px;padding:15px 32px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;gap:8px;transition:transform .15s,box-shadow .15s;margin-top:8px}
-.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(201,153,58,.4)}
-.btn-back-step{background:transparent;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);padding:10px 20px;border-radius:10px;font-size:13px;cursor:pointer;margin-right:12px;transition:all .2s}
+.q-select option{background:#12252b}
+.btn-next{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0f2e36;border:none;border-radius:12px;padding:15px 32px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:8px;box-shadow:0 8px 22px rgba(184,135,58,.25);transition:transform .4s var(--ease),box-shadow .4s var(--ease);margin-top:8px}
+.btn-next:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(184,135,58,.36)}
+.btn-back-step{background:transparent;border:1px solid rgba(255,255,255,.12);color:rgba(255,255,255,.5);padding:10px 20px;border-radius:10px;font-size:13px;cursor:pointer;margin-right:12px;transition:border-color .3s var(--ease),color .3s var(--ease)}
 .btn-back-step:hover{border-color:rgba(255,255,255,.3);color:#fff}
 
 /* RESULT */
 #result-screen{display:none;animation:fadeUp .5s ease}
-.res-header{text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(13,32,64,.9),rgba(6,15,30,.95));border-radius:20px;border:1px solid rgba(201,153,58,.2);margin-bottom:24px}
-.res-perfil-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#060f1e;font-size:13px;font-weight:800;padding:8px 20px;border-radius:30px;margin-bottom:20px}
-.res-h1{font-size:28px;font-weight:900;margin-bottom:8px}
+.res-header{text-align:center;padding:40px 20px;background:linear-gradient(135deg,rgba(15,46,54,.92),rgba(10,31,38,.96));border-radius:20px;border:1px solid rgba(184,135,58,.2);margin-bottom:24px}
+.res-perfil-badge{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,var(--gold),var(--gold2));color:#0f2e36;font-size:13px;font-weight:700;padding:8px 20px;border-radius:30px;margin-bottom:20px}
+.res-h1{font-family:'Fraunces',Georgia,serif;font-size:29px;font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
 .res-sub{font-size:14px;color:rgba(255,255,255,.6);max-width:480px;margin:0 auto}
-.res-match-card{background:rgba(255,255,255,.04);border:1px solid rgba(201,153,58,.25);border-radius:20px;overflow:hidden;margin-bottom:16px}
+.res-match-card{background:rgba(255,255,255,.04);border:1px solid rgba(184,135,58,.25);border-radius:20px;overflow:hidden;margin-bottom:16px}
 .rmc-header{display:flex;align-items:center;gap:16px;padding:20px 24px;border-bottom:1px solid rgba(255,255,255,.06)}
 .rmc-img{width:80px;height:80px;border-radius:12px;object-fit:cover;flex-shrink:0}
 .rmc-info{flex:1}
 .rmc-tag{font-size:10px;font-weight:700;color:var(--gold);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px}
-.rmc-name{font-size:18px;font-weight:800;margin-bottom:4px}
+.rmc-name{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;letter-spacing:-.01em;margin-bottom:4px}
 .rmc-loc{font-size:12px;color:rgba(255,255,255,.5)}
 .rmc-match-pct{font-size:28px;font-weight:900;color:var(--green)}
 .rmc-body{padding:20px 24px}
@@ -92,10 +92,10 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 .bar-label{display:flex;justify-content:space-between;margin-bottom:4px;font-size:12px;font-weight:700;color:rgba(255,255,255,.6)}
 .bar-track{height:8px;background:rgba(255,255,255,.08);border-radius:10px;margin-bottom:14px;overflow:hidden}
 .bar-fill{height:100%;border-radius:10px;transition:width 1.2s ease;width:0}
-.bar-fill.green{background:linear-gradient(90deg,#16a34a,#4ade80)}
+.bar-fill.green{background:linear-gradient(90deg,var(--green),var(--green2))}
 .bar-fill.gold{background:linear-gradient(90deg,var(--gold),var(--gold2))}
-.btn-wa-result{width:100%;padding:17px;background:#25d366;color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;transition:transform .15s,box-shadow .15s}
-.btn-wa-result:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(37,211,102,.4)}
+.btn-wa-result{width:100%;padding:17px;background:var(--gold);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 24px rgba(184,135,58,.3);transition:transform .4s var(--ease),box-shadow .4s var(--ease),background-color .3s var(--ease)}
+.btn-wa-result:hover{background:#a5772e;transform:translateY(-3px);box-shadow:0 14px 34px rgba(184,135,58,.4)}
 .res-disclaimer{text-align:center;font-size:11px;color:rgba(255,255,255,.25);margin-top:16px;line-height:1.6}
 @media(max-width:600px){.q-grid{grid-template-columns:1fr}.rmc-row{grid-template-columns:1fr}.mh{padding:12px 20px}}
 </style>
@@ -103,12 +103,12 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 <body>
 
 <header class="mh">
-  <a href="index.html" class="mh-logo"><img src="logo-header.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></a>
+  <a href="index.html" class="mh-logo"><img src="logo-wordmark.png" alt="Paulo Cotrim" style="height:44px;width:auto;display:block"/></a>
   <a href="index.html" class="mh-back">← Voltar ao site</a>
 </header>
 
 <div class="match-hero">
-  <div class="match-tag">✨ Análise gratuita · 2 minutos</div>
+  <div class="match-tag"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 2l2.4 7.2L22 12l-7.6 2.8L12 22l-2.4-7.2L2 12l7.6-2.8z"/></svg>Análise gratuita · 2 minutos</div>
   <h1 class="match-h1">Qual é o imóvel ideal<br><span>para o seu perfil?</span></h1>
   <p class="match-sub">Responda 10 perguntas e descubra qual empreendimento Cury tem maior potencial para você — com análise real de aprovação e valorização.</p>
 
@@ -127,7 +127,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 
   <!-- ETAPA 1: IDENTIFICAÇÃO -->
   <div class="quiz-step active" id="step-1">
-    <div class="qs-title">Antes de tudo, vamos nos conhecer 👋</div>
+    <div class="qs-title">Antes de tudo, vamos nos conhecer</div>
     <div class="qs-sub">Seus dados são 100% confidenciais e usados apenas para personalizar sua análise.</div>
     <div class="q-field"><label class="q-label-text">Seu nome</label>
       <input class="q-input" id="q-nome" type="text" placeholder="Como prefere ser chamado?"/></div>
@@ -140,7 +140,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 
   <!-- ETAPA 2: FINANÇAS -->
   <div class="quiz-step" id="step-2">
-    <div class="qs-title">Perfil financeiro 💰</div>
+    <div class="qs-title">Perfil financeiro <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M20.59 13.41 13 21l-9-9V4h8z"/><circle cx="7.5" cy="7.5" r="1.2" fill="currentColor" stroke="none"/></svg></div>
     <div class="qs-sub">Essas informações definem quais empreendimentos se encaixam no seu perfil de aprovação.</div>
     <div class="q-field"><label class="q-label-text">Renda mensal familiar</label>
       <select class="q-select" id="q-renda">
@@ -178,26 +178,26 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 
   <!-- ETAPA 3: OBJETIVOS -->
   <div class="quiz-step" id="step-3">
-    <div class="qs-title">O que você busca? 🎯</div>
+    <div class="qs-title">O que você busca? <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg></div>
     <div class="qs-sub">Seu objetivo define a estratégia ideal de compra.</div>
     <div class="q-grid" id="q-objetivo">
       <div class="q-card" data-val="morar" onclick="selectCard(this,'q-objetivo')">
-        <span class="q-icon">🏠</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg></span>
         <div class="q-label">Morar</div>
         <div class="q-sub">Casa própria para minha família</div>
       </div>
       <div class="q-card" data-val="investir" onclick="selectCard(this,'q-objetivo')">
-        <span class="q-icon">📈</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M23 6l-9.5 9.5-5-5L1 18"/><path d="M17 6h6v6"/></svg></span>
         <div class="q-label">Investir</div>
         <div class="q-sub">Renda passiva e valorização</div>
       </div>
       <div class="q-card" data-val="airbnb" onclick="selectCard(this,'q-objetivo')">
-        <span class="q-icon">🛎️</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M18 8a6 6 0 00-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 01-3.46 0"/></svg></span>
         <div class="q-label">Airbnb / Temporada</div>
         <div class="q-sub">Retorno de 8–12% ao ano</div>
       </div>
       <div class="q-card" data-val="ambos" onclick="selectCard(this,'q-objetivo')">
-        <span class="q-icon">💡</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg></span>
         <div class="q-label">Morar e valorizar</div>
         <div class="q-sub">Patrimônio que cresce</div>
       </div>
@@ -219,38 +219,38 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 
   <!-- ETAPA 4: REGIÃO -->
   <div class="quiz-step" id="step-4">
-    <div class="qs-title">Onde você quer estar? 📍</div>
+    <div class="qs-title">Onde você quer estar? <svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
     <div class="qs-sub">Escolha a região que mais combina com seu estilo de vida ou estratégia de investimento.</div>
     <div class="q-grid" id="q-regiao" style="grid-template-columns:1fr 1fr">
       <div class="q-card" data-val="porto" onclick="selectCard(this,'q-regiao')">
-        <span class="q-icon">🌊</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M2 12c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/><path d="M2 18c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg></span>
         <div class="q-label">Porto Maravilha</div>
         <div class="q-sub">Centro · Santo Cristo · máxima valorização</div>
       </div>
       <div class="q-card" data-val="piedade" onclick="selectCard(this,'q-regiao')">
-        <span class="q-icon">🏘️</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M3 21V9l4-3v15M11 21V6l4-3v18M19 21v-9l-4-3"/><line x1="1" y1="21" x2="23" y2="21"/></svg></span>
         <div class="q-label">Piedade</div>
         <div class="q-sub">Zona Norte · MCMV · melhor custo-benefício</div>
       </div>
       <div class="q-card" data-val="cristovao" onclick="selectCard(this,'q-regiao')">
-        <span class="q-icon">🚲</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-9h5l3 9M10 8h4"/></svg></span>
         <div class="q-label">São Cristóvão</div>
         <div class="q-sub">Imperial · Bike LEV · até 2 quartos</div>
       </div>
       <div class="q-card" data-val="niteroi" onclick="selectCard(this,'q-regiao')">
-        <span class="q-icon">🏖️</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><circle cx="12" cy="9" r="3"/><path d="M12 12v9"/><path d="M2 21c2-2 4-2 6 0s4 2 6 0 4-2 6 0"/></svg></span>
         <div class="q-label">Niterói</div>
         <div class="q-sub">Vista Guanabara · Rooftop · qualidade de vida</div>
       </div>
       <div class="q-card" data-val="qualquer" onclick="selectCard(this,'q-regiao')" style="grid-column:span 2">
-        <span class="q-icon">🗺️</span>
+        <span class="q-icon"><svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4z"/><line x1="8" y1="2" x2="8" y2="18"/><line x1="16" y1="6" x2="16" y2="22"/></svg></span>
         <div class="q-label">Melhor oportunidade do momento</div>
         <div class="q-sub">Paulo indica o imóvel com maior potencial agora</div>
       </div>
     </div>
     <div style="display:flex;margin-top:8px">
       <button class="btn-back-step" onclick="goStep(3)">← Voltar</button>
-      <button class="btn-next" onclick="gerarResultado()" id="btn-gerar" style="background:linear-gradient(135deg,#16a34a,#4ade80)">
+      <button class="btn-next" onclick="gerarResultado()" id="btn-gerar" style="background:linear-gradient(135deg,#3E8E5A,#6BAE85)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
         Ver meu resultado →
       </button>
@@ -260,7 +260,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
   <!-- RESULTADO -->
   <div id="result-screen">
     <div class="res-header">
-      <div class="res-perfil-badge" id="res-badge">🎯 Perfil identificado</div>
+      <div class="res-perfil-badge" id="res-badge"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1" fill="currentColor" stroke="none"/></svg><span id="res-badge-text">Perfil identificado</span></div>
       <div class="res-h1" id="res-title">Seu imóvel ideal é...</div>
       <div class="res-sub" id="res-subtitle">Análise baseada no seu perfil financeiro e objetivos.</div>
     </div>
@@ -271,7 +271,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
         <div class="rmc-info">
           <div class="rmc-tag" id="res-tipo">Lançamento</div>
           <div class="rmc-name" id="res-nome">Orla Central</div>
-          <div class="rmc-loc" id="res-loc">📍 Centro · Porto Maravilha · RJ</div>
+          <div class="rmc-loc" id="res-loc"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span id="res-loc-text">Centro · Porto Maravilha · RJ</span></div>
         </div>
         <div style="text-align:right;flex-shrink:0">
           <div style="font-size:11px;color:rgba(255,255,255,.4);margin-bottom:2px">Compatibilidade</div>
@@ -310,7 +310,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
         </div>
         <div class="bar-track"><div class="bar-fill gold" id="bar-val"></div></div>
 
-        <div style="background:rgba(22,163,74,.08);border:1px solid rgba(22,163,74,.2);border-radius:12px;padding:14px 16px;margin:16px 0;font-size:13px;color:rgba(255,255,255,.8);line-height:1.6" id="res-analise">
+        <div style="background:rgba(184,135,58,.08);border:1px solid rgba(184,135,58,.2);border-radius:12px;padding:14px 16px;margin:16px 0;font-size:13px;color:rgba(255,255,255,.8);line-height:1.6" id="res-analise">
           Baseado no seu perfil financeiro, esse empreendimento tem o maior potencial de aprovação e retorno para você.
         </div>
 
@@ -358,7 +358,7 @@ function goStep(n){
   for(let i=1;i<=4;i++){
     const dot = document.getElementById('dot-'+i);
     const lbl = document.getElementById('lbl-'+i);
-    if(i < n){ dot.classList.remove('active'); dot.classList.add('done'); dot.textContent='✓'; lbl.classList.remove('active'); }
+    if(i < n){ dot.classList.remove('active'); dot.classList.add('done'); dot.innerHTML='<svg viewBox="0 0 24 24" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:3"><path d="M20 6 9 17l-5-5"/></svg>'; lbl.classList.remove('active'); }
     else if(i===n){ dot.classList.remove('done'); dot.classList.add('active'); dot.textContent=i; lbl.classList.add('active'); }
     else{ dot.classList.remove('active','done'); dot.textContent=i; lbl.classList.remove('active'); }
     if(i < n){ const line=document.getElementById('line-'+i); if(line) line.classList.add('done'); }
@@ -377,35 +377,35 @@ function selectCard(el, groupId){
 // Property database
 const PROPS = {
   porto_invest: {
-    nome:'Orla Central',loc:'📍 Centro · Porto Maravilha · RJ',tipo:'Lançamento Premium',
+    nome:'Orla Central',loc:'Centro · Porto Maravilha · RJ',tipo:'Lançamento Premium',
     preco:'A partir de R$ 402.000',tipoImovel:'Studio ou 1 quarto · ideal Airbnb',
     img:'https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg',
     href:'orla-central.html',apr:92,val:88,
     analise:'O Porto Maravilha valorizou 180% na última década. Com perfil de investidor, o Orla Central oferece o maior potencial de retorno Airbnb da região — média de 8 a 12% ao ano.'
   },
   porto_morar: {
-    nome:'Farol da Guanabara',loc:'📍 Santo Cristo · Porto Maravilha · RJ',tipo:'Lançamento',
+    nome:'Farol da Guanabara',loc:'Santo Cristo · Porto Maravilha · RJ',tipo:'Lançamento',
     preco:'A partir de R$ 402.000',tipoImovel:'1 a 3 quartos · toda a família',
     img:'https://cury.net/storage/images/products/gallery/68d552905502b.jpeg',
     href:'farol-da-guanabara.html',apr:88,val:84,
     analise:'O Farol da Guanabara combina localização privilegiada no Porto Maravilha com variedade de tipologias para famílias. Rooftop, Espaço Zen e piscinas elevam a qualidade de vida.'
   },
   piedade:{
-    nome:'Parque Piedade — Aquarela',loc:'📍 Piedade · Rio de Janeiro',tipo:'Lançamento · MCMV',
+    nome:'Parque Piedade — Aquarela',loc:'Piedade · Rio de Janeiro',tipo:'Lançamento · MCMV',
     preco:'A partir de R$ 263.200',tipoImovel:'2 quartos · subsídio até R$ 47k',
     img:'https://cury.net/storage/images/products/gallery/69c6cbd3e9e0a.jpeg',
     href:'parque-piedade.html',apr:94,val:72,
     analise:'Com subsídio MCMV de até R$ 47.000 e parcelas menores do que um aluguel, o Parque Piedade tem o maior potencial de aprovação para a sua faixa de renda. Excelente custo-benefício.'
   },
   cristovao:{
-    nome:'Luzes do Rio — Lamparina',loc:'📍 Imperial São Cristóvão · RJ',tipo:'Lançamento',
+    nome:'Luzes do Rio — Lamparina',loc:'Imperial São Cristóvão · RJ',tipo:'Lançamento',
     preco:'A partir de R$ 359.000',tipoImovel:'1 e 2 quartos · Bike LEV inclusa',
     img:'https://cury.net/storage/images/products/gallery/69cd31f2e807e.jpeg',
     href:'luzes-do-rio-lamparina.html',apr:86,val:78,
     analise:'São Cristóvão Imperial une conexão ao metro, Bike LEV e qualidade construtiva Cury. Boa opção para quem busca moradia com mobilidade urbana e parcelas acessíveis.'
   },
   niteroi:{
-    nome:'Caminhos da Guanabara',loc:'📍 Niterói · Rio de Janeiro',tipo:'Em Obras',
+    nome:'Caminhos da Guanabara',loc:'Niterói · Rio de Janeiro',tipo:'Em Obras',
     preco:'A partir de R$ 334.999',tipoImovel:'1 e 2 quartos · vista Guanabara',
     img:'https://cury.net/storage/images/products/gallery/67c9b83a44c13.jpeg',
     href:'caminhos-da-guanabara.html',apr:84,val:80,
@@ -439,12 +439,12 @@ function gerarResultado(){
 
   // Perfil label
   const perfilLabels = {
-    morar: '🏠 Comprador de Moradia',
-    investir: '📈 Investidor Estratégico',
-    airbnb: '🛎️ Investidor Airbnb',
-    ambos: '💡 Comprador Inteligente'
+    morar: 'Comprador de Moradia',
+    investir: 'Investidor Estratégico',
+    airbnb: 'Investidor Airbnb',
+    ambos: 'Comprador Inteligente'
   };
-  const perfil = perfilLabels[obj]||'🎯 Perfil Identificado';
+  const perfil = perfilLabels[obj]||'Perfil Identificado';
 
   // Approval potential based on income
   let aprAdj = prop.apr;
@@ -452,13 +452,13 @@ function gerarResultado(){
   if(renda <= 2640 && prop===PROPS.piedade) aprAdj = 96;
 
   // Fill result
-  document.getElementById('res-badge').textContent = perfil;
+  document.getElementById('res-badge-text').textContent = perfil;
   document.getElementById('res-title').textContent = 'Seu imóvel ideal: '+prop.nome;
   document.getElementById('res-subtitle').textContent = 'Compatibilidade calculada com base na sua renda, objetivos e região de interesse.';
   document.getElementById('res-img').src = prop.img;
   document.getElementById('res-tipo').textContent = prop.tipo;
   document.getElementById('res-nome').textContent = prop.nome;
-  document.getElementById('res-loc').textContent = prop.loc;
+  document.getElementById('res-loc-text').textContent = prop.loc;
   document.getElementById('res-pct').textContent = aprAdj+'%';
   document.getElementById('res-tipo-imovel').textContent = prop.tipoImovel;
   document.getElementById('res-preco').textContent = prop.preco;
@@ -487,11 +487,11 @@ function enviarResultadoWA(){
   const p = selections._prop;
   const msg = encodeURIComponent(
     'Olá Paulo! Fiz a análise no seu site e meu imóvel ideal é: *'+p.nome+'*\n'
-    +'📍 '+p.loc.replace('📍 ','')+'\n'
-    +'💰 '+p.preco+'\n'
-    +'👤 Nome: '+selections.nome+'\n'
-    +'📱 WhatsApp: '+selections.wa+'\n'
-    +'🎯 Objetivo: '+selections.objetivo+'\n'
+    +'Região: '+p.loc+'\n'
+    +'Valor: '+p.preco+'\n'
+    +'Nome: '+selections.nome+'\n'
+    +'WhatsApp: '+selections.wa+'\n'
+    +'Objetivo: '+selections.objetivo+'\n'
     +'Quero receber a análise completa!'
   );
   window.open('https://wa.me/5521989150864?text='+msg,'_blank');
@@ -499,5 +499,6 @@ function enviarResultadoWA(){
 </script>
 <script src="crm-config.js"></script>
 <script src="admin-panel.js" defer></script>
+<script src="leads.js" defer></script>
 </body>
 </html>

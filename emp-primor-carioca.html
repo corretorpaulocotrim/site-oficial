@@ -13,6 +13,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "Primor Carioca — Fase 2", "address": {"@type": "PostalAddress", "addressLocality": "Inhaúma · Zona Norte", "addressRegion": "RJ", "addressCountry": "BR"}}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--ink2:#12252b;--gold:#b8873a;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--maxw:1100px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
@@ -189,12 +190,18 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .manual-preview div b{color:var(--gray);font-weight:500}
 .manual-preview div span{color:var(--ink);font-weight:600;text-align:right}
 .manual-note{font-size:12px;color:var(--gray);line-height:1.6;margin-bottom:20px}
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
-.depo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:420px}
-@media(max-width:640px){.depo-grid{grid-template-columns:repeat(4,1fr);max-width:280px}}
-.depo-photo{border-radius:12px;overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow)}
-.depo-photo img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .5s var(--ease)}
-.depo-photo:hover img{transform:scale(1.06)}
+.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:720px}
+@media(max-width:760px){.depo-grid{grid-template-columns:repeat(3,1fr);gap:8px}}
+@media(max-width:480px){.depo-grid{grid-template-columns:repeat(1,1fr);max-width:320px;margin:0 auto}}
+.depo-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:4/5;position:relative;background:var(--mist);box-shadow:var(--shadow-lg),inset 0 0 55px rgba(15,46,54,.16);transition:transform .5s var(--ease)}
+.depo-photo:hover{transform:translateY(-5px)}
+.depo-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) saturate(1.06) brightness(1.02);transition:transform 1.2s var(--ease)}
+.depo-photo:hover img{transform:scale(1.045)}
+.depo-photo::after{content:'';position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,46,54,.55) 0%,transparent 45%);pointer-events:none}
+.depo-tag{position:absolute;left:12px;bottom:12px;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px}
+.depo-tag svg{width:14px;height:14px;stroke:#cf9f4f;fill:none;stroke-width:2.2}
+
+
 .im-map-route-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
 @media(max-width:860px){.im-map-route-wrap{grid-template-columns:1fr}}
 .im-map-route-wrap #map-imovel{margin-bottom:0}
@@ -327,11 +334,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <p style="font-size:11.5px;color:var(--gray);margin-top:8px">Valor de tabela pública para a planta de entrada — sujeito a alteração e disponibilidade.</p>
     <p style="font-size:13px;color:var(--gray);margin-top:16px;background:var(--petrol-soft);padding:14px 18px;border-radius:12px">Tabela de preços e disponibilidade de unidades atualizadas diariamente — <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20sua%20an%C3%A1lise%20do%20Primor%20Carioca%20%E2%80%94%20Fase%202%20e%20quero%20a%20tabela%20e%20informa%C3%A7%C3%B5es." style="color:var(--gold);font-weight:600">peça a tabela oficial no WhatsApp</a>.</p>
     <div class="manual-cta reveal" style="display:flex;gap:12px;flex-wrap:wrap">
-      <button class="btn-ghost" onclick="abrirManualModal()">
-        <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-        Baixar tabela de vendas em PDF
-      </button>
-      <a class="btn-ghost" href="aprovacao-expressa.html">
+      <a class="btn-gold" href="#simulador" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+        <svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>
+        Simular financiamento agora
+      </a>
+      <a class="btn-ghost" href="aprovacao-expressa.html" style="text-decoration:none">
         <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4M12 3l7 4v5c0 5-3.5 8.5-7 9-3.5-.5-7-4-7-9V7z"/></svg>
         Aprovação Expressa
       </a>
@@ -374,6 +381,10 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
           <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
           Baixar tabela + simulação em PDF
         </button>
+        <button class="btn-ghost" onclick="window.open('apresentacoes/primor-carioca.pdf','_blank')">
+          <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h6"/></svg>
+          Baixar apresentação completa (PDF oficial)
+        </button>
       </div>
     </div>
   </div>
@@ -389,7 +400,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div class="im-route-card reveal">
         <div class="im-route-title"><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:var(--gold)"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Calcule sua rota até aqui</div>
         <div class="im-route-sub">Digite seu endereço e veja se o deslocamento até aqui é viável no seu dia a dia.</div>
-        <input type="text" id="rotaOrigem" class="im-route-input" placeholder="Seu endereço de partida"/>
+        <input type="text" id="rotaOrigem" class="im-route-input" placeholder="Seu endereço de partida" onkeypress="if(event.key==='Enter'){event.preventDefault();calcularRota();}"/>
         <div class="im-route-modes">
           <button type="button" class="im-route-mode on" onclick="setRotaModo('driving',this)">De carro</button>
           <button type="button" class="im-route-mode" onclick="setRotaModo('walking',this)">A pé</button>
@@ -465,10 +476,9 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <h2 class="stitle display reveal" style="margin-bottom:20px">Famílias que já receberam as chaves</h2>
     <p class="reveal" style="color:var(--gray);margin-bottom:20px;max-width:640px">Mais de 700 famílias já aprovadas e com as chaves em mãos. Alguns momentos reais de entrega, com nossa equipe:</p>
     <div class="depo-grid reveal">
-      <div class="depo-photo"><img src="clientes-img/cliente-2.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-3.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-7.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
-      <div class="depo-photo"><img src="clientes-img/cliente-9.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>
+      <div class="depo-photo"><img src="clientes-img/cliente-11.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div>
+      <div class="depo-photo"><img src="clientes-img/cliente-18.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div>
+      <div class="depo-photo"><img src="clientes-img/cliente-3.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div>
     </div>
   </div>
 </section>
@@ -641,7 +651,11 @@ function simuCalc(){
   var temFgts = document.getElementById('simFgts').checked;
   var fgtsValor = temFgts ? parseBRLnum(document.getElementById('simFgtsValor').value) : 0;
   var fgtsAplicado = Math.min(fgtsValor, aVista);
-  var aVistaFinal = Math.max(0, aVista-fgtsAplicado);
+  var aVistaExcedente = Math.max(0, aVista-fgtsAplicado);
+  var temPosChaves = aVistaExcedente>0; // Primor Carioca é MRV: excedente vai para pós-chaves em até 72x
+  var maxParcelasPosChaves = 72;
+  var parcelaPosChaves = temPosChaves ? aVistaExcedente/maxParcelasPosChaves : 0;
+  var aVistaFinal = temPosChaves ? 0 : aVistaExcedente;
   var parcelas = parseInt(document.getElementById('simParcelas').value,10) || 1;
   var reforcoDez = parseBRLnum(document.getElementById('simReforco').value);
   var anos = Math.max(1, Math.ceil(parcelas/12));
@@ -654,7 +668,8 @@ function simuCalc(){
   return {renda:renda,mod:mod,pctFin:pctFin,preco:preco,aprovado:aprovado,entrada:entrada,limite20:limite20,
     parcelavel:parcelavel,aVista:aVista,fgtsAplicado:fgtsAplicado,aVistaFinal:aVistaFinal,parcelas:parcelas,
     reforcoDez:reforcoDez,totalReforcos:totalReforcos,parcelaMensal:parcelaMensal,parcelaChavesMax:parcelaChavesMax,
-    valorChavesMax12x:valorChavesMax12x,semEntradaAVista:semEntradaAVista};
+    valorChavesMax12x:valorChavesMax12x,semEntradaAVista:semEntradaAVista,
+    temPosChaves:temPosChaves,maxParcelasPosChaves:maxParcelasPosChaves,parcelaPosChaves:parcelaPosChaves};
 }
 
 function simuUpdate(){
@@ -668,7 +683,7 @@ function simuUpdate(){
     +'<div class="sim-out-card hl"><div class="l">Financiamento estimado</div><div class="v">'+fmtBRL(c.aprovado)+'</div></div>'
     +'<div class="sim-out-card"><div class="l">Entrada total</div><div class="v">'+fmtBRL(c.entrada)+'</div></div>'
     +'<div class="sim-out-card"><div class="l">Parcelável (até 20% do imóvel)</div><div class="v">'+fmtBRL(c.parcelavel)+'</div></div>'
-    +'<div class="sim-out-card'+(c.semEntradaAVista?'':' sim-warn')+'"><div class="l">Entrada à vista necessária</div><div class="v">'+fmtBRL(c.aVistaFinal)+'</div></div>'
+    +(c.temPosChaves?'<div class="sim-out-card hl"><div class="l">Pós-chaves MRV (72x)</div><div class="v">'+fmtBRL(c.parcelaPosChaves)+'</div></div>':(c.semEntradaAVista?'':'<div class="sim-out-card sim-warn"><div class="l">Entrada à vista necessária</div><div class="v">'+fmtBRL(c.aVistaFinal)+'</div></div>'))
     +'<div class="sim-out-card"><div class="l">Parcela da entrada ('+c.parcelas+'x)</div><div class="v">'+fmtBRL(c.parcelaMensal)+'</div></div>'
     +'<div class="sim-out-card"><div class="l">FGTS aplicado</div><div class="v">'+fmtBRL(c.fgtsAplicado)+'</div></div>';
   document.getElementById('simOut').innerHTML = out;
@@ -676,6 +691,8 @@ function simuUpdate(){
   var note = '';
   if(c.semEntradaAVista){
     note += '<strong>Você pode ir para as chaves sem dar entrada à vista</strong> — toda a sua entrada de '+fmtBRL(c.entrada)+' cabe dentro dos 20% do valor do imóvel parceláveis em até '+c.parcelas+'x. ';
+  } else if(c.temPosChaves){
+    note += '<strong>A MRV permite estender o que passar dos 20% parceláveis</strong> para depois da entrega das chaves, em até 72x de '+fmtBRL(c.parcelaPosChaves)+' — por isso você não precisa de entrada à vista aqui. ';
   } else {
     note += 'Sua entrada de '+fmtBRL(c.entrada)+' é maior que os 20% do valor do imóvel que podem ser parcelados ('+fmtBRL(c.limite20)+'). O que exceder — '+fmtBRL(c.aVistaFinal)+' — precisa ser pago à vista'+(c.fgtsAplicado>0?' mesmo depois de usar o FGTS':'')+'. ';
   }
@@ -779,6 +796,8 @@ function baixarManualPDF(){
     '<div style="font-family:Inter,sans-serif;min-width:170px"><div style="font-size:13px;font-weight:800;color:#0f2e36;margin-bottom:3px">Primor Carioca — Fase 2</div><div style="font-size:11px;color:#6b7280">Inhaúma · Zona Norte</div></div>',
     {maxWidth:230, closeButton:false}
   ).openPopup();
+  setTimeout(function(){ map.invalidateSize(); map.setView([lat,lng], 15); }, 300);
+  window.addEventListener('load', function(){ setTimeout(function(){ map.invalidateSize(); }, 200); });
 })();
 </script>
 <script>
@@ -798,4 +817,4 @@ function calcularRota(){
 </script>
 <script src="leads.js" defer></script>
 </body>
-</html>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+</html>

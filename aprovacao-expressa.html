@@ -111,6 +111,41 @@ a{color:inherit;text-decoration:none}
 .file-row-status.pending{color:var(--text3)}
 .file-row-status.ok{color:var(--green)}
 .file-row-status.err{color:#b91c1c}
+.ir-box{margin-top:14px;padding:14px 16px;background:var(--bg);border-radius:10px}
+.ir-box-label{font-size:12.5px;font-weight:700;color:var(--text);margin-bottom:10px}
+.ir-toggle-row{display:flex;gap:8px}
+.ir-toggle-btn{flex:1;padding:11px;border:1.5px solid var(--border);border-radius:9px;background:#fff;font-size:12.5px;font-weight:700;color:var(--text2);cursor:pointer;transition:.2s var(--ease)}
+.ir-toggle-btn:hover{border-color:var(--gold)}
+.ir-toggle-btn.sel{border-color:var(--gold);background:#fffbeb;color:#92400e}
+.ir-hint{font-size:11px;color:var(--text3);margin-top:9px;line-height:1.5;min-height:14px}
+.bank-note{margin-top:10px;padding:10px 12px;background:#fef3c7;border-radius:8px;font-size:11.5px;color:#92400e;line-height:1.55}
+.item-upload-toggle{margin-top:10px;text-align:center}
+.item-upload-toggle a{font-size:11.5px;color:var(--gold);font-weight:700}
+.item-upload-toggle a:hover{text-decoration:underline}
+.item-row{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:#fff}
+.item-row-label{flex:1;min-width:0;font-size:12.5px;font-weight:600;color:var(--text)}
+.item-row-sub{font-size:10.5px;color:var(--text3);display:block;margin-top:2px;font-weight:400}
+.item-row-input{font-size:11px}
+.item-row-send{background:var(--gold);color:#fff;border:none;border-radius:7px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.item-row-send:hover{background:#a5772e}
+.item-row-send:disabled{background:var(--border);color:var(--text3);cursor:not-allowed}
+.item-row-status{font-size:10.5px;font-weight:700;white-space:nowrap;flex-shrink:0;min-width:70px;text-align:right}
+.item-row.done{border-color:rgba(22,163,74,.3);background:#f7fdf9}
+.item-check{width:26px;height:26px;border-radius:50%;border:2px solid var(--border);flex-shrink:0;display:flex;align-items:center;justify-content:center;transition:.25s var(--ease);background:#fff}
+.item-check.ready{border-color:var(--gold);background:#fffbeb}
+.item-check.ok{border-color:#16a34a;background:#16a34a}
+.item-check svg{width:14px;height:14px;stroke:#fff;fill:none;stroke-width:3;opacity:0;transform:scale(.5);transition:.25s var(--ease)}
+.item-check.ok svg{opacity:1;transform:scale(1)}
+.item-progress{display:flex;align-items:center;gap:10px;margin-bottom:14px;padding:10px 14px;background:var(--bg);border-radius:10px}
+.item-progress-bar{flex:1;height:7px;background:var(--border);border-radius:99px;overflow:hidden}
+.item-progress-fill{height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:99px;transition:width .5s var(--ease)}
+.item-progress-label{font-size:11.5px;font-weight:700;color:var(--text2);white-space:nowrap}
+.item-final-ok{display:none;margin-top:16px;padding:22px;background:linear-gradient(135deg,#f0fdf4,#fff);border:1px solid rgba(22,163,74,.3);border-radius:14px;text-align:center}
+.item-final-ok.show{display:block}
+.item-final-ok .ico{width:46px;height:46px;border-radius:50%;background:#16a34a;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.item-final-ok .ico svg{width:22px;height:22px;stroke:#fff;fill:none;stroke-width:3}
+.item-final-ok h4{font-family:'Fraunces',Georgia,serif;font-size:18px;color:var(--text);margin-bottom:8px}
+.item-final-ok p{font-size:13px;color:var(--text2);line-height:1.6;max-width:420px;margin:0 auto}
 </style>
 <link rel="canonical" href="https://paulocotrim.com.br/aprovacao-expressa.html"/>
 <meta property="og:title" content="Aprovação Expressa 48h — Financiamento Sem Burocracia"/>
@@ -176,12 +211,24 @@ a{color:inherit;text-decoration:none}
         <span class="doc-item">Certidão nascimento / casamento</span>
         <span class="doc-item">Extrato FGTS (se usar)</span>
         <span class="doc-item">Comprovante de renda</span>
+        <span class="doc-item">Extrato bancário (jan/2025 até hoje)</span>
       </div>
+      <div class="bank-note"><strong>Sobre o extrato bancário:</strong> precisa cobrir de janeiro de 2025 até hoje — mínimo de 12 meses de movimentação, sem lacunas entre os meses.</div>
+
+      <div class="ir-box">
+        <div class="ir-box-label">Você declara Imposto de Renda?</div>
+        <div class="ir-toggle-row">
+          <button type="button" class="ir-toggle-btn" id="irBtnSim" onclick="setIR(true)">Declarei</button>
+          <button type="button" class="ir-toggle-btn" id="irBtnNao" onclick="setIR(false)">Não declarei</button>
+        </div>
+        <div class="ir-hint" id="irHint"></div>
+      </div>
+
       <div class="upload-area" onclick="document.getElementById('docFileInput').click()">
         <input type="file" id="docFileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="onDocFilesSelected(this.files)"/>
         <div class="upload-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:2"><path d="M21 11.5V17a4 4 0 01-4 4H9a5 5 0 01-5-5V8a3 3 0 013-3 3 3 0 013 3v8a1 1 0 01-2 0V9"/></svg></div>
-        <div class="upload-title">Enviar documentos</div>
-        <div class="upload-sub">Clique para selecionar · PDF, JPG, PNG · até 15MB por arquivo</div>
+        <div class="upload-title">Enviar todos de uma vez</div>
+        <div class="upload-sub">Clique para selecionar vários arquivos · PDF, JPG, PNG · até 15MB por arquivo</div>
         <div class="upload-btn">Selecionar arquivos</div>
       </div>
       <div id="uploadFilesList" style="display:none;margin-top:10px;padding:10px 12px;background:var(--bg);border-radius:10px;font-size:11.5px;color:var(--text2)"></div>
@@ -193,6 +240,29 @@ a{color:inherit;text-decoration:none}
         <div class="upload-btn" onclick="enviarDocsReal()" style="cursor:pointer">Enviar documentos com segurança</div>
         <div id="uploadStatus" style="margin-top:8px;font-size:11.5px;color:var(--text3);line-height:1.5"></div>
       </div>
+
+      <div class="item-upload-toggle">
+        <a href="#" onclick="toggleItemUpload();return false;" id="toggleItemUploadLink">Prefere enviar documento por documento, clicando em cada um? →</a>
+      </div>
+      <div id="itemUploadBox" style="display:none;margin-top:14px">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+          <input type="text" id="itemNome" placeholder="Seu nome completo" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
+          <input type="text" id="itemTel" placeholder="Seu WhatsApp" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
+        </div>
+        <div class="item-progress">
+          <span class="item-progress-label" id="itemProgressLabel">0 de 7 enviados</span>
+          <div class="item-progress-bar"><div class="item-progress-fill" id="itemProgressFill" style="width:0%"></div></div>
+        </div>
+        <div id="itemRowsBox"></div>
+        <div class="upload-btn" id="itemSendAllBtn" onclick="enviarTodosItens()" style="cursor:pointer;display:block;text-align:center;opacity:.5;pointer-events:none;margin-top:6px">Concluir e enviar</div>
+        <div id="itemSendAllStatus" style="margin-top:8px;font-size:11.5px;color:var(--text3);line-height:1.5;text-align:center"></div>
+        <div class="item-final-ok" id="itemFinalOk">
+          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
+          <h4>Recebemos tudo, obrigado!</h4>
+          <p>Todos os seus documentos chegaram certinho por aqui. Nossa equipe já foi avisada e vai revisar tudo agora — em até 48h você recebe a resposta da sua Aprovação Expressa direto no WhatsApp. Qualquer dúvida antes disso, é só chamar.</p>
+        </div>
+      </div>
+
       <div class="upload-alt">
         <span>Prefere não usar o formulário?</span>
         <a href="https://wa.me/5521989150864?text=Vou+enviar+meus+documentos+para+aprova%C3%A7%C3%A3o+expressa!" target="_blank">Enviar pelo WhatsApp</a>
@@ -289,7 +359,7 @@ a{color:inherit;text-decoration:none}
 </section>
 
 <footer class="footer">
-  Paulo Cotrim · Coordenador Cury · CRECI-RJ 77677-F · Dados informativos ·
+  Paulo Cotrim · Especialista em Financiamento Imobiliário · CRECI-RJ 77677-F · Dados informativos ·
   <a href="index.html">← Voltar ao site</a>
   <div style="margin-top:10px;font-size:10.5px;color:#94a3b8;max-width:640px;margin-left:auto;margin-right:auto;line-height:1.6">Prazos de aprovação, condições de pagamento e disponibilidade de unidades variam por caso e estão sujeitos às políticas da instituição financeira e da construtora. Este processo não garante aprovação de crédito.</div>
 </footer>
@@ -311,6 +381,139 @@ document.addEventListener('googleLoginSucesso', function(e){
   if(nomeEl && !nomeEl.value) nomeEl.value = e.detail.name || '';
 });
 
+var IR_DECLAROU = null;
+function setIR(v){
+  IR_DECLAROU = v;
+  document.getElementById('irBtnSim').classList.toggle('sel', v===true);
+  document.getElementById('irBtnNao').classList.toggle('sel', v===false);
+  var hint = document.getElementById('irHint');
+  hint.textContent = v
+    ? 'Perfeito — anexe a declaração completa do IR (todas as páginas, com o recibo de entrega) no envio de documentos.'
+    : 'Sem problema — nesse caso a análise usa o extrato bancário (jan/2025 até hoje) para comprovar a movimentação financeira.';
+}
+
+/* ---------- Envio item por item ---------- */
+var ITEM_DOC_TYPES = [
+  {key:'rg', label:'RG ou CNH'},
+  {key:'cpf', label:'CPF'},
+  {key:'endereco', label:'Comprovante de endereço'},
+  {key:'certidao', label:'Certidão de nascimento / casamento'},
+  {key:'fgts', label:'Extrato FGTS', sub:'se for usar no financiamento'},
+  {key:'renda', label:'Comprovante de renda'},
+  {key:'extrato', label:'Extrato bancário', sub:'jan/2025 até hoje, mín. 12 meses'}
+];
+window._itemFiles = {};
+function toggleItemUpload(){
+  var box = document.getElementById('itemUploadBox');
+  var link = document.getElementById('toggleItemUploadLink');
+  var open = box.style.display !== 'none';
+  box.style.display = open ? 'none' : 'block';
+  link.textContent = open ? 'Prefere enviar documento por documento? →' : 'Ocultar envio item por item ↑';
+  if(!open && !document.getElementById('itemRowsBox').children.length) renderItemRows();
+}
+window._itemDone = {};
+function renderItemRows(){
+  var box = document.getElementById('itemRowsBox');
+  box.innerHTML = ITEM_DOC_TYPES.map(function(t){
+    return '<div class="item-row" id="itemrow-'+t.key+'">'
+      +'<span class="item-check" id="itemcheck-'+t.key+'"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>'
+      +'<label class="item-row-label" style="cursor:pointer">'+t.label+(t.sub?'<span class="item-row-sub">'+t.sub+'</span>':'')
+      +'<input type="file" class="item-row-input" accept=".pdf,.jpg,.jpeg,.png" style="display:block;margin-top:6px;font-size:11px" onchange="onItemFilePicked(\''+t.key+'\',this.files[0])"/>'
+      +'</label>'
+      +'<button type="button" class="item-row-send" id="itemsend-'+t.key+'" disabled onclick="enviarItemDoc(\''+t.key+'\')">Enviar</button>'
+      +'<span class="item-row-status" id="itemstatus-'+t.key+'" style="color:var(--text3)">—</span>'
+      +'</div>';
+  }).join('');
+  atualizarProgressoItens();
+}
+function atualizarProgressoItens(){
+  var total = ITEM_DOC_TYPES.length;
+  var feitos = Object.keys(window._itemDone).filter(function(k){ return window._itemDone[k]; }).length;
+  var label = document.getElementById('itemProgressLabel');
+  var fill = document.getElementById('itemProgressFill');
+  if(label) label.textContent = feitos+' de '+total+' enviados';
+  if(fill) fill.style.width = Math.round(feitos/total*100)+'%';
+  var concluirBtn = document.getElementById('itemSendAllBtn');
+  if(concluirBtn){
+    var podeConcluir = feitos > 0;
+    concluirBtn.style.opacity = podeConcluir ? '1' : '.5';
+    concluirBtn.style.pointerEvents = podeConcluir ? 'auto' : 'none';
+    concluirBtn.textContent = feitos===total ? 'Concluir e enviar (tudo pronto ✓)' : 'Concluir com '+feitos+' de '+total+' enviado(s)';
+  }
+}
+function onItemFilePicked(key, file){
+  if(!file) return;
+  window._itemFiles[key] = file;
+  var btn = document.getElementById('itemsend-'+key);
+  if(btn) btn.disabled = false;
+  var st = document.getElementById('itemstatus-'+key);
+  if(st){ st.textContent = 'pronto p/ enviar'; st.style.color = 'var(--text3)'; }
+  var chk = document.getElementById('itemcheck-'+key);
+  if(chk) chk.classList.add('ready');
+}
+async function enviarItemDoc(key){
+  var file = window._itemFiles[key];
+  var nome = document.getElementById('itemNome').value.trim();
+  var tel = document.getElementById('itemTel').value.trim();
+  var st = document.getElementById('itemstatus-'+key);
+  var row = document.getElementById('itemrow-'+key);
+  var btn = document.getElementById('itemsend-'+key);
+  var chk = document.getElementById('itemcheck-'+key);
+  if(!nome || !tel){ alert('Preencha seu nome e WhatsApp no topo antes de enviar cada documento.'); return; }
+  if(!file){ return; }
+  if(!window.DOC_UPLOAD_CONFIG || !window.DOC_UPLOAD_CONFIG.uploadUrl || !window.enviarDocumentos){
+    st.innerHTML = 'envio automático inativo';
+    st.style.color = '#8a6526';
+    return;
+  }
+  st.textContent = 'enviando…';
+  st.style.color = 'var(--text2)';
+  btn.disabled = true;
+  var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa-item-a-item', extras:{tipoDoc:key, imposto_renda:IR_DECLAROU}}, [{file:file, tipoDoc:key}]);
+  if(res && res.ok){
+    st.textContent = 'OK';
+    st.style.color = '#15803d';
+    if(row) row.classList.add('done');
+    if(chk){ chk.classList.remove('ready'); chk.classList.add('ok'); }
+    window._itemDone[key] = true;
+    atualizarProgressoItens();
+  } else {
+    st.textContent = '✗ falhou';
+    st.style.color = '#b91c1c';
+    btn.disabled = false;
+  }
+}
+async function enviarTodosItens(){
+  var nome = document.getElementById('itemNome').value.trim();
+  var tel = document.getElementById('itemTel').value.trim();
+  var statusEl = document.getElementById('itemSendAllStatus');
+  var feitos = Object.keys(window._itemDone).filter(function(k){ return window._itemDone[k]; }).length;
+  if(!nome || !tel){ statusEl.textContent = 'Preencha seu nome e WhatsApp no topo antes de concluir.'; statusEl.style.color = '#b91c1c'; return; }
+  if(!feitos){ statusEl.textContent = 'Envie pelo menos um documento antes de concluir.'; statusEl.style.color = '#b91c1c'; return; }
+  var total = ITEM_DOC_TYPES.length;
+  var enviados = Object.keys(window._itemDone).filter(function(k){ return window._itemDone[k]; });
+  var faltando = ITEM_DOC_TYPES.filter(function(t){ return !window._itemDone[t.key]; }).map(function(t){ return t.label; });
+  statusEl.textContent = 'Concluindo...';
+  statusEl.style.color = 'var(--text2)';
+  if(window.enviarLeadCRM){
+    try{
+      await window.enviarLeadCRM({
+        nome: nome, telefone: tel,
+        interesse: 'Aprovação Expressa — documentos concluídos',
+        origem: 'aprovacao-expressa-concluido',
+        extras: { imposto_renda: IR_DECLAROU, documentos_enviados: enviados.join(', '), documentos_faltando: faltando.join(', ') || 'nenhum' }
+      });
+    }catch(e){}
+  }
+  var finalBox = document.getElementById('itemFinalOk');
+  if(finalBox){
+    finalBox.classList.add('show');
+    finalBox.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+  statusEl.textContent = feitos===total ? '' : 'Concluído com '+feitos+' de '+total+' documentos — pode enviar o restante depois pelo WhatsApp.';
+  statusEl.style.color = 'var(--text3)';
+}
+
 window._docFiles = [];
 function renderFileRows(){
   var list = document.getElementById('uploadFilesList');
@@ -331,49 +534,4 @@ function onDocFilesSelected(fileList){
   formBox.style.display = 'block';
 }
 async function enviarDocsReal(){
-  var nome = document.getElementById('docNome').value.trim();
-  var tel = document.getElementById('docTel').value.trim();
-  var status = document.getElementById('uploadStatus');
-  if(!nome || !tel){ status.textContent='Preencha nome e WhatsApp antes de enviar.'; status.style.color='#b91c1c'; return; }
-  if(!window._docFiles.length){ status.textContent='Selecione ao menos um arquivo.'; status.style.color='#b91c1c'; return; }
-
-  if(!window.DOC_UPLOAD_CONFIG || !window.DOC_UPLOAD_CONFIG.uploadUrl || !window.enviarDocumentos){
-    status.innerHTML = 'Envio automático ainda não está ativo — <a href="https://wa.me/5521989150864?text=Vou+enviar+meus+documentos+para+aprova%C3%A7%C3%A3o+expressa!" target="_blank" style="color:#b8873a;font-weight:700">envie pelo WhatsApp</a> por enquanto.';
-    status.style.color='#8a6526';
-    return;
-  }
-
-  status.textContent = 'Enviando '+window._docFiles.length+' arquivo(s)...';
-  status.style.color = 'var(--text2)';
-  window._docFiles.forEach(function(f,i){
-    var el = document.getElementById('filestatus-'+i);
-    if(el){ el.textContent='enviando…'; el.className='file-row-status pending'; }
-  });
-
-  var itens = window._docFiles.map(function(f){ return {file:f, tipoDoc:f.name}; });
-  var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa'}, itens);
-
-  if(res && res.ok){
-    window._docFiles.forEach(function(f,i){
-      var el = document.getElementById('filestatus-'+i);
-      if(el){ el.innerHTML='✓ enviado'; el.className='file-row-status ok'; }
-    });
-    status.textContent = 'Todos os documentos foram enviados com sucesso! Nossa equipe já foi avisada.';
-    status.style.color = '#15803d';
-    document.getElementById('docFileInput').value = '';
-    window._docFiles = [];
-  } else {
-    window._docFiles.forEach(function(f,i){
-      var el = document.getElementById('filestatus-'+i);
-      if(el){ el.innerHTML='✗ falhou'; el.className='file-row-status err'; }
-    });
-    status.textContent = 'Não deu para enviar agora. Tente novamente ou use o WhatsApp abaixo.';
-    status.style.color = '#b91c1c';
-  }
-}
-</script>
-<script src="doc-upload-config.js"></script>
-<script src="social-login.js"></script>
-<script src="leads.js" defer></script>
-</body>
-</html>
+  var nome = document.getElementById('do

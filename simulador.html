@@ -3,13 +3,14 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>Simulador Financiamento — Paulo Cotrim | Cury RJ</title>
+<title>Simulador Financiamento — Paulo Cotrim | Rio de Janeiro</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#0f2e36;--navy2:#173d47;--gold:#b8873a;--gold2:#cf9f4f;--green:#1a8f4c;--green2:#157540;--bg:#f5f6f7;--border:#e8eaed;--text:#0f2e36;--text2:#6b7280;--ease:cubic-bezier(.16,1,.3,1)}
 body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;min-height:100vh;-webkit-font-smoothing:antialiased}
 /* HEADER */
 .sim-hdr{background:rgba(15,46,54,.92);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(255,255,255,.06),0 12px 30px -18px rgba(0,0,0,.4)}
@@ -72,8 +73,8 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .ssh .cv{font-size:13px;color:rgba(255,255,255,.8);transition:transform .2s}
 .ssh .cv.op{transform:rotate(180deg)}
 .ssb{padding:.9rem 1.2rem 1.1rem;border-top:.5px solid var(--border)}
-.s1x .ssh{background:var(--navy)}.s2x .ssh{background:var(--green)}
-.s3x .ssh{background:#9a6621}.scx .ssh{background:var(--gold)}.skx .ssh{background:var(--navy2)}
+.s1x .ssh{background:var(--navy)}.s2x .ssh{background:var(--navy2)}
+.s3x .ssh{background:var(--navy)}.scx .ssh{background:var(--gold)}.skx .ssh{background:var(--navy2)}
 .mets2{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-top:9px}
 .mt2{background:var(--bg);border-radius:7px;padding:9px 11px}
 .mt2 .ml{font-size:10px;color:var(--text2);line-height:1.3}
@@ -110,7 +111,7 @@ tr.s2rx td{background:var(--bg)}
 </style>
 <link rel="canonical" href="https://paulocotrim.com.br/simulador.html"/>
 <meta name="description" content="Simule seu financiamento imobiliário pelo Minha Casa Minha Vida. Calcule parcelas, entrada e FGTS em segundos. Paulo Cotrim · CRECI-RJ 77677-F."/>
-<meta property="og:title" content="Simulador MCMV — Paulo Cotrim | Cury RJ"/>
+<meta property="og:title" content="Simulador MCMV — Paulo Cotrim | Rio de Janeiro"/>
 <meta property="og:description" content="Simule seu financiamento Minha Casa Minha Vida em segundos. Parcelas, entrada e uso do FGTS calculados automaticamente."/>
 <meta property="og:url" content="https://paulocotrim.com.br/simulador.html"/>
 <meta property="og:image" content="https://paulocotrim.com.br/og-image.jpg"/>
@@ -126,7 +127,7 @@ tr.s2rx td{background:var(--bg)}
   </div>
 </div>
 <div class="sim-hero">
-  <h1><svg viewBox="0 0 24 24" style="width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="8" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="8" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r=".6" fill="currentColor" stroke="none"/></svg>Simulador Profissional Cury</h1>
+  <h1><svg viewBox="0 0 24 24" style="width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="8" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="8" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r=".6" fill="currentColor" stroke="none"/></svg>Simulador Profissional</h1>
   <p>Calcule aprovação Caixa, parcelamento de entrada, fase de obras e tabela direta. Preços atualizados Julho/2026.</p>
   <div class="sim-chips">
     <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>14 empreendimentos</span>
@@ -220,11 +221,17 @@ const DB={
 const NAMES=Object.keys(DB);
 
 let S={tab:0,cond:"Parque Piedade",tipIdx:2,valorImovel:309473.50,avaliacao:289000,modalidade:"mcmv",aprovacaoCaixa:231578.80,prestCaixa:1200,prazo:360,
+  renda:0,taxaAnual:6,
   s2:[{t:"À Vista",q:1,u:9996},{t:"Mensal",q:36,u:950},{t:"Anual",q:2,u:5000},{t:"Única",q:1,u:5000}],
   s4:{vu:481540,ato:149800,pi:30000,pqm:23,pvm:2600,pqa:0,pva:0,chave:15000,oqm:48,ovm:6494.58,oqa:2,ova:10000},
-  open:{s1:true,s2:true,s3:false,s4:false,sk:false,sc:true}};
+  open:{s1:true,s2:true,s3:false,s4:false,sk:true,sc:true}};
 
 function calcAprovacaoAuto(){return Math.min(S.avaliacao*(S.modalidade==='sbpe'?0.90:0.80),S.avaliacao)}
+function financiavelPorPrestacao(prest,taxaAnual,prazo){
+  const i=Math.pow(1+(taxaAnual||0)/100,1/12)-1;
+  if(i<=0) return prest*prazo;
+  return prest*(1-Math.pow(1+i,-prazo))/i;
+}
 function calc(){
   const pctFin=S.modalidade==='sbpe'?0.90:0.80;
   const avalMaxFin=S.avaliacao*pctFin;
@@ -237,17 +244,23 @@ function calc(){
   const {ato,pi,pqm,pvm,pqa,pva,chave,oqm,ovm,oqa,ova,vu}=S.s4;
   const tPreM=pqm*pvm,tPreA=pqa*pva,tPre=ato+pi+tPreM+tPreA+chave;
   const tPosM=oqm*ovm,tPosA=oqa*ova,tPos=tPosM+tPosA;
-  return{pctFin,avalMaxFin,aprovado,entrada,tot,rows,men,tPreM,tPreA,tPre,tPosM,tPosA,tPos,saldo:vu-ato,rendMin30:S.prestCaixa/0.30,rendMin35:S.prestCaixa/0.35};
+  const prestPorRenda30=S.renda*0.30,prestPorRenda35=S.renda*0.35;
+  const financiavelPorRenda30=financiavelPorPrestacao(prestPorRenda30,S.taxaAnual,S.prazo);
+  const financiavelPorRenda35=financiavelPorPrestacao(prestPorRenda35,S.taxaAnual,S.prazo);
+  return{pctFin,avalMaxFin,aprovado,entrada,tot,rows,men,tPreM,tPreA,tPre,tPosM,tPosA,tPos,saldo:vu-ato,rendMin30:S.prestCaixa/0.30,rendMin35:S.prestCaixa/0.35,
+    prestPorRenda30,prestPorRenda35,financiavelPorRenda30,financiavelPorRenda35};
 }
 
 function tog(id){S.open[id]=!S.open[id];render()}
 function selC(v){S.cond=v;S.tipIdx=0;const t=DB[v].tips[0];S.valorImovel=t.p;S.avaliacao=t.a;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
 function selT(v){S.tipIdx=+v;const t=DB[S.cond].tips[S.tipIdx];S.valorImovel=t.p;S.avaliacao=t.a;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
-function setMod(v){S.modalidade=v;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
+function setMod(v){S.modalidade=v;S.aprovacaoCaixa=calcAprovacaoAuto();S.taxaAnual=v==='sbpe'?10.9:6;render()}
 function updF(k,v){S[k]=parseBRL(v);if(k==='avaliacao')S.aprovacaoCaixa=calcAprovacaoAuto();render()}
 function updAprov(v){S.aprovacaoCaixa=parseBRL(v);render()}
 function updS2(i,k,v){S.s2[i][k]=parseFloat(v)||0;render()}
 function updS4(k,v){S.s4[k]=parseFloat(v)||0;render()}
+function updRenda(v){S.renda=parseBRL(v);render()}
+function updTaxa(v){S.taxaAnual=parseFloat(v)||0;render()}
 
 function ssec(id,title,cls,fn){
   const o=S.open[id];
@@ -268,17 +281,48 @@ function whatsappSim(){
   window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');
 }
 
+function baixarSimuladorPDF(){
+  const tip=DB[S.cond].tips[S.tipIdx];const c=calc();
+  const qr='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(window.location.href.split('#')[0]);
+  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Simulação — '+S.cond+'</title>'
+    +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
+    +'.kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#b8873a;margin-bottom:8px}'
+    +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:28px}'
+    +'.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e8eaed;font-size:14px}.rk{color:#6b7280}.rv{font-weight:700}'
+    +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
+    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e8eaed}'
+    +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
+    +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e8eaed}'
+    +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
+    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
+    +'<div class="kicker">Simulador de Financiamento · Paulo Cotrim</div>'
+    +'<h1>'+S.cond+'</h1><div class="sub">'+tip.n+' · Modalidade '+S.modalidade.toUpperCase()+' · CRECI-RJ 77677-F</div>'
+    +'<div class="row"><span class="rk">Preço do imóvel</span><span class="rv">'+BRL(tip.p)+'</span></div>'
+    +'<div class="row"><span class="rk">Avaliação</span><span class="rv">'+BRL(S.avaliacao)+'</span></div>'
+    +'<div class="row"><span class="rk">Aprovação estimada (Caixa)</span><span class="rv">'+BRL(c.aprovado)+'</span></div>'
+    +'<div class="row"><span class="rk">Entrada</span><span class="rv">'+BRL(c.entrada)+'</span></div>'
+    +'<div class="note">Simulação educativa com base nos valores de tabela informados — sujeita a alteração e disponibilidade. Confirme condições atualizadas com Paulo antes de decidir.</div>'
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar ao simulador</b>Refaça a simulação ou fale com o Paulo direto do celular.</div></div>'
+    +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
+    +'<div class="foot">Paulo Cotrim · Documento informativo, não substitui a simulação bancária real</div>'
+    +'</body></html>';
+  const win=window.open('','_blank');
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
+}
+
 function renderSim(){
   const c=calc();const isSBPE=S.modalidade==='sbpe';const tips=DB[S.cond].tips;
-  const fotoPaulo=localStorage.getItem('pc_foto_paulo')||'';
+  const fotoPaulo=localStorage.getItem('pc_foto_paulo')||'paulo-cotrim-profissional.jpeg';
   return`
 <div class="hdr2">
   <div class="hdr2-top">
     <div class="hdr2-left">
       <div class="av">${fotoPaulo?`<img src="${fotoPaulo}" alt="Paulo"/>`:'PC'}</div>
-      <div><div class="hdr2-name">Paulo Cotrim</div><div class="hdr2-sub">Coordenador Cury — Simulador Profissional</div></div>
+      <div><div class="hdr2-name">Paulo Cotrim</div><div class="hdr2-sub">Especialista em Financiamento Imobiliário — Simulador Profissional</div></div>
     </div>
     <button class="wa-btn2" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Enviar pelo WhatsApp</button>
+    <button class="wa-btn2" style="background:transparent;border:1.5px solid var(--gold2);color:var(--gold2)" onclick="baixarSimuladorPDF()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar (PDF)</button>
   </div>
   <div class="hdr2-div"></div>
   <div class="hdr2-meta">
@@ -329,16 +373,31 @@ ${ssec('s1','Seção 1 — Dados do financiamento','ssec s1x',()=>`
   <div class="mt2 am"><div class="ml">Seguro inicial (20%)</div><div class="mv">${BRL(S.prestCaixa*0.2)}</div></div>
   <div class="mt2 vi"><div class="ml">Seguro na entrega</div><div class="mv">${BRL(S.prestCaixa)}</div></div>
 </div>`)}
-${ssec('sk','Renda mínima necessária','ssec skx',()=>`
-<div class="mets2"><div class="mt2 am"><div class="ml">Renda mínima (30%)</div><div class="mv">${BRL(c.rendMin30)}</div></div><div class="mt2 gr"><div class="ml">Renda mínima (35%)</div><div class="mv">${BRL(c.rendMin35)}</div></div></div>
-<p style="font-size:10px;color:#94a3b8;margin-top:8px">Baseado na prestação de ${BRL(S.prestCaixa)}. Renda pode ser composta com familiares.</p>`)}
-${ssec('s2','Seção 2 — Parcelamento da entrada (Cury)','ssec s2x',()=>`
+${ssec('sk','Digite sua renda e veja quanto aprova','ssec skx',()=>`
+<div class="info-box2"><strong>Como funciona:</strong> a partir da sua renda mensal, estimamos a prestação máxima (30% ou 35% da renda) e, com uma taxa de juros de referência editável, o valor aproximado que pode ser financiado.</div>
+<div class="g2s" style="margin-bottom:9px">
+  <div class="fi2 hl"><label>Sua renda mensal (R$)</label><input type="text" value="${N2(S.renda)}" oninput="updRenda(this.value)" placeholder="Ex: 4.500,00"></div>
+  <div class="fi2"><label>Taxa de juros a.a. estimada (%)</label><input type="text" value="${N2(S.taxaAnual)}" oninput="updTaxa(this.value)"></div>
+</div>
+${S.renda>0?`
+<div class="mets2">
+  <div class="mt2 am"><div class="ml">Prestação máx. (30% da renda)</div><div class="mv">${BRL(c.prestPorRenda30)}</div></div>
+  <div class="mt2 gr"><div class="ml">Prestação máx. (35% da renda)</div><div class="mv">${BRL(c.prestPorRenda35)}</div></div>
+  <div class="mt2 vi"><div class="ml">Financiável estimado (30%)</div><div class="mv">${BRL(c.financiavelPorRenda30)}</div></div>
+  <div class="mt2 hi"><div class="ml">Financiável estimado (35%)</div><div class="mv">${BRL(c.financiavelPorRenda35)}</div></div>
+</div>
+<p style="font-size:10px;color:#94a3b8;margin-top:8px">Estimativa educativa considerando prazo de ${S.prazo} meses e taxa de ${N2(S.taxaAnual)}% a.a. — a Caixa confirma a taxa, o prazo e o valor exatos após análise de crédito. Ajuste a taxa acima se souber a condição atual.</p>
+`:`<p style="font-size:11px;color:#94a3b8;margin-top:4px">Digite sua renda acima para ver a estimativa.</p>`}
+<div style="height:1px;background:#e8eaed;margin:14px 0"></div>
+<div class="mets2"><div class="mt2 am"><div class="ml">Renda mínima p/ este imóvel (30%)</div><div class="mv">${BRL(c.rendMin30)}</div></div><div class="mt2 gr"><div class="ml">Renda mínima p/ este imóvel (35%)</div><div class="mv">${BRL(c.rendMin35)}</div></div></div>
+<p style="font-size:10px;color:#94a3b8;margin-top:8px">Baseado na prestação de ${BRL(S.prestCaixa)} d${DB[S.cond]?'e '+S.cond:'o imóvel selecionado'}. Renda pode ser composta com familiares.</p>`)}
+${ssec('s2','Seção 2 — Parcelamento da entrada','ssec s2x',()=>`
 <p style="font-size:11px;color:#64748b;margin-bottom:8px">Entrada: <strong style="color:#B91C1C">${BRL(c.entrada)}</strong> &nbsp;|&nbsp; Total: <strong>${BRL(c.tot)}</strong> ${c.tot<c.entrada?`<span style="color:#B91C1C"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>faltam ${BRL(c.entrada-c.tot)}</span>`:`<span style="color:#15803D"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>coberta</span>`}</p>
 <div class="tw2"><table><thead><tr><th>Tipo</th><th>Qtd</th><th>Valor unit.</th><th>Total</th></tr></thead>
 <tbody>${S.s2.map((r,i)=>`<tr class="${i%2?'s2rx':''}"><td>${r.t}</td><td><input class="is2" type="number" value="${r.q}" oninput="updS2(${i},'q',this.value)"></td><td><input class="is2" style="width:90px" type="number" value="${r.u}" oninput="updS2(${i},'u',this.value)"></td><td>${BRL(r.q*r.u)}</td></tr>`).join('')}
 <tr class="trx"><td colspan="3">TOTAL ENTRADA</td><td>${BRL(c.tot)}</td></tr></tbody></table></div>`)}
 ${ssec('s3','Seção 3 — Fase de obras (36 meses)','ssec s3x',()=>`
-<div class="info-box2" style="border-left-color:#9a6621"><strong>Seguro progressivo:</strong> 20% → 100% da prestação Caixa (${BRL(S.prestCaixa)}) em 36 meses.</div>
+<div class="info-box2" style="border-left-color:#b8873a"><strong>Seguro progressivo:</strong> 20% → 100% da prestação Caixa (${BRL(S.prestCaixa)}) em 36 meses.</div>
 <div class="tw2"><div class="st2"><table><thead><tr><th style="text-align:center">Mês</th><th>% Seguro</th><th>Seguro</th><th>Entrada</th><th>Total/mês</th></tr></thead>
 <tbody>${c.rows.map((r,i)=>`<tr class="${i%2?'s2rx':''}"><td style="text-align:center">${r.m}</td><td style="text-align:center">${PCT(r.p)}</td><td>${BRL(r.seg)}</td><td>${BRL(r.men)}</td><td style="font-weight:700;color:#0f2e36">${BRL(r.tot)}</td></tr>`).join('')}</tbody></table></div></div>`)}
 ${ssec('sc','Quero iniciar minha aprovação de crédito','ssec scx',()=>{
@@ -351,25 +410,53 @@ ${ssec('sc','Quero iniciar minha aprovação de crédito','ssec scx',()=>{
     <div class="fi2"><label>Nome completo</label><input type="text" id="cf-nome" placeholder="Seu nome"></div>
     <div class="fi2"><label>WhatsApp</label><input type="text" id="cf-tel" placeholder="(21) 99999-9999"></div>
   </div>
-  <button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com nossa equipe no WhatsApp</button></div>`;
+  <button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com nossa equipe no WhatsApp</button>
+  <button class="btn-pg" style="background:transparent;border:1.5px solid var(--gold);color:var(--navy)" onclick="baixarSimuladorPDF()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar esta simulação (PDF)</button></div>`;
 })}`;
 }
 
+const MAX_MENSAL_DIRETA=1500;
+function montarAutoDireta(){
+  const s4=S.s4;
+  if(s4.pvm>MAX_MENSAL_DIRETA){
+    const poolPre=Math.max(1,s4.pqm)*s4.pvm;
+    const novoPqm=Math.min(60,Math.max(1,Math.ceil(poolPre/MAX_MENSAL_DIRETA)));
+    s4.pqm=novoPqm;s4.pvm=Math.round((poolPre/novoPqm)*100)/100;
+  }
+  if(s4.ovm>MAX_MENSAL_DIRETA){
+    const poolPos=Math.max(1,s4.oqm)*s4.ovm;
+    const novoOqm=Math.min(96,Math.max(1,Math.ceil(poolPos/MAX_MENSAL_DIRETA)));
+    s4.oqm=novoOqm;s4.ovm=Math.round((poolPos/novoOqm)*100)/100;
+  }
+  render();
+}
 function renderTabDireta(c){
   const {ato,pi,pqm,pvm,chave,oqm,ovm,oqa,ova,vu}=S.s4;
+  const anosPre=Math.round((pqm/12)*10)/10;
+  const anosPos=Math.round((oqm/12)*10)/10;
+  const acimaPre=pvm>MAX_MENSAL_DIRETA;
+  const acimaPos=ovm>MAX_MENSAL_DIRETA;
+  const acimaAlgum=acimaPre||acimaPos;
   return`<div class="sel-box">
-  <div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/></svg>Tabela Direta Cury — sem financiamento</div>
+  <div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="8" y="2" width="8" height="4" rx="1"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H6a2 2 0 01-2-2V6a2 2 0 012-2h2"/></svg>Tabela Direta — sem financiamento</div>
   <div class="g2s" style="margin-bottom:12px">
     <div class="fi2"><label>Valor total (R$)</label><input type="number" value="${vu}" oninput="updS4('vu',this.value)"></div>
     <div class="fi2"><label>Ato / Entrada (R$)</label><input type="number" value="${ato}" oninput="updS4('ato',this.value)"></div>
   </div>
+  <div style="display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap;background:${acimaAlgum?'#fbf3e4':'#f0f9f3'};border:1px solid ${acimaAlgum?'#e9d4ab':'#bfe3cc'};border-radius:8px;padding:9px 12px;margin-bottom:12px">
+    <div style="font-size:11.5px;color:${acimaAlgum?'#a5691f':'#157540'};font-weight:600;display:flex;align-items:center;gap:6px">
+      <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0">${acimaAlgum?'<path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/>':'<path d="M20 6 9 17l-5-5"/>'}</svg>
+      ${acimaAlgum?'Parcela mensal acima do teto recomendado de R$ 1.500 — ajuste o número de meses':'Parcela mensal dentro do teto recomendado de R$ 1.500/mês'}
+    </div>
+    <button class="btn-pg" style="width:auto;margin:0;padding:7px 14px;font-size:11.5px;background:var(--gold)" onclick="montarAutoDireta()"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Montar automaticamente</button>
+  </div>
   <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
     <div style="border:.5px solid #e2e8f0;border-radius:8px;overflow:hidden">
-      <div style="background:#0f2e36;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pré-chaves — 3 anos</div>
+      <div style="background:#0f2e36;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pré-chaves — ${pqm} meses${pqm>=12?` (${anosPre} anos)`:''}</div>
       <div style="padding:9px 11px">
         <div class="g2s" style="gap:6px;margin-bottom:8px">
-          <div class="fi2"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${pqm}" oninput="updS4('pqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
-          <div class="fi2"><label style="font-size:10px">Vl mensal</label><input type="number" value="${pvm}" oninput="updS4('pvm',this.value)" style="font-size:12px;padding:5px 8px"></div>
+          <div class="fi2 ${acimaPre?'wn':''}"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${pqm}" oninput="updS4('pqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
+          <div class="fi2 ${acimaPre?'wn':''}"><label style="font-size:10px">Vl mensal</label><input type="number" value="${pvm}" oninput="updS4('pvm',this.value)" style="font-size:12px;padding:5px 8px"></div>
         </div>
         <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Ato</span><span style="font-weight:600">${BRL(ato)}</span></div>
         <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Mensais (${pqm}×)</span><span style="font-weight:600">${BRL(c.tPreM)}</span></div>
@@ -378,42 +465,8 @@ function renderTabDireta(c){
       </div>
     </div>
     <div style="border:.5px solid #e2e8f0;border-radius:8px;overflow:hidden">
-      <div style="background:#9a6621;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pós-chaves — 4 anos</div>
+      <div style="background:#b8873a;padding:8px 11px;font-size:12px;font-weight:600;color:#fff">Pós-chaves — ${oqm} meses${oqm>=12?` (${anosPos} anos)`:''}</div>
       <div style="padding:9px 11px">
         <div class="g2s" style="gap:6px;margin-bottom:8px">
-          <div class="fi2"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${oqm}" oninput="updS4('oqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
-          <div class="fi2"><label style="font-size:10px">Vl mensal</label><input type="number" value="${ovm}" oninput="updS4('ovm',this.value)" style="font-size:12px;padding:5px 8px"></div>
-        </div>
-        <div style="display:flex;justify-content:space-between;font-size:11px;padding:3px 0;border-bottom:.5px solid #f1f5f9"><span style="color:#64748b">Mensais (${oqm}×)</span><span style="font-weight:600">${BRL(c.tPosM)}</span></div>
-        <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;margin-top:6px;padding-top:6px;border-top:1px solid #e2e8f0"><span>Total pós-chaves</span><span style="color:#9a6621">${BRL(c.tPos)}</span></div>
-        <div style="margin-top:9px;padding:9px;background:#f5f6f7;border-radius:7px">
-          <div style="display:flex;justify-content:space-between;font-size:12px;font-weight:700;border-top:.5px solid #e2e8f0;padding-top:6px;margin-top:6px"><span>Total geral</span><span style="color:#b8873a">${BRL(c.tPre+c.tPos)}</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>`;
-}
-
-function render(){document.getElementById('sim-root').innerHTML=renderSim()}
-render();
-</script>
-<script src="crm-config.js"></script>
-<script src="admin-panel.js" defer></script>
-
-<!-- WhatsApp FAB -->
-<style>
-.wa-fab{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.wa-fab a{background:#b8873a;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(184,135,58,.35);display:flex;align-items:center;gap:8px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1);white-space:nowrap;text-decoration:none}
-.wa-fab a:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(184,135,58,.42)}
-.wa-fab-pulse{width:56px;height:56px;border-radius:50%;padding:0;justify-content:center;font-size:24px}
-@media(max-width:600px){.wa-fab-label{display:none}}
-</style>
-<div class="wa-fab">
-  <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Fiz%20uma%20simulação%20de%20financiamento%20e%20quero%20evoluir." target="_blank" rel="noopener">
-    <span><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span class="wa-fab-label">Falar com nossa equipe</span>
-  </a>
-</div>
-<script src="leads.js" defer></script>
-</body>
-</html>
+          <div class="fi2 ${acimaPos?'wn':''}"><label style="font-size:10px">Qtd mensais</label><input type="number" value="${oqm}" oninput="updS4('oqm',this.value)" style="font-size:12px;padding:5px 8px"></div>
+          <div class="fi2 ${acimaPos?'wn':''}"><label style="font-size:10px">Vl mensal</label><input type="number" value="${ovm}" oninput="updS4('ovm',this.value)" style="font-size:12px;padding:5p

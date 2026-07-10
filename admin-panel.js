@@ -57,13 +57,13 @@
       '<div id="pc-adm-panel">'+
         '<div id="pc-adm-hdr">'+
           '<span id="pc-adm-hdr-title">Painel Paulo</span>'+
-          '<button id="pc-adm-logout" title="Sair">Sair ✕</button>'+
+          '<button id="pc-adm-logout" title="Sair">Sair ×</button>'+
         '</div>'+
         '<div id="pc-adm-body">'+
           '<div>'+
             '<div id="pc-adm-photo-area">'+
               (ph?'<img src="'+ph+'" alt="Minha foto"/>'
-                 :'<div class="pc-adm-ph"><span>📸</span>Minha foto</div>')+
+                 :'<div class="pc-adm-ph"><span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></span>Minha foto</div>')+
             '</div>'+
             '<div id="pc-adm-photo-hint">Clique para adicionar foto</div>'+
             '<input type="file" id="pc-adm-ph-input" accept="image/*" style="display:none"/>'+
@@ -119,7 +119,7 @@
     ov.id='pc-login-ov';
     ov.innerHTML=
       '<div id="pc-login-box">'+
-        '<div id="pc-login-ico">🔐</div>'+
+        '<div id="pc-login-ico"><svg viewBox="0 0 24 24" style="width:36px;height:36px;stroke:currentColor;fill:none;stroke-width:1.6"><path d="M19 11H5a2 2 0 00-2 2v7a2 2 0 002 2h14a2 2 0 002-2v-7a2 2 0 00-2-2z"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div>'+
         '<div id="pc-login-ttl">Acesso Restrito</div>'+
         '<input id="pc-login-user" class="pc-inp" type="text" placeholder="Usuário" autocomplete="username"/>'+
         '<input id="pc-login-pass" class="pc-inp" type="password" placeholder="Senha" autocomplete="current-password"/>'+

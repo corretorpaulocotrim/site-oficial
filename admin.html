@@ -126,16 +126,16 @@ input[type=file]{display:none}
   <div class="sidebar">
     <div class="sidebar-logo">
       <div class="name">Paulo Cotrim</div>
-      <div class="sub">Coordenador Cury</div>
+      <div class="sub">Especialista em Financiamento Imobiliário</div>
     </div>
-    <span class="sidebar-badge">⚙ Admin</span>
+    <span class="sidebar-badge"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:4px;display:inline-block"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06a1.65 1.65 0 001.82.33H9a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 112.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Admin</span>
     <nav class="sn">
-      <a onclick="showPanel('dashboard')" class="active">📊 Dashboard</a>
-      <a onclick="showPanel('slides')">🖼 Imagens do Hero</a>
-      <a onclick="showPanel('condominios')">🏠 Imagens dos Imóveis</a>
-      <a onclick="showPanel('foto')">👤 Minha Foto</a>
-      <a href="index.html" target="_blank">🌐 Ver Site</a>
-      <a href="simulador.html" target="_blank">🧮 Simulador</a>
+      <a onclick="showPanel('dashboard')" class="active"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 3v18h18"/><path d="M18 17V9M13 17V5M8 17v-3"/></svg>Dashboard</a>
+      <a onclick="showPanel('slides')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Imagens do Hero</a>
+      <a onclick="showPanel('condominios')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>Imagens dos Imóveis</a>
+      <a onclick="showPanel('foto')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>Minha Foto</a>
+      <a href="index.html" target="_blank"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 010 20 15.3 15.3 0 010-20"/></svg>Ver Site</a>
+      <a href="simulador.html" target="_blank"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8" y2="11"/><line x1="12" y1="11" x2="12" y2="11"/><line x1="16" y1="11" x2="16" y2="11"/><line x1="8" y1="15" x2="8" y2="15"/><line x1="12" y1="15" x2="12" y2="15"/><line x1="16" y1="15" x2="16" y2="15"/><line x1="8" y1="19" x2="8" y2="19"/><line x1="12" y1="19" x2="12" y2="19"/><line x1="16" y1="19" x2="16" y2="19"/></svg>Simulador</a>
     </nav>
     <div class="sidebar-bottom">
       <button class="btn-logout" onclick="doLogout()">← Sair do Admin</button>
@@ -159,85 +159,85 @@ input[type=file]{display:none}
       <div style="background:#fff;border-radius:14px;padding:24px;box-shadow:0 2px 10px rgba(0,0,0,.06)">
         <h2 style="font-size:16px;font-weight:700;color:#0d2040;margin-bottom:14px">Acesso rápido</h2>
         <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px">
-          <button onclick="showPanel('slides')" style="padding:16px;background:#eff6ff;border:none;border-radius:10px;color:#1e40af;font-size:13px;font-weight:700;cursor:pointer">🖼 Editar Slides</button>
-          <button onclick="showPanel('condominios')" style="padding:16px;background:#f0fdf4;border:none;border-radius:10px;color:#15803d;font-size:13px;font-weight:700;cursor:pointer">🏠 Editar Imóveis</button>
-          <button onclick="showPanel('foto')" style="padding:16px;background:#fdf4ff;border:none;border-radius:10px;color:#7c3aed;font-size:13px;font-weight:700;cursor:pointer">👤 Trocar Foto</button>
+          <button onclick="showPanel('slides')" style="padding:16px;background:#eff6ff;border:none;border-radius:10px;color:#1e40af;font-size:13px;font-weight:700;cursor:pointer"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>Editar Slides</button>
+          <button onclick="showPanel('condominios')" style="padding:16px;background:#f0fdf4;border:none;border-radius:10px;color:#15803d;font-size:13px;font-weight:700;cursor:pointer"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><path d="M9 22V12h6v10"/></svg>Editar Imóveis</button>
+          <button onclick="showPanel('foto')" style="padding:16px;background:#fdf4ff;border:none;border-radius:10px;color:#7c3aed;font-size:13px;font-weight:700;cursor:pointer"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>Trocar Foto</button>
         </div>
       </div>
       <div style="margin-top:20px;background:#fffbeb;border:1px solid #fde68a;border-radius:10px;padding:16px;font-size:13px;color:#92400e">
-        <strong>💡 Dica:</strong> As imagens são salvas no navegador. Para trocar uma imagem, cole a URL ou faça upload de um arquivo nas seções ao lado.
+        <strong><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:4px;display:inline-block"><path d="M9 18h6M10 22h4M12 2a7 7 0 00-4 12.7V17h8v-2.3A7 7 0 0012 2z"/></svg>Dica:</strong> As imagens são salvas no navegador. Para trocar uma imagem, cole a URL ou faça upload de um arquivo nas seções ao lado.
       </div>
     </div>
 
     <!-- SLIDES -->
     <div class="panel" id="panel-slides">
       <div class="top-bar"><h1>Imagens do Hero (Carrossel)</h1><span>3 slides configuráveis</span></div>
-      <div class="alert-success" id="alert-slides">✅ Imagem salva com sucesso!</div>
+      <div class="alert-success" id="alert-slides"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:4px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Imagem salva com sucesso!</div>
       <div class="admin-grid">
 
         <div class="admin-card">
           <div class="card-preview" onclick="document.getElementById('f-slide0').click()">
             <img id="prev-slide0" src="https://images.unsplash.com/photo-1545324418-cc1a3fa10c00?w=600&q=80" alt="Slide 1"/>
-            <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+            <div class="overlay"><div class="overlay-text"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Clique para trocar</div></div>
           </div>
           <div class="card-info">
             <h3>Slide 1 — Orla Central</h3>
             <label>URL da imagem de fundo</label>
             <input type="text" id="url-slide0" placeholder="https://...jpg" onchange="previewUrl('slide0',this.value)"/>
             <div class="file-zone" onclick="document.getElementById('f-slide0').click()">
-              <p>📁 Ou clique para fazer upload</p>
+              <p><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 7a2 2 0 012-2h4l2 3h8a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Ou clique para fazer upload</p>
               <small>JPG, PNG — máx. 5MB</small>
             </div>
             <input type="file" id="f-slide0" accept="image/*" onchange="uploadImg('slide0',this)"/>
             <div class="card-actions">
-              <button class="btn-save" onclick="saveSlide(0)">💾 Salvar</button>
+              <button class="btn-save" onclick="saveSlide(0)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Salvar</button>
               <button class="btn-reset" onclick="resetSlide(0)">↺ Padrão</button>
             </div>
-            <div class="saved-badge" id="saved-slide0">✓ Salvo!</div>
+            <div class="saved-badge" id="saved-slide0"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;vertical-align:-1px;margin-right:3px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Salvo!</div>
           </div>
         </div>
 
         <div class="admin-card">
           <div class="card-preview" onclick="document.getElementById('f-slide1').click()">
             <img id="prev-slide1" src="https://images.unsplash.com/photo-1486325212027-8081e485255e?w=600&q=80" alt="Slide 2"/>
-            <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+            <div class="overlay"><div class="overlay-text"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Clique para trocar</div></div>
           </div>
           <div class="card-info">
             <h3>Slide 2 — Luzes do Rio</h3>
             <label>URL da imagem de fundo</label>
             <input type="text" id="url-slide1" placeholder="https://...jpg" onchange="previewUrl('slide1',this.value)"/>
             <div class="file-zone" onclick="document.getElementById('f-slide1').click()">
-              <p>📁 Ou clique para fazer upload</p>
+              <p><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 7a2 2 0 012-2h4l2 3h8a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Ou clique para fazer upload</p>
               <small>JPG, PNG — máx. 5MB</small>
             </div>
             <input type="file" id="f-slide1" accept="image/*" onchange="uploadImg('slide1',this)"/>
             <div class="card-actions">
-              <button class="btn-save" onclick="saveSlide(1)">💾 Salvar</button>
+              <button class="btn-save" onclick="saveSlide(1)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Salvar</button>
               <button class="btn-reset" onclick="resetSlide(1)">↺ Padrão</button>
             </div>
-            <div class="saved-badge" id="saved-slide1">✓ Salvo!</div>
+            <div class="saved-badge" id="saved-slide1"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;vertical-align:-1px;margin-right:3px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Salvo!</div>
           </div>
         </div>
 
         <div class="admin-card">
           <div class="card-preview" onclick="document.getElementById('f-slide2').click()">
             <img id="prev-slide2" src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=600&q=80" alt="Slide 3"/>
-            <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+            <div class="overlay"><div class="overlay-text"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Clique para trocar</div></div>
           </div>
           <div class="card-info">
             <h3>Slide 3 — Parque Piedade</h3>
             <label>URL da imagem de fundo</label>
             <input type="text" id="url-slide2" placeholder="https://...jpg" onchange="previewUrl('slide2',this.value)"/>
             <div class="file-zone" onclick="document.getElementById('f-slide2').click()">
-              <p>📁 Ou clique para fazer upload</p>
+              <p><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 7a2 2 0 012-2h4l2 3h8a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Ou clique para fazer upload</p>
               <small>JPG, PNG — máx. 5MB</small>
             </div>
             <input type="file" id="f-slide2" accept="image/*" onchange="uploadImg('slide2',this)"/>
             <div class="card-actions">
-              <button class="btn-save" onclick="saveSlide(2)">💾 Salvar</button>
+              <button class="btn-save" onclick="saveSlide(2)"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Salvar</button>
               <button class="btn-reset" onclick="resetSlide(2)">↺ Padrão</button>
             </div>
-            <div class="saved-badge" id="saved-slide2">✓ Salvo!</div>
+            <div class="saved-badge" id="saved-slide2"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;vertical-align:-1px;margin-right:3px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Salvo!</div>
           </div>
         </div>
 
@@ -247,14 +247,14 @@ input[type=file]{display:none}
     <!-- CONDOMÍNIOS -->
     <div class="panel" id="panel-condominios">
       <div class="top-bar"><h1>Imagens dos Imóveis</h1><span>8 cards configuráveis</span></div>
-      <div class="alert-success" id="alert-cond">✅ Imagem salva com sucesso!</div>
+      <div class="alert-success" id="alert-cond"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:4px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Imagem salva com sucesso!</div>
       <div class="admin-grid" id="cond-grid"></div>
     </div>
 
     <!-- FOTO -->
     <div class="panel" id="panel-foto">
       <div class="top-bar"><h1>Minha Foto</h1><span>Seção "Sobre"</span></div>
-      <div class="alert-success" id="alert-foto">✅ Foto salva com sucesso!</div>
+      <div class="alert-success" id="alert-foto"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:4px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Foto salva com sucesso!</div>
       <div class="foto-wrap">
         <div class="foto-preview"><img id="prev-foto" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Paulo Cotrim"/></div>
         <div class="foto-inputs">
@@ -262,15 +262,15 @@ input[type=file]{display:none}
           <label>URL da foto</label>
           <input type="text" id="url-foto" placeholder="https://...jpg" oninput="previewUrlFoto(this.value)"/>
           <div class="file-zone" onclick="document.getElementById('f-foto').click()" style="margin-top:12px">
-            <p>📁 Ou clique para fazer upload da sua foto</p>
+            <p><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 7a2 2 0 012-2h4l2 3h8a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Ou clique para fazer upload da sua foto</p>
             <small>JPG, PNG — recomendado 400×500px ou maior</small>
           </div>
           <input type="file" id="f-foto" accept="image/*" onchange="uploadFoto(this)"/>
           <div style="display:flex;gap:10px;margin-top:14px">
-            <button class="btn-save" onclick="saveFoto()" style="padding:11px 20px">💾 Salvar foto</button>
+            <button class="btn-save" onclick="saveFoto()" style="padding:11px 20px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Salvar foto</button>
             <button class="btn-reset" onclick="resetFoto()" style="padding:11px 16px">↺ Padrão</button>
           </div>
-          <div class="saved-badge" id="saved-foto" style="text-align:left;margin-top:10px">✓ Foto salva!</div>
+          <div class="saved-badge" id="saved-foto" style="text-align:left;margin-top:10px"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;vertical-align:-1px;margin-right:3px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Foto salva!</div>
         </div>
       </div>
     </div>
@@ -349,22 +349,22 @@ function initAdmin(){
     return`<div class="admin-card">
       <div class="card-preview" onclick="document.getElementById('fc-${c.id}').click()">
         <img id="prev-c-${c.id}" src="${saved}" alt="${c.label}"/>
-        <div class="overlay"><div class="overlay-text">📷 Clique para trocar</div></div>
+        <div class="overlay"><div class="overlay-text"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>Clique para trocar</div></div>
       </div>
       <div class="card-info">
         <h3>${c.label}</h3>
         <label>URL da imagem</label>
         <input type="text" id="url-c-${c.id}" value="${saved!==c.def?saved:''}" placeholder="https://...jpg" onchange="previewCond('${c.id}',this.value)"/>
         <div class="file-zone" onclick="document.getElementById('fc-${c.id}').click()">
-          <p>📁 Ou clique para fazer upload</p>
+          <p><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 7a2 2 0 012-2h4l2 3h8a2 2 0 012 2v7a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Ou clique para fazer upload</p>
           <small>JPG, PNG — máx. 5MB</small>
         </div>
         <input type="file" id="fc-${c.id}" accept="image/*" onchange="uploadCond('${c.id}',this)"/>
         <div class="card-actions">
-          <button class="btn-save" onclick="saveCond('${c.id}')">💾 Salvar</button>
+          <button class="btn-save" onclick="saveCond('${c.id}')"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></svg>Salvar</button>
           <button class="btn-reset" onclick="resetCond('${c.id}','${c.def}')">↺ Padrão</button>
         </div>
-        <div class="saved-badge" id="saved-c-${c.id}">✓ Salvo!</div>
+        <div class="saved-badge" id="saved-c-${c.id}"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;vertical-align:-1px;margin-right:3px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Salvo!</div>
       </div>
     </div>`;
   }).join('');
@@ -437,7 +437,7 @@ function resetFoto(){
   showBadge('saved-foto','↺ Redefinido');
 }
 
-function showBadge(id,msg='✓ Salvo!'){
+function showBadge(id,msg='<svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.6;vertical-align:-1px;margin-right:3px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>Salvo!'){
   const el=document.getElementById(id);
   if(!el)return;
   el.textContent=msg;el.style.display='block';
