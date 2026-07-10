@@ -250,6 +250,32 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 @media(max-width:860px){.cat-grid{grid-template-columns:1fr 1fr}}
 @media(max-width:560px){.cat-grid{grid-template-columns:1fr}}
 
+/* COMPARADOR */
+.cat-compare-row{display:flex;align-items:center;gap:8px;margin-top:12px;padding-top:12px;border-top:1px solid var(--line)}
+.cat-compare-row label{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--gray);font-weight:600;cursor:pointer}
+.cat-compare-row input[type=checkbox]{width:17px;height:17px;accent-color:var(--gold);cursor:pointer}
+.compare-bar{position:fixed;left:0;right:0;bottom:0;z-index:6000;background:var(--ink);color:#fff;padding:14px 24px;display:none;align-items:center;justify-content:center;gap:20px;box-shadow:0 -10px 30px rgba(0,0,0,.18);flex-wrap:wrap}
+.compare-bar.show{display:flex}
+.compare-bar-txt{font-size:13.5px;font-weight:600}
+.compare-bar-txt b{color:var(--gold2)}
+.compare-bar-btn{background:linear-gradient(135deg,var(--gold),#cf9f4f);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}
+.compare-bar-clear{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:600;cursor:pointer}
+.compare-modal{position:fixed;inset:0;z-index:7000;background:rgba(15,46,54,.6);display:none;align-items:center;justify-content:center;padding:24px}
+.compare-modal.show{display:flex}
+.compare-modal-box{background:#fff;border-radius:20px;max-width:920px;width:100%;max-height:86vh;overflow:auto;padding:32px}
+.compare-modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.compare-modal-head h3{font-family:'Fraunces',Georgia,serif;font-size:22px;color:var(--ink);font-weight:600}
+.compare-modal-close{background:var(--mist);border:none;width:36px;height:36px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--ink)}
+.compare-table{width:100%;border-collapse:collapse;font-size:13px}
+.compare-table th{background:var(--mist);color:var(--ink);font-weight:700;padding:12px 14px;text-align:left;border-bottom:2px solid var(--line);position:sticky;top:0}
+.compare-table td{padding:12px 14px;border-bottom:1px solid var(--line);color:var(--ink)}
+.compare-table tr td:first-child,.compare-table tr th:first-child{color:var(--gray);font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.04em;white-space:nowrap}
+.compare-modal-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.compare-modal-actions a,.compare-modal-actions button{display:inline-flex;align-items:center;gap:7px;border-radius:10px;padding:12px 22px;font-size:13px;font-weight:800;cursor:pointer;text-decoration:none}
+.compare-modal-wa{background:#25d366;color:#fff;border:none}
+.compare-modal-dl{background:#fff;color:var(--ink);border:1.5px solid var(--gold)}
+@media(max-width:640px){.compare-table{font-size:11.5px}.compare-table th,.compare-table td{padding:9px 10px}}
+
 /* BRANDS */
 .brands{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
 .brand-chip{font-size:13.5px;font-weight:600;color:var(--gray);padding:10px 20px;border:1px solid var(--line);border-radius:30px;transition:color .3s var(--ease),border-color .3s var(--ease)}
@@ -273,6 +299,35 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .ae-promo-stat-num{display:block;font-family:'Fraunces',Georgia,serif;font-size:28px;font-weight:600;color:#e0b466;margin-bottom:4px}
 .ae-promo-stat-lbl{font-size:11.5px;color:rgba(255,255,255,.55);line-height:1.35}
 @media(max-width:820px){.ae-promo-grid{grid-template-columns:1fr}.ae-promo{padding:40px 26px}}
+
+/* MINI SIMULADOR (home) */
+.mini-sim{background:#fff;border:1px solid var(--line);border-radius:24px;padding:36px 40px;margin-top:24px;box-shadow:0 1px 3px rgba(15,46,54,.05)}
+.mini-sim-head{margin-bottom:26px}
+.mini-sim-tag{display:inline-block;background:var(--petrol-soft,rgba(15,46,54,.06));color:var(--gold);font-size:10.5px;font-weight:800;padding:5px 14px;border-radius:30px;letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.mini-sim-head h3{font-family:'Fraunces',Georgia,serif;font-size:clamp(20px,2.6vw,26px);font-weight:600;color:var(--ink);margin-bottom:8px;letter-spacing:-.01em}
+.mini-sim-head p{font-size:14px;color:var(--gray);line-height:1.6;max-width:56ch}
+.mini-sim-grid{display:grid;grid-template-columns:1.3fr 1fr 1fr;gap:20px;margin-bottom:22px}
+.mini-sim-field label{display:block;font-size:11px;font-weight:700;color:rgba(184,135,58,.85);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px}
+.mini-sim-field select{width:100%;padding:13px 14px;background:#fff;border:1.5px solid var(--line);border-radius:10px;color:var(--ink);font-size:14px;font-family:inherit;outline:none;cursor:pointer;appearance:none;-webkit-appearance:none}
+.mini-sim-stepper{display:flex;align-items:center;justify-content:space-between;border:1.5px solid var(--line);border-radius:10px;padding:6px}
+.mini-sim-stepper button{width:34px;height:34px;border-radius:8px;border:none;background:var(--mist);color:var(--ink);font-size:18px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background-color .25s var(--ease)}
+.mini-sim-stepper button:hover{background:rgba(184,135,58,.16);color:var(--gold)}
+.mini-sim-stepper span{font-size:14.5px;font-weight:700;color:var(--ink)}
+.mini-sim-btn{background:linear-gradient(135deg,var(--gold),var(--gold2));color:#fff;border:none;border-radius:10px;padding:14px 30px;font-size:14px;font-weight:800;cursor:pointer;transition:transform .4s var(--ease),box-shadow .4s var(--ease);box-shadow:0 8px 24px rgba(184,135,58,.22),inset 0 1px 0 rgba(255,255,255,.2)}
+.mini-sim-btn:hover{transform:translateY(-3px);box-shadow:0 14px 30px rgba(184,135,58,.32)}
+.mini-sim-result{margin-top:24px}
+.mini-sim-result.show{display:block;animation:msFadeUp .4s var(--ease)}
+@keyframes msFadeUp{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.mini-sim-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-bottom:16px}
+.mini-sim-card{background:var(--mist);border:1px solid var(--line);border-radius:12px;padding:16px;text-align:center}
+.mini-sim-card b{display:block;font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:4px}
+.mini-sim-card span{font-size:10.5px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.mini-sim-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:14px}
+.mini-sim-actions button,.mini-sim-actions a{display:inline-flex;align-items:center;gap:7px;border-radius:10px;padding:11px 20px;font-size:12.5px;font-weight:800;cursor:pointer;text-decoration:none;transition:transform .35s var(--ease)}
+.mini-sim-actions button:hover,.mini-sim-actions a:hover{transform:translateY(-2px)}
+.mini-sim-wa{background:#25d366;color:#fff;border:none}
+.mini-sim-dl{background:#fff;color:var(--ink);border:1.5px solid var(--gold)}
+@media(max-width:720px){.mini-sim{padding:26px 22px}.mini-sim-grid{grid-template-columns:1fr}.mini-sim-cards{grid-template-columns:1fr 1fr}}
 
 /* AUTHORITY strip */
 .auth{display:grid;grid-template-columns:1.1fr 1fr;gap:48px;align-items:center}
@@ -526,7 +581,7 @@ footer .wrap{position:relative;z-index:1}
 
     <div class="trust reveal">
       <div class="trust-item"><span class="trust-num">18</span><span class="trust-lbl">anos de mercado</span></div>
-      <div class="trust-item"><span class="trust-num">26</span><span class="trust-lbl">empreendimentos ativos</span></div>
+      <div class="trust-item"><span class="trust-num">31</span><span class="trust-lbl">empreendimentos ativos</span></div>
       <div class="trust-item"><span class="trust-num">16</span><span class="trust-lbl">construtoras parceiras</span></div>
       <div class="trust-item"><span class="trust-num">721</span><span class="trust-lbl">famílias atendidas</span></div>
     </div>
@@ -591,12 +646,44 @@ footer .wrap{position:relative;z-index:1}
           </div>
         </div>
         <div class="ae-promo-stats">
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">26</span><span class="ae-promo-stat-lbl">empreendimentos comparáveis</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">31</span><span class="ae-promo-stat-lbl">empreendimentos comparáveis</span></div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">16</span><span class="ae-promo-stat-lbl">construtoras, um só cálculo</span></div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">1 min</span><span class="ae-promo-stat-lbl">para ver seu plano</span></div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$0</span><span class="ae-promo-stat-lbl">custo para simular</span></div>
         </div>
       </div>
+    </div>
+
+    <div class="mini-sim reveal">
+      <div class="mini-sim-head">
+        <div class="mini-sim-tag">Sem digitar nada</div>
+        <h3>Teste agora, direto aqui na página</h3>
+        <p>Escolha o empreendimento e ajuste renda e FGTS com as setinhas — o cálculo aparece na hora, comparando o método de cada construtora.</p>
+      </div>
+      <div class="mini-sim-grid">
+        <div class="mini-sim-field">
+          <label>Empreendimento</label>
+          <select id="msEmp"></select>
+        </div>
+        <div class="mini-sim-field">
+          <label>Renda familiar mensal</label>
+          <div class="mini-sim-stepper">
+            <button type="button" onclick="msStep('renda',-500)" aria-label="Diminuir renda">−</button>
+            <span id="msRendaVal">R$ 6.000</span>
+            <button type="button" onclick="msStep('renda',500)" aria-label="Aumentar renda">+</button>
+          </div>
+        </div>
+        <div class="mini-sim-field">
+          <label>FGTS disponível</label>
+          <div class="mini-sim-stepper">
+            <button type="button" onclick="msStep('fgts',-2000)" aria-label="Diminuir FGTS">−</button>
+            <span id="msFgtsVal">R$ 10.000</span>
+            <button type="button" onclick="msStep('fgts',2000)" aria-label="Aumentar FGTS">+</button>
+          </div>
+        </div>
+      </div>
+      <button class="mini-sim-btn" onclick="msCalcular()">Calcular meu plano</button>
+      <div class="mini-sim-result" id="msResult"></div>
     </div>
   </div>
 </section>
@@ -781,9 +868,30 @@ footer .wrap{position:relative;z-index:1}
   <svg class="ic" viewBox="0 0 24 24" style="width:24px;height:24px" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<div class="compare-bar" id="compareBar">
+  <span class="compare-bar-txt" id="compareBarTxt">2 imóveis selecionados</span>
+  <button class="compare-bar-btn" onclick="showCompareModal()">Comparar agora</button>
+  <button class="compare-bar-clear" onclick="clearCompare()">Limpar seleção</button>
+</div>
+
+<div class="compare-modal" id="compareModal">
+  <div class="compare-modal-box">
+    <div class="compare-modal-head">
+      <h3>Comparação de imóveis</h3>
+      <button class="compare-modal-close" onclick="closeCompareModal()" aria-label="Fechar"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+    </div>
+    <div id="compareTableWrap" style="overflow-x:auto"></div>
+    <div class="compare-modal-actions">
+      <a class="compare-modal-wa" id="compareWaBtn" href="#" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Confirmar com Paulo</a>
+      <button class="compare-modal-dl" onclick="downloadComparacao()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar comparação (PDF)</button>
+    </div>
+  </div>
+</div>
+
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="financing-sim.js"></script>
 <script>
-var EMP = [{"nome": "Farol da Guanabara", "bairro": "Santo Cristo · Porto Maravilha", "construtora": "Cury", "status": "lancamento", "url": "farol-da-guanabara.html", "lat": -22.8958, "lng": -43.2103, "preco": "R$ 402.875", "img": "emp-img/farol-da-guanabara.jpg", "tipologia": "Studio, 1 e 3 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Solário", "Espaço Zen", "Espaço Gourmet"]}, {"nome": "Arcos do Porto", "bairro": "Porto Maravilha", "construtora": "Cury", "status": "obras", "url": "arcos-do-porto.html", "lat": -22.8912, "lng": -43.2013, "preco": "R$ 360.588", "img": "emp-img/arcos-do-porto.jpg", "tipologia": "Studio, 1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscina", "Churrasqueira", "Salão de Festas", "Academia"]}, {"nome": "Orla Central", "bairro": "Centro · Niterói", "construtora": "Cury", "status": "lancamento", "url": "orla-central.html", "lat": -22.899, "lng": -43.1248, "preco": "R$ 402.000", "img": "emp-img/orla-central.jpg", "tipologia": "1, 2 e 3 quartos", "cor": "#B8873A", "amen": ["Solário", "Piscinas", "Horta", "Beach Tênis"]}, {"nome": "Parque Piedade", "bairro": "Piedade · Zona Norte", "construtora": "Cury", "status": "lancamento", "url": "parque-piedade.html", "lat": -22.8672, "lng": -43.2885, "preco": "R$ 263.200", "img": "emp-img/parque-piedade.jpg", "tipologia": "2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Playground", "Academia", "Apoio Festas"]}, {"nome": "Luzes do Rio Lamparina", "bairro": "São Cristóvão", "construtora": "Cury", "status": "lancamento", "url": "luzes-do-rio-lamparina.html", "lat": -22.9008, "lng": -43.2238, "preco": "R$ 309.000", "img": "emp-img/luzes-do-rio-lamparina.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Salão de Festas", "Academia", "Churrasqueira"]}, {"nome": "Caminhos da Guanabara", "bairro": "Pendotiba · Niterói", "construtora": "Cury", "status": "obras", "url": "caminhos-da-guanabara.html", "lat": -22.8748, "lng": -43.1105, "preco": "R$ 334.999", "img": "emp-img/caminhos-da-guanabara.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Rooftop", "Academia", "Espaço Gourmet"]}, {"nome": "Cartola II", "bairro": "São Cristóvão", "construtora": "Cury", "status": "lancamento", "url": "cartola-ii.html", "lat": -22.9015, "lng": -43.2295, "preco": "R$ 302.470", "img": "emp-img/cartola-ii.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Solário", "Playground", "Academia"]}, {"nome": "Luzes do Rio Candeeiro", "bairro": "São Cristóvão", "construtora": "Cury", "status": "lancamento", "url": "luzes-do-rio-candeeiro.html", "lat": -22.9, "lng": -43.222, "preco": "R$ 361.962", "img": "emp-img/luzes-do-rio-candeeiro.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Solário", "Brinquedoteca", "Playground"]}, {"nome": "A Noite", "bairro": "Praça Mauá, 7 · Centro", "construtora": "Brookfield / AZO", "status": "obras", "url": "emp-a-noite.html", "lat": -22.8963, "lng": -43.1823, "preco": "R$ 802.000", "img": "emp-img/a-noite.jpg", "tipologia": "Studio 44m² e duplex 70m²", "cor": "#5B6570", "amen": ["Mirante 360°", "Restaurante", "Portaria 24h"]}, {"nome": "Saudosa Praça Onze", "bairro": "Praça Onze · Centro", "construtora": "Cury", "status": "lancamento", "url": "emp-saudosa-praca-onze.html", "lat": -22.9057, "lng": -43.1978, "preco": "A partir de R$ 285.000", "img": "emp-img/saudosa-praca-onze.jpg", "tipologia": "Studio a 2 quartos suíte (31-49m²)", "cor": "#B8873A", "amen": ["Academia", "Coworking", "Salão de Festas", "Pet Care"]}, {"nome": "Alma Carioca", "bairro": "Vila Valqueire · Zona Norte", "construtora": "Emccamp", "status": "lancamento", "url": "emp-alma-carioca.html", "lat": -22.8875, "lng": -43.2718, "preco": "Consulte valores", "img": "emp-img/alma-carioca.jpg", "tipologia": "2 quartos (37-46m²)", "cor": "#5B6570", "amen": ["Piscina", "Churrasqueira", "Academia", "Pet Place"]}, {"nome": "Beon Porto Residencial", "bairro": "São Cristóvão · Zona Norte", "construtora": "Riva Incorporadora", "status": "lancamento", "url": "emp-beon-porto.html", "lat": -22.8898, "lng": -43.2194, "preco": "A partir de R$ 259.000", "img": "emp-img/beon-porto.jpg", "tipologia": "1 e 2 quartos (32-39m²)", "cor": "#5B6570", "amen": ["Piscina", "Salão de Festas", "Academia", "Coworking"]}, {"nome": "Brise Studios Design", "bairro": "Praça Pio X · Centro", "construtora": "Fator Realty", "status": "lancamento", "url": "emp-brise-studios.html", "lat": -22.9004, "lng": -43.178, "preco": "Consulte valores", "img": "emp-img/brise-studios.jpg", "tipologia": "Studios 31-44m²", "cor": "#5B6570", "amen": ["Rooftop", "Sauna", "Academia", "Coworking"]}, {"nome": "Conquista Florianópolis — Fase 1", "bairro": "Praça Seca · Jacarepaguá", "construtora": "Direcional", "status": "lancamento", "url": "emp-conquista-florianopolis.html", "lat": -22.9026, "lng": -43.351, "preco": "A partir de R$ 207.500", "img": "emp-img/conquista-florianopolis.jpg", "tipologia": "1 e 2 quartos (36-56m²)", "cor": "#8B5C8F", "amen": ["Piscina", "Piscina Infantil", "Salão de Festas", "Playground"]}, {"nome": "Cores do Rio Residencial", "bairro": "Rua Irineu Marinho · Centro", "construtora": "W3 Engenharia", "status": "pronto", "url": "emp-cores-do-rio.html", "lat": -22.9068, "lng": -43.1889, "preco": "A partir de R$ 287.000", "img": "emp-img/cores-do-rio.jpg", "tipologia": "Studios, 1 e 2 quartos (35-57m²)", "cor": "#5B6570", "amen": ["Academia", "Espaço Gourmet", "Coworking"]}, {"nome": "CTV Beat", "bairro": "Madureira · Zona Norte", "construtora": "CTV", "status": "lancamento", "url": "emp-ctv-beat.html", "lat": -22.867, "lng": -43.342, "preco": "A partir de R$ 229.000", "img": "emp-img/ctv-beat.jpg", "tipologia": "2 quartos (50-110m²)", "cor": "#5B6570", "amen": ["Piscina", "Salão de Festas", "Playground"]}, {"nome": "CTV Vitória", "bairro": "Campinho · Zona Norte", "construtora": "CTV", "status": "lancamento", "url": "emp-ctv-vitoria.html", "lat": -22.8858, "lng": -43.3436, "preco": "A partir de R$ 229.000", "img": "emp-img/ctv-vitoria.jpg", "tipologia": "2 e 3 quartos (49-114m²)", "cor": "#5B6570", "amen": ["Piscina", "Salão de Jogos", "Churrasqueira", "Brinquedoteca"]}, {"nome": "East Side Harmony", "bairro": "Méier · Zona Norte", "construtora": "Tegra Incorporadora", "status": "pronto", "url": "emp-east-side-harmony.html", "lat": -22.8927, "lng": -43.2828, "preco": "A partir de R$ 411.000", "img": "emp-img/east-side-harmony.jpg", "tipologia": "2 e 3 quartos (52-68m²)", "cor": "#5B6570", "amen": ["Piscina", "Sauna", "Churrasqueira", "Coworking"]}, {"nome": "Wish Norte (Living)", "bairro": "Cachambi · Zona Norte", "construtora": "Cyrela · Living", "status": "lancamento", "url": "emp-living-wish-norte.html", "lat": -22.885, "lng": -43.2782, "preco": "A partir de R$ 385.000", "img": "emp-img/living-wish-norte.jpg", "tipologia": "2 e 3 quartos (44-59m²)", "cor": "#0F6E8C", "amen": ["Piscina", "Piscina Infantil", "Academia", "Brinquedoteca"]}, {"nome": "Meu Crescer Engenhão", "bairro": "Engenho de Dentro · Zona Norte", "construtora": "Crescer", "status": "lancamento", "url": "emp-meu-crescer-engenhao.html", "lat": -22.8931, "lng": -43.2924, "preco": "A partir de R$ 269.000", "img": "emp-img/meu-crescer-engenhao.jpg", "tipologia": "2 quartos (48-52m²)", "cor": "#5B6570", "amen": ["Piscina", "Espaço Gourmet", "Academia", "Bicicletário"]}, {"nome": "Only by Living — Fase 1", "bairro": "Cachambi · Zona Norte", "construtora": "Cyrela · Living", "status": "lancamento", "url": "emp-only-by-living.html", "lat": -22.885, "lng": -43.2775, "preco": "A partir de R$ 334.280", "img": "emp-img/only-by-living.jpg", "tipologia": "2 a 4 quartos + coberturas (44-182m²)", "cor": "#0F6E8C", "amen": ["Piscina", "Sky Lounge", "Academia", "Sauna"]}, {"nome": "Primor Carioca — Fase 2", "bairro": "Inhaúma · Zona Norte", "construtora": "MRV", "status": "lancamento", "url": "emp-primor-carioca.html", "lat": -22.8798, "lng": -43.2712, "preco": "A partir de R$ 262.990", "img": "emp-img/primor-carioca.jpg", "tipologia": "2 quartos (35-40m²)", "cor": "#5B6570", "amen": ["Piscina", "Playground", "Espaço Gourmet", "Bicicletário"]}, {"nome": "Sal Rio Residencial", "bairro": "Saúde · Porto Maravilha", "construtora": "CTV", "status": "lancamento", "url": "emp-sal-rio.html", "lat": -22.8974, "lng": -43.1878, "preco": "A partir de R$ 189.000", "img": "emp-img/sal-rio.jpg", "tipologia": "Studios e apartamentos, 1 quarto (22-35m²)", "cor": "#5B6570", "amen": ["Rooftop", "Mirante"]}, {"nome": "URB Sole", "bairro": "Todos os Santos · Zona Norte", "construtora": "DC4", "status": "obras", "url": "emp-urb-sole.html", "lat": -22.8935, "lng": -43.2799, "preco": "A partir de R$ 259.000", "img": "emp-img/urb-sole.jpg", "tipologia": "1 e 2 quartos (33-46m²)", "cor": "#5B6570", "amen": ["Piscina", "Espaço Gourmet", "Coworking", "Playground"]}, {"nome": "Village Caribe 1", "bairro": "Praça Seca · Jacarepaguá", "construtora": "FMAC Engenharia", "status": "lancamento", "url": "emp-village-caribe.html", "lat": -22.9036, "lng": -43.3495, "preco": "Consulte valores", "img": "emp-img/village-caribe.jpg", "tipologia": "2 quartos c/ suíte + coberturas (59-137m²)", "cor": "#5B6570", "amen": ["Piscina", "Playground", "Churrasqueira", "Sauna"]}, {"nome": "Vivaz Connection Zona Norte — Fase 1", "bairro": "Riachuelo · Zona Norte", "construtora": "Direcional · Vivaz", "status": "obras", "url": "emp-vivaz-connection.html", "lat": -22.8912, "lng": -43.2551, "preco": "A partir de R$ 233.000", "img": "emp-img/vivaz-connection.jpg", "tipologia": "2 quartos (37m²)", "cor": "#8B5C8F", "amen": ["Piscina", "Salão de Festas", "Academia", "Churrasqueira"]}, {"nome": "Vivaz Rua Honório", "bairro": "Todos os Santos · Zona Norte", "construtora": "Direcional · Vivaz", "status": "pronto", "url": "emp-vivaz-honorio.html", "lat": -22.8955, "lng": -43.2825, "preco": "A partir de R$ 259.592", "img": "emp-img/vivaz-honorio.jpg", "tipologia": "1 e 2 quartos (32-45m²)", "cor": "#8B5C8F", "amen": ["Piscina", "Churrasqueira", "Academia", "Salão de Festas"]}, {"nome": "Império do Ouro", "bairro": "Rio do Ouro · São Gonçalo", "construtora": "MRV", "status": "pronto", "url": "emp-imperio-do-ouro.html", "lat": -22.8861201, "lng": -42.9920149, "preco": "Consulte valores", "img": "emp-img/imperio-do-ouro.jpg", "tipologia": "2 quartos, até 1 suíte (46-47m²)", "cor": "#5B6570", "amen": ["Piscina", "Espaço Gourmet", "Playground", "Espaço Pet"]}];
+var EMP = [{"nome": "Farol da Guanabara", "bairro": "Santo Cristo · Porto Maravilha", "construtora": "Cury", "status": "lancamento", "url": "farol-da-guanabara.html", "lat": -22.8958, "lng": -43.2103, "preco": "R$ 402.875", "img": "emp-img/farol-da-guanabara.jpg", "tipologia": "Studio, 1 e 3 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Solário", "Espaço Zen", "Espaço Gourmet"]}, {"nome": "Arcos do Porto", "bairro": "Porto Maravilha", "construtora": "Cury", "status": "obras", "url": "arcos-do-porto.html", "lat": -22.8912, "lng": -43.2013, "preco": "R$ 360.588", "img": "emp-img/arcos-do-porto.jpg", "tipologia": "Studio, 1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscina", "Churrasqueira", "Salão de Festas", "Academia"]}, {"nome": "Orla Central", "bairro": "Centro · Niterói", "construtora": "Cury", "status": "lancamento", "url": "orla-central.html", "lat": -22.899, "lng": -43.1248, "preco": "R$ 402.000", "img": "emp-img/orla-central.jpg", "tipologia": "1, 2 e 3 quartos", "cor": "#B8873A", "amen": ["Solário", "Piscinas", "Horta", "Beach Tênis"]}, {"nome": "Parque Piedade", "bairro": "Piedade · Zona Norte", "construtora": "Cury", "status": "lancamento", "url": "parque-piedade.html", "lat": -22.8672, "lng": -43.2885, "preco": "R$ 263.200", "img": "emp-img/parque-piedade.jpg", "tipologia": "2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Playground", "Academia", "Apoio Festas"]}, {"nome": "Luzes do Rio Lamparina", "bairro": "São Cristóvão", "construtora": "Cury", "status": "lancamento", "url": "luzes-do-rio-lamparina.html", "lat": -22.9008, "lng": -43.2238, "preco": "R$ 309.000", "img": "emp-img/luzes-do-rio-lamparina.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Salão de Festas", "Academia", "Churrasqueira"]}, {"nome": "Caminhos da Guanabara", "bairro": "Pendotiba · Niterói", "construtora": "Cury", "status": "obras", "url": "caminhos-da-guanabara.html", "lat": -22.8748, "lng": -43.1105, "preco": "R$ 334.999", "img": "emp-img/caminhos-da-guanabara.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Rooftop", "Academia", "Espaço Gourmet"]}, {"nome": "Cartola II", "bairro": "São Cristóvão", "construtora": "Cury", "status": "lancamento", "url": "cartola-ii.html", "lat": -22.9015, "lng": -43.2295, "preco": "R$ 302.470", "img": "emp-img/cartola-ii.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Solário", "Playground", "Academia"]}, {"nome": "Luzes do Rio Candeeiro", "bairro": "São Cristóvão", "construtora": "Cury", "status": "lancamento", "url": "luzes-do-rio-candeeiro.html", "lat": -22.9, "lng": -43.222, "preco": "R$ 361.962", "img": "emp-img/luzes-do-rio-candeeiro.jpg", "tipologia": "1 e 2 quartos", "cor": "#B8873A", "amen": ["Piscinas", "Solário", "Brinquedoteca", "Playground"]}, {"nome": "A Noite", "bairro": "Praça Mauá, 7 · Centro", "construtora": "Brookfield / AZO", "status": "obras", "url": "emp-a-noite.html", "lat": -22.8963, "lng": -43.1823, "preco": "R$ 802.000", "img": "emp-img/a-noite.jpg", "tipologia": "Studio 44m² e duplex 70m²", "cor": "#5B6570", "amen": ["Mirante 360°", "Restaurante", "Portaria 24h"]}, {"nome": "Saudosa Praça Onze", "bairro": "Praça Onze · Centro", "construtora": "Cury", "status": "lancamento", "url": "emp-saudosa-praca-onze.html", "lat": -22.9057, "lng": -43.1978, "preco": "A partir de R$ 285.000", "img": "emp-img/saudosa-praca-onze.jpg", "tipologia": "Studio a 2 quartos suíte (31-49m²)", "cor": "#B8873A", "amen": ["Academia", "Coworking", "Salão de Festas", "Pet Care"]}, {"nome": "Alma Carioca", "bairro": "Vila Valqueire · Zona Norte", "construtora": "Emccamp", "status": "lancamento", "url": "emp-alma-carioca.html", "lat": -22.8875, "lng": -43.2718, "preco": "Consulte valores", "img": "emp-img/alma-carioca.jpg", "tipologia": "2 quartos (37-46m²)", "cor": "#5B6570", "amen": ["Piscina", "Churrasqueira", "Academia", "Pet Place"]}, {"nome": "Beon Porto Residencial", "bairro": "São Cristóvão · Zona Norte", "construtora": "Riva Incorporadora", "status": "lancamento", "url": "emp-beon-porto.html", "lat": -22.8898, "lng": -43.2194, "preco": "A partir de R$ 259.000", "img": "emp-img/beon-porto.jpg", "tipologia": "1 e 2 quartos (32-39m²)", "cor": "#5B6570", "amen": ["Piscina", "Salão de Festas", "Academia", "Coworking"]}, {"nome": "Brise Studios Design", "bairro": "Praça Pio X · Centro", "construtora": "Fator Realty", "status": "lancamento", "url": "emp-brise-studios.html", "lat": -22.9004, "lng": -43.178, "preco": "Consulte valores", "img": "emp-img/brise-studios.jpg", "tipologia": "Studios 31-44m²", "cor": "#5B6570", "amen": ["Rooftop", "Sauna", "Academia", "Coworking"]}, {"nome": "Conquista Florianópolis — Fase 1", "bairro": "Praça Seca · Jacarepaguá", "construtora": "Direcional", "status": "lancamento", "url": "emp-conquista-florianopolis.html", "lat": -22.9026, "lng": -43.351, "preco": "A partir de R$ 207.500", "img": "emp-img/conquista-florianopolis.jpg", "tipologia": "1 e 2 quartos (36-56m²)", "cor": "#8B5C8F", "amen": ["Piscina", "Piscina Infantil", "Salão de Festas", "Playground"]}, {"nome": "Cores do Rio Residencial", "bairro": "Rua Irineu Marinho · Centro", "construtora": "W3 Engenharia", "status": "pronto", "url": "emp-cores-do-rio.html", "lat": -22.9068, "lng": -43.1889, "preco": "A partir de R$ 287.000", "img": "emp-img/cores-do-rio.jpg", "tipologia": "Studios, 1 e 2 quartos (35-57m²)", "cor": "#5B6570", "amen": ["Academia", "Espaço Gourmet", "Coworking"]}, {"nome": "CTV Beat", "bairro": "Madureira · Zona Norte", "construtora": "CTV", "status": "lancamento", "url": "emp-ctv-beat.html", "lat": -22.867, "lng": -43.342, "preco": "A partir de R$ 229.000", "img": "emp-img/ctv-beat.jpg", "tipologia": "2 quartos (50-110m²)", "cor": "#5B6570", "amen": ["Piscina", "Salão de Festas", "Playground"]}, {"nome": "CTV Vitória", "bairro": "Campinho · Zona Norte", "construtora": "CTV", "status": "lancamento", "url": "emp-ctv-vitoria.html", "lat": -22.8858, "lng": -43.3436, "preco": "A partir de R$ 229.000", "img": "emp-img/ctv-vitoria.jpg", "tipologia": "2 e 3 quartos (49-114m²)", "cor": "#5B6570", "amen": ["Piscina", "Salão de Jogos", "Churrasqueira", "Brinquedoteca"]}, {"nome": "East Side Harmony", "bairro": "Méier · Zona Norte", "construtora": "Tegra Incorporadora", "status": "pronto", "url": "emp-east-side-harmony.html", "lat": -22.8927, "lng": -43.2828, "preco": "A partir de R$ 411.000", "img": "emp-img/east-side-harmony.jpg", "tipologia": "2 e 3 quartos (52-68m²)", "cor": "#5B6570", "amen": ["Piscina", "Sauna", "Churrasqueira", "Coworking"]}, {"nome": "Wish Norte (Living)", "bairro": "Cachambi · Zona Norte", "construtora": "Cyrela · Living", "status": "lancamento", "url": "emp-living-wish-norte.html", "lat": -22.885, "lng": -43.2782, "preco": "A partir de R$ 385.000", "img": "emp-img/living-wish-norte.jpg", "tipologia": "2 e 3 quartos (44-59m²)", "cor": "#0F6E8C", "amen": ["Piscina", "Piscina Infantil", "Academia", "Brinquedoteca"]}, {"nome": "Meu Crescer Engenhão", "bairro": "Engenho de Dentro · Zona Norte", "construtora": "Crescer", "status": "lancamento", "url": "emp-meu-crescer-engenhao.html", "lat": -22.8931, "lng": -43.2924, "preco": "A partir de R$ 269.000", "img": "emp-img/meu-crescer-engenhao.jpg", "tipologia": "2 quartos (48-52m²)", "cor": "#5B6570", "amen": ["Piscina", "Espaço Gourmet", "Academia", "Bicicletário"]}, {"nome": "Only by Living — Fase 1", "bairro": "Cachambi · Zona Norte", "construtora": "Cyrela · Living", "status": "lancamento", "url": "emp-only-by-living.html", "lat": -22.885, "lng": -43.2775, "preco": "A partir de R$ 334.280", "img": "emp-img/only-by-living.jpg", "tipologia": "2 a 4 quartos + coberturas (44-182m²)", "cor": "#0F6E8C", "amen": ["Piscina", "Sky Lounge", "Academia", "Sauna"]}, {"nome": "Primor Carioca — Fase 2", "bairro": "Inhaúma · Zona Norte", "construtora": "MRV", "status": "lancamento", "url": "emp-primor-carioca.html", "lat": -22.8798, "lng": -43.2712, "preco": "A partir de R$ 262.990", "img": "emp-img/primor-carioca.jpg", "tipologia": "2 quartos (35-40m²)", "cor": "#5B6570", "amen": ["Piscina", "Playground", "Espaço Gourmet", "Bicicletário"]}, {"nome": "Sal Rio Residencial", "bairro": "Saúde · Porto Maravilha", "construtora": "CTV", "status": "lancamento", "url": "emp-sal-rio.html", "lat": -22.8974, "lng": -43.1878, "preco": "A partir de R$ 189.000", "img": "emp-img/sal-rio.jpg", "tipologia": "Studios e apartamentos, 1 quarto (22-35m²)", "cor": "#5B6570", "amen": ["Rooftop", "Mirante"]}, {"nome": "URB Sole", "bairro": "Todos os Santos · Zona Norte", "construtora": "DC4", "status": "obras", "url": "emp-urb-sole.html", "lat": -22.8935, "lng": -43.2799, "preco": "A partir de R$ 259.000", "img": "emp-img/urb-sole.jpg", "tipologia": "1 e 2 quartos (33-46m²)", "cor": "#5B6570", "amen": ["Piscina", "Espaço Gourmet", "Coworking", "Playground"]}, {"nome": "Village Caribe 1", "bairro": "Praça Seca · Jacarepaguá", "construtora": "FMAC Engenharia", "status": "lancamento", "url": "emp-village-caribe.html", "lat": -22.9036, "lng": -43.3495, "preco": "Consulte valores", "img": "emp-img/village-caribe.jpg", "tipologia": "2 quartos c/ suíte + coberturas (59-137m²)", "cor": "#5B6570", "amen": ["Piscina", "Playground", "Churrasqueira", "Sauna"]}, {"nome": "Vivaz Connection Zona Norte — Fase 1", "bairro": "Riachuelo · Zona Norte", "construtora": "Direcional · Vivaz", "status": "obras", "url": "emp-vivaz-connection.html", "lat": -22.8912, "lng": -43.2551, "preco": "A partir de R$ 233.000", "img": "emp-img/vivaz-connection.jpg", "tipologia": "2 quartos (37m²)", "cor": "#8B5C8F", "amen": ["Piscina", "Salão de Festas", "Academia", "Churrasqueira"]}, {"nome": "Vivaz Rua Honório", "bairro": "Todos os Santos · Zona Norte", "construtora": "Direcional · Vivaz", "status": "pronto", "url": "emp-vivaz-honorio.html", "lat": -22.8955, "lng": -43.2825, "preco": "A partir de R$ 259.592", "img": "emp-img/vivaz-honorio.jpg", "tipologia": "1 e 2 quartos (32-45m²)", "cor": "#8B5C8F", "amen": ["Piscina", "Churrasqueira", "Academia", "Salão de Festas"]}, {"nome": "Império do Ouro", "bairro": "Rio do Ouro · São Gonçalo", "construtora": "MRV", "status": "pronto", "url": "emp-imperio-do-ouro.html", "lat": -22.8861201, "lng": -42.9920149, "preco": "Consulte valores", "img": "emp-img/imperio-do-ouro.jpg", "tipologia": "2 quartos, até 1 suíte (46-47m²)", "cor": "#5B6570", "amen": ["Piscina", "Espaço Gourmet", "Playground", "Espaço Pet"]}, {"nome": "Ritmos de Pilares", "bairro": "Pilares · Rio de Janeiro", "construtora": "MRV", "status": "lancamento", "url": "emp-ritmos-de-pilares.html", "lat": -22.8791, "lng": -43.2955, "preco": "Consulte valores", "img": "emp-img/mrv-ritmos-de-pilares.jpg", "tipologia": "1 ou 2 quartos, opção de suíte, todas as unidades com varanda (opção de área privativa)", "cor": "#5B6570", "amen": ["Piscina", "Salão de festas", "Churrasqueira", "Playground"]}, {"nome": "Encantos da Zona Norte", "bairro": "Região de Bonsucesso · Rio de Janeiro", "construtora": "MRV", "status": "lancamento", "url": "emp-encantos-da-zona-norte.html", "lat": -22.8659, "lng": -43.2533, "preco": "Consulte valores", "img": "emp-img/mrv-encantos-da-zona-norte.jpg", "tipologia": "2 quartos (opção de varanda ou área privativa)", "cor": "#5B6570", "amen": ["Piscinas", "Churrasqueira", "Miniquadra", "Playground"]}, {"nome": "Reserva Redentor", "bairro": "Rocha · Rio de Janeiro", "construtora": "MRV", "status": "obras", "url": "emp-reserva-redentor.html", "lat": -22.8996, "lng": -43.2488, "preco": "Consulte valores", "img": "emp-img/mrv-reserva-redentor.jpg", "tipologia": "2 quartos (opção de varanda)", "cor": "#5B6570", "amen": ["Piscina adulto", "Piscina infantil", "Playground", "Pet place"]}];
 var statusMeta = {lancamento:{t:"Lançamento",c:"#0F6E8C"},obras:{t:"Em obras",c:"#B8873A"},pronto:{t:"Pronto",c:"#3E8E5A"}};
 var conhecidas=["cury","cyrela","mrv","direcional"];
 /* ---------- BUSCA: quartos/valor derivados dos dados reais (não inventa nada, só interpreta tipologia/preço) ---------- */
@@ -804,6 +912,7 @@ function parsePrecoNum(preco){
 }
 EMP.forEach(function(e){e._quartos=parseQuartos(e.tipologia);e._precoNum=parsePrecoNum(e.preco);});
 var curQuartos="",curValorMax="";
+var compareList=[];
 function matchesQuartos(e){
   if(!curQuartos)return true;
   var q=parseInt(curQuartos,10);
@@ -1008,11 +1117,88 @@ function renderCat(filter){
       +'<div class="cat-price">'+e.preco+'</div>'
       +(amen?'<div class="cat-amen-grid">'+amen+'</div>':'')
       +'<div class="cat-foot"><span class="cat-const">'+e.construtora+'</span>'
-      +'<span class="cat-arrow">Ver ficha<svg class="ic ic-sm" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--gold)"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></div></article>';
+      +'<span class="cat-arrow">Ver ficha<svg class="ic ic-sm" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--gold)"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>'
+      +'<div class="cat-compare-row" onclick="event.stopPropagation()"><label><input type="checkbox" data-idx="'+i+'" onchange="toggleCompare('+i+',this)" '+(compareList.indexOf(i)>=0?'checked':'')+'/> Comparar este imóvel</label></div>'
+      +'</div></article>';
   });
   g.innerHTML=html;
 }
 function catFilter(f,btn){document.querySelectorAll(".cat-tab").forEach(function(t){t.classList.remove("on");});if(btn)btn.classList.add("on");renderCat(f);}
+
+/* ---------- COMPARADOR (até 3 imóveis) ---------- */
+function toggleCompare(i,el){
+  var pos=compareList.indexOf(i);
+  if(el.checked){
+    if(compareList.length>=3){ el.checked=false; alert("Você pode comparar até 3 imóveis por vez. Desmarque um para adicionar outro."); return; }
+    if(pos<0) compareList.push(i);
+  } else {
+    if(pos>=0) compareList.splice(pos,1);
+  }
+  updateCompareBar();
+}
+function updateCompareBar(){
+  var bar=document.getElementById("compareBar");
+  if(!bar) return;
+  if(compareList.length>=2){
+    bar.classList.add("show");
+    document.getElementById("compareBarTxt").innerHTML="<b>"+compareList.length+"</b> imóveis selecionados para comparar";
+  } else {
+    bar.classList.remove("show");
+  }
+}
+function clearCompare(){
+  compareList=[];
+  document.querySelectorAll('.cat-compare-row input[type=checkbox]').forEach(function(c){c.checked=false;});
+  updateCompareBar();
+}
+function showCompareModal(){
+  if(compareList.length<2) return;
+  var itens=compareList.map(function(i){return EMP[i];});
+  var linhas=[
+    ["Empreendimento",itens.map(function(e){return e.nome;})],
+    ["Construtora",itens.map(function(e){return e.construtora;})],
+    ["Bairro",itens.map(function(e){return e.bairro;})],
+    ["Tipologia",itens.map(function(e){return e.tipologia;})],
+    ["Valor",itens.map(function(e){return e.preco;})],
+    ["Status",itens.map(function(e){return statusMeta[e.status]?statusMeta[e.status].t:e.status;})],
+    ["Lazer",itens.map(function(e){return (e.amen||[]).slice(0,4).join(", ")||"—";})]
+  ];
+  var thead='<tr><th></th>'+itens.map(function(e){return '<th>'+e.nome+'</th>';}).join('')+'</tr>';
+  var tbody=linhas.map(function(l){return '<tr><td>'+l[0]+'</td>'+l[1].map(function(v){return '<td>'+v+'</td>';}).join('')+'</tr>';}).join('');
+  document.getElementById("compareTableWrap").innerHTML='<table class="compare-table"><thead>'+thead+'</thead><tbody>'+tbody+'</tbody></table>';
+  var waMsg="Olá Paulo! Estou comparando: "+itens.map(function(e){return e.nome;}).join(" x ")+". Quero saber mais sobre esses imóveis!";
+  document.getElementById("compareWaBtn").href="https://wa.me/5521989150864?text="+encodeURIComponent(waMsg);
+  document.getElementById("compareModal").classList.add("show");
+}
+function closeCompareModal(){ document.getElementById("compareModal").classList.remove("show"); }
+function downloadComparacao(){
+  var itens=compareList.map(function(i){return EMP[i];});
+  if(itens.length<2) return;
+  var qr='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(window.location.href.split("#")[0]);
+  var rows=[["Empreendimento",itens.map(function(e){return e.nome;})],["Construtora",itens.map(function(e){return e.construtora;})],
+    ["Bairro",itens.map(function(e){return e.bairro;})],["Tipologia",itens.map(function(e){return e.tipologia;})],
+    ["Valor",itens.map(function(e){return e.preco;})],["Status",itens.map(function(e){return statusMeta[e.status]?statusMeta[e.status].t:e.status;})]];
+  var tableRows=rows.map(function(r){return '<tr><td style="color:#6b7280;font-weight:700;font-size:11px;text-transform:uppercase">'+r[0]+'</td>'+r[1].map(function(v){return '<td>'+v+'</td>';}).join('')+'</tr>';}).join('');
+  var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Comparação de imóveis — Paulo Cotrim</title>'
+    +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:40px;max-width:760px;margin:0 auto}'
+    +'.kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#b8873a;margin-bottom:8px}'
+    +'h1{font-family:Fraunces,serif;font-size:22px;margin-bottom:20px}'
+    +'table{width:100%;border-collapse:collapse;font-size:12.5px}td{padding:9px 10px;border-bottom:1px solid #e8eaed}'
+    +'.note{font-size:11px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
+    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:24px;padding-top:18px;border-top:1px solid #e8eaed}'
+    +'.qrbox img{width:100px;height:100px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13px;margin-bottom:4px}'
+    +'.brandbar{margin-top:20px;padding-top:14px;border-top:1px solid #e8eaed;font-size:12px;color:#6b7280}.brandbar b{color:#0f2e36;display:block;font-size:13px}'
+    +'.foot{margin-top:22px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
+    +'<div class="kicker">Comparação de Imóveis · Paulo Cotrim</div><h1>'+itens.map(function(e){return e.nome;}).join(" vs. ")+'</h1>'
+    +'<table>'+tableRows+'</table>'
+    +'<div class="note">Valores de tabela pública, sujeitos a alteração e disponibilidade — confirme condições atualizadas com Paulo antes de decidir.</div>'
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar ao site</b>Refaça a comparação ou veja mais detalhes de cada imóvel.</div></div>'
+    +'<div class="brandbar"><b>Paulo Cotrim</b>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</div>'
+    +'<div class="foot">Paulo Cotrim · Documento informativo, não substitui a tabela oficial</div></body></html>';
+  var win=window.open("","_blank");
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
+}
 
 /* ---------- SEARCH ---------- */
 function applySearch(){
@@ -1109,8 +1295,84 @@ document.addEventListener("mousemove", function(e){
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add("in");io.unobserve(x.target);}});},{threshold:.12});
 document.querySelectorAll(".reveal").forEach(function(el){io.observe(el);});
 
+/* ---------- MINI SIMULADOR (home) ---------- */
+var MS_RENDA=6000, MS_FGTS=10000, MS_LAST=null;
+function msFmt(n){ return "R$ "+Math.round(n).toLocaleString("pt-BR"); }
+function msPopulate(){
+  var sel=document.getElementById("msEmp");
+  if(!sel) return;
+  var opts=EMP.filter(function(e){return e._precoNum;}).slice().sort(function(a,b){return a.nome.localeCompare(b.nome);});
+  sel.innerHTML=opts.map(function(e){return '<option value="'+e.nome.replace(/"/g,"")+'">'+e.nome+" — "+e.preco+"</option>";}).join("");
+}
+function msStep(campo,delta){
+  if(campo==="renda"){ MS_RENDA=Math.max(1500,MS_RENDA+delta); document.getElementById("msRendaVal").textContent=msFmt(MS_RENDA); }
+  else { MS_FGTS=Math.max(0,MS_FGTS+delta); document.getElementById("msFgtsVal").textContent=msFmt(MS_FGTS); }
+}
+function msCalcular(){
+  var sel=document.getElementById("msEmp");
+  if(!sel||!sel.value) return;
+  var emp=EMP.filter(function(e){return e.nome===sel.value;})[0];
+  if(!emp||typeof calcularSimulacao!=="function") return;
+  var c=calcularSimulacao({preco:emp._precoNum,renda:MS_RENDA,fgtsValor:MS_FGTS,construtora:emp.construtora,parcelasObra:24});
+  MS_LAST={c:c,emp:emp};
+  var cards=''
+    +'<div class="mini-sim-card"><b>'+fmtBRL(c.financiado)+'</b><span>Financiamento ('+(c.mod==="sbpe"?"SBPE":"MCMV")+')</span></div>'
+    +'<div class="mini-sim-card"><b>'+fmtBRL(c.entrada)+'</b><span>Entrada total</span></div>'
+    +'<div class="mini-sim-card"><b>'+fmtBRL(c.parcelaObraMensal)+'</b><span>Parcela na obra ('+c.parcelasObra+'x)</span></div>';
+  var nota='';
+  if(c.temPosChaves){
+    nota='<strong>'+(c.mrv?'MRV':'Direcional · Vivaz')+'</strong> permite estender o que passar dos 20% parceláveis para depois da entrega das chaves, em até '+c.maxParcelasPosChaves+'x de '+fmtBRL(c.parcelaPosChaves)+'.';
+  } else if(!c.semEntradaAVista){
+    nota='O que passar dos 20% parceláveis na obra ('+fmtBRL(c.aVistaFinal)+') precisa ser pago à vista na assinatura para esta construtora.';
+  } else {
+    nota='Sua entrada cabe inteira dentro dos 20% do valor do imóvel, parcelada sem juros durante a obra.';
+  }
+  document.getElementById("msResult").innerHTML = ''
+    +'<div class="mini-sim-cards">'+cards+'</div>'
+    +'<div class="result-note" style="font-size:12.5px;color:var(--gray);line-height:1.6;border-top:1px solid var(--line);padding-top:14px">'+nota+'</div>'
+    +'<div class="mini-sim-actions">'
+    +'  <a class="mini-sim-wa" href="https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo! Simulei o '+emp.nome+' no site: financiamento '+fmtBRL(c.financiado)+', entrada '+fmtBRL(c.entrada)+'. Quero confirmar com você!')+'" target="_blank"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>Confirmar com Paulo</a>'
+    +'  <button class="mini-sim-dl" onclick="msDownload()"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar esta análise (PDF)</button>'
+    +'  <a class="mini-sim-dl" href="'+emp.url+'">Ver '+emp.nome+' →</a>'
+    +'</div>';
+  document.getElementById("msResult").classList.add("show");
+}
+function msDownload(){
+  if(!MS_LAST) return;
+  var c=MS_LAST.c, emp=MS_LAST.emp;
+  var qr='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(window.location.href.split("#")[0]);
+  var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Simulação — '+emp.nome+'</title>'
+    +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
+    +'.kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#b8873a;margin-bottom:8px}'
+    +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:28px}'
+    +'.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e8eaed;font-size:14px}.rk{color:#6b7280}.rv{font-weight:700}'
+    +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
+    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e8eaed}'
+    +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
+    +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e8eaed}'
+    +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
+    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
+    +'<div class="kicker">Simulação Expressa · Paulo Cotrim</div>'
+    +'<h1>'+emp.nome+'</h1><div class="sub">'+emp.bairro+' · '+emp.construtora+' · CRECI-RJ 77677-F</div>'
+    +'<div class="row"><span class="rk">Valor do imóvel</span><span class="rv">'+fmtBRL(c.preco)+'</span></div>'
+    +'<div class="row"><span class="rk">Renda informada</span><span class="rv">'+fmtBRL(c.renda)+'</span></div>'
+    +'<div class="row"><span class="rk">Financiamento estimado ('+(c.mod==="sbpe"?"SBPE":"MCMV")+')</span><span class="rv">'+fmtBRL(c.financiado)+'</span></div>'
+    +'<div class="row"><span class="rk">Entrada total</span><span class="rv">'+fmtBRL(c.entrada)+'</span></div>'
+    +'<div class="row"><span class="rk">Parcela na obra ('+c.parcelasObra+'x)</span><span class="rv">'+fmtBRL(c.parcelaObraMensal)+'</span></div>'
+    +(c.temPosChaves?'<div class="row"><span class="rk">Pós-chaves ('+c.maxParcelasPosChaves+'x)</span><span class="rv">'+fmtBRL(c.parcelaPosChaves)+'</span></div>':'')
+    +'<div class="note">Simulação educativa com base no valor de tabela informado — sujeita a alteração e disponibilidade. Confirme condições atualizadas com Paulo antes de decidir.</div>'
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar ao site</b>Refaça a simulação ou veja outros empreendimentos direto do celular.</div></div>'
+    +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
+    +'<div class="foot">Paulo Cotrim · Documento informativo, não substitui a simulação bancária real</div>'
+    +'</body></html>';
+  var win=window.open("","_blank");
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
+}
+
 /* init */
 renderList();renderCat("");
+msPopulate();
 if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded",initMap);}else{initMap();}
 </script>
 <!-- ===== LGPD COOKIE CONSENT ===== -->
