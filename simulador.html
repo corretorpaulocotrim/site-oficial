@@ -74,7 +74,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .ssh .cv.op{transform:rotate(180deg)}
 .ssb{padding:.9rem 1.2rem 1.1rem;border-top:.5px solid var(--border)}
 .s1x .ssh{background:var(--navy)}.s2x .ssh{background:var(--navy2)}
-.s3x .ssh{background:var(--navy)}.scx .ssh{background:var(--gold)}.skx .ssh{background:var(--navy2)}
+.s3x .ssh{background:var(--navy)}.scx .ssh{background:var(--gold)}
 .mets2{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-top:9px}
 .mt2{background:var(--bg);border-radius:7px;padding:9px 11px}
 .mt2 .ml{font-size:10px;color:var(--text2);line-height:1.3}
@@ -220,11 +220,11 @@ const DB={
 };
 const NAMES=Object.keys(DB);
 
-let S={tab:0,cond:"Parque Piedade",tipIdx:2,valorImovel:309473.50,avaliacao:289000,modalidade:"mcmv",aprovacaoCaixa:231578.80,prestCaixa:1200,prazo:360,
+let S={tab:0,cond:"Parque Piedade",tipIdx:2,valorImovel:309473.50,avaliacao:289000,modalidade:"mcmv",aprovacaoCaixa:231578.80,aprovOverride:false,prestCaixa:1200,prazo:360,
   renda:0,taxaAnual:6,
   s2:[{t:"À Vista",q:1,u:9996},{t:"Mensal",q:36,u:950},{t:"Anual",q:2,u:5000},{t:"Única",q:1,u:5000}],
   s4:{vu:481540,ato:149800,pi:30000,pqm:23,pvm:2600,pqa:0,pva:0,chave:15000,oqm:48,ovm:6494.58,oqa:2,ova:10000},
-  open:{s1:true,s2:true,s3:false,s4:false,sk:true,sc:true}};
+  open:{s1:true,s2:true,s3:false,s4:false,sc:true}};
 
 function calcAprovacaoAuto(){return Math.min(S.avaliacao*(S.modalidade==='sbpe'?0.90:0.80),S.avaliacao)}
 function financiavelPorPrestacao(prest,taxaAnual,prazo){
@@ -244,23 +244,34 @@ function calc(){
   const {ato,pi,pqm,pvm,pqa,pva,chave,oqm,ovm,oqa,ova,vu}=S.s4;
   const tPreM=pqm*pvm,tPreA=pqa*pva,tPre=ato+pi+tPreM+tPreA+chave;
   const tPosM=oqm*ovm,tPosA=oqa*ova,tPos=tPosM+tPosA;
-  const prestPorRenda30=S.renda*0.30,prestPorRenda35=S.renda*0.35;
-  const financiavelPorRenda30=financiavelPorPrestacao(prestPorRenda30,S.taxaAnual,S.prazo);
-  const financiavelPorRenda35=financiavelPorPrestacao(prestPorRenda35,S.taxaAnual,S.prazo);
-  return{pctFin,avalMaxFin,aprovado,entrada,tot,rows,men,tPreM,tPreA,tPre,tPosM,tPosA,tPos,saldo:vu-ato,rendMin30:S.prestCaixa/0.30,rendMin35:S.prestCaixa/0.35,
-    prestPorRenda30,prestPorRenda35,financiavelPorRenda30,financiavelPorRenda35};
+  const prestPorRenda=S.renda*0.30;
+  const financiavelPorRenda=financiavelPorPrestacao(prestPorRenda,S.taxaAnual,S.prazo);
+  const limitante=S.renda>0?(financiavelPorRenda<avalMaxFin?'renda':'imovel'):null;
+  return{pctFin,avalMaxFin,aprovado,entrada,tot,rows,men,tPreM,tPreA,tPre,tPosM,tPosA,tPos,saldo:vu-ato,rendMin30:S.prestCaixa/0.30,
+    prestPorRenda,financiavelPorRenda,limitante};
 }
 
 function tog(id){S.open[id]=!S.open[id];render()}
-function selC(v){S.cond=v;S.tipIdx=0;const t=DB[v].tips[0];S.valorImovel=t.p;S.avaliacao=t.a;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
-function selT(v){S.tipIdx=+v;const t=DB[S.cond].tips[S.tipIdx];S.valorImovel=t.p;S.avaliacao=t.a;S.aprovacaoCaixa=calcAprovacaoAuto();render()}
-function setMod(v){S.modalidade=v;S.aprovacaoCaixa=calcAprovacaoAuto();S.taxaAnual=v==='sbpe'?10.9:6;render()}
-function updF(k,v){S[k]=parseBRL(v);if(k==='avaliacao')S.aprovacaoCaixa=calcAprovacaoAuto();render()}
-function updAprov(v){S.aprovacaoCaixa=parseBRL(v);render()}
+function recalcAprovacao(){
+  if(S.aprovOverride) return;
+  const porAval=calcAprovacaoAuto();
+  if(S.renda>0){
+    const porRenda=financiavelPorPrestacao(S.renda*0.30,S.taxaAnual,S.prazo);
+    S.aprovacaoCaixa=Math.min(porAval,porRenda);
+  } else {
+    S.aprovacaoCaixa=porAval;
+  }
+}
+function resetAprovAuto(){S.aprovOverride=false;recalcAprovacao();render()}
+function selC(v){S.cond=v;S.tipIdx=0;const t=DB[v].tips[0];S.valorImovel=t.p;S.avaliacao=t.a;recalcAprovacao();render()}
+function selT(v){S.tipIdx=+v;const t=DB[S.cond].tips[S.tipIdx];S.valorImovel=t.p;S.avaliacao=t.a;recalcAprovacao();render()}
+function setMod(v){S.modalidade=v;S.taxaAnual=v==='sbpe'?10.9:6;recalcAprovacao();render()}
+function updF(k,v){S[k]=parseBRL(v);if(k==='avaliacao')recalcAprovacao();render()}
+function updAprov(v){S.aprovacaoCaixa=parseBRL(v);S.aprovOverride=true;render()}
 function updS2(i,k,v){S.s2[i][k]=parseFloat(v)||0;render()}
 function updS4(k,v){S.s4[k]=parseFloat(v)||0;render()}
-function updRenda(v){S.renda=parseBRL(v);render()}
-function updTaxa(v){S.taxaAnual=parseFloat(v)||0;render()}
+function updRenda(v){S.renda=parseBRL(v);recalcAprovacao();render()}
+function updTaxa(v){S.taxaAnual=parseFloat(v)||0;recalcAprovacao();render()}
 
 function ssec(id,title,cls,fn){
   const o=S.open[id];
@@ -358,39 +369,54 @@ function renderTabSim(c,isSBPE,tips){return`
   </div>
   ${DB[S.cond].c?`<span class="cb2">⭐ Campanha Julho 2026</span>`:''}
 </div>
-${ssec('s1','Seção 1 — Dados do financiamento','ssec s1x',()=>`
-<div class="info-box2"><strong>Como funciona:</strong> Entrada = Preço − Aprovação Caixa (${isSBPE?'90%':'80%'} da avaliação = ${BRL(c.avalMaxFin)}). Edite abaixo se necessário.</div>
+${ssec('s1','Seção 1 — Quanto você pode financiar','ssec s1x',()=>`
+<div class="info-box2"><strong>Como funciona:</strong> a aprovação final é o menor valor entre o que o imóvel permite financiar (avaliação do banco) e o que sua renda permite pagar (até 30% da prestação sobre a renda) — assim você vê um único número confiável, não duas contas soltas.</div>
 <div class="g2s" style="margin-bottom:9px">
   <div class="fi2"><label>Preço do imóvel (R$)</label><input type="text" value="${N2(S.valorImovel)}" oninput="updF('valorImovel',this.value)"></div>
   <div class="fi2"><label>Avaliação banco (R$)</label><input type="text" value="${N2(S.avaliacao)}" oninput="updF('avaliacao',this.value)"></div>
-  <div class="fi2 hl"><label>Aprovação Caixa — liberado (R$)</label><input type="text" value="${N2(S.aprovacaoCaixa)}" oninput="updAprov(this.value)"></div>
-  <div class="fi2 wn"><label>Prestação Caixa — base seguro (R$)</label><input type="text" value="${N2(S.prestCaixa)}" oninput="updF('prestCaixa',this.value)"></div>
-</div>
-<div class="mets2">
-  <div class="mt2 hi"><div class="ml">Financiamento máx.</div><div class="mv">${BRL(c.avalMaxFin)}</div></div>
-  <div class="mt2 gr"><div class="ml">Aprovação Caixa</div><div class="mv">${BRL(c.aprovado)}</div></div>
-  <div class="mt2 re"><div class="ml">Entrada necessária</div><div class="mv">${BRL(c.entrada)}</div></div>
-  <div class="mt2 am"><div class="ml">Seguro inicial (20%)</div><div class="mv">${BRL(S.prestCaixa*0.2)}</div></div>
-  <div class="mt2 vi"><div class="ml">Seguro na entrega</div><div class="mv">${BRL(S.prestCaixa)}</div></div>
-</div>`)}
-${ssec('sk','Digite sua renda e veja quanto aprova','ssec skx',()=>`
-<div class="info-box2"><strong>Como funciona:</strong> a partir da sua renda mensal, estimamos a prestação máxima (30% ou 35% da renda) e, com uma taxa de juros de referência editável, o valor aproximado que pode ser financiado.</div>
-<div class="g2s" style="margin-bottom:9px">
   <div class="fi2 hl"><label>Sua renda mensal (R$)</label><input type="text" value="${N2(S.renda)}" oninput="updRenda(this.value)" placeholder="Ex: 4.500,00"></div>
   <div class="fi2"><label>Taxa de juros a.a. estimada (%)</label><input type="text" value="${N2(S.taxaAnual)}" oninput="updTaxa(this.value)"></div>
 </div>
-${S.renda>0?`
 <div class="mets2">
-  <div class="mt2 am"><div class="ml">Prestação máx. (30% da renda)</div><div class="mv">${BRL(c.prestPorRenda30)}</div></div>
-  <div class="mt2 gr"><div class="ml">Prestação máx. (35% da renda)</div><div class="mv">${BRL(c.prestPorRenda35)}</div></div>
-  <div class="mt2 vi"><div class="ml">Financiável estimado (30%)</div><div class="mv">${BRL(c.financiavelPorRenda30)}</div></div>
-  <div class="mt2 hi"><div class="ml">Financiável estimado (35%)</div><div class="mv">${BRL(c.financiavelPorRenda35)}</div></div>
+  <div class="mt2 hi"><div class="ml">Financiamento máx. pelo imóvel</div><div class="mv">${BRL(c.avalMaxFin)}</div></div>
+  <div class="mt2 ${S.renda>0?'am':'hi'}"><div class="ml">Financiamento máx. pela sua renda (30%)</div><div class="mv">${S.renda>0?BRL(c.financiavelPorRenda):'—'}</div></div>
 </div>
-<p style="font-size:10px;color:#94a3b8;margin-top:8px">Estimativa educativa considerando prazo de ${S.prazo} meses e taxa de ${N2(S.taxaAnual)}% a.a. — a Caixa confirma a taxa, o prazo e o valor exatos após análise de crédito. Ajuste a taxa acima se souber a condição atual.</p>
-`:`<p style="font-size:11px;color:#94a3b8;margin-top:4px">Digite sua renda acima para ver a estimativa.</p>`}
+<div style="margin-top:10px;padding:12px 14px;border-radius:9px;background:${S.renda>0?(c.limitante==='renda'?'#fbf3e4':'#f0f9f3'):'#f5f6f7'};border:1px solid ${S.renda>0?(c.limitante==='renda'?'#e9d4ab':'#bfe3cc'):'var(--border)'}">
+  <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
+    <div>
+      <div style="font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text2)">Valor aprovado (Caixa)</div>
+      <div style="font-size:22px;font-weight:800;color:${S.renda>0?(c.limitante==='renda'?'#a5691f':'var(--green)'):'var(--navy)'}">${BRL(c.aprovado)}</div>
+    </div>
+    <span style="font-size:11px;font-weight:700;padding:5px 11px;border-radius:20px;background:#fff;color:${S.renda>0?(c.limitante==='renda'?'#a5691f':'var(--green)'):'var(--text2)'};border:1px solid ${S.renda>0?(c.limitante==='renda'?'#e9d4ab':'#bfe3cc'):'var(--border)'}">
+      ${S.renda===0?'Informe a renda para um valor preciso':(c.limitante==='renda'?'Limitado pela sua renda':'Sua renda cobre o valor do imóvel ✓')}
+    </span>
+  </div>
+  ${S.aprovOverride?`<div style="margin-top:8px;font-size:10.5px;color:var(--text2)">Valor ajustado manualmente. <a href="#" onclick="resetAprovAuto();return false" style="color:var(--gold);font-weight:700">Recalcular automaticamente</a></div>`:''}
+</div>
+<div class="mets2" style="margin-top:9px">
+  <div class="mt2 gr"><div class="ml">Entrada necessária</div><div class="mv">${BRL(c.entrada)}</div></div>
+  <div class="mt2 vi"><div class="ml">Seguro inicial (20%)</div><div class="mv">${BRL(S.prestCaixa*0.2)}</div></div>
+  <div class="mt2 re"><div class="ml">Seguro na entrega</div><div class="mv">${BRL(S.prestCaixa)}</div></div>
+</div>
+<details style="margin-top:11px">
+  <summary style="cursor:pointer;font-size:11px;font-weight:700;color:var(--text2)">Ajustar valor aprovado manualmente (uso avançado)</summary>
+  <div class="g2s" style="margin-top:8px">
+    <div class="fi2 wn"><label>Aprovação Caixa — liberado (R$)</label><input type="text" value="${N2(S.aprovacaoCaixa)}" oninput="updAprov(this.value)"></div>
+    <div class="fi2"><label>Prestação Caixa — base seguro (R$)</label><input type="text" value="${N2(S.prestCaixa)}" oninput="updF('prestCaixa',this.value)"></div>
+  </div>
+</details>
+<div class="info-box2" style="margin-top:12px;border-left-color:var(--green)">
+  <strong>Benefícios do Minha Casa Minha Vida:</strong>
+  <ul style="margin:6px 0 0 16px;padding:0;font-size:11.5px;line-height:1.7;color:var(--text)">
+    <li>Documentação, ITBI e RGI por conta do programa — você não paga</li>
+    <li>Entrada gratuita ou, quando houver, parcelada sem juros durante o período de obra</li>
+    <li>Prestação fixa, só começa a pagar depois de receber as chaves</li>
+  </ul>
+</div>
+${S.renda>0?`<p style="font-size:10px;color:#94a3b8;margin-top:8px">Estimativa educativa considerando 30% da renda comprometida, prazo de ${S.prazo} meses e taxa de ${N2(S.taxaAnual)}% a.a. — a Caixa confirma a taxa, o prazo e o valor exatos após análise de crédito. Renda pode ser composta com familiares.</p>`:''}
 <div style="height:1px;background:#e8eaed;margin:14px 0"></div>
-<div class="mets2"><div class="mt2 am"><div class="ml">Renda mínima p/ este imóvel (30%)</div><div class="mv">${BRL(c.rendMin30)}</div></div><div class="mt2 gr"><div class="ml">Renda mínima p/ este imóvel (35%)</div><div class="mv">${BRL(c.rendMin35)}</div></div></div>
-<p style="font-size:10px;color:#94a3b8;margin-top:8px">Baseado na prestação de ${BRL(S.prestCaixa)} d${DB[S.cond]?'e '+S.cond:'o imóvel selecionado'}. Renda pode ser composta com familiares.</p>`)}
+<div class="mets2"><div class="mt2 am"><div class="ml">Renda mínima p/ este imóvel (30%)</div><div class="mv">${BRL(c.rendMin30)}</div></div></div>
+<p style="font-size:10px;color:#94a3b8;margin-top:8px">Baseado na prestação de ${BRL(S.prestCaixa)} d${DB[S.cond]?'e '+S.cond:'o imóvel selecionado'}.</p>`)}
 ${ssec('s2','Seção 2 — Parcelamento da entrada','ssec s2x',()=>`
 <p style="font-size:11px;color:#64748b;margin-bottom:8px">Entrada: <strong style="color:#B91C1C">${BRL(c.entrada)}</strong> &nbsp;|&nbsp; Total: <strong>${BRL(c.tot)}</strong> ${c.tot<c.entrada?`<span style="color:#B91C1C"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>faltam ${BRL(c.entrada-c.tot)}</span>`:`<span style="color:#15803D"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>coberta</span>`}</p>
 <div class="tw2"><table><thead><tr><th>Tipo</th><th>Qtd</th><th>Valor unit.</th><th>Total</th></tr></thead>
