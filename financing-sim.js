@@ -112,9 +112,17 @@ function calcularSimulacao(p){
   var renda = p.renda || 0;
   var mod = p.modalidade==='auto' || !p.modalidade ? (renda>12000?'sbpe':'mcmv') : p.modalidade;
   var pctFin = mod==='sbpe' ? 0.90 : 0.80;
-  var financiado = Math.min(preco*pctFin, preco);
-  var entradaCalc = Math.max(0, preco-financiado);
-  var entrada = (p.entradaManual!=null && p.entradaManual>0) ? p.entradaManual : entradaCalc;
+  var financiadoMax = Math.min(preco*pctFin, preco);
+  var entradaMinima = Math.max(0, preco - financiadoMax);
+  // Entrada = o que sobra depois do que o banco financia. Se o usuário digitar um valor de
+  // entrada MENOR que o mínimo exigido pela modalidade, os números não fechariam (financiado +
+  // entrada < preço) — então usamos o mínimo e sinalizamos isso na interface (c.entradaInsuficiente).
+  // Se digitar um valor MAIOR, é uma escolha válida (financia menos que o teto), e o financiamento
+  // é recalculado a partir da entrada real, não do teto fixo.
+  var entradaSolicitada = (p.entradaManual!=null && p.entradaManual>0) ? p.entradaManual : entradaMinima;
+  var entradaInsuficiente = entradaSolicitada < entradaMinima - 0.01;
+  var entrada = entradaInsuficiente ? entradaMinima : entradaSolicitada;
+  var financiado = Math.max(0, preco - entrada);
 
   var atoEntrada = Math.max(0, Math.min(p.atoEntrada||0, entrada));
   var valorChave = Math.min(p.valorChave||0, Math.max(0, entrada-atoEntrada));
@@ -150,7 +158,8 @@ function calcularSimulacao(p){
   var acimaDoTeto = parcelaObraMensal > MAX_MENSAL + 0.01;
 
   return {
-    preco:preco, renda:renda, mod:mod, pctFin:pctFin, financiado:financiado,
+    preco:preco, renda:renda, mod:mod, pctFin:pctFin, financiado:financiado, financiadoMax:financiadoMax,
+    entradaMinima:entradaMinima, entradaInsuficiente:entradaInsuficiente,
     entrada:entrada, atoEntrada:atoEntrada, valorChave:valorChave, entradaRestante:entradaRestante,
     limite20:limite20, parcelavelObra:parcelavelObra, excedente:excedente,
     fgtsAplicado:fgtsAplicado, excedenteFinal:excedenteFinal,
@@ -279,7 +288,11 @@ function fsimUpdate(){
   });
   FSIM_LAST = c;
 
-  var out = ''
+  var out = '';
+  if(c.entradaInsuficiente){
+    out += '<div class="sim-out-card" style="grid-column:1/-1;background:#fef3c7;border:1px solid #e9d4ab"><div class="l" style="color:#92400e">Entrada ajustada automaticamente</div><div style="font-size:12px;color:#92400e;margin-top:3px">A modalidade '+(c.mod==='sbpe'?'SBPE':'MCMV')+' financia no máximo '+(c.pctFin*100).toFixed(0)+'% do imóvel — por isso a entrada mínima exigida é <strong>'+fmtBRL(c.entradaMinima)+'</strong>. Usamos esse valor abaixo em vez do que foi digitado.</div></div>';
+  }
+  out += ''
     +'<div class="sim-out-card hl"><div class="l">Financiamento estimado ('+(c.mod==='sbpe'?'SBPE':'MCMV')+')</div><div class="v">'+fmtBRL(c.financiado)+'</div></div>'
     +'<div class="sim-out-card"><div class="l">Entrada total</div><div class="v">'+fmtBRL(c.entrada)+'</div></div>';
   if(c.atoEntrada>0) out += '<div class="sim-out-card"><div class="l">Pago no ato da assinatura</div><div class="v">'+fmtBRL(c.atoEntrada)+'</div></div>';
@@ -431,4 +444,8 @@ function fsimDownload(nome){
     +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à página</b>Reveja fotos, mapa e fale com o Paulo pelo WhatsApp direto do celular.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
     +'<div class="legal">Documento meramente informativo e educativo, sem valor contratual. Valores, prazos, condições de pagamento e disponibilidade de unidades são de responsabilidade da construtora/incorporadora e da instituição financeira, podendo ser alterados sem aviso prévio. A aprovação de crédito depende de análise cadastral própria do agente financeiro. Consulte sempre a tabela oficial atualizada e formalize as condições finais com Paulo Cotrim antes de tomar qualquer decisão.</div>'
-    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Finan
+    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Financiamento Imobiliário</div>'
+    +'</body></html>';
+  var win=window.open('','_blank');
+  if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
+}

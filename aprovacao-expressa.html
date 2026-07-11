@@ -224,42 +224,43 @@ a{color:inherit;text-decoration:none}
         <div class="ir-hint" id="irHint"></div>
       </div>
 
-      <div class="upload-area" onclick="document.getElementById('docFileInput').click()">
-        <input type="file" id="docFileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="onDocFilesSelected(this.files)"/>
-        <div class="upload-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:2"><path d="M21 11.5V17a4 4 0 01-4 4H9a5 5 0 01-5-5V8a3 3 0 013-3 3 3 0 013 3v8a1 1 0 01-2 0V9"/></svg></div>
-        <div class="upload-title">Enviar todos de uma vez</div>
-        <div class="upload-sub">Clique para selecionar vários arquivos · PDF, JPG, PNG · até 15MB por arquivo</div>
-        <div class="upload-btn">Selecionar arquivos</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+        <input type="text" id="itemNome" placeholder="Seu nome completo" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
+        <input type="text" id="itemTel" placeholder="Seu WhatsApp" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
       </div>
-      <div id="uploadFilesList" style="display:none;margin-top:10px;padding:10px 12px;background:var(--bg);border-radius:10px;font-size:11.5px;color:var(--text2)"></div>
-      <div id="uploadFormBox" style="display:none;margin-top:12px;padding:16px;background:#fbf7ef;border:1px solid rgba(184,135,58,.25);border-radius:12px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-          <input type="text" id="docNome" placeholder="Seu nome completo" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
-          <input type="text" id="docTel" placeholder="Seu WhatsApp" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
-        </div>
-        <div class="upload-btn" onclick="enviarDocsReal()" style="cursor:pointer">Enviar documentos com segurança</div>
-        <div id="uploadStatus" style="margin-top:8px;font-size:11.5px;color:var(--text3);line-height:1.5"></div>
+      <div class="item-progress">
+        <span class="item-progress-label" id="itemProgressLabel">0 de 6 enviados</span>
+        <div class="item-progress-bar"><div class="item-progress-fill" id="itemProgressFill" style="width:0%"></div></div>
+      </div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:10px">Clique em cada documento abaixo para escolher o arquivo — ele é enviado assim que você seleciona, um de cada vez.</div>
+      <div id="itemRowsBox"></div>
+      <div class="upload-btn" id="itemSendAllBtn" onclick="enviarTodosItens()" style="cursor:pointer;display:block;text-align:center;opacity:.5;pointer-events:none;margin-top:6px">Concluir e enviar</div>
+      <div id="itemSendAllStatus" style="margin-top:8px;font-size:11.5px;color:var(--text3);line-height:1.5;text-align:center"></div>
+      <div class="item-final-ok" id="itemFinalOk">
+        <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
+        <h4>Recebemos tudo, obrigado!</h4>
+        <p>Todos os seus documentos chegaram certinho por aqui. Nossa equipe já foi avisada e vai revisar tudo agora — em até 48h você recebe a resposta da sua Aprovação Expressa direto no WhatsApp. Qualquer dúvida antes disso, é só chamar.</p>
       </div>
 
       <div class="item-upload-toggle">
-        <a href="#" onclick="toggleItemUpload();return false;" id="toggleItemUploadLink">Prefere enviar documento por documento, clicando em cada um? →</a>
+        <a href="#" onclick="toggleBulkUpload();return false;" id="toggleBulkUploadLink">Prefere enviar todos os arquivos de uma vez, em vez de um por um? →</a>
       </div>
-      <div id="itemUploadBox" style="display:none;margin-top:14px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-          <input type="text" id="itemNome" placeholder="Seu nome completo" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
-          <input type="text" id="itemTel" placeholder="Seu WhatsApp" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
+      <div id="bulkUploadBox" style="display:none;margin-top:14px">
+        <div class="upload-area" onclick="document.getElementById('docFileInput').click()">
+          <input type="file" id="docFileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="onDocFilesSelected(this.files)"/>
+          <div class="upload-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:2"><path d="M21 11.5V17a4 4 0 01-4 4H9a5 5 0 01-5-5V8a3 3 0 013-3 3 3 0 013 3v8a1 1 0 01-2 0V9"/></svg></div>
+          <div class="upload-title">Enviar todos de uma vez</div>
+          <div class="upload-sub">Clique para selecionar vários arquivos · PDF, JPG, PNG · até 15MB por arquivo</div>
+          <div class="upload-btn">Selecionar arquivos</div>
         </div>
-        <div class="item-progress">
-          <span class="item-progress-label" id="itemProgressLabel">0 de 7 enviados</span>
-          <div class="item-progress-bar"><div class="item-progress-fill" id="itemProgressFill" style="width:0%"></div></div>
-        </div>
-        <div id="itemRowsBox"></div>
-        <div class="upload-btn" id="itemSendAllBtn" onclick="enviarTodosItens()" style="cursor:pointer;display:block;text-align:center;opacity:.5;pointer-events:none;margin-top:6px">Concluir e enviar</div>
-        <div id="itemSendAllStatus" style="margin-top:8px;font-size:11.5px;color:var(--text3);line-height:1.5;text-align:center"></div>
-        <div class="item-final-ok" id="itemFinalOk">
-          <div class="ico"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></div>
-          <h4>Recebemos tudo, obrigado!</h4>
-          <p>Todos os seus documentos chegaram certinho por aqui. Nossa equipe já foi avisada e vai revisar tudo agora — em até 48h você recebe a resposta da sua Aprovação Expressa direto no WhatsApp. Qualquer dúvida antes disso, é só chamar.</p>
+        <div id="uploadFilesList" style="display:none;margin-top:10px;padding:10px 12px;background:var(--bg);border-radius:10px;font-size:11.5px;color:var(--text2)"></div>
+        <div id="uploadFormBox" style="display:none;margin-top:12px;padding:16px;background:#fbf7ef;border:1px solid rgba(184,135,58,.25);border-radius:12px">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
+            <input type="text" id="docNome" placeholder="Seu nome completo" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
+            <input type="text" id="docTel" placeholder="Seu WhatsApp" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
+          </div>
+          <div class="upload-btn" onclick="enviarDocsReal()" style="cursor:pointer">Enviar documentos com segurança</div>
+          <div id="uploadStatus" style="margin-top:8px;font-size:11.5px;color:var(--text3);line-height:1.5"></div>
         </div>
       </div>
 
@@ -372,6 +373,7 @@ a{color:inherit;text-decoration:none}
 </div>
 
 <script>
+renderItemRows(); // checklist item-a-item agora é o fluxo principal, visível desde o carregamento
 const obs=new IntersectionObserver(e=>e.forEach(x=>{if(x.isIntersecting)x.target.classList.add('visible')}),{threshold:.1});
 document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 const pf=document.getElementById('progress-fill');
@@ -402,13 +404,12 @@ var ITEM_DOC_TYPES = [
   {key:'extrato', label:'Extrato bancário', sub:'jan/2025 até hoje, mín. 12 meses'}
 ];
 window._itemFiles = {};
-function toggleItemUpload(){
-  var box = document.getElementById('itemUploadBox');
-  var link = document.getElementById('toggleItemUploadLink');
+function toggleBulkUpload(){
+  var box = document.getElementById('bulkUploadBox');
+  var link = document.getElementById('toggleBulkUploadLink');
   var open = box.style.display !== 'none';
   box.style.display = open ? 'none' : 'block';
-  link.textContent = open ? 'Prefere enviar documento por documento? →' : 'Ocultar envio item por item ↑';
-  if(!open && !document.getElementById('itemRowsBox').children.length) renderItemRows();
+  link.textContent = open ? 'Prefere enviar todos os arquivos de uma vez, em vez de um por um? →' : 'Ocultar envio de uma vez ↑';
 }
 window._itemDone = {};
 function renderItemRows(){
