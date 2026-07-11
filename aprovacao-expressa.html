@@ -394,8 +394,7 @@ function setIR(v){
 
 /* ---------- Envio item por item ---------- */
 var ITEM_DOC_TYPES = [
-  {key:'rg', label:'RG ou CNH'},
-  {key:'cpf', label:'CPF'},
+  {key:'identidade_cpf', label:'Identidade (RG ou CNH) e CPF', sub:'pode enviar os dois juntos', multi:true},
   {key:'endereco', label:'Comprovante de endereço'},
   {key:'certidao', label:'Certidão de nascimento / casamento'},
   {key:'fgts', label:'Extrato FGTS', sub:'se for usar no financiamento'},
@@ -418,9 +417,9 @@ function renderItemRows(){
     return '<div class="item-row" id="itemrow-'+t.key+'">'
       +'<span class="item-check" id="itemcheck-'+t.key+'"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>'
       +'<label class="item-row-label" style="cursor:pointer">'+t.label+(t.sub?'<span class="item-row-sub">'+t.sub+'</span>':'')
-      +'<input type="file" class="item-row-input" accept=".pdf,.jpg,.jpeg,.png" style="display:block;margin-top:6px;font-size:11px" onchange="onItemFilePicked(\''+t.key+'\',this.files[0])"/>'
+      +'<input type="file" class="item-row-input" id="itemfile-'+t.key+'" accept=".pdf,.jpg,.jpeg,.png" '+(t.multi?'multiple ':'')+'style="display:block;margin-top:6px;font-size:11px" onchange="onItemFilePicked(\''+t.key+'\',this.files)"/>'
       +'</label>'
-      +'<button type="button" class="item-row-send" id="itemsend-'+t.key+'" disabled onclick="enviarItemDoc(\''+t.key+'\')">Enviar</button>'
+      +'<button type="button" class="item-row-send" id="itemsend-'+t.key+'" onclick="onItemSendClick(\''+t.key+'\')">Enviar</button>'
       +'<span class="item-row-status" id="itemstatus-'+t.key+'" style="color:var(--text3)">—</span>'
       +'</div>';
   }).join('');
@@ -441,18 +440,32 @@ function atualizarProgressoItens(){
     concluirBtn.textContent = feitos===total ? 'Concluir e enviar (tudo pronto ✓)' : 'Concluir com '+feitos+' de '+total+' enviado(s)';
   }
 }
-function onItemFilePicked(key, file){
-  if(!file) return;
-  window._itemFiles[key] = file;
-  var btn = document.getElementById('itemsend-'+key);
-  if(btn) btn.disabled = false;
+function onItemFilePicked(key, fileList){
+  if(!fileList || !fileList.length) return;
+  window._itemFiles[key] = Array.prototype.slice.call(fileList);
   var st = document.getElementById('itemstatus-'+key);
   if(st){ st.textContent = 'pronto p/ enviar'; st.style.color = 'var(--text3)'; }
   var chk = document.getElementById('itemcheck-'+key);
   if(chk) chk.classList.add('ready');
+  enviarItemDoc(key);
+}
+function onItemSendClick(key){
+  var nome = document.getElementById('itemNome').value.trim();
+  var tel = document.getElementById('itemTel').value.trim();
+  if(!nome || !tel){
+    alert('Preencha seu nome e WhatsApp no topo antes de enviar cada documento.');
+    document.getElementById('itemNome').focus();
+    return;
+  }
+  if(!window._itemFiles[key] || !window._itemFiles[key].length){
+    var input = document.getElementById('itemfile-'+key);
+    if(input) input.click();
+    return;
+  }
+  enviarItemDoc(key);
 }
 async function enviarItemDoc(key){
-  var file = window._itemFiles[key];
+  var files = window._itemFiles[key];
   var nome = document.getElementById('itemNome').value.trim();
   var tel = document.getElementById('itemTel').value.trim();
   var st = document.getElementById('itemstatus-'+key);
@@ -460,7 +473,7 @@ async function enviarItemDoc(key){
   var btn = document.getElementById('itemsend-'+key);
   var chk = document.getElementById('itemcheck-'+key);
   if(!nome || !tel){ alert('Preencha seu nome e WhatsApp no topo antes de enviar cada documento.'); return; }
-  if(!file){ return; }
+  if(!files || !files.length){ return; }
   if(!window.DOC_UPLOAD_CONFIG || !window.DOC_UPLOAD_CONFIG.uploadUrl || !window.enviarDocumentos){
     var tipoDoc = ITEM_DOC_TYPES.find(function(t){ return t.key===key; });
     var labelDoc = tipoDoc ? tipoDoc.label : key;
@@ -477,7 +490,7 @@ async function enviarItemDoc(key){
   st.textContent = 'enviando…';
   st.style.color = 'var(--text2)';
   btn.disabled = true;
-  var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa-item-a-item', extras:{tipoDoc:key, imposto_renda:IR_DECLAROU}}, [{file:file, tipoDoc:key}]);
+  var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa-item-a-item', extras:{tipoDoc:key, imposto_renda:IR_DECLAROU}}, files.map(function(f){ return {file:f, tipoDoc:key}; }));
   if(res && res.ok){
     st.textContent = 'OK';
     st.style.color = '#15803d';
@@ -528,4 +541,63 @@ function renderFileRows(){
   list.innerHTML = window._docFiles.map(function(f,i){
     return '<div class="file-row" id="filerow-'+i+'">'
       +'<span class="file-row-name">'+f.name+' &nbsp;<span style="color:var(--text3)">('+(f.size/1024/1024).toFixed(1)+'MB)</span></span>'
-      +'<span class="file-row-status pending" id="filestatus-'+i+'">aguardand
+      +'<span class="file-row-status pending" id="filestatus-'+i+'">aguardando envio</span>'
+      +'</div>';
+  }).join('');
+}
+function onDocFilesSelected(fileList){
+  window._docFiles = Array.from(fileList);
+  var list = document.getElementById('uploadFilesList');
+  var formBox = document.getElementById('uploadFormBox');
+  if(!window._docFiles.length){ list.style.display='none'; formBox.style.display='none'; return; }
+  list.style.display = 'block';
+  renderFileRows();
+  formBox.style.display = 'block';
+}
+async function enviarDocsReal(){
+  var nome = document.getElementById('docNome').value.trim();
+  var tel = document.getElementById('docTel').value.trim();
+  var status = document.getElementById('uploadStatus');
+  if(!nome || !tel){ status.textContent='Preencha nome e WhatsApp antes de enviar.'; status.style.color='#b91c1c'; return; }
+  if(!window._docFiles.length){ status.textContent='Selecione ao menos um arquivo.'; status.style.color='#b91c1c'; return; }
+
+  if(!window.DOC_UPLOAD_CONFIG || !window.DOC_UPLOAD_CONFIG.uploadUrl || !window.enviarDocumentos){
+    status.innerHTML = 'Envio automático ainda não está ativo — <a href="https://wa.me/5521989150864?text=Vou+enviar+meus+documentos+para+aprova%C3%A7%C3%A3o+expressa!" target="_blank" style="color:#b8873a;font-weight:700">envie pelo WhatsApp</a> por enquanto.';
+    status.style.color='#8a6526';
+    return;
+  }
+
+  status.textContent = 'Enviando '+window._docFiles.length+' arquivo(s)...';
+  status.style.color = 'var(--text2)';
+  window._docFiles.forEach(function(f,i){
+    var el = document.getElementById('filestatus-'+i);
+    if(el){ el.textContent='enviando…'; el.className='file-row-status pending'; }
+  });
+
+  var itens = window._docFiles.map(function(f){ return {file:f, tipoDoc:f.name}; });
+  var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa'}, itens);
+
+  if(res && res.ok){
+    window._docFiles.forEach(function(f,i){
+      var el = document.getElementById('filestatus-'+i);
+      if(el){ el.innerHTML='✓ enviado'; el.className='file-row-status ok'; }
+    });
+    status.textContent = 'Todos os documentos foram enviados com sucesso! Nossa equipe já foi avisada.';
+    status.style.color = '#15803d';
+    document.getElementById('docFileInput').value = '';
+    window._docFiles = [];
+  } else {
+    window._docFiles.forEach(function(f,i){
+      var el = document.getElementById('filestatus-'+i);
+      if(el){ el.innerHTML='✗ falhou'; el.className='file-row-status err'; }
+    });
+    status.textContent = 'Não deu para enviar agora. Tente novamente ou use o WhatsApp abaixo.';
+    status.style.color = '#b91c1c';
+  }
+}
+</script>
+<script src="doc-upload-config.js"></script>
+<script src="social-login.js"></script>
+<script src="leads.js" defer></script>
+</body>
+</html>
