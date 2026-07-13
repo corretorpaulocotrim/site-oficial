@@ -6,3 +6,5 @@ Sitemap: https://paulocotrim.com.br/sitemap.xml
 # Bloquear páginas internas
 Disallow: /admin.html
 Disallow: /documentos.html
+Disallow: /crm.html
+Disallow: /index-v2.html

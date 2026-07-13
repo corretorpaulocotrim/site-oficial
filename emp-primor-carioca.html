@@ -8,12 +8,17 @@
 <meta property="og:description" content="Análise independente de quem entende o mercado do Rio há 18 anos."/>
 <meta property="og:image" content="https://paulocotrim.com.br/emp-img/primor-carioca.jpg"/>
 <meta property="og:url" content="https://paulocotrim.com.br/emp-primor-carioca.html"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Primor Carioca — Fase 2 — Análise de Paulo Cotrim"/>
+<meta name="twitter:description" content="Análise independente de quem entende o mercado do Rio há 18 anos."/>
+<meta name="twitter:image" content="https://paulocotrim.com.br/emp-img/primor-carioca.jpg"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="favicon.svg"/>
 <link rel="canonical" href="https://paulocotrim.com.br/emp-primor-carioca.html"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "Primor Carioca — Fase 2", "address": {"@type": "PostalAddress", "addressLocality": "Inhaúma · Zona Norte", "addressRegion": "RJ", "addressCountry": "BR"}}</script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/></noscript>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 :root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--ink2:#12252b;--gold:#b8873a;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--maxw:1100px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
@@ -351,42 +356,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
     <div class="eyebrow reveal">Aprovação Expressa · Simulação</div>
     <h2 class="stitle display reveal" style="margin-bottom:12px">Faça sua simulação do Primor Carioca — Fase 2</h2>
     <p class="ssub reveal" style="margin-bottom:28px">Informe sua renda e veja o financiamento estimado, a entrada e as opções de parcelamento — inclusive a possibilidade de ir para as chaves sem precisar de entrada à vista. Simulação educativa e não vinculante; a <a href="aprovacao-expressa.html" style="color:var(--gold);font-weight:600">Aprovação Expressa</a> com o Paulo confirma os valores reais direto com a Caixa.</p>
-    <div class="sim-card reveal">
-      <div class="sim-top">
-        <span class="sim-badge" id="simModBadge">MCMV · financia 80% da unidade</span>
-        <span style="font-size:13px;color:var(--gray)">Unidade simulada: <b style="color:var(--ink)">Apartamento (PCD), 1 quarto — R$ 262.990</b></span>
-      </div>
-      <div class="sim-grid">
-        <div class="sim-field"><label>Sua renda familiar mensal (R$)</label><input type="text" id="simRenda" value="3.000" oninput="simuUpdate()"></div>
-        <div class="sim-field"><label>Modalidade</label><select id="simMod" onchange="simuUpdate()"><option value="auto" selected>Automática (pela renda)</option><option value="mcmv">MCMV — financia 80%</option><option value="sbpe">SBPE — financia 90%</option></select></div>
-        <div class="sim-field"><label>Valor de entrada que você quer dar (R$) <span style="font-weight:400">— opcional</span></label><input type="text" id="simEntrada" placeholder="Deixe em branco para calcular automaticamente" oninput="simuUpdate()"></div>
-        <div class="sim-field"><label>Parcelar a entrada em quantos meses?</label><input type="range" min="1" max="36" value="24" class="sim-range" id="simParcelas" oninput="simuUpdate()"><div class="sim-range-val"><span id="simParcelasVal">24</span>x, até a entrega das chaves</div></div>
-        <div class="sim-field">
-          <label class="sim-toggle"><input type="checkbox" id="simFgts" onchange="simuUpdate()"> Tenho FGTS para usar na entrada</label>
-          <input type="text" id="simFgtsValor" placeholder="Valor disponível de FGTS (R$)" style="margin-top:8px;display:none" oninput="simuUpdate()">
-        </div>
-        <div class="sim-field"><label>Reforço a cada dezembro (opcional)</label><input type="text" id="simReforco" placeholder="R$ 0" oninput="simuUpdate()"></div>
-      </div>
-      <div class="sim-out" id="simOut"></div>
-      <div class="sim-note" id="simNote"></div>
-      <div class="sim-check-row">
-        <input type="checkbox" id="simIncluirPdf" checked> <label for="simIncluirPdf">Incluir esta simulação no PDF da tabela de vendas</label>
-      </div>
-      <div class="sim-actions">
-        <button class="btn-gold" onclick="whatsappSimu()">
-          <svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
-          Confirmar esta simulação com Paulo
-        </button>
-        <button class="btn-ghost" onclick="abrirManualModal()">
-          <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>
-          Baixar tabela + simulação em PDF
-        </button>
-        <button class="btn-ghost" onclick="window.open('apresentacoes/primor-carioca.pdf','_blank')">
-          <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 15h6M9 11h6"/></svg>
-          Baixar apresentação completa (PDF oficial)
-        </button>
-      </div>
-    </div>
+    <div id="fsimEmbed"></div>
   </div>
 </section>
 
@@ -429,7 +399,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
       <div><b>Entrega</b><span>A definir</span></div>
     </div>
     <div class="sim-check-row" id="modalSimCheckRow" style="display:none">
-      <input type="checkbox" id="simIncluirPdfModal" checked onchange="document.getElementById('simIncluirPdf').checked=this.checked">
+      <input type="checkbox" id="simIncluirPdfModal" checked>
       <label for="simIncluirPdfModal">Incluir a simulação de financiamento que você fez</label>
     </div>
     <p class="manual-note">Preço, entrada e forma de pagamento variam por unidade e mudam com frequência — o PDF traz um QR code para você voltar a esta página e pedir a tabela atualizada com o Paulo, inclusive mostrando pelo celular a quem estiver com você.</p>
@@ -570,6 +540,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="financing-sim.js"></script>
 <script>
 pdfjsLib.GlobalWorkerOptions.workerSrc = "https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.worker.min.js";
 var pdfDoc=null,pdfPageNum=1,pdfRendering=false,pdfPending=null;
@@ -624,102 +595,32 @@ function tf(b){var a=b.nextElementSibling,o=b.classList.contains('open');documen
 /* ===== SIMULADOR DE FINANCIAMENTO — Primor Carioca ===== */
 var SIMU_PRECO = 262990;
 var SIMU_UNIDADE = "Apartamento (PCD), 1 quarto";
-var SIMU_LAST = null; // guarda o último resultado calculado, usado pelo PDF
 
-function parseBRLnum(v){
-  if(!v) return 0;
-  v = String(v).replace(/[R$\s]/g,'').replace(/\./g,'').replace(',', '.');
-  var n = parseFloat(v);
-  return isNaN(n) ? 0 : n;
-}
-function fmtBRL(n){
-  return 'R$ ' + (n||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
-}
+// Usa o módulo de simulação compartilhado (financing-sim.js) — o mesmo das
+// outras 30 páginas de empreendimento, já com o plano de pagamento editável,
+// FGTS, reforço de dezembro e a lógica de entrada/financiado corrigida.
+initSimuladorEmbed('fsimEmbed', {
+  nome: 'Primor Carioca — Fase 2',
+  construtora: 'MRV',
+  bairro: 'Inhaúma · Zona Norte',
+  preco: SIMU_PRECO,
+  apresentacao: 'primor-carioca.pdf'
+});
 
-function simuCalc(){
-  var renda = parseBRLnum(document.getElementById('simRenda').value);
-  var modSel = document.getElementById('simMod').value;
-  var mod = modSel==='auto' ? (renda>12000?'sbpe':'mcmv') : modSel;
-  var pctFin = mod==='sbpe' ? 0.90 : 0.80;
-  var preco = SIMU_PRECO;
-  var aprovado = Math.min(preco*pctFin, preco);
-  var entradaCalc = Math.max(0, preco-aprovado);
-  var entradaInput = document.getElementById('simEntrada').value;
-  var entrada = entradaInput.trim()!=='' ? Math.max(0,parseBRLnum(entradaInput)) : entradaCalc;
-  var limite20 = preco*0.20;
-  var parcelavel = Math.min(entrada, limite20);
-  var aVista = Math.max(0, entrada-limite20);
-  var temFgts = document.getElementById('simFgts').checked;
-  var fgtsValor = temFgts ? parseBRLnum(document.getElementById('simFgtsValor').value) : 0;
-  var fgtsAplicado = Math.min(fgtsValor, aVista);
-  var aVistaExcedente = Math.max(0, aVista-fgtsAplicado);
-  var temPosChaves = aVistaExcedente>0; // Primor Carioca é MRV: excedente vai para pós-chaves em até 72x
-  var maxParcelasPosChaves = 72;
-  var parcelaPosChaves = temPosChaves ? aVistaExcedente/maxParcelasPosChaves : 0;
-  var aVistaFinal = temPosChaves ? 0 : aVistaExcedente;
-  var parcelas = parseInt(document.getElementById('simParcelas').value,10) || 1;
-  var reforcoDez = parseBRLnum(document.getElementById('simReforco').value);
-  var anos = Math.max(1, Math.ceil(parcelas/12));
-  var totalReforcos = Math.min(parcelavel, reforcoDez*anos);
-  var baseMensal = Math.max(0, parcelavel-totalReforcos);
-  var parcelaMensal = parcelas>0 ? baseMensal/parcelas : 0;
-  var parcelaChavesMax = renda*0.30;
-  var valorChavesMax12x = parcelaChavesMax*12;
-  var semEntradaAVista = (aVistaFinal<=0.005);
-  return {renda:renda,mod:mod,pctFin:pctFin,preco:preco,aprovado:aprovado,entrada:entrada,limite20:limite20,
-    parcelavel:parcelavel,aVista:aVista,fgtsAplicado:fgtsAplicado,aVistaFinal:aVistaFinal,parcelas:parcelas,
-    reforcoDez:reforcoDez,totalReforcos:totalReforcos,parcelaMensal:parcelaMensal,parcelaChavesMax:parcelaChavesMax,
-    valorChavesMax12x:valorChavesMax12x,semEntradaAVista:semEntradaAVista,
-    temPosChaves:temPosChaves,maxParcelasPosChaves:maxParcelasPosChaves,parcelaPosChaves:parcelaPosChaves};
-}
-
-function simuUpdate(){
-  document.getElementById('simFgtsValor').style.display = document.getElementById('simFgts').checked ? 'block' : 'none';
-  document.getElementById('simParcelasVal').textContent = document.getElementById('simParcelas').value;
-  var c = simuCalc();
-  SIMU_LAST = c;
-  document.getElementById('simModBadge').textContent = (c.mod==='sbpe' ? 'SBPE · financia 90% da unidade' : 'MCMV · financia 80% da unidade');
-
-  var out = ''
-    +'<div class="sim-out-card hl"><div class="l">Financiamento estimado</div><div class="v">'+fmtBRL(c.aprovado)+'</div></div>'
-    +'<div class="sim-out-card"><div class="l">Entrada total</div><div class="v">'+fmtBRL(c.entrada)+'</div></div>'
-    +'<div class="sim-out-card"><div class="l">Parcelável (até 20% do imóvel)</div><div class="v">'+fmtBRL(c.parcelavel)+'</div></div>'
-    +(c.temPosChaves?'<div class="sim-out-card hl"><div class="l">Pós-chaves MRV (72x)</div><div class="v">'+fmtBRL(c.parcelaPosChaves)+'</div></div>':(c.semEntradaAVista?'':'<div class="sim-out-card sim-warn"><div class="l">Entrada à vista necessária</div><div class="v">'+fmtBRL(c.aVistaFinal)+'</div></div>'))
-    +'<div class="sim-out-card"><div class="l">Parcela da entrada ('+c.parcelas+'x)</div><div class="v">'+fmtBRL(c.parcelaMensal)+'</div></div>'
-    +'<div class="sim-out-card"><div class="l">FGTS aplicado</div><div class="v">'+fmtBRL(c.fgtsAplicado)+'</div></div>';
-  document.getElementById('simOut').innerHTML = out;
-
-  var note = '';
-  if(c.semEntradaAVista){
-    note += '<strong>Você pode ir para as chaves sem dar entrada à vista</strong> — toda a sua entrada de '+fmtBRL(c.entrada)+' cabe dentro dos 20% do valor do imóvel parceláveis em até '+c.parcelas+'x. ';
-  } else if(c.temPosChaves){
-    note += '<strong>A MRV permite estender o que passar dos 20% parceláveis</strong> para depois da entrega das chaves, em até 72x de '+fmtBRL(c.parcelaPosChaves)+' — por isso você não precisa de entrada à vista aqui. ';
-  } else {
-    note += 'Sua entrada de '+fmtBRL(c.entrada)+' é maior que os 20% do valor do imóvel que podem ser parcelados ('+fmtBRL(c.limite20)+'). O que exceder — '+fmtBRL(c.aVistaFinal)+' — precisa ser pago à vista'+(c.fgtsAplicado>0?' mesmo depois de usar o FGTS':'')+'. ';
-  }
-  if(c.totalReforcos>0){
-    note += 'Considerado reforço de '+fmtBRL(c.reforcoDez)+' em cada dezembro ao longo de '+Math.max(1,Math.ceil(c.parcelas/12))+' ano(s), reduzindo a parcela mensal. ';
-  }
-  note += 'Na entrega das chaves, o valor cobrado deve caber na sua renda: com '+fmtBRL(c.renda)+' de renda familiar, a parcela das chaves não deveria passar de <strong>'+fmtBRL(c.parcelaChavesMax)+'/mês</strong>, ou seja, até <strong>'+fmtBRL(c.valorChavesMax12x)+'</strong> parcelado em até 12x pós-chaves. ';
-  note += '<br><span style="opacity:.85">Simulação educativa com base no valor de tabela pública ('+fmtBRL(c.preco)+') — a prestação real do financiamento e as condições finais são calculadas pela Caixa na Aprovação Expressa com o Paulo.</span>';
-  document.getElementById('simNote').innerHTML = note;
-}
-
-function whatsappSimu(){
-  var c = SIMU_LAST || simuCalc();
-  var msg = 'Olá Paulo! Fiz a simulação do Primor Carioca — Fase 2 ('+SIMU_UNIDADE+'):\n\n'
-    +'Renda: '+fmtBRL(c.renda)+'\nModalidade: '+c.mod.toUpperCase()+'\nFinanciamento estimado: '+fmtBRL(c.aprovado)+'\nEntrada total: '+fmtBRL(c.entrada)
-    +'\nParcelável (20%): '+fmtBRL(c.parcelavel)+' em '+c.parcelas+'x de '+fmtBRL(c.parcelaMensal)
-    +'\nEntrada à vista: '+fmtBRL(c.aVistaFinal)+(c.fgtsAplicado>0?'\nFGTS usado: '+fmtBRL(c.fgtsAplicado):'')
-    +'\n\nQuero confirmar esses valores com você!';
-  if(window.enviarLeadCRM) enviarLeadCRM({
-    nome:'Lead Simulador Primor Carioca', telefone:'', interesse:'Primor Carioca — Fase 2', renda:fmtBRL(c.renda),
-    regiao:'Inhaúma · Zona Norte', origem:'simulador-imovel',
-    extras:{preco:c.preco, entrada:c.entrada, aprovado:c.aprovado, modalidade:c.mod}
+// Troca o botão padrão "Baixar resumo" pela versão especial desta página:
+// tabela de vendas com QR code + simulação embutida (baixarManualPDF()).
+(function(){
+  var actions = document.querySelector('#fsimEmbed .sim-actions');
+  if(!actions) return;
+  var btns = actions.querySelectorAll('button');
+  btns.forEach(function(b){
+    if(/fsimDownload/.test(b.getAttribute('onclick')||'')){
+      b.removeAttribute('onclick');
+      b.onclick = abrirManualModal;
+      b.innerHTML = '<svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg> Baixar tabela + simulação em PDF';
+    }
   });
-  window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');
-}
-(function(){ if(document.getElementById('simRenda')) simuUpdate(); })();
+})();
 
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
@@ -728,25 +629,25 @@ function closeHeroLb(){document.getElementById('heroLb').classList.remove('open'
 
 function abrirManualModal(){
   var row = document.getElementById('modalSimCheckRow');
-  if(row) row.style.display = SIMU_LAST ? 'flex' : 'none';
+  if(row) row.style.display = FSIM_LAST ? 'flex' : 'none';
   document.getElementById('manualModal').style.display = 'flex';
 }
 function baixarManualPDF(){
   var url="https://paulocotrim.com.br/emp-primor-carioca.html";
   var qr="https://api.qrserver.com/v1/create-qr-code/?size=220x220&data="+encodeURIComponent(url);
-  var incluirSim = document.getElementById('simIncluirPdf') && document.getElementById('simIncluirPdf').checked;
-  var c = incluirSim ? (SIMU_LAST || (document.getElementById('simRenda') ? simuCalc() : null)) : null;
+  var incluirSim = document.getElementById('simIncluirPdfModal') ? document.getElementById('simIncluirPdfModal').checked : true;
+  var c = incluirSim ? FSIM_LAST : null;
 
   var simBlock = '';
   if(c){
     simBlock = '<div class="simh">Sua simulação de financiamento</div>'
       +'<div class="row"><span class="rk">Unidade simulada</span><span class="rv">'+SIMU_UNIDADE+' — '+fmtBRL(c.preco)+'</span></div>'
       +'<div class="row"><span class="rk">Renda informada</span><span class="rv">'+fmtBRL(c.renda)+'</span></div>'
-      +'<div class="row"><span class="rk">Modalidade</span><span class="rv">'+c.mod.toUpperCase()+' — financia '+Math.round(c.pctFin*100)+'%</span></div>'
-      +'<div class="row"><span class="rk">Financiamento estimado</span><span class="rv">'+fmtBRL(c.aprovado)+'</span></div>'
+      +'<div class="row"><span class="rk">Modalidade</span><span class="rv">'+c.mod.toUpperCase()+'</span></div>'
+      +'<div class="row"><span class="rk">Financiamento estimado</span><span class="rv">'+fmtBRL(c.financiado)+'</span></div>'
       +'<div class="row"><span class="rk">Entrada total</span><span class="rv">'+fmtBRL(c.entrada)+'</span></div>'
-      +'<div class="row"><span class="rk">Parcelável (até 20% do imóvel)</span><span class="rv">'+fmtBRL(c.parcelavel)+' em '+c.parcelas+'x de '+fmtBRL(c.parcelaMensal)+'</span></div>'
-      +'<div class="row"><span class="rk">Entrada à vista necessária</span><span class="rv">'+fmtBRL(c.aVistaFinal)+'</span></div>'
+      +'<div class="row"><span class="rk">Parcelável sem juros na obra (até 20%)</span><span class="rv">'+fmtBRL(c.parcelavelObra)+' em '+c.parcelasObra+'x de '+fmtBRL(c.parcelaObraMensal)+'</span></div>'
+      +(c.temPosChaves ? '<div class="row"><span class="rk">Pós-chaves MRV ('+c.maxParcelasPosChaves+'x)</span><span class="rv">'+fmtBRL(c.parcelaPosChaves)+'</span></div>' : (!c.semEntradaAVista ? '<div class="row"><span class="rk">Entrada à vista necessária</span><span class="rv">'+fmtBRL(c.aVistaFinal)+'</span></div>' : ''))
       +(c.fgtsAplicado>0 ? '<div class="row"><span class="rk">FGTS aplicado</span><span class="rv">'+fmtBRL(c.fgtsAplicado)+'</span></div>' : '')
       +'<div class="row"><span class="rk">Parcela máxima nas chaves (renda)</span><span class="rv">'+fmtBRL(c.parcelaChavesMax)+'/mês</span></div>'
       +'<div class="note">Simulação educativa e não vinculante, com base no valor de tabela pública. A prestação real e as condições finais são calculadas pela Caixa na Aprovação Expressa com o Paulo.</div>';

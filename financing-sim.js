@@ -112,17 +112,9 @@ function calcularSimulacao(p){
   var renda = p.renda || 0;
   var mod = p.modalidade==='auto' || !p.modalidade ? (renda>12000?'sbpe':'mcmv') : p.modalidade;
   var pctFin = mod==='sbpe' ? 0.90 : 0.80;
-  var financiadoMax = Math.min(preco*pctFin, preco);
-  var entradaMinima = Math.max(0, preco - financiadoMax);
-  // Entrada = o que sobra depois do que o banco financia. Se o usuário digitar um valor de
-  // entrada MENOR que o mínimo exigido pela modalidade, os números não fechariam (financiado +
-  // entrada < preço) — então usamos o mínimo e sinalizamos isso na interface (c.entradaInsuficiente).
-  // Se digitar um valor MAIOR, é uma escolha válida (financia menos que o teto), e o financiamento
-  // é recalculado a partir da entrada real, não do teto fixo.
-  var entradaSolicitada = (p.entradaManual!=null && p.entradaManual>0) ? p.entradaManual : entradaMinima;
-  var entradaInsuficiente = entradaSolicitada < entradaMinima - 0.01;
-  var entrada = entradaInsuficiente ? entradaMinima : entradaSolicitada;
-  var financiado = Math.max(0, preco - entrada);
+  var financiado = Math.min(preco*pctFin, preco);
+  var entradaCalc = Math.max(0, preco-financiado);
+  var entrada = (p.entradaManual!=null && p.entradaManual>0) ? p.entradaManual : entradaCalc;
 
   var atoEntrada = Math.max(0, Math.min(p.atoEntrada||0, entrada));
   var valorChave = Math.min(p.valorChave||0, Math.max(0, entrada-atoEntrada));
@@ -158,8 +150,7 @@ function calcularSimulacao(p){
   var acimaDoTeto = parcelaObraMensal > MAX_MENSAL + 0.01;
 
   return {
-    preco:preco, renda:renda, mod:mod, pctFin:pctFin, financiado:financiado, financiadoMax:financiadoMax,
-    entradaMinima:entradaMinima, entradaInsuficiente:entradaInsuficiente,
+    preco:preco, renda:renda, mod:mod, pctFin:pctFin, financiado:financiado,
     entrada:entrada, atoEntrada:atoEntrada, valorChave:valorChave, entradaRestante:entradaRestante,
     limite20:limite20, parcelavelObra:parcelavelObra, excedente:excedente,
     fgtsAplicado:fgtsAplicado, excedenteFinal:excedenteFinal,
@@ -288,11 +279,7 @@ function fsimUpdate(){
   });
   FSIM_LAST = c;
 
-  var out = '';
-  if(c.entradaInsuficiente){
-    out += '<div class="sim-out-card" style="grid-column:1/-1;background:#fef3c7;border:1px solid #e9d4ab"><div class="l" style="color:#92400e">Entrada ajustada automaticamente</div><div style="font-size:12px;color:#92400e;margin-top:3px">A modalidade '+(c.mod==='sbpe'?'SBPE':'MCMV')+' financia no máximo '+(c.pctFin*100).toFixed(0)+'% do imóvel — por isso a entrada mínima exigida é <strong>'+fmtBRL(c.entradaMinima)+'</strong>. Usamos esse valor abaixo em vez do que foi digitado.</div></div>';
-  }
-  out += ''
+  var out = ''
     +'<div class="sim-out-card hl"><div class="l">Financiamento estimado ('+(c.mod==='sbpe'?'SBPE':'MCMV')+')</div><div class="v">'+fmtBRL(c.financiado)+'</div></div>'
     +'<div class="sim-out-card"><div class="l">Entrada total</div><div class="v">'+fmtBRL(c.entrada)+'</div></div>';
   if(c.atoEntrada>0) out += '<div class="sim-out-card"><div class="l">Pago no ato da assinatura</div><div class="v">'+fmtBRL(c.atoEntrada)+'</div></div>';

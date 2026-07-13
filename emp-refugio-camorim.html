@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Refúgio Camorim · Análise de Paulo Cotrim | Região do Camorim · Rio de Janeiro</title>
+<meta name="description" content="Análise de Paulo Cotrim sobre o Refúgio Camorim (MRV), em Região do Camorim, Rio de Janeiro. CRECI-RJ 77677-F."/>
+<meta property="og:title" content="Refúgio Camorim — Análise de Paulo Cotrim"/>
+<meta property="og:description" content="Análise independente de quem entende o mercado do Rio há 18 anos."/>
+<meta property="og:image" content="https://paulocotrim.com.br/emp-img/mrv-refugio-camorim-em-breve.jpg"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<meta name="twitter:title" content="Refúgio Camorim — Análise de Paulo Cotrim"/>
+<meta name="twitter:description" content="Análise independente de quem entende o mercado do Rio há 18 anos."/>
+<meta name="twitter:image" content="https://paulocotrim.com.br/emp-img/mrv-refugio-camorim-em-breve.jpg"/>
+<meta property="og:url" content="https://paulocotrim.com.br/emp-refugio-camorim.html"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="favicon.svg"/>
+<link rel="canonical" href="https://paulocotrim.com.br/emp-refugio-camorim.html"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "Refúgio Camorim", "address": {"@type": "PostalAddress", "addressLocality": "Região do Camorim, Rio de Janeiro", "addressRegion": "RJ", "addressCountry": "BR"}}</script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'"/>
+<noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/></noscript>
+<script src="financing-sim.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--ink2:#12252b;--gold:#b8873a;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--maxw:1100px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+@media(max-width:640px){.wrap{padding:0 20px}}
+.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+.ic{width:20px;height:20px;stroke:currentColor;stroke-width:1.6;fill:none;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
+.ic-sm{width:16px;height:16px}
+header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);box-shadow:0 1px 0 rgba(15,46,54,.06),0 12px 30px -18px rgba(15,46,54,.14);transition:box-shadow .4s var(--ease)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.02em}
+.brand-logo{height:26px;width:auto;display:block}
+.nav-links{display:flex;gap:4px;align-items:center}
+.nav-links a{padding:7px 13px;font-size:13px;font-weight:500;color:var(--gray);border-radius:8px;transition:color .3s var(--ease),background-color .3s var(--ease)}
+.nav-links a:hover{color:var(--ink);background:var(--mist)}
+.nav-cta{background:var(--ink);color:#fff!important;font-weight:600!important}
+.burger{display:none;background:none;border:none;cursor:pointer;color:var(--ink);padding:6px}
+@media(max-width:820px){.nav-links a:not(.nav-cta){display:none}.burger{display:block}}
+#mnav a{display:block;padding:10px 0;color:var(--gray);font-size:14px}
+.trust-bar{display:flex;gap:20px;flex-wrap:wrap;font-size:12.5px;color:rgba(255,255,255,.75);margin-top:4px}
+.trust-bar b{color:#fff;font-weight:700}
+.sticky-cta{position:fixed;left:0;right:0;bottom:0;z-index:700;background:#fff;border-top:1px solid var(--line);box-shadow:0 -6px 24px rgba(15,46,54,.12);display:none;gap:10px;padding:10px 14px;align-items:center}
+.sticky-cta .txt{flex:1;min-width:0}
+.sticky-cta .txt b{display:block;font-size:13px;color:var(--ink)}
+.sticky-cta .txt span{font-size:11.5px;color:var(--gray)}
+.sticky-cta a{background:var(--gold);color:#fff;padding:11px 18px;border-radius:10px;font-size:13.5px;font-weight:600;white-space:nowrap;box-shadow:0 6px 18px rgba(184,135,58,.3);transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.sticky-cta a:active{transform:scale(.97)}
+@media(max-width:760px){.sticky-cta{display:flex}body{padding-bottom:70px}}
+.hero{position:relative;min-height:78vh;display:flex;align-items:flex-end;color:#fff;overflow:hidden;background:linear-gradient(135deg,var(--petrol),#173d47)}
+.hero-bg{position:absolute;inset:0;background:linear-gradient(135deg,#173d47,#0f2e36);transform:scale(1.05)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(to top,rgba(9,20,24,.92) 0%,rgba(9,20,24,.4) 45%,rgba(9,20,24,.55) 100%)}
+.hero-c{position:relative;z-index:2;width:100%;padding-bottom:56px}
+.hero-status{display:inline-flex;align-items:center;gap:7px;font-size:12px;font-weight:600;padding:6px 14px;border-radius:30px;color:#fff;margin-bottom:20px;box-shadow:0 4px 14px rgba(0,0,0,.18),inset 0 1px 0 rgba(255,255,255,.15)}
+.hero h1{font-size:clamp(32px,6vw,64px);line-height:1;letter-spacing:-.03em;margin-bottom:14px}
+.hero-meta{display:flex;gap:24px;flex-wrap:wrap;font-size:14.5px;color:rgba(255,255,255,.8);margin-bottom:30px}
+.hero-meta b{color:#fff;font-weight:600}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.btn-wa-hero{display:inline-flex;align-items:center;gap:9px;background:var(--gold);border:1px solid rgba(255,255,255,.3);color:#fff;padding:14px 26px;border-radius:12px;font-size:14.5px;font-weight:700;box-shadow:0 8px 24px rgba(184,135,58,.35),inset 0 1px 0 rgba(255,255,255,.22);transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-color .3s var(--ease)}
+.btn-wa-hero:hover{background:#a5772e;transform:translateY(-3px);box-shadow:0 14px 34px rgba(184,135,58,.42),inset 0 1px 0 rgba(255,255,255,.25)}
+.section{padding:76px 0}
+.section-mist{background:var(--mist)}
+.eyebrow{font-size:12px;font-weight:600;color:var(--gold);letter-spacing:.06em;text-transform:uppercase;margin-bottom:12px}
+.stitle{font-size:clamp(24px,3.4vw,36px);line-height:1.12;letter-spacing:-.02em;margin-bottom:14px}
+.ssub{font-size:16px;color:var(--gray);max-width:60ch;line-height:1.65}
+.analise{display:grid;grid-template-columns:180px 1fr;gap:36px;align-items:center}
+.analise-photo{border-radius:var(--r);overflow:hidden;aspect-ratio:1/1;background:var(--mist);box-shadow:var(--shadow-lg)}
+.analise-photo img{width:100%;height:100%;object-fit:cover}
+.analise-quote{font-family:'Fraunces',serif;font-size:clamp(17px,2vw,22px);line-height:1.5;color:var(--ink);letter-spacing:-.01em;margin-bottom:22px;font-weight:500}
+.analise-quote::before{content:'"';color:var(--gold);font-size:1.4em;line-height:0;vertical-align:-.3em;margin-right:.06em}
+.analise-sign{display:flex;align-items:center;gap:12px}
+.analise-sign-line{width:32px;height:1px;background:var(--gold)}
+.analise-sign b{font-size:14px}.analise-sign span{font-size:12.5px;color:var(--gray);display:block}
+@media(max-width:760px){.analise{grid-template-columns:1fr;gap:22px}.analise-photo{max-width:130px}}
+.nota-head{display:flex;gap:28px;align-items:center;margin-bottom:40px;flex-wrap:wrap}
+.nota-score{background:var(--petrol);color:#fff;border-radius:20px;padding:26px 32px;text-align:center;min-width:150px;box-shadow:0 20px 46px -12px rgba(15,46,54,.45)}
+.nota-score .of{font-size:14px;color:rgba(255,255,255,.6)}
+.nota-score .tier{font-family:'Fraunces',serif;font-size:23px;font-weight:600;line-height:1.25}
+.nota-intro{flex:1;min-width:260px}
+.nota-intro h2{font-size:clamp(22px,3vw,30px);letter-spacing:-.02em;margin-bottom:10px}
+.nota-intro p{font-size:15px;color:var(--gray);line-height:1.6}
+.crit-grid{display:grid;grid-template-columns:1fr 1fr;gap:26px 40px}
+.crit-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
+.crit-name{font-size:14.5px;font-weight:600}
+.crit-bar{height:5px;background:var(--line);border-radius:10px;overflow:hidden}
+.crit-bar span{display:block;height:100%;background:var(--petrol);border-radius:10px}
+.crit-desc{font-size:12.5px;color:var(--gray);margin-top:8px;line-height:1.5}
+@media(max-width:640px){.crit-grid{grid-template-columns:1fr}}
+.ficha-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.ficha-cell{padding:22px;border-right:1px solid var(--line);border-bottom:1px solid var(--line)}
+.ficha-cell .l{font-size:11.5px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.ficha-cell .v{font-size:16px;font-weight:600}
+.pontos{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.pontos-col{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:28px}
+.pontos-col h3{font-size:17px;margin-bottom:18px;display:flex;align-items:center;gap:9px;letter-spacing:-.01em}
+.pontos-col ul{list-style:none;display:flex;flex-direction:column;gap:13px}
+.pontos-col li{display:flex;gap:11px;font-size:14px;line-height:1.5;color:var(--ink)}
+.pontos-col li .ic{margin-top:2px}
+@media(max-width:700px){.pontos{grid-template-columns:1fr}}
+.cta-band{background:var(--petrol);border-radius:22px;padding:56px 48px;text-align:center;color:#fff;box-shadow:var(--shadow-lg);position:relative;overflow:hidden}
+.cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(600px 200px at 50% 0%,rgba(184,135,58,.16),transparent 70%);pointer-events:none}
+.cta-band h2{font-size:clamp(24px,3.2vw,34px);letter-spacing:-.02em;margin-bottom:12px}
+.cta-band p{font-size:16px;color:rgba(255,255,255,.7);max-width:46ch;margin:0 auto 28px}
+.btn-gold{display:inline-flex;align-items:center;gap:9px;background:var(--gold);color:#fff;padding:14px 30px;border-radius:12px;font-size:15px;font-weight:600;box-shadow:0 10px 26px rgba(184,135,58,.3),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-color .3s var(--ease);position:relative;z-index:1}
+.btn-gold:hover{background:#a5772e;transform:translateY(-3px);box-shadow:0 16px 36px rgba(184,135,58,.38),inset 0 1px 0 rgba(255,255,255,.22)}
+.btn-ghost{display:inline-flex;align-items:center;gap:8px;background:#fff;border:1px solid var(--line);color:var(--ink);padding:13px 22px;border-radius:12px;font-size:14.5px;font-weight:600}
+@media(max-width:600px){.cta-band{padding:40px 22px}}
+footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(--gray)}
+.foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.wafloat{position:fixed;bottom:24px;right:24px;z-index:600;background:var(--ink);color:#fff;width:54px;height:54px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 30px rgba(15,46,54,.25)}
+.wa-msg{position:fixed;bottom:32px;right:88px;z-index:600;background:#fff;color:var(--ink);font-size:12.5px;line-height:1.5;padding:12px 16px;border-radius:12px;max-width:230px;box-shadow:var(--shadow-lg);border:1px solid var(--line)}
+@media(max-width:640px){.wa-msg{display:none}}
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+.im-map-route-wrap{display:grid;grid-template-columns:1.3fr 1fr;gap:16px;align-items:start;margin-bottom:14px}
+@media(max-width:860px){.im-map-route-wrap{grid-template-columns:1fr}}
+.im-route-card{background:var(--mist);border-radius:var(--r);padding:20px;border:1px solid var(--line)}
+.im-route-title{font-size:14px;font-weight:700;color:var(--ink);margin-bottom:4px;display:flex;align-items:center;gap:7px}
+.im-route-sub{font-size:12px;color:var(--gray);margin-bottom:12px;line-height:1.5}
+.im-route-input{width:100%;padding:10px 12px;border:1px solid var(--line);border-radius:9px;font-size:13px;font-family:inherit;margin-bottom:10px;background:#fff}
+.im-route-input:focus{outline:none;border-color:var(--gold)}
+.im-route-input.im-route-error{border-color:#c0392b;animation:imRouteShake .3s}
+@keyframes imRouteShake{0%,100%{transform:translateX(0)}25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.im-route-modes{display:flex;gap:6px;margin-bottom:12px}
+.im-route-mode{flex:1;padding:8px 6px;border:1px solid var(--line);border-radius:8px;background:#fff;font-size:11.5px;font-weight:600;color:var(--gray);cursor:pointer;text-align:center}
+.im-route-mode.on{background:var(--gold);border-color:var(--gold);color:#fff}
+.im-route-btn{width:100%;padding:11px;border:none;border-radius:9px;background:var(--ink);color:#fff;font-size:13px;font-weight:700;cursor:pointer}
+.im-route-btn:hover{background:var(--gold)}
+.im-route-hint{font-size:11px;color:var(--gray);margin-top:8px;line-height:1.5}
+.constr-strip{display:flex;align-items:flex-start;gap:14px;background:var(--petrol-soft);border:1px solid var(--line);border-radius:var(--r);padding:18px 20px}
+.constr-strip svg{width:28px;height:28px;flex-shrink:0;color:var(--gold);margin-top:2px}
+.constr-strip .constr-body span{font-size:11px;color:var(--gray);text-transform:uppercase;letter-spacing:.04em}
+.constr-strip .constr-body b{color:var(--ink);font-size:14.5px;display:block;margin-top:2px;margin-bottom:6px}
+.constr-strip .constr-body p{font-size:12.5px;color:var(--gray);line-height:1.5}
+.sim-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:32px;max-width:900px;margin:0 auto}
+</style></head>
+<body>
+<header><div class="wrap nav">
+  <a href="index.html" class="brand"><img src="logo-wordmark.png" alt="Paulo Cotrim" class="brand-logo"/></a>
+  <nav class="nav-links">
+    <a href="index.html#mapa">Mapa</a>
+    <a href="index.html#empreendimentos">Empreendimentos</a>
+    <a href="investidor.html">Investidor</a>
+    <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20o%20Ref%C3%BAgio%20Camorim%20%28MRV%29%20no%20seu%20site%20e%20quero%20mais%20informa%C3%A7%C3%B5es." class="nav-links nav-cta" style="padding:8px 15px;border-radius:9px">Falar com nossa equipe de vendas</a>
+  </nav>
+  <button class="burger" onclick="document.getElementById('mnav').style.display=document.getElementById('mnav').style.display==='block'?'none':'block'" aria-label="Menu">
+    <svg class="ic" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+  </button>
+</div>
+<div id="mnav" style="display:none;border-top:1px solid var(--line);padding:12px 20px;background:#fff">
+  <a href="index.html#mapa">Mapa</a>
+  <a href="index.html#empreendimentos">Empreendimentos</a>
+  <a href="investidor.html">Investidor</a>
+  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20o%20Ref%C3%BAgio%20Camorim%20%28MRV%29%20no%20seu%20site%20e%20quero%20mais%20informa%C3%A7%C3%B5es.">Falar com nossa equipe de vendas</a>
+</div>
+</header>
+
+<section class="hero">
+  <div class="hero-bg"></div><div class="hero-shade"></div>
+  <div class="wrap hero-c">
+    <span class="hero-status" style="background:#6b7280">Pré-lançamento</span>
+    <h1 class="display">Refúgio Camorim</h1>
+    <div class="hero-meta">
+      <span><b>MRV</b><br>Construtora</span>
+      <span><b>Região do Camorim · Rio de Janeiro</b><br>Localização</span>
+      <span><b>2 quartos (opção de suíte e varanda)</b><br>Tipologia</span>
+      <span><b>Pré-lançamento</b><br>Status</span>
+    </div>
+    <div class="hero-actions">
+      <a class="btn-wa-hero" href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20o%20Ref%C3%BAgio%20Camorim%20%28MRV%29%20no%20seu%20site%20e%20quero%20mais%20informa%C3%A7%C3%B5es."><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Falar com nossa equipe de vendas</a>
+    </div>
+    <div class="trust-bar">
+      <span><b>18 anos</b> de mercado</span>
+      <span><b>CRECI-RJ 77677-F</b></span>
+      <span><b>700+</b> famílias atendidas</span>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="constr-strip reveal">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 21h18M5 21V7l7-4 7 4v14M9 9h1m4 0h1m-6 4h1m4 0h1m-6 4h1m4 0h1"/></svg>
+      <div class="constr-body">
+        <span>Construtora responsável</span>
+        <b>MRV</b>
+        <p>Pré-lançamento da MRV na região do Camorim, Zona Oeste do Rio. A construtora ainda não divulgou memorial descritivo completo, plantas nem valores — apenas cadastro para lista de espera antecipada.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">Condomínio</div>
+    <h2 class="stitle display reveal" style="margin-bottom:20px">Lazer divulgado pela construtora</h2>
+    <p style="font-size:13.5px;color:var(--gray)">Itens de lazer ainda não divulgados pela construtora para este pré-lançamento.</p>
+    <p style="font-size:11.5px;color:var(--gray);margin-top:14px">Itens de lazer conforme divulgado pela MRV em mrv.com.br — sujeitos a confirmação no memorial descritivo oficial.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">Ficha técnica</div>
+    <h2 class="stitle display reveal" style="margin-bottom:28px">Os números do Refúgio Camorim</h2>
+    <div class="ficha-grid reveal"><div class="ficha-cell"><div class="l">Construtora</div><div class="v">MRV</div></div><div class="ficha-cell"><div class="l">Localização</div><div class="v">Região do Camorim — Rio de Janeiro, RJ</div></div><div class="ficha-cell"><div class="l">Tipologia</div><div class="v">2 quartos (opção de suíte e varanda)</div></div><div class="ficha-cell"><div class="l">Status</div><div class="v">Pré-lançamento</div></div></div>
+    <p style="font-size:11.5px;color:var(--gray);margin-top:8px">Preço não divulgado publicamente pela construtora — valores variam por unidade, andar e disponibilidade. Elegível ao Minha Casa Minha Vida, com uso de FGTS.</p>
+    <div class="manual-cta reveal" style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+      <a href="simulador.html" class="btn-gold" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+        <svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>
+        Simular financiamento agora
+      </a>
+      <a href="aprovacao-expressa.html" class="btn-ghost" style="display:inline-flex;align-items:center;gap:8px;text-decoration:none">
+        <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>
+        Aprovação Expressa em 48h
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="section section-mist" id="simulador">
+  <div class="wrap">
+    <div class="eyebrow reveal" style="text-align:center">Simulação Expressa</div>
+    <h2 class="stitle display reveal" style="text-align:center;margin:0 auto 12px;max-width:32ch">Simule agora seu financiamento no Refúgio Camorim</h2>
+    <p class="reveal" style="text-align:center;color:var(--gray);font-size:14.5px;margin:0 auto 28px;max-width:60ch">Informe sua renda e veja entrada, parcelas na obra e — se aplicável — parcelamento pós-chaves de até 72x direto com a MRV. Sem compromisso.</p>
+    <div id="fsimEmbed"></div>
+  </div>
+</section>
+<script>
+initSimuladorEmbed('fsimEmbed', {preco:null, construtora:'MRV', nome:'Refúgio Camorim', bairro:'Região do Camorim · Rio de Janeiro'});
+</script>
+
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="eyebrow reveal">Localização</div>
+    <h2 class="stitle display reveal" style="margin-bottom:20px">Onde fica o Refúgio Camorim</h2>
+    <p class="reveal" style="font-size:14px;color:var(--gray);margin-bottom:18px;display:flex;align-items:flex-start;gap:7px"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong style="color:var(--ink)">Região do Camorim · Rio de Janeiro, RJ</strong> — localização aproximada da região; endereço exato sob consulta.</span></p>
+    <div class="im-map-route-wrap">
+      <div id="map-imovel" class="reveal" style="width:100%;height:360px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg);margin-bottom:14px"></div>
+      <div class="im-route-card reveal">
+        <div class="im-route-title"><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:var(--gold)"><path d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"/></svg>Calcule sua rota até aqui</div>
+        <div class="im-route-sub">Digite seu endereço e veja se o deslocamento até aqui é viável no seu dia a dia.</div>
+        <input type="text" id="rotaOrigem" class="im-route-input" placeholder="Seu endereço de partida" onkeypress="if(event.key==='Enter'){event.preventDefault();calcularRota();}"/>
+        <div class="im-route-modes">
+          <button type="button" class="im-route-mode on" onclick="setRotaModo('driving',this)">De carro</button>
+          <button type="button" class="im-route-mode" onclick="setRotaModo('walking',this)">A pé</button>
+          <button type="button" class="im-route-mode" onclick="setRotaModo('transit',this)">Ônibus</button>
+        </div>
+        <button type="button" class="im-route-btn" onclick="calcularRota()">Ver rota até o imóvel</button>
+        <div class="im-route-hint">Abre o Google Maps com o trajeto real, incluindo horários de ônibus quando disponíveis.</div>
+      </div>
+    </div>
+    <a href="https://www.google.com/maps/search/?api=1&query=-22.9711394,-43.4311836" target="_blank" style="font-size:13px;font-weight:600;color:var(--gold)">Abrir no Google Maps →</a>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="eyebrow reveal">Análise honesta</div>
+    <h2 class="stitle display reveal" style="margin-bottom:32px">O que pesa a favor — e o que observar</h2>
+    <div class="pontos reveal">
+      <div class="pontos-col">
+        <h3><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#3E8E5A"><path d="M20 6 9 17l-5-5"/></svg>Pontos fortes</h3>
+        <ul><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#3E8E5A"><path d="M20 6 9 17l-5-5"/></svg><span>Elegível ao Minha Casa Minha Vida, com uso de FGTS (consulte condições)</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#3E8E5A"><path d="M20 6 9 17l-5-5"/></svg><span>Construtora MRV, uma das maiores do país em unidades entregues</span></li></ul>
+      </div>
+      <div class="pontos-col">
+        <h3><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Pontos de atenção</h3>
+        <ul><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Pré-lançamento: memorial descritivo, plantas e tabela de preços ainda não foram divulgados publicamente</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Sem imagens oficiais do empreendimento até o momento — apenas cadastro para lista de espera</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Preço não divulgado publicamente pela MRV para este empreendimento — é preciso consultar disponibilidade e condições diretamente</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Localização no mapa desta página é aproximada (região de Região do Camorim) — endereço exato deve ser confirmado antes de qualquer decisão</span></li></ul>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="reveal" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line)"><div style="font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Vizinhança</div><p style="font-size:13.5px;color:var(--gray);line-height:1.6">Na região do Camorim, próxima a Jacarepaguá, com crescimento imobiliário acelerado e acesso a vias como a Estrada dos Bandeirantes.</p></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">Para quem é indicado</div>
+    <h2 class="stitle display reveal" style="margin-bottom:32px">Esse imóvel faz sentido para você?</h2>
+    <div class="perfil-grid reveal"><div class="perfil-card"><h4>Primeiro imóvel</h4><p>Unidade compacta, com uso de FGTS e financiamento facilitado pelo Minha Casa Minha Vida — indicada pra quem está saindo do aluguel.</p></div><div class="perfil-card"><h4>Quem busca Camorim/Jacarepaguá</h4><p>Bom encaixe pra quem já tem rotina ou trabalho na região e quer morar por perto.</p></div><div class="perfil-card"><h4>Família em formação</h4><p>Tipologia de 2 quartos com espaço de sobra pra quem está montando a primeira casa.</p></div></div>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="wrap" style="max-width:800px">
+    <div class="eyebrow reveal">Perguntas frequentes</div>
+    <h2 class="stitle display reveal" style="margin-bottom:24px">Tudo que você quer saber</h2>
+    <div class="reveal"><div class="faq-item"><button class="faq-q" onclick="tf(this)">O Refúgio Camorim já está pronto?<svg class="ic ic-sm faq-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Ainda não — é um lançamento, com obra ainda não iniciada ou em fase inicial. O prazo de entrega deve ser confirmado com a construtora.</p></div></div><div class="faq-item"><button class="faq-q" onclick="tf(this)">Aceita FGTS e financiamento?<svg class="ic ic-sm faq-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Sim. Refúgio Camorim é elegível ao Minha Casa Minha Vida, com financiamento pela Caixa e uso de FGTS na entrada para unidades elegíveis.</p></div></div><div class="faq-item"><button class="faq-q" onclick="tf(this)">Qual o valor a partir de?<svg class="ic ic-sm faq-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>A MRV não divulga publicamente o valor deste empreendimento. Fale comigo pelo WhatsApp para confirmar a tabela atualizada e as condições de pagamento.</p></div></div><div class="faq-item"><button class="faq-q" onclick="tf(this)">É um bom negócio para morar ou investir?<svg class="ic ic-sm faq-chev" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></button><div class="faq-a"><p>Depende do seu perfil e prioridade. Posso te ajudar a avaliar se o Refúgio Camorim faz sentido no seu caso — sem compromisso.</p></div></div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="eyebrow reveal">Prova real</div>
+    <h2 class="stitle display reveal" style="margin-bottom:20px">Famílias que já receberam as chaves</h2>
+    <p class="reveal" style="color:var(--gray);margin-bottom:20px;max-width:640px">Mais de 700 famílias já aprovadas e com as chaves em mãos. Alguns momentos reais de entrega, com nossa equipe:</p>
+    <div class="depo-grid reveal"><div class="depo-photo"><img src="clientes-img/cliente-21.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div><div class="depo-photo"><img src="clientes-img/cliente-25.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div><div class="depo-photo"><img src="clientes-img/cliente-2.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/><div class="depo-tag"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Chave entregue</div></div></div>
+  </div>
+</section>
+
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="nota-head reveal">
+      <div class="nota-score">
+        <div class="tier">A confirmar</div><div class="of">avaliação geral</div>
+      </div>
+      <div class="nota-intro">
+        <div class="eyebrow">Metodologia Paulo Cotrim</div>
+        <h2 class="display">Uma avaliação que eu explico critério por critério</h2>
+        <p>Avalio cada empreendimento em critérios que realmente importam na hora de comprar. Sem achismo: cada critério tem um porquê.</p>
+      </div>
+    </div>
+    <div class="crit-grid reveal"><div class="crit">
+      <div class="crit-top"><span class="crit-name">Segurança do negócio</span></div>
+      <div class="crit-bar"><span style="width:35%"></span></div>
+      <p class="crit-desc">Baseado no status atual do empreendimento: quanto mais avançada a obra, menor o risco de atraso.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Prazo de entrega</span></div>
+      <div class="crit-bar"><span style="width:20%"></span></div>
+      <p class="crit-desc">Pré-lançamentos e lançamentos têm prazo mais longo até a entrega das chaves.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Lazer e diferenciais</span></div>
+      <div class="crit-bar"><span style="width:30%"></span></div>
+      <p class="crit-desc">Itens de lazer ainda não divulgados neste pré-lançamento.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Custo-benefício (MCMV)</span></div>
+      <div class="crit-bar"><span style="width:60%"></span></div>
+      <p class="crit-desc">Elegível ao MCMV, mas subsídio específico não confirmado — consulte.</p>
+    </div><div class="crit">
+      <div class="crit-top"><span class="crit-name">Construtora</span></div>
+      <div class="crit-bar"><span style="width:85%"></span></div>
+      <p class="crit-desc">MRV é uma das maiores construtoras do Brasil em unidades entregues, com histórico consolidado no Rio de Janeiro.</p>
+    </div></div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="analise reveal">
+      <div class="analise-photo"><img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" loading="lazy"/></div>
+      <div>
+        <div class="eyebrow">A análise de Paulo Cotrim</div>
+        <p class="analise-quote">O Refúgio Camorim é um empreendimento da MRV em Região do Camorim, Rio de Janeiro. É um pré-lançamento: a construtora ainda não divulgou plantas, memorial descritivo nem tabela de preços — por enquanto só dá para se cadastrar para ficar na frente quando as vendas abrirem oficialmente. Minha recomendação é acompanhar de perto e não tomar nenhuma decisão de compra até que os valores estejam publicados. Como em todo empreendimento da MRV, os apartamentos de 2 quartos costumam ter parcelamento pós-chaves de até 72x direto com a construtora — simule abaixo para ver como fica no seu caso.</p>
+        <div class="analise-sign"><span class="analise-sign-line"></span><div><b>Paulo Cotrim</b><span>Especialista em lançamentos · CRECI-RJ 77677-F</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="wrap">
+    <div class="cta-band reveal">
+      <h2 class="display">Quer minha análise completa do Refúgio Camorim?</h2>
+      <p>Te envio a tabela oficial (assim que divulgada), plantas e as unidades disponíveis. Sem custo, sem compromisso.</p>
+      <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20o%20Ref%C3%BAgio%20Camorim%20%28MRV%29%20no%20seu%20site%20e%20quero%20mais%20informa%C3%A7%C3%B5es." class="btn-gold"><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Falar com nossa equipe de vendas</a>
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap foot-in">
+  <span>© 2026 Paulo Cotrim · CRECI-RJ 77677-F · Análise independente</span>
+  <a href="index.html" style="color:var(--gold)">← Voltar ao mapa</a>
+</div>
+<div class="wrap" style="padding-top:0"><p style="font-size:10.5px;color:var(--gray);opacity:.75;max-width:640px;line-height:1.6;margin:0 auto">Valores, condições de pagamento, disponibilidade e prazos de entrega são fornecidos pela construtora e estão sujeitos a alteração sem aviso prévio. Consulte sempre a tabela oficial atualizada com nossa equipe antes de decidir.</p></div></footer>
+
+<div class="wa-msg" id="wa-msg">Atendimento direto com Paulo Cotrim. Clique no WhatsApp para receber valores atualizados, disponibilidade e condições de pagamento.</div>
+<a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20o%20Ref%C3%BAgio%20Camorim%20%28MRV%29%20no%20seu%20site%20e%20quero%20mais%20informa%C3%A7%C3%B5es." class="wafloat" aria-label="WhatsApp"><svg viewBox="0 0 24 24" style="width:24px;height:24px" fill="#fff"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></a>
+
+<div class="sticky-cta">
+  <div class="txt"><b>Fale com Paulo agora</b><span>Condições e disponibilidade do Refúgio Camorim</span></div>
+  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Vi%20o%20Ref%C3%BAgio%20Camorim%20%28MRV%29%20no%20seu%20site%20e%20quero%20mais%20informa%C3%A7%C3%B5es.">WhatsApp</a>
+</div>
+
+<script>
+var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.1});
+document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+<script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  var el = document.getElementById('map-imovel');
+  if(!el || typeof L === 'undefined') return;
+  var lat = -22.9711394, lng = -43.4311836;
+  var map = L.map('map-imovel', { center:[lat,lng], zoom:14, scrollWheelZoom:false, zoomControl:true });
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution:'&copy; <a href="https://openstreetmap.org">OSM</a> &copy; <a href="https://carto.com">CARTO</a>',
+    subdomains:'abcd', maxZoom:19
+  }).addTo(map);
+  var icon = L.divIcon({
+    className:'',
+    html:'<div style="background:#b8873a;width:30px;height:30px;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 16px rgba(184,135,58,.55)"></div>',
+    iconSize:[30,30], iconAnchor:[15,15], popupAnchor:[0,-20]
+  });
+  L.marker([lat,lng], {icon:icon}).addTo(map).bindPopup(
+    '<div style="font-family:Inter,sans-serif;min-width:170px"><div style="font-size:13px;font-weight:800;color:#0f2e36;margin-bottom:3px">Refúgio Camorim</div><div style="font-size:11px;color:#6b7280">Região do Camorim · Rio de Janeiro (região aproximada)</div></div>',
+    {maxWidth:230, closeButton:false}
+  ).openPopup();
+  setTimeout(function(){ map.invalidateSize(); map.setView([lat,lng], 14); }, 300);
+  window.addEventListener('load', function(){ setTimeout(function(){ map.invalidateSize(); }, 200); });
+})();
+</script>
+<script>
+window._rotaModo='driving';
+function setRotaModo(modo,btn){
+  window._rotaModo=modo;
+  document.querySelectorAll('.im-route-mode').forEach(function(b){b.classList.remove('on')});
+  btn.classList.add('on');
+}
+function calcularRota(){
+  var input=document.getElementById('rotaOrigem');
+  var val=input.value.trim();
+  if(!val){input.classList.add('im-route-error');setTimeout(function(){input.classList.remove('im-route-error')},400);return;}
+  var url='https://www.google.com/maps/dir/?api=1&origin='+encodeURIComponent(val)+'&destination=-22.9711394,-43.4311836&travelmode='+window._rotaModo;
+  window.open(url,'_blank');
+}
+</script>
+<script src="tracking-config.js"></script>
+<script src="leads.js" defer></script>
+
+</body>
+</html>

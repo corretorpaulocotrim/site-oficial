@@ -1,11 +1,11 @@
 {
-  "name": "Paulo Cotrim — Especialista Cury Porto Maravilha",
+  "name": "Paulo Cotrim — Inteligência Imobiliária no Rio de Janeiro",
   "short_name": "Paulo Cotrim",
-  "description": "Especialista em imóveis no Porto Maravilha. +700 famílias atendidas. Aprovação em 48h.",
+  "description": "Lançamentos de todas as principais construtoras no Rio de Janeiro. +700 famílias atendidas. Aprovação em 48h. CRECI-RJ 77677-F.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#060f1e",
-  "theme_color": "#060f1e",
+  "background_color": "#0f2e36",
+  "theme_color": "#0f2e36",
   "orientation": "portrait-primary",
   "lang": "pt-BR",
   "icons": [
