@@ -15,10 +15,8 @@
       ua: navigator.userAgent.substring(0,80)
     }, dados || {});
 
-    // Espelha o mesmo evento pro GA4/Meta Pixel (tracking-config.js), se configurado
     if(window.trackEvent) window.trackEvent(evento, dados||{});
 
-    // Beacon API (non-blocking, works on page unload)
     if(navigator.sendBeacon){
       var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
       navigator.sendBeacon(SHEET_URL, blob);
@@ -32,24 +30,18 @@
     }
   }
 
-  // ─── EVENTOS AUTOMÁTICOS ─────────────────────────────────────────────
-
-  // 1. Visualização de página
   window.addEventListener('DOMContentLoaded', function(){
     capture('pagina_visualizada', {titulo: document.title});
   });
 
-  // 2. Mapa: propriedade clicada (disparado pelo mapa Órulo)
   window.leadMapaClick = function(imovel){
     capture('mapa_imovel_clicado', {imovel: imovel});
   };
 
-  // 3. Simulador usado
   window.leadSimulador = function(tipo){
     capture('simulador_usado', {simulador: tipo});
   };
 
-  // 4. Botão WhatsApp clicado (qualquer botão WA)
   document.addEventListener('click', function(e){
     var el = e.target.closest('a[href*="wa.me"]');
     if(el){
@@ -58,17 +50,14 @@
     }
   });
 
-  // 5. Formulário de contato enviado
   window.leadFormulario = function(nome, telefone, interesse){
     capture('formulario_enviado', {nome: nome||'', telefone: telefone||'', interesse: interesse||''});
   };
 
-  // 6. Tabela Direta usada
   window.leadTabelaDireta = function(empreendimento, tipologia, valor){
     capture('tabela_direta_calculada', {empreendimento: empreendimento||'', tipologia: tipologia||'', valor: valor||''});
   };
 
-  // 7. Scroll 50% — engajamento
   var scroll50fired = false;
   window.addEventListener('scroll', function(){
     if(!scroll50fired && (window.scrollY/(document.body.scrollHeight-window.innerHeight))>.5){
@@ -77,15 +66,9 @@
     }
   }, {passive:true});
 
-  // 8. Popup de engajamento — benefícios do Minha Casa Minha Vida
-  // Aparece uma vez por sessão, depois de 2 minutos de navegação no site,
-  // em qualquer página (leads.js é carregado em todas). Objetivo: reforçar,
-  // no momento em que a pessoa já demonstrou interesse (ficou navegando),
-  // os benefícios de comprar dentro do MCMV — gatilho de reciprocidade/
-  // educação que ajuda a converter em lead.
   (function(){
     if(sessionStorage.getItem('mcmv_popup_shown')) return;
-    if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return; // não interromper fluxos de conversão já em andamento
+    if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return;
     setTimeout(function(){
       if(sessionStorage.getItem('mcmv_popup_shown')) return;
       sessionStorage.setItem('mcmv_popup_shown','1');
@@ -127,13 +110,6 @@
       +'</li>';
   }
 
-  // 9. Popup de saída (exit-intent) — captura quem já ia embora
-  // Desktop: dispara quando o mouse sai por cima da janela (indicando que a
-  // pessoa está indo fechar a aba ou trocar de aba). Mobile: não existe
-  // "mouse saindo", então usamos um proxy — inatividade de 40s combinada com
-  // ter rolado pelo menos uma tela — como sinal de que a pessoa está prestes
-  // a sair sem converter. Só uma vez por sessão, e só depois de pelo menos
-  // 15s no site (pra não disparar em quem só passou de raspão).
   (function(){
     if(sessionStorage.getItem('exitPopupShown'))return;
     if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname))return;
@@ -182,7 +158,6 @@
     document.getElementById('exitPopupCta').addEventListener('click', function(){ capture('exit_popup_clicado'); });
   }
 
-  // Indicador de horário/online perto do botão flutuante do WhatsApp
   (function(){
     var waBtn = document.querySelector('.wafloat');
     if(!waBtn) return;
@@ -214,7 +189,6 @@
     }
   })();
 
-  // Gatilho de escassez honesto — baseado no status real do empreendimento (sem números inventados)
   (function(){
     var badge = document.querySelector('.hero-status');
     if(!badge || document.getElementById('scarcityNote')) return;
@@ -231,14 +205,12 @@
     badge.insertAdjacentElement('afterend', note);
   })();
 
-  // Captura de lead (nome + WhatsApp) antes do primeiro redirecionamento à conversa
   (function(){
     if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return;
     document.addEventListener('click', function(e){
       var link = e.target.closest && e.target.closest('a[href*="wa.me"]');
       if(!link) return;
-      if(sessionStorage.getItem('waLeadCaptured')) return; // já capturou nesta sessão, deixa passar direto
-      // CTAs dentro dos popups de mcmv/exit-intent/destaque já são o próprio momento de captura — não empilhar outro formulário
+      if(sessionStorage.getItem('waLeadCaptured')) return;
       if(link.closest('#mcmvPopupOverlay, #exitPopupOverlay, #featuredPopupOverlay')) return;
       e.preventDefault();
       showWaLeadModal(link.href);
@@ -275,7 +247,7 @@
         var fone = (document.getElementById('waLeadFone').value||'').trim();
         if(wantsCallback){
           var horario = document.getElementById('waLeadHorario').value;
-          if(!fone){ document.getElementById('waLeadFone').focus(); return; } // telefone é obrigatório pra pedir ligação
+          if(!fone){ document.getElementById('waLeadFone').focus(); return; }
           capture('pedido_de_ligacao', {nome: nome, telefone: fone, horario: horario});
           var msg = 'Olá! Meu nome é ' + (nome||'(não informado)') + ', meu telefone é ' + fone + ' e prefiro ser contatado no período: ' + horario + '. Pode me ligar?';
           wrap.remove();
@@ -305,7 +277,6 @@
     }
   })();
 
-  // FAQ Schema (dados estruturados) — gerado a partir do conteúdo real de "Perguntas frequentes" da página
   (function(){
     var items = document.querySelectorAll('.faq-item');
     if(!items.length) return;
@@ -330,7 +301,6 @@
     script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq });
     document.head.appendChild(script);
 
-    // cross-link pro Guia do Comprador — mantém quem tem mais dúvidas dentro do site, em vez de sair pesquisando
     if(!/guia-do-comprador/.test(location.pathname)){
       var faqWrap = items[0].closest('.wrap') || items[0].parentElement;
       var xlink = document.createElement('p');
@@ -340,13 +310,12 @@
     }
   })();
 
-  // Structured data RealEstateListing — enriquece o JSON-LD já existente com imagem e faixa de preço reais
   (function(){
     var existing = document.querySelector('script[type="application/ld+json"]');
     if(!existing) return;
     var base;
     try{ base = JSON.parse(existing.textContent); }catch(e){ return; }
-    if(!base || base['@type'] !== 'Residence' || !base.name) return; // só roda nas páginas de empreendimento
+    if(!base || base['@type'] !== 'Residence' || !base.name) return;
 
     var img = document.querySelector('#heroLb img');
     var priceScope = document.querySelector('.tipo-table');
@@ -369,7 +338,6 @@
     if(img && img.src) listing.image = img.src;
     if(offers) listing.offers = offers;
 
-    // quartos/m² reais, extraídos da mesma tabela (nada inventado)
     if(priceScope){
       var txt = priceScope.innerText;
       var m2 = (txt.match(/(\d+(?:,\d+)?)\s*m²/g) || []).map(function(s){ return parseFloat(s.replace(',','.').replace(/\s*m²/,'')); }).filter(function(n){ return n > 10 && n < 1000; });
@@ -388,7 +356,6 @@
     document.head.appendChild(script);
   })();
 
-  // Breadcrumbs (visual discreto no hero + schema.org BreadcrumbList)
   (function(){
     var heroC = document.querySelector('.hero-c');
     var h1 = heroC ? heroC.querySelector('h1') : null;
@@ -427,7 +394,6 @@
     document.head.appendChild(s);
   })();
 
-  // Botão de compartilhar (Web Share API com fallback de copiar link) + registro de "visto recentemente"
   (function(){
     var heroC = document.querySelector('.hero-c');
     var h1 = heroC ? heroC.querySelector('h1') : null;
@@ -435,7 +401,6 @@
     var pageName = h1.textContent.trim();
     if(!pageName) return;
 
-    // registra em "vistos recentemente" (lido pela home)
     try{
       var img = document.querySelector('#heroLb img');
       var list = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
@@ -445,7 +410,6 @@
       localStorage.setItem('recentlyViewed', JSON.stringify(list));
     }catch(e){}
 
-    // botão de compartilhar, ao lado do breadcrumb
     var shareBtn = document.createElement('button');
     shareBtn.setAttribute('aria-label', 'Compartilhar');
     shareBtn.setAttribute('style', 'margin-left:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:20px;cursor:pointer;vertical-align:middle');
@@ -461,7 +425,6 @@
         }).catch(function(){});
       }
     };
-    // selo de verificação CRECI (link real de consulta pública)
     var creciBadge = document.createElement('a');
     creciBadge.href = 'https://servico.creci-rj.gov.br/spw/ConsultaCadastral/TelaConsultaPubCompleta.aspx';
     creciBadge.target = '_blank';
@@ -473,7 +436,6 @@
     if(bcNav){ bcNav.appendChild(shareBtn); bcNav.appendChild(creciBadge); }
     else { heroC.insertBefore(creciBadge, heroC.firstChild); heroC.insertBefore(shareBtn, heroC.firstChild); }
 
-    // botão de favoritar (coração) — some junto com o breadcrumb, sempre visível
     function getFavorites(){ try{ return JSON.parse(localStorage.getItem('favoritos')||'[]'); }catch(e){ return []; } }
     function setFavorites(list){ try{ localStorage.setItem('favoritos', JSON.stringify(list)); }catch(e){} window.updateFavCounter && window.updateFavCounter(); }
     var favBtn = document.createElement('button');
@@ -501,12 +463,9 @@
     else heroC.insertBefore(favBtn, heroC.firstChild);
   })();
 
-  // Contador de favoritos + painel (ícone fixo, sitewide)
   (function(){
     function getFavorites(){ try{ return JSON.parse(localStorage.getItem('favoritos')||'[]'); }catch(e){ return []; } }
     var favStyle = document.createElement('style');
-    // no mobile a sticky-cta (barra de "Falar com Paulo") ocupa os últimos ~70px da tela,
-    // então o botão de favoritos sobe pra não ficar em cima dela
     favStyle.textContent = '#favCounterWrap{position:fixed;z-index:996;bottom:26px;left:20px;display:none}'
       + '@media(max-width:760px){#favCounterWrap{bottom:96px}}';
     document.head.appendChild(favStyle);
@@ -552,10 +511,9 @@
     };
   })();
 
-  // Banner de consentimento de cookies (LGPD)
   (function(){
     try{
-      if(localStorage.getItem('cookieConsent')) return; // já respondeu antes (aceitou ou recusou)
+      if(localStorage.getItem('cookieConsent')) return;
     }catch(e){ return; }
     var bar = document.createElement('div');
     bar.id = 'cookieConsentBar';
@@ -578,7 +536,6 @@
     };
   })();
 
-  // Structured data Person/RealEstateAgent — reforço de autoridade (E-E-A-T) sitewide
   (function(){
     if(document.getElementById('personSchemaLd')) return;
     var s = document.createElement('script');
@@ -597,7 +554,6 @@
     document.head.appendChild(s);
   })();
 
-  // Structured data Organization — a prática/marca de Paulo Cotrim como negócio (complementa o Person)
   (function(){
     if(document.getElementById('orgSchemaLd')) return;
     var s = document.createElement('script');
@@ -616,8 +572,6 @@
     document.head.appendChild(s);
   })();
 
-  // Folha de estilo de impressão — esconde nav/popups/botões, mantém ficha técnica e tabela de preços
-  // (muita gente ainda imprime ou salva em PDF a tabela pra levar pro banco)
   (function(){
     var style = document.createElement('style');
     style.textContent = '@media print {'
@@ -631,8 +585,6 @@
     document.head.appendChild(style);
   })();
 
-  // Acessibilidade: foto do hero é clicável (abre lightbox) mas era só <div onclick>,
-  // sem foco de teclado. Adiciona role/tabindex/Enter-Space pra quem navega sem mouse.
   (function(){
     var heroBg = document.querySelector('.hero-bg');
     if(!heroBg || !heroBg.getAttribute('onclick')) return;
@@ -647,7 +599,6 @@
     });
   })();
 
-  // Acessibilidade: aria-expanded correto no botão de menu mobile (hambúrguer)
   (function(){
     var burger = document.querySelector('.burger');
     var mnav = document.getElementById('mnav');
@@ -661,7 +612,6 @@
     });
   })();
 
-  // Loading skeleton (shimmer) pro mapa e pro simulador enquanto carregam — evita tela em branco/pulando
   (function(){
     var style = document.createElement('style');
     style.textContent = '@keyframes skeletonShimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}'
@@ -669,6 +619,160 @@
     document.head.appendChild(style);
   })();
 
-  // Expor para uso externo
   window.leadCapture = capture;
+})();
+
+/* ============================================================
+   4 MELHORIAS INDISPENSÁVEIS (Auditoria Técnica Final, Jul/2026)
+   Selo de confiança visual · Barra de contato multi-ação ·
+   Data de verificação da tabela · Comparador entre páginas
+   Roda só em páginas de empreendimento (detecta .trust-bar + .tipo-table)
+   ============================================================ */
+(function(){
+  var isPropertyPage = !!document.querySelector('.trust-bar') && !!document.querySelector('.tipo-table');
+  if(!isPropertyPage) return;
+
+  var WA_NUM = '5521989150864';
+
+  (function(){
+    var bar = document.querySelector('.trust-bar');
+    if(!bar || document.getElementById('trustSealBlock')) return;
+    var seal = document.createElement('div');
+    seal.id = 'trustSealBlock';
+    seal.setAttribute('style','display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 16px;margin-top:12px;max-width:fit-content');
+    seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#cf9f4f;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
+      + '<div style="line-height:1.35"><div style="font-size:12.5px;font-weight:800;color:#fff">Corretor Oficial · CRECI-RJ 77677-F</div>'
+      + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 700+ famílias atendidas · Especialista Cury e MCMV</div></div>';
+    bar.insertAdjacentElement('afterend', seal);
+  })();
+
+  (function(){
+    var tabs = document.querySelectorAll('.tipo-table');
+    if(!tabs.length) return;
+    tabs.forEach(function(t){
+      var nxt = t.nextElementSibling;
+      if(nxt && nxt.classList && nxt.classList.contains('price-freshness')) return;
+      var note = document.createElement('div');
+      note.className = 'price-freshness';
+      note.setAttribute('style','font-size:11px;color:#6b7280;margin-top:8px;display:flex;align-items:center;gap:5px');
+      note.innerHTML = '<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Tabela verificada em Julho/2026 — confirme disponibilidade e valores atualizados com Paulo antes de decidir.';
+      t.insertAdjacentElement('afterend', note);
+    });
+  })();
+
+  (function(){
+    var cta = document.querySelector('.sticky-cta');
+    if(!cta || cta.dataset.upgraded) return;
+    cta.dataset.upgraded = '1';
+    var style = document.createElement('style');
+    style.textContent = '.sticky-cta{display:flex !important;flex-wrap:wrap;gap:8px}'
+      + '.sticky-cta .sc-btn{flex:1;min-width:110px;text-align:center;padding:11px 10px;border-radius:10px;font-size:12.5px;font-weight:700;white-space:nowrap;text-decoration:none}'
+      + 'body{padding-bottom:66px}'
+      + '@media(min-width:761px){.sticky-cta{max-width:640px;left:50%;right:auto;transform:translateX(-50%);bottom:18px;border-radius:14px;border:1px solid #e8eaed;box-shadow:0 12px 34px rgba(15,46,54,.18)}}';
+    document.head.appendChild(style);
+    var oldLink = cta.querySelector('a');
+    var waHref = oldLink ? oldLink.getAttribute('href') : ('https://wa.me/'+WA_NUM);
+    cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
+      + '<a class="sc-btn" style="background:#0f2e36;color:#fff" href="simulador.html">Simular financiamento</a>'
+      + '<a class="sc-btn" style="background:#b8873a;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
+  })();
+
+  (function(){
+    var KEY = 'pc_compare_v2';
+    function getList(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
+    function setList(l){ localStorage.setItem(KEY, JSON.stringify(l)); }
+
+    var h1 = document.querySelector('h1');
+    var nomeAtual = h1 ? h1.textContent.trim() : document.title.split('—')[0].trim();
+    var precoEl = document.querySelector('.tipo-table div[style*="color:var(--gold)"]');
+    var thisItem = {
+      nome: nomeAtual,
+      preco: precoEl ? precoEl.textContent.trim() : 'Consulte valores',
+      url: window.location.pathname.split('/').pop()
+    };
+
+    var btn = document.createElement('button');
+    btn.id = 'compareAddBtn';
+    btn.type = 'button';
+    function renderBtn(){
+      var list = getList();
+      var on = list.some(function(i){ return i.url === thisItem.url; });
+      btn.textContent = on ? '✓ Adicionado à comparação' : '+ Comparar este imóvel';
+      btn.setAttribute('style','position:fixed;right:16px;bottom:90px;z-index:650;background:'+(on?'#1a8f4c':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#1a8f4c':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
+    }
+    renderBtn();
+    btn.addEventListener('click', function(){
+      var list = getList();
+      var idx = list.findIndex(function(i){ return i.url === thisItem.url; });
+      if(idx >= 0){ list.splice(idx,1); }
+      else{
+        if(list.length >= 3){ alert('Você pode comparar até 3 imóveis por vez. Remova um para adicionar outro.'); return; }
+        list.push(thisItem);
+      }
+      setList(list);
+      renderBtn();
+      renderBar();
+    });
+    document.body.appendChild(btn);
+
+    var style = document.createElement('style');
+    style.textContent = '.pc-compare-bar{position:fixed;left:0;right:0;bottom:0;z-index:6000;background:#0f2e36;color:#fff;padding:14px 24px;display:none;align-items:center;justify-content:center;gap:20px;box-shadow:0 -10px 30px rgba(0,0,0,.18);flex-wrap:wrap}'
+      + '.pc-compare-bar.show{display:flex}'
+      + '.pc-compare-bar b{color:#cf9f4f}'
+      + '.pc-compare-btn{background:linear-gradient(135deg,#b8873a,#cf9f4f);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}'
+      + '.pc-compare-clear{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:600;cursor:pointer}'
+      + '.pc-compare-modal{position:fixed;inset:0;z-index:7000;background:rgba(15,46,54,.6);display:none;align-items:center;justify-content:center;padding:24px}'
+      + '.pc-compare-modal.show{display:flex}'
+      + '.pc-compare-modal-box{background:#fff;border-radius:20px;max-width:720px;width:100%;max-height:86vh;overflow:auto;padding:32px}'
+      + '.pc-compare-table{width:100%;border-collapse:collapse;font-size:13px}'
+      + '.pc-compare-table td,.pc-compare-table th{padding:8px 10px;border-bottom:1px solid #e8eaed;text-align:left}';
+    document.head.appendChild(style);
+
+    var bar = document.createElement('div');
+    bar.className = 'pc-compare-bar';
+    bar.id = 'pcCompareBar';
+    bar.innerHTML = '<span id="pcCompareBarTxt"></span>'
+      + '<button class="pc-compare-btn" id="pcCompareShowBtn" type="button">Comparar agora</button>'
+      + '<button class="pc-compare-clear" id="pcCompareClearBtn" type="button">Limpar seleção</button>';
+    document.body.appendChild(bar);
+
+    var modal = document.createElement('div');
+    modal.className = 'pc-compare-modal';
+    modal.id = 'pcCompareModal';
+    modal.innerHTML = '<div class="pc-compare-modal-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">'
+      + '<h3 style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#0f2e36">Comparação de imóveis</h3>'
+      + '<button id="pcCompareCloseBtn" type="button" style="background:#f5f6f7;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer">✕</button></div>'
+      + '<div id="pcCompareTableWrap"></div>'
+      + '<a id="pcCompareWaBtn" href="#" target="_blank" style="display:inline-block;margin-top:16px;background:#1a8f4c;color:#fff;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Falar com Paulo sobre esses imóveis</a></div>';
+    document.body.appendChild(modal);
+
+    function renderBar(){
+      var list = getList();
+      if(list.length >= 2){
+        bar.classList.add('show');
+        document.getElementById('pcCompareBarTxt').innerHTML = '<b>'+list.length+'</b> imóveis selecionados para comparar';
+      } else {
+        bar.classList.remove('show');
+      }
+    }
+    document.getElementById('pcCompareClearBtn').addEventListener('click', function(){
+      setList([]); renderBar(); renderBtn();
+    });
+    document.getElementById('pcCompareShowBtn').addEventListener('click', function(){
+      var list = getList();
+      if(list.length < 2) return;
+      var rows = [
+        ['Empreendimento', list.map(function(i){return i.nome;})],
+        ['Valor', list.map(function(i){return i.preco;})]
+      ];
+      var thead = '<tr><th></th>'+list.map(function(i){return '<th>'+i.nome+'</th>';}).join('')+'</tr>';
+      var tbody = rows.map(function(r){return '<tr><td>'+r[0]+'</td>'+r[1].map(function(v){return '<td>'+v+'</td>';}).join('')+'</tr>';}).join('');
+      document.getElementById('pcCompareTableWrap').innerHTML = '<table class="pc-compare-table"><thead>'+thead+'</thead><tbody>'+tbody+'</tbody></table>';
+      var waMsg = 'Olá Paulo! Estou comparando: '+list.map(function(i){return i.nome;}).join(' x ')+'. Quero saber mais sobre esses imóveis!';
+      document.getElementById('pcCompareWaBtn').href = 'https://wa.me/'+WA_NUM+'?text='+encodeURIComponent(waMsg);
+      modal.classList.add('show');
+    });
+    document.getElementById('pcCompareCloseBtn').addEventListener('click', function(){ modal.classList.remove('show'); });
+    renderBar();
+  })();
 })();

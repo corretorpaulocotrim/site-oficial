@@ -224,27 +224,10 @@ a{color:inherit;text-decoration:none}
         <div class="ir-hint" id="irHint"></div>
       </div>
 
-      <div class="upload-area" onclick="document.getElementById('docFileInput').click()">
-        <input type="file" id="docFileInput" multiple accept=".pdf,.jpg,.jpeg,.png" style="display:none" onchange="onDocFilesSelected(this.files)"/>
-        <div class="upload-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:var(--navy);fill:none;stroke-width:2"><path d="M21 11.5V17a4 4 0 01-4 4H9a5 5 0 01-5-5V8a3 3 0 013-3 3 3 0 013 3v8a1 1 0 01-2 0V9"/></svg></div>
-        <div class="upload-title">Enviar todos de uma vez</div>
-        <div class="upload-sub">Clique para selecionar vários arquivos · PDF, JPG, PNG · até 15MB por arquivo</div>
-        <div class="upload-btn">Selecionar arquivos</div>
-      </div>
-      <div id="uploadFilesList" style="display:none;margin-top:10px;padding:10px 12px;background:var(--bg);border-radius:10px;font-size:11.5px;color:var(--text2)"></div>
-      <div id="uploadFormBox" style="display:none;margin-top:12px;padding:16px;background:#fbf7ef;border:1px solid rgba(184,135,58,.25);border-radius:12px">
-        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
-          <input type="text" id="docNome" placeholder="Seu nome completo" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
-          <input type="text" id="docTel" placeholder="Seu WhatsApp" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
-        </div>
-        <div class="upload-btn" onclick="enviarDocsReal()" style="cursor:pointer">Enviar documentos com segurança</div>
-        <div id="uploadStatus" style="margin-top:8px;font-size:11.5px;color:var(--text3);line-height:1.5"></div>
-      </div>
-
       <div class="item-upload-toggle">
-        <a href="#" onclick="toggleItemUpload();return false;" id="toggleItemUploadLink">Prefere enviar documento por documento, clicando em cada um? →</a>
+        <div style="font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:10px">Envie cada documento clicando no item correspondente abaixo:</div>
       </div>
-      <div id="itemUploadBox" style="display:none;margin-top:14px">
+      <div id="itemUploadBox" style="display:block;margin-top:6px">
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px">
           <input type="text" id="itemNome" placeholder="Seu nome completo" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
           <input type="text" id="itemTel" placeholder="Seu WhatsApp" style="font-size:13px;padding:9px 12px;border:1px solid var(--border);border-radius:8px;font-family:inherit"/>
@@ -377,7 +360,7 @@ document.querySelectorAll('.fade-in').forEach(el=>obs.observe(el));
 const pf=document.getElementById('progress-fill');
 if(pf){const po=new IntersectionObserver(e=>{if(e[0].isIntersecting){pf.style.width=pf.dataset.w;po.disconnect()}},{threshold:.5});po.observe(pf)}
 document.addEventListener('googleLoginSucesso', function(e){
-  var nomeEl = document.getElementById('docNome');
+  var nomeEl = document.getElementById('itemNome');
   if(nomeEl && !nomeEl.value) nomeEl.value = e.detail.name || '';
 });
 
@@ -595,9 +578,11 @@ async function enviarDocsReal(){
     status.style.color = '#b91c1c';
   }
 }
+renderItemRows();
 </script>
 <script src="doc-upload-config.js"></script>
 <script src="social-login.js"></script>
 <script src="leads.js" defer></script>
 </body>
 </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
