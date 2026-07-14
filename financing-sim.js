@@ -383,8 +383,11 @@ function fsimWhatsapp(nome){
 function fsimDownload(nome){
   var c = FSIM_LAST;
   var incluirSim = !!c;
+  var _dataGer = new Date().toLocaleDateString('pt-BR');
   var url = window.location.href;
-  var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(url);
+  var waMsg = 'Ol\u00e1 Paulo! Baixei o resumo em PDF do '+nome+' e quero continuar a conversa.';
+  var waLink = 'https://wa.me/5521989150864?text='+encodeURIComponent(waMsg);
+  var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(waLink);
   var simRows = '';
   if(incluirSim){
     simRows = ''
@@ -412,7 +415,23 @@ function fsimDownload(nome){
     +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
     +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e8eaed}'
     +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
-    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
+    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}'
+    +'.wm{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}'
+    +'.wm div{position:absolute;left:-20%;width:140%;text-align:center;transform:rotate(-27deg);font-family:Inter,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.16em;color:rgba(15,46,54,.055);white-space:nowrap}'
+    +'.pdf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}'
+    +'.pdf-head img{height:24px;display:block}'
+    +'.gendate{font-size:10.5px;color:#94a3b8}'
+    +'@media print{body{padding:20px}}</style></head><body>'
+    +'<div class="wm" aria-hidden="true">'
+    +'<div style="top:-40px">PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:70px">PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:180px">PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:290px">PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:400px">PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:510px">PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:620px">PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM \u00b7 PAULOCOTRIM.COM.BR</div>'
+    +'</div>'
+    +'<div class="pdf-head"><img src="https://corretorpaulocotrim.github.io/site-oficial/logo-wordmark.png" alt="Paulo Cotrim"/><span class="gendate">Gerado em '+_dataGer+'</span></div>'
     +'<h1>'+nome+'</h1><div class="sub">Resumo do empreendimento · Paulo Cotrim · CRECI-RJ 77677-F</div>'
     +'<div class="row"><span class="rk">Construtora</span><span class="rv">'+FSIM_CONSTRUTORA+'</span></div>'
     +'<div class="row"><span class="rk">Localização</span><span class="rv">'+FSIM_BAIRRO+'</span></div>'
@@ -429,10 +448,10 @@ function fsimDownload(nome){
     ):'')
     +'<div class="note">Valores de tabela pública e simulação educativa — sujeitos a alteração e disponibilidade. Confirme condições atualizadas com Paulo antes de decidir.</div>'
     +(FSIM_APRESENTACAO?'<div class="row"><span class="rk">Apresentação completa</span><span class="rv">'+window.location.origin+window.location.pathname.replace(/[^/]*$/,'')+'apresentacoes/'+FSIM_APRESENTACAO+'</span></div>':'')
-    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à página</b>Reveja fotos, mapa e fale com o Paulo pelo WhatsApp direto do celular.</div></div>'
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code do WhatsApp"/><div><b>Fale agora com o Paulo</b>Escaneie para abrir o WhatsApp direto com o Paulo Cotrim sobre este resumo.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
     +'<div class="legal">Documento meramente informativo e educativo, sem valor contratual. Valores, prazos, condições de pagamento e disponibilidade de unidades são de responsabilidade da construtora/incorporadora e da instituição financeira, podendo ser alterados sem aviso prévio. A aprovação de crédito depende de análise cadastral própria do agente financeiro. Consulte sempre a tabela oficial atualizada e formalize as condições finais com Paulo Cotrim antes de tomar qualquer decisão.</div>'
-    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Financiamento Imobiliário</div>'
+    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Financiamento Imobiliário · paulocotrim.com.br</div>'
     +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
