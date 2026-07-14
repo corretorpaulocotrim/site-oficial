@@ -26,6 +26,7 @@ function fmtBRL(n){
 }
 function isMRVConstrutora(c){ return /mrv/i.test(c||''); }
 function isVivazConstrutora(c){ return /vivaz/i.test(c||''); }
+function isVitaleConstrutora(c){ return /vitale/i.test(c||''); }
 
 /* ---------- CATÁLOGO SLIM (sugestão cruzada) — mesmos dados reais do EMP em index.html ---------- */
 var FSIM_CATALOG = [
@@ -129,9 +130,9 @@ function calcularSimulacao(p){
   var excedenteFinal = Math.max(0, excedente - fgtsAplicado);
 
   var construtora = p.construtora||'';
-  var mrv = isMRVConstrutora(construtora), vivaz = isVivazConstrutora(construtora);
-  var temPosChaves = (mrv || vivaz) && excedenteFinal>0;
-  var maxParcelasPosChaves = mrv ? 72 : (vivaz ? 48 : 0);
+  var mrv = isMRVConstrutora(construtora), vivaz = isVivazConstrutora(construtora), vitale = isVitaleConstrutora(construtora);
+  var temPosChaves = (mrv || vivaz || vitale) && excedenteFinal>0;
+  var maxParcelasPosChaves = mrv ? 72 : ((vivaz || vitale) ? 48 : 0);
   var parcelaPosChaves = temPosChaves ? excedenteFinal/maxParcelasPosChaves : 0;
   var aVistaFinal = temPosChaves ? 0 : excedenteFinal;
   var semEntradaAVista = aVistaFinal<=0.005;
@@ -154,7 +155,7 @@ function calcularSimulacao(p){
     entrada:entrada, atoEntrada:atoEntrada, valorChave:valorChave, entradaRestante:entradaRestante,
     limite20:limite20, parcelavelObra:parcelavelObra, excedente:excedente,
     fgtsAplicado:fgtsAplicado, excedenteFinal:excedenteFinal,
-    construtora:construtora, mrv:mrv, vivaz:vivaz, temPosChaves:temPosChaves,
+    construtora:construtora, mrv:mrv, vivaz:vivaz, vitale:vitale, temPosChaves:temPosChaves,
     maxParcelasPosChaves:maxParcelasPosChaves, parcelaPosChaves:parcelaPosChaves,
     aVistaFinal:aVistaFinal, semEntradaAVista:semEntradaAVista,
     parcelasObra:parcelasObra, reforcoDez:reforcoDez, totalReforcos:totalReforcos,
@@ -298,10 +299,10 @@ function fsimUpdate(){
   if(c.semEntradaAVista && !c.temPosChaves){
     note += '<strong>Sua entrada cabe inteira dentro dos 20% do valor do imóvel</strong>, parcelada sem juros em '+c.parcelasObra+'x durante a obra. ';
   } else if(c.temPosChaves){
-    var constNome = c.mrv?'MRV':'Direcional · Vivaz';
+    var constNome = c.mrv?'MRV':(c.vivaz?'Direcional · Vivaz':'Vitale');
     note += '<strong>'+constNome+' permite estender o que passar dos 20% parceláveis</strong> para depois da entrega das chaves, em até '+c.maxParcelasPosChaves+'x — por isso você não precisa de entrada à vista aqui. ';
   } else {
-    note += 'Sua entrada passa dos 20% do imóvel que podem ser parcelados sem juros na obra ('+fmtBRL(c.limite20)+'). O que exceder — '+fmtBRL(c.aVistaFinal)+' — precisa ser pago à vista na assinatura'+(c.fgtsAplicado>0?' mesmo depois de usar o FGTS':'')+(c.mrv||c.vivaz?'':'. Construtoras como MRV e Vivaz costumam estender esse valor para pós-chaves — vale perguntar ao Paulo se surgiu uma condição assim para este empreendimento')+'. ';
+    note += 'Sua entrada passa dos 20% do imóvel que podem ser parcelados sem juros na obra ('+fmtBRL(c.limite20)+'). O que exceder — '+fmtBRL(c.aVistaFinal)+' — precisa ser pago à vista na assinatura'+(c.fgtsAplicado>0?' mesmo depois de usar o FGTS':'')+(c.mrv||c.vivaz||c.vitale?'':'. Construtoras como MRV, Direcional/Vivaz e Vitale costumam estender esse valor para pós-chaves — vale perguntar ao Paulo se surgiu uma condição assim para este empreendimento')+'. ';
   }
   if(c.totalReforcos>0){
     note += 'Considerado reforço de '+fmtBRL(c.reforcoDez)+' em cada dezembro, reduzindo a parcela mensal da obra. ';
