@@ -106,7 +106,7 @@ tr.s2rx td{background:var(--bg)}
 .regra-tag2{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;margin-top:8px}
 .rt-sbpe2{background:var(--bg);color:var(--navy);border:.5px solid var(--border)}
 .rt-mcmv2{background:#f0f9f3;color:var(--green);border:.5px solid #bfe3cc}
-.cb2{display:inline-flex;align-items:center;gap:4px;background:#fbf3e4;color:#8a5c1c;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
+.cb2{display:inline-flex;align-items:center;gap:5px;background:#fbf3e4;color:#8a5c1c;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
 @media(max-width:600px){.g2s,.g4s,.pr2{grid-template-columns:1fr 1fr}.stabs{flex-wrap:wrap}}
 </style>
 <link rel="canonical" href="https://paulocotrim.com.br/simulador.html"/>
@@ -225,9 +225,50 @@ function parsePrecoStr(p){var m=(p||'').match(/R\$\s*([\d.]+)/);if(!m)return 0;r
 function mesesObraEstimado(status){if(status==='lancamento')return 42;if(status==='obras')return 24;return 0;}
 var STATUS_LABEL={lancamento:'Lançamento',obras:'Em obras',pronto:'Pronto para morar'};
 
+/* ================= PÓS-CHAVES POR CONSTRUTORA =================
+   Regra de negócio (mesma do financing-sim.js usado nas 45 páginas de empreendimento):
+   - MRV: parcelamento pós-chaves em até 72x
+   - Direcional / Vivaz / Vitale: parcelamento pós-chaves em até 48x
+     (prazo da Vitale ainda não confirmado pelo Paulo — usando 48x como referência inicial)
+   - Demais construtoras (Cury, Cyrela/Living, Tegra, CTV, etc.): não têm essa condição —
+     o que passar do parcelável durante a obra precisa ser pago à vista na assinatura,
+     salvo condição especial que o Paulo confirme caso a caso. */
+function posChavesMaxSugerido(construtora){
+  if(/mrv/i.test(construtora||'')) return 72;
+  if(/direcional|vivaz|vitale/i.test(construtora||'')) return 48;
+  return 0;
+}
+
+/* ================= TABELA OFICIAL MINHA CASA MINHA VIDA 2026 =================
+   Faixas de renda, limite de financiamento, taxa de juros e subsídio.
+   Faixa 2: limite de R$400.000 aplicado (grupo Rio de Janeiro Capital/RM — ajustar se a
+   planilha oficial trouxer valor diferente para alguma região específica). */
+var FAIXAS_MCMV=[
+  {id:1, min:0,       max:3200,  limite:275000, taxaMin:4.00, taxaMax:4.50, subsidioMax:55000},
+  {id:2, min:3200.01, max:5000,  limite:400000, taxaMin:4.75, taxaMax:6.50, subsidioMax:55000},
+  {id:3, min:5000.01, max:9600,  limite:400000, taxaMin:7.66, taxaMax:7.66, subsidioMax:0},
+  {id:4, min:9600.01, max:13000, limite:600000, taxaMin:10.50,taxaMax:10.50,subsidioMax:0}
+];
+function getFaixaMCMV(renda){
+  for(var i=0;i<FAIXAS_MCMV.length;i++){ if(renda<=FAIXAS_MCMV[i].max) return FAIXAS_MCMV[i]; }
+  return null; // acima de R$13.000 -> financiamento SBPE tradicional, fora do MCMV
+}
+function taxaDaFaixa(f,renda){
+  if(!f) return 10.9; // SBPE tradicional (mercado)
+  if(f.taxaMin===f.taxaMax) return f.taxaMin;
+  var prop=Math.max(0,Math.min(1,(renda-f.min)/(f.max-f.min)));
+  return f.taxaMin+(f.taxaMax-f.taxaMin)*prop;
+}
+function subsidioDaFaixa(f,renda){
+  if(!f||!f.subsidioMax) return 0;
+  var prop=Math.max(0,Math.min(1,(renda-f.min)/(f.max-f.min)));
+  return f.subsidioMax*(1-prop); // maior no piso da faixa, decrescendo até 0 no teto (estimativa — Caixa confirma valor exato)
+}
+
 var S={
-  renda:0, empIdx:0, useCustom:false, customPreco:0, taxaAnual:10.9, tab:0,
+  renda:0, empIdx:0, useCustom:false, customPreco:0, customConstrutora:'', taxaAnual:10.9, useCustomTaxa:false, tab:0,
   ato:0, mensaisQtd:24, mensaisValor:0, anuaisQtd:2, anuaisValor:0, parcelaUnica:0, valorChaves:0,
+  posChavesQtd:0, posChavesValor:0,
   clienteNome:'', clienteTel:'', zerarAlvo:'mensais'
 };
 
@@ -235,7 +276,12 @@ function precoAtual(){
   if(S.useCustom) return S.customPreco;
   var e=CATALOG[S.empIdx];
   var p=parsePrecoStr(e.p);
-  return p||S.customPreco;
+  return p||S.customPreco; // catálogo sem tabela pública ("Consulte valores") cai no valor manual
+}
+function construtoraAtual(){
+  if(S.useCustom) return S.customConstrutora;
+  var e=CATALOG[S.empIdx];
+  return e?e.c:'';
 }
 function financiavelPorPrestacao(prest,taxaAnual,prazo){
   var i=Math.pow(1+(taxaAnual||0)/100,1/12)-1;
@@ -250,48 +296,70 @@ function prestacaoPorFinanciado(fin,taxaAnual,prazo){
 function calc(){
   var preco=precoAtual();
   var renda=S.renda;
-  var mod=renda>12000?'sbpe':'mcmv';
-  var pctFin=mod==='sbpe'?0.90:0.80;
+  var faixa=getFaixaMCMV(renda);
+  var taxaAnual = S.useCustomTaxa ? S.taxaAnual : taxaDaFaixa(faixa,renda);
+  var mod = faixa ? ('mcmv'+faixa.id) : 'sbpe';
+  var modLabel = faixa ? ('MCMV Faixa '+faixa.id) : 'SBPE';
+  var pctFin = faixa ? 0.80 : 0.90; // parcela do imóvel que o financiamento cobre, no máximo
   var prazo=360;
+  var limiteFaixa = faixa ? faixa.limite : Infinity;
   var financMaxImovel=preco*pctFin;
   var prestMax=renda*0.30;
-  var financPorRenda=financiavelPorPrestacao(prestMax,S.taxaAnual,prazo);
-  // reconciliado: o crédito nunca passa do que a renda comprova NEM do teto do próprio imóvel
-  var creditoEstimado=Math.min(financMaxImovel,financPorRenda);
+  var financPorRenda=financiavelPorPrestacao(prestMax,taxaAnual,prazo);
+  // reconciliado: o crédito financiado nunca passa do que a renda comprova, NEM do teto do
+  // próprio imóvel, NEM do limite oficial de financiamento da faixa MCMV aplicável
+  var creditoFinanciado=Math.min(limiteFaixa,financMaxImovel,financPorRenda);
+  var subsidio=subsidioDaFaixa(faixa,renda);
+  var creditoEstimado=creditoFinanciado+subsidio; // poder de compra total (financiamento + subsídio)
   var entrada=Math.max(0,preco-creditoEstimado);
-  var prestacaoEstimada=prestacaoPorFinanciado(creditoEstimado,S.taxaAnual,prazo);
+  var prestacaoEstimada=prestacaoPorFinanciado(creditoFinanciado,taxaAnual,prazo);
   var seguroEstimado=prestacaoEstimada*0.12;
-  var capacidadeCompra=financPorRenda>0?financPorRenda/pctFin:0;
+  var capacidadeCompra=financPorRenda>0?(Math.min(limiteFaixa,financPorRenda)+subsidio)/pctFin:0;
   var mensaisTotal=S.mensaisQtd*S.mensaisValor;
   var anuaisTotal=S.anuaisQtd*S.anuaisValor;
-  var fluxoTotal=S.ato+mensaisTotal+anuaisTotal+S.parcelaUnica+S.valorChaves;
+  var construtora=construtoraAtual();
+  var posChavesMax=posChavesMaxSugerido(construtora);
+  var posChavesElegivel=posChavesMax>0;
+  var posChavesQtdEfetivo=S.posChavesQtd>0?S.posChavesQtd:posChavesMax;
+  var posChavesTotal=posChavesElegivel?(S.posChavesQtd*S.posChavesValor):0;
+  var fluxoTotal=S.ato+mensaisTotal+anuaisTotal+S.parcelaUnica+S.valorChaves+posChavesTotal;
   var fluxoRestante=entrada-fluxoTotal;
   var emp=CATALOG[S.empIdx];
   var mesesObra=emp?mesesObraEstimado(emp.s):0;
-  return{preco,renda,mod,pctFin,financMaxImovel,prestMax,financPorRenda,creditoEstimado,entrada,
-    prestacaoEstimada,seguroEstimado,capacidadeCompra,mensaisTotal,anuaisTotal,fluxoTotal,fluxoRestante,prazo,mesesObra};
+  return{preco,renda,mod,modLabel,faixa,taxaAnual,pctFin,limiteFaixa,financMaxImovel,prestMax,financPorRenda,
+    creditoFinanciado,subsidio,creditoEstimado,entrada,
+    prestacaoEstimada,seguroEstimado,capacidadeCompra,mensaisTotal,anuaisTotal,fluxoTotal,fluxoRestante,prazo,mesesObra,
+    construtora,posChavesMax,posChavesElegivel,posChavesQtdEfetivo,posChavesTotal};
 }
 function zerarFluxo(){
   var c=calc();
   var alvo=S.zerarAlvo;
   var outros=0;
-  if(alvo==='ato') outros=c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+S.valorChaves;
-  else if(alvo==='mensais') outros=S.ato+c.anuaisTotal+S.parcelaUnica+S.valorChaves;
-  else if(alvo==='anuais') outros=S.ato+c.mensaisTotal+S.parcelaUnica+S.valorChaves;
-  else if(alvo==='unica') outros=S.ato+c.mensaisTotal+c.anuaisTotal+S.valorChaves;
-  else if(alvo==='chaves') outros=S.ato+c.mensaisTotal+c.anuaisTotal+S.parcelaUnica;
+  if(alvo==='ato') outros=c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+S.valorChaves+c.posChavesTotal;
+  else if(alvo==='mensais') outros=S.ato+c.anuaisTotal+S.parcelaUnica+S.valorChaves+c.posChavesTotal;
+  else if(alvo==='anuais') outros=S.ato+c.mensaisTotal+S.parcelaUnica+S.valorChaves+c.posChavesTotal;
+  else if(alvo==='unica') outros=S.ato+c.mensaisTotal+c.anuaisTotal+S.valorChaves+c.posChavesTotal;
+  else if(alvo==='chaves') outros=S.ato+c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+c.posChavesTotal;
+  else if(alvo==='poschaves') outros=S.ato+c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+S.valorChaves;
   var restante=Math.max(0,c.entrada-outros);
   if(alvo==='ato') S.ato=restante;
   else if(alvo==='mensais') S.mensaisValor=S.mensaisQtd>0?restante/S.mensaisQtd:0;
   else if(alvo==='anuais') S.anuaisValor=S.anuaisQtd>0?restante/S.anuaisQtd:0;
   else if(alvo==='unica') S.parcelaUnica=restante;
   else if(alvo==='chaves') S.valorChaves=restante;
+  else if(alvo==='poschaves'){
+    var qtd=S.posChavesQtd>0?S.posChavesQtd:c.posChavesMax;
+    S.posChavesQtd=qtd;
+    S.posChavesValor=qtd>0?restante/qtd:0;
+  }
   render();
 }
 function updRenda(v){S.renda=parseBRL(v);render();}
-function updTaxa(v){S.taxaAnual=parseFloat(v)||0;render();}
+function updTaxa(v){S.taxaAnual=parseFloat(v)||0;S.useCustomTaxa=true;render();}
+function resetTaxa(){S.useCustomTaxa=false;render();}
 function selEmp(v){if(v==='custom'){S.useCustom=true;}else{S.useCustom=false;S.empIdx=+v;}render();}
 function updCustomPreco(v){S.customPreco=parseBRL(v);render();}
+function updCustomConstrutora(v){S.customConstrutora=v;render();}
 function setTab(t){S.tab=t;render();}
 function updFluxo(k,v){S[k]=k.indexOf('Qtd')>=0?(parseInt(v,10)||0):parseBRL(v);render();}
 function updZerarAlvo(v){S.zerarAlvo=v;}
@@ -301,13 +369,17 @@ function whatsappSim(){
   var c=calc();var emp=S.useCustom?null:CATALOG[S.empIdx];
   var nomeEmp=emp?emp.n:'imóvel personalizado';
   var msg='Olá Paulo! Fiz a simulação:\n\n*'+nomeEmp+'*\nValor: '+BRL(c.preco)+'\nRenda informada: '+BRL(c.renda)
-    +'\nCrédito estimado: '+BRL(c.creditoEstimado)+'\nEntrada estimada: '+BRL(c.entrada)
-    +'\nPrestação estimada: '+BRL(c.prestacaoEstimada)+'\nModalidade: '+c.mod.toUpperCase()
+    +'\nModalidade: '+c.modLabel
+    +(c.subsidio>0?'\nSubsídio estimado: '+BRL(c.subsidio):'')
+    +'\nCrédito financiado: '+BRL(c.creditoFinanciado)+'\nCrédito total (com subsídio): '+BRL(c.creditoEstimado)
+    +'\nEntrada estimada: '+BRL(c.entrada)
+    +'\nPrestação estimada: '+BRL(c.prestacaoEstimada)
+    +(c.posChavesElegivel&&c.posChavesTotal>0?'\nPós-chaves ('+c.construtora+'): '+S.posChavesQtd+'x de '+BRL(S.posChavesValor):'')
     +'\n\nQuero saber mais!';
   if(window.enviarLeadCRM) enviarLeadCRM({
     nome:S.clienteNome||'Lead Simulador',telefone:S.clienteTel||'',interesse:nomeEmp,
     renda:BRL(c.renda),regiao:emp?emp.b:'',origem:'simulador',
-    extras:{preco:c.preco,entrada:c.entrada,credito:c.creditoEstimado,modalidade:c.mod}
+    extras:{preco:c.preco,entrada:c.entrada,credito:c.creditoEstimado,modalidade:c.modLabel}
   });
   window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');
 }
@@ -321,7 +393,8 @@ function baixarResumoSimulacao(){
     +(S.mensaisValor>0?'<div class="row"><span class="rk">Parcelas mensais</span><span class="rv">'+S.mensaisQtd+'x de '+BRL(S.mensaisValor)+'</span></div>':'')
     +(S.anuaisValor>0?'<div class="row"><span class="rk">Reforços anuais</span><span class="rv">'+S.anuaisQtd+'x de '+BRL(S.anuaisValor)+'</span></div>':'')
     +(S.parcelaUnica>0?'<div class="row"><span class="rk">Parcela única</span><span class="rv">'+BRL(S.parcelaUnica)+'</span></div>':'')
-    +(S.valorChaves>0?'<div class="row"><span class="rk">Na entrega das chaves</span><span class="rv">'+BRL(S.valorChaves)+'</span></div>':'');
+    +(S.valorChaves>0?'<div class="row"><span class="rk">Na entrega das chaves</span><span class="rv">'+BRL(S.valorChaves)+'</span></div>':'')
+    +(c.posChavesElegivel&&c.posChavesTotal>0?'<div class="row"><span class="rk">Pós-chaves ('+c.construtora+')</span><span class="rv">'+S.posChavesQtd+'x de '+BRL(S.posChavesValor)+'</span></div>':'');
   var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Resumo + Simulação — '+nomeEmp+'</title>'
     +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
     +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
@@ -343,8 +416,11 @@ function baixarResumoSimulacao(){
     +'<div class="h2">Resumo financeiro</div>'
     +'<div class="row"><span class="rk">Renda familiar informada</span><span class="rv">'+BRL(c.renda)+'</span></div>'
     +'<div class="row"><span class="rk">Valor do imóvel</span><span class="rv">'+BRL(c.preco)+'</span></div>'
-    +'<div class="row"><span class="rk">Modalidade</span><span class="rv">'+c.mod.toUpperCase()+'</span></div>'
-    +'<div class="row"><span class="rk">Crédito estimado</span><span class="rv">'+BRL(c.creditoEstimado)+'</span></div>'
+    +'<div class="row"><span class="rk">Modalidade</span><span class="rv">'+c.modLabel+'</span></div>'
+    +'<div class="row"><span class="rk">Taxa de juros aplicada</span><span class="rv">'+N2(c.taxaAnual)+'% a.a.</span></div>'
+    +(c.subsidio>0?'<div class="row"><span class="rk">Subsídio estimado do governo</span><span class="rv">'+BRL(c.subsidio)+'</span></div>':'')
+    +'<div class="row"><span class="rk">Crédito financiado</span><span class="rv">'+BRL(c.creditoFinanciado)+'</span></div>'
+    +'<div class="row"><span class="rk">Crédito total (financiamento + subsídio)</span><span class="rv">'+BRL(c.creditoEstimado)+'</span></div>'
     +'<div class="row"><span class="rk">Entrada estimada</span><span class="rv">'+BRL(c.entrada)+'</span></div>'
     +'<div class="row"><span class="rk">Prestação inicial estimada</span><span class="rv">'+BRL(c.prestacaoEstimada)+'</span></div>'
     +'<div class="row"><span class="rk">Seguro estimado (MIP/DFI)</span><span class="rv">'+BRL(c.seguroEstimado)+'</span></div>'
@@ -392,39 +468,46 @@ function renderSim(){
   return head+tabs+'<div class="sim-body">'+(S.tab===0?renderResumo(c):renderFluxo(c))+'</div>';
 }
 
-function renderEmpSelector(){
+function renderEmpSelector(c){
   var opts=CATALOG.map(function(e,i){return'<option value="'+i+'" '+(!S.useCustom&&S.empIdx===i?'selected':'')+'>'+e.n+' — '+STATUS_LABEL[e.s]+'</option>';}).join('');
   return'<div class="g2s" style="margin-bottom:10px">'
     +'<div class="fi2"><label>Empreendimento</label><select onchange="selEmp(this.value)">'+opts+'<option value="custom" '+(S.useCustom?'selected':'')+'>Outro valor (digitar manualmente)</option></select></div>'
     +(S.useCustom?'<div class="fi2 hl"><label>Valor do imóvel (R$)</label><input type="text" value="'+(S.customPreco?N2(S.customPreco):'')+'" placeholder="Ex: 300.000" oninput="updCustomPreco(this.value)"></div>'
-      :'<div class="fi2"><label>Taxa de juros a.a. estimada (%)</label><input type="text" value="'+N2(S.taxaAnual)+'" oninput="updTaxa(this.value)"></div>')
-    +'</div>';
+      :'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" oninput="updTaxa(this.value)">'
+        +(S.useCustomTaxa?'<a href="#" onclick="resetTaxa();return false" style="font-size:10px;color:var(--gold);margin-top:3px;display:inline-block">← usar taxa automática da faixa</a>':'')+'</div>')
+    +'</div>'
+    +(S.useCustom?'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Construtora <span style="font-weight:400;color:#94a3b8">— define regra de pós-chaves</span></label><input type="text" value="'+S.customConstrutora+'" placeholder="Ex: MRV, Direcional, Cury..." oninput="updCustomConstrutora(this.value)"></div>'
+      +'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" oninput="updTaxa(this.value)">'
+        +(S.useCustomTaxa?'<a href="#" onclick="resetTaxa();return false" style="font-size:10px;color:var(--gold);margin-top:3px;display:inline-block">← usar taxa automática da faixa</a>':'')+'</div></div>':'');
 }
 
 function renderResumo(c){
   var emp=S.useCustom?null:CATALOG[S.empIdx];
-  var isSBPE=c.mod==='sbpe';
+  var isSBPE=!c.faixa;
   return'<div class="sel-box">'
     +'<div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="1"/></svg>Sua renda &nbsp;<span style="color:#94a3b8;font-weight:400;font-size:10px">edite se precisar corrigir</span></div>'
     +'<div class="g2s" style="margin-bottom:10px"><div class="fi2 hl"><label>Renda familiar mensal (R$)</label><input type="text" value="'+N2(S.renda)+'" oninput="updRenda(this.value)"></div>'
-    +'<div style="display:flex;align-items:center;padding-top:18px"><span class="regra-tag2 '+(isSBPE?'rt-sbpe2':'rt-mcmv2')+'">'+(isSBPE?'SBPE — máx. 90%':'MCMV — máx. 80%')+'</span></div></div>'
-    +renderEmpSelector()
+    +'<div style="display:flex;align-items:center;padding-top:18px"><span class="regra-tag2 '+(isSBPE?'rt-sbpe2':'rt-mcmv2')+'">'+c.modLabel+' — até '+(isSBPE?'90%':'80%')+' do imóvel'+(c.limiteFaixa!==Infinity?' · teto R$ '+N2(c.limiteFaixa):'')+'</span></div></div>'
+    +renderEmpSelector(c)
     +(emp?'<span class="cb2">'+emp.c+' · '+STATUS_LABEL[emp.s]+'</span>':'')
+    +(c.posChavesElegivel?' <span class="cb2" style="background:#f0f9f3;color:#157540">Pós-chaves até '+c.posChavesMax+'x</span>':'')
     +'</div>'
-    +'<div class="info-box2"><strong>Como calculamos:</strong> pegamos o menor valor entre o que sua renda comprova (30% dela, financiado em até 360 meses) e o teto que o próprio imóvel permite financiar ('+(isSBPE?'90%':'80%')+' da avaliação). Isso evita mostrar um crédito que a Caixa não aprovaria na prática.</div>'
+    +'<div class="info-box2"><strong>Como calculamos:</strong> identificamos sua faixa no Minha Casa Minha Vida pela renda informada (tabela oficial 2026), aplicamos o limite de financiamento e a taxa de juros dessa faixa, e comparamos com o que sua renda comprova (30% dela, em até 360 meses) e com o teto que o próprio imóvel permite financiar. O menor entre os três é o crédito financiado — depois somamos o subsídio, se sua faixa tiver direito.</div>'
     +'<div class="pr2">'
     +'<div class="pi2 b"><span class="pl2">Valor do imóvel</span><span class="pv2">'+BRL(c.preco)+'</span></div>'
     +'<div class="pi2 v"><span class="pl2">Capacidade de compra (pela renda)</span><span class="pv2">'+BRL(c.capacidadeCompra)+'</span></div>'
-    +'<div class="pi2 g"><span class="pl2">Crédito estimado</span><span class="pv2">'+BRL(c.creditoEstimado)+'</span></div>'
+    +'<div class="pi2 g"><span class="pl2">Crédito financiado</span><span class="pv2">'+BRL(c.creditoFinanciado)+'</span></div>'
     +'<div class="pi2 r"><span class="pl2">Entrada estimada</span><span class="pv2">'+BRL(c.entrada)+'</span></div>'
     +'</div>'
+    +(c.subsidio>0?'<div class="mets2" style="margin-top:7px"><div class="mt2 gr" style="grid-column:1/-1"><div class="ml">Subsídio estimado do governo (reduz sua entrada)</div><div class="mv">'+BRL(c.subsidio)+' &nbsp;→&nbsp; crédito total: '+BRL(c.creditoEstimado)+'</div></div></div>':'')
     +'<div class="mets2" style="margin-top:10px">'
+    +'<div class="mt2 hi"><div class="ml">Taxa de juros aplicada</div><div class="mv">'+N2(c.taxaAnual)+'% a.a.</div></div>'
     +'<div class="mt2 hi"><div class="ml">Prestação inicial estimada</div><div class="mv">'+BRL(c.prestacaoEstimada)+'/mês</div></div>'
     +'<div class="mt2 am"><div class="ml">Seguro estimado (MIP/DFI)</div><div class="mv">'+BRL(c.seguroEstimado)+'/mês</div></div>'
     +'<div class="mt2 gr"><div class="ml">Prazo considerado</div><div class="mv">'+c.prazo+' meses</div></div>'
     +(c.mesesObra>0?'<div class="mt2 vi"><div class="ml">Previsão até as chaves</div><div class="mv">'+c.mesesObra+' meses</div></div>':'<div class="mt2 vi"><div class="ml">Situação da obra</div><div class="mv">Pronto para morar</div></div>')
     +'</div>'
-    +'<p style="font-size:10.5px;color:#94a3b8;margin-top:12px">Estimativa educativa considerando taxa de '+N2(S.taxaAnual)+'% a.a. — a Caixa confirma taxa, prazo e valor exatos após análise de crédito. Valores estimados e sujeitos à análise oficial da instituição financeira e da construtora.</p>'
+    +'<p style="font-size:10.5px;color:#94a3b8;margin-top:12px">Estimativa educativa com base na tabela oficial do Minha Casa Minha Vida 2026 — a Caixa confirma taxa, subsídio, prazo e valor exatos após análise de crédito. Valores sujeitos à análise oficial da instituição financeira e da construtora.</p>'
     +'<div style="margin-top:16px;padding-top:14px;border-top:.5px solid var(--border)">'
     +'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Seu nome completo</label><input type="text" value="'+S.clienteNome+'" oninput="updCliente(\'clienteNome\',this.value)"></div><div class="fi2"><label>Seu WhatsApp</label><input type="text" value="'+S.clienteTel+'" oninput="updCliente(\'clienteTel\',this.value)"></div></div>'
     +'<button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com nossa equipe no WhatsApp</button>'
@@ -434,9 +517,10 @@ function renderResumo(c){
 
 function renderFluxo(c){
   var acimaTeto=(S.mensaisQtd>0&&S.mensaisValor>1500)||(S.anuaisQtd>0&&S.anuaisValor>18000);
+  var pc=c.posChavesElegivel;
   return'<div class="sel-box">'
     +'<div class="sel-title">Entrada a cobrir: <span style="color:#B91C1C">'+BRL(c.entrada)+'</span></div>'
-    +'<p style="font-size:11.5px;color:var(--text2);margin-bottom:10px">Distribua a entrada entre ato, parcelas mensais, reforços anuais, parcela única (ex: FGTS/13º) e valor na entrega das chaves. Use o ZERAR para completar automaticamente o campo que faltar.</p>'
+    +'<p style="font-size:11.5px;color:var(--text2);margin-bottom:10px">Distribua a entrada entre ato, parcelas mensais, reforços anuais, parcela única (ex: FGTS/13º)'+(pc?', valor na entrega das chaves e parcelamento pós-chaves':' e valor na entrega das chaves')+'. Use o ZERAR para completar automaticamente o campo que faltar.</p>'
     +'<div class="g4s" style="margin-bottom:10px">'
     +'<div class="fi2"><label>Ato de entrada (R$)</label><input type="text" value="'+N2(S.ato)+'" oninput="updFluxo(\'ato\',this.value)"></div>'
     +'<div class="fi2"><label>Valor na entrega das chaves (R$)</label><input type="text" value="'+N2(S.valorChaves)+'" oninput="updFluxo(\'valorChaves\',this.value)"></div>'
@@ -451,8 +535,15 @@ function renderFluxo(c){
       +'<option value="mensais" '+(S.zerarAlvo==='mensais'?'selected':'')+'>Parcelas mensais</option>'
       +'<option value="anuais" '+(S.zerarAlvo==='anuais'?'selected':'')+'>Reforços anuais</option>'
       +'<option value="unica" '+(S.zerarAlvo==='unica'?'selected':'')+'>Parcela única</option>'
+      +(pc?'<option value="poschaves" '+(S.zerarAlvo==='poschaves'?'selected':'')+'>Pós-chaves ('+c.posChavesMax+'x)</option>':'')
       +'</select></div>'
     +'</div>'
+    +(pc?('<div class="g2s" style="margin-bottom:10px;padding-top:10px;border-top:.5px solid var(--border)">'
+      +'<div class="fi2"><label>Parcelas pós-chaves — até '+c.posChavesMax+'x ('+c.construtora+')</label><input type="number" value="'+(S.posChavesQtd>0?S.posChavesQtd:'')+'" placeholder="Ex: '+c.posChavesMax+'" oninput="updFluxo(\'posChavesQtd\',this.value)"></div>'
+      +'<div class="fi2"><label>Valor de cada parcela pós-chaves (R$)</label><input type="text" value="'+N2(S.posChavesValor)+'" oninput="updFluxo(\'posChavesValor\',this.value)"></div>'
+      +'</div>'
+      +'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' costuma estender o que exceder o parcelável da obra para depois da entrega das chaves, em até '+c.posChavesMax+'x. Digite a quantidade de parcelas que quer usar e o ZERAR calcula o valor de cada uma.</p>')
+      :(c.construtora?'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' não trabalha com parcelamento pós-chaves nesta simulação — o que exceder o parcelável da obra e o FGTS costuma precisar ser pago à vista na assinatura. Vale confirmar com o Paulo se há condição especial para este empreendimento.</p>':''))
     +'<button type="button" class="btn-pg" style="background:var(--gold)" onclick="zerarFluxo()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg>ZERAR — completar automaticamente</button>'
     +'</div>'
     +'<div class="ssec s1x"><div class="ssh" style="cursor:default"><h3>Total do fluxo montado</h3></div><div class="ssb">'
@@ -462,6 +553,7 @@ function renderFluxo(c){
     +'<div class="mt2 hi"><div class="ml">Anuais ('+S.anuaisQtd+'x)</div><div class="mv">'+BRL(c.anuaisTotal)+'</div></div>'
     +'<div class="mt2 hi"><div class="ml">Parcela única</div><div class="mv">'+BRL(S.parcelaUnica)+'</div></div>'
     +'<div class="mt2 hi"><div class="ml">Nas chaves</div><div class="mv">'+BRL(S.valorChaves)+'</div></div>'
+    +(pc&&c.posChavesTotal>0?'<div class="mt2 gr"><div class="ml">Pós-chaves ('+S.posChavesQtd+'x)</div><div class="mv">'+BRL(c.posChavesTotal)+'</div></div>':'')
     +'<div class="mt2 '+(Math.abs(c.fluxoRestante)<0.5?'gr':'am')+'"><div class="ml">'+(c.fluxoRestante>0.5?'Ainda falta':(c.fluxoRestante<-0.5?'Passou do valor em':'Fechado certinho'))+'</div><div class="mv">'+BRL(Math.abs(c.fluxoRestante))+'</div></div>'
     +'</div>'
     +(acimaTeto?'<div style="margin-top:12px;padding:10px 12px;background:#fbf3e4;border-radius:8px;font-size:11.5px;color:#8a5c1c">Parcela mensal ou anual está bem alta — considere aumentar a quantidade de parcelas ou usar ZERAR para redistribuir.</div>':'')
