@@ -224,6 +224,25 @@ a{color:inherit;text-decoration:none}
         <div class="ir-hint" id="irHint"></div>
       </div>
 
+      <div class="ir-box" id="rendaAppBox">
+        <div class="ir-box-label">Como você comprova renda?</div>
+        <div class="ir-toggle-row">
+          <button type="button" class="ir-toggle-btn" id="rendaBtnClt" onclick="setRendaTipo('clt')">Carteira assinada</button>
+          <button type="button" class="ir-toggle-btn" id="rendaBtnAuto" onclick="setRendaTipo('autonomo')">Autônomo</button>
+          <button type="button" class="ir-toggle-btn" id="rendaBtnApp" onclick="setRendaTipo('app')">Motorista/entregador de app</button>
+        </div>
+        <div class="ir-hint" id="rendaTipoHint"></div>
+        <div id="appPlatformBox" style="display:none;margin-top:12px;padding-top:12px;border-top:1px solid var(--border)">
+          <div class="ir-box-label">Qual plataforma? (escolha uma só)</div>
+          <div class="ir-toggle-row">
+            <button type="button" class="ir-toggle-btn" id="platBtnUber" onclick="setAppPlataforma('Uber')">Uber</button>
+            <button type="button" class="ir-toggle-btn" id="platBtn99" onclick="setAppPlataforma('99')">99</button>
+            <button type="button" class="ir-toggle-btn" id="platBtnIfood" onclick="setAppPlataforma('iFood')">iFood</button>
+          </div>
+          <div class="ir-hint">A Caixa pede o relatório de ganhos dos últimos 4 meses de uma única plataforma — não pode misturar Uber com 99 ou iFood no mesmo período. O mês de menor ganho é o que conta como sua renda comprovada.</div>
+        </div>
+      </div>
+
       <div class="item-upload-toggle">
         <div style="font-size:12.5px;font-weight:700;color:var(--navy);margin-bottom:10px">Envie cada documento clicando no item correspondente abaixo:</div>
       </div>
@@ -375,6 +394,37 @@ function setIR(v){
     : 'Sem problema — nesse caso a análise usa o extrato bancário (jan/2025 até hoje) para comprovar a movimentação financeira.';
 }
 
+var RENDA_TIPO = null;
+var APP_PLATAFORMA = null;
+function setRendaTipo(v){
+  RENDA_TIPO = v;
+  document.getElementById('rendaBtnClt').classList.toggle('sel', v==='clt');
+  document.getElementById('rendaBtnAuto').classList.toggle('sel', v==='autonomo');
+  document.getElementById('rendaBtnApp').classList.toggle('sel', v==='app');
+  var hint = document.getElementById('rendaTipoHint');
+  var platBox = document.getElementById('appPlatformBox');
+  var rendaItem = ITEM_DOC_TYPES.find(function(t){ return t.key==='renda'; });
+  if(v==='app'){
+    hint.textContent = 'Perfeito — escolha abaixo qual plataforma você usa.';
+    platBox.style.display = 'block';
+    if(rendaItem){ rendaItem.label = 'Relatório de ganhos do app'; rendaItem.sub = '4 meses de uma única plataforma (Uber, 99 ou iFood)'; }
+  } else {
+    hint.textContent = v==='clt' ? 'Anexe seu holerite ou contracheque dos últimos 3 meses.' : 'Anexe seus últimos 3 recibos de pagamento (RPA) ou pró-labore.';
+    platBox.style.display = 'none';
+    if(rendaItem){ rendaItem.label = 'Comprovante de renda'; rendaItem.sub = undefined; }
+  }
+  if(document.getElementById('itemRowsBox') && document.getElementById('itemRowsBox').children.length) renderItemRows();
+}
+function setAppPlataforma(p){
+  APP_PLATAFORMA = p;
+  document.getElementById('platBtnUber').classList.toggle('sel', p==='Uber');
+  document.getElementById('platBtn99').classList.toggle('sel', p==='99');
+  document.getElementById('platBtnIfood').classList.toggle('sel', p==='iFood');
+  var rendaItem = ITEM_DOC_TYPES.find(function(t){ return t.key==='renda'; });
+  if(rendaItem){ rendaItem.sub = '4 meses do '+p+' (mesma plataforma, sem misturar)'; }
+  if(document.getElementById('itemRowsBox') && document.getElementById('itemRowsBox').children.length) renderItemRows();
+}
+
 /* ---------- Envio item por item ---------- */
 var ITEM_DOC_TYPES = [
   {key:'identidade_cpf', label:'Identidade (RG ou CNH) e CPF', sub:'pode enviar os dois juntos', multi:true},
@@ -473,7 +523,7 @@ async function enviarItemDoc(key){
   st.textContent = 'enviando…';
   st.style.color = 'var(--text2)';
   btn.disabled = true;
-  var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa-item-a-item', extras:{tipoDoc:key, imposto_renda:IR_DECLAROU}}, files.map(function(f){ return {file:f, tipoDoc:key}; }));
+  var res = await window.enviarDocumentos({nome:nome, telefone:tel, origem:'aprovacao-expressa-item-a-item', extras:{tipoDoc:key, imposto_renda:IR_DECLAROU, renda_tipo:RENDA_TIPO, app_plataforma:APP_PLATAFORMA}}, files.map(function(f){ return {file:f, tipoDoc:key}; }));
   if(res && res.ok){
     st.textContent = 'OK';
     st.style.color = '#15803d';
@@ -505,7 +555,7 @@ async function enviarTodosItens(){
         nome: nome, telefone: tel,
         interesse: 'Aprovação Expressa — documentos concluídos',
         origem: 'aprovacao-expressa-concluido',
-        extras: { imposto_renda: IR_DECLAROU, documentos_enviados: enviados.join(', '), documentos_faltando: faltando.join(', ') || 'nenhum' }
+        extras: { imposto_renda: IR_DECLAROU, renda_tipo: RENDA_TIPO, app_plataforma: APP_PLATAFORMA, documentos_enviados: enviados.join(', '), documentos_faltando: faltando.join(', ') || 'nenhum' }
       });
     }catch(e){}
   }
@@ -579,10 +629,17 @@ async function enviarDocsReal(){
   }
 }
 renderItemRows();
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  if(params.get('renda') === 'app'){
+    setRendaTipo('app');
+    var box = document.getElementById('rendaAppBox');
+    if(box) setTimeout(function(){ box.scrollIntoView({behavior:'smooth', block:'center'}); }, 500);
+  }
+})();
 </script>
 <script src="doc-upload-config.js"></script>
 <script src="social-login.js"></script>
 <script src="leads.js" defer></script>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  
