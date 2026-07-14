@@ -599,8 +599,8 @@ footer .wrap{position:relative;z-index:1}
 
     <div class="trust reveal">
       <div class="trust-item"><span class="trust-num">18</span><span class="trust-lbl">anos de mercado</span></div>
-      <div class="trust-item"><span class="trust-num">31</span><span class="trust-lbl">empreendimentos ativos</span></div>
-      <div class="trust-item"><span class="trust-num">16</span><span class="trust-lbl">construtoras parceiras</span></div>
+      <div class="trust-item"><span class="trust-num">46</span><span class="trust-lbl">empreendimentos ativos</span></div>
+      <div class="trust-item"><span class="trust-num">15</span><span class="trust-lbl">construtoras parceiras</span></div>
       <div class="trust-item"><span class="trust-num">721</span><span class="trust-lbl">famílias atendidas</span></div>
     </div>
 
@@ -643,6 +643,43 @@ footer .wrap{position:relative;z-index:1}
 })();
 </script>
 
+<!-- CATALOG -->
+<section class="section" id="empreendimentos">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-eyebrow">Catálogo</div>
+      <h2 class="sec-title display">Lançamentos por status</h2>
+      <p class="sec-sub">Do lançamento ao pronto para morar. Cada empreendimento com ficha completa e tabela oficial sob consulta.</p>
+    </div>
+    <div class="cat-tabs reveal">
+      <button class="cat-tab on" onclick="catFilter('',this)">Todos</button>
+      <button class="cat-tab" onclick="catFilter('lancamento',this)">Lançamento · 1ª tabela</button>
+      <button class="cat-tab" onclick="catFilter('obras',this)">Em obras · preço de obra</button>
+      <button class="cat-tab" onclick="catFilter('pronto',this)">Pronto · sem espera</button>
+    </div>
+    <div class="cat-grid" id="cat-grid"></div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="section section-mist">
+  <div class="wrap" style="text-align:center">
+    <div class="sec-eyebrow reveal" style="text-align:center">Sem favorecer ninguém</div>
+    <h2 class="sec-title display reveal" style="margin:0 auto 32px;max-width:24ch">Trabalhamos com todas as principais construtoras do Rio</h2>
+    <div class="brands reveal">
+      <span class="brand-chip">Cury</span>
+      <span class="brand-chip">MRV</span>
+      <span class="brand-chip">Direcional</span>
+      <span class="brand-chip">Direcional · Vivaz</span>
+      <span class="brand-chip">Cyrela · Living</span>
+      <span class="brand-chip">Emccamp</span>
+      <span class="brand-chip">Brookfield / AZO</span>
+      <span class="brand-chip">CTV</span>
+      <span class="brand-chip" style="color:var(--gray);opacity:.7">+7 outras construtoras</span>
+    </div>
+  </div>
+</section>
+
 <!-- MAP: protagonist -->
 <section class="section" id="mapa">
   <div class="wrap">
@@ -670,102 +707,6 @@ footer .wrap{position:relative;z-index:1}
         <div class="map-list" id="map-list"></div>
         <div class="map-detail" id="map-detail"></div>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- SIMULAÇÃO EXPRESSA -->
-<section class="section section-mist">
-  <div class="wrap">
-    <div class="ae-promo reveal" style="background:linear-gradient(135deg,#0f2e36,#173d47)">
-      <div class="ae-promo-grid">
-        <div>
-          <div class="ae-promo-badge">Simulação Expressa · em 1 minuto</div>
-          <h2>Descubra agora quanto você paga de entrada e de parcela</h2>
-          <p>Informe sua renda e o imóvel que te interessa: eu calculo entrada facilitada, uso do FGTS e plano de pagamento — na hora, sem compromisso, comparando entre todas as construtoras do Rio.</p>
-          <div class="ae-promo-ctas">
-            <a href="simulador.html" class="ae-promo-cta-primary"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>Simular agora</a>
-            <a href="aprovacao-expressa.html" class="ae-promo-cta-secondary"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Já sei o imóvel, quero aprovar crédito</a>
-          </div>
-        </div>
-        <div class="ae-promo-stats">
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">31</span><span class="ae-promo-stat-lbl">empreendimentos comparáveis</span></div>
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">16</span><span class="ae-promo-stat-lbl">construtoras, um só cálculo</span></div>
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">1 min</span><span class="ae-promo-stat-lbl">para ver seu plano</span></div>
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$0</span><span class="ae-promo-stat-lbl">custo para simular</span></div>
-        </div>
-      </div>
-    </div>
-
-    <div class="mini-sim reveal">
-      <div class="mini-sim-head">
-        <div class="mini-sim-tag">Sem digitar nada</div>
-        <h3>Teste agora, direto aqui na página</h3>
-        <p>Escolha o empreendimento, digite sua renda e FGTS (ou use as setinhas) — o cálculo aparece na hora, comparando o método de cada construtora.</p>
-      </div>
-      <div class="mini-sim-grid">
-        <div class="mini-sim-field">
-          <label>Empreendimento</label>
-          <select id="msEmp"></select>
-        </div>
-        <div class="mini-sim-field">
-          <label>Renda familiar mensal</label>
-          <div class="mini-sim-stepper">
-            <button type="button" onclick="msStep('renda',-500)" aria-label="Diminuir renda">−</button>
-            <input type="text" id="msRendaVal" class="mini-sim-stepper-input" value="R$ 6.000" inputmode="numeric" oninput="msTyped('renda',this.value)" onblur="msBlur('renda')">
-            <button type="button" onclick="msStep('renda',500)" aria-label="Aumentar renda">+</button>
-          </div>
-          <div class="mini-sim-hint">Pode digitar direto ou usar as setinhas</div>
-        </div>
-        <div class="mini-sim-field">
-          <label>FGTS disponível</label>
-          <div class="mini-sim-stepper">
-            <button type="button" onclick="msStep('fgts',-2000)" aria-label="Diminuir FGTS">−</button>
-            <input type="text" id="msFgtsVal" class="mini-sim-stepper-input" value="R$ 10.000" inputmode="numeric" oninput="msTyped('fgts',this.value)" onblur="msBlur('fgts')">
-            <button type="button" onclick="msStep('fgts',2000)" aria-label="Aumentar FGTS">+</button>
-          </div>
-        </div>
-      </div>
-      <button class="mini-sim-btn" onclick="msCalcular()">Calcular meu plano</button>
-      <div class="mini-sim-result" id="msResult"></div>
-      <div class="mini-sim-sugg" id="msSugg"></div>
-    </div>
-  </div>
-</section>
-
-<!-- CATALOG -->
-<section class="section" id="empreendimentos">
-  <div class="wrap">
-    <div class="sec-head reveal">
-      <div class="sec-eyebrow">Catálogo</div>
-      <h2 class="sec-title display">Lançamentos por status</h2>
-      <p class="sec-sub">Do lançamento ao pronto para morar. Cada empreendimento com ficha completa e tabela oficial sob consulta.</p>
-    </div>
-    <div class="cat-tabs reveal">
-      <button class="cat-tab on" onclick="catFilter('',this)">Todos</button>
-      <button class="cat-tab" onclick="catFilter('lancamento',this)">Lançamento · 1ª tabela</button>
-      <button class="cat-tab" onclick="catFilter('obras',this)">Em obras · preço de obra</button>
-      <button class="cat-tab" onclick="catFilter('pronto',this)">Pronto · sem espera</button>
-    </div>
-    <div class="cat-grid" id="cat-grid"></div>
-  </div>
-</section>
-
-<!-- BRANDS -->
-<section class="section section-mist">
-  <div class="wrap" style="text-align:center">
-    <div class="sec-eyebrow reveal" style="text-align:center">Sem favorecer ninguém</div>
-    <h2 class="sec-title display reveal" style="margin:0 auto 32px;max-width:24ch">Trabalhamos com todas as principais construtoras do Rio</h2>
-    <div class="brands reveal">
-      <span class="brand-chip">Cury</span>
-      <span class="brand-chip">Direcional</span>
-      <span class="brand-chip">Cyrela · Living</span>
-      <span class="brand-chip">Brookfield / AZO</span>
-      <span class="brand-chip">Emccamp</span>
-      <span class="brand-chip">CTV</span>
-      <span class="brand-chip">W3 Engenharia</span>
-      <span class="brand-chip">Village</span>
-      <span class="brand-chip" style="color:var(--gray);opacity:.7">+8 outras construtoras</span>
     </div>
   </div>
 </section>
@@ -831,6 +772,65 @@ footer .wrap{position:relative;z-index:1}
         </div>
         <p style="font-size:10.5px;color:var(--gray);opacity:.75;margin-top:16px;max-width:60ch">Regra sujeita a análise de crédito e critérios vigentes da Caixa Econômica Federal. Uber, 99 e iFood são marcas de seus respectivos titulares — Paulo Cotrim não é afiliado a essas empresas, apenas orienta motoristas e entregadores no processo de financiamento.</p>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- SIMULAÇÃO EXPRESSA -->
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="ae-promo reveal" style="background:linear-gradient(135deg,#0f2e36,#173d47)">
+      <div class="ae-promo-grid">
+        <div>
+          <div class="ae-promo-badge">Simulação Expressa · em 1 minuto</div>
+          <h2>Descubra agora quanto você paga de entrada e de parcela</h2>
+          <p>Informe sua renda e o imóvel que te interessa: eu calculo entrada facilitada, uso do FGTS e plano de pagamento — na hora, sem compromisso, comparando entre todas as construtoras do Rio.</p>
+          <div class="ae-promo-ctas">
+            <a href="simulador.html" class="ae-promo-cta-primary"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>Simular agora</a>
+            <a href="aprovacao-expressa.html" class="ae-promo-cta-secondary"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Já sei o imóvel, quero aprovar crédito</a>
+          </div>
+        </div>
+        <div class="ae-promo-stats">
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">46</span><span class="ae-promo-stat-lbl">empreendimentos comparáveis</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">15</span><span class="ae-promo-stat-lbl">construtoras, um só cálculo</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">1 min</span><span class="ae-promo-stat-lbl">para ver seu plano</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$0</span><span class="ae-promo-stat-lbl">custo para simular</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mini-sim reveal">
+      <div class="mini-sim-head">
+        <div class="mini-sim-tag">Sem digitar nada</div>
+        <h3>Teste agora, direto aqui na página</h3>
+        <p>Escolha o empreendimento, digite sua renda e FGTS (ou use as setinhas) — o cálculo aparece na hora, comparando o método de cada construtora.</p>
+      </div>
+      <div class="mini-sim-grid">
+        <div class="mini-sim-field">
+          <label>Empreendimento</label>
+          <select id="msEmp"></select>
+        </div>
+        <div class="mini-sim-field">
+          <label>Renda familiar mensal</label>
+          <div class="mini-sim-stepper">
+            <button type="button" onclick="msStep('renda',-500)" aria-label="Diminuir renda">−</button>
+            <input type="text" id="msRendaVal" class="mini-sim-stepper-input" value="R$ 6.000" inputmode="numeric" oninput="msTyped('renda',this.value)" onblur="msBlur('renda')">
+            <button type="button" onclick="msStep('renda',500)" aria-label="Aumentar renda">+</button>
+          </div>
+          <div class="mini-sim-hint">Pode digitar direto ou usar as setinhas</div>
+        </div>
+        <div class="mini-sim-field">
+          <label>FGTS disponível</label>
+          <div class="mini-sim-stepper">
+            <button type="button" onclick="msStep('fgts',-2000)" aria-label="Diminuir FGTS">−</button>
+            <input type="text" id="msFgtsVal" class="mini-sim-stepper-input" value="R$ 10.000" inputmode="numeric" oninput="msTyped('fgts',this.value)" onblur="msBlur('fgts')">
+            <button type="button" onclick="msStep('fgts',2000)" aria-label="Aumentar FGTS">+</button>
+          </div>
+        </div>
+      </div>
+      <button class="mini-sim-btn" onclick="msCalcular()">Calcular meu plano</button>
+      <div class="mini-sim-result" id="msResult"></div>
+      <div class="mini-sim-sugg" id="msSugg"></div>
     </div>
   </div>
 </section>
@@ -902,6 +902,31 @@ footer .wrap{position:relative;z-index:1}
   if(grid.children.length) document.getElementById('videoTestimonials').style.display = '';
 })();
 </script>
+
+<!-- ÁREA DO INVESTIDOR -->
+<section class="section section-mist" id="area-investidor-home">
+  <div class="wrap">
+    <div class="ae-promo reveal" style="background:linear-gradient(135deg,#0f2e36,#173d47)">
+      <div class="ae-promo-grid">
+        <div>
+          <div class="ae-promo-badge">Área do Investidor · foco Porto Maravilha</div>
+          <h2>Simuladores, tabelas e análise de valorização para quem compra pensando em retorno</h2>
+          <p>Ferramentas dedicadas para quem investe: simulador de rentabilidade, comparador de tabelas por construtora e análise da região que mais valoriza no Rio — o Porto Maravilha.</p>
+          <div class="ae-promo-ctas">
+            <a href="investidor.html" class="ae-promo-cta-primary"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 3v18h18M7 14l4-4 4 4 5-6"/></svg>Acessar Área do Investidor</a>
+            <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo!%20Quero%20saber%20mais%20sobre%20oportunidades%20de%20investimento%20no%20Porto%20Maravilha." target="_blank" class="ae-promo-cta-secondary"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>Falar sobre investimento</a>
+          </div>
+        </div>
+        <div class="ae-promo-stats">
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$1,75bi</span><span class="ae-promo-stat-lbl">investidos no Porto Maravilha</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">5</span><span class="ae-promo-stat-lbl">simuladores especializados</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">18</span><span class="ae-promo-stat-lbl">anos analisando o mercado</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$0</span><span class="ae-promo-stat-lbl">custo para consultar</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- CTA -->
 <section class="section" style="padding-top:0">
