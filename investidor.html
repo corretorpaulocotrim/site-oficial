@@ -1013,8 +1013,9 @@ function baixarAnaliseInvestidor(simTitulo, resBoxId){
   }
   var noteEl = box.querySelector('.result-note');
   var note = noteEl ? noteEl.textContent : '';
-  var url = window.location.href.split('#')[0];
-  var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(url);
+  var _dataGer = new Date().toLocaleDateString('pt-BR');
+  var waMsg = 'Olá Paulo! Baixei minha análise de \''+simTitulo+'\' no seu site e quero conversar sobre isso.';
+  var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent('https://wa.me/5521989150864?text='+encodeURIComponent(waMsg));
   var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Análise — '+simTitulo+'</title>'
     +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
     +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
@@ -1027,15 +1028,31 @@ function baixarAnaliseInvestidor(simTitulo, resBoxId){
     +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e8eaed}'
     +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
     +'.cta{display:inline-block;margin-top:20px;background:#25d366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 22px;border-radius:10px}'
-    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{.cta{display:none}body{padding:20px}}</style></head><body>'
+    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}'
+    +'.wm{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}'
+    +'.wm div{position:absolute;left:-20%;width:140%;text-align:center;transform:rotate(-27deg);font-family:Inter,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.16em;color:rgba(15,46,54,.055);white-space:nowrap}'
+    +'.pdf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}'
+    +'.pdf-head img{height:24px;display:block}'
+    +'.gendate{font-size:10.5px;color:#94a3b8}'
+    +'@media print{.cta{display:none}body{padding:20px}}</style></head><body>'
+    +'<div class="wm" aria-hidden="true">'
+    +'<div style="top:-40px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:70px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:180px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:290px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:400px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:510px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
+    +'<div style="top:620px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
+    +'</div>'
+    +'<div class="pdf-head"><img src="https://corretorpaulocotrim.github.io/site-oficial/logo-wordmark.png" alt="Paulo Cotrim"/><span class="gendate">Gerado em '+_dataGer+'</span></div>'
     +'<div class="kicker">Calculadora do Investidor · Porto Maravilha</div>'
     +'<h1>'+simTitulo+'</h1><div class="sub">Análise gerada por você · Paulo Cotrim · CRECI-RJ 77677-F</div>'
     + rows
     +(note?'<div class="note">'+note+'</div>':'')
     +'<a class="cta" href="https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo! Baixei minha análise de \''+simTitulo+'\' no seu site e quero conversar sobre isso.')+'" target="_blank">Falar com Paulo sobre esta análise</a>'
-    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à calculadora</b>Refaça a simulação ou explore outras ferramentas do investidor direto do celular.</div></div>'
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code do WhatsApp"/><div><b>Fale agora com o Paulo</b>Escaneie para abrir o WhatsApp direto com o Paulo Cotrim sobre esta análise.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
-    +'<div class="foot">Paulo Cotrim · Documento informativo e educativo, não substitui a simulação bancária real</div>'
+    +'<div class="foot">Paulo Cotrim · paulocotrim.com.br · Documento informativo e educativo, não substitui a simulação bancária real</div>'
     +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
