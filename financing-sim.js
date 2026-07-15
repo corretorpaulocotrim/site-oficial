@@ -201,6 +201,7 @@ function fsimHTML(nome, precoConhecido, precoInicial, apresentacao){
     +'    <div class="sim-field"><label>Tem FGTS disponível?</label><div class="sim-check-row"><input type="checkbox" id="fsimFgts" onchange="fsimUpdate()"> <label for="fsimFgts">Sim, quero usar</label></div><input type="text" id="fsimFgtsValor" placeholder="Valor do FGTS (R$)" style="display:none;margin-top:8px" oninput="fsimUpdate()"></div>'
     +'    <div class="sim-field"><label>Entrada que você quer dar (R$) <span style="font-weight:400">— opcional</span></label><input type="text" id="fsimEntrada" placeholder="Deixe em branco para calcular automaticamente" oninput="fsimUpdate()"></div>'
     +'  </div>'
+    +'  <div id="fsimVerdict"></div>'
     +'  <div class="sim-out" id="fsimOut"></div>'
     +'  <div class="sim-note" id="fsimNote"></div>'
     +'  <div class="sim-plano" id="fsimPlano" style="margin-top:22px;padding-top:20px;border-top:1px solid var(--line)">'
@@ -249,6 +250,31 @@ function initSimuladorEmbed(containerId, opts){
   fsimUpdate();
 }
 
+function fsimVerdictHTML(c){
+  var headline, tone;
+  if(c.acimaDoTeto){
+    tone = 'warn';
+    headline = 'A parcela da obra ficou em '+fmtBRL(c.parcelaObraMensal)+'/mês — acima do que eu recomendaria pra você dormir tranquilo. Dá pra ajustar o prazo, o ato de entrada ou o reforço de dezembro que eu resolvo isso com você.';
+  } else if(c.temPosChaves){
+    var constNome = c.mrv?'MRV':(c.vivaz?'Direcional · Vivaz':'a construtora');
+    headline = 'Com renda de '+fmtBRL(c.renda)+', esse plano fecha bem: entrada parcelada sem juros na obra e o restante estendido pela '+constNome+' até '+c.maxParcelasPosChaves+'x pós-chaves. Não precisa tirar nada extra do bolso agora.';
+  } else if(c.semEntradaAVista){
+    headline = 'Boa notícia: com renda de '+fmtBRL(c.renda)+', sua entrada cabe inteira dentro dos 20% parceláveis sem juros — '+fmtBRL(c.parcelaObraMensal)+'/mês até a entrega das chaves, sem surpresa.';
+  } else {
+    headline = 'Esse plano ainda deixa '+fmtBRL(c.aVistaFinal)+' pra cobrir à vista na assinatura. Antes de descartar o imóvel, vamos ver se o FGTS ou uma entrada maior resolvem — é rápido no WhatsApp.';
+    tone = 'neutral';
+  }
+  var bg = tone==='warn' ? 'linear-gradient(135deg,#7a4a1a,#a5772e)' : 'linear-gradient(135deg,#0f2e36,#173d47)';
+  return ''
+    +'<div class="reveal" style="display:flex;gap:14px;align-items:flex-start;background:'+bg+';border-radius:16px;padding:20px 22px;margin-bottom:20px;color:#fff">'
+    +'  <img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" style="width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,.35)" loading="lazy">'
+    +'  <div>'
+    +'    <div style="font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:rgba(255,255,255,.65);margin-bottom:5px">Análise do Paulo pra esse plano</div>'
+    +'    <div style="font-family:Fraunces,Georgia,serif;font-size:16px;font-weight:600;line-height:1.45">'+headline+'</div>'
+    +'  </div>'
+    +'</div>';
+}
+
 function fsimUpdate(){
   var fgtsChk = document.getElementById('fsimFgts');
   var fgtsBox = document.getElementById('fsimFgtsValor');
@@ -261,6 +287,8 @@ function fsimUpdate(){
   if(preco<=0){
     document.getElementById('fsimOut').innerHTML = '';
     document.getElementById('fsimNote').innerHTML = '<span style="color:var(--gray)">Informe o valor do imóvel para ver a simulação completa.</span>';
+    var verdictElEmpty = document.getElementById('fsimVerdict');
+    if(verdictElEmpty) verdictElEmpty.innerHTML = '';
     return;
   }
   var renda = parseBRLnum(document.getElementById('fsimRenda').value);
@@ -279,6 +307,9 @@ function fsimUpdate(){
     construtora:FSIM_CONSTRUTORA
   });
   FSIM_LAST = c;
+
+  var verdictEl = document.getElementById('fsimVerdict');
+  if(verdictEl) verdictEl.innerHTML = fsimVerdictHTML(c);
 
   var out = ''
     +'<div class="sim-out-card hl"><div class="l">Financiamento estimado ('+(c.mod==='sbpe'?'SBPE':'MCMV')+')</div><div class="v">'+fmtBRL(c.financiado)+'</div></div>'
