@@ -481,6 +481,13 @@ footer .wrap{position:relative;z-index:1}
 .rg-card small{display:block;font-size:11.5px;color:var(--gray);margin-top:3px;font-weight:500}
 .rg-foot{margin-top:30px;font-size:12.5px;color:var(--gray)}
 .rg-foot a{color:var(--gold);font-weight:600}
+.constr-marquee{overflow:hidden;background:var(--mist);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;white-space:nowrap}
+.constr-marquee-track{display:inline-flex;gap:48px;animation:constrScroll 32s linear infinite}
+.constr-marquee:hover .constr-marquee-track{animation-play-state:paused}
+.constr-marquee-item{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--gray);letter-spacing:.01em;opacity:.7;transition:opacity .3s var(--ease),color .3s var(--ease)}
+.constr-marquee-item:hover{opacity:1;color:var(--petrol)}
+@keyframes constrScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.constr-marquee-track{animation:none}}
 </style>
 </head>
 <body>
@@ -1290,15 +1297,7 @@ function downloadComparacao(){
     +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:24px;padding-top:18px;border-top:1px solid #e8eaed}'
     +'.qrbox img{width:100px;height:100px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13px;margin-bottom:4px}'
     +'.brandbar{margin-top:20px;padding-top:14px;border-top:1px solid #e8eaed;font-size:12px;color:#6b7280}.brandbar b{color:#0f2e36;display:block;font-size:13px}'
-    +'.foot{margin-top:22px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}
-.constr-marquee{overflow:hidden;background:var(--mist);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;white-space:nowrap}
-.constr-marquee-track{display:inline-flex;gap:48px;animation:constrScroll 32s linear infinite}
-.constr-marquee:hover .constr-marquee-track{animation-play-state:paused}
-.constr-marquee-item{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--gray);letter-spacing:.01em;opacity:.7;transition:opacity .3s var(--ease),color .3s var(--ease)}
-.constr-marquee-item:hover{opacity:1;color:var(--petrol)}
-@keyframes constrScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-@media(prefers-reduced-motion:reduce){.constr-marquee-track{animation:none}}
-</style></head><body>'
+    +'.foot{margin-top:22px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
     +'<div class="kicker">Comparação de Imóveis · Paulo Cotrim</div><h1>'+itens.map(function(e){return e.nome;}).join(" vs. ")+'</h1>'
     +'<table>'+tableRows+'</table>'
     +'<div class="note">Valores de tabela pública, sujeitos a alteração e disponibilidade — confirme condições atualizadas com Paulo antes de decidir.</div>'
