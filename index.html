@@ -42,6 +42,24 @@ gtag('consent','default',{analytics_storage:'denied',ad_storage:'denied',ad_user
 gtag('js',new Date());gtag('config','G-FXTZPVZW2X');
 function trackEvent(action,category,label){gtag('event',action,{event_category:category,event_label:label});}
 </script>
+<!-- Meta Pixel Code -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('consent','revoke');
+fbq('init', '1758733705251535');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1758733705251535&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"RealEstateAgent","name":"Paulo Cotrim","description":"Plataforma independente de inteligência imobiliária no Rio de Janeiro. 18 anos de experiência ajudando famílias e investidores a comparar lançamentos de todas as principais construtoras e decidir com segurança.","url":"https://paulocotrim.com.br","telephone":"+552198915-0864","email":"corretorpaulocotrim@gmail.com","address":{"@type":"PostalAddress","streetAddress":"Porto Maravilha","addressLocality":"Rio de Janeiro","addressRegion":"RJ","postalCode":"20081-902","addressCountry":"BR"},"geo":{"@type":"GeoCoordinates","latitude":-22.8955,"longitude":-43.1729},"openingHours":"Mo-Sa 08:00-20:00","sameAs":["https://instagram.com/corretorpaulocotrim","https://wa.me/5521989150864"],"aggregateRating":{"@type":"AggregateRating","ratingValue":"4.9","reviewCount":"212"},"priceRange":"R$ 245.000 – R$ 900.000","areaServed":["Porto Maravilha","Centro","Santo Cristo","Gamboa","Saúde","Niterói","Piedade","São Cristóvão","Zona Norte","Zona Oeste","Jacarepaguá","Oswaldo Cruz","Campinho","Todos os Santos","Riachuelo","Engenho de Dentro"]}
 </script>
@@ -1481,19 +1499,24 @@ if(document.readyState==="loading"){document.addEventListener("DOMContentLoaded"
 </div>
 <script>
 (function(){
-  if(!localStorage.getItem('pc_cookie_consent')){
+  var saved = localStorage.getItem('pc_cookie_consent');
+  if(!saved){
     setTimeout(function(){
       var bar=document.getElementById('cookie-bar');
       if(bar){bar.style.display='flex';}
     },2500);
+  } else if(saved==='all'){
+    if(typeof gtag!=='undefined') gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});
+    if(typeof fbq!=='undefined') fbq('consent','grant');
   }
 })();
 function cookieConsent(type){
   localStorage.setItem('pc_cookie_consent',type);
   var bar=document.getElementById('cookie-bar');
   if(bar) bar.style.display='none';
-  if(type==='all' && typeof gtag!=='undefined'){
-    gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted'});
+  if(type==='all'){
+    if(typeof gtag!=='undefined') gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});
+    if(typeof fbq!=='undefined') fbq('consent','grant');
   }
 }
 if('serviceWorker' in navigator){
