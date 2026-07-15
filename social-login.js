@@ -12,7 +12,7 @@
  * 3. Clique em "Criar credenciais" → "ID do cliente OAuth"
  * 4. Tipo de aplicativo: "Aplicativo da Web"
  * 5. Em "Origens JavaScript autorizadas", adicione o domínio do site,
- *    ex: https://paulocotrim.com.br (e também https://www.paulocotrim.com.br
+ *    ex: https://paulocotrim.com (e também https://www.paulocotrim.com
  *    se usar com www)
  * 6. Clique em "Criar" — vai aparecer um "ID do cliente" (Client ID),
  *    algo como 1234567890-abc123.apps.googleusercontent.com

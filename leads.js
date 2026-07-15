@@ -511,42 +511,11 @@
     };
   })();
 
-  window.__initTrackingScripts = function(){
-    try{
-      if(typeof gtag === 'undefined' && !document.getElementById('ga4-tag')){
-        var gs = document.createElement('script');
-        gs.id = 'ga4-tag'; gs.async = true;
-        gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-FXTZPVZW2X';
-        document.head.appendChild(gs);
-        window.dataLayer = window.dataLayer || [];
-        window.gtag = function(){ dataLayer.push(arguments); };
-        gtag('js', new Date());
-        gtag('config', 'G-FXTZPVZW2X');
-      } else if(typeof gtag !== 'undefined'){
-        gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});
-      }
-      if(typeof fbq === 'undefined' && !document.getElementById('meta-pixel-base')){
-        !function(f,b,e,v,n,t,s)
-        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-        n.queue=[];t=b.createElement(e);t.id='meta-pixel-base';t.async=!0;
-        t.src=v;s=b.getElementsByTagName(e)[0];
-        s.parentNode.insertBefore(t,s)}(window, document,'script',
-        'https://connect.facebook.net/en_US/fbevents.js');
-        fbq('init', '1758733705251535');
-        fbq('track', 'PageView');
-      } else if(typeof fbq !== 'undefined'){
-        fbq('consent','grant');
-      }
-    }catch(e){}
-  };
-
   (function(){
     try{
       if(document.getElementById('cookie-bar')) return;
       var saved = localStorage.getItem('pc_cookie_consent');
-      if(saved === 'all'){ window.__initTrackingScripts(); return; }
+      if(saved === 'all'){ if(window.__initTrackingScripts) window.__initTrackingScripts(); return; }
       if(saved) return;
     }catch(e){ return; }
     var bar = document.createElement('div');
@@ -561,7 +530,7 @@
     document.body.appendChild(bar);
     document.getElementById('cookieAccept').onclick = function(){
       try{ localStorage.setItem('pc_cookie_consent','all'); }catch(e){}
-      window.__initTrackingScripts();
+      if(window.__initTrackingScripts) window.__initTrackingScripts();
       bar.remove();
     };
     document.getElementById('cookieDecline').onclick = function(){
@@ -580,7 +549,7 @@
       '@type': 'RealEstateAgent',
       name: 'Paulo Cotrim',
       description: 'Corretor de imóveis com 18 anos de experiência, especialista em financiamento imobiliário e Minha Casa Minha Vida no Rio de Janeiro.',
-      url: 'https://paulocotrim.com.br/',
+      url: 'https://paulocotrim.com/',
       email: 'corretorpaulocotrim@gmail.com',
       areaServed: { '@type': 'City', name: 'Rio de Janeiro' },
       identifier: 'CRECI-RJ 77677-F'
@@ -597,8 +566,8 @@
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'Paulo Cotrim — Inteligência Imobiliária',
-      url: 'https://paulocotrim.com.br/',
-      logo: 'https://paulocotrim.com.br/logo-wordmark.png',
+      url: 'https://paulocotrim.com/',
+      logo: 'https://paulocotrim.com/logo-wordmark.png',
       founder: { '@type': 'Person', name: 'Paulo Cotrim' },
       areaServed: { '@type': 'City', name: 'Rio de Janeiro' },
       contactPoint: { '@type': 'ContactPoint', contactType: 'vendas', email: 'corretorpaulocotrim@gmail.com', telephone: '+5521989150864', availableLanguage: 'pt-BR' }
@@ -810,3 +779,92 @@
     renderBar();
   })();
 })();
+
+// ===== Empreendimentos Relacionados =====
+var REL_CATALOG = [
+  {nome:'Farol da Guanabara',url:'farol-da-guanabara.html',bairro:'Santo Cristo · Porto Maravilha',primary:'Santo Cristo',secondary:'Porto Maravilha'},
+  {nome:'Arcos do Porto',url:'arcos-do-porto.html',bairro:'Porto Maravilha',primary:'Porto Maravilha',secondary:'Porto Maravilha'},
+  {nome:'Orla Central',url:'orla-central.html',bairro:'Centro · Niterói',primary:'Centro',secondary:'Niterói'},
+  {nome:'Parque Piedade',url:'parque-piedade.html',bairro:'Piedade · Zona Norte',primary:'Piedade',secondary:'Zona Norte'},
+  {nome:'Luzes do Rio Lamparina',url:'luzes-do-rio-lamparina.html',bairro:'São Cristóvão',primary:'São Cristóvão',secondary:'São Cristóvão'},
+  {nome:'Caminhos da Guanabara',url:'caminhos-da-guanabara.html',bairro:'Pendotiba · Niterói',primary:'Pendotiba',secondary:'Niterói'},
+  {nome:'Cartola II',url:'cartola-ii.html',bairro:'São Cristóvão',primary:'São Cristóvão',secondary:'São Cristóvão'},
+  {nome:'Luzes do Rio Candeeiro',url:'luzes-do-rio-candeeiro.html',bairro:'São Cristóvão',primary:'São Cristóvão',secondary:'São Cristóvão'},
+  {nome:'A Noite',url:'emp-a-noite.html',bairro:'Praça Mauá, 7 · Centro',primary:'Praça Mauá, 7',secondary:'Centro'},
+  {nome:'Saudosa Praça Onze',url:'emp-saudosa-praca-onze.html',bairro:'Praça Onze · Centro',primary:'Praça Onze',secondary:'Centro'},
+  {nome:'Alma Carioca',url:'emp-alma-carioca.html',bairro:'Vila Valqueire · Zona Norte',primary:'Vila Valqueire',secondary:'Zona Norte'},
+  {nome:'Beon Porto Residencial',url:'emp-beon-porto.html',bairro:'São Cristóvão · Zona Norte',primary:'São Cristóvão',secondary:'Zona Norte'},
+  {nome:'Brise Studios Design',url:'emp-brise-studios.html',bairro:'Praça Pio X · Centro',primary:'Praça Pio X',secondary:'Centro'},
+  {nome:'Conquista Florianópolis',url:'emp-conquista-florianopolis.html',bairro:'Praça Seca · Jacarepaguá',primary:'Praça Seca',secondary:'Jacarepaguá'},
+  {nome:'Cores do Rio Residencial',url:'emp-cores-do-rio.html',bairro:'Centro',primary:'Centro',secondary:'Centro'},
+  {nome:'CTV Beat',url:'emp-ctv-beat.html',bairro:'Madureira · Zona Norte',primary:'Madureira',secondary:'Zona Norte'},
+  {nome:'CTV Vitória',url:'emp-ctv-vitoria.html',bairro:'Campinho · Zona Norte',primary:'Campinho',secondary:'Zona Norte'},
+  {nome:'East Side Harmony',url:'emp-east-side-harmony.html',bairro:'Méier · Zona Norte',primary:'Méier',secondary:'Zona Norte'},
+  {nome:'Wish Norte (Living)',url:'emp-living-wish-norte.html',bairro:'Cachambi · Zona Norte',primary:'Cachambi',secondary:'Zona Norte'},
+  {nome:'Meu Crescer Engenhão',url:'emp-meu-crescer-engenhao.html',bairro:'Engenho de Dentro · Zona Norte',primary:'Engenho de Dentro',secondary:'Zona Norte'},
+  {nome:'Only by Living',url:'emp-only-by-living.html',bairro:'Cachambi · Zona Norte',primary:'Cachambi',secondary:'Zona Norte'},
+  {nome:'Primor Carioca',url:'emp-primor-carioca.html',bairro:'Inhaúma · Zona Norte',primary:'Inhaúma',secondary:'Zona Norte'},
+  {nome:'Sal Rio Residencial',url:'emp-sal-rio.html',bairro:'Saúde · Porto Maravilha',primary:'Saúde',secondary:'Porto Maravilha'},
+  {nome:'URB Sole',url:'emp-urb-sole.html',bairro:'Todos os Santos · Zona Norte',primary:'Todos os Santos',secondary:'Zona Norte'},
+  {nome:'Village Caribe 1',url:'emp-village-caribe.html',bairro:'Praça Seca · Jacarepaguá',primary:'Praça Seca',secondary:'Jacarepaguá'},
+  {nome:'Vivaz Connection',url:'emp-vivaz-connection.html',bairro:'Riachuelo · Zona Norte',primary:'Riachuelo',secondary:'Zona Norte'},
+  {nome:'Vivaz Rua Honório',url:'emp-vivaz-honorio.html',bairro:'Todos os Santos · Zona Norte',primary:'Todos os Santos',secondary:'Zona Norte'},
+  {nome:'Império do Ouro',url:'emp-imperio-do-ouro.html',bairro:'Rio do Ouro · São Gonçalo',primary:'Rio do Ouro',secondary:'São Gonçalo'},
+  {nome:'Ritmos de Pilares',url:'emp-ritmos-de-pilares.html',bairro:'Pilares · Rio de Janeiro',primary:'Pilares',secondary:'Rio de Janeiro'},
+  {nome:'Encantos da Zona Norte',url:'emp-encantos-da-zona-norte.html',bairro:'Região de Bonsucesso · Rio de Janeiro',primary:'Região de Bonsucesso',secondary:'Rio de Janeiro'},
+  {nome:'Reserva Redentor',url:'emp-reserva-redentor.html',bairro:'Rocha · Rio de Janeiro',primary:'Rocha',secondary:'Rio de Janeiro'},
+  {nome:'Jardim das Amoreiras',url:'emp-jardim-das-amoreiras.html',bairro:'Região de Campo Grande · Rio de Janeiro',primary:'Região de Campo Grande',secondary:'Rio de Janeiro'},
+  {nome:'Marbelle Residence',url:'emp-marbelle-residence.html',bairro:'Região do Parque Aeroporto · Macaé',primary:'Região do Parque Aeroporto',secondary:'Macaé'},
+  {nome:'Mirante da Luz',url:'emp-mirante-da-luz.html',bairro:'Bairro da Luz · Nova Iguaçu',primary:'Bairro da Luz',secondary:'Nova Iguaçu'},
+  {nome:'Mirantes do Rio - Rio Mar',url:'emp-mirantes-do-rio-rio-mar.html',bairro:'Santa Cruz · Rio de Janeiro',primary:'Santa Cruz',secondary:'Rio de Janeiro'},
+  {nome:'Oceanside Recreio',url:'emp-oceanside-recreio.html',bairro:'Recreio dos Bandeirantes · Rio de Janeiro',primary:'Recreio dos Bandeirantes',secondary:'Rio de Janeiro'},
+  {nome:'Parque Ilhabela',url:'emp-parque-ilhabela.html',bairro:'Parque Pecuária · Campos dos Goytacazes',primary:'Parque Pecuária',secondary:'Campos dos Goytacazes'},
+  {nome:'Primavera Garden',url:'emp-primavera-garden.html',bairro:'Jardim Primavera · Duque de Caxias',primary:'Jardim Primavera',secondary:'Duque de Caxias'},
+  {nome:'Refúgio Camorim',url:'emp-refugio-camorim.html',bairro:'Região do Camorim · Rio de Janeiro',primary:'Região do Camorim',secondary:'Rio de Janeiro'},
+  {nome:'Residencial Bálsamo',url:'emp-residencial-balsamo.html',bairro:'Região de Campo Grande · Rio de Janeiro',primary:'Região de Campo Grande',secondary:'Rio de Janeiro'},
+  {nome:'Residencial Ipê Amarelo',url:'emp-residencial-ipe-amarelo.html',bairro:'Região de Campo Grande · Rio de Janeiro',primary:'Região de Campo Grande',secondary:'Rio de Janeiro'},
+  {nome:'Residencial Mar de Trindade',url:'emp-residencial-mar-de-trindade.html',bairro:'Alcântara · São Gonçalo',primary:'Alcântara',secondary:'São Gonçalo'},
+  {nome:'Residencial Monet',url:'emp-residencial-monet.html',bairro:'Região da Vila São Luiz · Duque de Caxias',primary:'Região da Vila São Luiz',secondary:'Duque de Caxias'},
+  {nome:'Residencial Morada Real',url:'emp-residencial-morada-real.html',bairro:'Região de Arsenal · São Gonçalo',primary:'Região de Arsenal',secondary:'São Gonçalo'},
+  {nome:'Residencial Paineiras',url:'emp-residencial-paineiras.html',bairro:'Vila Nova · Nova Iguaçu',primary:'Vila Nova',secondary:'Nova Iguaçu'},
+  {nome:'Sensia Barra',url:'emp-sensia-barra.html',bairro:'Barra da Tijuca · Rio de Janeiro',primary:'Barra da Tijuca',secondary:'Rio de Janeiro'}
+];
+
+function renderRelacionados(){
+  try{
+    var el = document.getElementById('related-empreendimentos');
+    if(!el) return;
+    var slug = el.getAttribute('data-slug');
+    var self = null;
+    for(var i=0;i<REL_CATALOG.length;i++){ if(REL_CATALOG[i].url === slug){ self = REL_CATALOG[i]; break; } }
+    if(!self) return;
+    var picked = [];
+    var used = {};
+    used[self.url] = true;
+    function addFrom(list){
+      for(var i=0;i<list.length && picked.length<3;i++){
+        if(!used[list[i].url]){ picked.push(list[i]); used[list[i].url]=true; }
+      }
+    }
+    // tier 1: mesma zona (secundária), se não for genérico demais
+    if(self.secondary && self.secondary !== 'Rio de Janeiro'){
+      addFrom(REL_CATALOG.filter(function(x){ return x.secondary === self.secondary; }));
+    }
+    // tier 2: mesmo bairro/região primária (cobre casos onde a zona é genérica, ex: Campo Grande)
+    if(picked.length < 2){
+      addFrom(REL_CATALOG.filter(function(x){ return x.primary === self.primary; }));
+    }
+    // tier 3: qualquer outro, pra sempre ter pelo menos 2 sugestões
+    if(picked.length < 2){
+      addFrom(REL_CATALOG);
+    }
+    if(picked.length === 0){ el.closest('section').style.display='none'; return; }
+    el.innerHTML = picked.map(function(p){
+      return '<a class="related-card" href="'+p.url+'">'
+        + '<img src="emp-img/'+p.url.replace(/^emp-/,'').replace('.html','.jpg')+'" alt="'+p.nome+'" loading="lazy" onerror="this.style.display=\'none\'"/>'
+        + '<div><div class="rc-name">'+p.nome+'</div><div class="rc-loc">'+p.bairro+'</div></div>'
+        + '</a>';
+    }).join('');
+  }catch(e){}
+}
+document.addEventListener('DOMContentLoaded', renderRelacionados);

@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://paulocotrim.com.br/sitemap.xml
+Sitemap: https://paulocotrim.com/sitemap.xml
 
 # Bloquear páginas internas
 Disallow: /admin.html

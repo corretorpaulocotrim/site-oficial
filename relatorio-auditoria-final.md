@@ -1,6 +1,6 @@
 # Auditoria Final e Refinamento Premium — Relatório
 
-Site: paulocotrim.com.br (GitHub Pages) · Data: 14/07/2026
+Site: paulocotrim.com (GitHub Pages) · Data: 14/07/2026
 
 ## O que foi corrigido nesta rodada
 
@@ -24,7 +24,7 @@ Pra ativar: abra o Google Apps Script, cole o conteúdo de `google-apps-script-u
 
 **Modelo de mapa** — você disse que vai mandar um modelo padrão de mapa pra usar em todo o site. Não fiz nada aqui ainda porque não quero adivinhar o design.
 
-**Domínio paulocotrim.com.br** — segue fora do ar (erro de DNS/registro, não é do site). O GitHub Pages está funcionando normalmente.
+**Domínio paulocotrim.com** — segue fora do ar (erro de DNS/registro, não é do site). O GitHub Pages está funcionando normalmente.
 
 ## O que já estava certo (não precisou mexer)
 

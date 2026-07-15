@@ -487,7 +487,7 @@ window.baixarPropostaSimples = function(){
       <p>Paulo Cotrim cuida de toda a documentação e aprovação do seu financiamento em até 48h.</p>
       <a class="cta-wa" href="https://wa.me/5521989150864?text=Tenho%20interesse%20no%20${encodeURIComponent(p.nome)}!" target="_blank">Falar com nossa equipe de vendas</a>
     </div>
-    <div class="footer">Proposta gerada em ${new Date().toLocaleDateString('pt-BR')} · paulocotrim.com.br · corretorpaulocotrim@gmail.com</div>
+    <div class="footer">Proposta gerada em ${new Date().toLocaleDateString('pt-BR')} · paulocotrim.com · corretorpaulocotrim@gmail.com</div>
   </div>
   <script>window.onload=function(){window.print()}<\/script>
   </body></html>`);

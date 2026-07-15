@@ -19,8 +19,8 @@
  * ver leads.js) — sem precisar editar mais nada.
  * ------------------------------------------------------------------
  */
-var GA4_MEASUREMENT_ID = '';   // ex: 'G-ABC1234XYZ'
-var META_PIXEL_ID = '';        // ex: '123456789012345'
+var GA4_MEASUREMENT_ID = 'G-FXTZPVZW2X';
+var META_PIXEL_ID = '1758733705251535';
 
 (function(){
   // Ponte com os eventos que leads.js já dispara — não precisa duplicar
