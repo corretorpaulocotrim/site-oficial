@@ -511,9 +511,43 @@
     };
   })();
 
+  window.__initTrackingScripts = function(){
+    try{
+      if(typeof gtag === 'undefined' && !document.getElementById('ga4-tag')){
+        var gs = document.createElement('script');
+        gs.id = 'ga4-tag'; gs.async = true;
+        gs.src = 'https://www.googletagmanager.com/gtag/js?id=G-FXTZPVZW2X';
+        document.head.appendChild(gs);
+        window.dataLayer = window.dataLayer || [];
+        window.gtag = function(){ dataLayer.push(arguments); };
+        gtag('js', new Date());
+        gtag('config', 'G-FXTZPVZW2X');
+      } else if(typeof gtag !== 'undefined'){
+        gtag('consent','update',{analytics_storage:'granted',ad_storage:'granted',ad_user_data:'granted',ad_personalization:'granted'});
+      }
+      if(typeof fbq === 'undefined' && !document.getElementById('meta-pixel-base')){
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.id='meta-pixel-base';t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1758733705251535');
+        fbq('track', 'PageView');
+      } else if(typeof fbq !== 'undefined'){
+        fbq('consent','grant');
+      }
+    }catch(e){}
+  };
+
   (function(){
     try{
-      if(localStorage.getItem('cookieConsent')) return;
+      if(document.getElementById('cookie-bar')) return;
+      var saved = localStorage.getItem('pc_cookie_consent');
+      if(saved === 'all'){ window.__initTrackingScripts(); return; }
+      if(saved) return;
     }catch(e){ return; }
     var bar = document.createElement('div');
     bar.id = 'cookieConsentBar';
@@ -526,12 +560,12 @@
       + '</div>';
     document.body.appendChild(bar);
     document.getElementById('cookieAccept').onclick = function(){
-      try{ localStorage.setItem('cookieConsent','accepted'); }catch(e){}
-      if(window.__initTrackingScripts) window.__initTrackingScripts();
+      try{ localStorage.setItem('pc_cookie_consent','all'); }catch(e){}
+      window.__initTrackingScripts();
       bar.remove();
     };
     document.getElementById('cookieDecline').onclick = function(){
-      try{ localStorage.setItem('cookieConsent','declined'); }catch(e){}
+      try{ localStorage.setItem('pc_cookie_consent','essential'); }catch(e){}
       bar.remove();
     };
   })();
