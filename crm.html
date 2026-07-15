@@ -453,7 +453,7 @@ function formHTML(){
 }
 function renderFormLead(tid,modal){
   var el=document.getElementById(tid);if(!el)return;
-  el.innerHTML=formHTML()+"<div class='form-actions'>"+(modal?"<button class='btn-cancel' onclick='closeModal("modal-lead")'>Cancelar</button>":"<button class='btn-cancel' onclick='goPage("leads")'>Cancelar</button>")+"<button class='btn-submit' onclick='salvarLead("+modal+")'>Cadastrar Lead</button></div>";
+  el.innerHTML=formHTML()+"<div class='form-actions'>"+(modal?"<button class='btn-cancel' onclick='closeModal(\"modal-lead\")'>Cancelar</button>":"<button class='btn-cancel' onclick='goPage(\"leads\")'>Cancelar</button>")+"<button class='btn-submit' onclick='salvarLead("+modal+")'>Cadastrar Lead</button></div>";
 }
 function salvarLead(modal){
   var nome=document.getElementById("fl-nome").value.trim();
@@ -482,7 +482,7 @@ function searchLeads(v){
   var data=getLeads().filter(function(l){return l.nome.toLowerCase().includes(v.toLowerCase())||l.tel.includes(v)||(l.interesse||"").toLowerCase().includes(v.toLowerCase())});
   goPage("leads");
   var tb=document.getElementById("leads-tbody");if(!tb)return;
-  tb.innerHTML=data.length?data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td>"+( l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td>"+(l.data||"—")+"</td><td><button class='btn-sm' onclick='verPerfil("+l.id+")'>Ver</button></td></tr>"}).join(""):"<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128269;</div><p>Sem resultados para ""+v+""</p></div></td></tr>";
+  tb.innerHTML=data.length?data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td>"+( l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td>"+(l.data||"—")+"</td><td><button class='btn-sm' onclick='verPerfil("+l.id+")'>Ver</button></td></tr>"}).join(""):"<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128269;</div><p>Sem resultados para \""+v+"\"</p></div></td></tr>";
 }
 
 // LEAD ACTIONS
@@ -494,13 +494,12 @@ function verPerfil(id){
   document.getElementById("p-name").textContent=l.nome;
   document.getElementById("p-sub").textContent=l.interesse||"—";
   var hist=(l.hist||[]).map(function(h){return"<div class='tl-item'><div class='tl-dot act-dot gold'>&#11088;</div><div><div class='tl-action'>"+h.a+"</div><div class='tl-detail'>"+(h.d||"")+" &middot; "+h.t+"</div></div></div>"}).join("");
-  document.getElementById("modal-profile-body").innerHTML="<div style='display:flex;gap:8px;margin-bottom:16px'><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><span class='origin-tag'>"+(l.origem||"—")+"</span><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></div><div style='background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:16px'><div class='lp-row'><span class='lp-key'>WhatsApp</span><span>"+l.tel+"</span></div><div class='lp-row'><span class='lp-key'>E-mail</span><span>"+(l.email||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Orcamento</span><span>"+(l.orcamento||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Cadastro</span><span>"+(l.data||"—")+" "+(l.hora||"")+"</span></div>"+(l.obs?"<div class='lp-row'><span class='lp-key'>Obs.</span><span>"+l.obs+"</span></div>":"")+"</div><div style='font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px'>Historico</div><div>"+(hist||"<div style='font-size:13px;color:var(--muted)'>Sem registros</div>")+"</div><div style='display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9'><button class='btn-submit' style='flex:1' onclick='ligar("+l.id+");closeModal("modal-profile")'>&#128222; Ligar</button><button class='btn-sm green' onclick='zap("+l.id+")'>&#128172; WhatsApp</button><button class='btn-sm' onclick='editStatus("+l.id+")'>&#9998; Status</button></div>";
+  document.getElementById("modal-profile-body").innerHTML="<div style='display:flex;gap:8px;margin-bottom:16px'><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><span class='origin-tag'>"+(l.origem||"—")+"</span><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></div><div style='background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:16px'><div class='lp-row'><span class='lp-key'>WhatsApp</span><span>"+l.tel+"</span></div><div class='lp-row'><span class='lp-key'>E-mail</span><span>"+(l.email||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Orcamento</span><span>"+(l.orcamento||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Cadastro</span><span>"+(l.data||"—")+" "+(l.hora||"")+"</span></div>"+(l.obs?"<div class='lp-row'><span class='lp-key'>Obs.</span><span>"+l.obs+"</span></div>":"")+"</div><div style='font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px'>Historico</div><div>"+(hist||"<div style='font-size:13px;color:var(--muted)'>Sem registros</div>")+"</div><div style='display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9'><button class='btn-submit' style='flex:1' onclick='ligar("+l.id+");closeModal(\"modal-profile\")'>&#128222; Ligar</button><button class='btn-sm green' onclick='zap("+l.id+")'>&#128172; WhatsApp</button><button class='btn-sm' onclick='editStatus("+l.id+")'>&#9998; Status</button></div>";
   openModal("modal-profile");
 }
 function editStatus(id){
   var ls=getLeads();var i=ls.findIndex(function(x){return x.id===id});if(i<0)return;
-  var s=prompt("Novo status:
-novo / contato / proposta / visita / fechado / perdido",ls[i].status||"novo");
+  var s=prompt("Novo status:\nnovo / contato / proposta / visita / fechado / perdido",ls[i].status||"novo");
   if(!s)return;
   ls[i].status=s;ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Status: "+s,d:"",t:new Date().toLocaleString("pt-BR")});
   saveLeads(ls);closeModal("modal-profile");renderLeads();toast("Status atualizado!");
@@ -508,9 +507,8 @@ novo / contato / proposta / visita / fechado / perdido",ls[i].status||"novo");
 function exportCSV(){
   var ls=getLeads();if(!ls.length){toast("Nenhum lead para exportar");return}
   var rows=[["Nome","Telefone","Email","Origem","Interesse","Temperatura","Status","Orcamento","Data"].join(",")];
-  ls.forEach(function(l){rows.push([l.nome,l.tel,l.email||"",l.origem||"",l.interesse||"",l.temp,l.status||"",l.orcamento||"",l.data||""].map(function(v){return"""+v+"""}).join(","))});
-  var a=document.createElement("a");a.href="data:text/csv;charset=utf-8,﻿"+encodeURIComponent(rows.join("
-"));a.download="leads-"+new Date().toLocaleDateString("pt-BR").replace(/\//g,"-")+".csv";a.click();toast("CSV exportado!");
+  ls.forEach(function(l){rows.push([l.nome,l.tel,l.email||"",l.origem||"",l.interesse||"",l.temp,l.status||"",l.orcamento||"",l.data||""].map(function(v){return"\""+v+"\""}).join(","))});
+  var a=document.createElement("a");a.href="data:text/csv;charset=utf-8,﻿"+encodeURIComponent(rows.join("\n"));a.download="leads-"+new Date().toLocaleDateString("pt-BR").replace(/\//g,"-")+".csv";a.click();toast("CSV exportado!");
 }
 
 // DASHBOARD
@@ -542,7 +540,7 @@ function renderPipeline(){
 function renderImoveis(){
   var ims=getImoveis();var grid=document.getElementById("imovel-grid");if(!grid)return;
   if(!ims.length){grid.innerHTML="<div class='empty-state'><div class='icon'>&#127970;</div><p>Nenhum imovel cadastrado</p></div>";return}
-  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'><span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span><div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage("tabelas")'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast("Enviando por WhatsApp...")'>&#128228; Enviar</button></div></div></div>"}).join("");
+  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'><span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span><div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage(\"tabelas\")'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast(\"Enviando por WhatsApp...\")'>&#128228; Enviar</button></div></div></div>"}).join("");
 }
 function salvarImovel(){
   var nome=document.getElementById("ci-nome").value.trim();if(!nome){toast("Nome obrigatorio");return}
