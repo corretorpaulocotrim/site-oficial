@@ -138,6 +138,10 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .constr-strip .constr-body b{color:var(--ink);font-size:14.5px;display:block;margin-top:2px;margin-bottom:6px}
 .constr-strip .constr-body p{font-size:12.5px;color:var(--gray);line-height:1.5}
 .sim-card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:32px;max-width:900px;margin:0 auto}
+.hero-badges{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin-bottom:20px}
+.hero-badges .hero-status{margin-bottom:0}
+.hero-verified{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:30px;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);backdrop-filter:blur(6px)}
+.hero-verified svg{width:13px;height:13px;stroke:var(--gold);stroke-width:2.5;fill:none;flex-shrink:0}
 </style></head>
 <body>
 <header><div class="wrap nav">
@@ -163,7 +167,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 <section class="hero">
   <div class="hero-bg"></div><div class="hero-shade"></div>
   <div class="wrap hero-c">
-    <span class="hero-status" style="background:#0F6E8C">Lançamento</span>
+    <div class="hero-badges"><span class="hero-status" style="background:#0F6E8C">Lançamento</span><span class="hero-verified" title="Conferido por Paulo Cotrim, CRECI-RJ 77677-F"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9"/></svg>Conferido por Paulo · jul/2026</span></div>
     <h1 class="display">Residencial Paineiras</h1>
     <div class="hero-meta">
       <span><b>MRV</b><br>Construtora</span>
