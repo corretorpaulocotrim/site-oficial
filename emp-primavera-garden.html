@@ -142,6 +142,11 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 .hero-badges .hero-status{margin-bottom:0}
 .hero-verified{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;padding:6px 13px;border-radius:30px;color:#fff;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.32);backdrop-filter:blur(6px)}
 .hero-verified svg{width:13px;height:13px;stroke:var(--gold);stroke-width:2.5;fill:none;flex-shrink:0}
+.viz-card{display:flex;gap:14px;align-items:flex-start;background:var(--petrol-soft);border-radius:var(--r);padding:20px 22px;margin-bottom:18px}
+.viz-card-icon{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:var(--petrol);display:flex;align-items:center;justify-content:center}
+.viz-card-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}
+.viz-card-label{font-size:12px;font-weight:700;color:var(--petrol);text-transform:uppercase;letter-spacing:.04em;margin-bottom:5px}
+.viz-card-text{font-size:14px;color:var(--ink2);line-height:1.6;margin:0}
 </style></head>
 <body>
 <header><div class="wrap nav">
@@ -244,6 +249,7 @@ initSimuladorEmbed('fsimEmbed', {preco:null, construtora:'MRV', nome:'Primavera 
     <div class="eyebrow reveal">Localização</div>
     <h2 class="stitle display reveal" style="margin-bottom:20px">Onde fica o Primavera Garden</h2>
     <p class="reveal" style="font-size:14px;color:var(--gray);margin-bottom:18px;display:flex;align-items:flex-start;gap:7px"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:var(--gold);fill:none;stroke-width:2;flex-shrink:0;margin-top:2px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg><span><strong style="color:var(--ink)">Jardim Primavera · Duque de Caxias, RJ</strong> — localização aproximada da região; endereço exato sob consulta.</span></p>
+    <div class="viz-card reveal"><div class="viz-card-icon"><svg viewBox="0 0 24 24"><path d="M3 21h18M5 21V9l7-5 7 5v12M9 21v-6h6v6"/></svg></div><div><div class="viz-card-label">O que tem por perto</div><p class="viz-card-text">Em Duque de Caxias, município com forte presença industrial e comercial na Baixada Fluminense, bem servido por transporte público.</p></div></div>
     <div class="im-map-route-wrap">
       <div id="map-imovel" class="reveal" style="width:100%;height:360px;border-radius:var(--r);overflow:hidden;border:1px solid var(--line);box-shadow:var(--shadow-lg);margin-bottom:14px"></div>
       <div class="im-route-card reveal">
@@ -283,7 +289,7 @@ initSimuladorEmbed('fsimEmbed', {preco:null, construtora:'MRV', nome:'Primavera 
 
 <section class="section">
   <div class="wrap">
-    <div class="reveal" style="margin-top:16px;padding-top:16px;border-top:1px solid var(--line)"><div style="font-size:12px;font-weight:700;color:var(--ink);text-transform:uppercase;letter-spacing:.04em;margin-bottom:6px">Vizinhança</div><p style="font-size:13.5px;color:var(--gray);line-height:1.6">Em Duque de Caxias, município com forte presença industrial e comercial na Baixada Fluminense, bem servido por transporte público.</p></div>
+    
   </div>
 </section>
 
