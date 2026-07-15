@@ -248,7 +248,7 @@ a{color:inherit;text-decoration:none}
 .td-root .btn-wa{background:#3E8E5A;color:#fff;flex:1;min-width:180px}
 .td-root .btn-pdf{background:#0f2e36;color:#fff;flex:1;min-width:180px}
 .td-root .btn-google{background:#EA4335;color:#fff;min-width:160px}
-.td-root .btn-reset{background:#f5f6f7;color:#6b7280;border:1.5px solid #e8eaed;min-width:120px}
+.td-root .btn-reset{background:#f5f6f7;color:#6b7280;border:1.5px solid #e8eaed;min-width:120px}.td-root .btn-share{background:#fff;color:#b8873a;border:1.5px solid #b8873a;min-width:150px}
 .td-root .nota{font-size:10px;color:#9aa1a8;text-align:center;margin-top:1.5rem;line-height:1.8}
 @media(max-width:600px){
   .td-root .g2{grid-template-columns:1fr}
@@ -860,6 +860,7 @@ a{color:inherit;text-decoration:none}
         <div class="btn-row">
           <a class="tdbtn btn-wa" href="#" onclick="tdSendWA();return false;"><i class="ti ti-brand-whatsapp"></i>Falar com nossa equipe</a>
           <button class="tdbtn btn-pdf" onclick="tdBaixarProposta()"><i class="ti ti-download"></i>Baixar Proposta</button>
+          <button class="tdbtn btn-share" onclick="tdShareProposta(this)"><i class="ti ti-share-3"></i>Compartilhar</button>
           <button class="tdbtn btn-reset" onclick="tdResetar()"><i class="ti ti-refresh"></i>Resetar</button>
         </div>
 
@@ -1355,6 +1356,17 @@ function tdCalcReajuste(c,s4){
   var preR=c.tPre*Math.pow(1+incM,mPre);
   var posR=c.tPos*Math.pow(1+igpM,mPos);
   return{preR:preR,posR:posR,grandR:preR+posR,incAA:INCC_AA,igpAA:IGPM_AA};
+}
+function tdShareProposta(btn){
+  const c=tdCalc();
+  const txt='Proposta de investimento — '+tdCondLabel()+' ('+tdConsLabel()+'): total '+TDBRL(c.grand)+'. Fale com Paulo Cotrim:';
+  if(navigator.share){
+    navigator.share({title:'Proposta — '+tdCondLabel(),text:txt,url:location.href}).catch(function(){});
+  }else if(navigator.clipboard){
+    navigator.clipboard.writeText(location.href).then(function(){
+      if(btn){var orig=btn.innerHTML;btn.innerHTML='Link copiado!';setTimeout(function(){btn.innerHTML=orig;},2200);}
+    }).catch(function(){});
+  }
 }
 function tdBaixarProposta(){
   const tip=tdTipLabel();

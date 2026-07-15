@@ -622,6 +622,57 @@
     document.head.appendChild(style);
   })();
 
+  (function(){
+    if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return;
+    if(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return;
+    if(navigator.standalone) return;
+    if(localStorage.getItem('pwaInstallDismissed')) return;
+    var deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', function(e){
+      e.preventDefault();
+      deferredPrompt = e;
+      setTimeout(showInstallBanner, 20000);
+    });
+    window.addEventListener('appinstalled', function(){
+      localStorage.setItem('pwaInstallDismissed','1');
+      capture('pwa_instalado');
+      var b = document.getElementById('pwaInstallBanner');
+      if(b) b.remove();
+    });
+    function showInstallBanner(){
+      if(document.getElementById('pwaInstallBanner')) return;
+      var style = document.createElement('style');
+      style.textContent = '@keyframes pwaSlideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}';
+      document.head.appendChild(style);
+      var el = document.createElement('div');
+      el.id = 'pwaInstallBanner';
+      el.setAttribute('style','position:fixed;left:16px;right:16px;bottom:16px;z-index:9998;max-width:420px;margin:0 auto;background:#0f2e36;color:#fff;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 14px 40px rgba(15,46,54,.4);font-family:Inter,system-ui,sans-serif;animation:pwaSlideUp .4s cubic-bezier(.16,1,.3,1)');
+      el.innerHTML = ''
+        + '<div style="width:40px;height:40px;border-radius:11px;background:rgba(184,135,58,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e0b466" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg></div>'
+        + '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;margin-bottom:2px">Instalar o site como app</div><div style="font-size:11.5px;color:rgba(255,255,255,.65);line-height:1.4">O app é o próprio site — leve, rápido, sem baixar nada de loja. Acesso em 1 toque na tela inicial.</div></div>'
+        + '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">'
+        + '  <button id="pwaInstallBtn" style="background:#b8873a;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Instalar</button>'
+        + '  <button id="pwaInstallClose" aria-label="Fechar" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;text-decoration:underline">Agora não</button>'
+        + '</div>';
+      document.body.appendChild(el);
+      capture('pwa_banner_exibido');
+      document.getElementById('pwaInstallBtn').addEventListener('click', function(){
+        el.remove();
+        localStorage.setItem('pwaInstallDismissed','1');
+        if(deferredPrompt){
+          deferredPrompt.prompt();
+          deferredPrompt.userChoice.then(function(choice){ capture('pwa_prompt_resultado', {escolha:choice.outcome}); });
+          deferredPrompt = null;
+        }
+      });
+      document.getElementById('pwaInstallClose').addEventListener('click', function(){
+        el.remove();
+        localStorage.setItem('pwaInstallDismissed','1');
+        capture('pwa_banner_dispensado');
+      });
+    }
+  })();
+
   window.leadCapture = capture;
 })();
 

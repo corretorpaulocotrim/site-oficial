@@ -227,6 +227,10 @@ function fsimHTML(nome, precoConhecido, precoInicial, apresentacao){
     +'      <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M12 3v12m0 0l-4-4m4 4l4-4M5 21h14"/></svg>'
     +'      Baixar resumo (com ou sem simulação)'
     +'    </button>'
+    +'    <button class="btn-ghost" onclick="fsimShare(this,\''+nome.replace(/'/g,"\\'")+'\')">'
+    +'      <svg class="ic ic-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/></svg>'
+    +'      Compartilhar simulação'
+    +'    </button>'
     + btnApresentacao
     +'  </div>'
     +'  <div style="font-size:11px;color:var(--gray);margin-top:10px">Esta é uma simulação inicial. A aprovação oficial depende da análise da construtora e da instituição financeira.</div>'
@@ -314,6 +318,10 @@ function fsimUpdate(){
   var out = ''
     +'<div class="sim-out-card hl"><div class="l">Financiamento estimado ('+(c.mod==='sbpe'?'SBPE':'MCMV')+')</div><div class="v">'+fmtBRL(c.financiado)+'</div></div>'
     +'<div class="sim-out-card"><div class="l">Entrada total</div><div class="v">'+fmtBRL(c.entrada)+'</div></div>';
+  out += '<div class="sim-out-card" style="grid-column:1/-1;background:linear-gradient(90deg,#fbf7ee,#fdf9ef);border:1.5px solid #b8873a;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px">'
+    +'<div><div class="l" style="color:#0f2e36">Compre este imóvel de '+fmtBRL(c.preco)+' sem sair de casa</div>'
+    +'<div style="font-size:11.5px;color:#6b7280;margin-top:3px;font-weight:400">Aprovação Expressa: documentação, análise e assinatura 100% online — funciona pra imóveis em obras ou já prontos.</div></div>'
+    +'<a href="aprovacao-expressa.html" style="background:#b8873a;color:#fff;font-size:12px;font-weight:700;padding:9px 16px;border-radius:8px;text-decoration:none;white-space:nowrap;flex-shrink:0">Ver como funciona →</a></div>';
   if(c.atoEntrada>0) out += '<div class="sim-out-card"><div class="l">Pago no ato da assinatura</div><div class="v">'+fmtBRL(c.atoEntrada)+'</div></div>';
   if(c.valorChave>0) out += '<div class="sim-out-card"><div class="l">Abatido com valor na entrega das chaves</div><div class="v">'+fmtBRL(c.valorChave)+'</div></div>';
   out += '<div class="sim-out-card"><div class="l">Parcelável sem juros na obra (até 20%)</div><div class="v">'+fmtBRL(c.parcelavelObra)+'</div></div>'
@@ -411,6 +419,17 @@ function fsimWhatsapp(nome){
   window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');
 }
 
+function fsimShare(btn,nome){
+  var c=FSIM_LAST;
+  var txt=c?('Simulei o financiamento de '+nome+' com o Paulo Cotrim — financiamento estimado '+fmtBRL(c.financiado)+', entrada '+fmtBRL(c.entrada)+'. Dá uma olhada:'):('Simulei o financiamento de '+nome+' com o Paulo Cotrim — dá uma olhada:');
+  if(navigator.share){
+    navigator.share({title:'Simulação — '+nome,text:txt,url:location.href}).catch(function(){});
+  }else if(navigator.clipboard){
+    navigator.clipboard.writeText(location.href).then(function(){
+      if(btn){var orig=btn.innerHTML;btn.innerHTML='Link copiado!';setTimeout(function(){btn.innerHTML=orig;},2200);}
+    }).catch(function(){});
+  }
+}
 function fsimDownload(nome){
   var c = FSIM_LAST;
   var incluirSim = !!c;
