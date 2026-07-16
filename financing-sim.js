@@ -272,6 +272,63 @@ function initSimuladorEmbed(containerId, opts){
     +'</div>';
 }
 
+/* ---------- PLANTAS REAIS: extraidas das apresentacoes oficiais das construtoras ---------- */
+var PLANTAS_REAIS = {
+  "emp-primor-carioca.html": [
+    {img:"plantas/primor-carioca-apto112.png", label:"Apto 112 · Torre 02 · 2 quartos"},
+    {img:"plantas/primor-carioca-apto110.png", label:"Apto 110 · Torre 02 · 2 quartos"}
+  ]
+};
+
+function fsimPlantasHTML(entry){
+  var slug = (entry && entry.url) || '';
+  var reais = PLANTAS_REAIS[slug];
+  if(reais && reais.length){
+    return '<div class="plantas-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px">'
+      + reais.map(function(p){
+          return '<div style="background:#fff;border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:0 1px 4px rgba(15,46,54,.05)">'
+            + '<img src="'+p.img+'" alt="'+p.label+'" loading="lazy" style="width:100%;height:auto;display:block;cursor:zoom-in" onclick="window.open(this.src,\'_blank\')"/>'
+            + '<div style="padding:10px 14px;font-size:12.5px;font-weight:600;color:var(--ink)">'+p.label+'</div>'
+            + '</div>';
+        }).join('')
+      + '</div>'
+      + '<p style="font-size:11px;color:var(--gray);margin-top:10px">Plantas de divulgação oficial da construtora — imagem ilustrativa, sujeita a alterações no memorial descritivo.</p>';
+  }
+  return '<div style="background:var(--mist);border:1px dashed var(--line);border-radius:14px;padding:28px 24px;text-align:center;max-width:520px;margin:0 auto">'
+    + '<div style="font-size:14.5px;font-weight:600;color:var(--ink);margin-bottom:6px">Plantas em atualização</div>'
+    + '<p style="font-size:13px;color:var(--gray);line-height:1.6;margin-bottom:16px">Ainda não recebi as plantas oficiais deste empreendimento da construtora. Me chama no WhatsApp que eu te envio assim que estiverem disponíveis — ou já te mando a planta-base semelhante de outro imóvel da mesma faixa.</p>'
+    + '<a href="https://wa.me/5521989150864?text='+encodeURIComponent('Olá! Quero receber as plantas do imóvel que vi no seu site.')+'" target="_blank" style="display:inline-flex;align-items:center;gap:7px;background:var(--gold);color:#fff;padding:10px 18px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Pedir plantas pelo WhatsApp</a>'
+    + '</div>';
+}
+
+function fsimInjectPlantas(){
+  try{
+    var anchor = document.getElementById('related-empreendimentos');
+    if(!anchor) return;
+    var parentSection = anchor.closest('section');
+    if(!parentSection || document.getElementById('fsimPlantasSection')) return;
+    var slug = anchor.getAttribute('data-slug') || '';
+    var entry = null;
+    for(var i=0;i<FSIM_CATALOG.length;i++){ if(FSIM_CATALOG[i].url === slug){ entry = FSIM_CATALOG[i]; break; } }
+    var nomeAtual = entry ? entry.nome : (document.querySelector('h1') ? document.querySelector('h1').textContent.trim() : 'este imóvel');
+    var sec = document.createElement('section');
+    sec.className = 'section';
+    sec.id = 'fsimPlantasSection';
+    sec.innerHTML = ''
+      + '<div class="wrap">'
+      + '  <div class="eyebrow reveal">Plantas</div>'
+      + '  <h2 class="stitle display reveal" style="margin-bottom:20px">Plantas do '+nomeAtual+'</h2>'
+      + '  ' + fsimPlantasHTML({url: slug})
+      + '</div>';
+    parentSection.parentNode.insertBefore(sec, parentSection);
+  }catch(e){}
+}
+if(document.readyState==='loading'){
+  document.addEventListener('DOMContentLoaded', fsimInjectPlantas);
+} else {
+  fsimInjectPlantas();
+}
+
 function fsimVerdictHTML(c){
   var headline, tone;
   if(c.acimaDoTeto){
