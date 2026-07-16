@@ -58,6 +58,10 @@
     capture('tabela_direta_calculada', {empreendimento: empreendimento||'', tipologia: tipologia||'', valor: valor||''});
   };
 
+  window.leadNewsletter = function(email){
+    capture('newsletter_inscricao', {email: email||''});
+  };
+
   var scroll50fired = false;
   window.addEventListener('scroll', function(){
     if(!scroll50fired && (window.scrollY/(document.body.scrollHeight-window.innerHeight))>.5){
@@ -943,5 +947,53 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     document.addEventListener('DOMContentLoaded', addWatermarks);
   } else {
     addWatermarks();
+  }
+})();
+
+
+/* ---------- NEWSLETTER: opt-in de novidades no rodape (sitewide) ---------- */
+(function(){
+  function emailValido(v){
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
+  }
+  function injectNewsletter(){
+    var footer = document.querySelector('footer');
+    if(!footer || document.getElementById('nlStrip')) return;
+    if(localStorage.getItem('pc_newsletter_ok')) return;
+
+    var wrap = document.createElement('div');
+    wrap.id = 'nlStrip';
+    wrap.style.cssText = 'background:var(--petrol,#0f2e36);color:#fff;padding:36px 0';
+    wrap.innerHTML = ''
+      + '<div class="wrap" style="max-width:1100px;margin:0 auto;padding:0 32px;display:flex;gap:22px;align-items:center;justify-content:space-between;flex-wrap:wrap">'
+      + '  <div style="max-width:420px">'
+      + '    <div style="font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;margin-bottom:5px">Novidades de lançamentos e condições MCMV</div>'
+      + '    <div style="font-size:13px;color:rgba(255,255,255,.68);line-height:1.5">Receba por e-mail quando eu adicionar novos empreendimentos ou mudar uma tabela de preço. Sem spam, cancele quando quiser.</div>'
+      + '  </div>'
+      + '  <form id="nlForm" style="display:flex;gap:8px;flex-wrap:wrap;flex:1;max-width:420px;min-width:260px">'
+      + '    <input type="email" id="nlEmail" required placeholder="Seu melhor e-mail" style="flex:1;min-width:180px;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:14px;font-family:inherit">'
+      + '    <button type="submit" style="background:var(--gold,#b8873a);color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;white-space:nowrap">Quero receber</button>'
+      + '  </form>'
+      + '</div>';
+    footer.parentNode.insertBefore(wrap, footer);
+
+    var form = wrap.querySelector('#nlForm');
+    var input = wrap.querySelector('#nlEmail');
+    form.addEventListener('submit', function(e){
+      e.preventDefault();
+      var v = input.value.trim();
+      if(!emailValido(v)){
+        input.style.borderColor = '#e0736b';
+        return;
+      }
+      if(window.leadNewsletter) window.leadNewsletter(v);
+      localStorage.setItem('pc_newsletter_ok', '1');
+      wrap.querySelector('.wrap').innerHTML = '<div style="font-size:14.5px;font-weight:600">Inscrito! Você vai receber as novidades em '+v+'.</div>';
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', injectNewsletter);
+  } else {
+    injectNewsletter();
   }
 })();
