@@ -150,6 +150,15 @@ section{padding:64px 0}
 .wa-fab a{background:var(--gold);color:#fff;border-radius:50px;padding:14px 22px;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(184,135,58,.35);display:flex;align-items:center;gap:8px;transition:transform .35s var(--ease),box-shadow .35s var(--ease);text-decoration:none;white-space:nowrap}
 .wa-fab a:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(184,135,58,.42)}
 @media(max-width:600px){.wa-fab a span:last-child{display:none}.wa-fab a{padding:14px;border-radius:50%}}
+.app-marquee{overflow:hidden;padding:4px 0;margin-bottom:22px;white-space:nowrap}
+.app-marquee-track{display:inline-flex;gap:14px;animation:appMarqueeScroll 11s linear infinite}
+.app-marquee:hover .app-marquee-track{animation-play-state:paused}
+.app-chip{display:inline-flex;align-items:center;padding:11px 22px;border-radius:12px;font-family:'Inter',sans-serif;font-weight:800;font-size:15px;letter-spacing:.01em;box-shadow:0 2px 10px rgba(0,0,0,.16)}
+.app-chip-uber{background:#000;color:#fff}
+.app-chip-99{background:#FFD100;color:#111}
+.app-chip-ifood{background:#EA1D2C;color:#fff}
+@keyframes appMarqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.app-marquee-track{animation:none}}
 </style>
 </head>
 <body>
@@ -266,6 +275,12 @@ section{padding:64px 0}
   <div class="wrap">
     <div class="sec-tag fade-in">Plataformas aceitas</div>
     <h2 class="sec-h2 fade-in">Uber, 99 ou iFood — qualquer uma serve</h2>
+    <div class="app-marquee fade-in"><div class="app-marquee-track">
+      <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+      <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+      <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+      <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+    </div></div>
     <div class="plat-grid">
       <div class="plat-card fade-in"><div class="plat-name">Uber</div><span class="plat-ok"><svg viewBox="0 0 24 24" width="12" height="12" style="stroke:currentColor;fill:none;stroke-width:3"><polyline points="20 6 9 17 4 12"/></svg>Relatório aceito</span></div>
       <div class="plat-card fade-in"><div class="plat-name">99</div><span class="plat-ok"><svg viewBox="0 0 24 24" width="12" height="12" style="stroke:currentColor;fill:none;stroke-width:3"><polyline points="20 6 9 17 4 12"/></svg>Relatório aceito</span></div>

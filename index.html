@@ -489,6 +489,37 @@ footer .wrap{position:relative;z-index:1}
 .constr-marquee-item:hover{opacity:1;color:var(--petrol)}
 @keyframes constrScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.constr-marquee-track{animation:none}}
+
+/* QUER MORAR ONDE — gancho visual de regiao logo apos o hero */
+.qmo-section{padding:56px 0 12px}
+.qmo-head-center{text-align:center;max-width:560px;margin:0 auto 32px}
+.qmo-head-center .sec-eyebrow{text-align:center}
+.qmo-head-center .sec-title{max-width:none;text-align:center}
+.qmo-head-center .sec-sub{max-width:none;text-align:center;margin:0 auto}
+.qmo-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+@media(max-width:900px){.qmo-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.qmo-grid{grid-template-columns:1fr}}
+.qmo-card{position:relative;height:300px;border-radius:20px;overflow:hidden;background-size:cover;background-position:center;cursor:pointer;box-shadow:var(--shadow);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.qmo-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.qmo-card::before{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(9,20,24,.94) 0%,rgba(9,20,24,.38) 58%,rgba(9,20,24,.08) 100%);transition:opacity .4s var(--ease)}
+.qmo-card:hover::before{opacity:.88}
+.qmo-overlay{position:absolute;inset:0;padding:20px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;z-index:1}
+.qmo-count{align-self:flex-start;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.28);font-size:11px;font-weight:700;padding:5px 12px;border-radius:30px;margin-bottom:auto;text-transform:uppercase;letter-spacing:.03em}
+.qmo-name{font-family:'Fraunces',Georgia,serif;font-size:24px;font-weight:600;letter-spacing:-.01em;margin-bottom:4px}
+.qmo-sub{font-size:12px;opacity:.82;margin-bottom:10px;line-height:1.4}
+.qmo-price{font-size:13px;font-weight:700;color:var(--gold2);margin-bottom:10px}
+.qmo-cta{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:700;color:#fff;transition:gap .3s var(--ease)}
+.qmo-card:hover .qmo-cta{gap:10px}
+/* MARQUEE DE APPS (Uber/99/iFood) -- gancho visual com efeito de movimento */
+.app-marquee{overflow:hidden;padding:4px 0;white-space:nowrap}
+.app-marquee-track{display:inline-flex;gap:14px;animation:appMarqueeScroll 11s linear infinite}
+.app-marquee:hover .app-marquee-track{animation-play-state:paused}
+.app-chip{display:inline-flex;align-items:center;padding:11px 22px;border-radius:12px;font-family:'Inter',sans-serif;font-weight:800;font-size:15px;letter-spacing:.01em;box-shadow:0 2px 10px rgba(0,0,0,.16)}
+.app-chip-uber{background:#000;color:#fff}
+.app-chip-99{background:#FFD100;color:#111}
+.app-chip-ifood{background:#EA1D2C;color:#fff}
+@keyframes appMarqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@media(prefers-reduced-motion:reduce){.app-marquee-track{animation:none}}
 </style>
 </head>
 <body>
@@ -646,6 +677,18 @@ footer .wrap{position:relative;z-index:1}
   </div>
 </section>
 
+<!-- QUER MORAR ONDE -->
+<section class="qmo-section">
+  <div class="wrap">
+    <div class="qmo-head-center reveal">
+      <div class="sec-eyebrow">Comece por aqui</div>
+      <h2 class="sec-title display">Quer morar onde?</h2>
+      <p class="sec-sub">Escolha a região e eu já separo os lançamentos, o mapa e os preços certos pra você.</p>
+    </div>
+    <div class="qmo-grid" id="qmoGrid"></div>
+  </div>
+</section>
+
 <!-- MARQUEE DE CONSTRUTORAS PARCEIRAS -->
 <div class="constr-marquee"><div class="constr-marquee-track"><span class="constr-marquee-item">Cury</span><span class="constr-marquee-item">MRV</span><span class="constr-marquee-item">Emccamp</span><span class="constr-marquee-item">Direcional</span><span class="constr-marquee-item">Riva Incorporadora</span><span class="constr-marquee-item">Tegra Incorporadora</span><span class="constr-marquee-item">Cyrela · Living</span><span class="constr-marquee-item">CTV Engenharia</span><span class="constr-marquee-item">Crescer</span><span class="constr-marquee-item">Sensia · MRV&CO</span><span class="constr-marquee-item">Cury</span><span class="constr-marquee-item">MRV</span><span class="constr-marquee-item">Emccamp</span><span class="constr-marquee-item">Direcional</span><span class="constr-marquee-item">Riva Incorporadora</span><span class="constr-marquee-item">Tegra Incorporadora</span><span class="constr-marquee-item">Cyrela · Living</span><span class="constr-marquee-item">CTV Engenharia</span><span class="constr-marquee-item">Crescer</span><span class="constr-marquee-item">Sensia · MRV&CO</span></div></div>
 
@@ -746,9 +789,15 @@ footer .wrap{position:relative;z-index:1}
           </div>
         </div>
         <div class="ae-promo-stats">
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">Uber</span><span class="ae-promo-stat-lbl">relatório de ganhos aceito</span></div>
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">99</span><span class="ae-promo-stat-lbl">relatório de ganhos aceito</span></div>
-          <div class="ae-promo-stat"><span class="ae-promo-stat-num">iFood</span><span class="ae-promo-stat-lbl">relatório de ganhos aceito</span></div>
+          <div class="ae-promo-stat" style="grid-column:1/-1">
+            <div class="app-marquee"><div class="app-marquee-track">
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+            </div></div>
+            <span class="ae-promo-stat-lbl">relatório de ganhos aceito de qualquer uma delas</span>
+          </div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">4 meses</span><span class="ae-promo-stat-lbl">de uma única plataforma</span></div>
         </div>
       </div>
@@ -1049,6 +1098,36 @@ function buildShowcase(){
 }
 buildConstrutoraFilters();
 buildShowcase();
+/* ---------- QUER MORAR ONDE: cards dinamicos por regiao (usa zonaKey, definido abaixo, via hoisting) ---------- */
+var QMO_ZONAS=[
+  {key:"centro",nome:"Porto Maravilha",sub:"Centro · Santo Cristo · Praça Onze",img:"emp-img/saudosa-praca-onze.jpg"},
+  {key:"zona-norte",nome:"Zona Norte",sub:"Méier · Madureira · Piedade · Engenho de Dentro",img:"emp-img/mrv-ritmos-de-pilares.jpg"},
+  {key:"zona-oeste",nome:"Zona Oeste",sub:"Jacarepaguá · Praça Seca",img:"emp-img/village-caribe.jpg"},
+  {key:"niteroi",nome:"Niterói",sub:"Centro · Pendotiba · Orla",img:"emp-img/orla-central.jpg"}
+];
+function qmoParsePreco(s){var m=s&&s.match(/R\$\s*([\d.]+)/);if(!m)return null;var n=parseInt(m[1].replace(/\./g,""),10);return isNaN(n)?null:n;}
+function buildQmo(){
+  var grid=document.getElementById("qmoGrid");
+  if(!grid)return;
+  var html="";
+  QMO_ZONAS.forEach(function(z){
+    var items=EMP.filter(function(e){return zonaKey(e)===z.key;});
+    var count=items.length;
+    var prices=items.map(function(e){return qmoParsePreco(e.preco);}).filter(function(n){return n;});
+    var min=prices.length?Math.min.apply(null,prices):null;
+    var priceLbl=min?"a partir de R$ "+Math.round(min/1000)+" mil":"consulte valores";
+    html+='<div class="qmo-card reveal" style="background-image:url(\''+z.img+'\')" onclick="pickRegion(\''+z.key+'\')">'
+      +'<div class="qmo-overlay">'
+      +'<div class="qmo-count">'+count+' empreendimento'+(count===1?'':'s')+'</div>'
+      +'<div class="qmo-name">'+z.nome+'</div>'
+      +'<div class="qmo-sub">'+z.sub+'</div>'
+      +'<div class="qmo-price">'+priceLbl+'</div>'
+      +'<div class="qmo-cta">Ver imóveis<svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></svg></div>'
+      +'</div></div>';
+  });
+  grid.innerHTML=html;
+}
+buildQmo();
 function cKey(c){c=c.toLowerCase();if(c.indexOf("cury")>=0)return"cury";if(c.indexOf("cyrela")>=0||c.indexOf("living")>=0)return"cyrela";if(c.indexOf("mrv")>=0)return"mrv";if(c.indexOf("direcional")>=0||c.indexOf("vivaz")>=0)return"direcional";return"outras";}
 function zonaKey(e){var b=e.bairro.toLowerCase();
   if(b.indexOf("niter")>=0)return"niteroi";

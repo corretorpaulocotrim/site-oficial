@@ -371,15 +371,6 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
   </div>
 </section>
 
-<section class="section section-mist" id="simulador">
-  <div class="wrap">
-    <div class="eyebrow reveal">Aprovação Expressa · Simulação</div>
-    <h2 class="stitle display reveal" style="margin-bottom:12px">Faça sua simulação do Primor Carioca — Fase 2</h2>
-    <p class="ssub reveal" style="margin-bottom:28px">Informe sua renda e veja o financiamento estimado, a entrada e as opções de parcelamento — inclusive a possibilidade de ir para as chaves sem precisar de entrada à vista. Simulação educativa e não vinculante; a <a href="aprovacao-expressa.html" style="color:var(--gold);font-weight:600">Aprovação Expressa</a> com o Paulo confirma os valores reais direto com a Caixa.</p>
-    <div id="fsimEmbed"></div>
-  </div>
-</section>
-
 <section class="section section-mist">
   <div class="wrap">
     <div class="eyebrow reveal">Localização</div>
@@ -627,13 +618,6 @@ var SIMU_UNIDADE = "Apartamento (PCD), 1 quarto";
 // Usa o módulo de simulação compartilhado (financing-sim.js) — o mesmo das
 // outras 30 páginas de empreendimento, já com o plano de pagamento editável,
 // FGTS, reforço de dezembro e a lógica de entrada/financiado corrigida.
-initSimuladorEmbed('fsimEmbed', {
-  nome: 'Primor Carioca — Fase 2',
-  construtora: 'MRV',
-  bairro: 'Inhaúma · Zona Norte',
-  preco: SIMU_PRECO,
-  apresentacao: 'primor-carioca.pdf'
-});
 
 // Troca o botão padrão "Baixar resumo" pela versão especial desta página:
 // tabela de vendas com QR code + simulação embutida (baixarManualPDF()).

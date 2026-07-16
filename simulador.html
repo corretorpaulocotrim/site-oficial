@@ -340,8 +340,19 @@ function calc(){
     construtora,posChavesMax,posChavesElegivel,posChavesQtdEfetivo,posChavesTotal};
 }
 function zerarFluxo(){
-  var c=calc();
   var alvo=S.zerarAlvo;
+  // Primeira vez que roda com tudo zerado: sugere uma composicao realista de pagamento
+  // (ato pequeno + reforcos anuais redondos e iguais + parcela mensal confortavel e menor
+  // que o reforco anual) em vez de jogar a entrada inteira dentro de um unico campo.
+  var virgem = S.ato===0 && S.anuaisValor===0 && S.valorChaves===0 && S.parcelaUnica===0 && S.mensaisValor===0;
+  if(virgem){
+    var c0=calc();
+    if(alvo!=='ato') S.ato=Math.round(c0.entrada*0.04);
+    if(alvo!=='anuais' && S.anuaisQtd>0) S.anuaisValor=3000;
+    if(alvo!=='chaves') S.valorChaves=3000;
+    if(alvo!=='mensais') S.mensaisValor=2000;
+  }
+  var c=calc();
   var outros=0;
   if(alvo==='ato') outros=c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+S.valorChaves+c.posChavesTotal;
   else if(alvo==='mensais') outros=S.ato+c.anuaisTotal+S.parcelaUnica+S.valorChaves+c.posChavesTotal;
@@ -351,7 +362,23 @@ function zerarFluxo(){
   else if(alvo==='poschaves') outros=S.ato+c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+S.valorChaves;
   var restante=Math.max(0,c.entrada-outros);
   if(alvo==='ato') S.ato=restante;
-  else if(alvo==='mensais') S.mensaisValor=S.mensaisQtd>0?restante/S.mensaisQtd:0;
+  else if(alvo==='mensais'){
+    // a quantidade de meses segue a previsao real ate as chaves deste condominio
+    // (lancamento=42, obras=24, pronto=sem periodo de obra) -- e o valor mensal
+    // e o que sobra dividido por essa quantidade. So cai no valor fixo redondo
+    // (2.000, resolvendo a quantidade) quando nao ha uma data de entrega pra usar
+    // como referencia (empreendimento customizado ou ja pronto).
+    var emp = (!S.useCustom) ? CATALOG[S.empIdx] : null;
+    var mesesRef = emp ? mesesObraEstimado(emp.s) : 0;
+    if(mesesRef>0){
+      S.mensaisQtd = mesesRef;
+      S.mensaisValor = restante/mesesRef;
+    } else {
+      var valorFixo = S.mensaisValor>0?S.mensaisValor:2000;
+      S.mensaisValor = valorFixo;
+      S.mensaisQtd = valorFixo>0?Math.max(1,Math.ceil(restante/valorFixo)):S.mensaisQtd;
+    }
+  }
   else if(alvo==='anuais') S.anuaisValor=S.anuaisQtd>0?restante/S.anuaisQtd:0;
   else if(alvo==='unica') S.parcelaUnica=restante;
   else if(alvo==='chaves') S.valorChaves=restante;
@@ -488,6 +515,7 @@ function renderSim(){
   var head='<div class="hdr2"><div class="hdr2-top"><div class="hdr2-left">'
     +'<div class="av">'+(fotoPaulo?'<img src="'+fotoPaulo+'" alt="Paulo"/>':'PC')+'</div>'
     +'<div><div class="hdr2-name">Paulo Cotrim</div><div class="hdr2-sub">Especialista em Financiamento Imobiliário — Simulador Profissional</div></div></div>'
+    +'<a class="wa-btn2" href="aprovacao-expressa.html" style="text-decoration:none;background:#3E8E5A;text-align:center;display:inline-flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Enviar meus documentos e pedir aprovação</a>'
     +'<button class="wa-btn2" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Enviar pelo WhatsApp</button>'
     +'<button class="wa-btn2" style="background:transparent;border:1.5px solid var(--gold2);color:var(--gold2)" onclick="baixarResumoSimulacao()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar Resumo + Simulação</button>'
     +'<button class="wa-btn2" style="background:transparent;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85);margin-top:8px" onclick="shareSim(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/></svg>Compartilhar simulação</button>'
@@ -551,6 +579,7 @@ function renderResumo(c){
     +'<p style="font-size:10.5px;color:#94a3b8;margin-top:12px">Estimativa educativa com base na tabela oficial do Minha Casa Minha Vida 2026 — a Caixa confirma taxa, subsídio, prazo e valor exatos após análise de crédito. Valores sujeitos à análise oficial da instituição financeira e da construtora.</p>'
     +'<div style="margin-top:16px;padding-top:14px;border-top:.5px solid var(--border)">'
     +'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Seu nome completo</label><input type="text" value="'+S.clienteNome+'" oninput="updCliente(\'clienteNome\',this.value)"></div><div class="fi2"><label>Seu WhatsApp</label><input type="text" value="'+S.clienteTel+'" oninput="updCliente(\'clienteTel\',this.value)"></div></div>'
+    +'<a class="btn-pg" href="aprovacao-expressa.html" style="text-decoration:none;background:#3E8E5A;text-align:center;display:inline-flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Enviar meus documentos e pedir aprovação</a>'
     +'<button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com nossa equipe no WhatsApp</button>'
     +'<button class="btn-pg" style="background:transparent;border:1.5px solid var(--gold);color:var(--navy)" onclick="baixarResumoSimulacao()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar Resumo + Simulação</button>'
     +'<button class="btn-pn" style="background:transparent;border:1.5px solid var(--border);color:var(--text2)" onclick="shareSim(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/></svg>Compartilhar simulação</button>'
@@ -588,6 +617,7 @@ function renderFluxo(c){
       +'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' costuma estender o que exceder o parcelável da obra para depois da entrega das chaves, em até '+c.posChavesMax+'x. Digite a quantidade de parcelas que quer usar e o ZERAR calcula o valor de cada uma.</p>')
       :(c.construtora?'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' não trabalha com parcelamento pós-chaves nesta simulação — o que exceder o parcelável da obra e o FGTS costuma precisar ser pago à vista na assinatura. Vale confirmar com o Paulo se há condição especial para este empreendimento.</p>':''))
     +'<button type="button" class="btn-pg btn-zerar" onclick="zerarFluxo()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg>ZERAR — completar automaticamente</button>'
+    +'<p style="font-size:10.5px;color:#b7bec2;margin-top:8px;font-style:italic">Valores sugeridos automaticamente (ato de entrada, reforços e mensais) — ajuste como quiser, isso não é compromisso final.</p>'
     +'</div>'
     +'<div class="ssec s1x"><div class="ssh" style="cursor:default"><h3>Total do fluxo montado</h3></div><div class="ssb">'
     +'<div class="mets2">'

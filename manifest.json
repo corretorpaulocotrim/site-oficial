@@ -1,7 +1,7 @@
 {
-  "name": "Paulo Cotrim — Inteligência Imobiliária no Rio de Janeiro",
-  "short_name": "Paulo Cotrim",
-  "description": "Lançamentos de todas as principais construtoras no Rio de Janeiro. +700 famílias atendidas. Aprovação em 48h. CRECI-RJ 77677-F.",
+  "name": "Quer morar onde? — Paulo Cotrim Imobiliária",
+  "short_name": "Quer Morar Onde",
+  "description": "Escolha o bairro, veja o imóvel, simule o financiamento, envie seus documentos e receba a aprovação — tudo com Paulo Cotrim. CRECI-RJ 77677-F.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0f2e36",
