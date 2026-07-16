@@ -281,6 +281,10 @@ var PLANTAS_REAIS = {
   "emp-ctv-beat.html": [
     {img:"plantas/ctv-beat-tipo02.jpg", label:"Apartamento Tipo 02 · 2 quartos · 46,95m²"},
     {img:"plantas/ctv-beat-cobertura01.jpg", label:"Cobertura Tipo 01 · 2 quartos duplex · até 93,30m²"}
+  ],
+  "emp-village-caribe.html": [
+    {img:"plantas/caribe-tipo-padrao.jpg", label:"Tipo padrão · Quarto + suíte · 60,99 a 61,35m²"},
+    {img:"plantas/caribe-cobertura.jpg", label:"Cobertura duplex · Quarto + suíte · até 126,74m²"}
   ]
 };
 
