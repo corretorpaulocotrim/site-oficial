@@ -732,7 +732,7 @@
     var waHref = oldLink ? oldLink.getAttribute('href') : ('https://wa.me/'+WA_NUM);
     cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
       + '<a class="sc-btn" style="background:#0f2e36;color:#fff" href="simulador.html">Simular financiamento</a>'
-      + '<a class="sc-btn" style="background:#b8873a;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
+      + '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
   })();
 
   (function(){

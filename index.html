@@ -395,9 +395,9 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .cta-band::before{content:'';position:absolute;inset:0;background:radial-gradient(600px 200px at 50% 0%,rgba(184,135,58,.16),transparent 70%);pointer-events:none}
 .cta-band h2{font-size:clamp(26px,3.4vw,38px);letter-spacing:-.02em;line-height:1.12;margin-bottom:14px;color:#fff}
 .cta-band p{font-size:16px;color:rgba(255,255,255,.7);max-width:48ch;margin:0 auto 30px;line-height:1.6}
-.btn-gold{background:var(--gold);color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 28px;border:none;border-radius:11px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 10px 26px rgba(184,135,58,.3),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .5s var(--ease),box-shadow .5s var(--ease),background-color .4s var(--ease);position:relative;z-index:1;overflow:hidden;isolation:isolate}
+.btn-gold{background:#1a8f4c;color:#fff;display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 28px;border:none;border-radius:11px;font-family:inherit;font-size:15px;font-weight:600;cursor:pointer;box-shadow:0 10px 26px rgba(26,143,76,.3),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .5s var(--ease),box-shadow .5s var(--ease),background-color .4s var(--ease);position:relative;z-index:1;overflow:hidden;isolation:isolate}
 .btn-gold::before{content:'';position:absolute;top:0;left:-60%;width:40%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.35),transparent);animation:heroSweep 6.5s ease-in-out infinite;animation-delay:1.5s;pointer-events:none}
-.btn-gold:hover{background:#a5772e;transform:translateY(-3px);box-shadow:0 18px 40px rgba(184,135,58,.4),inset 0 1px 0 rgba(255,255,255,.24)}
+.btn-gold:hover{background:#157a3f;transform:translateY(-3px);box-shadow:0 18px 40px rgba(26,143,76,.4),inset 0 1px 0 rgba(255,255,255,.24)}
 @media(prefers-reduced-motion:reduce){.btn-gold::before{animation:none;display:none}}
 @media(max-width:600px){.cta-band{padding:40px 24px}}
 
@@ -828,39 +828,6 @@ footer .wrap{position:relative;z-index:1}
       </div>
     </div>
 
-    <div class="mini-sim reveal">
-      <div class="mini-sim-head">
-        <div class="mini-sim-tag">Sem digitar nada</div>
-        <h3>Teste agora, direto aqui na página</h3>
-        <p>Escolha o empreendimento, digite sua renda e FGTS (ou use as setinhas) — o cálculo aparece na hora, comparando o método de cada construtora.</p>
-      </div>
-      <div class="mini-sim-grid">
-        <div class="mini-sim-field">
-          <label>Empreendimento</label>
-          <select id="msEmp"></select>
-        </div>
-        <div class="mini-sim-field">
-          <label>Renda familiar mensal</label>
-          <div class="mini-sim-stepper">
-            <button type="button" onclick="msStep('renda',-500)" aria-label="Diminuir renda">−</button>
-            <input type="text" id="msRendaVal" class="mini-sim-stepper-input" value="R$ 6.000" inputmode="numeric" oninput="msTyped('renda',this.value)" onblur="msBlur('renda')">
-            <button type="button" onclick="msStep('renda',500)" aria-label="Aumentar renda">+</button>
-          </div>
-          <div class="mini-sim-hint">Pode digitar direto ou usar as setinhas</div>
-        </div>
-        <div class="mini-sim-field">
-          <label>FGTS disponível</label>
-          <div class="mini-sim-stepper">
-            <button type="button" onclick="msStep('fgts',-2000)" aria-label="Diminuir FGTS">−</button>
-            <input type="text" id="msFgtsVal" class="mini-sim-stepper-input" value="R$ 10.000" inputmode="numeric" oninput="msTyped('fgts',this.value)" onblur="msBlur('fgts')">
-            <button type="button" onclick="msStep('fgts',2000)" aria-label="Aumentar FGTS">+</button>
-          </div>
-        </div>
-      </div>
-      <button class="mini-sim-btn" onclick="msCalcular()">Calcular meu plano</button>
-      <div class="mini-sim-result" id="msResult"></div>
-      <div class="mini-sim-sugg" id="msSugg"></div>
-    </div>
   </div>
 </section>
 
