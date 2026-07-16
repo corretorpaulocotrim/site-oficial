@@ -247,11 +247,29 @@ function fsimAbrirApresentacao(){
 function initSimuladorEmbed(containerId, opts){
   var el = document.getElementById(containerId);
   if(!el) return;
-  FSIM_NOME = opts.nome||''; FSIM_CONSTRUTORA = opts.construtora||''; FSIM_BAIRRO = opts.bairro||'';
-  FSIM_APRESENTACAO = opts.apresentacao||'';
-  var precoConhecido = !!(opts.preco && opts.preco>0);
-  el.innerHTML = fsimHTML(FSIM_NOME, precoConhecido, opts.preco||'', FSIM_APRESENTACAO);
-  fsimUpdate();
+  var nome = opts.nome||'';
+  var preco = opts.preco||0;
+  var precoTxt = preco>0 ? fmtBRL(preco).replace(',00','') : '';
+  var qs = preco>0 ? ('?preco='+Math.round(preco)+'&nome='+encodeURIComponent(nome)) : ('?nome='+encodeURIComponent(nome));
+  var msg = encodeURIComponent('Olá! Vi o '+nome+' no site e quero simular o financiamento com a sua ajuda.');
+  el.innerHTML = ''
+    +'<div class="sim-cta-card reveal" style="background:#fff;border:1px solid var(--line);border-radius:20px;padding:32px 28px;text-align:center;max-width:560px;margin:0 auto;box-shadow:0 1px 4px rgba(15,46,54,.05)">'
+    +'  <div style="width:52px;height:52px;border-radius:50%;background:var(--mist);display:flex;align-items:center;justify-content:center;margin:0 auto 16px">'
+    +'    <svg viewBox="0 0 24 24" style="width:24px;height:24px;stroke:var(--gold);fill:none;stroke-width:1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>'
+    +'  </div>'
+    +'  <div style="font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;color:var(--ink);margin-bottom:8px">Simule o financiamento do '+nome+'</div>'
+    +'  <div style="font-size:14px;color:var(--gray);line-height:1.65;margin-bottom:24px;max-width:420px;margin-left:auto;margin-right:auto">'
+    +      (precoTxt ? 'A partir de '+precoTxt+'. ' : '')
+    +'    Use o simulador oficial do site para ver entrada, parcelas na obra e aprovação estimada — ou já comece sua Aprovação Expressa em 48h.'
+    +'  </div>'
+    +'  <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">'
+    +'    <a href="simulador.html'+qs+'" class="btn-gold" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">'
+    +'      <svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Ir para o simulador</a>'
+    +'    <a href="aprovacao-expressa.html" class="btn-ghost" style="text-decoration:none;display:inline-flex;align-items:center;gap:8px">'
+    +'      <svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M9 12l2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg>Aprovação Expressa em 48h</a>'
+    +'  </div>'
+    +'  <a href="https://wa.me/5521989150864?text='+msg+'" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:18px;font-size:12.5px;color:var(--gray);text-decoration:underline">Prefere falar direto com o Paulo? Chame no WhatsApp</a>'
+    +'</div>';
 }
 
 function fsimVerdictHTML(c){

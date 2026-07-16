@@ -752,7 +752,7 @@
       var list = getList();
       var on = list.some(function(i){ return i.url === thisItem.url; });
       btn.textContent = on ? '✓ Adicionado à comparação' : '+ Comparar este imóvel';
-      btn.setAttribute('style','position:fixed;right:16px;bottom:90px;z-index:650;background:'+(on?'#1a8f4c':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#1a8f4c':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
+      btn.setAttribute('style','position:fixed;right:16px;bottom:150px;z-index:650;background:'+(on?'#1a8f4c':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#1a8f4c':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
     }
     renderBtn();
     btn.addEventListener('click', function(){
