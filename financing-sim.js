@@ -293,6 +293,10 @@ var PLANTAS_REAIS = {
   "emp-vivaz-connection.html": [
     {img:"plantas/vivazconn-2q.jpg", label:"2 quartos · 37,55m²"},
     {img:"plantas/vivazconn-1q.jpg", label:"1 quarto (suíte) · 37,55m²"}
+  ],
+  "parque-piedade.html": [
+    {img:"plantas/piedade-planta1.jpg", label:"Pavimento Térreo · 2 quartos com Garden"},
+    {img:"plantas/piedade-planta2.jpg", label:"Pavimento Tipo · 2 quartos com varanda"}
   ]
 };
 
