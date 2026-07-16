@@ -297,6 +297,14 @@ var PLANTAS_REAIS = {
   "parque-piedade.html": [
     {img:"plantas/piedade-planta1.jpg", label:"Pavimento Térreo · 2 quartos com Garden"},
     {img:"plantas/piedade-planta2.jpg", label:"Pavimento Tipo · 2 quartos com varanda"}
+  ],
+  "emp-saudosa-praca-onze.html": [
+    {img:"plantas/saudosa-planta1.jpg", label:"Apartamento Tipo · 2 dormitórios"},
+    {img:"plantas/saudosa-planta2.jpg", label:"Studio com varanda"}
+  ],
+  "farol-da-guanabara.html": [
+    {img:"plantas/farol-planta1.jpg", label:"Apartamento Tipo · 1 quarto com varanda"},
+    {img:"plantas/farol-planta2.jpg", label:"Studio com varanda"}
   ]
 };
 
