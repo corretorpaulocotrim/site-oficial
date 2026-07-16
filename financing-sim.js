@@ -277,6 +277,10 @@ var PLANTAS_REAIS = {
   "emp-primor-carioca.html": [
     {img:"plantas/primor-carioca-apto112.png", label:"Apto 112 · Torre 02 · 2 quartos"},
     {img:"plantas/primor-carioca-apto110.png", label:"Apto 110 · Torre 02 · 2 quartos"}
+  ],
+  "emp-ctv-beat.html": [
+    {img:"plantas/ctv-beat-tipo02.jpg", label:"Apartamento Tipo 02 · 2 quartos · 46,95m²"},
+    {img:"plantas/ctv-beat-cobertura01.jpg", label:"Cobertura Tipo 01 · 2 quartos duplex · até 93,30m²"}
   ]
 };
 
