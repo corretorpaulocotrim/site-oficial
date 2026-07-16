@@ -623,6 +623,37 @@ function render(){
     }
   }
 }
+/* Personaliza a partir de ?preco=X&nome=Y vindo dos cards das paginas de empreendimento */
+(function(){
+  try{
+    var qp = new URLSearchParams(location.search);
+    var qNome = qp.get('nome');
+    var qPreco = parseFloat(qp.get('preco'));
+    if(qNome){
+      var alvo = qNome.trim().toLowerCase();
+      var idx = -1;
+      for(var i=0;i<CATALOG.length;i++){
+        if(CATALOG[i].n.trim().toLowerCase() === alvo){ idx = i; break; }
+      }
+      if(idx === -1){
+        for(var j=0;j<CATALOG.length;j++){
+          if(CATALOG[j].n.trim().toLowerCase().indexOf(alvo) !== -1 || alvo.indexOf(CATALOG[j].n.trim().toLowerCase()) !== -1){ idx = j; break; }
+        }
+      }
+      if(idx !== -1){
+        S.empIdx = idx;
+        S.useCustom = false;
+      } else {
+        S.useCustom = true;
+        S.customConstrutora = '';
+        if(qPreco && qPreco > 0) S.customPreco = qPreco;
+      }
+    } else if(qPreco && qPreco > 0){
+      S.useCustom = true;
+      S.customPreco = qPreco;
+    }
+  }catch(e){}
+})();
 render();
 </script>
 <script src="crm-config.js"></script>
