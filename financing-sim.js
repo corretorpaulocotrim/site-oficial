@@ -289,6 +289,10 @@ var PLANTAS_REAIS = {
   "emp-ctv-vitoria.html": [
     {img:"plantas/vitoria-tipo01.jpg", label:"Apartamento Tipo 01 · 2 quartos · 57,04 a 57,45m²"},
     {img:"plantas/vitoria-cobertura01.jpg", label:"Cobertura 01 + Dependência · Terraço 35,20m² · até 114,90m²"}
+  ],
+  "emp-vivaz-connection.html": [
+    {img:"plantas/vivazconn-2q.jpg", label:"2 quartos · 37,55m²"},
+    {img:"plantas/vivazconn-1q.jpg", label:"1 quarto (suíte) · 37,55m²"}
   ]
 };
 
