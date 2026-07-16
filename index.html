@@ -520,6 +520,15 @@ footer .wrap{position:relative;z-index:1}
 .app-chip-ifood{background:#EA1D2C;color:#fff}
 @keyframes appMarqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 @media(prefers-reduced-motion:reduce){.app-marquee-track{animation:none}}
+.app-download-card{display:flex;align-items:center;gap:24px;background:linear-gradient(135deg,#0f2e36,#173d47);border-radius:20px;padding:30px 34px;color:#fff;flex-wrap:wrap}
+.adc-icon{width:60px;height:60px;border-radius:15px;background:rgba(26,143,76,.18);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.adc-body{flex:1;min-width:240px}
+.adc-eyebrow{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:#3ddc84;margin-bottom:6px}
+.adc-body h3{font-family:'Fraunces',Georgia,serif;font-size:clamp(19px,2.4vw,24px);font-weight:600;margin-bottom:6px;letter-spacing:-.01em;color:#fff}
+.adc-body p{font-size:13.5px;color:rgba(255,255,255,.75);line-height:1.6;max-width:52ch;margin:0}
+.adc-cta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;flex-shrink:0}
+.adc-note{font-size:11px;color:rgba(255,255,255,.55)}
+@media(max-width:640px){.app-download-card{padding:24px 20px}.adc-cta{width:100%}.adc-cta button{width:100%}}
 </style>
 </head>
 <body>
@@ -674,6 +683,24 @@ footer .wrap{position:relative;z-index:1}
     <div class="showcase-stack" id="showcase-stack"></div>
     <div class="showcase-dots" id="showcase-dots"></div>
   </div>
+  </div>
+</section>
+
+<!-- BAIXAR O APP -->
+<section class="section" id="baixar-app" style="padding-top:28px;padding-bottom:8px">
+  <div class="wrap">
+    <div class="app-download-card reveal">
+      <div class="adc-icon"><svg viewBox="0 0 24 24" style="width:30px;height:30px;stroke:#3ddc84;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M11 18h2"/></svg></div>
+      <div class="adc-body">
+        <div class="adc-eyebrow">Quer Morar Onde — agora no seu celular</div>
+        <h3>Baixe o app e leve o Rio inteiro no bolso</h3>
+        <p>É o próprio site instalado como app — sem loja, sem espaço ocupado. Mapa, simulador e Aprovação Expressa sempre a 1 toque de distância.</p>
+      </div>
+      <div class="adc-cta">
+        <button type="button" class="btn-gold" onclick="if(window.pcInstallApp)pcInstallApp();else alert('Abra o menu do navegador e escolha Instalar aplicativo / Adicionar à tela inicial.')">Instalar o app agora</button>
+        <span class="adc-note">Funciona no Android e no iPhone</span>
+      </div>
+    </div>
   </div>
 </section>
 

@@ -627,15 +627,17 @@
   })();
 
   (function(){
-    if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return;
     if(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return;
     if(navigator.standalone) return;
-    if(localStorage.getItem('pwaInstallDismissed')) return;
     var deferredPrompt = null;
+    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
+
     window.addEventListener('beforeinstallprompt', function(e){
       e.preventDefault();
       deferredPrompt = e;
-      setTimeout(showInstallBanner, 20000);
+      if(!/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname) && !localStorage.getItem('pwaInstallDismissed')){
+        setTimeout(showInstallBanner, 20000);
+      }
     });
     window.addEventListener('appinstalled', function(){
       localStorage.setItem('pwaInstallDismissed','1');
@@ -643,6 +645,40 @@
       var b = document.getElementById('pwaInstallBanner');
       if(b) b.remove();
     });
+
+    function showIOSInstructions(){
+      if(document.getElementById('pwaIOSModal')) return;
+      var style = document.createElement('style');
+      style.textContent = '@keyframes pwaSlideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}';
+      document.head.appendChild(style);
+      var overlay = document.createElement('div');
+      overlay.id = 'pwaIOSModal';
+      overlay.setAttribute('style','position:fixed;inset:0;z-index:9999;background:rgba(9,20,24,.72);display:flex;align-items:flex-end;justify-content:center');
+      overlay.innerHTML = '<div style="background:#fff;border-radius:20px 20px 0 0;padding:28px 24px 32px;max-width:440px;width:100%;font-family:Inter,system-ui,sans-serif;animation:pwaSlideUp .35s cubic-bezier(.16,1,.3,1)">'
+        + '<div style="font-size:15px;font-weight:800;color:#0f2e36;margin-bottom:16px">Como instalar no iPhone</div>'
+        + '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px"><div style="width:26px;height:26px;border-radius:8px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#1a8f4c">1</div><div style="font-size:13.5px;color:#374151;line-height:1.5">Toque no ícone de compartilhar <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#1a8f4c;fill:none;stroke-width:2;vertical-align:-2px;display:inline-block"><path d="M12 3v13m0-13l-4 4m4-4l4 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg> na barra do Safari</div></div>'
+        + '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px"><div style="width:26px;height:26px;border-radius:8px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#1a8f4c">2</div><div style="font-size:13.5px;color:#374151;line-height:1.5">Escolha <strong>Adicionar à Tela de Início</strong></div></div>'
+        + '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:22px"><div style="width:26px;height:26px;border-radius:8px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#1a8f4c">3</div><div style="font-size:13.5px;color:#374151;line-height:1.5">Toque em <strong>Adicionar</strong> — pronto, o app fica na sua tela</div></div>'
+        + '<button type="button" id="pwaIOSClose" style="width:100%;background:#1a8f4c;color:#fff;border:none;padding:13px;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer">Entendi</button>'
+        + '</div>';
+      document.body.appendChild(overlay);
+      capture('pwa_ios_instrucoes_exibidas');
+      overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.remove(); });
+      document.getElementById('pwaIOSClose').addEventListener('click', function(){ overlay.remove(); });
+    }
+
+    window.pcInstallApp = function(){
+      capture('pwa_campanha_clicada');
+      if(deferredPrompt){
+        deferredPrompt.prompt();
+        deferredPrompt.userChoice.then(function(choice){ capture('pwa_prompt_resultado', {escolha:choice.outcome}); });
+        deferredPrompt = null;
+        return;
+      }
+      if(isIOS){ showIOSInstructions(); return; }
+      alert('Para instalar, abra o menu do seu navegador (⋮ ou ...) e escolha "Instalar aplicativo" ou "Adicionar à tela inicial".');
+    };
+
     function showInstallBanner(){
       if(document.getElementById('pwaInstallBanner')) return;
       var style = document.createElement('style');
@@ -652,10 +688,10 @@
       el.id = 'pwaInstallBanner';
       el.setAttribute('style','position:fixed;left:16px;right:16px;bottom:16px;z-index:9998;max-width:420px;margin:0 auto;background:#0f2e36;color:#fff;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 14px 40px rgba(15,46,54,.4);font-family:Inter,system-ui,sans-serif;animation:pwaSlideUp .4s cubic-bezier(.16,1,.3,1)');
       el.innerHTML = ''
-        + '<div style="width:40px;height:40px;border-radius:11px;background:rgba(184,135,58,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e0b466" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg></div>'
+        + '<div style="width:40px;height:40px;border-radius:11px;background:rgba(26,143,76,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg></div>'
         + '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;margin-bottom:2px">Instalar o site como app</div><div style="font-size:11.5px;color:rgba(255,255,255,.65);line-height:1.4">O app é o próprio site — leve, rápido, sem baixar nada de loja. Acesso em 1 toque na tela inicial.</div></div>'
         + '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">'
-        + '  <button id="pwaInstallBtn" style="background:#b8873a;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Instalar</button>'
+        + '  <button id="pwaInstallBtn" style="background:#1a8f4c;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Instalar</button>'
         + '  <button id="pwaInstallClose" aria-label="Fechar" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;text-decoration:underline">Agora não</button>'
         + '</div>';
       document.body.appendChild(el);
@@ -663,11 +699,7 @@
       document.getElementById('pwaInstallBtn').addEventListener('click', function(){
         el.remove();
         localStorage.setItem('pwaInstallDismissed','1');
-        if(deferredPrompt){
-          deferredPrompt.prompt();
-          deferredPrompt.userChoice.then(function(choice){ capture('pwa_prompt_resultado', {escolha:choice.outcome}); });
-          deferredPrompt = null;
-        }
+        window.pcInstallApp();
       });
       document.getElementById('pwaInstallClose').addEventListener('click', function(){
         el.remove();
@@ -926,21 +958,34 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
 
 /* ---------- MARCA D'AGUA: logo real nas fotos principais (hero + galeria) ---------- */
 (function(){
+  function makeWM(size){
+    var wm = document.createElement('div');
+    wm.className = 'pc-watermark';
+    wm.style.cssText = 'position:absolute;right:'+(size>18?'10px':'8px')+';bottom:'+(size>18?'10px':'8px')+';width:auto;height:'+size+'px;opacity:.88;pointer-events:none;z-index:6;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7))';
+    var img = document.createElement('img');
+    img.src = 'logo-wordmark-light.png';
+    img.alt = '';
+    img.style.cssText = 'height:100%;width:auto;display:block';
+    wm.appendChild(img);
+    return wm;
+  }
   function addWatermarks(){
-    var els = document.querySelectorAll('.hero-bg, .gal-grid .depo-photo');
-    els.forEach(function(el){
+    // Foto principal (hero): .hero-bg fica atrás de .hero-shade (mesmo z-index:auto, ordem de DOM),
+    // então a marca d'água precisa ir no container .hero (pai comum), não dentro de .hero-bg,
+    // senão o gradiente escuro do .hero-shade cobre ela por completo.
+    document.querySelectorAll('.hero-bg').forEach(function(bg){
+      var host = bg.closest('.hero') || bg.parentElement;
+      if(!host || host.querySelector(':scope > .pc-watermark')) return;
+      var cs = window.getComputedStyle(host);
+      if(cs.position === 'static') host.style.position = 'relative';
+      host.appendChild(makeWM(24));
+    });
+    // Fotos da galeria
+    document.querySelectorAll('.gal-grid .depo-photo').forEach(function(el){
       if(el.querySelector('.pc-watermark')) return;
       var cs = window.getComputedStyle(el);
       if(cs.position === 'static') el.style.position = 'relative';
-      var wm = document.createElement('div');
-      wm.className = 'pc-watermark';
-      wm.style.cssText = 'position:absolute;right:10px;bottom:10px;width:auto;height:22px;opacity:.7;pointer-events:none;z-index:3;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))';
-      var img = document.createElement('img');
-      img.src = 'logo-wordmark-light.png';
-      img.alt = '';
-      img.style.cssText = 'height:100%;width:auto;display:block';
-      wm.appendChild(img);
-      el.appendChild(wm);
+      el.appendChild(makeWM(16));
     });
   }
   if(document.readyState==='loading'){
