@@ -305,6 +305,30 @@ var PLANTAS_REAIS = {
   "farol-da-guanabara.html": [
     {img:"plantas/farol-planta1.jpg", label:"Apartamento Tipo · 1 quarto com varanda"},
     {img:"plantas/farol-planta2.jpg", label:"Studio com varanda"}
+  ],
+  "arcos-do-porto.html": [
+    {img:"plantas/arcos-planta1.jpg", label:"Apartamento Tipo · 1 quarto com varanda"},
+    {img:"plantas/arcos-planta2.jpg", label:"Studio com varanda"}
+  ],
+  "orla-central.html": [
+    {img:"plantas/orla-planta1.jpg", label:"Apartamento Tipo · 1 quarto com varanda"},
+    {img:"plantas/orla-planta2.jpg", label:"Apartamento Tipo · 2 quartos com varanda"}
+  ],
+  "luzes-do-rio-lamparina.html": [
+    {img:"plantas/lamparina-planta1.jpg", label:"Apartamento Tipo · 2 quartos com suíte"},
+    {img:"plantas/lamparina-planta2.jpg", label:"Apartamento Tipo · 1 quarto com varanda"}
+  ],
+  "luzes-do-rio-candeeiro.html": [
+    {img:"plantas/candeeiro-planta1.jpg", label:"Apartamento Tipo · 1 quarto com varanda"},
+    {img:"plantas/candeeiro-planta2.jpg", label:"Apartamento Tipo · 2 quartos com suíte"}
+  ],
+  "cartola-ii.html": [
+    {img:"plantas/cartola2-planta1.jpg", label:"Apartamento Tipo · 1 quarto com varanda"},
+    {img:"plantas/cartola2-planta2.jpg", label:"Apartamento Tipo · 2 quartos com varanda"}
+  ],
+  "caminhos-da-guanabara.html": [
+    {img:"plantas/caminhos-planta1.jpg", label:"Apartamento Tipo · 2 quartos com suíte"},
+    {img:"plantas/caminhos-planta2.jpg", label:"Apartamento Tipo · 1 quarto com varanda"}
   ]
 };
 
