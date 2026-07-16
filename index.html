@@ -265,6 +265,7 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .cat-loc{font-size:12.5px;color:var(--gold);font-weight:600;display:flex;align-items:center;gap:5px;margin-bottom:10px}
 .cat-desc{font-size:12.5px;color:var(--gray);line-height:1.55;margin-bottom:14px;min-height:34px}
 .cat-price{font-size:13.5px;font-weight:700;color:var(--ink);margin-bottom:12px}
+.cat-perks{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:12px}.cat-perk{font-size:9.5px;font-weight:700;color:#3E8E5A;background:rgba(62,142,90,.1);border-radius:20px;padding:3px 8px;white-space:nowrap}
 .cat-amen-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px 10px;margin-bottom:14px}
 .cat-amen{display:flex;align-items:center;gap:7px;font-size:11.5px;color:var(--ink);font-weight:500}
 .cat-amen svg{width:16px;height:16px;flex-shrink:0;stroke:var(--gold);fill:none;stroke-width:1.8}
@@ -1232,12 +1233,21 @@ var AMEN_ICONS={
   "Minimercado":'<svg viewBox="0 0 24 24"><path d="M3 3h2l2.4 12.2a2 2 0 002 1.8h8.2a2 2 0 002-1.8L21 8H6"/><circle cx="9" cy="21" r="1"/><circle cx="18" cy="21" r="1"/></svg>'
 };
 var AMEN_FALLBACK='<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
-function renderCat(filter){
+var CAT_SHOW_ALL=false, CAT_LAST_FILTER="", CAT_PAGE_SIZE=12;
+function renderCat(filter,showAll){
+  CAT_LAST_FILTER=filter||"";
+  CAT_SHOW_ALL=!!showAll;
   var g=document.getElementById("cat-grid"),html="";
+  var matched=[];
   EMP.forEach(function(e,i){
     if(filter&&e.status!==filter)return;
     if(!matchesQuartos(e))return;
     if(!matchesValor(e))return;
+    matched.push(i);
+  });
+  var visible = CAT_SHOW_ALL ? matched : matched.slice(0,CAT_PAGE_SIZE);
+  visible.forEach(function(i){
+    var e=EMP[i];
     var s=statusMeta[e.status];
     var amen=(e.amen||[]).slice(0,4).map(function(a){return '<div class="cat-amen">'+(AMEN_ICONS[a]||AMEN_FALLBACK)+'<span>'+a+'</span></div>';}).join('');
     html+='<article class="cat-card spotlight" onclick="location.href=\''+e.url+'\'" onmouseenter="highlightPin('+i+')" onmouseleave="unhighlightPin()">'
@@ -1247,7 +1257,9 @@ function renderCat(filter){
       +'<div class="cat-name">'+e.nome+'</div>'
       +'<div class="cat-loc"><svg class="ic ic-sm" viewBox="0 0 24 24" style="width:12px;height:12px;stroke:var(--gold)"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>'+e.bairro+'</div>'
       +'<div class="cat-desc">'+e.tipologia+' · '+e.construtora+'</div>'
-      +'<div class="cat-price">'+e.preco+'</div>'
+      +(/^(R\$|A partir)/.test(e.preco)
+        ? '<div class="cat-price">'+e.preco+'</div>'
+        : '<div class="cat-perks"><span class="cat-perk">Documentação grátis</span><span class="cat-perk">Entrada sem juros</span><span class="cat-perk">Parcela só nas chaves</span></div>')
       +(amen?'<div class="cat-amen-grid">'+amen+'</div>':'')
       +'<div class="cat-foot"><span class="cat-const">'+e.construtora+'</span>'
       +'<span class="cat-arrow">Ver ficha<svg class="ic ic-sm" viewBox="0 0 24 24" style="width:14px;height:14px;stroke:var(--gold)"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>'
@@ -1255,6 +1267,22 @@ function renderCat(filter){
       +'</div></article>';
   });
   g.innerHTML=html;
+  var moreWrap=document.getElementById("cat-more-wrap");
+  if(!moreWrap){
+    moreWrap=document.createElement("div");
+    moreWrap.id="cat-more-wrap";
+    moreWrap.style.cssText="text-align:center;margin-top:28px";
+    g.parentNode.insertBefore(moreWrap, g.nextSibling);
+  }
+  if(!CAT_SHOW_ALL && matched.length>CAT_PAGE_SIZE){
+    var rest=matched.length-CAT_PAGE_SIZE;
+    moreWrap.innerHTML='<button class="btn-gold" onclick="renderCat(CAT_LAST_FILTER,true)" style="display:inline-flex;align-items:center;gap:8px"><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#fff"><path d="M12 5v14M5 12h14"/></svg>Ver mais '+rest+' empreendimento'+(rest>1?'s':'')+'</button>'
+      +'<div style="font-size:12.5px;color:var(--gray);margin-top:10px">Mostrando '+CAT_PAGE_SIZE+' de '+matched.length+' — sempre chegam novos lançamentos, confira todos</div>';
+  } else if(CAT_SHOW_ALL && matched.length>CAT_PAGE_SIZE){
+    moreWrap.innerHTML='<button class="btn-ghost" onclick="renderCat(CAT_LAST_FILTER,false)" style="display:inline-flex;align-items:center;gap:8px">Mostrar menos</button>';
+  } else {
+    moreWrap.innerHTML='';
+  }
 }
 function catFilter(f,btn){document.querySelectorAll(".cat-tab").forEach(function(t){t.classList.remove("on");});if(btn)btn.classList.add("on");renderCat(f);}
 

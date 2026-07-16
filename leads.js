@@ -919,3 +919,29 @@ function renderRelacionados(){
   }catch(e){}
 }
 document.addEventListener('DOMContentLoaded', renderRelacionados);
+
+/* ---------- MARCA D'AGUA: logo real nas fotos principais (hero + galeria) ---------- */
+(function(){
+  function addWatermarks(){
+    var els = document.querySelectorAll('.hero-bg, .gal-grid .depo-photo');
+    els.forEach(function(el){
+      if(el.querySelector('.pc-watermark')) return;
+      var cs = window.getComputedStyle(el);
+      if(cs.position === 'static') el.style.position = 'relative';
+      var wm = document.createElement('div');
+      wm.className = 'pc-watermark';
+      wm.style.cssText = 'position:absolute;right:10px;bottom:10px;width:auto;height:22px;opacity:.7;pointer-events:none;z-index:3;filter:drop-shadow(0 1px 3px rgba(0,0,0,.6))';
+      var img = document.createElement('img');
+      img.src = 'logo-wordmark-light.png';
+      img.alt = '';
+      img.style.cssText = 'height:100%;width:auto;display:block';
+      wm.appendChild(img);
+      el.appendChild(wm);
+    });
+  }
+  if(document.readyState==='loading'){
+    document.addEventListener('DOMContentLoaded', addWatermarks);
+  } else {
+    addWatermarks();
+  }
+})();
