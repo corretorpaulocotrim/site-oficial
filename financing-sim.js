@@ -285,6 +285,10 @@ var PLANTAS_REAIS = {
   "emp-village-caribe.html": [
     {img:"plantas/caribe-tipo-padrao.jpg", label:"Tipo padrão · Quarto + suíte · 60,99 a 61,35m²"},
     {img:"plantas/caribe-cobertura.jpg", label:"Cobertura duplex · Quarto + suíte · até 126,74m²"}
+  ],
+  "emp-ctv-vitoria.html": [
+    {img:"plantas/vitoria-tipo01.jpg", label:"Apartamento Tipo 01 · 2 quartos · 57,04 a 57,45m²"},
+    {img:"plantas/vitoria-cobertura01.jpg", label:"Cobertura 01 + Dependência · Terraço 35,20m² · até 114,90m²"}
   ]
 };
 
