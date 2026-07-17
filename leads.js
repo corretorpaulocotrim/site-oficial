@@ -1076,14 +1076,14 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     /* Clicaveis do site: VERDE com a fonte serif da logo (pedido Paulo) */
     '.btn-gold,a.btn-gold,button.btn-gold,.wa-btn,.btn-wa-big,.btn-wa-hdr,.btn-primary,.cta,.sim-btn,.fs-btn,.btn-sim,.btn-wa,.hero-cta,input[type=submit],.btn-verde,.btn-green{',
     '  background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;border-color:#157a3f !important;',
-    "  font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important;letter-spacing:.02em !important}",
+    "  font-family:'Cinzel',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
     '.btn-gold:hover,a.btn-gold:hover,button.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-wa-hdr:hover,.btn-primary:hover,.cta:hover,input[type=submit]:hover{',
     '  background:linear-gradient(135deg,#157a3f,#116334) !important}',
     /* Fluxo de DOCUMENTOS: AMARELO (pedido Paulo: enviar docs tudo com amarelo) */
-    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#b8873a,#cf9f4f) !important;color:#fff !important;font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important}",
+    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#b8873a,#cf9f4f) !important;color:#fff !important;font-family:'Cinzel',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
     '.upload-btn:hover,.item-row-send:hover,.wa-btn2:hover,.btn-pg:hover{background:linear-gradient(135deg,#a5772e,#b8873a) !important}',
     /* Botoes secundarios/outline tambem na fonte da logo */
-    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important}",
+    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Cinzel',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
     /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
     '.leaflet-tooltip:before,.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{display:none !important}',
     /* Cinema nas fotos de capa de todas as paginas de imovel */
@@ -1138,4 +1138,60 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     l.href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap';
     (document.head||document.documentElement).appendChild(l);
   }
+  var cz=document.createElement('link');
+  cz.rel='stylesheet';
+  cz.href='https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap';
+  (document.head||document.documentElement).appendChild(cz);
+})();
+
+
+/* ---------- CINEMA GARANTIDO: Ken Burns via JS em toda foto de capa (independe de reduced-motion) ---------- */
+(function(){
+  function startCine(){
+    try{
+      document.querySelectorAll('.hero-bg').forEach(function(el){
+        if(el.dataset.pcCine) return;
+        el.dataset.pcCine='1';
+        if(el.animate){
+          el.animate(
+            [{transform:'scale(1.03)'},{transform:'scale(1.12)'}],
+            {duration:22000,direction:'alternate',iterations:Infinity,easing:'ease-in-out'}
+          );
+        }
+      });
+    }catch(e){}
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', startCine); } else { startCine(); }
+})();
+
+/* ---------- O QUE TEM POR PERTO: padarias, escolas, faculdades, comercio (todas as paginas de imovel) ---------- */
+(function(){
+  function coords(){
+    var scripts=document.querySelectorAll('script:not([src])');
+    for(var i=0;i<scripts.length;i++){
+      var m=scripts[i].textContent.match(/\[\s*(-2[23]\.\d+)\s*,\s*(-4[34]\.\d+)\s*\]/);
+      if(m) return [m[1],m[2]];
+    }
+    return null;
+  }
+  function addPerto(){
+    if(document.getElementById('pc-perto')) return;
+    if(!document.querySelector('.hero-bg')) return;
+    var c=coords();
+    if(!c) return;
+    var cats=[['Padarias','padarias'],['Mercados','supermercados'],['Escolas','escolas'],['Faculdades','faculdades'],['Farm\u00e1cias','farmacias'],['Com\u00e9rcio','comercio'],['\u00d4nibus e trem','transporte publico']];
+    var host=document.querySelector('.viz-card');
+    var target=host?host.parentElement:(document.getElementById('map-imovel')?document.getElementById('map-imovel').parentElement:null);
+    if(!target) return;
+    var box=document.createElement('div');
+    box.id='pc-perto';
+    box.style.cssText='margin:16px 0 6px';
+    var chips=cats.map(function(k){
+      return '<a href="https://www.google.com/maps/search/'+encodeURIComponent(k[1])+'/@'+c[0]+','+c[1]+',16z" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;margin:0 8px 8px 0;padding:7px 14px;border:1.5px solid #1a8f4c;border-radius:30px;font-size:12px;font-weight:700;color:#157a3f;text-decoration:none;background:#f0f9f3">'+k[0]+'</a>';
+    }).join('');
+    box.innerHTML='<div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0f2e36;margin-bottom:9px">Explore o que tem por perto</div>'+chips
+      +'<div style="font-size:10.5px;color:#9ca3af;margin-top:2px">Abre no Google Maps com tudo ao redor do empreendimento \u2014 padarias, escolas, faculdades, com\u00e9rcio e transporte.</div>';
+    if(host){ host.insertAdjacentElement('afterend', box); } else { target.insertAdjacentElement('afterbegin', box); }
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', addPerto); } else { addPerto(); }
 })();
