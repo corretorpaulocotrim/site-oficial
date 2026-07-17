@@ -1073,12 +1073,15 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
 /* ---------- PADRAO OURO SITEWIDE + FONTE DA LOGO NOS BOTOES + CINEMA (pedido Paulo 2026-07-17) ---------- */
 (function(){
   var css = [
-    /* Todo clicavel principal: DOURADO com a fonte serif da logo */
-    '.btn-gold,a.btn-gold,button.btn-gold,.wa-btn,.wa-btn2,.btn-pg,.btn-wa-big,.btn-wa-hdr,.upload-btn,.btn-primary,.cta,.sim-btn,.fs-btn,.btn-sim,.btn-wa,.hero-cta,.item-row-send,input[type=submit],.btn-verde,.btn-green{',
-    '  background:linear-gradient(135deg,#b8873a,#cf9f4f) !important;color:#fff !important;border-color:#b8873a !important;',
+    /* Clicaveis do site: VERDE com a fonte serif da logo (pedido Paulo) */
+    '.btn-gold,a.btn-gold,button.btn-gold,.wa-btn,.btn-wa-big,.btn-wa-hdr,.btn-primary,.cta,.sim-btn,.fs-btn,.btn-sim,.btn-wa,.hero-cta,input[type=submit],.btn-verde,.btn-green{',
+    '  background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;border-color:#157a3f !important;',
     "  font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important;letter-spacing:.02em !important}",
-    '.btn-gold:hover,a.btn-gold:hover,button.btn-gold:hover,.wa-btn:hover,.wa-btn2:hover,.btn-pg:hover,.btn-wa-big:hover,.btn-wa-hdr:hover,.upload-btn:hover,.btn-primary:hover,.cta:hover,.item-row-send:hover,input[type=submit]:hover{',
-    '  background:linear-gradient(135deg,#a5772e,#b8873a) !important}',
+    '.btn-gold:hover,a.btn-gold:hover,button.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-wa-hdr:hover,.btn-primary:hover,.cta:hover,input[type=submit]:hover{',
+    '  background:linear-gradient(135deg,#157a3f,#116334) !important}',
+    /* Fluxo de DOCUMENTOS: AMARELO (pedido Paulo: enviar docs tudo com amarelo) */
+    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#b8873a,#cf9f4f) !important;color:#fff !important;font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important}",
+    '.upload-btn:hover,.item-row-send:hover,.wa-btn2:hover,.btn-pg:hover{background:linear-gradient(135deg,#a5772e,#b8873a) !important}',
     /* Botoes secundarios/outline tambem na fonte da logo */
     ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important}",
     /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
