@@ -4,8 +4,8 @@
    Network-First para HTML
    ===================================================== */
 
-const CACHE_NAME = 'paulocotrim-v10';
-const CACHE_STATIC = 'paulocotrim-static-v10';
+const CACHE_NAME = 'paulocotrim-v11';
+const CACHE_STATIC = 'paulocotrim-static-v11';
 
 // Arquivos essenciais para cache (carregam offline)
 const PRECACHE_ASSETS = [

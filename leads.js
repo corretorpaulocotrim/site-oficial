@@ -1097,7 +1097,23 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     '}',
     '.btn-gold,a.btn-gold,.wa-btn,.btn-wa-big,.btn-primary,.cta,.upload-btn,.wa-btn2,.btn-pg{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1),background .3s !important}',
     'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(184,135,58,.55) !important;outline-offset:2px}',
-    '@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}'
+    '@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}',
+    /* EMBELEZAMENTO FABLE NOTA 10 — acabamento tipografico, grao cinematografico, profundidade */
+    '::selection{background:#0f2e36;color:#e0b872}',
+    'h1,h2,h3,.display{text-wrap:balance}',
+    '.hero-bg{filter:saturate(1.05) contrast(1.02)}',
+    '.hero-bg::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'140\' height=\'140\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")}',
+    '@media(hover:hover) and (pointer:fine){',
+    '  .related-card,.perfil-card,.crit-card,.faq-item,.viz-card{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)}',
+    '  .related-card:hover,.perfil-card:hover,.crit-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px -14px rgba(15,46,54,.28)}',
+    '  .depo-photo img,.related-card img{transition:transform .7s cubic-bezier(.16,1,.3,1)}',
+    '  .depo-photo:hover img,.related-card:hover img{transform:scale(1.045)}',
+    '  ::-webkit-scrollbar{width:11px}',
+    '  ::-webkit-scrollbar-track{background:#f5f6f7}',
+    '  ::-webkit-scrollbar-thumb{background:#0f2e36;border-radius:99px;border:3px solid #f5f6f7}',
+    '  ::-webkit-scrollbar-thumb:hover{background:#173d47}',
+    '}',
+    '@media(prefers-reduced-motion:reduce){.related-card,.perfil-card,.crit-card,.depo-photo img,.related-card img{transition:none !important}}'
   ].join('\n');
   var st = document.createElement('style');
   st.id = 'pc-gold-cine';
