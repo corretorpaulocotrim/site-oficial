@@ -109,7 +109,7 @@
   }
   function mcmvBenefit(titulo, desc){
     return '<li style="display:flex;gap:11px;align-items:flex-start">'
-      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3E8E5A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
+      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a8f4c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
       +'<span style="font-size:13.5px;color:#0f2e36;line-height:1.5"><b>'+titulo+'</b><br><span style="color:#6b7280">'+desc+'</span></span>'
       +'</li>';
   }
@@ -688,10 +688,10 @@
       el.id = 'pwaInstallBanner';
       el.setAttribute('style','position:fixed;left:16px;right:16px;bottom:16px;z-index:9998;max-width:420px;margin:0 auto;background:#0f2e36;color:#fff;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 14px 40px rgba(15,46,54,.4);font-family:Inter,system-ui,sans-serif;animation:pwaSlideUp .4s cubic-bezier(.16,1,.3,1)');
       el.innerHTML = ''
-        + '<img src="favicon-192x192.png" alt="" style="width:44px;height:44px;border-radius:11px;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,.35)"/>'
-        + '<div style="flex:1;min-width:0"><div style="font-size:13.5px;font-weight:700;margin-bottom:2px">Leve o Rio inteiro no bolso</div><div style="font-size:11.5px;color:rgba(255,255,255,.7);line-height:1.45">Mapa de lançamentos, simulador e Aprovação Expressa a um toque. Grátis, sem loja e sem ocupar memória.</div></div>'
+        + '<div style="width:40px;height:40px;border-radius:11px;background:rgba(26,143,76,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg></div>'
+        + '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;margin-bottom:2px">Instalar o site como app</div><div style="font-size:11.5px;color:rgba(255,255,255,.65);line-height:1.4">O app é o próprio site — leve, rápido, sem baixar nada de loja. Acesso em 1 toque na tela inicial.</div></div>'
         + '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">'
-        + '  <button id="pwaInstallBtn" style="background:#1a8f4c;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Instalar grátis</button>'
+        + '  <button id="pwaInstallBtn" style="background:#1a8f4c;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Instalar</button>'
         + '  <button id="pwaInstallClose" aria-label="Fechar" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;text-decoration:underline">Agora não</button>'
         + '</div>';
       document.body.appendChild(el);
@@ -956,12 +956,12 @@ function renderRelacionados(){
 }
 document.addEventListener('DOMContentLoaded', renderRelacionados);
 
-/* ---------- MARCA D'AGUA: logo real nas fotos principais (hero + galeria) ---------- */
+/* ---------- MARCA D'AGUA: logo real de fundo em TODAS as fotos do site (sitewide, generico + observer p/ conteudo dinamico) ---------- */
 (function(){
   function makeWM(size){
     var wm = document.createElement('div');
     wm.className = 'pc-watermark';
-    wm.style.cssText = 'position:absolute;right:'+(size>18?'10px':'8px')+';bottom:'+(size>18?'10px':'8px')+';width:auto;height:'+size+'px;opacity:.88;pointer-events:none;z-index:6;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7))';
+    wm.style.cssText = 'position:absolute;right:'+(size>18?'10px':'6px')+';bottom:'+(size>18?'10px':'6px')+';width:auto;height:'+size+'px;opacity:.88;pointer-events:none;z-index:6;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7))';
     var img = document.createElement('img');
     img.src = 'logo-wordmark-light.png';
     img.alt = '';
@@ -969,29 +969,68 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     wm.appendChild(img);
     return wm;
   }
-  function addWatermarks(){
-    // Foto principal (hero): .hero-bg fica atrás de .hero-shade (mesmo z-index:auto, ordem de DOM),
-    // então a marca d'água precisa ir no container .hero (pai comum), não dentro de .hero-bg,
-    // senão o gradiente escuro do .hero-shade cobre ela por completo.
-    document.querySelectorAll('.hero-bg').forEach(function(bg){
-      var host = bg.closest('.hero') || bg.parentElement;
-      if(!host || host.querySelector(':scope > .pc-watermark')) return;
-      var cs = window.getComputedStyle(host);
-      if(cs.position === 'static') host.style.position = 'relative';
-      host.appendChild(makeWM(24));
-    });
-    // Fotos da galeria
-    document.querySelectorAll('.gal-grid .depo-photo').forEach(function(el){
-      if(el.querySelector('.pc-watermark')) return;
-      var cs = window.getComputedStyle(el);
-      if(cs.position === 'static') el.style.position = 'relative';
-      el.appendChild(makeWM(16));
-    });
+  // Imagens que NUNCA devem levar marca d'agua: logos, favicons/icones, avatares de clientes/equipe, a propria marca.
+  var SKIP_SELECTOR = '.pc-watermark, .pc-watermark img, nav img, header img, footer img, .navbar img, .site-logo img, .logo-wordmark, .adc-icon img, .avatar img, .cliente-avatar img, .depo-avatar, .team-avatar img, .step-num img, .rg-card img, .authority-avatar img, .btn-wa-hdr img';
+  function shouldSkip(img){
+    if(img.dataset.pcWm) return true;
+    if(img.matches(SKIP_SELECTOR) || img.closest(SKIP_SELECTOR)) return true;
+    var src = (img.getAttribute('src')||'').toLowerCase();
+    if(src.indexOf('logo')>-1 || src.indexOf('favicon')>-1 || src.indexOf('avatar')>-1) return true;
+    return false;
   }
+  function sizeOk(img){
+    var w = img.clientWidth || img.naturalWidth || 0;
+    var h = img.clientHeight || img.naturalHeight || 0;
+    return w >= 90 && h >= 64;
+  }
+  function place(img){
+    var host = img.parentElement;
+    if(!host) return;
+    if(host.querySelector('.pc-watermark[data-for="'+ (img.dataset.pcId||'') +'"]')) return;
+    var cs = window.getComputedStyle(host);
+    if(cs.position === 'static') host.style.position = 'relative';
+    var h = img.clientHeight || img.naturalHeight || 60;
+    var size = Math.max(14, Math.min(26, Math.round(h*0.16)));
+    var wm = makeWM(size);
+    var id = 'wm'+Math.random().toString(36).slice(2,8);
+    img.dataset.pcId = id;
+    wm.setAttribute('data-for', id);
+    host.appendChild(wm);
+    img.dataset.pcWm = '1';
+  }
+  function applyWatermarkTo(img){
+    if(shouldSkip(img)) return;
+    if(!sizeOk(img)){
+      if(!img.complete){ img.addEventListener('load', function(){ applyWatermarkTo(img); }, {once:true}); }
+      return;
+    }
+    place(img);
+  }
+  function scan(root){
+    var imgs = root.tagName === 'IMG' ? [root] : root.querySelectorAll ? root.querySelectorAll('img') : [];
+    imgs.forEach && imgs.forEach(applyWatermarkTo);
+    if(!imgs.forEach){ Array.prototype.forEach.call(imgs, applyWatermarkTo); }
+  }
+  function initialScan(){ scan(document); }
   if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', addWatermarks);
+    document.addEventListener('DOMContentLoaded', initialScan);
   } else {
-    addWatermarks();
+    initialScan();
+  }
+  // Observer: cobre grids/catalogos/mapas renderizados via JS depois do load (favoritos, agende-sua-visita, relacionados, popups de mapa, resultados do simulador etc.)
+  if('MutationObserver' in window){
+    var mo = new MutationObserver(function(mutations){
+      mutations.forEach(function(m){
+        m.addedNodes && m.addedNodes.forEach(function(n){
+          if(!n || n.nodeType !== 1) return;
+          if(n.tagName === 'IMG'){ applyWatermarkTo(n); }
+          else if(n.querySelectorAll){ scan(n); }
+        });
+      });
+    });
+    var startObserver = function(){ mo.observe(document.body, {childList:true, subtree:true}); };
+    if(document.body) startObserver();
+    else document.addEventListener('DOMContentLoaded', startObserver);
   }
 })();
 

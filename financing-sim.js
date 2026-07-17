@@ -96,7 +96,7 @@ function fsimSugestoesHTML(nomeAtual, precoAlvo){
   if(!candidatos.length) return '';
   var cards = candidatos.map(function(e){
     return '<a href="'+e.url+'" style="display:block;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px 18px 16px;text-decoration:none;box-shadow:0 1px 2px rgba(15,46,54,.04);transition:box-shadow .3s ease,transform .3s ease" onmouseover="this.style.boxShadow=\'0 12px 28px rgba(15,46,54,.12)\';this.style.transform=\'translateY(-3px)\'" onmouseout="this.style.boxShadow=\'0 1px 2px rgba(15,46,54,.04)\';this.style.transform=\'none\'">'
-      +'<span style="display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#3E8E5A;background:rgba(62,142,90,.1);padding:3px 9px;border-radius:20px;margin-bottom:9px">Dentro do orçamento</span>'
+      +'<span style="display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#1a8f4c;background:rgba(26,143,76,.1);padding:3px 9px;border-radius:20px;margin-bottom:9px">Dentro do orçamento</span>'
       +'<b style="display:block;font-size:15px;color:#0f2e36;margin-bottom:3px;font-weight:700">'+e.nome+'</b>'
       +'<span style="display:block;font-size:12px;color:#6b7280;margin-bottom:2px">'+e.bairro+' · '+e.tip+'</span>'
       +(e.endereco?'<span style="display:block;font-size:11px;color:#9ca3af;margin-bottom:10px">'+e.endereco+'</span>':'<span style="display:block;margin-bottom:10px"></span>')
