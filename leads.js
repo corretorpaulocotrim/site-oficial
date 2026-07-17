@@ -1076,14 +1076,14 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     /* Clicaveis do site: VERDE com a fonte serif da logo (pedido Paulo) */
     '.btn-gold,a.btn-gold,button.btn-gold,.wa-btn,.btn-wa-big,.btn-wa-hdr,.btn-primary,.cta,.sim-btn,.fs-btn,.btn-sim,.btn-wa,.hero-cta,input[type=submit],.btn-verde,.btn-green{',
     '  background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;border-color:#157a3f !important;',
-    "  font-family:'Playfair Display',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
+    "  font-family:'Inter',system-ui,sans-serif !important;font-weight:700 !important;letter-spacing:.02em !important}",
     '.btn-gold:hover,a.btn-gold:hover,button.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-wa-hdr:hover,.btn-primary:hover,.cta:hover,input[type=submit]:hover{',
     '  background:linear-gradient(135deg,#157a3f,#116334) !important}',
     /* Fluxo de DOCUMENTOS: AMARELO (pedido Paulo: enviar docs tudo com amarelo) */
-    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;font-family:'Playfair Display',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
+    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;font-family:'Inter',system-ui,sans-serif !important;font-weight:700 !important;letter-spacing:.02em !important}",
     '.upload-btn:hover,.item-row-send:hover,.wa-btn2:hover,.btn-pg:hover{background:linear-gradient(135deg,#157a3f,#116334) !important}',
-    /* Botoes secundarios/outline tambem na fonte da logo */
-    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Playfair Display',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
+    /* Botoes secundarios/outline: mesma fonte limpa, legivel em qualquer tamanho */
+    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Inter',system-ui,sans-serif !important;font-weight:700 !important;letter-spacing:.02em !important}",
     /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
     '.leaflet-tooltip:before,.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{display:none !important}',
     /* Cinema nas fotos de capa de todas as paginas de imovel */
@@ -1121,8 +1121,8 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     "h1 em,h2 em,.display em{font-style:italic;color:#cf9f4f}",
     '.ae-trust-num,.res-val,.mv,.pv2,.compare-num{font-variant-numeric:tabular-nums}',
     ".eyebrow,.step-tag,.showcase-label,.inv-tag,.ae-badge,label{letter-spacing:.08em}",
-    /* TODA A FONTE DO SITE = fonte da logo (Playfair Display) — pedido Paulo */
-    "body,p,a,li,span,div,h1,h2,h3,h4,h5,label,button,input,select,textarea,.display,.stitle,.sec-h2,.sim-title,.inv-h1,.ae-h1,.step-title,.sel-title{font-family:'Playfair Display',Georgia,serif !important}",
+    /* SISTEMA TIPOGRAFICO DEFINITIVO: serif da logo (Fraunces) SÓ em titulos grandes; Inter (limpa, premium, legivel) no corpo, menus, campos e botoes — pedido Paulo apos "fontes não ficaram boas" com serif em tudo */
+    "body,p,a,li,span,label,button,input,select,textarea,.eyebrow,.step-tag,.showcase-label,.inv-tag,.ae-badge,.doc-item,.faq-q,.nav,nav{font-family:'Inter',system-ui,sans-serif !important}",
     '.leaflet-container *{font-family:inherit}',
     /* HEADER DE LUXO */
     '.pc-hdr-lux{background:linear-gradient(180deg,rgba(10,32,39,.97),rgba(15,46,54,.93)) !important;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);border-bottom:1px solid rgba(207,159,79,.3) !important;box-shadow:0 14px 44px -20px rgba(0,0,0,.65) !important;transition:transform .45s cubic-bezier(.16,1,.3,1)}',
@@ -1148,10 +1148,14 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     l.href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap';
     (document.head||document.documentElement).appendChild(l);
   }
-  var pf=document.createElement('link');
-  pf.rel='stylesheet';
-  pf.href='https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,600&display=swap';
-  (document.head||document.documentElement).appendChild(pf);
+  var hasInter=false;
+  document.querySelectorAll('link[href*="fonts.googleapis"]').forEach(function(l){ if(l.href.indexOf('Inter')>-1) hasInter=true; });
+  if(!hasInter){
+    var ir=document.createElement('link');
+    ir.rel='stylesheet';
+    ir.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap';
+    (document.head||document.documentElement).appendChild(ir);
+  }
 })();
 
 
