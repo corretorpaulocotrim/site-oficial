@@ -325,7 +325,7 @@
     var priceScope = document.querySelector('.tipo-table');
     var offers;
     if(priceScope){
-      var nums = (priceScope.innerText.match(/R\$\s?[\d.,]+/g) || [])
+      var nums = (priceScope.innerText.match(/R\$\s?[\d.]+/g) || [])
         .map(function(s){ return parseInt(s.replace(/[^\d]/g,''),10); })
         .filter(function(n){ return n > 30000 && n < 20000000; });
       if(nums.length){
@@ -900,20 +900,7 @@ var REL_CATALOG = [
   {nome:'Ritmos de Pilares',url:'emp-ritmos-de-pilares.html',bairro:'Pilares · Rio de Janeiro',primary:'Pilares',secondary:'Rio de Janeiro'},
   {nome:'Encantos da Zona Norte',url:'emp-encantos-da-zona-norte.html',bairro:'Região de Bonsucesso · Rio de Janeiro',primary:'Região de Bonsucesso',secondary:'Rio de Janeiro'},
   {nome:'Reserva Redentor',url:'emp-reserva-redentor.html',bairro:'Rocha · Rio de Janeiro',primary:'Rocha',secondary:'Rio de Janeiro'},
-  {nome:'Jardim das Amoreiras',url:'emp-jardim-das-amoreiras.html',bairro:'Região de Campo Grande · Rio de Janeiro',primary:'Região de Campo Grande',secondary:'Rio de Janeiro'},
-  {nome:'Marbelle Residence',url:'emp-marbelle-residence.html',bairro:'Região do Parque Aeroporto · Macaé',primary:'Região do Parque Aeroporto',secondary:'Macaé'},
-  {nome:'Mirante da Luz',url:'emp-mirante-da-luz.html',bairro:'Bairro da Luz · Nova Iguaçu',primary:'Bairro da Luz',secondary:'Nova Iguaçu'},
-  {nome:'Mirantes do Rio - Rio Mar',url:'emp-mirantes-do-rio-rio-mar.html',bairro:'Santa Cruz · Rio de Janeiro',primary:'Santa Cruz',secondary:'Rio de Janeiro'},
   {nome:'Oceanside Recreio',url:'emp-oceanside-recreio.html',bairro:'Recreio dos Bandeirantes · Rio de Janeiro',primary:'Recreio dos Bandeirantes',secondary:'Rio de Janeiro'},
-  {nome:'Parque Ilhabela',url:'emp-parque-ilhabela.html',bairro:'Parque Pecuária · Campos dos Goytacazes',primary:'Parque Pecuária',secondary:'Campos dos Goytacazes'},
-  {nome:'Primavera Garden',url:'emp-primavera-garden.html',bairro:'Jardim Primavera · Duque de Caxias',primary:'Jardim Primavera',secondary:'Duque de Caxias'},
-  {nome:'Refúgio Camorim',url:'emp-refugio-camorim.html',bairro:'Região do Camorim · Rio de Janeiro',primary:'Região do Camorim',secondary:'Rio de Janeiro'},
-  {nome:'Residencial Bálsamo',url:'emp-residencial-balsamo.html',bairro:'Região de Campo Grande · Rio de Janeiro',primary:'Região de Campo Grande',secondary:'Rio de Janeiro'},
-  {nome:'Residencial Ipê Amarelo',url:'emp-residencial-ipe-amarelo.html',bairro:'Região de Campo Grande · Rio de Janeiro',primary:'Região de Campo Grande',secondary:'Rio de Janeiro'},
-  {nome:'Residencial Mar de Trindade',url:'emp-residencial-mar-de-trindade.html',bairro:'Alcântara · São Gonçalo',primary:'Alcântara',secondary:'São Gonçalo'},
-  {nome:'Residencial Monet',url:'emp-residencial-monet.html',bairro:'Região da Vila São Luiz · Duque de Caxias',primary:'Região da Vila São Luiz',secondary:'Duque de Caxias'},
-  {nome:'Residencial Morada Real',url:'emp-residencial-morada-real.html',bairro:'Região de Arsenal · São Gonçalo',primary:'Região de Arsenal',secondary:'São Gonçalo'},
-  {nome:'Residencial Paineiras',url:'emp-residencial-paineiras.html',bairro:'Vila Nova · Nova Iguaçu',primary:'Vila Nova',secondary:'Nova Iguaçu'},
   {nome:'Sensia Barra',url:'emp-sensia-barra.html',bairro:'Barra da Tijuca · Rio de Janeiro',primary:'Barra da Tijuca',secondary:'Rio de Janeiro'}
 ];
 
