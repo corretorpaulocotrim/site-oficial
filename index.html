@@ -145,6 +145,54 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .showcase-dots span.on{background:var(--gold);transform:scale(1.3)}
 .hero-lead{font-size:clamp(16px,2vw,19px);color:var(--gray);max-width:52ch;line-height:1.6;margin-bottom:0}
 
+/* ===== HERO CINEMATICO (redesign 2026-07) ===== */
+.hero-cine{position:relative;height:100vh;min-height:620px;max-height:1080px;overflow:hidden;background:#0a2027;padding:0}
+@supports(height:100svh){.hero-cine{height:100svh}}
+.hero-cine::before,.hero-cine::after{display:none}
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;opacity:0;transition:opacity 2.4s var(--ease);background-size:cover;background-position:center;will-change:transform,opacity}
+.hero-slide.on{opacity:1;animation:cineKB 16s linear forwards}
+@keyframes cineKB{0%{transform:scale(1.06) translate3d(0,0,0)}100%{transform:scale(1.16) translate3d(-1.5%,-1%,0)}}
+.hero-cine-shade{position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(180deg,rgba(10,32,39,.62) 0%,rgba(10,32,39,.28) 34%,rgba(10,32,39,.40) 62%,rgba(10,32,39,.92) 100%),radial-gradient(120% 90% at 50% 108%,rgba(10,32,39,.55) 0%,transparent 55%)}
+.hero-grain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.05;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+.hero-cine-content{position:relative;z-index:3;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start}
+.hero-cine-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:12px;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.14em;text-transform:uppercase;margin-bottom:30px;opacity:0;animation:cineFade 1.2s var(--ease) .3s forwards}
+.hero-cine-eyebrow::before{content:"";width:34px;height:1px;background:var(--gold2,#cf9f4f)}
+.hero-cine .hero-cine-title{font-family:'Fraunces',Georgia,serif;font-weight:600;font-size:clamp(44px,7.6vw,104px);line-height:1.02;letter-spacing:-.028em;color:#fff;margin:0 0 30px;max-width:14ch}
+.hero-cine-title .hl{display:block;overflow:hidden}
+.hero-cine-title .hl>span{display:block;transform:translateY(112%);animation:cineRise 1.25s var(--ease) forwards}
+.hero-cine-title .hl:nth-child(1)>span{animation-delay:.15s}
+.hero-cine-title .hl:nth-child(2)>span{animation-delay:.3s}
+.hero-cine-title .hl:nth-child(3)>span{animation-delay:.45s}
+.hero-cine-title em{font-style:italic;color:var(--gold2,#cf9f4f)}
+.hero-cine-lead{font-size:clamp(15px,1.7vw,18.5px);color:rgba(255,255,255,.72);max-width:46ch;line-height:1.75;margin-bottom:40px;opacity:0;animation:cineFade 1.3s var(--ease) .85s forwards}
+.hero-cine-ctas{display:flex;gap:14px;flex-wrap:wrap;align-items:center;opacity:0;animation:cineFade 1.2s var(--ease) 1.1s forwards}
+.hc-btn{display:inline-flex;align-items:center;gap:10px;padding:17px 34px;border-radius:14px;font-size:15px;font-weight:700;text-decoration:none;transition:transform .45s var(--ease),box-shadow .45s var(--ease),background-color .35s var(--ease),border-color .35s var(--ease)}
+.hc-btn-primary{background:#1a8f4c;color:#fff;box-shadow:0 14px 34px rgba(26,143,76,.4),inset 0 1px 0 rgba(255,255,255,.22)}
+.hc-btn-primary:hover{background:#157a3f;transform:translateY(-3px);box-shadow:0 20px 46px rgba(26,143,76,.5)}
+.hc-btn-ghost{background:rgba(255,255,255,.08);color:#fff;border:1px solid rgba(255,255,255,.28);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+.hc-btn-ghost:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.5);transform:translateY(-3px)}
+.hero-cine-cred{margin-top:34px;font-size:12.5px;font-weight:500;color:rgba(255,255,255,.5);letter-spacing:.05em;opacity:0;animation:cineFade 1.2s var(--ease) 1.35s forwards}
+.hero-cine-cred b{color:rgba(255,255,255,.85);font-weight:700}
+.hero-caption{position:absolute;left:0;right:0;bottom:0;z-index:3;pointer-events:none}
+.hero-caption .wrap{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;padding-bottom:30px}
+.hc-cap{pointer-events:auto;min-height:44px}
+.hc-cap a{display:block;text-decoration:none}
+.hc-cap .hc-cap-name{font-family:'Fraunces',Georgia,serif;font-size:17px;font-weight:600;color:#fff;transition:opacity .5s var(--ease)}
+.hc-cap .hc-cap-loc{font-size:11.5px;color:rgba(255,255,255,.55);letter-spacing:.06em;text-transform:uppercase;margin-top:3px;transition:opacity .5s var(--ease)}
+.hc-cap.fade .hc-cap-name,.hc-cap.fade .hc-cap-loc{opacity:0}
+.hero-progress{display:flex;gap:8px;pointer-events:auto}
+.hero-progress button{width:34px;height:3px;border:none;border-radius:99px;background:rgba(255,255,255,.22);cursor:pointer;padding:0;transition:background .4s var(--ease)}
+.hero-progress button.on{background:var(--gold2,#cf9f4f)}
+.hero-scrollcue{position:absolute;left:50%;bottom:88px;transform:translateX(-50%);z-index:3;pointer-events:none;opacity:0;animation:cineFade 1.4s var(--ease) 1.9s forwards}
+.hero-scrollcue span{display:block;width:1px;height:44px;margin:0 auto;background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.55));animation:cueDrop 2.2s var(--ease) infinite}
+@keyframes cueDrop{0%{transform:scaleY(0);transform-origin:top}45%{transform:scaleY(1);transform-origin:top}55%{transform:scaleY(1);transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+@keyframes cineRise{to{transform:translateY(0)}}
+@keyframes cineFade{to{opacity:1}}
+@media(max-width:720px){.hero-cine{min-height:560px}.hero-cine-content{justify-content:flex-end;padding-bottom:170px}.hero-cine-eyebrow{margin-bottom:18px}.hero-cine .hero-cine-title{margin-bottom:18px}.hero-cine-lead{margin-bottom:26px}.hc-btn{padding:15px 24px;font-size:14px}.hero-cine-cred{display:none}.hero-scrollcue{display:none}.hero-caption .wrap{padding-bottom:20px}}
+@media(prefers-reduced-motion:reduce){.hero-slide.on{animation:none;transform:none}.hero-cine-title .hl>span{animation:none;transform:none}.hero-cine-eyebrow,.hero-cine-lead,.hero-cine-ctas,.hero-cine-cred,.hero-scrollcue{animation:none;opacity:1}.hero-scrollcue span{animation:none}}
+.buscar-section{padding:46px 0 8px}
+
 /* SEARCH BAR */
 .search-title{font-size:13px;font-weight:700;color:var(--gold);letter-spacing:.02em;margin:28px 0 8px;display:flex;align-items:center;gap:7px}
 .search-title svg{width:15px;height:15px;stroke:var(--gold);fill:none;stroke-width:2.3}
@@ -574,6 +622,7 @@ footer .wrap{position:relative;z-index:1}
       <a href="#empreendimentos">Empreendimentos</a>
       <a href="investidor.html">Investidor</a>
       <a href="aprovacao-expressa.html">Aprovação Expressa</a>
+      <a href="agende-sua-visita.html">Agende sua Visita</a>
       <a href="guia-do-comprador.html">Guia do Comprador</a>
       <a href="#quem-conduz">Sobre</a>
       <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20falar%20com%20a%20equipe%20de%20vendas." class="nav-cta"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Equipe de vendas online, chame agora</a>
@@ -587,19 +636,43 @@ footer .wrap{position:relative;z-index:1}
     <a href="#empreendimentos" style="display:block;padding:10px 0;color:var(--gray);font-size:14px">Empreendimentos</a>
     <a href="investidor.html" style="display:block;padding:10px 0;color:var(--gray);font-size:14px">Investidor</a>
     <a href="aprovacao-expressa.html" style="display:block;padding:10px 0;color:var(--gray);font-size:14px">Aprovação Expressa</a>
+    <a href="agende-sua-visita.html" style="display:block;padding:10px 0;color:var(--gray);font-size:14px">Agende sua Visita</a>
     <a href="guia-do-comprador.html" style="display:block;padding:10px 0;color:var(--gray);font-size:14px">Guia do Comprador</a>
     <a href="#quem-conduz" style="display:block;padding:10px 0;color:var(--gray);font-size:14px">Sobre</a>
   </div>
 </header>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="wrap hero-grid">
-  <div class="hero-main">
-    <div class="hero-eyebrow reveal">Plataforma independente · Rio de Janeiro</div>
-    <h1 class="display reveal">Todo o mercado de <span class="accent">imóveis novos</span> do Rio, em um só lugar.</h1>
-    <p class="hero-lead reveal">Uma plataforma de inteligência imobiliária que reúne lançamentos de todas as principais construtoras. Explore no mapa, compare com dados e decida com quem entende o Rio há 18 anos.</p>
+<!-- HERO CINEMATICO -->
+<section class="hero hero-cine">
+  <div class="hero-slides hero-bg" id="heroSlides"></div>
+  <div class="hero-cine-shade"></div>
+  <div class="hero-grain"></div>
+  <div class="wrap hero-cine-content">
+    <div class="hero-cine-eyebrow">Paulo Cotrim · Rio de Janeiro</div>
+    <h1 class="hero-cine-title">
+      <span class="hl"><span>Todo o mercado de</span></span>
+      <span class="hl"><span><em>imóveis novos</em> do Rio,</span></span>
+      <span class="hl"><span>em um só lugar.</span></span>
+    </h1>
+    <p class="hero-cine-lead">Lançamentos de todas as grandes construtoras em um só mapa. Explore, compare e decida com quem entende o Rio há 18 anos.</p>
+    <div class="hero-cine-ctas">
+      <a class="hc-btn hc-btn-primary" href="#buscar"><svg viewBox="0 0 24 24" style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2.2;stroke-linecap:round"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Explorar empreendimentos</a>
+      <a class="hc-btn hc-btn-ghost" href="agende-sua-visita.html"><svg viewBox="0 0 24 24" style="width:17px;height:17px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Agendar uma visita</a>
+    </div>
+    <div class="hero-cine-cred"><b>18 anos</b> de mercado &nbsp;·&nbsp; <b>700+</b> famílias atendidas &nbsp;·&nbsp; <b>CRECI-RJ 77677-F</b></div>
+  </div>
+  <div class="hero-scrollcue"><span></span></div>
+  <div class="hero-caption">
+    <div class="wrap">
+      <div class="hc-cap" id="heroCaption"></div>
+      <div class="hero-progress" id="heroProgress"></div>
+    </div>
+  </div>
+</section>
 
+<!-- BUSCA -->
+<section class="section buscar-section" id="buscar">
+  <div class="wrap">
     <div class="search-title reveal"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>Ache agora seu imóvel!</div>
     <div class="search reveal" role="search">
       <div class="search-field">
@@ -658,31 +731,6 @@ footer .wrap{position:relative;z-index:1}
         Explorar
       </button>
     </div>
-
-    <div class="hero-quicklinks reveal">
-      <a href="aprovacao-expressa.html"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Aprovação de crédito em 48h</a>
-      <a href="simulador.html"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>Simular financiamento</a>
-    </div>
-
-    <div class="trust reveal">
-      <div class="trust-item"><span class="trust-num">18</span><span class="trust-lbl">anos de mercado</span></div>
-      <div class="trust-item"><span class="trust-num">31</span><span class="trust-lbl">empreendimentos ativos</span></div>
-      <div class="trust-item"><span class="trust-num">16</span><span class="trust-lbl">construtoras parceiras</span></div>
-      <div class="trust-item"><span class="trust-num">721</span><span class="trust-lbl">famílias atendidas</span></div>
-    </div>
-
-    <div class="hero-intents reveal">
-      <button onclick="quickIntent('morar')">Morar</button>
-      <a href="investidor.html">Investir</a>
-      <a href="investidor.html">Airbnb</a>
-      <button onclick="quickIntent('mcmv')">MCMV · entrada facilitada</button>
-    </div>
-  </div>
-  <div class="hero-showcase reveal">
-    <div class="showcase-label">Sem favorecer ninguém</div>
-    <div class="showcase-stack" id="showcase-stack"></div>
-    <div class="showcase-dots" id="showcase-dots"></div>
-  </div>
   </div>
 </section>
 
@@ -795,6 +843,31 @@ footer .wrap{position:relative;z-index:1}
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">48h</span><span class="ae-promo-stat-lbl">tempo médio de resposta</span></div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">72%</span><span class="ae-promo-stat-lbl">aprovados na 1ª análise</span></div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$0</span><span class="ae-promo-stat-lbl">custo para o comprador</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AGENDE SUA VISITA -->
+<section class="section section-mist">
+  <div class="wrap">
+    <div class="ae-promo reveal">
+      <div class="ae-promo-grid">
+        <div>
+          <div class="ae-promo-badge" style="background:rgba(26,143,76,.18);color:#7fd9a0;border-color:rgba(26,143,76,.35)">Agende sua visita</div>
+          <h2>Veja o empreendimento de perto antes de decidir</h2>
+          <p>Todos os empreendimentos que acompanho, organizados por região e construtora, com mapa e rota de como chegar. Escolha o seu, clique em agendar e você cai direto no meu WhatsApp — eu confirmo o estande e já deixo o horário marcado.</p>
+          <div class="ae-promo-ctas">
+            <a href="agende-sua-visita.html" class="ae-promo-cta-primary" style="background:#1a8f4c"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Agendar Visita</a>
+            <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20consultar%20disponibilidade%20com%20a%20equipe%20de%20vendas%20e%20agendar%20uma%20visita." target="_blank" class="ae-promo-cta-secondary"><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="12" cy="7" r="4"/><path d="M6 21v-2a4 4 0 014-4h4a4 4 0 014 4v2"/></svg>Consultar disponibilidade com equipe de vendas</a>
+          </div>
+        </div>
+        <div class="ae-promo-stats">
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">45</span><span class="ae-promo-stat-lbl">empreendimentos no mapa</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">15</span><span class="ae-promo-stat-lbl">construtoras parceiras</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">100%</span><span class="ae-promo-stat-lbl">endereço confirmado por WhatsApp</span></div>
+          <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$0</span><span class="ae-promo-stat-lbl">para agendar</span></div>
         </div>
       </div>
     </div>
@@ -1663,6 +1736,53 @@ if('serviceWorker' in navigator){
   });
 }
 </script>
+<script>
+(function(){
+  var PICKS = ['farol-da-guanabara.html','orla-central.html','emp-saudosa-praca-onze.html','emp-a-noite.html','emp-only-by-living.html','emp-east-side-harmony.html'];
+  var slidesEl = document.getElementById('heroSlides');
+  var capEl = document.getElementById('heroCaption');
+  var progEl = document.getElementById('heroProgress');
+  if(!slidesEl || typeof EMP === 'undefined') return;
+  var slides = [];
+  PICKS.forEach(function(u){ for(var i=0;i<EMP.length;i++){ if(EMP[i].url===u){ slides.push(EMP[i]); break; } } });
+  if(!slides.length) return;
+  var html='', dots='';
+  slides.forEach(function(e,i){
+    html += '<div class="hero-slide'+(i===0?' on':'')+'" style="background-image:url(\''+e.img+'\')"></div>';
+    dots += '<button type="button"'+(i===0?' class="on"':'')+' aria-label="Foto '+(i+1)+'" onclick="pcHeroGo('+i+')"></button>';
+  });
+  slidesEl.innerHTML = html;
+  if(progEl) progEl.innerHTML = dots;
+  var cur = 0, timer = null;
+  function caption(e){
+    if(!capEl) return;
+    capEl.classList.add('fade');
+    setTimeout(function(){
+      capEl.innerHTML = '<a href="'+e.url+'"><span class="hc-cap-name">'+e.nome+'</span><span class="hc-cap-loc">'+e.bairro+'</span></a>';
+      capEl.classList.remove('fade');
+    }, 420);
+  }
+  if(capEl) capEl.innerHTML = '<a href="'+slides[0].url+'"><span class="hc-cap-name">'+slides[0].nome+'</span><span class="hc-cap-loc">'+slides[0].bairro+'</span></a>';
+  function show(i){
+    var els = slidesEl.querySelectorAll('.hero-slide');
+    var bts = progEl ? progEl.querySelectorAll('button') : [];
+    if(els[cur]) els[cur].classList.remove('on');
+    if(bts[cur]) bts[cur].classList.remove('on');
+    cur = (i + slides.length) % slides.length;
+    if(els[cur]) els[cur].classList.add('on');
+    if(bts[cur]) bts[cur].classList.add('on');
+    caption(slides[cur]);
+  }
+  function next(){ show(cur+1); }
+  function start(){ stop(); timer = setInterval(next, 7000); }
+  function stop(){ if(timer){ clearInterval(timer); timer = null; } }
+  window.pcHeroGo = function(i){ show(i); start(); };
+  var reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!reduced && slides.length > 1) start();
+  document.addEventListener('visibilitychange', function(){ if(document.hidden) stop(); else if(!reduced && slides.length > 1) start(); });
+})();
+</script>
+
 <script src="crm-config.js"></script>
 <script src="leads.js" defer></script>
 </body>
