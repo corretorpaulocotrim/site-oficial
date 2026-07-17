@@ -1089,7 +1089,15 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     /* Cinema nas fotos de capa de todas as paginas de imovel */
     '.hero .hero-bg,.hero-bg{animation:pcCineKB 16s ease-out forwards;will-change:transform}',
     '@keyframes pcCineKB{0%{transform:scale(1.02)}100%{transform:scale(1.1)}}',
-    '@media(prefers-reduced-motion:reduce){.hero .hero-bg,.hero-bg{animation:none !important}}'
+    '@media(prefers-reduced-motion:reduce){.hero .hero-bg,.hero-bg{animation:none !important}}',
+    /* ARREMATE 10/10: micro-interacoes premium (transform/opacity only, guardadas p/ touch e reduced-motion) */
+    '@media(hover:hover) and (pointer:fine){',
+    '  .btn-gold:hover,a.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-primary:hover,.cta:hover,.upload-btn:hover,.wa-btn2:hover,.btn-pg:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(15,46,54,.35) !important}',
+    '  .btn-gold:active,a.btn-gold:active,.wa-btn:active,.btn-primary:active,.cta:active{transform:translateY(0) scale(.98)}',
+    '}',
+    '.btn-gold,a.btn-gold,.wa-btn,.btn-wa-big,.btn-primary,.cta,.upload-btn,.wa-btn2,.btn-pg{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1),background .3s !important}',
+    'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(184,135,58,.55) !important;outline-offset:2px}',
+    '@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}'
   ].join('\n');
   var st = document.createElement('style');
   st.id = 'pc-gold-cine';

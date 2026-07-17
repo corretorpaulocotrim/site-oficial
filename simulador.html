@@ -54,16 +54,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .sim-divider::before,.sim-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .sim-divider span{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
 .sim-body{padding:0 1.5rem 1.5rem}
-.sel-box{background:#fff;border:1.5px solid var(--gold);border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem;box-shadow:0 2px 10px rgba(184,135,58,.08)}
-.sel-title{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
+.sel-box{background:linear-gradient(180deg,#fffdf8,#fff 30%);border:1.5px solid var(--gold);border-radius:16px;padding:1.5rem 1.6rem;margin-bottom:.9rem;box-shadow:0 6px 28px rgba(184,135,58,.13)}
+.sel-title{font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;color:var(--navy);letter-spacing:-.01em;margin-bottom:12px}
 .g2s{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.g4s{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
+.g4s{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:13px}
 .fi2{display:flex;flex-direction:column;gap:3px}
 .fi2 label{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.fi2 input,.fi2 select{font-size:13px;padding:7px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);width:100%;font-family:inherit}
-.fi2 input:focus,.fi2 select:focus{outline:none;border-color:var(--gold)}
+.fi2 input,.fi2 select{font-size:14.5px;padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);width:100%;font-family:inherit;font-variant-numeric:tabular-nums;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
+.fi2 input:focus,.fi2 select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,135,58,.14)}
 .fi2.hl input{border-color:var(--green);background:#f0f9f3}.fi2.hl label{color:var(--green)}
-.fi2.wn input{border-color:#a5691f;background:#fbf3e4}.fi2.wn label{color:#a5691f}.rng-wrap{margin-top:7px}.rng-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}.rng-val{font-size:12px;font-weight:700;color:var(--gold)}.rng-wrap input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:99px;background:var(--border);outline:none;cursor:pointer;margin:2px 0 1px;accent-color:var(--gold)}.rng-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 1px 5px rgba(15,46,54,.35);cursor:pointer;transition:transform .15s var(--ease)}.rng-wrap input[type=range]::-webkit-slider-thumb:active{transform:scale(1.2)}.rng-wrap input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 1px 5px rgba(15,46,54,.35);cursor:pointer;border:none}.prog-wrap{margin-bottom:12px}.prog-top{display:flex;align-items:center;justify-content:space-between;font-size:11px;color:var(--text2);margin-bottom:5px}.prog-top b{color:var(--navy)}.prog-bar{height:9px;border-radius:99px;background:var(--border);overflow:hidden}.prog-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .4s var(--ease)}.btn-zerar{background:var(--gold);box-shadow:0 2px 10px rgba(184,135,58,.3)}.btn-zerar:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,135,58,.4)}.btn-zerar svg{transition:transform .4s var(--ease)}.btn-zerar:hover svg{transform:rotate(180deg)}
+.fi2.wn input{border-color:#a5691f;background:#fbf3e4}.fi2.wn label{color:#a5691f}.rng-wrap{margin-top:7px}.rng-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}.rng-val{font-size:12px;font-weight:700;color:var(--gold)}.rng-wrap input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:99px;background:var(--border);outline:none;cursor:pointer;margin:2px 0 1px;accent-color:var(--gold)}.rng-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 1px 5px rgba(15,46,54,.35);cursor:pointer;transition:transform .15s var(--ease)}.rng-wrap input[type=range]::-webkit-slider-thumb:active{transform:scale(1.2)}.rng-wrap input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 1px 5px rgba(15,46,54,.35);cursor:pointer;border:none}.prog-wrap{margin-bottom:12px}.prog-top{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--text2);margin-bottom:6px}.prog-top b{color:var(--navy)}.prog-bar{height:13px;border-radius:99px;background:var(--border);overflow:hidden;box-shadow:inset 0 1px 3px rgba(15,46,54,.12)}.prog-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .4s var(--ease)}.btn-zerar{background:var(--gold);box-shadow:0 2px 10px rgba(184,135,58,.3);width:100%;justify-content:center;padding:13px 20px;font-size:13.5px;margin-top:4px}.btn-zerar:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,135,58,.4)}.btn-zerar svg{transition:transform .4s var(--ease)}.btn-zerar:hover svg{transform:rotate(180deg)}
 .pr2{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin-top:10px}
 .pi2{padding:10px 12px;border-radius:8px;display:flex;flex-direction:column;gap:3px}
 .pi2.b{background:var(--bg);border:.5px solid var(--border)}.pi2.b .pv2{color:var(--navy)}
@@ -83,9 +83,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .s1x .ssh{background:var(--navy)}.s2x .ssh{background:var(--navy2)}
 .s3x .ssh{background:var(--navy)}.scx .ssh{background:var(--gold)}.skx .ssh{background:var(--navy2)}
 .mets2{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-top:9px}
-.mt2{background:var(--bg);border-radius:7px;padding:9px 11px}
+.mt2{background:var(--bg);border-radius:11px;padding:12px 14px}
 .mt2 .ml{font-size:10px;color:var(--text2);line-height:1.3}
-.mt2 .mv{font-size:13px;font-weight:700;margin-top:3px;color:var(--text)}
+.mt2 .mv{font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:600;margin-top:3px;color:var(--text);font-variant-numeric:tabular-nums}
 .mt2.hi{background:var(--bg);border:.5px solid var(--border)}.mt2.hi .mv{color:var(--navy)}
 .mt2.gr{background:#f0f9f3;border:.5px solid #bfe3cc}.mt2.gr .mv{color:var(--green)}
 .mt2.am{background:#fbf3e4;border:.5px solid #e9d4ab}.mt2.am .mv{color:#a5691f}
@@ -591,9 +591,9 @@ function renderFluxo(c){
   var acimaTeto=(S.mensaisQtd>0&&S.mensaisValor>1500)||(S.anuaisQtd>0&&S.anuaisValor>18000);
   var pc=c.posChavesElegivel;
   return'<div class="sel-box">'
-    +'<div class="sel-title">Entrada a cobrir: <span style="color:#B91C1C">'+BRL(c.entrada)+'</span></div>'
+    +'<div class="sel-title">Monte sua entrada — falta cobrir <span style="color:#B91C1C">'+BRL(c.entrada)+'</span></div>'
     +'<div class="prog-wrap"><div class="prog-top">Fluxo montado: <b>'+BRL(Math.max(0,c.fluxoTotal))+'</b> de '+BRL(c.entrada)+' ('+Math.round(c.entrada>0?Math.min(999,Math.max(0,c.fluxoTotal/c.entrada*100)):0)+'%)</div><div class="prog-bar"><i style="width:'+Math.min(100,Math.max(0,c.entrada>0?c.fluxoTotal/c.entrada*100:0))+'%"></i></div></div>'
-    +'<p style="font-size:11.5px;color:var(--text2);margin-bottom:10px">Distribua a entrada entre ato, parcelas mensais, reforços anuais, parcela única (ex: FGTS/13º)'+(pc?', valor na entrega das chaves e parcelamento pós-chaves':' e valor na entrega das chaves')+'. Use o ZERAR para completar automaticamente o campo que faltar.</p>'
+    +'<p style="font-size:11.5px;color:var(--text2);margin-bottom:10px">Distribua a entrada entre ato, parcelas mensais, reforços anuais, parcela única (ex: FGTS/13º)'+(pc?', valor na entrega das chaves e parcelamento pós-chaves':' e valor na entrega das chaves')+'. Preencha o que você já sabe — o <b>ZERAR</b> completa o resto sozinho.</p>'
     +'<div class="g4s" style="margin-bottom:10px">'
     +'<div class="fi2"><label>Ato de entrada (R$)</label><input type="text" value="'+N2(S.ato)+'" onchange="updFluxo(\'ato\',this.value)">'+'<div class="rng-wrap"><input type="range" min="0" max="'+Math.max(100,Math.round(c.entrada))+'" step="50" value="'+Math.round(S.ato)+'" '+'oninput="this.nextElementSibling.textContent=BRL(this.value)" onchange="updFluxo(\'ato\',this.value)">'+'<div class="rng-val" style="text-align:right">'+BRL(S.ato)+'</div></div>'+'</div>'
     +'<div class="fi2"><label>Valor na entrega das chaves (R$)</label><input type="text" value="'+N2(S.valorChaves)+'" onchange="updFluxo(\'valorChaves\',this.value)"></div>'
