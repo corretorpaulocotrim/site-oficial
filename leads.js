@@ -1068,3 +1068,28 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     injectNewsletter();
   }
 })();
+
+
+/* ---------- PADRAO OURO SITEWIDE + FONTE DA LOGO NOS BOTOES + CINEMA (pedido Paulo 2026-07-17) ---------- */
+(function(){
+  var css = [
+    /* Todo clicavel principal: DOURADO com a fonte serif da logo */
+    '.btn-gold,a.btn-gold,button.btn-gold,.wa-btn,.wa-btn2,.btn-pg,.btn-wa-big,.btn-wa-hdr,.upload-btn,.btn-primary,.cta,.sim-btn,.fs-btn,.btn-sim,.btn-wa,.hero-cta,.item-row-send,input[type=submit],.btn-verde,.btn-green{',
+    '  background:linear-gradient(135deg,#b8873a,#cf9f4f) !important;color:#fff !important;border-color:#b8873a !important;',
+    "  font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important;letter-spacing:.02em !important}",
+    '.btn-gold:hover,a.btn-gold:hover,button.btn-gold:hover,.wa-btn:hover,.wa-btn2:hover,.btn-pg:hover,.btn-wa-big:hover,.btn-wa-hdr:hover,.upload-btn:hover,.btn-primary:hover,.cta:hover,.item-row-send:hover,input[type=submit]:hover{',
+    '  background:linear-gradient(135deg,#a5772e,#b8873a) !important}',
+    /* Botoes secundarios/outline tambem na fonte da logo */
+    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Fraunces',Georgia,serif !important;font-weight:600 !important}",
+    /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
+    '.leaflet-tooltip:before,.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{display:none !important}',
+    /* Cinema nas fotos de capa de todas as paginas de imovel */
+    '.hero .hero-bg,.hero-bg{animation:pcCineKB 16s ease-out forwards;will-change:transform}',
+    '@keyframes pcCineKB{0%{transform:scale(1.02)}100%{transform:scale(1.1)}}',
+    '@media(prefers-reduced-motion:reduce){.hero .hero-bg,.hero-bg{animation:none !important}}'
+  ].join('\n');
+  var st = document.createElement('style');
+  st.id = 'pc-gold-cine';
+  st.textContent = css;
+  (document.head||document.documentElement).appendChild(st);
+})();
