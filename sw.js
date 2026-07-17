@@ -1,11 +1,11 @@
 /* =====================================================
    SERVICE WORKER — Paulo Cotrim Site Oficial
-   Versão: 2.0 | Estratégia: Cache-First para assets,
+   Versão: 3.0 | Estratégia: Cache-First para assets,
    Network-First para HTML
    ===================================================== */
 
-const CACHE_NAME = 'paulocotrim-v2';
-const CACHE_STATIC = 'paulocotrim-static-v2';
+const CACHE_NAME = 'paulocotrim-v3';
+const CACHE_STATIC = 'paulocotrim-static-v3';
 
 // Arquivos essenciais para cache (carregam offline)
 const PRECACHE_ASSETS = [
@@ -73,7 +73,7 @@ self.addEventListener('fetch', function(e) {
   if (e.request.headers.get('accept') &&
       e.request.headers.get('accept').includes('text/html')) {
     e.respondWith(
-      fetch(e.request)
+      fetch(e.request, { cache: 'reload' })
         .then(function(res) {
           var clone = res.clone();
           caches.open(CACHE_NAME).then(function(c) { c.put(e.request, clone); });
