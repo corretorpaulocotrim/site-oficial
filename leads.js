@@ -1113,10 +1113,29 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     '  ::-webkit-scrollbar-thumb{background:#0f2e36;border-radius:99px;border:3px solid #f5f6f7}',
     '  ::-webkit-scrollbar-thumb:hover{background:#173d47}',
     '}',
-    '@media(prefers-reduced-motion:reduce){.related-card,.perfil-card,.crit-card,.depo-photo img,.related-card img{transition:none !important}}'
+    '@media(prefers-reduced-motion:reduce){.related-card,.perfil-card,.crit-card,.depo-photo img,.related-card img{transition:none !important}}',
+    /* FOCO NAS FONTES — identidade tipografica da logo em todos os titulos, acabamento fino */
+    "h1,h2,.display,.stitle,.sec-h2,.sim-title,.inv-h1,.ae-h1,.step-title,.sel-title{font-family:'Fraunces',Georgia,serif !important;font-optical-sizing:auto;font-weight:600;letter-spacing:-.015em}",
+    "h3{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;letter-spacing:-.01em}",
+    'body{text-rendering:optimizeLegibility;font-kerning:normal}',
+    "h1 em,h2 em,.display em{font-style:italic;color:#cf9f4f}",
+    '.ae-trust-num,.res-val,.mv,.pv2,.compare-num{font-variant-numeric:tabular-nums}',
+    ".eyebrow,.step-tag,.showcase-label,.inv-tag,.ae-badge,label{letter-spacing:.08em}"
   ].join('\n');
   var st = document.createElement('style');
   st.id = 'pc-gold-cine';
   st.textContent = css;
   (document.head||document.documentElement).appendChild(st);
+})();
+
+/* Fallback: garante a fonte da logo (Fraunces) em toda pagina */
+(function(){
+  var has=false;
+  document.querySelectorAll('link[href*="fonts.googleapis"]').forEach(function(l){ if(l.href.indexOf('Fraunces')>-1) has=true; });
+  if(!has){
+    var l=document.createElement('link');
+    l.rel='stylesheet';
+    l.href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap';
+    (document.head||document.documentElement).appendChild(l);
+  }
 })();
