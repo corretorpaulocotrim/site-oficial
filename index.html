@@ -582,7 +582,7 @@ footer .wrap{position:relative;z-index:1}
 </div>
 <script>
 (function(){
-  if(sessionStorage.getItem("rgSeen")) return;
+  try{if((Date.now()-(+localStorage.getItem("rgSeenAt")||0))<216e5) return;}catch(e){}
   var slides = document.querySelectorAll('#rgSlides .rg-slide');
   if(slides.length < 2) return;
   if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
@@ -596,7 +596,7 @@ footer .wrap{position:relative;z-index:1}
   }, 6000);
 })();
 </script>
-<script>if(sessionStorage.getItem("rgSeen"))document.getElementById("region-gate").classList.add("hide");</script>
+<script>try{if((Date.now()-(+localStorage.getItem("rgSeenAt")||0))<216e5)document.getElementById("region-gate").classList.add("hide");}catch(e){}</script>
 
 <header>
   <div class="wrap nav">
@@ -1192,7 +1192,7 @@ function zonaKey(e){var b=e.bairro.toLowerCase();
   return e.lng>-43.20?"centro":"zona-norte";}
 /* ---------- REGION GATE ---------- */
 function closeRegionGate(){
-  sessionStorage.setItem("rgSeen","1");
+  try{localStorage.setItem("rgSeenAt",String(Date.now()))}catch(e){}
   document.getElementById("region-gate").classList.add("hide");
   setTimeout(showFeaturedPopup, 700);
 }
@@ -1234,7 +1234,7 @@ function showFeaturedPopup(){
 // Se a pessoa já viu o splash de região numa visita anterior nesta sessão, o gate
 // nem chega a abrir — nesse caso mostramos o popup de destaque direto, com um
 // pequeno atraso para não competir com o carregamento inicial da página.
-if(sessionStorage.getItem("rgSeen")){
+if((function(){try{return (Date.now()-(+localStorage.getItem("rgSeenAt")||0))<216e5}catch(e){return false}})()){
   setTimeout(showFeaturedPopup, 1500);
 }
 function pickRegion(zona){

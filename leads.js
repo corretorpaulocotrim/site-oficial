@@ -1076,14 +1076,14 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     /* Clicaveis do site: VERDE com a fonte serif da logo (pedido Paulo) */
     '.btn-gold,a.btn-gold,button.btn-gold,.wa-btn,.btn-wa-big,.btn-wa-hdr,.btn-primary,.cta,.sim-btn,.fs-btn,.btn-sim,.btn-wa,.hero-cta,input[type=submit],.btn-verde,.btn-green{',
     '  background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;border-color:#157a3f !important;',
-    "  font-family:'Cinzel',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
+    "  font-family:'Playfair Display',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
     '.btn-gold:hover,a.btn-gold:hover,button.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-wa-hdr:hover,.btn-primary:hover,.cta:hover,input[type=submit]:hover{',
     '  background:linear-gradient(135deg,#157a3f,#116334) !important}',
     /* Fluxo de DOCUMENTOS: AMARELO (pedido Paulo: enviar docs tudo com amarelo) */
-    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#b8873a,#cf9f4f) !important;color:#fff !important;font-family:'Cinzel',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
-    '.upload-btn:hover,.item-row-send:hover,.wa-btn2:hover,.btn-pg:hover{background:linear-gradient(135deg,#a5772e,#b8873a) !important}',
+    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;font-family:'Playfair Display',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
+    '.upload-btn:hover,.item-row-send:hover,.wa-btn2:hover,.btn-pg:hover{background:linear-gradient(135deg,#157a3f,#116334) !important}',
     /* Botoes secundarios/outline tambem na fonte da logo */
-    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Cinzel',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
+    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Playfair Display',Georgia,serif !important;font-weight:700 !important;text-transform:uppercase !important;letter-spacing:.05em !important}",
     /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
     '.leaflet-tooltip:before,.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{display:none !important}',
     /* Cinema nas fotos de capa de todas as paginas de imovel */
@@ -1120,7 +1120,17 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     'body{text-rendering:optimizeLegibility;font-kerning:normal}',
     "h1 em,h2 em,.display em{font-style:italic;color:#cf9f4f}",
     '.ae-trust-num,.res-val,.mv,.pv2,.compare-num{font-variant-numeric:tabular-nums}',
-    ".eyebrow,.step-tag,.showcase-label,.inv-tag,.ae-badge,label{letter-spacing:.08em}"
+    ".eyebrow,.step-tag,.showcase-label,.inv-tag,.ae-badge,label{letter-spacing:.08em}",
+    /* TODA A FONTE DO SITE = fonte da logo (Playfair Display) — pedido Paulo */
+    "body,p,a,li,span,div,h1,h2,h3,h4,h5,label,button,input,select,textarea,.display,.stitle,.sec-h2,.sim-title,.inv-h1,.ae-h1,.step-title,.sel-title{font-family:'Playfair Display',Georgia,serif !important}",
+    '.leaflet-container *{font-family:inherit}',
+    /* HEADER DE LUXO */
+    '.pc-hdr-lux{background:linear-gradient(180deg,rgba(10,32,39,.97),rgba(15,46,54,.93)) !important;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);border-bottom:1px solid rgba(207,159,79,.3) !important;box-shadow:0 14px 44px -20px rgba(0,0,0,.65) !important;transition:transform .45s cubic-bezier(.16,1,.3,1)}',
+    '.pc-hdr-lux a{color:rgba(255,255,255,.87)}',
+    '.pc-hdr-lux nav a,.pc-hdr-lux .nav a{position:relative;padding-bottom:3px}',
+    '.pc-hdr-lux nav a::after,.pc-hdr-lux .nav a::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:linear-gradient(90deg,#b8873a,#cf9f4f);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1)}',
+    '@media(hover:hover){.pc-hdr-lux nav a:hover::after,.pc-hdr-lux .nav a:hover::after{transform:scaleX(1)}.pc-hdr-lux nav a:hover,.pc-hdr-lux .nav a:hover{color:#cf9f4f}}',
+    '.pc-hdr-lux img{filter:drop-shadow(0 2px 8px rgba(0,0,0,.45))}'
   ].join('\n');
   var st = document.createElement('style');
   st.id = 'pc-gold-cine';
@@ -1138,10 +1148,10 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     l.href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap';
     (document.head||document.documentElement).appendChild(l);
   }
-  var cz=document.createElement('link');
-  cz.rel='stylesheet';
-  cz.href='https://fonts.googleapis.com/css2?family=Cinzel:wght@700&display=swap';
-  (document.head||document.documentElement).appendChild(cz);
+  var pf=document.createElement('link');
+  pf.rel='stylesheet';
+  pf.href='https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,700;0,800;1,600&display=swap';
+  (document.head||document.documentElement).appendChild(pf);
 })();
 
 
@@ -1194,4 +1204,26 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     if(host){ host.insertAdjacentElement('afterend', box); } else { target.insertAdjacentElement('afterbegin', box); }
   }
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', addPerto); } else { addPerto(); }
+})();
+
+
+/* ---------- HEADER TOP: vidro escuro premium + some ao rolar, volta ao subir ---------- */
+(function(){
+  function initHdr(){
+    var h = document.querySelector('header') || document.querySelector('.hdr');
+    if(!h || h.dataset.pcLux) return;
+    h.dataset.pcLux = '1';
+    h.classList.add('pc-hdr-lux');
+    var pos = getComputedStyle(h).position;
+    if(pos === 'sticky' || pos === 'fixed'){
+      var lastY = 0;
+      window.addEventListener('scroll', function(){
+        var y = window.scrollY || 0;
+        if(y > 160 && y > lastY){ h.style.transform = 'translateY(-110%)'; }
+        else { h.style.transform = ''; }
+        lastY = y;
+      }, {passive:true});
+    }
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initHdr); } else { initHdr(); }
 })();
