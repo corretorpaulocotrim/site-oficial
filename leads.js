@@ -1086,6 +1086,9 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Inter',system-ui,sans-serif !important;font-weight:700 !important;letter-spacing:.02em !important}",
     /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
     '.leaflet-tooltip:before,.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{display:none !important}',
+    '.leaflet-popup-tip{display:none !important}',
+    '.leaflet-popup-content-wrapper{border-radius:14px !important;box-shadow:0 12px 32px rgba(15,46,54,.22) !important;border:1px solid rgba(184,135,58,.25) !important}',
+    '.leaflet-popup-content{margin:12px 14px !important}',
     /* Cinema nas fotos de capa de todas as paginas de imovel */
     '.hero .hero-bg,.hero-bg{animation:pcCineKB 16s ease-out forwards;will-change:transform}',
     '@keyframes pcCineKB{0%{transform:scale(1.02)}100%{transform:scale(1.1)}}',
