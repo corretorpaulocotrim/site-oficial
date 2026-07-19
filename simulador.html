@@ -196,7 +196,7 @@ var CATALOG=[
 {n:'Alma Carioca',b:'Vila Valqueire · Zona Norte',c:'Emccamp',s:'lancamento',p:'Consulte valores',u:'emp-alma-carioca.html'},
 {n:'Beon Porto Residencial',b:'São Cristóvão · Zona Norte',c:'Riva Incorporadora',s:'lancamento',p:'A partir de R$ 259.000',u:'emp-beon-porto.html'},
 {n:'Brise Studios Design',b:'Praça Pio X · Centro',c:'Fator Realty',s:'lancamento',p:'Consulte valores',u:'emp-brise-studios.html'},
-{n:'Conquista Florianópolis — Fase 1',b:'Praça Seca · Jacarepaguá',c:'Direcional',s:'lancamento',p:'A partir de R$ 207.500',u:'emp-conquista-florianopolis.html'},
+{n:'Conquista Florianópolis — Fase 1',b:'Praça Seca · Jacarepaguá',c:'Direcional',s:'pronto',p:'A partir de R$ 207.500',u:'emp-conquista-florianopolis.html'},
 {n:'Cores do Rio Residencial',b:'Rua Irineu Marinho · Centro',c:'W3 Engenharia',s:'pronto',p:'A partir de R$ 287.000',u:'emp-cores-do-rio.html'},
 {n:'CTV Beat',b:'Madureira · Zona Norte',c:'CTV',s:'lancamento',p:'A partir de R$ 229.000',u:'emp-ctv-beat.html'},
 {n:'CTV Vitória',b:'Campinho · Zona Norte',c:'CTV',s:'lancamento',p:'A partir de R$ 229.000',u:'emp-ctv-vitoria.html'},
@@ -412,6 +412,14 @@ function aplicarPlano(tipo){
   S.plano=tipo;
   S.parcelaUnica=0;S.posChavesQtd=0;S.posChavesValor=0;
   var emp=(!S.useCustom)?CATALOG[S.empIdx]:null;
+  /* REGRA (Paulo, 2026-07-19): imovel ja entregue (pronto) nao tem fase de obra --
+     a entrada e paga no VALOR TOTAL na assinatura, sem diluicao em mensais/anuais/chaves */
+  if(emp && emp.s==='pronto'){
+    S.plano='completo';
+    var cp=calc();
+    S.ato=cp.entrada;S.mensaisQtd=0;S.mensaisValor=0;S.anuaisQtd=0;S.anuaisValor=0;S.valorChaves=0;
+    render();return;
+  }
   var mesesRef=emp?mesesObraEstimado(emp.s):0;
   var qtd=mesesRef>0?mesesRef:(S.mensaisQtd>0?S.mensaisQtd:24);
   var anos=Math.max(1,Math.ceil(qtd/12));
@@ -653,6 +661,15 @@ function renderPlanos(c){
       +'<div style="font-size:11.5px;color:var(--text2);line-height:1.5;margin-bottom:5px">'+desc+'</div>'
       +'<div style="font-size:10.5px;color:#94a3b8">'+detalhe+'</div>'
       +'</button>';
+  }
+  var empP=(!S.useCustom)?CATALOG[S.empIdx]:null;
+  if(empP && empP.s==='pronto'){
+    return '<div class="sel-box" style="margin-bottom:14px;border-color:var(--gold)">'
+      +'<div class="sel-title">Imóvel pronto para morar — entrada no valor total</div>'
+      +'<p style="font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:10px">Como este imóvel já foi entregue, não existe fase de obra para diluir a entrada: ela é paga no <b>valor total na assinatura</b>. FGTS e subsídio (quando houver) continuam valendo para reduzir esse valor.</p>'
+      +'<button type="button" onclick="aplicarPlano(\'completo\')" style="font-family:inherit;font-size:12.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1a8f4c,#157a3f);border:none;border-radius:10px;padding:10px 18px;cursor:pointer">Aplicar entrada total no ato</button>'
+      +'<p style="font-size:10.5px;color:#94a3b8;margin-top:8px">Condições especiais de parcelamento direto com a construtora podem existir caso a caso — confirme com o Paulo.</p>'
+      +'</div>';
   }
   return '<div class="sel-box" style="margin-bottom:14px">'
     +'<div class="sel-title">Escolha um plano pronto — ou monte o seu do zero abaixo</div>'
