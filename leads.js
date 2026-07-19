@@ -1121,6 +1121,13 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     '@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}',
     /* EMBELEZAMENTO FABLE NOTA 10 — acabamento tipografico, grao cinematografico, profundidade */
     '::selection{background:#0f2e36;color:#e0b872}',
+    /* REPAGINADA FINAL (sobria): acabamento de site caro, sem efeito chamativo */
+    'body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}',
+    'h1,h2,h3,.display,.stitle{text-rendering:optimizeLegibility}',
+    '[id]{scroll-margin-top:86px}',
+    '.pv2,.mv,.rv,.cat-price,.price,.preco{font-variant-numeric:tabular-nums}',
+    '@media(max-width:700px){input[type=text],input[type=number],input[type=tel],input[type=email],select,textarea{font-size:16px !important}}',
+    '@media(pointer:coarse){.nav-links a{padding-top:10px;padding-bottom:10px}.bairro-chips button{padding:10px 16px}}',
     'h1,h2,h3,.display{text-wrap:balance}',
     '.hero-bg{filter:saturate(1.05) contrast(1.02)}',
     '.hero-bg::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.04;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'140\' height=\'140\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")}',
@@ -1256,6 +1263,12 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
         lastY = y;
       }, {passive:true});
     }
+  }
+  /* barra do navegador mobile na cor da marca (so injeta se a pagina nao definir) */
+  if(!document.querySelector('meta[name="theme-color"]')){
+    var tc = document.createElement('meta');
+    tc.name = 'theme-color'; tc.content = '#0f2e36';
+    document.head.appendChild(tc);
   }
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initHdr); } else { initHdr(); }
 })();
