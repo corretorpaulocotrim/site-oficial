@@ -274,8 +274,11 @@ function subsidioDaFaixa(f,renda){
   return f.subsidioMax*(1-prop); // maior no piso da faixa, decrescendo até 0 no teto (estimativa — Caixa confirma valor exato)
 }
 
+/* Tipologia real de cada empreendimento (mesma base do catálogo da home) */
+var TIPOLOGIAS={"farol-da-guanabara.html": "Studio, 1 e 3 quartos", "arcos-do-porto.html": "Studio, 1 e 2 quartos", "orla-central.html": "1, 2 e 3 quartos", "parque-piedade.html": "2 quartos", "luzes-do-rio-lamparina.html": "1 e 2 quartos", "caminhos-da-guanabara.html": "1 e 2 quartos", "cartola-ii.html": "1 e 2 quartos", "luzes-do-rio-candeeiro.html": "1 e 2 quartos", "emp-a-noite.html": "Studio 44m² e duplex 70m²", "emp-saudosa-praca-onze.html": "Studio a 2 quartos suíte (31-49m²)", "emp-alma-carioca.html": "2 quartos (37-46m²)", "emp-beon-porto.html": "1 e 2 quartos (32-39m²)", "emp-brise-studios.html": "Studios 31-44m²", "emp-conquista-florianopolis.html": "1 e 2 quartos (36-56m²)", "emp-cores-do-rio.html": "Studios, 1 e 2 quartos (35-57m²)", "emp-ctv-beat.html": "2 quartos (50-110m²)", "emp-ctv-vitoria.html": "2 e 3 quartos (49-114m²)", "emp-east-side-harmony.html": "2 e 3 quartos (52-68m²)", "emp-living-wish-norte.html": "2 e 3 quartos (44-59m²)", "emp-meu-crescer-engenhao.html": "2 quartos (48-52m²)", "emp-only-by-living.html": "2 a 4 quartos + coberturas (44-182m²)", "emp-primor-carioca.html": "2 quartos (35-40m²)", "emp-sal-rio.html": "Studios e apartamentos, 1 quarto (22-35m²)", "emp-urb-sole.html": "1 e 2 quartos (33-46m²)", "emp-village-caribe.html": "2 quartos c/ suíte + coberturas (59-137m²)", "emp-vivaz-connection.html": "2 quartos (37m²)", "emp-vivaz-honorio.html": "1 e 2 quartos (32-45m²)", "emp-imperio-do-ouro.html": "2 quartos, até 1 suíte (46-47m²)", "emp-ritmos-de-pilares.html": "2 quartos, com ou sem suíte — todas as unidades com varanda", "emp-encantos-da-zona-norte.html": "2 quartos (opção de varanda ou área privativa)", "emp-reserva-redentor.html": "2 quartos (opção de varanda)", "emp-sensia-barra.html": "2 e 3 quartos com suíte e varanda gourmet (opções garden e cobertura, até 148m²)", "emp-oceanside-recreio.html": "2 e 3 quartos com suíte (47,74 a 78,19m²)"};
 var S={
   renda:0, empIdx:0, useCustom:false, customPreco:0, customConstrutora:'', taxaAnual:10.9, useCustomTaxa:false, tab:0,
+  prazo:360, plano:'',
   ato:0, mensaisQtd:24, mensaisValor:0, anuaisQtd:2, anuaisValor:0, parcelaUnica:0, valorChaves:0,
   posChavesQtd:0, posChavesValor:0,
   clienteNome:'', clienteTel:'', zerarAlvo:'mensais'
@@ -310,7 +313,7 @@ function calc(){
   var mod = faixa ? ('mcmv'+faixa.id) : 'sbpe';
   var modLabel = faixa ? ('MCMV Faixa '+faixa.id) : 'SBPE';
   var pctFin = faixa ? 0.80 : 0.90; // parcela do imóvel que o financiamento cobre, no máximo
-  var prazo=360;
+  var prazo=S.prazo||360;
   var limiteFaixa = faixa ? faixa.limite : Infinity;
   var financMaxImovel=preco*pctFin;
   var prestMax=renda*0.30;
@@ -397,7 +400,49 @@ function selEmp(v){if(v==='custom'){S.useCustom=true;}else{S.useCustom=false;S.e
 function updCustomPreco(v){S.customPreco=parseBRL(v);render();}
 function updCustomConstrutora(v){S.customConstrutora=v;render();}
 function setTab(t){S.tab=t;render();}
-function updFluxo(k,v){S[k]=k.indexOf('Qtd')>=0?(parseInt(v,10)||0):parseBRL(v);render();}
+function updFluxo(k,v){S[k]=k.indexOf('Qtd')>=0?(parseInt(v,10)||0):parseBRL(v);S.plano='';render();}
+function updPrazo(v){S.prazo=parseInt(v,10)||360;render();}
+/* ============ PLANOS PRONTOS (Paulo, 2026-07-19) ============
+   completo   -> construtor manual + ZERAR (comportamento atual)
+   sementrada -> R$0 de ato; mensais simbolicas de ate R$1.000; o restante
+                 dos valores maiores vai para reforcos anuais de dezembro e chaves
+   ato4       -> ato de 4% do valor do imovel; reforcos anuais e chaves de ate
+                 R$5.000 cada; o restante diluido nas parcelas mensais */
+function aplicarPlano(tipo){
+  S.plano=tipo;
+  S.parcelaUnica=0;S.posChavesQtd=0;S.posChavesValor=0;
+  var emp=(!S.useCustom)?CATALOG[S.empIdx]:null;
+  var mesesRef=emp?mesesObraEstimado(emp.s):0;
+  var qtd=mesesRef>0?mesesRef:(S.mensaisQtd>0?S.mensaisQtd:24);
+  var anos=Math.max(1,Math.ceil(qtd/12));
+  if(tipo==='sementrada'){
+    S.ato=0;S.mensaisQtd=qtd;
+    var c0=calc();var entrada=c0.entrada;
+    S.mensaisValor=Math.min(1000,qtd>0?entrada/qtd:0);
+    var resto=Math.max(0,entrada-S.mensaisQtd*S.mensaisValor);
+    S.anuaisQtd=anos;
+    var partes=anos+1; /* reforcos de dezembro + valor nas chaves, em partes iguais */
+    S.anuaisValor=resto>0?resto/partes:0;
+    S.valorChaves=resto>0?resto/partes:0;
+  }else if(tipo==='ato4'){
+    var preco=precoAtual();
+    S.mensaisQtd=qtd;
+    var c1=calc();var entrada1=c1.entrada;
+    S.ato=Math.min(entrada1,preco*0.04);
+    var apos=Math.max(0,entrada1-S.ato);
+    S.anuaisQtd=anos;
+    S.anuaisValor=Math.min(5000,anos>0?apos/anos:0);
+    var aposAnuais=Math.max(0,apos-S.anuaisQtd*S.anuaisValor);
+    S.valorChaves=Math.min(5000,aposAnuais);
+    var resto2=Math.max(0,aposAnuais-S.valorChaves);
+    S.mensaisValor=qtd>0?resto2/qtd:0;
+  }else{
+    S.plano='completo';
+    S.ato=0;S.anuaisQtd=2;S.anuaisValor=0;S.valorChaves=0;S.mensaisQtd=qtd;S.mensaisValor=0;S.zerarAlvo='mensais';
+    zerarFluxo();return;
+  }
+  render();
+}
 function updZerarAlvo(v){S.zerarAlvo=v;}
 function updCliente(k,v){S[k]=v;}
 
@@ -533,7 +578,8 @@ function renderSim(){
   // Resumo e montagem da entrada ficam sempre visíveis, um abaixo do outro — nada escondido atrás de aba.
   return head+'<div class="sim-body">'
     +renderResumo(c)
-    +'<div class="sim-divider"><span>Agora monte como você vai pagar a entrada</span></div>'
+    +'<div class="sim-divider"><span>Agora escolha como você vai pagar a entrada</span></div>'
+    +renderPlanos(c)
     +renderFluxo(c)
     +'</div>';
 }
@@ -562,6 +608,15 @@ function renderResumo(c){
     +(emp?'<span class="cb2">'+emp.c+' · '+STATUS_LABEL[emp.s]+'</span>':'')
     +(c.posChavesElegivel?' <span class="cb2" style="background:#f0f9f3;color:#157540">Pós-chaves até '+c.posChavesMax+'x</span>':'')
     +'</div>'
+    +'<div style="background:linear-gradient(135deg,#0f2e36,#14404b);border-radius:12px;padding:14px 18px;margin-bottom:12px;color:#fff">'
+    +'<div style="font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#d9b36c;margin-bottom:5px">Simulação baseada em</div>'
+    +'<div style="font-size:15px;font-weight:700;font-family:Fraunces,Georgia,serif">'+(emp?emp.n:'Imóvel personalizado')+'</div>'
+    +'<div style="font-size:12px;color:rgba(255,255,255,.82);margin-top:3px">'
+    +(emp&&TIPOLOGIAS[emp.u]?TIPOLOGIAS[emp.u]+' · ':'')
+    +'Valor do imóvel: <b style="color:#fff">'+BRL(c.preco)+'</b>'
+    +(emp?' · '+emp.c+' · '+STATUS_LABEL[emp.s]:(S.customConstrutora?' · '+S.customConstrutora:''))
+    +(emp&&emp.b?' · '+emp.b:'')+'</div>'
+    +'</div>'
     +'<div class="info-box2"><strong>Como calculamos:</strong> identificamos sua faixa no Minha Casa Minha Vida pela renda informada (tabela oficial 2026), aplicamos o limite de financiamento e a taxa de juros dessa faixa, e comparamos com o que sua renda comprova (30% dela, em até 360 meses) e com o teto que o próprio imóvel permite financiar. O menor entre os três é o crédito financiado — depois somamos o subsídio, se sua faixa tiver direito.</div>'
     +'<div class="pr2">'
     +'<div class="pi2 b"><span class="pl2">Valor do imóvel</span><span class="pv2">'+BRL(c.preco)+'</span></div>'
@@ -574,7 +629,9 @@ function renderResumo(c){
     +'<div class="mt2 hi"><div class="ml">Taxa de juros aplicada</div><div class="mv">'+N2(c.taxaAnual)+'% a.a.</div></div>'
     +'<div class="mt2 hi"><div class="ml">Prestação inicial estimada</div><div class="mv">'+BRL(c.prestacaoEstimada)+'/mês</div></div>'
     +'<div class="mt2 am"><div class="ml">Seguro estimado (MIP/DFI)</div><div class="mv">'+BRL(c.seguroEstimado)+'/mês</div></div>'
-    +'<div class="mt2 gr"><div class="ml">Prazo considerado</div><div class="mv">'+c.prazo+' meses</div></div>'
+    +'<div class="mt2 gr"><div class="ml">Prazo do financiamento</div><div class="mv"><select onchange="updPrazo(this.value)" style="font-size:12px;font-weight:700;border:1px solid var(--border);border-radius:6px;padding:3px 6px;background:#fff;font-family:inherit;color:inherit">'
+      +[240,300,360,420].map(function(pz){return '<option value="'+pz+'" '+(c.prazo===pz?'selected':'')+'>'+pz+' meses ('+(pz/12)+' anos)</option>';}).join('')
+      +'</select></div></div>'
     +(c.mesesObra>0?'<div class="mt2 vi"><div class="ml">Previsão até as chaves</div><div class="mv">'+c.mesesObra+' meses</div></div>':'<div class="mt2 vi"><div class="ml">Situação da obra</div><div class="mv">Pronto para morar</div></div>')
     +'</div>'
     +'<p style="font-size:10.5px;color:#94a3b8;margin-top:12px">Estimativa educativa com base na tabela oficial do Minha Casa Minha Vida 2026 — a Caixa confirma taxa, subsídio, prazo e valor exatos após análise de crédito. Valores sujeitos à análise oficial da instituição financeira e da construtora.</p>'
@@ -587,6 +644,26 @@ function renderResumo(c){
     +'</div>';
 }
 
+function renderPlanos(c){
+  function card(id,titulo,desc,detalhe){
+    var on=S.plano===id;
+    return '<button type="button" onclick="aplicarPlano(\''+id+'\')" style="text-align:left;cursor:pointer;background:'+(on?'#f0f9f3':'#fff')+';border:2px solid '+(on?'#1a8f4c':'var(--border)')+';border-radius:14px;padding:16px;transition:border-color .25s ease,box-shadow .25s ease;font-family:inherit'+(on?';box-shadow:0 6px 18px rgba(26,143,76,.12)':'')+'">'
+      +(on?'<span style="display:inline-block;font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#1a8f4c;padding:2px 8px;border-radius:20px;margin-bottom:7px">Plano aplicado</span>':'')
+      +'<div style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;font-family:Fraunces,Georgia,serif">'+titulo+'</div>'
+      +'<div style="font-size:11.5px;color:var(--text2);line-height:1.5;margin-bottom:5px">'+desc+'</div>'
+      +'<div style="font-size:10.5px;color:#94a3b8">'+detalhe+'</div>'
+      +'</button>';
+  }
+  return '<div class="sel-box" style="margin-bottom:14px">'
+    +'<div class="sel-title">Escolha um plano pronto — ou monte o seu do zero abaixo</div>'
+    +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">'
+    +card('completo','Plano Completo','Você controla ato, mensais, reforços e chaves. O ZERAR completa o que faltar automaticamente.','Sugestão inicial: ato pequeno + reforços de dezembro + mensais confortáveis')
+    +card('sementrada','Sem Entrada no Ato','R$ 0 no ato. Mensais simbólicas de até R$ 1.000 — o restante vai para os reforços de dezembro e o valor nas chaves.','Ideal pra quem não tem valor guardado agora, mas recebe 13º/bonificações')
+    +card('ato4','Ato de 4%','4% do valor do imóvel no ato. Reforços de dezembro e chaves limitados a R$ 5.000 cada — o resto diluído nas mensais.','Equilibrado: sinal pequeno e parcelas previsíveis até as chaves')
+    +'</div>'
+    +'<p style="font-size:10.5px;color:#94a3b8;margin-top:10px">Os três planos usam a mesma regra oficial (entrada parcelada sem juros durante a obra). Qualquer valor pode ser ajustado à mão depois de aplicar — sujeito à aprovação da construtora.</p>'
+    +'</div>';
+}
 function renderFluxo(c){
   var acimaTeto=(S.mensaisQtd>0&&S.mensaisValor>1500)||(S.anuaisQtd>0&&S.anuaisValor>18000);
   var pc=c.posChavesElegivel;
@@ -683,9 +760,19 @@ function render(){
       S.useCustom = true;
       S.customPreco = qPreco;
     }
+    var qPlano = qp.get('plano');
+    if(qPlano==='sementrada'||qPlano==='ato4'){ S._planoInicial=qPlano; }
   }catch(e){}
 })();
 render();
+/* aplica plano vindo da URL depois que a pessoa informa a renda */
+(function(){
+  var _origUpdRenda = updRenda;
+  updRenda = function(v){
+    _origUpdRenda(v);
+    if(S._planoInicial && S.renda>0){ var p=S._planoInicial; S._planoInicial=null; aplicarPlano(p); }
+  };
+})();
 </script>
 <script src="crm-config.js"></script>
 
