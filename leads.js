@@ -1221,6 +1221,13 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     if(!h || h.dataset.pcLux) return;
     h.dataset.pcLux = '1';
     h.classList.add('pc-hdr-lux');
+    /* header e escuro: garante a versao CLARA da logo (fix definitivo do dark-on-dark) */
+    h.querySelectorAll('img').forEach(function(im){
+      var s = im.getAttribute('src')||'';
+      if(/logo/i.test(s) && s.indexOf('light') === -1){
+        im.setAttribute('src','logo-wordmark-light.png');
+      }
+    });
     var pos = getComputedStyle(h).position;
     if(pos === 'sticky' || pos === 'fixed'){
       var lastY = 0;
