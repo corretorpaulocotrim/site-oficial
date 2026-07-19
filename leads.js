@@ -1116,6 +1116,13 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     '  .hero .hero-lead,.hero .hero-eyebrow{animation:pcCineTitle 1.1s cubic-bezier(.16,1,.3,1) .35s both}',
     '}',
     '@keyframes pcCineTitle{0%{opacity:0;transform:translateY(16px);filter:blur(7px)}100%{opacity:1;transform:none;filter:none}}',
+    /* CINEMA DE ROLAGEM SITEWIDE: blocos entram desfocado->nitido em TODAS as paginas */
+    '@media(prefers-reduced-motion:no-preference){',
+    '  .reveal{filter:blur(7px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1),filter .95s cubic-bezier(.16,1,.3,1) !important}',
+    '  .reveal.in{filter:none}',
+    '  .pc-cine-sec{opacity:0;transform:translateY(20px);filter:blur(7px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}',
+    '  .pc-cine-sec.pc-in{opacity:1;transform:none;filter:none}',
+    '}',
     /* ARREMATE 10/10: micro-interacoes premium (transform/opacity only, guardadas p/ touch e reduced-motion) */
     '@media(hover:hover) and (pointer:fine){',
     '  .btn-gold:hover,a.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-primary:hover,.cta:hover,.upload-btn:hover,.wa-btn2:hover,.btn-pg:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(15,46,54,.35) !important}',
@@ -1270,6 +1277,22 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
       }, {passive:true});
     }
   }
+  /* CINEMA DE ROLAGEM AUTOMATICO: paginas sem sistema .reveal proprio ganham entrada de secoes */
+  function initCineScroll(){
+    try{
+      if(document.querySelector('.reveal')) return; // pagina ja tem o proprio sistema
+      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var els = document.querySelectorAll('section, .sel-box, .ssec');
+      if(!els.length || els.length > 60) return;
+      els.forEach(function(el){ el.classList.add('pc-cine-sec'); });
+      var io = new IntersectionObserver(function(entries){
+        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('pc-in'); io.unobserve(en.target); } });
+      }, {threshold:.06});
+      els.forEach(function(el){ io.observe(el); });
+    }catch(e){ document.querySelectorAll('.pc-cine-sec').forEach(function(el){ el.classList.add('pc-in'); }); }
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initCineScroll); } else { initCineScroll(); }
+
   /* barra do navegador mobile na cor da marca (so injeta se a pagina nao definir) */
   if(!document.querySelector('meta[name="theme-color"]')){
     var tc = document.createElement('meta');
