@@ -1087,6 +1087,15 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
     '.leaflet-tooltip:before,.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{display:none !important}',
     '.leaflet-popup-tip{display:none !important}',
+    /* fix icone preto gigante: paginas novas usam .depo-grid/.depo-photo/.depo-tag sem definir o CSS — regras completas aqui valem pra qualquer pagina */
+    '.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:720px}',
+    '@media(max-width:900px){.depo-grid{grid-template-columns:repeat(3,1fr);gap:8px}}',
+    '@media(max-width:600px){.depo-grid{grid-template-columns:repeat(1,1fr);max-width:320px;margin:0 auto}}',
+    '.depo-photo{border-radius:18px;overflow:hidden;aspect-ratio:4/5;position:relative;background:#eef2f2;box-shadow:0 18px 44px -18px rgba(15,46,54,.35),inset 0 0 55px rgba(15,46,54,.16);transition:transform .5s cubic-bezier(.16,1,.3,1)}',
+    '.depo-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) saturate(1.06) brightness(1.02)}',
+    '.depo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,46,54,.55) 0%,transparent 45%);pointer-events:none}',
+    '.depo-tag{position:absolute;left:12px;bottom:12px;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;z-index:2}',
+    '.depo-tag svg{width:14px;height:14px;stroke:#cf9f4f;fill:none;stroke-width:2.2;flex-shrink:0}',
     '.leaflet-popup-content-wrapper{border-radius:14px !important;box-shadow:0 12px 32px rgba(15,46,54,.22) !important;border:1px solid rgba(184,135,58,.25) !important}',
     '.leaflet-popup-content{margin:12px 14px !important}',
     /* Cinema nas fotos de capa de todas as paginas de imovel */
