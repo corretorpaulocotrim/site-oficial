@@ -159,6 +159,13 @@ header{position:sticky;top:0;z-index:500;background:rgba(255,255,255,.82);backdr
 .search-btn:hover{background:var(--ink2);transform:translateY(-1px)}
 @media(max-width:760px){.search{flex-direction:column}.search-field+.search-field{border-left:none;border-top:1px solid var(--line)}.search-btn{padding:14px}}
 .hero-quicklinks{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.bairro-strip{margin-top:16px}
+.bairro-strip-label{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.bairro-strip-label svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:2}
+.bairro-chips{display:flex;gap:8px;flex-wrap:wrap}
+.bairro-chips button{font-family:inherit;font-size:12px;font-weight:700;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:30px;padding:7px 14px;cursor:pointer;transition:border-color .25s ease,background .25s ease,color .25s ease}
+.bairro-chips button:hover{border-color:#1a8f4c;background:#f0f9f3;color:#157a3f}
+@media(max-width:700px){.bairro-chips{flex-wrap:nowrap;overflow-x:auto;padding-bottom:6px;-webkit-overflow-scrolling:touch;scrollbar-width:none}.bairro-chips::-webkit-scrollbar{display:none}.bairro-chips button{flex-shrink:0}}
 .hero-quicklinks a{font-size:13px;font-weight:600;color:var(--ink);background:var(--petrol-soft);padding:8px 16px;border-radius:20px;display:inline-flex;align-items:center;gap:6px;transition:background-color .3s var(--ease)}
 .hero-quicklinks a:hover{background:var(--mist)}
 .hero-quicklinks a svg{width:14px;height:14px;stroke:var(--gold);fill:none;stroke-width:2.3}
@@ -699,6 +706,11 @@ footer .wrap{position:relative;z-index:1}
         <svg class="ic ic-sm" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></svg>
         Explorar
       </button>
+    </div>
+
+    <div class="bairro-strip reveal">
+      <div class="bairro-strip-label"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Ou escolha direto o bairro</div>
+      <div class="bairro-chips"><button type="button" onclick="quickBairro('São Cristóvão')">São Cristóvão</button><button type="button" onclick="quickBairro('Centro')">Centro</button><button type="button" onclick="quickBairro('Praça Seca')">Praça Seca</button><button type="button" onclick="quickBairro('Cachambi')">Cachambi</button><button type="button" onclick="quickBairro('Todos os Santos')">Todos os Santos</button><button type="button" onclick="quickBairro('Santo Cristo')">Santo Cristo</button><button type="button" onclick="quickBairro('Porto Maravilha')">Porto Maravilha</button><button type="button" onclick="quickBairro('Piedade')">Piedade</button><button type="button" onclick="quickBairro('Pendotiba')">Pendotiba</button><button type="button" onclick="quickBairro('Praça Mauá')">Praça Mauá</button><button type="button" onclick="quickBairro('Praça Onze')">Praça Onze</button><button type="button" onclick="quickBairro('Vila Valqueire')">Vila Valqueire</button><button type="button" onclick="quickBairro('Praça Pio X')">Praça Pio X</button><button type="button" onclick="quickBairro('Madureira')">Madureira</button><button type="button" onclick="quickBairro('Campinho')">Campinho</button><button type="button" onclick="quickBairro('Méier')">Méier</button><button type="button" onclick="quickBairro('Engenho de Dentro')">Engenho de Dentro</button><button type="button" onclick="quickBairro('Inhaúma')">Inhaúma</button><button type="button" onclick="quickBairro('Saúde')">Saúde</button><button type="button" onclick="quickBairro('Riachuelo')">Riachuelo</button><button type="button" onclick="quickBairro('Rio do Ouro')">Rio do Ouro</button><button type="button" onclick="quickBairro('Pilares')">Pilares</button><button type="button" onclick="quickBairro('Bonsucesso')">Bonsucesso</button><button type="button" onclick="quickBairro('Rocha')">Rocha</button><button type="button" onclick="quickBairro('Barra da Tijuca')">Barra da Tijuca</button><button type="button" onclick="quickBairro('Recreio')">Recreio</button></div>
     </div>
 
     <div class="hero-quicklinks reveal">
@@ -1505,6 +1517,11 @@ function downloadComparacao(){
 }
 
 /* ---------- SEARCH ---------- */
+function quickBairro(b){
+  var f=document.getElementById("f-texto");
+  if(f)f.value=b;
+  applySearch();
+}
 function applySearch(){
   var st=document.getElementById("f-status").value;
   var rg=document.getElementById("f-regiao").value;
