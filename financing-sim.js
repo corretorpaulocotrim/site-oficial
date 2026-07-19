@@ -62,6 +62,7 @@ var FSIM_CATALOG = [
   {nome:"Encantos da Zona Norte",tip:"2 quartos",preco:"R$ 273.990",url:"emp-encantos-da-zona-norte.html",bairro:"Região de Bonsucesso · Rio de Janeiro"},
   {nome:"Reserva Redentor",tip:"2 quartos",preco:"R$ 274.990",url:"emp-reserva-redentor.html",bairro:"Rocha · Rio de Janeiro"},
   {nome:"Sensia Barra",tip:"2 e 3 quartos c/ suíte, 58-148m²",preco:"R$ 913.990",url:"emp-sensia-barra.html",bairro:"Barra da Tijuca · Rio de Janeiro"},
+  {nome:"Oceanside Recreio",tip:"2 e 3 quartos com suíte, 47-78m²",preco:"R$ 440.000",url:"emp-oceanside-recreio.html",bairro:"Pontal Oceânico · Recreio dos Bandeirantes"},
 ];
 function fsimParseQuartos(tip){
   tip=(tip||'').toLowerCase();var out={};
