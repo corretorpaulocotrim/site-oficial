@@ -1096,6 +1096,15 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     '.depo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,46,54,.55) 0%,transparent 45%);pointer-events:none}',
     '.depo-tag{position:absolute;left:12px;bottom:12px;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;z-index:2}',
     '.depo-tag svg{width:14px;height:14px;stroke:#cf9f4f;fill:none;stroke-width:2.2;flex-shrink:0}',
+    /* fix viz-card sem CSS em 7 paginas Cury (mesma familia do icone gigante) */
+    '.viz-card{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(15,46,54,.05)}',
+    '.viz-card-icon{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#0f2e36;display:flex;align-items:center;justify-content:center}',
+    '.viz-card-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}',
+    '.viz-card-label{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#b8873a;margin-bottom:4px}',
+    '.viz-card-text{font-size:13.5px;color:#4b5563;line-height:1.6;margin:0}',
+    /* mata rolagem lateral no mobile sem quebrar sticky (clip nao cria scroll container) */
+    'html{overflow-x:clip}',
+    '@supports not (overflow:clip){html{overflow-x:hidden}}',
     '.leaflet-popup-content-wrapper{border-radius:14px !important;box-shadow:0 12px 32px rgba(15,46,54,.22) !important;border:1px solid rgba(184,135,58,.25) !important}',
     '.leaflet-popup-content{margin:12px 14px !important}',
     /* Cinema nas fotos de capa de todas as paginas de imovel */
