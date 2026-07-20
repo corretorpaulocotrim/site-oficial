@@ -4,9 +4,9 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Paulo Cotrim · Inteligência Imobiliária no Rio de Janeiro</title>
-<meta name="description" content="Plataforma independente de lançamentos no Rio de Janeiro. Explore empreendimentos de todas as principais construtoras no mapa, compare e encontre seu imóvel ideal. Paulo Cotrim · CRECI-RJ 77677-F."/>
+<meta name="description" content="Compre seu imóvel sem sair de casa: escolha no mapa, simule com valor real, aprove o crédito em 48h e assine online. Lançamentos de todas as construtoras do Rio. Paulo Cotrim · CRECI-RJ 77677-F."/>
 <meta property="og:title" content="Paulo Cotrim · Inteligência Imobiliária no Rio de Janeiro"/>
-<meta property="og:description" content="Explore lançamentos de todas as construtoras do Rio em um só lugar. Mapa interativo, comparadores e consultoria especializada."/>
+<meta property="og:description" content="Do primeiro clique à assinatura, sem sair de casa: mapa interativo, simulação real, aprovação em 48h e contrato digital. Todas as construtoras do Rio em um só lugar."/>
 <meta property="og:type" content="website"/>
 <meta property="og:url" content="https://www.paulocotrim.com/"/>
 <link rel="canonical" href="https://www.paulocotrim.com/"/>
@@ -67,7 +67,7 @@ src="https://www.facebook.com/tr?id=1758733705251535&ev=PageView&noscript=1"
 {"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Início","item":"https://www.paulocotrim.com/"},{"@type":"ListItem","position":2,"name":"Investidor","item":"https://www.paulocotrim.com/investidor.html"},{"@type":"ListItem","position":3,"name":"Aprovação Expressa 48h","item":"https://www.paulocotrim.com/aprovacao-expressa.html"}]}
 </script>
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como comprar apartamento no Porto Maravilha?","acceptedAnswer":{"@type":"Answer","text":"Fale com Paulo Cotrim, especialista Cury no Porto Maravilha. Em 48h você tem pré-aprovação de crédito. Atendimento online por WhatsApp, Zoom ou Google Meet."}},{"@type":"Question","name":"Posso usar o FGTS para comprar no Porto Maravilha?","acceptedAnswer":{"@type":"Answer","text":"Sim. Diversos lançamentos no Rio aceitam FGTS como entrada, amortização ou na prestação. Paulo Cotrim orienta todo o processo gratuitamente."}},{"@type":"Question","name":"Como funciona a aprovação de crédito imobiliário em 48h?","acceptedAnswer":{"@type":"Answer","text":"Paulo Cotrim analisa seu perfil, envia os documentos para a Caixa Econômica e retorna com a pré-aprovação em até 48 horas úteis. Basta enviar RG, CPF, comprovante de renda e extrato do FGTS."}},{"@type":"Question","name":"Paulo Cotrim faz atendimento online?","acceptedAnswer":{"@type":"Answer","text":"Sim. Paulo atende por WhatsApp, Zoom e Google Meet. Agende uma videochamada diretamente pelo site, de qualquer lugar do Brasil ou exterior."}}]}
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Como comprar apartamento no Porto Maravilha?","acceptedAnswer":{"@type":"Answer","text":"Fale com Paulo Cotrim, especialista em financiamento imobiliário no Porto Maravilha. Em 48h você tem pré-aprovação de crédito. Atendimento online por WhatsApp, Zoom ou Google Meet."}},{"@type":"Question","name":"Posso usar o FGTS para comprar no Porto Maravilha?","acceptedAnswer":{"@type":"Answer","text":"Sim. Diversos lançamentos no Rio aceitam FGTS como entrada, amortização ou na prestação. Paulo Cotrim orienta todo o processo gratuitamente."}},{"@type":"Question","name":"Como funciona a aprovação de crédito imobiliário em 48h?","acceptedAnswer":{"@type":"Answer","text":"Paulo Cotrim analisa seu perfil, envia os documentos para a Caixa Econômica e retorna com a pré-aprovação em até 48 horas úteis. Basta enviar RG, CPF, comprovante de renda e extrato do FGTS."}},{"@type":"Question","name":"Paulo Cotrim faz atendimento online?","acceptedAnswer":{"@type":"Answer","text":"Sim. Paulo atende por WhatsApp, Zoom e Google Meet. Agende uma videochamada diretamente pelo site, de qualquer lugar do Brasil ou exterior."}}]}
 </script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" media="print" onload="this.media='all'"/>
 <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/></noscript>
@@ -546,6 +546,27 @@ footer .wrap{position:relative;z-index:1}
 .adc-cta{display:flex;flex-direction:column;align-items:flex-start;gap:8px;flex-shrink:0}
 .adc-note{font-size:11px;color:rgba(255,255,255,.55)}
 @media(max-width:640px){.app-download-card{padding:24px 20px}.adc-cta{width:100%}.adc-cta button{width:100%}}
+/* JORNADA 100% DIGITAL — o posicionamento central */
+.pcj{background:linear-gradient(160deg,var(--petrol) 0%,#0a2129 100%);border-radius:calc(var(--r) + 8px);padding:56px 48px;position:relative;overflow:hidden;color:#fff}
+.pcj::before{content:'';position:absolute;inset:0;background:radial-gradient(640px 260px at 12% 0%,rgba(184,135,58,.18),transparent 70%);pointer-events:none}
+.pcj-head{position:relative;z-index:1;max-width:620px;margin-bottom:38px}
+.pcj-eyebrow{font-size:12px;font-weight:700;color:var(--gold2);letter-spacing:.08em;text-transform:uppercase;margin-bottom:12px}
+.pcj-head h2{font-family:'Fraunces',Georgia,serif;font-size:clamp(26px,3.6vw,40px);font-weight:600;letter-spacing:-.02em;line-height:1.12;color:#fff}
+.pcj-head h2 em{font-style:italic;color:var(--gold2)}
+.pcj-head p{font-size:15px;color:rgba(255,255,255,.68);line-height:1.65;margin-top:12px}
+.pcj-steps{position:relative;z-index:1;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.pcj-step{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.12);border-radius:16px;padding:22px 18px;position:relative;transition:transform .35s var(--ease),border-color .35s var(--ease),background-color .35s var(--ease)}
+.pcj-step:hover{transform:translateY(-4px);border-color:rgba(207,159,79,.55);background:rgba(255,255,255,.09)}
+.pcj-num{font-family:'Fraunces',Georgia,serif;font-size:36px;font-weight:600;color:var(--gold2);line-height:1;margin-bottom:12px}
+.pcj-step b{display:block;font-size:15.5px;font-weight:700;color:#fff;margin-bottom:6px}
+.pcj-step span{font-size:12.5px;color:rgba(255,255,255,.62);line-height:1.55;display:block}
+.pcj-step{display:block;text-decoration:none;cursor:pointer}
+.pcj-go{display:inline-block;font-style:normal;font-size:12.5px;font-weight:800;color:#3ddc84;margin-top:12px;transition:transform .3s var(--ease)}
+.pcj-step:hover .pcj-go{transform:translateX(4px)}
+.pcj-cta{position:relative;z-index:1;display:flex;align-items:center;gap:16px;margin-top:34px;flex-wrap:wrap}
+.pcj-note{font-size:12.5px;color:rgba(255,255,255,.55)}
+@media(max-width:860px){.pcj-steps{grid-template-columns:1fr 1fr}.pcj{padding:40px 26px}}
+@media(max-width:480px){.pcj-steps{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -772,6 +793,33 @@ footer .wrap{position:relative;z-index:1}
 
 <!-- MARQUEE DE CONSTRUTORAS PARCEIRAS -->
 <div class="constr-marquee"><div class="constr-marquee-track"><span class="constr-marquee-item">Cury</span><span class="constr-marquee-item">MRV</span><span class="constr-marquee-item">Emccamp</span><span class="constr-marquee-item">Direcional</span><span class="constr-marquee-item">Riva Incorporadora</span><span class="constr-marquee-item">Tegra Incorporadora</span><span class="constr-marquee-item">Cyrela · Living</span><span class="constr-marquee-item">CTV Engenharia</span><span class="constr-marquee-item">Crescer</span><span class="constr-marquee-item">Sensia · MRV&CO</span><span class="constr-marquee-item">Cury</span><span class="constr-marquee-item">MRV</span><span class="constr-marquee-item">Emccamp</span><span class="constr-marquee-item">Direcional</span><span class="constr-marquee-item">Riva Incorporadora</span><span class="constr-marquee-item">Tegra Incorporadora</span><span class="constr-marquee-item">Cyrela · Living</span><span class="constr-marquee-item">CTV Engenharia</span><span class="constr-marquee-item">Crescer</span><span class="constr-marquee-item">Sensia · MRV&CO</span></div></div>
+
+<!-- JORNADA 100% DIGITAL -->
+<section class="section" id="jornada" style="padding-top:56px;padding-bottom:8px">
+  <div class="wrap">
+    <div class="pcj reveal">
+      <div class="pcj-head">
+        <div class="pcj-eyebrow">Do primeiro clique à assinatura</div>
+        <h2>Compre seu imóvel <em>sem sair de casa</em>.</h2>
+        <p>Aqui o processo inteiro acontece online, comigo do seu lado em cada etapa — do mapa à assinatura do contrato.</p>
+      </div>
+      <div class="pcj-steps">
+        <a class="pcj-step" href="#mapa" onclick="trackEvent('jornada_click','jornada','1-escolha-mapa')"><div class="pcj-num">1</div><b>Escolha</b><span>33 empreendimentos no mapa, filtrados por bairro, renda e objetivo.</span><i class="pcj-go">Abrir o mapa →</i></a>
+        <a class="pcj-step" href="simulador.html" onclick="trackEvent('jornada_click','jornada','2-simule')"><div class="pcj-num">2</div><b>Simule</b><span>Simulação com o valor real do imóvel e as condições que cabem na sua renda.</span><i class="pcj-go">Simular agora →</i></a>
+        <a class="pcj-step" href="aprovacao-expressa.html" onclick="trackEvent('jornada_click','jornada','3-aprove')"><div class="pcj-num">3</div><b>Aprove</b><span>Análise de crédito gratuita com resposta em até 48h úteis, tudo pelo WhatsApp.</span><i class="pcj-go">Iniciar análise →</i></a>
+        <a class="pcj-step" href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%21%20Quero%20fechar%20a%20compra%20100%25%20online%2C%20com%20contrato%20digital." onclick="trackEvent('jornada_click','jornada','4-assine-whatsapp')"><div class="pcj-num">4</div><b>Assine</b><span>Escolha a unidade, receba o contrato e assine digitalmente, de onde estiver.</span><i class="pcj-go">Falar com Paulo →</i></a>
+      </div>
+      <div class="pcj-cta">
+        <a href="aprovacao-expressa.html" class="btn-gold" onclick="trackEvent('jornada_click','jornada','cta-comecar-agora')">Começar agora — é grátis</a>
+        <span class="pcj-note">721 famílias já fizeram esse caminho.</span>
+      </div>
+      <div style="position:relative;z-index:1;display:flex;gap:10px;align-items:flex-start;margin-top:22px;padding-top:18px;border-top:1px solid rgba(255,255,255,.12)">
+        <svg viewBox="0 0 24 24" style="width:18px;height:18px;flex-shrink:0;stroke:#cf9f4f;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;margin-top:1px"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+        <span style="font-size:12.5px;color:rgba(255,255,255,.62);line-height:1.6">Proteção jurídica de ponta a ponta: contrato oficial da construtora, assinatura eletrônica com validade jurídica e corretor registrado — CRECI-RJ 77677-F — acompanhando cada etapa.</span>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- VISTOS RECENTEMENTE (só aparece se o visitante já viu algum imóvel nesta sessão/navegador) -->
 <section class="section" id="recentlyViewedSection" style="display:none;padding-top:0;padding-bottom:0">
@@ -1067,6 +1115,7 @@ footer .wrap{position:relative;z-index:1}
       <div class="foot-col">
         <h4>Contato</h4>
         <a href="https://wa.me/5521989150864">WhatsApp</a>
+        <a href="https://instagram.com/corretorpaulocotrim" target="_blank" rel="noopener">Instagram @corretorpaulocotrim</a>
         <a href="#quem-conduz">Sobre Paulo</a>
       </div>
     </div>
@@ -1228,7 +1277,7 @@ function showFeaturedPopup(){
     +'  <button id="featuredPopupClose" aria-label="Fechar" style="position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,.92);border:none;font-size:19px;color:#0f2e36;cursor:pointer;z-index:2;box-shadow:0 4px 14px rgba(0,0,0,.2)">&times;</button>'
     +'  <div style="position:relative;height:230px;background:url(\'emp-img/saudosa-praca-onze.jpg\') center/cover">'
     +'    <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(9,20,24,.85) 0%,rgba(9,20,24,.15) 55%,rgba(9,20,24,.35) 100%)"></div>'
-    +'    <span style="position:absolute;top:16px;left:16px;background:#b8873a;color:#fff;font-size:11px;font-weight:700;padding:6px 13px;border-radius:30px;text-transform:uppercase;letter-spacing:.04em">Lançamento oficial Cury</span>'
+    +'    <span style="position:absolute;top:16px;left:16px;background:#b8873a;color:#fff;font-size:11px;font-weight:700;padding:6px 13px;border-radius:30px;text-transform:uppercase;letter-spacing:.04em">Lançamento em destaque</span>'
     +'    <div style="position:absolute;bottom:14px;left:20px;right:20px;color:#fff">'
     +'      <div style="font-family:Fraunces,Georgia,serif;font-size:25px;font-weight:600;line-height:1.1">Saudosa Praça Onze</div>'
     +'      <div style="font-size:12.5px;opacity:.85;margin-top:4px">Berço do samba carioca · a 300m do Metrô Praça Onze</div>'

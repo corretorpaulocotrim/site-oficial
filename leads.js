@@ -72,6 +72,7 @@
 
   (function(){
     if(sessionStorage.getItem('mcmv_popup_shown')) return;
+    if(sessionStorage.getItem('featuredPopupShown')) return; /* teto: 1 popup por sessão */
     if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return;
     setTimeout(function(){
       if(sessionStorage.getItem('mcmv_popup_shown')) return;
@@ -732,7 +733,7 @@
     seal.setAttribute('style','display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 16px;margin-top:12px;max-width:fit-content');
     seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#cf9f4f;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
       + '<div style="line-height:1.35"><div style="font-size:12.5px;font-weight:800;color:#fff">Corretor Oficial · CRECI-RJ 77677-F</div>'
-      + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 700+ famílias atendidas · Especialista Cury e MCMV</div></div>';
+      + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 700+ famílias atendidas · Especialista em MCMV e financiamento imobiliário</div></div>';
     bar.insertAdjacentElement('afterend', seal);
   })();
 
@@ -1171,7 +1172,20 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     '.pc-hdr-lux nav a,.pc-hdr-lux .nav a{position:relative;padding-bottom:3px}',
     '.pc-hdr-lux nav a::after,.pc-hdr-lux .nav a::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:linear-gradient(90deg,#b8873a,#cf9f4f);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1)}',
     '@media(hover:hover){.pc-hdr-lux nav a:hover::after,.pc-hdr-lux .nav a:hover::after{transform:scaleX(1)}.pc-hdr-lux nav a:hover,.pc-hdr-lux .nav a:hover{color:#cf9f4f}}',
-    '.pc-hdr-lux img{filter:drop-shadow(0 2px 8px rgba(0,0,0,.45))}'
+    '.pc-hdr-lux img{filter:drop-shadow(0 2px 8px rgba(0,0,0,.45))}',
+    /* ===== CAMADA UAU — assinatura cinematografica Paulo Cotrim (leve, CSS/JS puro) ===== */
+    '#pcScrollBar{position:fixed;top:0;left:0;height:3px;width:0;z-index:9500;background:linear-gradient(90deg,#b8873a,#cf9f4f 60%,#e0b872);box-shadow:0 0 12px rgba(207,159,79,.55);pointer-events:none;transition:opacity .4s ease}',
+    '@media(prefers-reduced-motion:reduce){#pcScrollBar{display:none}}',
+    '@keyframes pcShimmer{0%{background-position:200% center}100%{background-position:-200% center}}',
+    '@media(prefers-reduced-motion:no-preference){.hero h1 .accent,.rg-inner h1 em{background:linear-gradient(110deg,#b8873a 30%,#f4d9a4 47%,#e0b872 53%,#b8873a 70%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:pcShimmer 7s linear infinite}}',
+    'a,button{-webkit-tap-highlight-color:transparent}',
+    '@media(prefers-reduced-motion:no-preference){.btn-gold:active,.nav-cta:active,.search-btn:active,.btn-primary:active,.mini-sim-btn:active,.compare-bar-btn:active,button:active{transform:scale(.965)}}',
+    '@keyframes pcPageIn{from{opacity:0}to{opacity:1}}',
+    'html.pc-page-out body{opacity:0;transition:opacity .22s ease}',
+    '@media(prefers-reduced-motion:no-preference){body{animation:pcPageIn .35s ease}}',
+    '.pc-nums-live .trust-num,.pc-nums-live .ae-promo-stat-num{font-variant-numeric:tabular-nums}',
+    'html.pc-lite .hero h1 .accent,html.pc-lite .rg-inner h1 em{animation:none;-webkit-text-fill-color:#cf9f4f;background:none}',
+    'html.pc-lite .reveal,html.pc-lite .pc-cine-sec{opacity:1 !important;transform:none !important;filter:none !important;transition:none !important}'
   ].join('\n');
   var st = document.createElement('style');
   st.id = 'pc-gold-cine';
@@ -1299,5 +1313,73 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     tc.name = 'theme-color'; tc.content = '#0f2e36';
     document.head.appendChild(tc);
   }
+  /* ===== CAMADA UAU JS — progresso, count-up, transicao de pagina ===== */
+  function initWow(){
+    try{
+      var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      try{ if(navigator.connection && navigator.connection.saveData){ rm = true; document.documentElement.classList.add('pc-lite'); } }catch(e){}
+      /* barra de progresso dourada */
+      if(!rm && !document.getElementById('pcScrollBar')){
+        var bar=document.createElement('div'); bar.id='pcScrollBar';
+        document.body.appendChild(bar);
+        var tick=false;
+        window.addEventListener('scroll',function(){
+          if(tick) return; tick=true;
+          requestAnimationFrame(function(){
+            var h=document.documentElement.scrollHeight-window.innerHeight;
+            var p=h>0?(window.scrollY/h)*100:0;
+            bar.style.width=p+'%';
+            bar.style.opacity=window.scrollY>40?'1':'0';
+            tick=false;
+          });
+        },{passive:true});
+      }
+      /* count-up cinematografico dos numeros de prova */
+      if(!rm && 'IntersectionObserver' in window){
+        var nums=document.querySelectorAll('.trust-num,.ae-promo-stat-num');
+        var io=new IntersectionObserver(function(es){
+          es.forEach(function(en){
+            if(!en.isIntersecting) return;
+            io.unobserve(en.target);
+            var el=en.target, raw=(el.textContent||'').trim();
+            var m=raw.match(/^([^0-9]*)([0-9][0-9.,]*)(.*)$/);
+            if(!m) return;
+            var pre=m[1], num=m[2], suf=m[3];
+            var target=parseInt(num.replace(/[.,]/g,''),10);
+            if(!isFinite(target)||target<=0||target>100000) return;
+            var sep=num.indexOf('.')>-1?'.':(num.indexOf(',')>-1?',':'');
+            var t0=null, dur=1100;
+            function fmt(v){ var st=String(v); return sep?st.replace(/\B(?=(\d{3})+(?!\d))/g,sep):st; }
+            function step(ts){
+              if(!t0) t0=ts;
+              var k=Math.min((ts-t0)/dur,1);
+              k=1-Math.pow(1-k,3);
+              el.textContent=pre+fmt(Math.round(target*k))+suf;
+              if(k<1) requestAnimationFrame(step);
+            }
+            requestAnimationFrame(step);
+          });
+        },{threshold:.6});
+        nums.forEach(function(el){ io.observe(el); });
+        if(nums.length) document.body.classList.add('pc-nums-live');
+      }
+      /* transicao de pagina: corte cinematografico entre paginas internas */
+      if(!rm){
+        document.addEventListener('click',function(e){
+          if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
+          var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
+          if(!a||a.target==='_blank'||a.hasAttribute('download')) return;
+          var href=a.getAttribute('href')||'';
+          if(!/\.html(\?|#|$)/.test(href)||href.charAt(0)==='#') return;
+          if(/^https?:/i.test(href)&&a.host!==location.host) return;
+          e.preventDefault();
+          document.documentElement.classList.add('pc-page-out');
+          setTimeout(function(){ location.href=a.href; },200);
+        },true);
+      }
+    }catch(err){}
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initWow); } else { initWow(); }
+
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initHdr); } else { initHdr(); }
 })();
