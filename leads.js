@@ -1379,6 +1379,37 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
       }
     }catch(err){}
   }
+  /* Ver no Google Maps / Waze sob o mapa das paginas de empreendimento */
+  function initMapRotas(){
+    try{
+      var el=document.getElementById('map-imovel');
+      if(!el || document.getElementById('pcMapRotas')) return;
+      var lat=null,lng=null;
+      var scripts=document.querySelectorAll('script:not([src])');
+      for(var i=0;i<scripts.length;i++){
+        var m=(scripts[i].textContent||'').match(/var\s+lat\s*=\s*(-?\d+\.?\d*)\s*,\s*lng\s*=\s*(-?\d+\.?\d*)/);
+        if(m){ lat=m[1]; lng=m[2]; break; }
+      }
+      if(lat===null) return;
+      var row=document.createElement('div');
+      row.id='pcMapRotas';
+      row.style.cssText='display:flex;gap:10px;margin-top:12px;flex-wrap:wrap';
+      function mk(label,href,svg){
+        var a=document.createElement('a');
+        a.href=href; a.target='_blank'; a.rel='noopener';
+        a.style.cssText='flex:1;min-width:150px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#1a8f4c;color:#fff;font-weight:700;font-size:13.5px;padding:12px 16px;border-radius:11px;text-decoration:none;box-shadow:0 6px 18px rgba(26,143,76,.25)';
+        a.innerHTML=svg+label;
+        return a;
+      }
+      var pin='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
+      var nav='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>';
+      row.appendChild(mk('Ver no Google Maps','https://www.google.com/maps/search/?api=1&query='+lat+','+lng,pin));
+      row.appendChild(mk('Consultar no Waze','https://waze.com/ul?ll='+lat+','+lng+'&navigate=yes',nav));
+      el.parentNode.insertBefore(row, el.nextSibling);
+    }catch(e){}
+  }
+  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initMapRotas); } else { initMapRotas(); }
+
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initWow); } else { initWow(); }
 
   if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initHdr); } else { initHdr(); }
