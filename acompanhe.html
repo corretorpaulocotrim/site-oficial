@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Acompanhe sua compra — Paulo Cotrim</title>
+<meta name="description" content="Acompanhe em tempo real a etapa da sua compra: documentos, análise de crédito, aprovação, contrato e chaves. Paulo Cotrim · CRECI-RJ 77677-F."/>
+<meta name="robots" content="noindex, follow"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="manifest" href="manifest.json"/>
+<meta name="theme-color" content="#0f2e36"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --navy:#0f2e36;--navy2:#0d2932;--navy3:#12252b;
+  --gold:#b8873a;--gold2:#cf9f4f;
+  --green:#1a8f4c;--green2:#157a3f;
+  --bg:#f5f6f7;--card:#ffffff;
+  --text:#0f2e36;--text2:#6b7280;--text3:#9ca3af;
+  --border:#e8eaed;
+  --shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.hdr{background:rgba(15,46,54,.92);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);position:sticky;top:0;z-index:100;padding:14px 32px;display:flex;align-items:center;justify-content:space-between;gap:10px;overflow:hidden}
+.hdr-logo img{height:40px;width:auto;display:block}
+.btn-wa-hdr{background:var(--gold);color:#fff;padding:9px 16px;border-radius:9px;font-size:12.5px;font-weight:700;white-space:nowrap;box-shadow:0 4px 14px rgba(184,135,58,.3)}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px}
+
+/* HERO */
+.hero{background:linear-gradient(165deg,var(--navy) 0%,#0a2129 100%);color:#fff;padding:52px 0 92px;position:relative;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(620px 260px at 12% 0%,rgba(184,135,58,.20),transparent 70%);pointer-events:none}
+.hero .wrap{position:relative;z-index:1}
+.eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:11.5px;font-weight:700;color:var(--gold2);letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px}
+.eyebrow::before{content:'';width:22px;height:2px;background:var(--gold2)}
+.hero h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(27px,4.4vw,40px);font-weight:600;line-height:1.12;letter-spacing:-.02em;margin-bottom:10px}
+.hero h1 em{font-style:italic;color:var(--gold2)}
+.hero p{font-size:15px;color:rgba(255,255,255,.7);line-height:1.65;max-width:52ch}
+
+/* CARD DE PROGRESSO */
+.panel{background:var(--card);border-radius:20px;box-shadow:var(--shadow-lg);padding:30px 28px;margin-top:-58px;position:relative;z-index:2}
+.pbar-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:9px}
+.pbar-top b{font-size:14px;font-weight:800;color:var(--text)}
+.pbar-top span{font-size:12.5px;color:var(--text2)}
+.pbar{height:10px;background:#eef0f2;border-radius:6px;overflow:hidden}
+.pbar i{display:block;height:100%;width:0;border-radius:6px;background:linear-gradient(90deg,var(--gold),var(--gold2));transition:width 1.1s var(--ease)}
+
+/* ETAPAS */
+.steps{margin-top:28px;position:relative}
+.steps::before{content:'';position:absolute;left:21px;top:16px;bottom:16px;width:2px;background:var(--border)}
+.step{display:flex;gap:16px;padding:14px 0;position:relative}
+.dot{width:44px;height:44px;border-radius:50%;background:#fff;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;position:relative;z-index:1;transition:.4s var(--ease)}
+.dot svg{width:19px;height:19px;stroke:var(--text3);fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.step-body{flex:1;min-width:0;padding-top:2px}
+.step-body b{display:block;font-size:15.5px;font-weight:700;color:var(--text3);margin-bottom:3px;transition:color .4s var(--ease)}
+.step-body span{display:block;font-size:13px;color:var(--text3);line-height:1.55}
+.step-body .step-tag{display:none;margin-top:8px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;padding:5px 12px;border-radius:20px;width:fit-content}
+
+/* concluída */
+.step.done .dot{background:var(--green);border-color:var(--green)}
+.step.done .dot svg{stroke:#fff}
+.step.done .step-body b{color:var(--text)}
+.step.done .step-body span{color:var(--text2)}
+
+/* atual */
+.step.now .dot{background:var(--gold);border-color:var(--gold);box-shadow:0 0 0 6px rgba(184,135,58,.16)}
+.step.now .dot svg{stroke:#fff}
+.step.now .step-body b{color:var(--text);font-size:16.5px}
+.step.now .step-body span{color:var(--text2)}
+.step.now .step-body .step-tag{display:block;background:#fdf6e9;color:#8a5c1c}
+@media(prefers-reduced-motion:no-preference){
+  .step.now .dot{animation:pulseNow 2.4s ease-in-out infinite}
+}
+@keyframes pulseNow{0%,100%{box-shadow:0 0 0 6px rgba(184,135,58,.16)}50%{box-shadow:0 0 0 12px rgba(184,135,58,0)}}
+
+/* CTA */
+.cta-row{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px;padding-top:22px;border-top:1px solid var(--border)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:14px 22px;border-radius:11px;font-size:14px;font-weight:700;cursor:pointer;border:none;font-family:inherit}
+.btn-green{background:var(--green);color:#fff;box-shadow:0 8px 22px rgba(26,143,76,.28)}
+.btn-green:hover{background:var(--green2)}
+.btn-ghost{background:#fff;color:var(--text);border:1.5px solid var(--border)}
+.btn-ghost:hover{border-color:var(--gold)}
+.btn svg{width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+/* AJUDA */
+.help{margin:26px 0 60px;background:#fff;border:1px solid var(--border);border-radius:16px;padding:22px 24px}
+.help h3{font-family:'Fraunces',Georgia,serif;font-size:19px;font-weight:600;margin-bottom:12px}
+.help .q{border-top:1px solid var(--border);padding:13px 0 0;margin-top:13px}
+.help .q:first-of-type{border-top:none;padding-top:0;margin-top:0}
+.help b{display:block;font-size:14px;margin-bottom:4px}
+.help p{font-size:13.5px;color:var(--text2);line-height:1.6}
+.sign{display:flex;align-items:center;gap:13px;margin-top:20px;padding-top:18px;border-top:1px solid var(--border)}
+.sign img{width:52px;height:52px;border-radius:50%;object-fit:cover;border:2px solid var(--gold)}
+.sign b{font-size:14.5px}
+.sign span{font-size:12px;color:var(--text2)}
+.foot{text-align:center;font-size:11.5px;color:var(--text3);padding:0 0 40px;line-height:1.7}
+@media(max-width:560px){
+  .hdr{padding:12px 14px;gap:8px}.hdr-logo img{height:30px}
+  .btn-wa-hdr{padding:8px 11px;font-size:11px;flex-shrink:0}
+  .hdr-logo{min-width:0;overflow:hidden}
+  .wrap{padding:0 16px}
+  .panel{padding:24px 18px;border-radius:16px}
+  .btn{flex:1 1 100%}
+}
+</style>
+</head>
+<body>
+
+<header class="hdr">
+  <a href="index.html" class="hdr-logo"><img src="logo-wordmark-light.png" alt="Paulo Cotrim"/></a>
+  <a class="btn-wa-hdr" id="waTop" href="https://wa.me/5521989150864" target="_blank" rel="noopener">Falar com Paulo</a>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">Acompanhe sua compra</div>
+    <h1 id="ola">Sua compra está <em>em andamento</em>.</h1>
+    <p id="sub">Aqui você vê exatamente em que etapa está o seu processo — sem precisar ligar pra perguntar.</p>
+  </div>
+</section>
+
+<div class="wrap">
+  <div class="panel">
+    <div class="pbar-top"><b id="etapaNome">Documentação</b><span id="etapaCont">Etapa 1 de 5</span></div>
+    <div class="pbar"><i id="pbarFill"></i></div>
+
+    <div class="steps" id="steps"></div>
+
+    <div class="cta-row">
+      <a class="btn btn-green" id="waMain" href="#" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>
+        Tirar uma dúvida com o Paulo
+      </a>
+      <a class="btn btn-ghost" href="aprovacao-expressa.html">
+        <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5-5 5 5"/><path d="M12 5v12"/></svg>
+        Enviar documentos
+      </a>
+    </div>
+  </div>
+
+  <div class="help">
+    <h3>Dúvidas comuns nesta fase</h3>
+    <div id="faq"></div>
+    <div class="sign">
+      <img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" onerror="this.style.display='none'"/>
+      <div>
+        <b>Paulo Cotrim</b>
+        <span>CRECI-RJ 77677-F · 18 anos · 721 famílias atendidas</span>
+      </div>
+    </div>
+  </div>
+
+  <p class="foot">
+    Esta página mostra o andamento informado pelo seu corretor e não substitui a análise oficial da instituição financeira.<br/>
+    Paulo Cotrim · CRECI-RJ 77677-F · (21) 98915-0864 · paulocotrim.com
+  </p>
+</div>
+
+<script src="leads.js"></script>
+<script>
+(function(){
+  var ETAPAS=[
+    {k:'documentos',n:'Documentação',d:'Reunir e enviar RG/CNH, CPF, comprovante de renda e extrato do FGTS.',
+     faq:[['Posso mandar foto pelo celular?','Pode. Na página de envio há um botão "Tirar foto" em cada documento — é só apontar a câmera.'],
+          ['E se faltar algum documento?','Sem problema: envie o que já tem. Eu aviso exatamente o que faltou.']]},
+    {k:'analise',n:'Análise de crédito',d:'Seus documentos estão na Caixa. O retorno costuma sair em até 48 horas úteis.',
+     faq:[['Quanto tempo demora?','Em geral até 48h úteis. Se passar disso, eu cobro e te dou posição.'],
+          ['Consultar meu score agora atrapalha?','Não atrapalha a análise que já está em andamento.']]},
+    {k:'aprovado',n:'Crédito aprovado',d:'Valor aprovado definido. Agora escolhemos a unidade e fechamos as condições.',
+     faq:[['O valor aprovado mudou o que eu posso comprar?','Pode ampliar ou reduzir opções. Eu refaço a simulação com o número real aprovado.'],
+          ['Posso mudar de imóvel agora?','Pode. A aprovação é sua, não do imóvel.']]},
+    {k:'contrato',n:'Contrato',d:'Contrato da construtora emitido e assinatura digital, sem sair de casa.',
+     faq:[['A assinatura digital tem validade?','Tem validade jurídica. O contrato é o oficial da construtora.'],
+          ['Preciso ir a algum lugar?','Não. Todo o processo é feito online, comigo acompanhando.']]},
+    {k:'chaves',n:'Chaves',d:'Processo concluído. Parabéns — o imóvel é seu.',
+     faq:[['E a documentação final?','Guarde contrato, matrícula e comprovantes. Qualquer dúvida futura, pode me chamar.'],
+          ['Posso indicar alguém?','Por favor! Indicação é como eu cresço — e cuido de quem você indica igual cuidei de você.']]}
+  ];
+  function qp(k){ try{ return new URLSearchParams(location.search).get(k); }catch(e){ return null; } }
+  function norm(v){
+    if(!v) return null;
+    v=String(v).trim().toLowerCase();
+    var n=parseInt(v,10);
+    if(!isNaN(n)&&n>=1&&n<=ETAPAS.length) return n-1;
+    for(var i=0;i<ETAPAS.length;i++){ if(ETAPAS[i].k===v) return i; }
+    return null;
+  }
+  var idx=norm(qp('etapa'));
+  if(idx===null){ try{ idx=norm(localStorage.getItem('pcEtapa')); }catch(e){} }
+  if(idx===null) idx=0;
+  try{ localStorage.setItem('pcEtapa',String(idx+1)); }catch(e){}
+
+  var nome=(qp('nome')||'').trim().replace(/[<>]/g,'').slice(0,40);
+  var imovel=(qp('imovel')||'').trim().replace(/[<>]/g,'').slice(0,60);
+  var et=ETAPAS[idx];
+
+  var h1=document.getElementById('ola');
+  if(nome) h1.innerHTML=nome.split(' ')[0]+', sua compra está <em>'+(idx===4?'concluída':'em andamento')+'</em>.';
+  else if(idx===4) h1.innerHTML='Sua compra está <em>concluída</em>.';
+  if(imovel) document.getElementById('sub').textContent='Acompanhamento do seu processo — '+imovel+'. Aqui você vê exatamente em que etapa está, sem precisar ligar pra perguntar.';
+
+  document.getElementById('etapaNome').textContent=et.n;
+  document.getElementById('etapaCont').textContent='Etapa '+(idx+1)+' de '+ETAPAS.length;
+
+  var CHECK='<svg viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></svg>';
+  var DOT='<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/></svg>';
+  var html='';
+  for(var i=0;i<ETAPAS.length;i++){
+    var cls=i<idx?'done':(i===idx?'now':'');
+    html+='<div class="step '+cls+'">'
+      +'<div class="dot">'+(i<idx?CHECK:DOT)+'</div>'
+      +'<div class="step-body"><b>'+ETAPAS[i].n+'</b><span>'+ETAPAS[i].d+'</span>'
+      +'<span class="step-tag">Você está aqui</span></div></div>';
+  }
+  document.getElementById('steps').innerHTML=html;
+
+  var pct=Math.round(((idx+1)/ETAPAS.length)*100);
+  setTimeout(function(){ document.getElementById('pbarFill').style.width=pct+'%'; },220);
+
+  var fq='';
+  for(var j=0;j<et.faq.length;j++){ fq+='<div class="q"><b>'+et.faq[j][0]+'</b><p>'+et.faq[j][1]+'</p></div>'; }
+  document.getElementById('faq').innerHTML=fq;
+
+  var msg='Olá Paulo! Estou acompanhando minha compra'+(imovel?' do '+imovel:'')+' e estou na etapa: '+et.n+'.';
+  var wa='https://wa.me/5521989150864?text='+encodeURIComponent(msg);
+  document.getElementById('waMain').href=wa;
+  document.getElementById('waTop').href=wa;
+
+  if(window.trackEvent) trackEvent('acompanhe_visita','acompanhe',et.k);
+})();
+</script>
+</body>
+</html>

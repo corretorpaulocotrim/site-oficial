@@ -567,11 +567,11 @@ footer .wrap{position:relative;z-index:1}
 .pcj-note{font-size:12.5px;color:rgba(255,255,255,.55)}
 @media(max-width:860px){.pcj-steps{grid-template-columns:1fr 1fr}.pcj{padding:40px 26px}}
 @media(max-width:480px){.pcj-steps{grid-template-columns:1fr}}
-/* ===== MAQUETE 3D — showpiece cinematográfico (CSS 3D puro, sem lib) ===== */
-.mq-sec{position:relative;overflow:hidden;background:linear-gradient(180deg,#0a2129 0%,#0f2e36 55%,#0a2129 100%);padding:96px 0 104px}
-.mq-sec::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(680px 320px at 50% 18%,rgba(184,135,58,.16),transparent 70%)}
+/* ===== VITRINE 3D — carrossel dos renders reais (substitui a maquete de caixas) ===== */
+.mq-sec{position:relative;overflow:hidden;background:linear-gradient(180deg,#0a2129 0%,#0f2e36 55%,#0a2129 100%);padding:92px 0 100px}
+.mq-sec::before{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(680px 320px at 50% 14%,rgba(184,135,58,.16),transparent 70%)}
 .mq-grid{position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center}
-@media(max-width:900px){.mq-grid{grid-template-columns:1fr;gap:24px}}
+@media(max-width:900px){.mq-grid{grid-template-columns:1fr;gap:30px}}
 .mq-copy .sec-eyebrow{color:var(--gold2)}
 .mq-copy h2{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,4vw,44px);font-weight:600;color:#fff;line-height:1.1;letter-spacing:-.02em;margin-bottom:16px}
 .mq-copy h2 em{font-style:italic;color:var(--gold2)}
@@ -579,36 +579,29 @@ footer .wrap{position:relative;z-index:1}
 .mq-tags{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:26px}
 .mq-tag{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:700;color:#fff;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.16);padding:8px 14px;border-radius:30px}
 .mq-tag svg{width:14px;height:14px;stroke:var(--gold2);fill:none;stroke-width:2.2}
-/* palco 3D */
-.mq-stage{position:relative;height:470px;display:flex;align-items:center;justify-content:center;perspective:1500px;perspective-origin:50% 42%}
-@media(max-width:900px){.mq-stage{height:340px}}
-.mq-float{transform-style:preserve-3d;animation:mqFloat 7s ease-in-out infinite}
-.mq-rot{position:relative;width:200px;height:200px;transform-style:preserve-3d;transform:rotateX(-16deg) rotateY(0deg);animation:mqSpin 26s linear infinite}
-.mq-vol{position:absolute;transform-style:preserve-3d}
-.mq-f{position:absolute;background:linear-gradient(180deg,#20505d 0%,#163d47 55%,#0e2a32 100%);border:1px solid rgba(207,159,79,.55);box-shadow:inset 0 -30px 50px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.10)}
-/* fachada: lajes + montantes + janelas acesas (maquete iluminada) */
-.mq-f.win{background-image:
-  repeating-linear-gradient(180deg,rgba(0,0,0,.34) 0 2px,transparent 2px 14px),
-  repeating-linear-gradient(90deg,rgba(0,0,0,.28) 0 2px,transparent 2px 12px),
-  repeating-linear-gradient(180deg,rgba(240,200,130,.30) 0 8px,transparent 8px 14px),
-  linear-gradient(180deg,#20505d 0%,#163d47 55%,#0e2a32 100%)}
-.mq-f.win::after{content:'';position:absolute;inset:0;background-image:
-  repeating-linear-gradient(90deg,rgba(255,214,150,.55) 0 5px,transparent 5px 36px),
-  repeating-linear-gradient(180deg,rgba(255,214,150,.5) 0 6px,transparent 6px 42px);
-  mix-blend-mode:screen;opacity:.5}
-.mq-top{position:absolute;background:linear-gradient(135deg,#33707f,#18424d);border:1px solid rgba(207,159,79,.6);box-shadow:inset 0 0 24px rgba(0,0,0,.35)}
-/* base/terreno da maquete */
-.mq-base{position:absolute;bottom:58px;left:50%;width:250px;height:250px;transform:translateX(-50%) rotateX(74deg);
-  background:radial-gradient(circle,rgba(32,80,93,.55),rgba(10,33,41,.15) 70%,transparent 72%);
-  border:1px solid rgba(207,159,79,.30);border-radius:10px;pointer-events:none}
-.mq-shadow{position:absolute;bottom:44px;left:50%;width:230px;height:34px;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(0,0,0,.55),transparent 70%);filter:blur(9px);animation:mqShadow 7s ease-in-out infinite}
-.mq-ring{position:absolute;bottom:52px;left:50%;width:300px;height:300px;transform:translateX(-50%) rotateX(74deg);border:1px solid rgba(207,159,79,.22);border-radius:50%;pointer-events:none}
-.mq-ring::after{content:'';position:absolute;inset:38px;border:1px solid rgba(207,159,79,.13);border-radius:50%}
-@keyframes mqSpin{from{transform:rotateX(-16deg) rotateY(0deg)}to{transform:rotateX(-16deg) rotateY(360deg)}}
-@keyframes mqFloat{0%,100%{transform:translateY(-6px)}50%{transform:translateY(8px)}}
-@keyframes mqShadow{0%,100%{opacity:.5;width:238px}50%{opacity:.35;width:214px}}
-@media(prefers-reduced-motion:reduce){.mq-rot{animation:none;transform:rotateX(-16deg) rotateY(-28deg)}.mq-float,.mq-shadow{animation:none}}
-html.pc-lite .mq-rot,html.pc-lite .mq-float,html.pc-lite .mq-shadow{animation:none}
+/* palco 3D com fotos reais */
+.v3-stage{position:relative;height:420px;perspective:1500px;perspective-origin:50% 46%}
+@media(max-width:900px){.v3-stage{height:330px}}
+.v3-ring{position:absolute;left:50%;top:50%;width:0;height:0;transform-style:preserve-3d;animation:v3Spin 44s linear infinite}
+.v3-card{position:absolute;width:230px;height:296px;margin:-148px 0 0 -115px;border-radius:16px;overflow:hidden;
+  box-shadow:0 22px 50px -12px rgba(0,0,0,.6);border:1px solid rgba(207,159,79,.4);background:#0a2129;backface-visibility:hidden}
+@media(max-width:900px){.v3-card{width:176px;height:228px;margin:-114px 0 0 -88px}}
+.v3-card img{width:100%;height:100%;object-fit:cover;display:block;filter:saturate(1.08) contrast(1.06) brightness(1.02)}
+.v3-card::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,33,41,0) 42%,rgba(10,33,41,.88) 100%)}
+.v3-cap{position:absolute;left:14px;right:14px;bottom:12px;z-index:2;color:#fff}
+.v3-cap b{display:block;font-family:'Fraunces',Georgia,serif;font-size:15px;font-weight:600;line-height:1.2}
+.v3-cap span{display:block;font-size:11px;color:var(--gold2);font-weight:700;margin-top:3px}
+.v3-floor{position:absolute;left:50%;bottom:26px;width:420px;height:62px;transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(0,0,0,.6),transparent 72%);filter:blur(12px);pointer-events:none;z-index:0}
+/* halo dourado atrás do card da frente */
+.v3-stage>.v3-glow{position:absolute;left:50%;top:46%;width:340px;height:340px;transform:translate(-50%,-50%);
+  background:radial-gradient(circle,rgba(184,135,58,.20),transparent 66%);filter:blur(26px);pointer-events:none;z-index:0}
+
+@keyframes v3Spin{from{transform:rotateY(0)}to{transform:rotateY(-360deg)}}
+/* respeita reduce-motion SEM ficar feio: gira devagar em vez de congelar */
+@media(prefers-reduced-motion:reduce){.v3-ring{animation-duration:150s}}
+html.pc-lite .v3-ring{animation-duration:150s}
+
 /* balanço suave da marca (efeito que o Paulo curtiu no whereinrio) */
 @media(prefers-reduced-motion:no-preference){
   .brand-logo{animation:pcSway 6.5s ease-in-out infinite;transform-origin:50% 50%}
@@ -857,11 +850,10 @@ html.pc-lite .brand-logo{animation:none}
       </div>
       <a href="simulador.html" class="btn-gold" onclick="trackEvent('maquete_cta','maquete','simular')">Ver os números do meu bolso</a>
     </div>
-    <div class="mq-stage reveal" aria-hidden="true">
-      <div class="mq-ring"></div>
-      <div class="mq-base"></div>
-      <div class="mq-shadow"></div>
-      <div class="mq-float"><div class="mq-rot"><div class="mq-vol" style="width:62px;height:190px;left:50%;top:50%;transform:translate(-50%,-50%) translate3d(-52px,0px,0px)"><div class="mq-f win" style="width:62px;height:190px;transform:translateZ(31.0px)"></div><div class="mq-f win" style="width:62px;height:190px;transform:rotateY(180deg) translateZ(31.0px)"></div><div class="mq-f win" style="width:62px;height:190px;left:0.0px;transform:rotateY(90deg) translateZ(31.0px)"></div><div class="mq-f win" style="width:62px;height:190px;left:0.0px;transform:rotateY(-90deg) translateZ(31.0px)"></div><div class="mq-top" style="width:62px;height:62px;top:64.0px;transform:rotateX(90deg) translateZ(95.0px)"></div></div><div class="mq-vol" style="width:54px;height:132px;left:50%;top:50%;transform:translate(-50%,-50%) translate3d(26px,29px,-30px)"><div class="mq-f win" style="width:54px;height:132px;transform:translateZ(27.0px)"></div><div class="mq-f win" style="width:54px;height:132px;transform:rotateY(180deg) translateZ(27.0px)"></div><div class="mq-f win" style="width:54px;height:132px;left:0.0px;transform:rotateY(90deg) translateZ(27.0px)"></div><div class="mq-f win" style="width:54px;height:132px;left:0.0px;transform:rotateY(-90deg) translateZ(27.0px)"></div><div class="mq-top" style="width:54px;height:54px;top:39.0px;transform:rotateX(90deg) translateZ(66.0px)"></div></div><div class="mq-vol" style="width:70px;height:74px;left:50%;top:50%;transform:translate(-50%,-50%) translate3d(34px,58px,42px)"><div class="mq-f win" style="width:70px;height:74px;transform:translateZ(22.0px)"></div><div class="mq-f win" style="width:70px;height:74px;transform:rotateY(180deg) translateZ(22.0px)"></div><div class="mq-f win" style="width:44px;height:74px;left:13.0px;transform:rotateY(90deg) translateZ(35.0px)"></div><div class="mq-f win" style="width:44px;height:74px;left:13.0px;transform:rotateY(-90deg) translateZ(35.0px)"></div><div class="mq-top" style="width:70px;height:44px;top:15.0px;transform:rotateX(90deg) translateZ(37.0px)"></div></div></div></div>
+    <div class="v3-stage reveal" aria-hidden="true">
+      <div class="v3-glow"></div>
+      <div class="v3-floor"></div>
+      <div class="v3-ring"><div class="v3-card" style="transform:rotateY(0deg) translateZ(330px)"><img src="emp-img/farol-da-guanabara.jpg" alt="Farol da Guanabara" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Farol da Guanabara</b><span>PORTO MARAVILHA</span></div></div><div class="v3-card" style="transform:rotateY(45deg) translateZ(330px)"><img src="emp-img/orla-central.jpg" alt="Orla Central" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Orla Central</b><span>NITERÓI</span></div></div><div class="v3-card" style="transform:rotateY(90deg) translateZ(330px)"><img src="emp-img/primor-carioca.jpg" alt="Primor Carioca" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Primor Carioca</b><span>INHAÚMA</span></div></div><div class="v3-card" style="transform:rotateY(135deg) translateZ(330px)"><img src="emp-img/saudosa-praca-onze.jpg" alt="Saudosa Praça Onze" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Saudosa Praça Onze</b><span>PRAÇA ONZE</span></div></div><div class="v3-card" style="transform:rotateY(180deg) translateZ(330px)"><img src="emp-img/village-caribe.jpg" alt="Village Caribe" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Village Caribe</b><span>JACAREPAGUÁ</span></div></div><div class="v3-card" style="transform:rotateY(225deg) translateZ(330px)"><img src="emp-img/mrv-sensia-barra.jpg" alt="Sensia Barra" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Sensia Barra</b><span>BARRA DA TIJUCA</span></div></div><div class="v3-card" style="transform:rotateY(270deg) translateZ(330px)"><img src="emp-img/alma-carioca.jpg" alt="Alma Carioca" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Alma Carioca</b><span>VILA VALQUEIRE</span></div></div><div class="v3-card" style="transform:rotateY(315deg) translateZ(330px)"><img src="emp-img/beon-porto.jpg" alt="Beon Porto" loading="lazy" onerror="this.parentNode.style.display='none'"/><div class="v3-cap"><b>Beon Porto</b><span>SÃO CRISTÓVÃO</span></div></div></div>
     </div>
   </div>
 </section>

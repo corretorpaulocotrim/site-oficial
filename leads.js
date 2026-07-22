@@ -958,7 +958,7 @@ document.addEventListener('DOMContentLoaded', renderRelacionados);
     return wm;
   }
   // Imagens que NUNCA devem levar marca d'agua: logos, favicons/icones, avatares de clientes/equipe, a propria marca.
-  var SKIP_SELECTOR = '.pc-watermark, .pc-watermark img, nav img, header img, footer img, .navbar img, .site-logo img, .logo-wordmark, .adc-icon img, .avatar img, .cliente-avatar img, .depo-avatar, .team-avatar img, .step-num img, .rg-card img, .authority-avatar img, .btn-wa-hdr img';
+  var SKIP_SELECTOR = '.pc-watermark, .pc-watermark img, nav img, header img, footer img, .navbar img, .site-logo img, .logo-wordmark, .adc-icon img, .avatar img, .cliente-avatar img, .depo-avatar, .team-avatar img, .step-num img, .rg-card img, .authority-avatar img, .btn-wa-hdr img, .v3-card img, .v3-stage img';
   function shouldSkip(img){
     if(img.dataset.pcWm) return true;
     if(img.matches(SKIP_SELECTOR) || img.closest(SKIP_SELECTOR)) return true;

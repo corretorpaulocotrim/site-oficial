@@ -268,7 +268,7 @@ var S={
   prazo:360, plano:'',
   ato:0, mensaisQtd:24, mensaisValor:0, anuaisQtd:2, anuaisValor:0, parcelaUnica:0, valorChaves:0,
   posChavesQtd:0, posChavesValor:0,
-  clienteNome:'', clienteTel:'', zerarAlvo:'mensais'
+  clienteNome:'', clienteTel:'', zerarAlvo:'mensais', aluguel:0
 };
 
 function precoAtual(){
@@ -592,6 +592,37 @@ function renderEmpSelector(c){
         +(S.useCustomTaxa?'<a href="#" onclick="resetTaxa();return false" style="font-size:10px;color:var(--gold);margin-top:3px;display:inline-block">← usar taxa automática da faixa</a>':'')+'</div></div>':'');
 }
 
+function heroiNumero(c){
+  var p=c.prestacaoEstimada+c.seguroEstimado;
+  var al=S.aluguel>0?S.aluguel:0;
+  var dif=al>0?(p-al):0;
+  var comp='';
+  if(al>0){
+    var mx=Math.max(p,al)||1, barP=p/mx*100, barA=al/mx*100;
+    comp='<div style="margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.16)">'
+      +'<div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.72);margin-bottom:4px"><span>Seu aluguel hoje</span><span>'+BRL(al)+'</span></div>'
+      +'<div style="height:9px;background:rgba(255,255,255,.14);border-radius:6px;overflow:hidden;margin-bottom:9px"><i style="display:block;height:100%;width:'+barA.toFixed(0)+'%;background:#94a3b8"></i></div>'
+      +'<div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.72);margin-bottom:4px"><span>Financiando este imóvel</span><span>'+BRL(p)+'</span></div>'
+      +'<div style="height:9px;background:rgba(255,255,255,.14);border-radius:6px;overflow:hidden"><i style="display:block;height:100%;width:'+barP.toFixed(0)+'%;background:'+(dif<=0?'#1a8f4c':'#d9b36c')+'"></i></div>'
+      +'<div style="margin-top:11px;font-size:13px;font-weight:700;color:'+(dif<=0?'#7fe0a6':'#e8c98a')+'">'
+      +(dif<=0?'Você pagaria '+BRL(Math.abs(dif))+' A MENOS por mês — e o imóvel fica seu.'
+             :'São '+BRL(dif)+' a mais por mês. A diferença compra patrimônio, não recibo.')
+      +'</div></div>';
+  }
+  return '<div style="background:linear-gradient(135deg,#0a2129,#123b46);border:1px solid rgba(207,159,79,.35);border-radius:14px;padding:20px 20px 18px;margin-bottom:12px;color:#fff">'
+    +'<div style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#d9b36c;margin-bottom:6px">O número que importa</div>'
+    +'<div style="display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap">'
+    +'<div style="font-family:Fraunces,Georgia,serif;font-size:42px;font-weight:700;line-height:1;color:#fff">'+BRL(p)+'</div>'
+    +'<div style="font-size:13px;color:rgba(255,255,255,.7);padding-bottom:5px">por mês (prestação + seguro)</div></div>'
+    +'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">'
+    +'<span class="cb2" style="background:rgba(255,255,255,.1);color:#fff">Entrada: '+BRL(c.entrada)+'</span>'
+    +'<span class="cb2" style="background:rgba(255,255,255,.1);color:#fff">Financiado: '+BRL(c.creditoFinanciado)+'</span>'
+    +'<span class="cb2" style="background:rgba(255,255,255,.1);color:#fff">'+c.prazo+' meses</span></div>'
+    +'<div style="margin-top:13px"><label style="font-size:11px;color:rgba(255,255,255,.72);display:block;margin-bottom:5px">Quanto você paga de aluguel hoje? (compare)</label>'
+    +'<input type="text" value="'+(S.aluguel>0?N2(S.aluguel):'')+'" placeholder="Ex: 1.500" onchange="updAluguel(this.value)" style="width:170px;padding:9px 11px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-family:inherit;font-size:14px"></div>'
+    +comp+'</div>';
+}
+function updAluguel(v){ S.aluguel=num(v)||0; render(); }
 function renderResumo(c){
   var emp=S.useCustom?null:CATALOG[S.empIdx];
   var isSBPE=!c.faixa;
@@ -603,6 +634,7 @@ function renderResumo(c){
     +(emp?'<span class="cb2">'+emp.c+' · '+STATUS_LABEL[emp.s]+'</span>':'')
     +(c.posChavesElegivel?' <span class="cb2" style="background:#f0f9f3;color:#157540">Pós-chaves até '+c.posChavesMax+'x</span>':'')
     +'</div>'
+    +heroiNumero(c)
     +'<div style="background:linear-gradient(135deg,#0f2e36,#14404b);border-radius:12px;padding:14px 18px;margin-bottom:12px;color:#fff">'
     +'<div style="font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#d9b36c;margin-bottom:5px">Simulação baseada em</div>'
     +'<div style="font-size:15px;font-weight:700;font-family:Fraunces,Georgia,serif">'+(emp?emp.n:'Imóvel personalizado')+'</div>'
