@@ -128,14 +128,44 @@ a{color:inherit;text-decoration:none}
 .ir-toggle-btn:hover{border-color:var(--gold)}
 .ir-toggle-btn.sel{border-color:var(--gold);background:#fffbeb;color:#92400e}
 .ir-hint{font-size:11px;color:var(--text3);margin-top:9px;line-height:1.5;min-height:14px}
+/* ===== CORREÇÕES MOBILE (elementos estavam sendo cortados/invisíveis) ===== */
+@media(max-width:560px){
+  .hdr{padding:11px 14px;gap:8px;overflow:hidden}
+  .hdr-logo img{height:32px}
+  .hdr-right{gap:8px;flex-shrink:0}
+  .btn-back-hdr{display:none}
+  .btn-wa-hdr{padding:8px 11px;font-size:11px;white-space:nowrap}
+  .ir-toggle-row{flex-wrap:wrap}
+  .ir-toggle-btn{flex:1 1 calc(50% - 4px);min-width:0;padding:10px 8px;font-size:12px}
+  div[style*="grid-template-columns:1fr 1fr"]{grid-template-columns:1fr!important}
+  input,select,textarea{max-width:100%}
+  .ir-box{padding:12px 13px}
+}
 .bank-note{margin-top:10px;padding:10px 12px;background:#fef3c7;border-radius:8px;font-size:11.5px;color:#92400e;line-height:1.55}
 .item-upload-toggle{margin-top:10px;text-align:center}
 .item-upload-toggle a{font-size:11.5px;color:var(--gold);font-weight:700}
 .item-upload-toggle a:hover{text-decoration:underline}
-.item-row{display:flex;align-items:center;gap:10px;padding:11px 12px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:#fff}
-.item-row-label{flex:1;min-width:0;font-size:12.5px;font-weight:600;color:var(--text)}
+.item-row{display:flex;flex-wrap:wrap;align-items:center;gap:10px;padding:12px 13px;border:1px solid var(--border);border-radius:10px;margin-bottom:8px;background:#fff}
+.item-row>.item-pick{flex:1 1 100%;order:5;margin-top:2px}
+.item-row-label{flex:1 1 55%}
+@media(max-width:520px){
+  .item-row{gap:8px}
+  .item-row-label{flex:1 1 100%}
+  .item-row-send{order:6;flex:1 1 auto}
+  .item-row-status{order:7;min-width:auto;text-align:left}
+  .item-pick-btn{flex:1 1 44%;justify-content:center;padding:11px 10px;font-size:12px}
+}
+.item-row-label{min-width:0;font-size:13px;font-weight:700;color:var(--text);line-height:1.35}
 .item-row-sub{font-size:10.5px;color:var(--text3);display:block;margin-top:2px;font-weight:400}
 .item-row-input{font-size:11px}
+.item-pick{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px}
+.item-pick-btn{display:inline-flex;align-items:center;gap:6px;font-family:inherit;font-size:11.5px;font-weight:700;color:var(--text);background:#fff;border:1.5px solid var(--border);border-radius:9px;padding:8px 12px;cursor:pointer;transition:border-color .2s ease,background .2s ease}
+.item-pick-btn:hover{border-color:var(--gold);background:#fffdf8}
+.item-pick-btn svg{width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.item-pick-btn.cam{background:#1a8f4c;border-color:#1a8f4c;color:#fff}
+.item-pick-btn.cam:hover{background:#157a3f;border-color:#157a3f}
+.item-pick-name{font-size:10.5px;color:var(--text3);flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+@media(min-width:820px){.item-pick-btn.cam{display:none}}
 .item-row-send{background:var(--gold);color:#fff;border:none;border-radius:7px;padding:7px 12px;font-size:11px;font-weight:700;cursor:pointer;white-space:nowrap;flex-shrink:0}
 .item-row-send:hover{background:#a5772e}
 .item-row-send:disabled{background:var(--border);color:var(--text3);cursor:not-allowed}
@@ -462,7 +492,13 @@ function renderItemRows(){
     return '<div class="item-row" id="itemrow-'+t.key+'">'
       +'<span class="item-check" id="itemcheck-'+t.key+'"><svg viewBox="0 0 24 24"><path d="M4 12l5 5L20 6"/></svg></span>'
       +'<label class="item-row-label" style="cursor:pointer">'+t.label+(t.sub?'<span class="item-row-sub">'+t.sub+'</span>':'')
-      +'<input type="file" class="item-row-input" id="itemfile-'+t.key+'" accept=".pdf,.jpg,.jpeg,.png" '+(t.multi?'multiple ':'')+'style="display:block;margin-top:6px;font-size:11px" onchange="onItemFilePicked(\''+t.key+'\',this.files)"/>'
+      +'<input type="file" class="item-row-input" id="itemfile-'+t.key+'" accept="image/*,application/pdf" '+(t.multi?'multiple ':'')+'style="display:none" onchange="onItemFilePicked(\''+t.key+'\',this.files)"/>'
+      +'<input type="file" class="item-row-cam" id="itemcam-'+t.key+'" accept="image/*" capture="environment" '+(t.multi?'multiple ':'')+'style="display:none" onchange="onItemFilePicked(\''+t.key+'\',this.files)"/>'
+      +'<div class="item-pick">'
+      +'  <button type="button" class="item-pick-btn cam" onclick="document.getElementById(\'itemcam-'+t.key+'\').click()"><svg viewBox="0 0 24 24"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>Tirar foto</button>'
+      +'  <button type="button" class="item-pick-btn" onclick="document.getElementById(\'itemfile-'+t.key+'\').click()"><svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5-5 5 5"/><path d="M12 5v12"/></svg>Escolher arquivo</button>'
+      +'  <span class="item-pick-name" id="itemname-'+t.key+'"></span>'
+      +'</div>'
       +'</label>'
       +'<button type="button" class="item-row-send" id="itemsend-'+t.key+'" onclick="onItemSendClick(\''+t.key+'\')">Enviar</button>'
       +'<span class="item-row-status" id="itemstatus-'+t.key+'" style="color:var(--text3)">—</span>'
