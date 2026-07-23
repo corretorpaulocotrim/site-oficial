@@ -1,3 +1,60 @@
+(function(){try{var s=document.createElement('style');s.id='pc-darkcine';s.textContent=`:root{
+ --white:#0b1a1d !important; --mist:#081619 !important; --line:rgba(207,159,79,.16) !important;
+ --gray:#9aa6a8 !important; --ink:#f4efe6 !important; --ink2:#c3cdcd !important;
+ --petrol:#050b0c !important; --petrol-soft:#0f2e36 !important; --gold:#cf9f4f !important; --gold2:#e6c581 !important;
+ --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 30px rgba(0,0,0,.5) !important;
+ --shadow-lg:0 10px 30px rgba(0,0,0,.5),0 30px 70px -10px rgba(0,0,0,.7) !important;
+}
+html,body{background:#050b0c !important;color:#f4efe6 !important}
+.section, .qmo-section, .mq-sec{background:#050b0c !important}
+.section-mist{background:#081619 !important}
+/* qualquer superficie branca/clara -> escura */
+[style*="background:#fff"],[style*="background:#ffffff"],[style*="background: #fff"],[style*="background-color:#fff"],
+.card,.emp-card,.status-card,.simn,.lead-form,.trust-item,.hero-showcase,.showcase-stack,.vcard,.step-card{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important}
+/* textos escuros -> claros */
+h1,h2,h3,h4,.display,.hero-lead,p,li,label,.trust-num,.trust-lbl{color:#f4efe6 !important}
+.hero-eyebrow,.eyebrow,.kicker,.section-kicker,.accent{color:#e6c581 !important}
+input,select,textarea{background:#050b0c !important;color:#f4efe6 !important;border-color:rgba(207,159,79,.25) !important}
+/* grão de filme */
+body::after{content:"" !important;position:fixed !important;inset:0 !important;pointer-events:none !important;z-index:9998 !important;
+ background:radial-gradient(120% 90% at 50% 38%,transparent 55%,rgba(0,0,0,.5) 100%) !important;mix-blend-mode:multiply !important}
+/* hero cinematográfico */
+.hero{background:radial-gradient(92% 80% at 50% 40%,#12333c 0%,#0a1e23 48%,#050b0c 100%) !important}
+.hero .display{font-family:'Fraunces',Georgia,serif !important;font-size:clamp(40px,6vw,88px) !important;line-height:.98 !important}
+.hero .accent{color:#e6c581 !important;font-style:italic !important}
+/* AUDIT fix: cards do catálogo e afins (texto escuro no escuro) */
+.cat-card,[class*="cat-card"],.rg-card,.qmo-card,.mini-sim-card,.testi-card,.showcase-card{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important}
+.cat-name,.qmo-title,.testi-name,.rg-title{color:#f4efe6 !important}
+.cat-loc,.cat-perk,.cat-tag,.testi-text,.rg-desc,.map-item-loc{color:#c3cdcd !important}
+.cat-price,.qmo-price,.map-item-price,.pin-tip-price,.mini-sim-card-badge{color:#e6c581 !important}
+.search,.search-field{background:#0b1a1d !important;border-color:rgba(207,159,79,.2) !important}
+.search-field label{color:#9aa6a8 !important}
+.search-field input,.search-field select,.search input,.search select{background:#050b0c !important;color:#f4efe6 !important}
+.cookie-bar,[id*=cookie]{background:#0b1a1d !important;color:#c3cdcd !important;border-color:rgba(207,159,79,.2) !important}
+/* botões-fantasma no escuro */
+.btn-ghost{border-color:rgba(207,159,79,.4) !important;color:#f4efe6 !important;background:transparent !important}
+/* AUDIT fix: painéis claros do SIMULADOR */
+.sim-card,.sel-box,.ssec,.sim-panel{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important;color:#f4efe6 !important}
+.sim-card *,.ssec *{color:inherit}
+.sel-box.on,.tab.on,.cat-tab.on{background:#12333c !important;color:#e6c581 !important}
+/* AUDIT fix: painéis claros do INVESTIDOR */
+.result-box,.res-item,.radar-card,.aco-body,.card,.tab-nav,.sim-input,.sim-select{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important;color:#f4efe6 !important}
+.res-item *,.result-box *,.radar-card *,.card *{color:inherit}
+.sim-input,.sim-select{background:#050b0c !important}
+.btn-dl-res,.btn-share{background:#12333c !important;color:#e6c581 !important;border-color:rgba(207,159,79,.3) !important}
+/* rótulos e valores dentro de painéis */
+.res-label,.sim-label,.field-label{color:#9aa6a8 !important}
+.res-val,.result-val,.big-num{color:#e6c581 !important}
+/* AUDIT fix: cards de resultado/skeleton do simulador */
+.entrada-box,.note,.rt-mcmv2,.cb2,[class*=skeleton],[class*=loader],.result-card,.sim-result{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important}
+.entrada-box *,.rt-mcmv2 *{color:#f4efe6 !important}
+/* AUDIT fix: cards de comparação MCMV + rede de segurança p/ fundos claros */
+.compare-col,.contact-card,.box{background:#0b1a1d !important;border-color:rgba(207,159,79,.18) !important;color:#f4efe6 !important}
+.box.gold,.box.hl,.compare-col.hl{background:#12333c !important}
+.box *,.compare-col *,.contact-card *{color:#f4efe6 !important}
+.box .gold,.gold-text,[class*=accent]{color:#e6c581 !important}
+[style*="background:#fff"],[style*="background: #fff"],[style*="background:#fef"],[style*="background:#fdf"],[style*="background:#fffbe"],[style*="background:#fff8"]{background:#0b1a1d !important}
+`;(document.head||document.documentElement).appendChild(s);}catch(e){}})();
 /**
  * leads.js — Captura de leads no Google Sheets
  * Endpoint: substitua SHEET_URL pela URL do Google Apps Script

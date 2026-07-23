@@ -646,6 +646,27 @@ body::after{content:"" !important;position:fixed !important;inset:0 !important;p
 .cookie-bar,[id*=cookie]{background:#0b1a1d !important;color:#c3cdcd !important;border-color:rgba(207,159,79,.2) !important}
 /* botões-fantasma no escuro */
 .btn-ghost{border-color:rgba(207,159,79,.4) !important;color:#f4efe6 !important;background:transparent !important}
+/* AUDIT fix: painéis claros do SIMULADOR */
+.sim-card,.sel-box,.ssec,.sim-panel{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important;color:#f4efe6 !important}
+.sim-card *,.ssec *{color:inherit}
+.sel-box.on,.tab.on,.cat-tab.on{background:#12333c !important;color:#e6c581 !important}
+/* AUDIT fix: painéis claros do INVESTIDOR */
+.result-box,.res-item,.radar-card,.aco-body,.card,.tab-nav,.sim-input,.sim-select{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important;color:#f4efe6 !important}
+.res-item *,.result-box *,.radar-card *,.card *{color:inherit}
+.sim-input,.sim-select{background:#050b0c !important}
+.btn-dl-res,.btn-share{background:#12333c !important;color:#e6c581 !important;border-color:rgba(207,159,79,.3) !important}
+/* rótulos e valores dentro de painéis */
+.res-label,.sim-label,.field-label{color:#9aa6a8 !important}
+.res-val,.result-val,.big-num{color:#e6c581 !important}
+/* AUDIT fix: cards de resultado/skeleton do simulador */
+.entrada-box,.note,.rt-mcmv2,.cb2,[class*=skeleton],[class*=loader],.result-card,.sim-result{background:#0b1a1d !important;border-color:rgba(207,159,79,.16) !important}
+.entrada-box *,.rt-mcmv2 *{color:#f4efe6 !important}
+/* AUDIT fix: cards de comparação MCMV + rede de segurança p/ fundos claros */
+.compare-col,.contact-card,.box{background:#0b1a1d !important;border-color:rgba(207,159,79,.18) !important;color:#f4efe6 !important}
+.box.gold,.box.hl,.compare-col.hl{background:#12333c !important}
+.box *,.compare-col *,.contact-card *{color:#f4efe6 !important}
+.box .gold,.gold-text,[class*=accent]{color:#e6c581 !important}
+[style*="background:#fff"],[style*="background: #fff"],[style*="background:#fef"],[style*="background:#fdf"],[style*="background:#fffbe"],[style*="background:#fff8"]{background:#0b1a1d !important}
 
 </style>
 </head>
