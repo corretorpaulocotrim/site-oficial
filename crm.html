@@ -202,6 +202,7 @@ button{cursor:pointer}
     <div class="sb-link" onclick="goPage('novo-lead')"><span class="sb-icon">&#9998;</span> Novo Lead</div>
     <div class="sb-link" onclick="goPage('discador')"><span class="sb-icon">&#128222;</span> Discador</div>
     <div class="sb-link" onclick="goPage('importar')"><span class="sb-icon">&#128229;</span> Importar Lista</div>
+    <div class="sb-link" onclick="goPage('busca')"><span class="sb-icon">&#128176;</span> Busca por Renda</div>
     <div class="sb-sec">Relatorios</div>
     <div class="sb-link" onclick="goPage('metricas')"><span class="sb-icon">&#128200;</span> Metricas</div>
     <div class="sb-link" onclick="goPage('campanhas')"><span class="sb-icon">&#127919;</span> Campanhas</div>
@@ -360,10 +361,21 @@ button{cursor:pointer}
       </div>
       <label style="font-size:12px;font-weight:700;color:var(--muted)">Cole a lista aqui (qualquer formato)</label>
       <textarea id="imp-text" rows="7" placeholder="Ex.: Maria Silva 21 99876-5432 maria@email.com" style="width:100%;padding:11px;border:1px solid #e2e6ee;border-radius:8px;font-family:inherit;margin:4px 0 10px"></textarea>
-      <div style="margin:6px 0 12px"><label style="font-size:12px;font-weight:700;color:var(--muted)">OU suba uma foto / print da lista</label><br/><input type="file" id="imp-file" accept="image/*" onchange="ocrImportar(this)"/> <span id="imp-ocr-status" style="font-size:12px;color:var(--muted)"></span></div>
+      <div style="margin:6px 0 12px;padding:12px;border:1px dashed #cbd3e0;border-radius:10px;background:#f8fafc"><div style="font-size:12px;font-weight:800;color:var(--navy3);margin-bottom:8px">&#128247; Modo CamScanner &mdash; tire UMA foto da lista e ele reconhece tudo</div><input type="file" id="imp-cam" accept="image/*" capture="environment" onchange="ocrImportar(this)" style="display:none"/><input type="file" id="imp-file" accept="image/*" onchange="ocrImportar(this)" style="display:none"/><button class="btn-primary" type="button" onclick="document.getElementById(&quot;imp-cam&quot;).click()">&#128247; Tirar foto da lista</button> <button class="btn-sm" type="button" onclick="document.getElementById(&quot;imp-file&quot;).click()">&#128193; Escolher imagem</button><div id="imp-ocr-status" style="font-size:12px;color:var(--muted);margin-top:8px"></div></div>
       <button class="btn-primary" onclick="extrairLeads()">Extrair contatos</button>
     </div></div>
     <div id="imp-preview" style="margin-top:16px"></div>
+  </div>
+  <div class="page" id="page-busca">
+    <div style="margin-bottom:16px"><div class="eyebrow">Match por perfil</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Busca por Renda</div><div style="font-size:13px;color:var(--muted)">Digite a renda do cliente. Mostro os empreendimentos que cabem, com o resumo pronto pra enviar no WhatsApp.</div></div>
+    <div class="card"><div class="card-body">
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end">
+        <div><label style="font-size:12px;font-weight:700;color:var(--muted)">Renda familiar (R$)</label><br/><input id="bq-renda" type="number" placeholder="Ex: 4500" style="width:100%;padding:11px;border:1px solid #e2e6ee;border-radius:8px"/></div>
+        <div><label style="font-size:12px;font-weight:700;color:var(--muted)">Regiao (opcional)</label><br/><select id="bq-reg" style="width:100%;padding:11px;border:1px solid #e2e6ee;border-radius:8px"><option value="">Todas</option><option>Zona Norte</option><option>Zona Oeste</option><option>Centro</option><option>Porto</option><option>Recreio</option><option>Barra</option><option>Niteroi</option><option>Jacarepagua</option><option>Piedade</option></select></div>
+        <button class="btn-primary" onclick="buscaRenda()">Buscar</button>
+      </div>
+    </div></div>
+    <div id="bq-res" style="margin-top:16px"></div>
   </div>
   <div class="page" id="page-campanhas">
     <div style="margin-bottom:20px"><div class="eyebrow">Midia paga</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Campanhas Ativas</div></div>
@@ -431,16 +443,41 @@ function saveImoveis(a){localStorage.setItem("crm_imoveis",JSON.stringify(a))}
 
 // DEFAULT IMOVEIS
 var defaultIm=[
-  {id:1,nome:"Orla Central",loc:"Porto Maravilha, RJ",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.000",roi:"Potencial alto",urg:"Copa Cury - tabela ate 30/jul",tags:["Rooftop","Piscinas","1-3 dorms"],icon:"&#127754;"},
-  {id:2,nome:"Farol da Guanabara",loc:"Santo Cristo, RJ",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.000",roi:"Porto Maravilha",urg:"Copa Cury ativa",tags:["Rooftop","Zen","Studio-3"],icon:"&#128332;"},
-  {id:3,nome:"Arcos do Porto",loc:"Porto Maravilha, RJ",status:"Em Obras",badge:"ib-obras",preco:"Consultar",roi:"Em valorizacao",urg:"",tags:["Piscina","Studio-2"],icon:"&#127959;"},
-  {id:4,nome:"Parque Piedade - Aquarela",loc:"Piedade, RJ",status:"Lancamento",badge:"ib-mcmv",preco:"R$ 263.200",roi:"Subsidio R$47k",urg:"Subsidio de R$ 47.000",tags:["MCMV","2 dorms"],icon:"&#127807;"},
-  {id:5,nome:"Luzes do Rio - Lamparina",loc:"Sao Cristovao, RJ",status:"Lancamento",badge:"ib-lanc",preco:"R$ 359.000",roi:"Bike LEV inclusa",urg:"Copa Cury ativa",tags:["Bike LEV","1-2 dorms"],icon:"&#128161;"},
-  {id:6,nome:"Caminhos da Guanabara",loc:"Niteroi, RJ",status:"Em Obras",badge:"ib-obras",preco:"R$ 334.999",roi:"Vista Guanabara",urg:"",tags:["Rooftop","1-2 dorms"],icon:"&#9973;"},
-  {id:7,nome:"Nova Norte Samba",loc:"Iraja, RJ",status:"Pronto",badge:"ib-pronto",preco:"R$ 349.000",roi:"Entrega imediata",urg:"Tabela ate 30/jul",tags:["Garden","2 dorms"],icon:"&#127968;"},
-  {id:8,nome:"Nova Norte Ginga",loc:"Iraja, RJ",status:"Lancamento",badge:"ib-mcmv",preco:"R$ 270.118",roi:"12+ tipologias",urg:"Copa Cury ativa",tags:["MCMV","Multi"],icon:"&#127928;"}
+  {id:1,nome:"Farol da Guanabara",loc:"Santo Cristo · Porto Maravilha",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.875",rendaMin:3850,tip:"Studio, 1 e 3 quartos",ender:"Rua Sacadura Cabral, 103, Santo Cristo — Rio de Janeiro, RJ",url:"farol-da-guanabara.html",roi:"Renda ideal ~R$ 3.850",urg:"Lancamento",tags:["Piscinas", "Solário", "Espaço Zen"],icon:"&#127968;"},
+  {id:2,nome:"Arcos do Porto",loc:"Porto Maravilha",status:"Em obras",badge:"ib-obras",preco:"R$ 360.588",rendaMin:3450,tip:"Studio, 1 e 2 quartos",ender:"Av. Rodrigues Alves, Porto Maravilha — Rio de Janeiro, RJ",url:"arcos-do-porto.html",roi:"Renda ideal ~R$ 3.450",urg:"Em obras",tags:["Piscina", "Churrasqueira", "Salão de Festas"],icon:"&#127968;"},
+  {id:3,nome:"Orla Central",loc:"Centro · Niterói",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.000",rendaMin:3800,tip:"1, 2 e 3 quartos",ender:"Rua Saldanha Marinho, Lote 2, Centro — Niterói, RJ",url:"orla-central.html",roi:"Renda ideal ~R$ 3.800",urg:"Lancamento",tags:["Solário", "Piscinas", "Horta"],icon:"&#127968;"},
+  {id:4,nome:"Parque Piedade",loc:"Piedade · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 263.200",rendaMin:2500,tip:"2 quartos",ender:"Rua Piedade, s/n, Piedade — Rio de Janeiro, RJ",url:"parque-piedade.html",roi:"Renda ideal ~R$ 2.500",urg:"Lancamento",tags:["Piscinas", "Playground", "Academia"],icon:"&#127968;"},
+  {id:5,nome:"Luzes do Rio Lamparina",loc:"São Cristóvão",status:"Lancamento",badge:"ib-lanc",preco:"R$ 309.000",rendaMin:2950,tip:"1 e 2 quartos",ender:"Rua Campo de São Cristóvão, Imperial São Cristóvão — Rio de Janeiro, RJ",url:"luzes-do-rio-lamparina.html",roi:"Renda ideal ~R$ 2.950",urg:"Lancamento",tags:["Piscinas", "Salão de Festas", "Academia"],icon:"&#127968;"},
+  {id:6,nome:"Caminhos da Guanabara",loc:"Pendotiba · Niterói",status:"Em obras",badge:"ib-obras",preco:"R$ 334.999",rendaMin:3200,tip:"1 e 2 quartos",ender:"Estrada Caetano Monteiro, s/n, Pendotiba — Niterói, RJ",url:"caminhos-da-guanabara.html",roi:"Renda ideal ~R$ 3.200",urg:"Em obras",tags:["Piscinas", "Rooftop", "Academia"],icon:"&#127968;"},
+  {id:7,nome:"Cartola II",loc:"São Cristóvão",status:"Lancamento",badge:"ib-lanc",preco:"R$ 302.470",rendaMin:2850,tip:"1 e 2 quartos",ender:"Rua São Luís Gonzaga, São Cristóvão — Rio de Janeiro, RJ",url:"cartola-ii.html",roi:"Renda ideal ~R$ 2.850",urg:"Lancamento",tags:["Piscinas", "Solário", "Playground"],icon:"&#127968;"},
+  {id:8,nome:"Luzes do Rio Candeeiro",loc:"São Cristóvão",status:"Lancamento",badge:"ib-lanc",preco:"R$ 361.962",rendaMin:3450,tip:"1 e 2 quartos",ender:"Rua Campo de São Cristóvão, Imperial São Cristóvão — Rio de Janeiro, RJ",url:"luzes-do-rio-candeeiro.html",roi:"Renda ideal ~R$ 3.450",urg:"Lancamento",tags:["Piscinas", "Solário", "Brinquedoteca"],icon:"&#127968;"},
+  {id:9,nome:"A Noite",loc:"Praça Mauá, 7 · Centro",status:"Em obras",badge:"ib-obras",preco:"R$ 802.000",rendaMin:7600,tip:"Studio 44m² e duplex 70m²",ender:"Praça Mauá, 7 — Centro, RJ",url:"emp-a-noite.html",roi:"Renda ideal ~R$ 7.600",urg:"Em obras",tags:["Mirante 360°", "Restaurante", "Portaria 24h"],icon:"&#127968;"},
+  {id:10,nome:"Saudosa Praça Onze",loc:"Praça Onze · Centro",status:"Lancamento",badge:"ib-lanc",preco:"R$ 285.000",rendaMin:2700,tip:"Studio a 2 quartos suíte (31-49m²)",ender:"Rua Benedito Hipólito, 160 — Praça Onze, Centro, RJ",url:"emp-saudosa-praca-onze.html",roi:"Renda ideal ~R$ 2.700",urg:"Lancamento",tags:["Academia", "Coworking", "Salão de Festas"],icon:"&#127968;"},
+  {id:11,nome:"Alma Carioca",loc:"Vila Valqueire · Zona Norte",status:"Em obras",badge:"ib-obras",preco:"R$ 264.000",rendaMin:2500,tip:"2 quartos (37-46m²)",ender:"Estrada Intendente Magalhães, 279 — Vila Valqueire, RJ",url:"emp-alma-carioca.html",roi:"Renda ideal ~R$ 2.500",urg:"Em obras",tags:["Piscina", "Churrasqueira", "Academia"],icon:"&#127968;"},
+  {id:12,nome:"Beon Porto Residencial",loc:"São Cristóvão · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 259.000",rendaMin:2450,tip:"1 e 2 quartos (32-39m²)",ender:"Rua Monsenhor Manuel Gomes, 175 — São Cristóvão",url:"emp-beon-porto.html",roi:"Renda ideal ~R$ 2.450",urg:"Lancamento",tags:["Piscina", "Salão de Festas", "Academia"],icon:"&#127968;"},
+  {id:13,nome:"Brise Studios Design",loc:"Praça Pio X · Centro",status:"Em obras",badge:"ib-obras",preco:"R$ 380.082",rendaMin:3600,tip:"Studios 31-44m²",ender:"Praça Pio X, 99 — Centro",url:"emp-brise-studios.html",roi:"Renda ideal ~R$ 3.600",urg:"Em obras",tags:["Rooftop", "Sauna", "Academia"],icon:"&#127968;"},
+  {id:14,nome:"Conquista Florianópolis — Fase 1",loc:"Praça Seca · Jacarepaguá",status:"Pronto",badge:"ib-pronto",preco:"R$ 207.500",rendaMin:1950,tip:"1 e 2 quartos (36-56m²)",ender:"Praça Seca · Jacarepaguá",url:"emp-conquista-florianopolis.html",roi:"Renda ideal ~R$ 1.950",urg:"Pronto",tags:["Piscina", "Piscina Infantil", "Salão de Festas"],icon:"&#127968;"},
+  {id:15,nome:"Cores do Rio Residencial",loc:"Rua Irineu Marinho · Centro",status:"Pronto",badge:"ib-pronto",preco:"R$ 287.000",rendaMin:2750,tip:"Studios, 1 e 2 quartos (35-57m²)",ender:"Rua Irineu Marinho, 52 — Centro",url:"emp-cores-do-rio.html",roi:"Renda ideal ~R$ 2.750",urg:"Pronto",tags:["Academia", "Espaço Gourmet", "Coworking"],icon:"&#127968;"},
+  {id:16,nome:"CTV Beat",loc:"Madureira · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 229.000",rendaMin:2200,tip:"2 quartos (50-110m²)",ender:"Rua Carlos Xavier, 72 — Madureira",url:"emp-ctv-beat.html",roi:"Renda ideal ~R$ 2.200",urg:"Lancamento",tags:["Piscina", "Salão de Festas", "Playground"],icon:"&#127968;"},
+  {id:17,nome:"CTV Vitória",loc:"Campinho · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 229.000",rendaMin:2200,tip:"2 e 3 quartos (49-114m²)",ender:"Rua Comendador Pinto, 483 — Campinho",url:"emp-ctv-vitoria.html",roi:"Renda ideal ~R$ 2.200",urg:"Lancamento",tags:["Piscina", "Salão de Jogos", "Churrasqueira"],icon:"&#127968;"},
+  {id:18,nome:"East Side Harmony",loc:"Méier · Zona Norte",status:"Pronto",badge:"ib-pronto",preco:"R$ 411.000",rendaMin:3900,tip:"2 e 3 quartos (52-68m²)",ender:"Rua José Bonifácio, 140 — Méier",url:"emp-east-side-harmony.html",roi:"Renda ideal ~R$ 3.900",urg:"Pronto",tags:["Piscina", "Sauna", "Churrasqueira"],icon:"&#127968;"},
+  {id:19,nome:"Wish Norte (Living)",loc:"Cachambi · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 385.000",rendaMin:3650,tip:"2 e 3 quartos (44-59m²)",ender:"Av. Dom Hélder Câmara, 5123 — Cachambi",url:"emp-living-wish-norte.html",roi:"Renda ideal ~R$ 3.650",urg:"Lancamento",tags:["Piscina", "Piscina Infantil", "Academia"],icon:"&#127968;"},
+  {id:20,nome:"Meu Crescer Engenhão",loc:"Engenho de Dentro · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 269.000",rendaMin:2550,tip:"2 quartos (48-52m²)",ender:"Av. Amaro Cavalcanti, 1615 — Engenho de Dentro",url:"emp-meu-crescer-engenhao.html",roi:"Renda ideal ~R$ 2.550",urg:"Lancamento",tags:["Piscina", "Espaço Gourmet", "Academia"],icon:"&#127968;"},
+  {id:21,nome:"Only by Living — Fase 1",loc:"Cachambi · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 334.280",rendaMin:3200,tip:"2 a 4 quartos + coberturas (44-182m²)",ender:"Av. Dom Hélder Câmara, 5000 — Cachambi",url:"emp-only-by-living.html",roi:"Renda ideal ~R$ 3.200",urg:"Lancamento",tags:["Piscina", "Sky Lounge", "Academia"],icon:"&#127968;"},
+  {id:22,nome:"Primor Carioca — Fase 2",loc:"Inhaúma · Zona Norte",status:"Pronto",badge:"ib-pronto",preco:"R$ 262.990",rendaMin:2500,tip:"2 quartos (35-40m²)",ender:"Av. Pastor Martin Luther King Jr, 989 — Inhaúma",url:"emp-primor-carioca.html",roi:"Renda ideal ~R$ 2.500",urg:"Pronto",tags:["Piscina", "Playground", "Espaço Gourmet"],icon:"&#127968;"},
+  {id:23,nome:"Sal Rio Residencial",loc:"Saúde · Porto Maravilha",status:"Lancamento",badge:"ib-lanc",preco:"R$ 189.000",rendaMin:1800,tip:"Studios e apartamentos, 1 quarto (22-35m²)",ender:"Rua Sacadura Cabral, 103 — Saúde/Porto Maravilha",url:"emp-sal-rio.html",roi:"Renda ideal ~R$ 1.800",urg:"Lancamento",tags:["Rooftop", "Mirante"],icon:"&#127968;"},
+  {id:24,nome:"URB Sole",loc:"Todos os Santos · Zona Norte",status:"Em obras",badge:"ib-obras",preco:"R$ 259.000",rendaMin:2450,tip:"1 e 2 quartos (33-46m²)",ender:"Rua Geobert de Queiróz, 127 — Todos os Santos",url:"emp-urb-sole.html",roi:"Renda ideal ~R$ 2.450",urg:"Em obras",tags:["Piscina", "Espaço Gourmet", "Coworking"],icon:"&#127968;"},
+  {id:25,nome:"Village Caribe 1",loc:"Praça Seca · Jacarepaguá",status:"Pronto",badge:"ib-pronto",preco:"R$ 1.263.594",rendaMin:12000,tip:"2 quartos c/ suíte + coberturas (59-137m²)",ender:"Rua Albano, 219 — Praça Seca",url:"emp-village-caribe.html",roi:"Renda ideal ~R$ 12.000",urg:"Pronto",tags:["Piscina", "Playground", "Churrasqueira"],icon:"&#127968;"},
+  {id:26,nome:"Vivaz Connection Zona Norte — Fase 1",loc:"Riachuelo · Zona Norte",status:"Em obras",badge:"ib-obras",preco:"R$ 233.000",rendaMin:2200,tip:"2 quartos (37m²)",ender:"Rua Magalhães Castro — Riachuelo",url:"emp-vivaz-connection.html",roi:"Renda ideal ~R$ 2.200",urg:"Em obras",tags:["Piscina", "Salão de Festas", "Academia"],icon:"&#127968;"},
+  {id:27,nome:"Vivaz Rua Honório",loc:"Todos os Santos · Zona Norte",status:"Pronto",badge:"ib-pronto",preco:"R$ 259.592",rendaMin:2450,tip:"1 e 2 quartos (32-45m²)",ender:"Rua Honório, 419 — Todos os Santos",url:"emp-vivaz-honorio.html",roi:"Renda ideal ~R$ 2.450",urg:"Pronto",tags:["Piscina", "Churrasqueira", "Academia"],icon:"&#127968;"},
+  {id:28,nome:"Império do Ouro",loc:"Rio do Ouro · São Gonçalo",status:"Pronto",badge:"ib-pronto",preco:"R$ 305.990",rendaMin:2900,tip:"2 quartos, até 1 suíte (46-47m²)",ender:"Av. Abdias José dos Santos — Rio do Ouro, São Gonçalo, RJ",url:"emp-imperio-do-ouro.html",roi:"Renda ideal ~R$ 2.900",urg:"Pronto",tags:["Piscina", "Espaço Gourmet", "Playground"],icon:"&#127968;"},
+  {id:29,nome:"Ritmos de Pilares",loc:"Pilares · Rio de Janeiro",status:"Lancamento",badge:"ib-lanc",preco:"R$ 274.990",rendaMin:2600,tip:"2 quartos, com ou sem suíte — todas as unidades com varanda",ender:"Pilares · Rio de Janeiro",url:"emp-ritmos-de-pilares.html",roi:"Renda ideal ~R$ 2.600",urg:"Lancamento",tags:["Piscinas", "Salão de festas", "Churrasqueira"],icon:"&#127968;"},
+  {id:30,nome:"Encantos da Zona Norte",loc:"Região de Bonsucesso · Rio de Janeiro",status:"Em obras",badge:"ib-obras",preco:"R$ 273.990",rendaMin:2600,tip:"2 quartos (opção de varanda ou área privativa)",ender:"Região de Bonsucesso · Rio de Janeiro",url:"emp-encantos-da-zona-norte.html",roi:"Renda ideal ~R$ 2.600",urg:"Em obras",tags:["Piscinas", "Churrasqueira", "Miniquadra"],icon:"&#127968;"},
+  {id:31,nome:"Reserva Redentor",loc:"Rocha · Rio de Janeiro",status:"Em obras",badge:"ib-obras",preco:"R$ 274.990",rendaMin:2600,tip:"2 quartos (opção de varanda)",ender:"Rocha · Rio de Janeiro",url:"emp-reserva-redentor.html",roi:"Renda ideal ~R$ 2.600",urg:"Em obras",tags:["Piscina adulto", "Piscina infantil", "Playground"],icon:"&#127968;"},
+  {id:32,nome:"Sensia Barra",loc:"Barra da Tijuca · Rio de Janeiro",status:"Em obras",badge:"ib-obras",preco:"R$ 913.990",rendaMin:8700,tip:"2 e 3 quartos com suíte e varanda gourmet (opções garden e cobertura, até 148m²)",ender:"Barra da Tijuca · Rio de Janeiro",url:"emp-sensia-barra.html",roi:"Renda ideal ~R$ 8.700",urg:"Em obras",tags:["Lazer em condomínio fechado"],icon:"&#127968;"},
+  {id:33,nome:"Oceanside Recreio",loc:"Pontal Oceânico · Recreio dos Bandeirantes",status:"Em obras",badge:"ib-obras",preco:"R$ 440.000",rendaMin:4200,tip:"2 e 3 quartos com suíte (47,74 a 78,19m²)",ender:"Rua Luiz Carlos Sarolli, 1.111 — Pontal Oceânico, Recreio dos Bandeirantes, RJ",url:"emp-oceanside-recreio.html",roi:"Renda ideal ~R$ 4.200",urg:"Em obras",tags:["Piscina", "Academia", "Coworking"],icon:"&#127968;"}
 ];
-if(!localStorage.getItem("crm_imoveis"))saveImoveis(defaultIm);
+var IM_VER="real33-v1";if(localStorage.getItem("crm_im_ver")!==IM_VER){saveImoveis(defaultIm);localStorage.setItem("crm_im_ver",IM_VER);}
 
 // NAV
 function goPage(id){
@@ -619,7 +656,32 @@ function confirmarImport(){var c=window._impCache||[];var reg=document.getElemen
  saveLeads(leads);toast(c.length+' leads adicionados!');document.getElementById('imp-text').value='';document.getElementById('imp-preview').innerHTML='';try{updateBadge()}catch(e){}goPage('leads');}
 function ocrImportar(inp){var f=inp.files[0];if(!f)return;var st=document.getElementById('imp-ocr-status');st.textContent=' Lendo imagem (pode levar alguns segundos)...';
  if(!window.Tesseract){var sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';sc.onload=function(){runOcr(f,st)};document.head.appendChild(sc);}else runOcr(f,st);}
-function runOcr(f,st){Tesseract.recognize(f,'por').then(function(r){var ta=document.getElementById('imp-text');ta.value+=(ta.value?'\n':'')+r.data.text;st.textContent=' Pronto! Clique em Extrair contatos.';}).catch(function(){st.textContent=' Nao consegui ler. Tente colar o texto.';});}
+function runOcr(f,st){Tesseract.recognize(f,'por').then(function(r){var ta=document.getElementById('imp-text');ta.value+=(ta.value?'\n':'')+r.data.text;st.textContent=' Foto lida! Organizando os contatos...';try{extrairLeads()}catch(e){}}).catch(function(){st.textContent=' Nao consegui ler. Tente colar o texto.';});}
+</script>
+<script>
+function buscaRenda(){
+  var renda=parseFloat((document.getElementById('bq-renda').value||'0').replace(/\D/g,''))||0;
+  var reg=(document.getElementById('bq-reg').value||'').toLowerCase();
+  var ims=getImoveis().filter(function(x){ return (x.rendaMin||0)<=renda*1.05 && (!reg || (x.loc||'').toLowerCase().indexOf(reg)>-1); });
+  ims.sort(function(a,b){return (b.rendaMin||0)-(a.rendaMin||0);});
+  var box=document.getElementById('bq-res');
+  if(!renda){box.innerHTML='<div class="card"><div class="card-body">Digite a renda.</div></div>';return;}
+  if(!ims.length){box.innerHTML='<div class="card"><div class="card-body">Nenhum empreendimento para essa renda'+(reg?' nessa regiao':'')+'. Tente uma renda maior ou tire o filtro de regiao.</div></div>';return;}
+  var top=ims.slice(0,6);
+  var cards=top.map(function(x){
+    return '<div class="card" style="margin-bottom:10px"><div class="card-body" style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">'
+     +'<div style="flex:1;min-width:200px"><div style="font-weight:900;color:var(--navy3);font-size:15px">'+x.icon+' '+x.nome+'</div>'
+     +'<div style="font-size:12px;color:var(--muted)">'+x.loc+' &middot; '+x.tip+'</div>'
+     +'<div style="font-size:13px;margin-top:4px"><b style="color:#16a34a">'+x.preco+'</b> &middot; renda ideal ~R$ '+(x.rendaMin||0).toLocaleString('pt-BR')+'</div>'
+     +'<div style="font-size:11px;color:var(--muted)">&#128205; Stand: '+x.ender+'</div></div>'
+     +'<div style="display:flex;gap:8px;flex-wrap:wrap">'
+     +'<a class="btn-sm" href="https://www.paulocotrim.com/'+x.url+'" target="_blank">Ver no site</a>'
+     +'<button class="btn-primary" onclick="zapResumo(&quot;'+x.url+'&quot;)">&#128241; Enviar resumo</button>'
+     +'</div></div></div>';
+  }).join('');
+  box.innerHTML='<div style="font-size:13px;color:var(--muted);margin-bottom:8px">'+ims.length+' empreendimentos cabem nessa renda (mostrando os '+top.length+' de maior valor):</div>'+cards;
+}
+function zapResumo(url){var x=getImoveis().find(function(i){return i.url===url});if(!x){return;}var rmin=(x.rendaMin||0).toLocaleString("pt-BR");var L=[];L.push("Oi! Separei um imovel que combina com voce \uD83D\uDD11");L.push("");L.push("*"+x.nome+"* - "+x.loc);L.push("\uD83C\uDFE0 "+x.tip);L.push("\uD83D\uDCB0 A partir de "+x.preco);L.push("\uD83D\uDCCA Renda ideal ~R$ "+rmin);L.push("\uD83D\uDCCD Stand: "+x.ender);L.push("");L.push("Veja fotos, planta e simule com a sua renda:");L.push("https://www.paulocotrim.com/"+x.url);L.push("");L.push("Uber, 99 e iFood contam como renda. Entrada parcelada e, no MCMV, ITBI e RGI de graca. Quer que eu simule com a SUA renda agora?");var msg=encodeURIComponent(L.join("\n"));window.open("https://wa.me/?text="+msg,"_blank");}
 </script>
 </body>
 </html>
