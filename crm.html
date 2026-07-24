@@ -687,5 +687,27 @@ function zapResumo(url){var x=getImoveis().find(function(i){return i.url===url})
 function backupCRM(){var data={leads:getLeads(),imoveis:getImoveis(),data:new Date().toISOString()};var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="backup-crm-paulocotrim-"+new Date().toISOString().slice(0,10)+".json";a.click();try{toast("Backup baixado! Guarde este arquivo.")}catch(e){}}
 function restoreCRM(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(d.leads){saveLeads(d.leads)}if(d.imoveis){saveImoveis(d.imoveis)}try{toast("Backup restaurado!")}catch(e){}setTimeout(function(){location.reload()},700);}catch(e){try{toast("Arquivo invalido")}catch(x){}}};r.readAsText(f);}
 </script>
+<script>
+(function(){
+ function daysAgo(id){return (Date.now()-(+id||Date.now()))/86400000;}
+ var _gp=window.goPage;
+ window.goPage=function(id){_gp(id);if(id==='dashboard')setTimeout(injectFU,60);};
+ function injectFU(){
+   var page=document.getElementById('page-dashboard');if(!page)return;var oldc=document.getElementById('fu-card');if(oldc)oldc.remove();
+   var ls=getLeads().filter(function(l){var st=(l.status||'').toLowerCase();return st!=='fechado'&&st!=='perdido'&&daysAgo(l.id)>=2;});
+   ls.sort(function(a,b){return a.id-b.id;});
+   var rows=ls.slice(0,8).map(function(l){var d=Math.floor(daysAgo(l.id));return '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #eef1f6;gap:10px;flex-wrap:wrap"><div><b>'+(l.nome||'-')+'</b> <span style="color:#c0392b;font-size:12px">&#128293; '+d+'d sem contato</span><br><span style="font-size:12px;color:#888">'+(l.regiao||l.interesse||'')+' &middot; '+(l.tel||'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-sm" onclick="ligar('+l.id+')">Ligar</button><button class="btn-primary" onclick="zap('+l.id+')">WhatsApp</button></div></div>';}).join('');
+   var card=document.createElement('div');card.className='card';card.id='fu-card';card.style.marginBottom='16px';card.style.borderLeft='4px solid #C9A227';
+   card.innerHTML='<div class="card-header"><div><div class="card-title">&#9200; Follow-up &mdash; leads esfriando ('+ls.length+')</div><div class="card-sub">Contate hoje pra nao perder a venda</div></div></div><div class="card-body">'+(ls.length?rows:'<div style="color:#16a34a;font-weight:700">Tudo em dia! Nenhum lead esquecido. &#9989;</div>')+'</div>';
+   page.insertBefore(card,page.children[1]||null);
+ }
+ try{var last=localStorage.getItem('pcLastBackup');var need=!last||(Date.now()-(+last))>7*86400000;var ta=document.querySelector('.tactions');
+   if(ta&&!document.getElementById('bkp-top')){var w=document.createElement('span');w.id='bkp-top';w.innerHTML='<button class="btn-sm" onclick="backupCRM()" style="margin-right:8px">&#128190; Backup'+(need?' <b style="color:#c0392b">!</b>':'')+'</button>';ta.insertBefore(w,ta.firstChild);}
+ }catch(e){}
+ var _bk=window.backupCRM;window.backupCRM=function(){_bk();try{localStorage.setItem('pcLastBackup',Date.now());var b=document.querySelector('#bkp-top button');if(b)b.innerHTML='&#128190; Backup';}catch(e){}};
+ try{var L=getLeads();var ch=false;L.forEach(function(l){var st=(l.status||'').toLowerCase();if(st==='fechado'||st==='perdido')return;var d=daysAgo(l.id);var t=d<1?'quente':d<3?'morno':'frio';if(l.temp!==t){l.temp=t;ch=true;}});if(ch)saveLeads(L);}catch(e){}
+ setTimeout(function(){var dp=document.getElementById('page-dashboard');if(dp&&dp.classList.contains('active'))injectFU();},500);
+})();
+</script>
 </body>
 </html>

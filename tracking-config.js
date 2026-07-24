@@ -31,6 +31,7 @@ var META_PIXEL_ID = '1758733705251535';
     if(window.fbq){
       // eventos-chave viram conversões padrão do Meta, o resto vira evento custom
       if(nome==='whatsapp_clicado' || nome==='formulario_enviado') fbq('track','Lead', dados||{});
+      if(window.gtag && (nome==='whatsapp_clicado'||nome==='formulario_enviado')) gtag('event','generate_lead',{method:nome});
       else fbq('trackCustom', nome, dados||{});
     }
   };
