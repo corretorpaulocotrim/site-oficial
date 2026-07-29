@@ -4,11 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Simulador Financiamento — Paulo Cotrim | Rio de Janeiro</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
-<link rel="shortcut icon" href="favicon.ico"/>
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
@@ -54,16 +50,16 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .sim-divider::before,.sim-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .sim-divider span{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
 .sim-body{padding:0 1.5rem 1.5rem}
-.sel-box{background:linear-gradient(180deg,#fffdf8,#fff 30%);border:1.5px solid var(--gold);border-radius:16px;padding:1.5rem 1.6rem;margin-bottom:.9rem;box-shadow:0 6px 28px rgba(184,135,58,.13)}
-.sel-title{font-family:'Fraunces',Georgia,serif;font-size:18px;font-weight:600;color:var(--navy);letter-spacing:-.01em;margin-bottom:12px}
+.sel-box{background:#fff;border:1.5px solid var(--gold);border-radius:12px;padding:1rem 1.25rem;margin-bottom:.75rem;box-shadow:0 2px 10px rgba(184,135,58,.08)}
+.sel-title{font-size:11px;font-weight:700;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px}
 .g2s{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-.g4s{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:13px}
+.g4s{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
 .fi2{display:flex;flex-direction:column;gap:3px}
 .fi2 label{font-size:10px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
-.fi2 input,.fi2 select{font-size:14.5px;padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);width:100%;font-family:inherit;font-variant-numeric:tabular-nums;transition:border-color .25s var(--ease),box-shadow .25s var(--ease)}
-.fi2 input:focus,.fi2 select:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 4px rgba(184,135,58,.14)}
+.fi2 input,.fi2 select{font-size:13px;padding:7px 10px;border:.5px solid var(--border);border-radius:7px;background:var(--bg);color:var(--text);width:100%;font-family:inherit}
+.fi2 input:focus,.fi2 select:focus{outline:none;border-color:var(--gold)}
 .fi2.hl input{border-color:var(--green);background:#f0f9f3}.fi2.hl label{color:var(--green)}
-.fi2.wn input{border-color:#a5691f;background:#fbf3e4}.fi2.wn label{color:#a5691f}.rng-wrap{margin-top:7px}.rng-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}.rng-val{font-size:12px;font-weight:700;color:var(--gold)}.rng-wrap input[type=range]{-webkit-appearance:none;appearance:none;width:100%;height:5px;border-radius:99px;background:var(--border);outline:none;cursor:pointer;margin:2px 0 1px;accent-color:var(--gold)}.rng-wrap input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;width:17px;height:17px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 1px 5px rgba(15,46,54,.35);cursor:pointer;transition:transform .15s var(--ease)}.rng-wrap input[type=range]::-webkit-slider-thumb:active{transform:scale(1.2)}.rng-wrap input[type=range]::-moz-range-thumb{width:17px;height:17px;border-radius:50%;background:var(--gold);border:3px solid #fff;box-shadow:0 1px 5px rgba(15,46,54,.35);cursor:pointer;border:none}.prog-wrap{margin-bottom:12px}.prog-top{display:flex;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--text2);margin-bottom:6px}.prog-top b{color:var(--navy)}.prog-bar{height:13px;border-radius:99px;background:var(--border);overflow:hidden;box-shadow:inset 0 1px 3px rgba(15,46,54,.12)}.prog-bar i{display:block;height:100%;border-radius:99px;background:linear-gradient(90deg,var(--gold),var(--green));transition:width .4s var(--ease)}.btn-zerar{background:var(--gold);box-shadow:0 2px 10px rgba(184,135,58,.3);width:100%;justify-content:center;padding:13px 20px;font-size:13.5px;margin-top:4px}.btn-zerar:hover{background:var(--gold2);transform:translateY(-1px);box-shadow:0 4px 14px rgba(184,135,58,.4)}.btn-zerar svg{transition:transform .4s var(--ease)}.btn-zerar:hover svg{transform:rotate(180deg)}
+.fi2.wn input{border-color:#a5691f;background:#fbf3e4}.fi2.wn label{color:#a5691f}
 .pr2{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin-top:10px}
 .pi2{padding:10px 12px;border-radius:8px;display:flex;flex-direction:column;gap:3px}
 .pi2.b{background:var(--bg);border:.5px solid var(--border)}.pi2.b .pv2{color:var(--navy)}
@@ -83,9 +79,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .s1x .ssh{background:var(--navy)}.s2x .ssh{background:var(--navy2)}
 .s3x .ssh{background:var(--navy)}.scx .ssh{background:var(--gold)}.skx .ssh{background:var(--navy2)}
 .mets2{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:7px;margin-top:9px}
-.mt2{background:var(--bg);border-radius:11px;padding:12px 14px}
+.mt2{background:var(--bg);border-radius:7px;padding:9px 11px}
 .mt2 .ml{font-size:10px;color:var(--text2);line-height:1.3}
-.mt2 .mv{font-family:'Fraunces',Georgia,serif;font-size:16px;font-weight:600;margin-top:3px;color:var(--text);font-variant-numeric:tabular-nums}
+.mt2 .mv{font-size:13px;font-weight:700;margin-top:3px;color:var(--text)}
 .mt2.hi{background:var(--bg);border:.5px solid var(--border)}.mt2.hi .mv{color:var(--navy)}
 .mt2.gr{background:#f0f9f3;border:.5px solid #bfe3cc}.mt2.gr .mv{color:var(--green)}
 .mt2.am{background:#fbf3e4;border:.5px solid #e9d4ab}.mt2.am .mv{color:#a5691f}
@@ -115,14 +111,13 @@ tr.s2rx td{background:var(--bg)}
 .rt-mcmv2{background:#f0f9f3;color:var(--green);border:.5px solid #bfe3cc}
 .cb2{display:inline-flex;align-items:center;gap:5px;background:#fbf3e4;color:#8a5c1c;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
 @media(max-width:600px){.g2s,.g4s,.pr2{grid-template-columns:1fr 1fr}.stabs{flex-wrap:wrap}}
-.cta-pulse{animation:ctaPulse 2s ease-in-out infinite}@keyframes ctaPulse{0%,100%{box-shadow:0 0 0 0 rgba(184,135,58,.55)}50%{box-shadow:0 0 0 10px rgba(184,135,58,0)}}@media(prefers-reduced-motion:reduce){.cta-pulse{animation:none}}
 </style>
-<link rel="canonical" href="https://www.paulocotrim.com/simulador.html"/>
+<link rel="canonical" href="https://paulocotrim.com.br/simulador.html"/>
 <meta name="description" content="Simule seu financiamento imobiliário pelo Minha Casa Minha Vida. Calcule parcelas, entrada e FGTS em segundos. Paulo Cotrim · CRECI-RJ 77677-F."/>
 <meta property="og:title" content="Simulador MCMV — Paulo Cotrim | Rio de Janeiro"/>
 <meta property="og:description" content="Simule seu financiamento Minha Casa Minha Vida em segundos. Parcelas, entrada e uso do FGTS calculados automaticamente."/>
-<meta property="og:url" content="https://www.paulocotrim.com/simulador.html"/>
-<meta property="og:image" content="https://www.paulocotrim.com/paulo-cotrim-profissional.jpeg"/>
+<meta property="og:url" content="https://paulocotrim.com.br/simulador.html"/>
+<meta property="og:image" content="https://paulocotrim.com.br/paulo-cotrim-profissional.jpeg"/>
 <meta property="og:type" content="website"/>
 
 </head>
@@ -138,7 +133,7 @@ tr.s2rx td{background:var(--bg)}
   <h1><svg viewBox="0 0 24 24" style="width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="8" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="8" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r=".6" fill="currentColor" stroke="none"/></svg>Simulador Profissional</h1>
   <p>Informe sua renda e veja capacidade de financiamento, entrada e prestação estimadas na hora. Preços atualizados Julho/2026.</p>
   <div class="sim-chips">
-    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>46 empreendimentos</span>
+    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>45 empreendimentos</span>
     <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Julho/2026</span>
     <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Rio de Janeiro</span>
     <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 21h18M4 21V10l8-6 8 6v11M8 14v3M12 14v3M16 14v3"/></svg>Caixa Econômica</span>
@@ -165,11 +160,11 @@ tr.s2rx td{background:var(--bg)}
   ">
     <p style="font-size:11.5px;font-weight:700;color:#0f2e36;margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>AVISO IMPORTANTE – INFORMAÇÕES, VALORES E CONDIÇÕES</p>
 
-    <p style="margin-bottom:8px">Os valores, parcelas, taxas de juros, condições de financiamento e valores de seguro apresentados nesta simulação são <strong>estimativas e valores prévios</strong>, elaborados com base em parâmetros de mercado, tabelas referenciais e na minha experiência de 18 anos no mercado imobiliário, atendendo às principais construtoras do Rio de Janeiro (Cury, MRV, Direcional, Emccamp, CTV, entre outras). Eles servem apenas como orientação, projeção e referência inicial para seu planejamento, <strong>podendo sofrer alterações, ajustes, variações ou divergências</strong> a qualquer momento, sem aviso prévio, conforme regras, políticas, normas e tabelas vigentes.</p>
+    <p style="margin-bottom:8px">Os valores, parcelas, taxas de juros, condições de financiamento e valores de seguro apresentados nesta simulação são <strong>estimativas e valores prévios</strong>, elaborados com base em parâmetros de mercado, tabelas referenciais e na minha experiência de 17 anos no mercado imobiliário, sendo 8 anos de atuação exclusiva no mercado imobiliário. Eles servem apenas como orientação, projeção e referência inicial para seu planejamento, <strong>podendo sofrer alterações, ajustes, variações ou divergências</strong> a qualquer momento, sem aviso prévio, conforme regras, políticas, normas e tabelas vigentes.</p>
 
-    <p style="margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg><strong>A confirmação dos valores reais, exatos, definitivos e válidos para contratação, assim como as condições finais de pagamento, taxas de juros efetivas, valores de prêmio de seguro, garantias, prazos, limites, documentação necessária e regras específicas de cada linha de crédito, produto ou serviço, será feita exclusivamente pela construtora responsável pelo empreendimento e pela Caixa Econômica Federal</strong>, conforme suas políticas internas, normas legais, análise de crédito, perfil do cliente, regulamentações do Banco Central do Brasil, contratos vigentes e disposições aplicáveis ao Programa Minha Casa Minha Vida e demais modalidades de financiamento imobiliário.</p>
+    <p style="margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg><strong>A confirmação dos valores reais, exatos, definitivos e válidos para contratação, assim como as condições finais de pagamento, taxas de juros efetivas, valores de prêmio de seguro, garantias, prazos, limites, documentação necessária e regras específicas de cada linha de crédito, produto ou serviço, será feita exclusivamente pela construtora e pela Caixa Econômica Federal</strong>, conforme suas políticas internas, normas legais, análise de crédito, perfil do cliente, regulamentações do Banco Central do Brasil, contratos vigentes e disposições aplicáveis ao Programa Minha Casa Minha Vida e demais modalidades de financiamento imobiliário.</p>
 
-    <p style="margin-bottom:8px">Todos os dados apresentados nesta ferramenta são apenas uma aproximação fundamentada no meu conhecimento prático, vivência, domínio dos processos e experiência consolidada junto à construtora e à instituição financeira, visando oferecer maior clareza, segurança e transparência na sua jornada de compra. Para todos os efeitos legais e contratuais, <strong>somente terão validade os valores, condições e informações constantes nos documentos oficiais, propostas formais, contratos e comunicações emitidas diretamente pela construtora responsável e pela Caixa Econômica Federal</strong>, sendo esses os únicos que geram direitos e obrigações entre as partes.</p>
+    <p style="margin-bottom:8px">Todos os dados apresentados nesta ferramenta são apenas uma aproximação fundamentada no meu conhecimento prático, vivência, domínio dos processos e experiência consolidada junto à construtora e à instituição financeira, visando oferecer maior clareza, segurança e transparência na sua jornada de compra. Para todos os efeitos legais e contratuais, <strong>somente terão validade os valores, condições e informações constantes nos documentos oficiais, propostas formais, contratos e comunicações emitidas diretamente pela construtora e pela Caixa Econômica Federal</strong>, sendo esses os únicos que geram direitos e obrigações entre as partes.</p>
 
     <p>Este simulador não constitui oferta, proposta vinculante, compromisso de venda, promessa de financiamento, garantia de aprovação de crédito ou contratação de seguro, servindo apenas como ferramenta de consulta e planejamento.</p>
   </div>
@@ -181,7 +176,7 @@ const PCT=v=>(v*100).toFixed(2)+'%';
 const N2=v=>Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const parseBRL=v=>parseFloat(String(v).replace(/\./g,'').replace(',','.'))||0;
 
-/* ================= CATALOGO COMPLETO (46 empreendimentos, mesma fonte do mapa da home) ================= */
+/* ================= CATALOGO COMPLETO (45 empreendimentos, mesma fonte do mapa da home) ================= */
 var CATALOG=[
 {n:'Farol da Guanabara',b:'Santo Cristo · Porto Maravilha',c:'Cury',s:'lancamento',p:'R$ 402.875',u:'farol-da-guanabara.html'},
 {n:'Arcos do Porto',b:'Porto Maravilha',c:'Cury',s:'obras',p:'R$ 360.588',u:'arcos-do-porto.html'},
@@ -192,11 +187,11 @@ var CATALOG=[
 {n:'Cartola II',b:'São Cristóvão',c:'Cury',s:'lancamento',p:'R$ 302.470',u:'cartola-ii.html'},
 {n:'Luzes do Rio Candeeiro',b:'São Cristóvão',c:'Cury',s:'lancamento',p:'R$ 361.962',u:'luzes-do-rio-candeeiro.html'},
 {n:'A Noite',b:'Praça Mauá, 7 · Centro',c:'Brookfield / AZO',s:'obras',p:'R$ 802.000',u:'emp-a-noite.html'},
-{n:'Saudosa Praça Onze',b:'Praça Onze · Centro',c:'Cury',s:'lancamento',p:'A partir de R$ 295.000',u:'emp-saudosa-praca-onze.html'},
-{n:'Alma Carioca',b:'Vila Valqueire · Zona Norte',c:'Emccamp',s:'lancamento',p:'A partir de R$ 264.000',u:'emp-alma-carioca.html'},
+{n:'Saudosa Praça Onze',b:'Praça Onze · Centro',c:'Cury',s:'lancamento',p:'A partir de R$ 285.000',u:'emp-saudosa-praca-onze.html'},
+{n:'Alma Carioca',b:'Vila Valqueire · Zona Norte',c:'Emccamp',s:'lancamento',p:'Consulte valores',u:'emp-alma-carioca.html'},
 {n:'Beon Porto Residencial',b:'São Cristóvão · Zona Norte',c:'Riva Incorporadora',s:'lancamento',p:'A partir de R$ 259.000',u:'emp-beon-porto.html'},
-{n:'Brise Studios Design',b:'Praça Pio X · Centro',c:'Fator Realty',s:'lancamento',p:'A partir de R$ 380.082',u:'emp-brise-studios.html'},
-{n:'Conquista Florianópolis — Fase 1',b:'Praça Seca · Jacarepaguá',c:'Direcional',s:'pronto',p:'A partir de R$ 207.500',u:'emp-conquista-florianopolis.html'},
+{n:'Brise Studios Design',b:'Praça Pio X · Centro',c:'Fator Realty',s:'lancamento',p:'Consulte valores',u:'emp-brise-studios.html'},
+{n:'Conquista Florianópolis — Fase 1',b:'Praça Seca · Jacarepaguá',c:'Direcional',s:'lancamento',p:'A partir de R$ 207.500',u:'emp-conquista-florianopolis.html'},
 {n:'Cores do Rio Residencial',b:'Rua Irineu Marinho · Centro',c:'W3 Engenharia',s:'pronto',p:'A partir de R$ 287.000',u:'emp-cores-do-rio.html'},
 {n:'CTV Beat',b:'Madureira · Zona Norte',c:'CTV',s:'lancamento',p:'A partir de R$ 229.000',u:'emp-ctv-beat.html'},
 {n:'CTV Vitória',b:'Campinho · Zona Norte',c:'CTV',s:'lancamento',p:'A partir de R$ 229.000',u:'emp-ctv-vitoria.html'},
@@ -207,15 +202,27 @@ var CATALOG=[
 {n:'Primor Carioca — Fase 2',b:'Inhaúma · Zona Norte',c:'MRV',s:'lancamento',p:'A partir de R$ 262.990',u:'emp-primor-carioca.html'},
 {n:'Sal Rio Residencial',b:'Saúde · Porto Maravilha',c:'CTV',s:'lancamento',p:'A partir de R$ 189.000',u:'emp-sal-rio.html'},
 {n:'URB Sole',b:'Todos os Santos · Zona Norte',c:'DC4',s:'obras',p:'A partir de R$ 259.000',u:'emp-urb-sole.html'},
-{n:'Village Caribe 1',b:'Praça Seca · Jacarepaguá',c:'FMAC Engenharia',s:'lancamento',p:'A partir de R$ 1.263.594',u:'emp-village-caribe.html'},
+{n:'Village Caribe 1',b:'Praça Seca · Jacarepaguá',c:'FMAC Engenharia',s:'lancamento',p:'Consulte valores',u:'emp-village-caribe.html'},
 {n:'Vivaz Connection Zona Norte — Fase 1',b:'Riachuelo · Zona Norte',c:'Direcional · Vivaz',s:'obras',p:'A partir de R$ 233.000',u:'emp-vivaz-connection.html'},
 {n:'Vivaz Rua Honório',b:'Todos os Santos · Zona Norte',c:'Direcional · Vivaz',s:'pronto',p:'A partir de R$ 259.592',u:'emp-vivaz-honorio.html'},
-{n:'Império do Ouro',b:'Rio do Ouro · São Gonçalo',c:'MRV',s:'pronto',p:'A partir de R$ 305.990',u:'emp-imperio-do-ouro.html'},
-{n:'Ritmos de Pilares',b:'Pilares · Rio de Janeiro',c:'MRV',s:'lancamento',p:'A partir de R$ 274.990',u:'emp-ritmos-de-pilares.html'},
-
-{n:'Oceanside Recreio',b:'Pontal Oceânico · Recreio dos Bandeirantes',c:'Emccamp',s:'obras',p:'A partir de R$ 440.000',u:'emp-oceanside-recreio.html'},{n:'Encantos da Zona Norte',b:'Região de Bonsucesso · Rio de Janeiro',c:'MRV',s:'lancamento',p:'A partir de R$ 273.990',u:'emp-encantos-da-zona-norte.html'},
-{n:'Reserva Redentor',b:'Rocha · Rio de Janeiro',c:'MRV',s:'obras',p:'A partir de R$ 274.990',u:'emp-reserva-redentor.html'},
-{n:'Sensia Barra',b:'Barra da Tijuca · Rio de Janeiro',c:'MRV',s:'obras',p:'A partir de R$ 913.990',u:'emp-sensia-barra.html'}
+{n:'Império do Ouro',b:'Rio do Ouro · São Gonçalo',c:'MRV',s:'pronto',p:'Consulte valores',u:'emp-imperio-do-ouro.html'},
+{n:'Ritmos de Pilares',b:'Pilares · Rio de Janeiro',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-ritmos-de-pilares.html'},
+{n:'Encantos da Zona Norte',b:'Região de Bonsucesso · Rio de Janeiro',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-encantos-da-zona-norte.html'},
+{n:'Reserva Redentor',b:'Rocha · Rio de Janeiro',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-reserva-redentor.html'},
+{n:'Sensia Barra',b:'Barra da Tijuca · Rio de Janeiro',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-sensia-barra.html'},
+{n:'Residencial Paineiras',b:'Vila Nova · Nova Iguaçu',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-residencial-paineiras.html'},
+{n:'Residencial Morada Real',b:'Região de Arsenal · São Gonçalo',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-residencial-morada-real.html'},
+{n:'Residencial Monet',b:'Região da Vila São Luiz · Duque de Caxias',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-residencial-monet.html'},
+{n:'Residencial Mar de Trindade',b:'Alcântara · São Gonçalo',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-residencial-mar-de-trindade.html'},
+{n:'Residencial Ipê Amarelo',b:'Região de Campo Grande · Rio de Janeiro',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-residencial-ipe-amarelo.html'},
+{n:'Residencial Bálsamo',b:'Região de Campo Grande · Rio de Janeiro',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-residencial-balsamo.html'},
+{n:'Refúgio Camorim',b:'Região do Camorim · Rio de Janeiro',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-refugio-camorim.html'},
+{n:'Primavera Garden',b:'Jardim Primavera · Duque de Caxias',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-primavera-garden.html'},
+{n:'Parque Ilhabela',b:'Parque Pecuária · Campos dos Goytacazes',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-parque-ilhabela.html'},
+{n:'Mirantes do Rio - Rio Mar',b:'Santa Cruz · Rio de Janeiro',c:'MRV',s:'pronto',p:'Consulte valores',u:'emp-mirantes-do-rio-rio-mar.html'},
+{n:'Mirante Da Luz',b:'Bairro da Luz · Nova Iguaçu',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-mirante-da-luz.html'},
+{n:'Marbelle Residence',b:'Região do Parque Aeroporto · Macaé',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-marbelle-residence.html'},
+{n:'Jardim das Amoreiras',b:'Região de Campo Grande · Rio de Janeiro',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-jardim-das-amoreiras.html'}
 ];
 function parsePrecoStr(p){var m=(p||'').match(/R\$\s*([\d.]+)/);if(!m)return 0;return parseInt(m[1].replace(/\./g,''),10);}
 function mesesObraEstimado(status){if(status==='lancamento')return 42;if(status==='obras')return 24;return 0;}
@@ -261,14 +268,11 @@ function subsidioDaFaixa(f,renda){
   return f.subsidioMax*(1-prop); // maior no piso da faixa, decrescendo até 0 no teto (estimativa — Caixa confirma valor exato)
 }
 
-/* Tipologia real de cada empreendimento (mesma base do catálogo da home) */
-var TIPOLOGIAS={"farol-da-guanabara.html": "Studio, 1 e 3 quartos", "arcos-do-porto.html": "Studio, 1 e 2 quartos", "orla-central.html": "1, 2 e 3 quartos", "parque-piedade.html": "2 quartos", "luzes-do-rio-lamparina.html": "1 e 2 quartos", "caminhos-da-guanabara.html": "1 e 2 quartos", "cartola-ii.html": "1 e 2 quartos", "luzes-do-rio-candeeiro.html": "1 e 2 quartos", "emp-a-noite.html": "Studio 44m² e duplex 70m²", "emp-saudosa-praca-onze.html": "Studio a 2 quartos suíte (31-49m²)", "emp-alma-carioca.html": "2 quartos (37-46m²)", "emp-beon-porto.html": "1 e 2 quartos (32-39m²)", "emp-brise-studios.html": "Studios 31-44m²", "emp-conquista-florianopolis.html": "1 e 2 quartos (36-56m²)", "emp-cores-do-rio.html": "Studios, 1 e 2 quartos (35-57m²)", "emp-ctv-beat.html": "2 quartos (50-110m²)", "emp-ctv-vitoria.html": "2 e 3 quartos (49-114m²)", "emp-east-side-harmony.html": "2 e 3 quartos (52-68m²)", "emp-living-wish-norte.html": "2 e 3 quartos (44-59m²)", "emp-meu-crescer-engenhao.html": "2 quartos (48-52m²)", "emp-only-by-living.html": "2 a 4 quartos + coberturas (44-182m²)", "emp-primor-carioca.html": "2 quartos (35-40m²)", "emp-sal-rio.html": "Studios e apartamentos, 1 quarto (22-35m²)", "emp-urb-sole.html": "1 e 2 quartos (33-46m²)", "emp-village-caribe.html": "2 quartos c/ suíte + coberturas (59-137m²)", "emp-vivaz-connection.html": "2 quartos (37m²)", "emp-vivaz-honorio.html": "1 e 2 quartos (32-45m²)", "emp-imperio-do-ouro.html": "2 quartos, até 1 suíte (46-47m²)", "emp-ritmos-de-pilares.html": "2 quartos, com ou sem suíte — todas as unidades com varanda", "emp-encantos-da-zona-norte.html": "2 quartos (opção de varanda ou área privativa)", "emp-reserva-redentor.html": "2 quartos (opção de varanda)", "emp-sensia-barra.html": "2 e 3 quartos com suíte e varanda gourmet (opções garden e cobertura, até 148m²)", "emp-oceanside-recreio.html": "2 e 3 quartos com suíte (47,74 a 78,19m²)"};
 var S={
   renda:0, empIdx:0, useCustom:false, customPreco:0, customConstrutora:'', taxaAnual:10.9, useCustomTaxa:false, tab:0,
-  prazo:360, plano:'',
   ato:0, mensaisQtd:24, mensaisValor:0, anuaisQtd:2, anuaisValor:0, parcelaUnica:0, valorChaves:0,
   posChavesQtd:0, posChavesValor:0,
-  clienteNome:'', clienteTel:'', zerarAlvo:'mensais', aluguel:0
+  clienteNome:'', clienteTel:'', zerarAlvo:'mensais'
 };
 
 function precoAtual(){
@@ -300,7 +304,7 @@ function calc(){
   var mod = faixa ? ('mcmv'+faixa.id) : 'sbpe';
   var modLabel = faixa ? ('MCMV Faixa '+faixa.id) : 'SBPE';
   var pctFin = faixa ? 0.80 : 0.90; // parcela do imóvel que o financiamento cobre, no máximo
-  var prazo=S.prazo||360;
+  var prazo=420;
   var limiteFaixa = faixa ? faixa.limite : Infinity;
   var financMaxImovel=preco*pctFin;
   var prestMax=renda*0.30;
@@ -331,19 +335,8 @@ function calc(){
     construtora,posChavesMax,posChavesElegivel,posChavesQtdEfetivo,posChavesTotal};
 }
 function zerarFluxo(){
-  var alvo=S.zerarAlvo;
-  // Primeira vez que roda com tudo zerado: sugere uma composicao realista de pagamento
-  // (ato pequeno + reforcos anuais redondos e iguais + parcela mensal confortavel e menor
-  // que o reforco anual) em vez de jogar a entrada inteira dentro de um unico campo.
-  var virgem = S.ato===0 && S.anuaisValor===0 && S.valorChaves===0 && S.parcelaUnica===0 && S.mensaisValor===0;
-  if(virgem){
-    var c0=calc();
-    if(alvo!=='ato') S.ato=Math.round(c0.entrada*0.04);
-    if(alvo!=='anuais' && S.anuaisQtd>0) S.anuaisValor=3000;
-    if(alvo!=='chaves') S.valorChaves=3000;
-    if(alvo!=='mensais') S.mensaisValor=2000;
-  }
   var c=calc();
+  var alvo=S.zerarAlvo;
   var outros=0;
   if(alvo==='ato') outros=c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+S.valorChaves+c.posChavesTotal;
   else if(alvo==='mensais') outros=S.ato+c.anuaisTotal+S.parcelaUnica+S.valorChaves+c.posChavesTotal;
@@ -353,23 +346,7 @@ function zerarFluxo(){
   else if(alvo==='poschaves') outros=S.ato+c.mensaisTotal+c.anuaisTotal+S.parcelaUnica+S.valorChaves;
   var restante=Math.max(0,c.entrada-outros);
   if(alvo==='ato') S.ato=restante;
-  else if(alvo==='mensais'){
-    // a quantidade de meses segue a previsao real ate as chaves deste condominio
-    // (lancamento=42, obras=24, pronto=sem periodo de obra) -- e o valor mensal
-    // e o que sobra dividido por essa quantidade. So cai no valor fixo redondo
-    // (2.000, resolvendo a quantidade) quando nao ha uma data de entrega pra usar
-    // como referencia (empreendimento customizado ou ja pronto).
-    var emp = (!S.useCustom) ? CATALOG[S.empIdx] : null;
-    var mesesRef = emp ? mesesObraEstimado(emp.s) : 0;
-    if(mesesRef>0){
-      S.mensaisQtd = mesesRef;
-      S.mensaisValor = restante/mesesRef;
-    } else {
-      var valorFixo = S.mensaisValor>0?S.mensaisValor:2000;
-      S.mensaisValor = valorFixo;
-      S.mensaisQtd = valorFixo>0?Math.max(1,Math.ceil(restante/valorFixo)):S.mensaisQtd;
-    }
-  }
+  else if(alvo==='mensais') S.mensaisValor=S.mensaisQtd>0?restante/S.mensaisQtd:0;
   else if(alvo==='anuais') S.anuaisValor=S.anuaisQtd>0?restante/S.anuaisQtd:0;
   else if(alvo==='unica') S.parcelaUnica=restante;
   else if(alvo==='chaves') S.valorChaves=restante;
@@ -387,57 +364,7 @@ function selEmp(v){if(v==='custom'){S.useCustom=true;}else{S.useCustom=false;S.e
 function updCustomPreco(v){S.customPreco=parseBRL(v);render();}
 function updCustomConstrutora(v){S.customConstrutora=v;render();}
 function setTab(t){S.tab=t;render();}
-function updFluxo(k,v){S[k]=k.indexOf('Qtd')>=0?(parseInt(v,10)||0):parseBRL(v);S.plano='';render();}
-function updPrazo(v){S.prazo=parseInt(v,10)||360;render();}
-/* ============ PLANOS PRONTOS (Paulo, 2026-07-19) ============
-   completo   -> construtor manual + ZERAR (comportamento atual)
-   sementrada -> R$0 de ato; mensais simbolicas de ate R$1.000; o restante
-                 dos valores maiores vai para reforcos anuais de dezembro e chaves
-   ato4       -> ato de 4% do valor do imovel; reforcos anuais e chaves de ate
-                 R$5.000 cada; o restante diluido nas parcelas mensais */
-function aplicarPlano(tipo){
-  S.plano=tipo;
-  S.parcelaUnica=0;S.posChavesQtd=0;S.posChavesValor=0;
-  var emp=(!S.useCustom)?CATALOG[S.empIdx]:null;
-  /* REGRA (Paulo, 2026-07-19): imovel ja entregue (pronto) nao tem fase de obra --
-     a entrada e paga no VALOR TOTAL na assinatura, sem diluicao em mensais/anuais/chaves */
-  if(emp && emp.s==='pronto'){
-    S.plano='completo';
-    var cp=calc();
-    S.ato=cp.entrada;S.mensaisQtd=0;S.mensaisValor=0;S.anuaisQtd=0;S.anuaisValor=0;S.valorChaves=0;
-    render();return;
-  }
-  var mesesRef=emp?mesesObraEstimado(emp.s):0;
-  var qtd=mesesRef>0?mesesRef:(S.mensaisQtd>0?S.mensaisQtd:24);
-  var anos=Math.max(1,Math.ceil(qtd/12));
-  if(tipo==='sementrada'){
-    S.ato=0;S.mensaisQtd=qtd;
-    var c0=calc();var entrada=c0.entrada;
-    S.mensaisValor=Math.min(1000,qtd>0?entrada/qtd:0);
-    var resto=Math.max(0,entrada-S.mensaisQtd*S.mensaisValor);
-    S.anuaisQtd=anos;
-    var partes=anos+1; /* reforcos de dezembro + valor nas chaves, em partes iguais */
-    S.anuaisValor=resto>0?resto/partes:0;
-    S.valorChaves=resto>0?resto/partes:0;
-  }else if(tipo==='ato4'){
-    var preco=precoAtual();
-    S.mensaisQtd=qtd;
-    var c1=calc();var entrada1=c1.entrada;
-    S.ato=Math.min(entrada1,preco*0.04);
-    var apos=Math.max(0,entrada1-S.ato);
-    S.anuaisQtd=anos;
-    S.anuaisValor=Math.min(5000,anos>0?apos/anos:0);
-    var aposAnuais=Math.max(0,apos-S.anuaisQtd*S.anuaisValor);
-    S.valorChaves=Math.min(5000,aposAnuais);
-    var resto2=Math.max(0,aposAnuais-S.valorChaves);
-    S.mensaisValor=qtd>0?resto2/qtd:0;
-  }else{
-    S.plano='completo';
-    S.ato=0;S.anuaisQtd=2;S.anuaisValor=0;S.valorChaves=0;S.mensaisQtd=qtd;S.mensaisValor=0;S.zerarAlvo='mensais';
-    zerarFluxo();return;
-  }
-  render();
-}
+function updFluxo(k,v){S[k]=k.indexOf('Qtd')>=0?(parseInt(v,10)||0):parseBRL(v);render();}
 function updZerarAlvo(v){S.zerarAlvo=v;}
 function updCliente(k,v){S[k]=v;}
 
@@ -460,24 +387,10 @@ function whatsappSim(){
   window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');
 }
 
-function shareSim(btn){
-  var emp=S.useCustom?null:CATALOG[S.empIdx];
-  var nomeEmp=emp?emp.n:'imóvel personalizado';
-  var txt='Simulei o financiamento de '+nomeEmp+' com o Paulo Cotrim — dá uma olhada:';
-  if(navigator.share){
-    navigator.share({title:'Simulação — '+nomeEmp,text:txt,url:location.href}).catch(function(){});
-  }else if(navigator.clipboard){
-    navigator.clipboard.writeText(location.href).then(function(){
-      if(btn){var orig=btn.innerHTML;btn.innerHTML='Link copiado!';setTimeout(function(){btn.innerHTML=orig;},2200);}
-    }).catch(function(){});
-  }
-}
 function baixarResumoSimulacao(){
   var c=calc();var emp=S.useCustom?null:CATALOG[S.empIdx];
   var nomeEmp=emp?emp.n:'Imóvel personalizado';
-  var _dataGer=new Date().toLocaleDateString('pt-BR');
-  var waMsg='Olá Paulo! Baixei o resumo da simulação de '+nomeEmp+' no seu site e quero continuar a conversa.';
-  var qr='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent('https://wa.me/5521989150864?text='+encodeURIComponent(waMsg));
+  var qr='https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(window.location.href.split('#')[0]);
   var fluxoRows=''
     +(S.ato>0?'<div class="row"><span class="rk">Ato de entrada (assinatura)</span><span class="rv">'+BRL(S.ato)+'</span></div>':'')
     +(S.mensaisValor>0?'<div class="row"><span class="rk">Parcelas mensais</span><span class="rv">'+S.mensaisQtd+'x de '+BRL(S.mensaisValor)+'</span></div>':'')
@@ -492,7 +405,6 @@ function baixarResumoSimulacao(){
     +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}'
     +'.h2{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;margin:22px 0 6px}'
     +'.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e8eaed;font-size:13.5px}.rk{color:#6b7280}.rv{font-weight:700}'
-    +'.entrada-box{display:flex;justify-content:space-between;align-items:center;background:linear-gradient(90deg,#fbf7ee,#fdf9ef);border:1.5px solid #b8873a;border-radius:10px;padding:14px 16px;margin:10px 0 6px}.entrada-box .ek{font-size:12.5px;font-weight:700;color:#0f2e36;text-transform:uppercase;letter-spacing:.04em}.entrada-box .ev{font-size:20px;font-weight:800;color:#b8873a}'
     +'.cliente{font-size:12px;color:#6b7280;margin-bottom:18px}'
     +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
     +'.legal{font-size:10px;color:#94a3b8;margin-top:14px;line-height:1.7;padding:14px 16px;border:1px solid #e8eaed;border-radius:10px}'
@@ -500,23 +412,7 @@ function baixarResumoSimulacao(){
     +'.qrbox img{width:100px;height:100px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
     +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid #e8eaed}'
     +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
-    +'.foot{margin-top:20px;font-size:10px;color:#94a3b8;text-align:center}'
-    +'.wm{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}'
-    +'.wm div{position:absolute;left:-20%;width:140%;text-align:center;transform:rotate(-27deg);font-family:Inter,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.16em;color:rgba(15,46,54,.055);white-space:nowrap}'
-    +'.pdf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}'
-    +'.pdf-head img{height:24px;display:block}'
-    +'.gendate{font-size:10.5px;color:#94a3b8}'
-    +'@media print{body{padding:20px}}</style></head><body>'
-    +'<div class="wm" aria-hidden="true">'
-    +'<div style="top:-40px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:70px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:180px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:290px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:400px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:510px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:620px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'</div>'
-    +'<div class="pdf-head"><img src="https://corretorpaulocotrim.github.io/site-oficial/logo-wordmark.png" alt="Paulo Cotrim"/><span class="gendate">Gerado em '+_dataGer+'</span></div>'
+    +'.foot{margin-top:20px;font-size:10px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
     +'<div class="kicker">Resumo + Simulação · Paulo Cotrim</div>'
     +'<h1>'+nomeEmp+'</h1><div class="sub">'+(emp?emp.b+' · '+emp.c:'Simulação personalizada')+' · CRECI-RJ 77677-F</div>'
     +(S.clienteNome?'<div class="cliente"><strong>Cliente:</strong> '+S.clienteNome+(S.clienteTel?' · '+S.clienteTel:'')+'</div>':'')
@@ -528,15 +424,15 @@ function baixarResumoSimulacao(){
     +(c.subsidio>0?'<div class="row"><span class="rk">Subsídio estimado do governo</span><span class="rv">'+BRL(c.subsidio)+'</span></div>':'')
     +'<div class="row"><span class="rk">Crédito financiado</span><span class="rv">'+BRL(c.creditoFinanciado)+'</span></div>'
     +'<div class="row"><span class="rk">Crédito total (financiamento + subsídio)</span><span class="rv">'+BRL(c.creditoEstimado)+'</span></div>'
-    +'<div class="entrada-box"><span class="ek">Entrada total a organizar</span><span class="ev">'+BRL(c.entrada)+'</span></div>'
+    +'<div class="row"><span class="rk">Entrada estimada</span><span class="rv">'+BRL(c.entrada)+'</span></div>'
     +'<div class="row"><span class="rk">Prestação inicial estimada</span><span class="rv">'+BRL(c.prestacaoEstimada)+'</span></div>'
     +'<div class="row"><span class="rk">Seguro estimado (MIP/DFI)</span><span class="rv">'+BRL(c.seguroEstimado)+'</span></div>'
     +(fluxoRows?'<div class="h2">Fluxo de pagamento da entrada</div>'+fluxoRows:'')
     +'<div class="note">Simulação educativa com base nos valores informados — sujeita a alteração e disponibilidade. Confirme condições atualizadas com Paulo antes de decidir.</div>'
-    +'<div class="qrbox"><img src="'+qr+'" alt="QR code do WhatsApp"/><div><b>Fale agora com o Paulo</b>Escaneie para abrir o WhatsApp direto com o Paulo Cotrim sobre esta simulação.</div></div>'
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar ao simulador</b>Refaça a simulação ou fale com o Paulo direto do celular.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
     +'<div class="legal">Documento meramente informativo e educativo, sem valor contratual. Valores, prazos, taxas e condições de pagamento são estimativas sujeitas à análise oficial da instituição financeira e da construtora, podendo ser alterados sem aviso prévio. Consulte sempre a tabela oficial atualizada e formalize as condições finais com Paulo Cotrim antes de tomar qualquer decisão.</div>'
-    +'<div class="foot">Paulo Cotrim · www.paulocotrim.com · Documento informativo, não substitui a simulação bancária real</div>'
+    +'<div class="foot">Paulo Cotrim · Documento informativo, não substitui a simulação bancária real</div>'
     +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
@@ -546,7 +442,7 @@ function renderGateRenda(){
   return'<div class="sel-box" style="border-color:var(--gold);text-align:center;padding:2rem 1.5rem">'
     +'<div class="sel-title" style="justify-content:center;display:flex">Para começar, qual é a sua renda familiar mensal?</div>'
     +'<p style="font-size:12.5px;color:var(--text2);margin-bottom:14px">Sem essa informação não conseguimos estimar corretamente sua capacidade de financiamento — é o primeiro passo antes de qualquer resultado.</p>'
-    +'<div style="max-width:280px;margin:0 auto"><input type="text" placeholder="Ex: 4.500,00" onchange="updRenda(this.value)" style="width:100%;font-size:16px;padding:12px 14px;border:1.5px solid var(--gold);border-radius:9px;text-align:center;font-family:inherit"></div>'
+    +'<div style="max-width:280px;margin:0 auto"><input type="text" placeholder="Ex: 4.500,00" oninput="updRenda(this.value)" style="width:100%;font-size:16px;padding:12px 14px;border:1.5px solid var(--gold);border-radius:9px;text-align:center;font-family:inherit"></div>'
     +'<p style="font-size:10.5px;color:#94a3b8;margin-top:10px">Renda pode ser composta com familiares. Usada apenas para estimar sua simulação.</p>'
     +'</div>';
 }
@@ -556,10 +452,8 @@ function renderSim(){
   var head='<div class="hdr2"><div class="hdr2-top"><div class="hdr2-left">'
     +'<div class="av">'+(fotoPaulo?'<img src="'+fotoPaulo+'" alt="Paulo"/>':'PC')+'</div>'
     +'<div><div class="hdr2-name">Paulo Cotrim</div><div class="hdr2-sub">Especialista em Financiamento Imobiliário — Simulador Profissional</div></div></div>'
-    +'<a class="wa-btn2 cta-pulse" href="aprovacao-expressa.html" style="text-decoration:none;background:linear-gradient(135deg,var(--gold),var(--gold2));text-align:center;display:inline-flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Enviar meus documentos e pedir aprovação</a>'
     +'<button class="wa-btn2" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Enviar pelo WhatsApp</button>'
     +'<button class="wa-btn2" style="background:transparent;border:1.5px solid var(--gold2);color:var(--gold2)" onclick="baixarResumoSimulacao()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar Resumo + Simulação</button>'
-    +'<button class="wa-btn2" style="background:transparent;border:1.5px solid rgba(255,255,255,.35);color:rgba(255,255,255,.85);margin-top:8px" onclick="shareSim(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/></svg>Compartilhar simulação</button>'
     +'</div><div class="hdr2-div"></div><div class="hdr2-meta">'
     +'<span><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M4 21V9l6-5v17"/><path d="M10 6h9v4h-4"/><line x1="15" y1="10" x2="15" y2="21"/></svg>'+CATALOG.length+' empreendimentos</span>'
     +'<span><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Julho/2026</span>'
@@ -573,8 +467,7 @@ function renderSim(){
   // Resumo e montagem da entrada ficam sempre visíveis, um abaixo do outro — nada escondido atrás de aba.
   return head+'<div class="sim-body">'
     +renderResumo(c)
-    +'<div class="sim-divider"><span>Agora escolha como você vai pagar a entrada</span></div>'
-    +renderPlanos(c)
+    +'<div class="sim-divider"><span>Agora monte como você vai pagar a entrada</span></div>'
     +renderFluxo(c)
     +'</div>';
 }
@@ -583,68 +476,27 @@ function renderEmpSelector(c){
   var opts=CATALOG.map(function(e,i){return'<option value="'+i+'" '+(!S.useCustom&&S.empIdx===i?'selected':'')+'>'+e.n+' — '+STATUS_LABEL[e.s]+'</option>';}).join('');
   return'<div class="g2s" style="margin-bottom:10px">'
     +'<div class="fi2"><label>Empreendimento</label><select onchange="selEmp(this.value)">'+opts+'<option value="custom" '+(S.useCustom?'selected':'')+'>Outro valor (digitar manualmente)</option></select></div>'
-    +(S.useCustom?'<div class="fi2 hl"><label>Valor do imóvel (R$)</label><input type="text" value="'+(S.customPreco?N2(S.customPreco):'')+'" placeholder="Ex: 300.000" onchange="updCustomPreco(this.value)"></div>'
-      :'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" onchange="updTaxa(this.value)">'
+    +(S.useCustom?'<div class="fi2 hl"><label>Valor do imóvel (R$)</label><input type="text" value="'+(S.customPreco?N2(S.customPreco):'')+'" placeholder="Ex: 300.000" oninput="updCustomPreco(this.value)"></div>'
+      :'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" oninput="updTaxa(this.value)">'
         +(S.useCustomTaxa?'<a href="#" onclick="resetTaxa();return false" style="font-size:10px;color:var(--gold);margin-top:3px;display:inline-block">← usar taxa automática da faixa</a>':'')+'</div>')
     +'</div>'
-    +(S.useCustom?'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Construtora <span style="font-weight:400;color:#94a3b8">— define regra de pós-chaves</span></label><input type="text" value="'+S.customConstrutora+'" placeholder="Ex: MRV, Direcional, Cury..." onchange="updCustomConstrutora(this.value)"></div>'
-      +'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" onchange="updTaxa(this.value)">'
+    +(S.useCustom?'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Construtora <span style="font-weight:400;color:#94a3b8">— define regra de pós-chaves</span></label><input type="text" value="'+S.customConstrutora+'" placeholder="Ex: MRV, Direcional, Cury..." oninput="updCustomConstrutora(this.value)"></div>'
+      +'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" oninput="updTaxa(this.value)">'
         +(S.useCustomTaxa?'<a href="#" onclick="resetTaxa();return false" style="font-size:10px;color:var(--gold);margin-top:3px;display:inline-block">← usar taxa automática da faixa</a>':'')+'</div></div>':'');
 }
 
-function heroiNumero(c){
-  var p=c.prestacaoEstimada+c.seguroEstimado;
-  var al=S.aluguel>0?S.aluguel:0;
-  var dif=al>0?(p-al):0;
-  var comp='';
-  if(al>0){
-    var mx=Math.max(p,al)||1, barP=p/mx*100, barA=al/mx*100;
-    comp='<div style="margin-top:14px;padding-top:13px;border-top:1px solid rgba(255,255,255,.16)">'
-      +'<div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.72);margin-bottom:4px"><span>Seu aluguel hoje</span><span>'+BRL(al)+'</span></div>'
-      +'<div style="height:9px;background:rgba(255,255,255,.14);border-radius:6px;overflow:hidden;margin-bottom:9px"><i style="display:block;height:100%;width:'+barA.toFixed(0)+'%;background:#94a3b8"></i></div>'
-      +'<div style="display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,.72);margin-bottom:4px"><span>Financiando este imóvel</span><span>'+BRL(p)+'</span></div>'
-      +'<div style="height:9px;background:rgba(255,255,255,.14);border-radius:6px;overflow:hidden"><i style="display:block;height:100%;width:'+barP.toFixed(0)+'%;background:'+(dif<=0?'#1a8f4c':'#d9b36c')+'"></i></div>'
-      +'<div style="margin-top:11px;font-size:13px;font-weight:700;color:'+(dif<=0?'#7fe0a6':'#e8c98a')+'">'
-      +(dif<=0?'Você pagaria '+BRL(Math.abs(dif))+' A MENOS por mês — e o imóvel fica seu.'
-             :'São '+BRL(dif)+' a mais por mês. A diferença compra patrimônio, não recibo.')
-      +'</div></div>';
-  }
-  return '<div style="background:linear-gradient(135deg,#0a2129,#123b46);border:1px solid rgba(207,159,79,.35);border-radius:14px;padding:20px 20px 18px;margin-bottom:12px;color:#fff">'
-    +'<div style="font-size:10px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:#d9b36c;margin-bottom:6px">O número que importa</div>'
-    +'<div style="display:flex;align-items:flex-end;gap:10px;flex-wrap:wrap">'
-    +'<div style="font-family:Fraunces,Georgia,serif;font-size:42px;font-weight:700;line-height:1;color:#fff">'+BRL(p)+'</div>'
-    +'<div style="font-size:13px;color:rgba(255,255,255,.7);padding-bottom:5px">por mês (prestação + seguro)</div></div>'
-    +'<div style="margin-top:10px;display:flex;gap:8px;flex-wrap:wrap">'
-    +'<span class="cb2" style="background:rgba(255,255,255,.1);color:#fff">Entrada: '+BRL(c.entrada)+'</span>'
-    +'<span class="cb2" style="background:rgba(255,255,255,.1);color:#fff">Financiado: '+BRL(c.creditoFinanciado)+'</span>'
-    +'<span class="cb2" style="background:rgba(255,255,255,.1);color:#fff">'+c.prazo+' meses</span></div>'
-    +'<div style="margin-top:13px"><label style="font-size:11px;color:rgba(255,255,255,.72);display:block;margin-bottom:5px">Quanto você paga de aluguel hoje? (compare)</label>'
-    +'<input type="text" value="'+(S.aluguel>0?N2(S.aluguel):'')+'" placeholder="Ex: 1.500" onchange="updAluguel(this.value)" style="width:170px;padding:9px 11px;border-radius:8px;border:1px solid rgba(255,255,255,.25);background:rgba(255,255,255,.08);color:#fff;font-family:inherit;font-size:14px"></div>'
-    +comp+'</div>';
-}
-function updAluguel(v){ S.aluguel=num(v)||0; render(); }
 function renderResumo(c){
   var emp=S.useCustom?null:CATALOG[S.empIdx];
   var isSBPE=!c.faixa;
   return'<div class="sel-box">'
     +'<div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="1"/></svg>Sua renda &nbsp;<span style="color:#94a3b8;font-weight:400;font-size:10px">edite se precisar corrigir</span></div>'
-    +'<div class="g2s" style="margin-bottom:10px"><div class="fi2 hl"><label>Renda familiar mensal (R$)</label><input type="text" value="'+N2(S.renda)+'" onchange="updRenda(this.value)"></div>'
+    +'<div class="g2s" style="margin-bottom:10px"><div class="fi2 hl"><label>Renda familiar mensal (R$)</label><input type="text" value="'+N2(S.renda)+'" oninput="updRenda(this.value)"></div>'
     +'<div style="display:flex;align-items:center;padding-top:18px"><span class="regra-tag2 '+(isSBPE?'rt-sbpe2':'rt-mcmv2')+'">'+c.modLabel+' — até '+(isSBPE?'90%':'80%')+' do imóvel'+(c.limiteFaixa!==Infinity?' · teto R$ '+N2(c.limiteFaixa):'')+'</span></div></div>'
     +renderEmpSelector(c)
     +(emp?'<span class="cb2">'+emp.c+' · '+STATUS_LABEL[emp.s]+'</span>':'')
     +(c.posChavesElegivel?' <span class="cb2" style="background:#f0f9f3;color:#157540">Pós-chaves até '+c.posChavesMax+'x</span>':'')
     +'</div>'
-    +heroiNumero(c)
-    +'<div style="background:linear-gradient(135deg,#0f2e36,#14404b);border-radius:12px;padding:14px 18px;margin-bottom:12px;color:#fff">'
-    +'<div style="font-size:10px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#d9b36c;margin-bottom:5px">Simulação baseada em</div>'
-    +'<div style="font-size:15px;font-weight:700;font-family:Fraunces,Georgia,serif">'+(emp?emp.n:'Imóvel personalizado')+'</div>'
-    +'<div style="font-size:12px;color:rgba(255,255,255,.82);margin-top:3px">'
-    +(emp&&TIPOLOGIAS[emp.u]?TIPOLOGIAS[emp.u]+' · ':'')
-    +'Valor do imóvel: <b style="color:#fff">'+BRL(c.preco)+'</b>'
-    +(emp?' · '+emp.c+' · '+STATUS_LABEL[emp.s]:(S.customConstrutora?' · '+S.customConstrutora:''))
-    +(emp&&emp.b?' · '+emp.b:'')+'</div>'
-    +'</div>'
-    +'<div class="info-box2"><strong>Como calculamos:</strong> identificamos sua faixa no Minha Casa Minha Vida pela renda informada (tabela oficial 2026), aplicamos o limite de financiamento e a taxa de juros dessa faixa, e comparamos com o que sua renda comprova (30% dela, em até 360 meses) e com o teto que o próprio imóvel permite financiar. O menor entre os três é o crédito financiado — depois somamos o subsídio, se sua faixa tiver direito.</div>'
+    +'<div class="info-box2"><strong>Como calculamos:</strong> identificamos sua faixa no Minha Casa Minha Vida pela renda informada (tabela oficial 2026), aplicamos o limite de financiamento e a taxa de juros dessa faixa, e comparamos com o que sua renda comprova (30% dela, em até 420 meses) e com o teto que o próprio imóvel permite financiar. O menor entre os três é o crédito financiado — depois somamos o subsídio, se sua faixa tiver direito.</div>'
     +'<div class="pr2">'
     +'<div class="pi2 b"><span class="pl2">Valor do imóvel</span><span class="pv2">'+BRL(c.preco)+'</span></div>'
     +'<div class="pi2 v"><span class="pl2">Capacidade de compra (pela renda)</span><span class="pv2">'+BRL(c.capacidadeCompra)+'</span></div>'
@@ -656,96 +508,33 @@ function renderResumo(c){
     +'<div class="mt2 hi"><div class="ml">Taxa de juros aplicada</div><div class="mv">'+N2(c.taxaAnual)+'% a.a.</div></div>'
     +'<div class="mt2 hi"><div class="ml">Prestação inicial estimada</div><div class="mv">'+BRL(c.prestacaoEstimada)+'/mês</div></div>'
     +'<div class="mt2 am"><div class="ml">Seguro estimado (MIP/DFI)</div><div class="mv">'+BRL(c.seguroEstimado)+'/mês</div></div>'
-    +'<div class="mt2 gr"><div class="ml">Prazo do financiamento</div><div class="mv"><select onchange="updPrazo(this.value)" style="font-size:12px;font-weight:700;border:1px solid var(--border);border-radius:6px;padding:3px 6px;background:#fff;font-family:inherit;color:inherit">'
-      +[240,300,360,420].map(function(pz){return '<option value="'+pz+'" '+(c.prazo===pz?'selected':'')+'>'+pz+' meses ('+(pz/12)+' anos)</option>';}).join('')
-      +'</select></div></div>'
+    +'<div class="mt2 gr"><div class="ml">Prazo considerado</div><div class="mv">'+c.prazo+' meses</div></div>'
     +(c.mesesObra>0?'<div class="mt2 vi"><div class="ml">Previsão até as chaves</div><div class="mv">'+c.mesesObra+' meses</div></div>':'<div class="mt2 vi"><div class="ml">Situação da obra</div><div class="mv">Pronto para morar</div></div>')
     +'</div>'
     +'<p style="font-size:10.5px;color:#94a3b8;margin-top:12px">Estimativa educativa com base na tabela oficial do Minha Casa Minha Vida 2026 — a Caixa confirma taxa, subsídio, prazo e valor exatos após análise de crédito. Valores sujeitos à análise oficial da instituição financeira e da construtora.</p>'
     +'<div style="margin-top:16px;padding-top:14px;border-top:.5px solid var(--border)">'
     +'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Seu nome completo</label><input type="text" value="'+S.clienteNome+'" oninput="updCliente(\'clienteNome\',this.value)"></div><div class="fi2"><label>Seu WhatsApp</label><input type="text" value="'+S.clienteTel+'" oninput="updCliente(\'clienteTel\',this.value)"></div></div>'
-    +'<a class="btn-pg cta-pulse" href="aprovacao-expressa.html" style="text-decoration:none;background:linear-gradient(135deg,var(--gold),var(--gold2));text-align:center;display:inline-flex;align-items:center;justify-content:center"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Enviar meus documentos e pedir aprovação</a>'
     +'<button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com nossa equipe no WhatsApp</button>'
     +'<button class="btn-pg" style="background:transparent;border:1.5px solid var(--gold);color:var(--navy)" onclick="baixarResumoSimulacao()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar Resumo + Simulação</button>'
-    +'<button class="btn-pn" style="background:transparent;border:1.5px solid var(--border);color:var(--text2)" onclick="shareSim(this)"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-right:5px;display:inline-block"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 3.9M15.4 6.6L8.6 10.5"/></svg>Compartilhar simulação</button>'
     +'</div>';
 }
 
-function renderPlanos(c){
-  function card(id,titulo,desc,detalhe){
-    var on=S.plano===id;
-    return '<button type="button" onclick="aplicarPlano(\''+id+'\')" style="text-align:left;cursor:pointer;background:'+(on?'#f0f9f3':'#fff')+';border:2px solid '+(on?'#1a8f4c':'var(--border)')+';border-radius:14px;padding:16px;transition:border-color .25s ease,box-shadow .25s ease;font-family:inherit'+(on?';box-shadow:0 6px 18px rgba(26,143,76,.12)':'')+'">'
-      +(on?'<span style="display:inline-block;font-size:9px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#fff;background:#1a8f4c;padding:2px 8px;border-radius:20px;margin-bottom:7px">Plano aplicado</span>':'')
-      +'<div style="font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;font-family:Fraunces,Georgia,serif">'+titulo+'</div>'
-      +'<div style="font-size:11.5px;color:var(--text2);line-height:1.5;margin-bottom:5px">'+desc+'</div>'
-      +'<div style="font-size:10.5px;color:#94a3b8">'+detalhe+'</div>'
-      +'</button>';
-  }
-  var empP=(!S.useCustom)?CATALOG[S.empIdx]:null;
-  if(empP && empP.s==='pronto'){
-    return '<div class="sel-box" style="margin-bottom:14px;border-color:var(--gold)">'
-      +'<div class="sel-title">Imóvel pronto para morar — entrada no valor total</div>'
-      +'<p style="font-size:12.5px;color:var(--text2);line-height:1.6;margin-bottom:10px">Como este imóvel já foi entregue, não existe fase de obra para diluir a entrada: ela é paga no <b>valor total na assinatura</b>. FGTS e subsídio (quando houver) continuam valendo para reduzir esse valor.</p>'
-      +'<button type="button" onclick="aplicarPlano(\'completo\')" style="font-family:inherit;font-size:12.5px;font-weight:700;color:#fff;background:linear-gradient(135deg,#1a8f4c,#157a3f);border:none;border-radius:10px;padding:10px 18px;cursor:pointer">Aplicar entrada total no ato</button>'
-      +'<p style="font-size:10.5px;color:#94a3b8;margin-top:8px">Condições especiais de parcelamento direto com a construtora podem existir caso a caso — confirme com o Paulo.</p>'
-      +'</div>';
-  }
-  return '<div class="sel-box" style="margin-bottom:14px">'
-    +'<div class="sel-title">Escolha um plano pronto — ou monte o seu do zero abaixo</div>'
-    +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">'
-    +card('completo','Plano Completo','Você controla ato, mensais, reforços e chaves. O ZERAR completa o que faltar automaticamente.','Sugestão inicial: ato pequeno + reforços de dezembro + mensais confortáveis')
-    +card('sementrada','Sem Entrada no Ato','R$ 0 no ato. Mensais simbólicas de até R$ 1.000 — o restante vai para os reforços de dezembro e o valor nas chaves.','Ideal pra quem não tem valor guardado agora, mas recebe 13º/bonificações')
-    +card('ato4','Ato de 4%','4% do valor do imóvel no ato. Reforços de dezembro e chaves limitados a R$ 5.000 cada — o resto diluído nas mensais.','Equilibrado: sinal pequeno e parcelas previsíveis até as chaves')
-    +'</div>'
-    +'<p style="font-size:10.5px;color:#94a3b8;margin-top:10px">Os três planos usam a mesma regra oficial (entrada parcelada sem juros durante a obra). Qualquer valor pode ser ajustado à mão depois de aplicar — sujeito à aprovação da construtora.</p>'
-    +'</div>';
-}
-function zerarPronto(){
-  var c=calc();
-  S.mensaisQtd=0;S.mensaisValor=0;S.anuaisQtd=0;S.anuaisValor=0;S.valorChaves=0;S.posChavesQtd=0;S.posChavesValor=0;
-  S.ato=Math.max(0,c.entrada-S.parcelaUnica);
-  render();
-}
 function renderFluxo(c){
-  /* REGRA (Paulo): imovel PRONTO nao tem fase de obra -- esconder mensais/anuais/chaves/pos-chaves */
-  var empF=(!S.useCustom)?CATALOG[S.empIdx]:null;
-  if(empF && empF.s==='pronto'){
-    if(S.mensaisQtd||S.mensaisValor||S.anuaisQtd||S.anuaisValor||S.valorChaves||S.posChavesQtd){
-      S.mensaisQtd=0;S.mensaisValor=0;S.anuaisQtd=0;S.anuaisValor=0;S.valorChaves=0;S.posChavesQtd=0;S.posChavesValor=0;
-      c=calc();
-    }
-    return '<div class="sel-box">'
-      +'<div class="sel-title">Entrada do imóvel pronto — '+BRL(c.entrada)+' na assinatura</div>'
-      +'<p style="font-size:11.5px;color:var(--text2);margin-bottom:10px">Este imóvel já foi entregue: não existem parcelas de obra, reforços anuais nem valor nas chaves. Informe o que vem de FGTS/13º — o restante fica no ato.</p>'
-      +'<div class="g2s" style="margin-bottom:10px">'
-      +'<div class="fi2"><label>Parcela única (FGTS/13º) (R$)</label><input type="text" value="'+N2(S.parcelaUnica)+'" onchange="updFluxo(\'parcelaUnica\',this.value)"></div>'
-      +'<div class="fi2"><label>Ato de entrada (R$)</label><input type="text" value="'+N2(S.ato)+'" onchange="updFluxo(\'ato\',this.value)"></div>'
-      +'</div>'
-      +'<button type="button" class="btn-pg btn-zerar" onclick="zerarPronto()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg>Completar o restante no ato</button>'
-      +'<div class="mets2" style="margin-top:14px">'
-      +'<div class="mt2 hi"><div class="ml">Ato de entrada</div><div class="mv">'+BRL(S.ato)+'</div></div>'
-      +'<div class="mt2 hi"><div class="ml">Parcela única (FGTS/13º)</div><div class="mv">'+BRL(S.parcelaUnica)+'</div></div>'
-      +'<div class="mt2 '+(Math.abs(c.fluxoRestante)<0.5?'gr':'am')+'"><div class="ml">'+(c.fluxoRestante>0.5?'Ainda falta':(c.fluxoRestante<-0.5?'Passou do valor em':'Fechado certinho'))+'</div><div class="mv">'+BRL(Math.abs(c.fluxoRestante))+'</div></div>'
-      +'</div>'
-      +'<p style="font-size:10.5px;color:#94a3b8;margin-top:8px">Parcelamento direto com a construtora em unidade pronta existe caso a caso — confirme com o Paulo.</p>'
-      +'</div>';
-  }
   var acimaTeto=(S.mensaisQtd>0&&S.mensaisValor>1500)||(S.anuaisQtd>0&&S.anuaisValor>18000);
   var pc=c.posChavesElegivel;
   return'<div class="sel-box">'
-    +'<div class="sel-title">Monte sua entrada — falta cobrir <span style="color:#B91C1C">'+BRL(c.entrada)+'</span></div>'
-    +'<div class="prog-wrap"><div class="prog-top">Fluxo montado: <b>'+BRL(Math.max(0,c.fluxoTotal))+'</b> de '+BRL(c.entrada)+' ('+Math.round(c.entrada>0?Math.min(999,Math.max(0,c.fluxoTotal/c.entrada*100)):0)+'%)</div><div class="prog-bar"><i style="width:'+Math.min(100,Math.max(0,c.entrada>0?c.fluxoTotal/c.entrada*100:0))+'%"></i></div></div>'
-    +'<p style="font-size:11.5px;color:var(--text2);margin-bottom:10px">Distribua a entrada entre ato, parcelas mensais, reforços anuais, parcela única (ex: FGTS/13º)'+(pc?', valor na entrega das chaves e parcelamento pós-chaves':' e valor na entrega das chaves')+'. Preencha o que você já sabe — o <b>ZERAR</b> completa o resto sozinho.</p>'
+    +'<div class="sel-title">Entrada a cobrir: <span style="color:#B91C1C">'+BRL(c.entrada)+'</span></div>'
+    +'<p style="font-size:11.5px;color:var(--text2);margin-bottom:10px">Distribua a entrada entre ato, parcelas mensais, reforços anuais, parcela única (ex: FGTS/13º)'+(pc?', valor na entrega das chaves e parcelamento pós-chaves':' e valor na entrega das chaves')+'. Use o ZERAR para completar automaticamente o campo que faltar.</p>'
     +'<div class="g4s" style="margin-bottom:10px">'
-    +'<div class="fi2"><label>Ato de entrada (R$)</label><input type="text" value="'+N2(S.ato)+'" onchange="updFluxo(\'ato\',this.value)">'+'<div class="rng-wrap"><input type="range" min="0" max="'+Math.max(100,Math.round(c.entrada))+'" step="50" value="'+Math.round(S.ato)+'" '+'oninput="this.nextElementSibling.textContent=BRL(this.value)" onchange="updFluxo(\'ato\',this.value)">'+'<div class="rng-val" style="text-align:right">'+BRL(S.ato)+'</div></div>'+'</div>'
-    +'<div class="fi2"><label>Valor na entrega das chaves (R$)</label><input type="text" value="'+N2(S.valorChaves)+'" onchange="updFluxo(\'valorChaves\',this.value)"></div>'
-    +'<div class="fi2"><label>Parcela única (FGTS/13º) (R$)</label><input type="text" value="'+N2(S.parcelaUnica)+'" onchange="updFluxo(\'parcelaUnica\',this.value)"></div>'
-    +'<div class="fi2"><label>Qtd. parcelas mensais</label><input type="number" value="'+S.mensaisQtd+'" onchange="updFluxo(\'mensaisQtd\',this.value)"></div>'
+    +'<div class="fi2"><label>Ato de entrada (R$)</label><input type="text" value="'+N2(S.ato)+'" oninput="updFluxo(\'ato\',this.value)"></div>'
+    +'<div class="fi2"><label>Valor na entrega das chaves (R$)</label><input type="text" value="'+N2(S.valorChaves)+'" oninput="updFluxo(\'valorChaves\',this.value)"></div>'
+    +'<div class="fi2"><label>Parcela única (FGTS/13º) (R$)</label><input type="text" value="'+N2(S.parcelaUnica)+'" oninput="updFluxo(\'parcelaUnica\',this.value)"></div>'
+    +'<div class="fi2"><label>Qtd. parcelas mensais</label><input type="number" value="'+S.mensaisQtd+'" oninput="updFluxo(\'mensaisQtd\',this.value)"></div>'
     +'</div>'
     +'<div class="g4s" style="margin-bottom:10px">'
-    +'<div class="fi2 '+(S.mensaisValor>1500?'wn':'')+'"><label>Valor mensal (R$)</label><input type="text" value="'+N2(S.mensaisValor)+'" onchange="updFluxo(\'mensaisValor\',this.value)">'+'<div class="rng-wrap"><input type="range" min="0" max="3000" step="25" value="'+Math.round(S.mensaisValor)+'" '+'oninput="this.nextElementSibling.textContent=BRL(this.value)" onchange="updFluxo(\'mensaisValor\',this.value)">'+'<div class="rng-val" style="text-align:right">'+BRL(S.mensaisValor)+'</div></div>'+'</div>'
-    +'<div class="fi2"><label>Qtd. reforços anuais</label><input type="number" value="'+S.anuaisQtd+'" onchange="updFluxo(\'anuaisQtd\',this.value)"></div>'
-    +'<div class="fi2 '+(S.anuaisValor>18000?'wn':'')+'"><label>Valor de cada reforço anual (R$)</label><input type="text" value="'+N2(S.anuaisValor)+'" onchange="updFluxo(\'anuaisValor\',this.value)"></div>'
+    +'<div class="fi2 '+(S.mensaisValor>1500?'wn':'')+'"><label>Valor mensal (R$)</label><input type="text" value="'+N2(S.mensaisValor)+'" oninput="updFluxo(\'mensaisValor\',this.value)"></div>'
+    +'<div class="fi2"><label>Qtd. reforços anuais</label><input type="number" value="'+S.anuaisQtd+'" oninput="updFluxo(\'anuaisQtd\',this.value)"></div>'
+    +'<div class="fi2 '+(S.anuaisValor>18000?'wn':'')+'"><label>Valor de cada reforço anual (R$)</label><input type="text" value="'+N2(S.anuaisValor)+'" oninput="updFluxo(\'anuaisValor\',this.value)"></div>'
     +'<div class="fi2"><label>ZERAR restante em</label><select onchange="updZerarAlvo(this.value)">'
       +'<option value="mensais" '+(S.zerarAlvo==='mensais'?'selected':'')+'>Parcelas mensais</option>'
       +'<option value="anuais" '+(S.zerarAlvo==='anuais'?'selected':'')+'>Reforços anuais</option>'
@@ -754,13 +543,12 @@ function renderFluxo(c){
       +'</select></div>'
     +'</div>'
     +(pc?('<div class="g2s" style="margin-bottom:10px;padding-top:10px;border-top:.5px solid var(--border)">'
-      +'<div class="fi2"><label>Parcelas pós-chaves — até '+c.posChavesMax+'x ('+c.construtora+')</label><input type="number" value="'+(S.posChavesQtd>0?S.posChavesQtd:'')+'" placeholder="Ex: '+c.posChavesMax+'" onchange="updFluxo(\'posChavesQtd\',this.value)"></div>'
-      +'<div class="fi2"><label>Valor de cada parcela pós-chaves (R$)</label><input type="text" value="'+N2(S.posChavesValor)+'" onchange="updFluxo(\'posChavesValor\',this.value)"></div>'
+      +'<div class="fi2"><label>Parcelas pós-chaves — até '+c.posChavesMax+'x ('+c.construtora+')</label><input type="number" value="'+(S.posChavesQtd>0?S.posChavesQtd:'')+'" placeholder="Ex: '+c.posChavesMax+'" oninput="updFluxo(\'posChavesQtd\',this.value)"></div>'
+      +'<div class="fi2"><label>Valor de cada parcela pós-chaves (R$)</label><input type="text" value="'+N2(S.posChavesValor)+'" oninput="updFluxo(\'posChavesValor\',this.value)"></div>'
       +'</div>'
       +'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' costuma estender o que exceder o parcelável da obra para depois da entrega das chaves, em até '+c.posChavesMax+'x. Digite a quantidade de parcelas que quer usar e o ZERAR calcula o valor de cada uma.</p>')
       :(c.construtora?'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' não trabalha com parcelamento pós-chaves nesta simulação — o que exceder o parcelável da obra e o FGTS costuma precisar ser pago à vista na assinatura. Vale confirmar com o Paulo se há condição especial para este empreendimento.</p>':''))
-    +'<button type="button" class="btn-pg btn-zerar" onclick="zerarFluxo()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg>ZERAR — completar automaticamente</button>'
-    +'<p style="font-size:10.5px;color:#b7bec2;margin-top:8px;font-style:italic">Valores sugeridos automaticamente (ato de entrada, reforços e mensais) — ajuste como quiser, isso não é compromisso final.</p>'
+    +'<button type="button" class="btn-pg" style="background:var(--gold)" onclick="zerarFluxo()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg>ZERAR — completar automaticamente</button>'
     +'</div>'
     +'<div class="ssec s1x"><div class="ssh" style="cursor:default"><h3>Total do fluxo montado</h3></div><div class="ssb">'
     +'<div class="mets2">'
@@ -796,48 +584,7 @@ function render(){
     }
   }
 }
-/* Personaliza a partir de ?preco=X&nome=Y vindo dos cards das paginas de empreendimento */
-(function(){
-  try{
-    var qp = new URLSearchParams(location.search);
-    var qNome = qp.get('nome');
-    var qPreco = parseFloat(qp.get('preco'));
-    if(qNome){
-      var alvo = qNome.trim().toLowerCase();
-      var idx = -1;
-      for(var i=0;i<CATALOG.length;i++){
-        if(CATALOG[i].n.trim().toLowerCase() === alvo){ idx = i; break; }
-      }
-      if(idx === -1){
-        for(var j=0;j<CATALOG.length;j++){
-          if(CATALOG[j].n.trim().toLowerCase().indexOf(alvo) !== -1 || alvo.indexOf(CATALOG[j].n.trim().toLowerCase()) !== -1){ idx = j; break; }
-        }
-      }
-      if(idx !== -1){
-        S.empIdx = idx;
-        S.useCustom = false;
-      } else {
-        S.useCustom = true;
-        S.customConstrutora = '';
-        if(qPreco && qPreco > 0) S.customPreco = qPreco;
-      }
-    } else if(qPreco && qPreco > 0){
-      S.useCustom = true;
-      S.customPreco = qPreco;
-    }
-    var qPlano = qp.get('plano');
-    if(qPlano==='sementrada'||qPlano==='ato4'){ S._planoInicial=qPlano; }
-  }catch(e){}
-})();
 render();
-/* aplica plano vindo da URL depois que a pessoa informa a renda */
-(function(){
-  var _origUpdRenda = updRenda;
-  updRenda = function(v){
-    _origUpdRenda(v);
-    if(S._planoInicial && S.renda>0){ var p=S._planoInicial; S._planoInicial=null; aplicarPlano(p); }
-  };
-})();
 </script>
 <script src="crm-config.js"></script>
 

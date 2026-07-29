@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
-<title>CRM | Paulo Cotrim — Corretor Independente</title>
+<title>CRM | Paulo Cotrim — Corretor de Imóveis · CRECI-RJ 77677-F</title>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -184,8 +184,20 @@ button{cursor:pointer}
 .mob-toggle{display:none;position:fixed;top:10px;left:10px;z-index:300;background:var(--navy);border:1px solid rgba(255,255,255,.12);border-radius:8px;width:38px;height:38px;align-items:center;justify-content:center;font-size:18px;color:#fff;cursor:pointer}
 @media(max-width:900px){#sidebar{transform:translateX(-100%)}#sidebar.open{transform:translateX(0)}#main{margin-left:0}.mob-toggle{display:flex!important}.kpi-row{grid-template-columns:1fr 1fr}.pipeline{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
 </style>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
 </head>
 <body>
+<div id="pc-login" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#060f1e,#0d2040);display:flex;align-items:center;justify-content:center;font-family:system-ui,Arial">
+  <div style="background:#0d2040;border:1px solid rgba(201,153,58,.3);border-radius:20px;padding:38px 32px;width:340px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)">
+    <div style="width:60px;height:60px;border-radius:50%;margin:0 auto 16px;background:radial-gradient(circle at 40% 35%,#153a44,#0a2129);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 2px rgba(201,153,58,.6);color:#e6c581;font-weight:800;font-size:22px;font-family:Georgia,serif">PC</div>
+    <div style="color:#e8b84b;font-size:18px;font-weight:900;margin-bottom:4px">CRM Paulo Cotrim</div>
+    <div style="color:rgba(255,255,255,.5);font-size:12px;margin-bottom:20px">Acesso restrito</div>
+    <input id="pc-u" placeholder="Usuário" style="width:100%;padding:12px 14px;margin-bottom:10px;border-radius:9px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:14px;outline:none"/>
+    <input id="pc-p" type="password" placeholder="Senha" onkeypress="if(event.key==='Enter')pcLogin()" style="width:100%;padding:12px 14px;margin-bottom:14px;border-radius:9px;border:1.5px solid rgba(255,255,255,.15);background:rgba(255,255,255,.06);color:#fff;font-size:14px;outline:none"/>
+    <div id="pc-err" style="color:#f87171;font-size:12px;min-height:16px;margin-bottom:8px"></div>
+    <button onclick="pcLogin()" style="width:100%;padding:13px;border:none;border-radius:10px;background:#c9993a;color:#060f1e;font-weight:900;font-size:15px;cursor:pointer">Entrar</button>
+  </div>
+</div>
 <button class="mob-toggle" onclick="document.getElementById('sidebar').classList.toggle('open')">&#9776;</button>
 <nav id="sidebar">
   <div class="sb-logo"><div class="sb-mark">PC</div><div><div class="sb-name">Paulo Cotrim</div><div class="sb-sub">CRM Imobiliario</div></div></div>
@@ -201,15 +213,14 @@ button{cursor:pointer}
     <div class="sb-sec">Captacao</div>
     <div class="sb-link" onclick="goPage('novo-lead')"><span class="sb-icon">&#9998;</span> Novo Lead</div>
     <div class="sb-link" onclick="goPage('discador')"><span class="sb-icon">&#128222;</span> Discador</div>
-    <div class="sb-link" onclick="goPage('importar')"><span class="sb-icon">&#128229;</span> Importar Lista</div>
-    <div class="sb-link" onclick="goPage('busca')"><span class="sb-icon">&#128176;</span> Busca por Renda</div>
+    <div class="sb-link" onclick="abrirImportFoto()"><span class="sb-icon">&#128247;</span> Importar de Foto</div>
     <div class="sb-sec">Relatorios</div>
     <div class="sb-link" onclick="goPage('metricas')"><span class="sb-icon">&#128200;</span> Metricas</div>
     <div class="sb-link" onclick="goPage('campanhas')"><span class="sb-icon">&#127919;</span> Campanhas</div>
   </div>
   <div class="sb-footer">
     <div class="sb-av">PC</div>
-    <div><div class="sb-uname">Paulo Cotrim</div><div class="sb-urole">Corretor Independente</div></div>
+    <div><div class="sb-uname">Paulo Cotrim</div><div class="sb-urole">Corretor de Imóveis · CRECI-RJ 77677-F</div></div>
   </div>
 </nav>
 <div id="main">
@@ -242,7 +253,7 @@ button{cursor:pointer}
   <div class="page" id="page-leads">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
       <div><div class="eyebrow">Gestao</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Todos os Leads</div></div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn-sm" onclick="exportCSV()">&#11015; Baixar planilha</button><button class="btn-sm" onclick="backupCRM()">&#128190; Backup</button><label class="btn-sm" style="cursor:pointer;display:inline-flex;align-items:center">&#8617; Restaurar<input type="file" accept="application/json" onchange="restoreCRM(this)" style="display:none"/></label><button class="btn-primary" onclick="openModal('modal-lead')">+ Novo Lead</button></div>
+      <div style="display:flex;gap:10px"><button class="btn-sm" onclick="exportCSV()">&#11015; Exportar CSV</button><button class="btn-primary" onclick="openModal('modal-lead')">+ Novo Lead</button></div>
     </div>
     <div class="filter-row">
       <button class="filter-btn active" onclick="filtrar('todos',this)">Todos</button>
@@ -283,7 +294,7 @@ button{cursor:pointer}
     <tr><td>2Q + Suite</td><td>67m2</td><td class="price-from">R$ 648.000</td><td>R$ 4.320</td><td>R$ 2.330</td><td><span class="avail-badge avail-low">&#128308; Ultimas 2</span></td></tr>
     <tr><td>3 Quartos</td><td>88m2</td><td class="price-from">R$ 861.000</td><td>R$ 5.740</td><td>R$ 3.100</td><td><span class="avail-badge avail-none">&#9899; Vendido</span></td></tr>
     </tbody></table></div></div>
-    <div class="card"><div class="card-header"><div><div class="card-title">Farol da Guanabara</div><div class="card-sub" style="color:#c9993a;font-weight:700">&#127942; Copa Cury &mdash; condicoes especiais</div></div><button class="btn-sm" onclick="toast('&#128228; Enviando...')">&#128228; WhatsApp</button></div>
+    <div class="card"><div class="card-header"><div><div class="card-title">Farol da Guanabara</div><div class="card-sub" style="color:#c9993a;font-weight:700">&#127942; Condições especiais &mdash; tabela do mês</div></div><button class="btn-sm" onclick="toast('&#128228; Enviando...')">&#128228; WhatsApp</button></div>
     <div class="card-body" style="padding:0"><table class="price-table"><thead><tr><th>Tipologia</th><th>Area</th><th>Valor</th><th>Parcela Obra</th><th>Parcela Chaves</th><th>Disponibilidade</th></tr></thead><tbody>
     <tr><td>Studio</td><td>22m2</td><td class="price-from">R$ 402.000</td><td>R$ 2.750</td><td>R$ 1.400</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
     <tr><td>1 Quarto</td><td>36m2</td><td class="price-from">R$ 478.000</td><td>R$ 3.180</td><td>R$ 1.720</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
@@ -300,7 +311,7 @@ button{cursor:pointer}
   <div class="page" id="page-cadastro-imovel">
     <div style="margin-bottom:20px"><div class="eyebrow">Portfolio</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Cadastrar Empreendimento</div></div>
     <div class="card"><div class="modal-top-bar"></div><div class="card-body">
-      <div class="form-row"><div class="form-group"><label class="form-label">Nome</label><input class="form-input" id="ci-nome" placeholder="Ex: Orla Central"/></div><div class="form-group"><label class="form-label">Construtora</label><input class="form-input" id="ci-const" placeholder="Ex: Cury"/></div></div>
+      <div class="form-row"><div class="form-group"><label class="form-label">Nome</label><input class="form-input" id="ci-nome" placeholder="Ex: Orla Central"/></div><div class="form-group"><label class="form-label">Construtora</label><input class="form-input" id="ci-const" placeholder="Ex:"/></div></div>
       <div class="form-row"><div class="form-group"><label class="form-label">Localizacao</label><input class="form-input" id="ci-loc" placeholder="Bairro, Cidade"/></div><div class="form-group"><label class="form-label">Status</label><select class="form-select" id="ci-status"><option>Lancamento</option><option>Em obras</option><option>Pronto para morar</option></select></div></div>
       <div class="form-row"><div class="form-group"><label class="form-label">Preco minimo</label><input class="form-input" id="ci-preco" placeholder="R$ 000.000"/></div><div class="form-group"><label class="form-label">ROI / Destaque</label><input class="form-input" id="ci-roi" placeholder="Ex: ROI acima de 12%"/></div></div>
       <div class="form-row"><div class="form-group"><label class="form-label">Programa</label><select class="form-select" id="ci-prog"><option>SBPE</option><option>MCMV Faixa 2</option><option>MCMV Faixa 3</option></select></div><div class="form-group"><label class="form-label">Urgencia / Destaque</label><input class="form-input" id="ci-urg" placeholder="Ex: Ultimas unidades!"/></div></div>
@@ -352,35 +363,10 @@ button{cursor:pointer}
   </div>
 
   <!-- CAMPANHAS -->
-  <div class="page" id="page-importar">
-    <div style="margin-bottom:16px"><div class="eyebrow">Lista fria</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Importar Leads</div><div style="font-size:13px;color:var(--muted)">Cole a lista OU suba uma foto/print. O sistema extrai nome e telefone sozinho.</div></div>
-    <div class="card"><div class="card-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:12px">
-        <div><label style="font-size:12px;font-weight:700;color:var(--muted)">Regiao</label><br/><select id="imp-regiao" style="width:100%;padding:10px;border:1px solid #e2e6ee;border-radius:8px"><option>A definir</option><option>Zona Norte</option><option>Zona Oeste</option><option>Centro / Porto</option><option>Niteroi</option><option>Baixada</option></select></div>
-        <div><label style="font-size:12px;font-weight:700;color:var(--muted)">Origem</label><br/><select id="imp-origem" style="width:100%;padding:10px;border:1px solid #e2e6ee;border-radius:8px"><option>Lista fria</option><option>Indicacao</option><option>Stand</option><option>Instagram</option><option>Meta Ads</option><option>Google Ads</option></select></div>
-      </div>
-      <label style="font-size:12px;font-weight:700;color:var(--muted)">Cole a lista aqui (qualquer formato)</label>
-      <textarea id="imp-text" rows="7" placeholder="Ex.: Maria Silva 21 99876-5432 maria@email.com" style="width:100%;padding:11px;border:1px solid #e2e6ee;border-radius:8px;font-family:inherit;margin:4px 0 10px"></textarea>
-      <div style="margin:6px 0 12px;padding:12px;border:1px dashed #cbd3e0;border-radius:10px;background:#f8fafc"><div style="font-size:12px;font-weight:800;color:var(--navy3);margin-bottom:8px">&#128247; Modo CamScanner &mdash; tire UMA foto da lista e ele reconhece tudo</div><input type="file" id="imp-cam" accept="image/*" capture="environment" onchange="ocrImportar(this)" style="display:none"/><input type="file" id="imp-file" accept="image/*" onchange="ocrImportar(this)" style="display:none"/><button class="btn-primary" type="button" onclick="document.getElementById(&quot;imp-cam&quot;).click()">&#128247; Tirar foto da lista</button> <button class="btn-sm" type="button" onclick="document.getElementById(&quot;imp-file&quot;).click()">&#128193; Escolher imagem</button><div id="imp-ocr-status" style="font-size:12px;color:var(--muted);margin-top:8px"></div></div>
-      <button class="btn-primary" onclick="extrairLeads()">Extrair contatos</button>
-    </div></div>
-    <div id="imp-preview" style="margin-top:16px"></div>
-  </div>
-  <div class="page" id="page-busca">
-    <div style="margin-bottom:16px"><div class="eyebrow">Match por perfil</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Busca por Renda</div><div style="font-size:13px;color:var(--muted)">Digite a renda do cliente. Mostro os empreendimentos que cabem, com o resumo pronto pra enviar no WhatsApp.</div></div>
-    <div class="card"><div class="card-body">
-      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end">
-        <div><label style="font-size:12px;font-weight:700;color:var(--muted)">Renda familiar (R$)</label><br/><input id="bq-renda" type="number" placeholder="Ex: 4500" style="width:100%;padding:11px;border:1px solid #e2e6ee;border-radius:8px"/></div>
-        <div><label style="font-size:12px;font-weight:700;color:var(--muted)">Regiao (opcional)</label><br/><select id="bq-reg" style="width:100%;padding:11px;border:1px solid #e2e6ee;border-radius:8px"><option value="">Todas</option><option>Zona Norte</option><option>Zona Oeste</option><option>Centro</option><option>Porto</option><option>Recreio</option><option>Barra</option><option>Niteroi</option><option>Jacarepagua</option><option>Piedade</option></select></div>
-        <button class="btn-primary" onclick="buscaRenda()">Buscar</button>
-      </div>
-    </div></div>
-    <div id="bq-res" style="margin-top:16px"></div>
-  </div>
   <div class="page" id="page-campanhas">
     <div style="margin-bottom:20px"><div class="eyebrow">Midia paga</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Campanhas Ativas</div></div>
     <div class="card"><div class="card-body" style="padding:0"><table class="lead-table"><thead><tr><th>Campanha</th><th>Plataforma</th><th>Empreendimento</th><th>Leads</th><th>CPA</th><th>Fechamentos</th><th>Status</th></tr></thead><tbody>
-    <tr><td class="lead-name">Copa Cury &mdash; Orla Central</td><td><span class="origin-tag">Meta Ads</span></td><td>Orla Central</td><td style="font-weight:700">34</td><td style="font-weight:700;color:#16a34a">R$ 78</td><td style="font-weight:800;color:#16a34a">3</td><td><span style="background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
+    <tr><td class="lead-name">Lançamento &mdash; Orla Central</td><td><span class="origin-tag">Meta Ads</span></td><td>Orla Central</td><td style="font-weight:700">34</td><td style="font-weight:700;color:#16a34a">R$ 78</td><td style="font-weight:800;color:#16a34a">3</td><td><span style="background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
     <tr><td class="lead-name">Farol &mdash; Studio Lancamento</td><td><span class="origin-tag">Meta Ads</span></td><td>Farol Guanabara</td><td style="font-weight:700">23</td><td style="font-weight:700;color:#16a34a">R$ 91</td><td style="font-weight:800;color:#16a34a">2</td><td><span style="background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
     <tr><td class="lead-name">MCMV Piedade &mdash; Subsidio 47k</td><td><span class="origin-tag">Google Ads</span></td><td>Parque Piedade</td><td style="font-weight:700">19</td><td style="font-weight:700;color:#16a34a">R$ 63</td><td style="font-weight:800;color:#16a34a">3</td><td><span style="background:#f0fdf4;color:#16a34a;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
     </tbody></table></div></div>
@@ -442,42 +428,8 @@ function getImoveis(){try{return JSON.parse(localStorage.getItem("crm_imoveis")|
 function saveImoveis(a){localStorage.setItem("crm_imoveis",JSON.stringify(a))}
 
 // DEFAULT IMOVEIS
-var defaultIm=[
-  {id:1,nome:"Farol da Guanabara",loc:"Santo Cristo · Porto Maravilha",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.875",rendaMin:3850,tip:"Studio, 1 e 3 quartos",ender:"Rua Sacadura Cabral, 103, Santo Cristo — Rio de Janeiro, RJ",url:"farol-da-guanabara.html",roi:"Renda ideal ~R$ 3.850",urg:"Lancamento",tags:["Piscinas", "Solário", "Espaço Zen"],icon:"&#127968;"},
-  {id:2,nome:"Arcos do Porto",loc:"Porto Maravilha",status:"Em obras",badge:"ib-obras",preco:"R$ 360.588",rendaMin:3450,tip:"Studio, 1 e 2 quartos",ender:"Av. Rodrigues Alves, Porto Maravilha — Rio de Janeiro, RJ",url:"arcos-do-porto.html",roi:"Renda ideal ~R$ 3.450",urg:"Em obras",tags:["Piscina", "Churrasqueira", "Salão de Festas"],icon:"&#127968;"},
-  {id:3,nome:"Orla Central",loc:"Centro · Niterói",status:"Lancamento",badge:"ib-lanc",preco:"R$ 402.000",rendaMin:3800,tip:"1, 2 e 3 quartos",ender:"Rua Saldanha Marinho, Lote 2, Centro — Niterói, RJ",url:"orla-central.html",roi:"Renda ideal ~R$ 3.800",urg:"Lancamento",tags:["Solário", "Piscinas", "Horta"],icon:"&#127968;"},
-  {id:4,nome:"Parque Piedade",loc:"Piedade · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 263.200",rendaMin:2500,tip:"2 quartos",ender:"Rua Piedade, s/n, Piedade — Rio de Janeiro, RJ",url:"parque-piedade.html",roi:"Renda ideal ~R$ 2.500",urg:"Lancamento",tags:["Piscinas", "Playground", "Academia"],icon:"&#127968;"},
-  {id:5,nome:"Luzes do Rio Lamparina",loc:"São Cristóvão",status:"Lancamento",badge:"ib-lanc",preco:"R$ 309.000",rendaMin:2950,tip:"1 e 2 quartos",ender:"Rua Campo de São Cristóvão, Imperial São Cristóvão — Rio de Janeiro, RJ",url:"luzes-do-rio-lamparina.html",roi:"Renda ideal ~R$ 2.950",urg:"Lancamento",tags:["Piscinas", "Salão de Festas", "Academia"],icon:"&#127968;"},
-  {id:6,nome:"Caminhos da Guanabara",loc:"Pendotiba · Niterói",status:"Em obras",badge:"ib-obras",preco:"R$ 334.999",rendaMin:3200,tip:"1 e 2 quartos",ender:"Estrada Caetano Monteiro, s/n, Pendotiba — Niterói, RJ",url:"caminhos-da-guanabara.html",roi:"Renda ideal ~R$ 3.200",urg:"Em obras",tags:["Piscinas", "Rooftop", "Academia"],icon:"&#127968;"},
-  {id:7,nome:"Cartola II",loc:"São Cristóvão",status:"Lancamento",badge:"ib-lanc",preco:"R$ 302.470",rendaMin:2850,tip:"1 e 2 quartos",ender:"Rua São Luís Gonzaga, São Cristóvão — Rio de Janeiro, RJ",url:"cartola-ii.html",roi:"Renda ideal ~R$ 2.850",urg:"Lancamento",tags:["Piscinas", "Solário", "Playground"],icon:"&#127968;"},
-  {id:8,nome:"Luzes do Rio Candeeiro",loc:"São Cristóvão",status:"Lancamento",badge:"ib-lanc",preco:"R$ 361.962",rendaMin:3450,tip:"1 e 2 quartos",ender:"Rua Campo de São Cristóvão, Imperial São Cristóvão — Rio de Janeiro, RJ",url:"luzes-do-rio-candeeiro.html",roi:"Renda ideal ~R$ 3.450",urg:"Lancamento",tags:["Piscinas", "Solário", "Brinquedoteca"],icon:"&#127968;"},
-  {id:9,nome:"A Noite",loc:"Praça Mauá, 7 · Centro",status:"Em obras",badge:"ib-obras",preco:"R$ 802.000",rendaMin:7600,tip:"Studio 44m² e duplex 70m²",ender:"Praça Mauá, 7 — Centro, RJ",url:"emp-a-noite.html",roi:"Renda ideal ~R$ 7.600",urg:"Em obras",tags:["Mirante 360°", "Restaurante", "Portaria 24h"],icon:"&#127968;"},
-  {id:10,nome:"Saudosa Praça Onze",loc:"Praça Onze · Centro",status:"Lancamento",badge:"ib-lanc",preco:"R$ 285.000",rendaMin:2700,tip:"Studio a 2 quartos suíte (31-49m²)",ender:"Rua Benedito Hipólito, 160 — Praça Onze, Centro, RJ",url:"emp-saudosa-praca-onze.html",roi:"Renda ideal ~R$ 2.700",urg:"Lancamento",tags:["Academia", "Coworking", "Salão de Festas"],icon:"&#127968;"},
-  {id:11,nome:"Alma Carioca",loc:"Vila Valqueire · Zona Norte",status:"Em obras",badge:"ib-obras",preco:"R$ 264.000",rendaMin:2500,tip:"2 quartos (37-46m²)",ender:"Estrada Intendente Magalhães, 279 — Vila Valqueire, RJ",url:"emp-alma-carioca.html",roi:"Renda ideal ~R$ 2.500",urg:"Em obras",tags:["Piscina", "Churrasqueira", "Academia"],icon:"&#127968;"},
-  {id:12,nome:"Beon Porto Residencial",loc:"São Cristóvão · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 259.000",rendaMin:2450,tip:"1 e 2 quartos (32-39m²)",ender:"Rua Monsenhor Manuel Gomes, 175 — São Cristóvão",url:"emp-beon-porto.html",roi:"Renda ideal ~R$ 2.450",urg:"Lancamento",tags:["Piscina", "Salão de Festas", "Academia"],icon:"&#127968;"},
-  {id:13,nome:"Brise Studios Design",loc:"Praça Pio X · Centro",status:"Em obras",badge:"ib-obras",preco:"R$ 380.082",rendaMin:3600,tip:"Studios 31-44m²",ender:"Praça Pio X, 99 — Centro",url:"emp-brise-studios.html",roi:"Renda ideal ~R$ 3.600",urg:"Em obras",tags:["Rooftop", "Sauna", "Academia"],icon:"&#127968;"},
-  {id:14,nome:"Conquista Florianópolis — Fase 1",loc:"Praça Seca · Jacarepaguá",status:"Pronto",badge:"ib-pronto",preco:"R$ 207.500",rendaMin:1950,tip:"1 e 2 quartos (36-56m²)",ender:"Praça Seca · Jacarepaguá",url:"emp-conquista-florianopolis.html",roi:"Renda ideal ~R$ 1.950",urg:"Pronto",tags:["Piscina", "Piscina Infantil", "Salão de Festas"],icon:"&#127968;"},
-  {id:15,nome:"Cores do Rio Residencial",loc:"Rua Irineu Marinho · Centro",status:"Pronto",badge:"ib-pronto",preco:"R$ 287.000",rendaMin:2750,tip:"Studios, 1 e 2 quartos (35-57m²)",ender:"Rua Irineu Marinho, 52 — Centro",url:"emp-cores-do-rio.html",roi:"Renda ideal ~R$ 2.750",urg:"Pronto",tags:["Academia", "Espaço Gourmet", "Coworking"],icon:"&#127968;"},
-  {id:16,nome:"CTV Beat",loc:"Madureira · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 229.000",rendaMin:2200,tip:"2 quartos (50-110m²)",ender:"Rua Carlos Xavier, 72 — Madureira",url:"emp-ctv-beat.html",roi:"Renda ideal ~R$ 2.200",urg:"Lancamento",tags:["Piscina", "Salão de Festas", "Playground"],icon:"&#127968;"},
-  {id:17,nome:"CTV Vitória",loc:"Campinho · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 229.000",rendaMin:2200,tip:"2 e 3 quartos (49-114m²)",ender:"Rua Comendador Pinto, 483 — Campinho",url:"emp-ctv-vitoria.html",roi:"Renda ideal ~R$ 2.200",urg:"Lancamento",tags:["Piscina", "Salão de Jogos", "Churrasqueira"],icon:"&#127968;"},
-  {id:18,nome:"East Side Harmony",loc:"Méier · Zona Norte",status:"Pronto",badge:"ib-pronto",preco:"R$ 411.000",rendaMin:3900,tip:"2 e 3 quartos (52-68m²)",ender:"Rua José Bonifácio, 140 — Méier",url:"emp-east-side-harmony.html",roi:"Renda ideal ~R$ 3.900",urg:"Pronto",tags:["Piscina", "Sauna", "Churrasqueira"],icon:"&#127968;"},
-  {id:19,nome:"Wish Norte (Living)",loc:"Cachambi · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 385.000",rendaMin:3650,tip:"2 e 3 quartos (44-59m²)",ender:"Av. Dom Hélder Câmara, 5123 — Cachambi",url:"emp-living-wish-norte.html",roi:"Renda ideal ~R$ 3.650",urg:"Lancamento",tags:["Piscina", "Piscina Infantil", "Academia"],icon:"&#127968;"},
-  {id:20,nome:"Meu Crescer Engenhão",loc:"Engenho de Dentro · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 269.000",rendaMin:2550,tip:"2 quartos (48-52m²)",ender:"Av. Amaro Cavalcanti, 1615 — Engenho de Dentro",url:"emp-meu-crescer-engenhao.html",roi:"Renda ideal ~R$ 2.550",urg:"Lancamento",tags:["Piscina", "Espaço Gourmet", "Academia"],icon:"&#127968;"},
-  {id:21,nome:"Only by Living — Fase 1",loc:"Cachambi · Zona Norte",status:"Lancamento",badge:"ib-lanc",preco:"R$ 334.280",rendaMin:3200,tip:"2 a 4 quartos + coberturas (44-182m²)",ender:"Av. Dom Hélder Câmara, 5000 — Cachambi",url:"emp-only-by-living.html",roi:"Renda ideal ~R$ 3.200",urg:"Lancamento",tags:["Piscina", "Sky Lounge", "Academia"],icon:"&#127968;"},
-  {id:22,nome:"Primor Carioca — Fase 2",loc:"Inhaúma · Zona Norte",status:"Pronto",badge:"ib-pronto",preco:"R$ 262.990",rendaMin:2500,tip:"2 quartos (35-40m²)",ender:"Av. Pastor Martin Luther King Jr, 989 — Inhaúma",url:"emp-primor-carioca.html",roi:"Renda ideal ~R$ 2.500",urg:"Pronto",tags:["Piscina", "Playground", "Espaço Gourmet"],icon:"&#127968;"},
-  {id:23,nome:"Sal Rio Residencial",loc:"Saúde · Porto Maravilha",status:"Lancamento",badge:"ib-lanc",preco:"R$ 189.000",rendaMin:1800,tip:"Studios e apartamentos, 1 quarto (22-35m²)",ender:"Rua Sacadura Cabral, 103 — Saúde/Porto Maravilha",url:"emp-sal-rio.html",roi:"Renda ideal ~R$ 1.800",urg:"Lancamento",tags:["Rooftop", "Mirante"],icon:"&#127968;"},
-  {id:24,nome:"URB Sole",loc:"Todos os Santos · Zona Norte",status:"Em obras",badge:"ib-obras",preco:"R$ 259.000",rendaMin:2450,tip:"1 e 2 quartos (33-46m²)",ender:"Rua Geobert de Queiróz, 127 — Todos os Santos",url:"emp-urb-sole.html",roi:"Renda ideal ~R$ 2.450",urg:"Em obras",tags:["Piscina", "Espaço Gourmet", "Coworking"],icon:"&#127968;"},
-  {id:25,nome:"Village Caribe 1",loc:"Praça Seca · Jacarepaguá",status:"Pronto",badge:"ib-pronto",preco:"R$ 1.263.594",rendaMin:12000,tip:"2 quartos c/ suíte + coberturas (59-137m²)",ender:"Rua Albano, 219 — Praça Seca",url:"emp-village-caribe.html",roi:"Renda ideal ~R$ 12.000",urg:"Pronto",tags:["Piscina", "Playground", "Churrasqueira"],icon:"&#127968;"},
-  {id:26,nome:"Vivaz Connection Zona Norte — Fase 1",loc:"Riachuelo · Zona Norte",status:"Em obras",badge:"ib-obras",preco:"R$ 233.000",rendaMin:2200,tip:"2 quartos (37m²)",ender:"Rua Magalhães Castro — Riachuelo",url:"emp-vivaz-connection.html",roi:"Renda ideal ~R$ 2.200",urg:"Em obras",tags:["Piscina", "Salão de Festas", "Academia"],icon:"&#127968;"},
-  {id:27,nome:"Vivaz Rua Honório",loc:"Todos os Santos · Zona Norte",status:"Pronto",badge:"ib-pronto",preco:"R$ 259.592",rendaMin:2450,tip:"1 e 2 quartos (32-45m²)",ender:"Rua Honório, 419 — Todos os Santos",url:"emp-vivaz-honorio.html",roi:"Renda ideal ~R$ 2.450",urg:"Pronto",tags:["Piscina", "Churrasqueira", "Academia"],icon:"&#127968;"},
-  {id:28,nome:"Império do Ouro",loc:"Rio do Ouro · São Gonçalo",status:"Pronto",badge:"ib-pronto",preco:"R$ 305.990",rendaMin:2900,tip:"2 quartos, até 1 suíte (46-47m²)",ender:"Av. Abdias José dos Santos — Rio do Ouro, São Gonçalo, RJ",url:"emp-imperio-do-ouro.html",roi:"Renda ideal ~R$ 2.900",urg:"Pronto",tags:["Piscina", "Espaço Gourmet", "Playground"],icon:"&#127968;"},
-  {id:29,nome:"Ritmos de Pilares",loc:"Pilares · Rio de Janeiro",status:"Lancamento",badge:"ib-lanc",preco:"R$ 274.990",rendaMin:2600,tip:"2 quartos, com ou sem suíte — todas as unidades com varanda",ender:"Pilares · Rio de Janeiro",url:"emp-ritmos-de-pilares.html",roi:"Renda ideal ~R$ 2.600",urg:"Lancamento",tags:["Piscinas", "Salão de festas", "Churrasqueira"],icon:"&#127968;"},
-  {id:30,nome:"Encantos da Zona Norte",loc:"Região de Bonsucesso · Rio de Janeiro",status:"Em obras",badge:"ib-obras",preco:"R$ 273.990",rendaMin:2600,tip:"2 quartos (opção de varanda ou área privativa)",ender:"Região de Bonsucesso · Rio de Janeiro",url:"emp-encantos-da-zona-norte.html",roi:"Renda ideal ~R$ 2.600",urg:"Em obras",tags:["Piscinas", "Churrasqueira", "Miniquadra"],icon:"&#127968;"},
-  {id:31,nome:"Reserva Redentor",loc:"Rocha · Rio de Janeiro",status:"Em obras",badge:"ib-obras",preco:"R$ 274.990",rendaMin:2600,tip:"2 quartos (opção de varanda)",ender:"Rocha · Rio de Janeiro",url:"emp-reserva-redentor.html",roi:"Renda ideal ~R$ 2.600",urg:"Em obras",tags:["Piscina adulto", "Piscina infantil", "Playground"],icon:"&#127968;"},
-  {id:32,nome:"Sensia Barra",loc:"Barra da Tijuca · Rio de Janeiro",status:"Em obras",badge:"ib-obras",preco:"R$ 913.990",rendaMin:8700,tip:"2 e 3 quartos com suíte e varanda gourmet (opções garden e cobertura, até 148m²)",ender:"Barra da Tijuca · Rio de Janeiro",url:"emp-sensia-barra.html",roi:"Renda ideal ~R$ 8.700",urg:"Em obras",tags:["Lazer em condomínio fechado"],icon:"&#127968;"},
-  {id:33,nome:"Oceanside Recreio",loc:"Pontal Oceânico · Recreio dos Bandeirantes",status:"Em obras",badge:"ib-obras",preco:"R$ 440.000",rendaMin:4200,tip:"2 e 3 quartos com suíte (47,74 a 78,19m²)",ender:"Rua Luiz Carlos Sarolli, 1.111 — Pontal Oceânico, Recreio dos Bandeirantes, RJ",url:"emp-oceanside-recreio.html",roi:"Renda ideal ~R$ 4.200",urg:"Em obras",tags:["Piscina", "Academia", "Coworking"],icon:"&#127968;"}
-];
-var IM_VER="real33-v1";if(localStorage.getItem("crm_im_ver")!==IM_VER){saveImoveis(defaultIm);localStorage.setItem("crm_im_ver",IM_VER);}
+var defaultIm=[{"id": 1, "nome": "Farol da Guanabara", "loc": "Santo Cristo · Porto Maravilha", "status": "Lancamento", "badge": "ib-lanc", "preco": "R$ 402.875", "roi": "Studio, 1 e 3 quartos", "urg": "", "tags": ["Studio", "1 e 3 quartos"], "icon": "&#127970;", "rendaMin": 3827, "end": "Rua Sacadura Cabral, 103, Santo Cristo — Rio de Janeiro, RJ"}, {"id": 2, "nome": "Arcos do Porto", "loc": "Porto Maravilha", "status": "Em Obras", "badge": "ib-obras", "preco": "R$ 360.588", "roi": "Studio, 1 e 2 quartos", "urg": "", "tags": ["Studio", "1 e 2 quartos"], "icon": "&#127970;", "rendaMin": 3425, "end": "Av. Rodrigues Alves, Porto Maravilha — Rio de Janeiro, RJ"}, {"id": 3, "nome": "Orla Central", "loc": "Centro · Niterói", "status": "Lancamento", "badge": "ib-lanc", "preco": "R$ 402.000", "roi": "1, 2 e 3 quartos", "urg": "", "tags": ["1", "2 e 3 quartos"], "icon": "&#127970;", "rendaMin": 3819, "end": "Rua Saldanha Marinho, Lote 2, Centro — Niterói, RJ"}, {"id": 4, "nome": "Parque Piedade", "loc": "Piedade · Zona Norte", "status": "Lancamento", "badge": "ib-lanc", "preco": "R$ 263.200", "roi": "2 quartos", "urg": "", "tags": ["2 quartos"], "icon": "&#127970;", "rendaMin": 2500, "end": "Rua Piedade, s/n, Piedade — Rio de Janeiro, RJ"}, {"id": 5, "nome": "Luzes do Rio Lamparina", "loc": "São Cristóvão", "status": "Lancamento", "badge": "ib-lanc", "preco": "R$ 309.000", "roi": "1 e 2 quartos", "urg": "", "tags": ["1 e 2 quartos"], "icon": "&#127970;", "rendaMin": 2935, "end": "Rua Campo de São Cristóvão, Imperial São Cristóvão — Rio de Janeiro, RJ"}, {"id": 6, "nome": "Caminhos da Guanabara", "loc": "Pendotiba · Niterói", "status": "Em Obras", "badge": "ib-obras", "preco": "R$ 334.999", "roi": "1 e 2 quartos", "urg": "", "tags": ["1 e 2 quartos"], "icon": "&#127970;", "rendaMin": 3182, "end": "Estrada Caetano Monteiro, s/n, Pendotiba — Niterói, RJ"}, {"id": 7, "nome": "Cartola II", "loc": "São Cristóvão", "status": "Lancamento", "badge": "ib-lanc", "preco": "R$ 302.470", "roi": "1 e 2 quartos", "urg": "", "tags": ["1 e 2 quartos"], "icon": "&#127970;", "rendaMin": 2873, "end": "Rua São Luís Gonzaga, São Cristóvão — Rio de Janeiro, RJ"}, {"id": 8, "nome": "Luzes do Rio Candeeiro", "loc": "São Cristóvão", "status": "Lancamento", "badge": "ib-lanc", "preco": "R$ 361.962", "roi": "1 e 2 quartos", "urg": "", "tags": ["1 e 2 quartos"], "icon": "&#127970;", "rendaMin": 3438, "end": "Rua Campo de São Cristóvão, Imperial São Cristóvão — Rio de Janeiro, RJ"}, {"id": 9, "nome": "A Noite", "loc": "Praça Mauá, 7 · Centro", "status": "Em Obras", "badge": "ib-obras", "preco": "R$ 802.000", "roi": "Studio 44m² e duplex 70m²", "urg": "", "tags": ["Studio 44m² e duplex 70m²"], "icon": "&#127970;", "rendaMin": 7619, "end": "Praça Mauá, 7 — Centro, RJ"}, {"id": 10, "nome": "Saudosa Praça Onze", "loc": "Praça Onze · Centro", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 285.000", "roi": "Studio a 2 quartos suíte (31-49m²)", "urg": "", "tags": ["Studio a 2 quartos suíte (31-49m²)"], "icon": "&#127970;", "rendaMin": 2707, "end": "Rua Benedito Hipólito, 160 — Praça Onze, Centro, RJ"}, {"id": 11, "nome": "Alma Carioca", "loc": "Vila Valqueire · Zona Norte", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 264.000", "roi": "2 quartos (37-46m²)", "urg": "", "tags": ["2 quartos (37-46m²)"], "icon": "&#127970;", "rendaMin": 2508, "end": "Estrada Intendente Magalhães, 279 — Vila Valqueire, RJ"}, {"id": 12, "nome": "Beon Porto Residencial", "loc": "São Cristóvão · Zona Norte", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 259.000", "roi": "1 e 2 quartos (32-39m²)", "urg": "", "tags": ["1 e 2 quartos (32-39m²)"], "icon": "&#127970;", "rendaMin": 2460, "end": "Rua Monsenhor Manuel Gomes, 175 — São Cristóvão"}, {"id": 13, "nome": "Brise Studios Design", "loc": "Praça Pio X · Centro", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 380.082", "roi": "Studios 31-44m²", "urg": "", "tags": ["Studios 31-44m²"], "icon": "&#127970;", "rendaMin": 3610, "end": "Praça Pio X, 99 — Centro"}, {"id": 14, "nome": "Conquista Florianópolis — Fase 1", "loc": "Praça Seca · Jacarepaguá", "status": "Pronto", "badge": "ib-pronto", "preco": "A partir de R$ 207.500", "roi": "1 e 2 quartos (36-56m²)", "urg": "", "tags": ["1 e 2 quartos (36-56m²)"], "icon": "&#127970;", "rendaMin": 1971, "end": null}, {"id": 15, "nome": "Cores do Rio Residencial", "loc": "Rua Irineu Marinho · Centro", "status": "Pronto", "badge": "ib-pronto", "preco": "A partir de R$ 287.000", "roi": "Studios, 1 e 2 quartos (35-57m²)", "urg": "", "tags": ["Studios", "1 e 2 quartos (35-57m²)"], "icon": "&#127970;", "rendaMin": 2726, "end": "Rua Irineu Marinho, 52 — Centro"}, {"id": 16, "nome": "CTV Beat", "loc": "Madureira · Zona Norte", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 229.000", "roi": "2 quartos (50-110m²)", "urg": "", "tags": ["2 quartos (50-110m²)"], "icon": "&#127970;", "rendaMin": 2175, "end": "Rua Carlos Xavier, 72 — Madureira"}, {"id": 17, "nome": "CTV Vitória", "loc": "Campinho · Zona Norte", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 229.000", "roi": "2 e 3 quartos (49-114m²)", "urg": "", "tags": ["2 e 3 quartos (49-114m²)"], "icon": "&#127970;", "rendaMin": 2175, "end": "Rua Comendador Pinto, 483 — Campinho"}, {"id": 18, "nome": "East Side Harmony", "loc": "Méier · Zona Norte", "status": "Pronto", "badge": "ib-pronto", "preco": "A partir de R$ 411.000", "roi": "2 e 3 quartos (52-68m²)", "urg": "", "tags": ["2 e 3 quartos (52-68m²)"], "icon": "&#127970;", "rendaMin": 3904, "end": "Rua José Bonifácio, 140 — Méier"}, {"id": 19, "nome": "Wish Norte (Living)", "loc": "Cachambi · Zona Norte", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 385.000", "roi": "2 e 3 quartos (44-59m²)", "urg": "", "tags": ["2 e 3 quartos (44-59m²)"], "icon": "&#127970;", "rendaMin": 3657, "end": "Av. Dom Hélder Câmara, 5123 — Cachambi"}, {"id": 20, "nome": "Meu Crescer Engenhão", "loc": "Engenho de Dentro · Zona Norte", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 269.000", "roi": "2 quartos (48-52m²)", "urg": "", "tags": ["2 quartos (48-52m²)"], "icon": "&#127970;", "rendaMin": 2555, "end": "Av. Amaro Cavalcanti, 1615 — Engenho de Dentro"}, {"id": 21, "nome": "Only by Living — Fase 1", "loc": "Cachambi · Zona Norte", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 334.280", "roi": "2 a 4 quartos + coberturas (44-182m²)", "urg": "", "tags": ["2 a 4 quartos + coberturas (44-182m²)"], "icon": "&#127970;", "rendaMin": 3175, "end": "Av. Dom Hélder Câmara, 5000 — Cachambi"}, {"id": 22, "nome": "Primor Carioca — Fase 2", "loc": "Inhaúma · Zona Norte", "status": "Pronto", "badge": "ib-pronto", "preco": "A partir de R$ 262.990", "roi": "2 quartos (35-40m²)", "urg": "", "tags": ["2 quartos (35-40m²)"], "icon": "&#127970;", "rendaMin": 2498, "end": "Av. Pastor Martin Luther King Jr, 989 — Inhaúma"}, {"id": 23, "nome": "Sal Rio Residencial", "loc": "Saúde · Porto Maravilha", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 189.000", "roi": "Studios e apartamentos, 1 quarto (22-35m²)", "urg": "", "tags": ["Studios e apartamentos", "1 quarto (22-35m²)"], "icon": "&#127970;", "rendaMin": 1795, "end": "Rua Sacadura Cabral, 103 — Saúde/Porto Maravilha"}, {"id": 24, "nome": "URB Sole", "loc": "Todos os Santos · Zona Norte", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 259.000", "roi": "1 e 2 quartos (33-46m²)", "urg": "", "tags": ["1 e 2 quartos (33-46m²)"], "icon": "&#127970;", "rendaMin": 2460, "end": "Rua Geobert de Queiróz, 127 — Todos os Santos"}, {"id": 25, "nome": "Village Caribe 1", "loc": "Praça Seca · Jacarepaguá", "status": "Pronto", "badge": "ib-pronto", "preco": "A partir de R$ 1.263.594", "roi": "2 quartos c/ suíte + coberturas (59-137m²)", "urg": "", "tags": ["2 quartos c/ suíte + coberturas (59-137m²)"], "icon": "&#127970;", "rendaMin": 12004, "end": "Rua Albano, 219 — Praça Seca"}, {"id": 26, "nome": "Vivaz Connection Zona Norte — Fase 1", "loc": "Riachuelo · Zona Norte", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 233.000", "roi": "2 quartos (37m²)", "urg": "", "tags": ["2 quartos (37m²)"], "icon": "&#127970;", "rendaMin": 2213, "end": "Rua Magalhães Castro — Riachuelo"}, {"id": 27, "nome": "Vivaz Rua Honório", "loc": "Todos os Santos · Zona Norte", "status": "Pronto", "badge": "ib-pronto", "preco": "A partir de R$ 259.592", "roi": "1 e 2 quartos (32-45m²)", "urg": "", "tags": ["1 e 2 quartos (32-45m²)"], "icon": "&#127970;", "rendaMin": 2466, "end": "Rua Honório, 419 — Todos os Santos"}, {"id": 28, "nome": "Império do Ouro", "loc": "Rio do Ouro · São Gonçalo", "status": "Pronto", "badge": "ib-pronto", "preco": "A partir de R$ 305.990", "roi": "2 quartos, até 1 suíte (46-47m²)", "urg": "", "tags": ["2 quartos", "até 1 suíte (46-47m²)"], "icon": "&#127970;", "rendaMin": 2906, "end": "Av. Abdias José dos Santos — Rio do Ouro, São Gonçalo, RJ"}, {"id": 29, "nome": "Ritmos de Pilares", "loc": "Pilares · Rio de Janeiro", "status": "Lancamento", "badge": "ib-lanc", "preco": "A partir de R$ 274.990", "roi": "2 quartos, com ou sem suíte — todas as unidades com varanda", "urg": "", "tags": ["2 quartos", "com ou sem suíte — todas as unidades com varanda"], "icon": "&#127970;", "rendaMin": 2612, "end": null}, {"id": 30, "nome": "Encantos da Zona Norte", "loc": "Região de Bonsucesso · Rio de Janeiro", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 273.990", "roi": "2 quartos (opção de varanda ou área privativa)", "urg": "", "tags": ["2 quartos (opção de varanda ou área privativa)"], "icon": "&#127970;", "rendaMin": 2602, "end": null}, {"id": 31, "nome": "Reserva Redentor", "loc": "Rocha · Rio de Janeiro", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 274.990", "roi": "2 quartos (opção de varanda)", "urg": "", "tags": ["2 quartos (opção de varanda)"], "icon": "&#127970;", "rendaMin": 2612, "end": null}, {"id": 32, "nome": "Sensia Barra", "loc": "Barra da Tijuca · Rio de Janeiro", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 913.990", "roi": "2 e 3 quartos com suíte e varanda gourmet (opções garden e cobertura, até 148m²)", "urg": "", "tags": ["2 e 3 quartos com suíte e varanda gourmet (opções garden e cobertura", "até 148m²)"], "icon": "&#127970;", "rendaMin": 8682, "end": null}, {"id": 33, "nome": "Oceanside Recreio", "loc": "Pontal Oceânico · Recreio dos Bandeirantes", "status": "Em Obras", "badge": "ib-obras", "preco": "A partir de R$ 440.000", "roi": "2 e 3 quartos com suíte (47,74 a 78,19m²)", "urg": "", "tags": ["2 e 3 quartos com suíte (47", "74 a 78", "19m²)"], "icon": "&#127970;", "rendaMin": 4180, "end": "Rua Luiz Carlos Sarolli, 1.111 — Pontal Oceânico, Recreio dos Bandeirantes, RJ"}];
+if(localStorage.getItem("crm_im_ver")!=="real33-2026"){saveImoveis(defaultIm);localStorage.setItem("crm_im_ver","real33-2026");}
 
 // NAV
 function goPage(id){
@@ -505,7 +457,7 @@ function formHTML(){
 }
 function renderFormLead(tid,modal){
   var el=document.getElementById(tid);if(!el)return;
-  el.innerHTML=formHTML()+"<div class='form-actions'>"+(modal?"<button class='btn-cancel' onclick='closeModal(\"modal-lead\")'>Cancelar</button>":"<button class='btn-cancel' onclick='goPage(\"leads\")'>Cancelar</button>")+"<button class='btn-submit' onclick='salvarLead("+modal+")'>Cadastrar Lead</button></div>";
+  el.innerHTML=formHTML()+"<div class='form-actions'>"+(modal?"<button class='btn-cancel' onclick=\"closeModal('modal-lead')\">Cancelar</button>":"<button class='btn-cancel' onclick=\"goPage('leads')\">Cancelar</button>")+"<button class='btn-submit' onclick='salvarLead("+modal+")'>Cadastrar Lead</button></div>";
 }
 function salvarLead(modal){
   var nome=document.getElementById("fl-nome").value.trim();
@@ -534,11 +486,11 @@ function searchLeads(v){
   var data=getLeads().filter(function(l){return l.nome.toLowerCase().includes(v.toLowerCase())||l.tel.includes(v)||(l.interesse||"").toLowerCase().includes(v.toLowerCase())});
   goPage("leads");
   var tb=document.getElementById("leads-tbody");if(!tb)return;
-  tb.innerHTML=data.length?data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td>"+( l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td>"+(l.data||"—")+"</td><td><button class='btn-sm' onclick='verPerfil("+l.id+")'>Ver</button></td></tr>"}).join(""):"<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128269;</div><p>Sem resultados para \""+v+"\"</p></div></td></tr>";
+  tb.innerHTML=data.length?data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td>"+( l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td>"+(l.data||"—")+"</td><td><button class='btn-sm' onclick='verPerfil("+l.id+")'>Ver</button></td></tr>"}).join(""):"<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128269;</div><p>Sem resultados para "+v+"</p></div></td></tr>";
 }
 
 // LEAD ACTIONS
-function ligar(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;toast("Ligando para "+l.nome+"...");try{window.location.href="tel:+55"+(l.tel||"").replace(/\D/g,"")}catch(e){}var ls=getLeads();var i=ls.findIndex(function(x){return x.id===id});if(i>-1){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Ligacao realizada",d:"",t:new Date().toLocaleString("pt-BR")});saveLeads(ls)}}
+function ligar(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;toast("Ligando para "+l.nome+"...");var ls=getLeads();var i=ls.findIndex(function(x){return x.id===id});if(i>-1){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Ligacao realizada",d:"",t:new Date().toLocaleString("pt-BR")});saveLeads(ls)}}
 function zap(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;var tel=l.tel.replace(/\D/g,"");var msg=encodeURIComponent("Ola "+l.nome.split(" ")[0]+"! Aqui e o Paulo Cotrim. Podemos conversar sobre "+l.interesse+"?");window.open("https://wa.me/55"+tel+"?text="+msg,"_blank")}
 function del(id){if(!confirm("Deletar este lead?"))return;saveLeads(getLeads().filter(function(x){return x.id!==id}));renderLeads();updateBadge();toast("Lead removido")}
 function verPerfil(id){
@@ -546,7 +498,7 @@ function verPerfil(id){
   document.getElementById("p-name").textContent=l.nome;
   document.getElementById("p-sub").textContent=l.interesse||"—";
   var hist=(l.hist||[]).map(function(h){return"<div class='tl-item'><div class='tl-dot act-dot gold'>&#11088;</div><div><div class='tl-action'>"+h.a+"</div><div class='tl-detail'>"+(h.d||"")+" &middot; "+h.t+"</div></div></div>"}).join("");
-  document.getElementById("modal-profile-body").innerHTML="<div style='display:flex;gap:8px;margin-bottom:16px'><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><span class='origin-tag'>"+(l.origem||"—")+"</span><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></div><div style='background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:16px'><div class='lp-row'><span class='lp-key'>WhatsApp</span><span>"+l.tel+"</span></div><div class='lp-row'><span class='lp-key'>E-mail</span><span>"+(l.email||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Orcamento</span><span>"+(l.orcamento||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Cadastro</span><span>"+(l.data||"—")+" "+(l.hora||"")+"</span></div>"+(l.obs?"<div class='lp-row'><span class='lp-key'>Obs.</span><span>"+l.obs+"</span></div>":"")+"</div><div style='font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px'>Historico</div><div>"+(hist||"<div style='font-size:13px;color:var(--muted)'>Sem registros</div>")+"</div><div style='display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9'><button class='btn-submit' style='flex:1' onclick='ligar("+l.id+");closeModal(\"modal-profile\")'>&#128222; Ligar</button><button class='btn-sm green' onclick='zap("+l.id+")'>&#128172; WhatsApp</button><button class='btn-sm' onclick='editStatus("+l.id+")'>&#9998; Status</button></div>";
+  document.getElementById("modal-profile-body").innerHTML="<div style='display:flex;gap:8px;margin-bottom:16px'><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><span class='origin-tag'>"+(l.origem||"—")+"</span><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></div><div style='background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:16px'><div class='lp-row'><span class='lp-key'>WhatsApp</span><span>"+l.tel+"</span></div><div class='lp-row'><span class='lp-key'>E-mail</span><span>"+(l.email||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Orcamento</span><span>"+(l.orcamento||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Cadastro</span><span>"+(l.data||"—")+" "+(l.hora||"")+"</span></div>"+(l.obs?"<div class='lp-row'><span class='lp-key'>Obs.</span><span>"+l.obs+"</span></div>":"")+"</div><div style='font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px'>Historico</div><div>"+(hist||"<div style='font-size:13px;color:var(--muted)'>Sem registros</div>")+"</div><div style='display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9'><button class='btn-submit' style='flex:1' onclick='ligar("+l.id+");closeModal(&quot;modal-profile&quot;)'>&#128222; Ligar</button><button class='btn-sm green' onclick='zap("+l.id+")'>&#128172; WhatsApp</button><button class='btn-sm' onclick='editStatus("+l.id+")'>&#9998; Status</button></div>";
   openModal("modal-profile");
 }
 function editStatus(id){
@@ -559,7 +511,7 @@ function editStatus(id){
 function exportCSV(){
   var ls=getLeads();if(!ls.length){toast("Nenhum lead para exportar");return}
   var rows=[["Nome","Telefone","Email","Origem","Interesse","Temperatura","Status","Orcamento","Data"].join(",")];
-  ls.forEach(function(l){rows.push([l.nome,l.tel,l.email||"",l.origem||"",l.interesse||"",l.temp,l.status||"",l.orcamento||"",l.data||""].map(function(v){return"\""+v+"\""}).join(","))});
+  ls.forEach(function(l){rows.push([l.nome,l.tel,l.email||"",l.origem||"",l.interesse||"",l.temp,l.status||"",l.orcamento||"",l.data||""].map(function(v){return '"'+v+'"'}).join(","))});
   var a=document.createElement("a");a.href="data:text/csv;charset=utf-8,﻿"+encodeURIComponent(rows.join("\n"));a.download="leads-"+new Date().toLocaleDateString("pt-BR").replace(/\//g,"-")+".csv";a.click();toast("CSV exportado!");
 }
 
@@ -592,7 +544,7 @@ function renderPipeline(){
 function renderImoveis(){
   var ims=getImoveis();var grid=document.getElementById("imovel-grid");if(!grid)return;
   if(!ims.length){grid.innerHTML="<div class='empty-state'><div class='icon'>&#127970;</div><p>Nenhum imovel cadastrado</p></div>";return}
-  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'><span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span><div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage(\"tabelas\")'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast(\"Enviando por WhatsApp...\")'>&#128228; Enviar</button></div></div></div>"}).join("");
+  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'><span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span><div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage(&quot;tabelas&quot;)'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast(&quot;Enviando por WhatsApp...&quot;)'>&#128228; Enviar</button></div></div></div>"}).join("");
 }
 function salvarImovel(){
   var nome=document.getElementById("ci-nome").value.trim();if(!nome){toast("Nome obrigatorio");return}
@@ -630,84 +582,78 @@ document.querySelectorAll(".modal-bg").forEach(function(m){m.addEventListener("c
 var toastTimer;
 function toast(msg){clearTimeout(toastTimer);var t=document.getElementById("toast");document.getElementById("toast-msg").textContent=msg;t.classList.add("show");toastTimer=setTimeout(function(){t.classList.remove("show")},3200)}
 
+// LOGIN
+function pcLogin(){
+  var u=(document.getElementById("pc-u").value||"").trim().toLowerCase();
+  var p=(document.getElementById("pc-p").value||"").trim();
+  if((u==="paulo"||u==="admin")&&p==="102030"){localStorage.setItem("crm_auth","1");document.getElementById("pc-login").style.display="none";}
+  else{document.getElementById("pc-err").textContent="Usuário ou senha incorretos.";}
+}
+if(localStorage.getItem("crm_auth")==="1"){var _o=document.getElementById("pc-login");if(_o)_o.style.display="none";}
+
+// IMPORTAR DE FOTO (OCR)
+function abrirImportFoto(){
+  var m=document.getElementById("modal-ocr");
+  if(!m){
+    m=document.createElement("div");m.id="modal-ocr";m.className="modal-bg";
+    m.innerHTML="<div class='modal' style='max-width:640px'><div class='modal-head'><div class='modal-title'>&#128247; Importar leads de uma foto</div><button class='modal-x' onclick='closeModal(&quot;modal-ocr&quot;)'>&times;</button></div><div class='modal-body'><p style='font-size:13px;color:var(--muted);margin-bottom:12px'>Tire uma foto (ou escolha uma imagem) de uma lista de contatos. Eu leio nomes, telefones, e-mails e a região e cadastro tudo de uma vez.</p><input type='file' id='ocr-file' accept='image/*' capture='environment' onchange='rodarOCR(this)' style='margin-bottom:12px'/><div id='ocr-status' style='font-size:13px;color:var(--navy3);font-weight:600'></div><div id='ocr-result'></div></div></div>";
+    document.body.appendChild(m);
+  }
+  openModal("modal-ocr");
+}
+function _digits(s){return (s||"").replace(/\D/g,"");}
+function parseContatosOCR(txt){
+  var linhas=txt.split(/\n/); var out=[];
+  var bairros=["porto maravilha","santo cristo","centro","niteroi","niterói","piedade","sao cristovao","são cristóvão","madureira","cachambi","meier","méier","engenho","inhauma","inhaúma","jacarepagua","jacarepaguá","praca seca","praça seca","todos os santos","riachuelo","pilares","bonsucesso","rocha","recreio","barra","sao goncalo","são gonçalo"];
+  var reTel=/(?:\+?55\s?)?(?:\(?\d{2}\)?[\s.-]?)?9?\d{4}[\s.-]?\d{4}/g;
+  var reEmail=/[\w.+-]+@[\w-]+\.[\w.-]+/g;
+  linhas.forEach(function(ln){
+    var tels=ln.match(reTel)||[]; var emails=ln.match(reEmail)||[];
+    tels=tels.filter(function(t){return _digits(t).length>=10 && _digits(t).length<=13;});
+    if(!tels.length && !emails.length) return;
+    // nome = texto antes do primeiro telefone/email, só letras
+    var nome=ln;
+    if(tels[0])nome=ln.split(tels[0])[0];
+    nome=nome.replace(reEmail,"").replace(/[^A-Za-zÀ-ÿ\s]/g,"").trim();
+    nome=nome.split(/\s+/).slice(0,4).join(" ");
+    var low=ln.toLowerCase(); var reg="";
+    for(var i=0;i<bairros.length;i++){if(low.indexOf(bairros[i])>=0){reg=bairros[i];break;}}
+    out.push({nome:nome||"Contato",tel:tels[0]?_digits(tels[0]):"",email:emails[0]||"",regiao:reg});
+  });
+  // dedup por telefone
+  var seen={},ded=[];
+  out.forEach(function(c){var k=c.tel||c.email||c.nome;if(!seen[k]){seen[k]=1;ded.push(c);}});
+  return ded;
+}
+var _ocrParsed=[];
+function rodarOCR(input){
+  var f=input.files&&input.files[0]; if(!f)return;
+  var st=document.getElementById("ocr-status"); st.textContent="Lendo a imagem... (pode levar alguns segundos)";
+  document.getElementById("ocr-result").innerHTML="";
+  Tesseract.recognize(f,"por").then(function(r){
+    var txt=r.data.text||""; _ocrParsed=parseContatosOCR(txt);
+    if(!_ocrParsed.length){st.textContent="Não consegui identificar contatos. Tente uma foto mais nítida.";return;}
+    st.textContent="Encontrei "+_ocrParsed.length+" contato(s):";
+    var rows=_ocrParsed.map(function(c,i){return "<tr><td style='padding:6px'><input value='"+c.nome+"' id='oc-n"+i+"' style='width:120px;padding:5px'/></td><td style='padding:6px'><input value='"+c.tel+"' id='oc-t"+i+"' style='width:120px;padding:5px'/></td><td style='padding:6px'><input value='"+c.email+"' id='oc-e"+i+"' style='width:150px;padding:5px'/></td><td style='padding:6px'><input value='"+c.regiao+"' id='oc-r"+i+"' style='width:110px;padding:5px'/></td></tr>";}).join("");
+    document.getElementById("ocr-result").innerHTML="<table style='width:100%;font-size:12px;margin:10px 0'><thead><tr><th style='text-align:left;padding:6px'>Nome</th><th style='text-align:left;padding:6px'>Telefone</th><th style='text-align:left;padding:6px'>E-mail</th><th style='text-align:left;padding:6px'>Região</th></tr></thead><tbody>"+rows+"</tbody></table><button class='btn-submit' onclick='salvarOCR()'>Cadastrar "+_ocrParsed.length+" lead(s)</button>";
+  }).catch(function(e){st.textContent="Erro ao ler a imagem: "+e.message;});
+}
+function salvarOCR(){
+  var leads=getLeads(),n=0;
+  for(var i=0;i<_ocrParsed.length;i++){
+    var nome=(document.getElementById("oc-n"+i)||{}).value||_ocrParsed[i].nome;
+    var tel=(document.getElementById("oc-t"+i)||{}).value||_ocrParsed[i].tel;
+    var email=(document.getElementById("oc-e"+i)||{}).value||"";
+    var reg=(document.getElementById("oc-r"+i)||{}).value||"";
+    if(!nome && !tel)continue;
+    leads.unshift({id:Date.now()+i,nome:nome||"Contato",tel:tel||"",email:email,origem:"Foto/Documento",interesse:reg?("Região: "+reg):"A definir",temp:"frio",status:"novo",orcamento:"",obs:"Importado de foto (OCR)"+(reg?" · "+reg:""),data:new Date().toLocaleDateString("pt-BR"),hora:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),hist:[{a:"Lead importado de foto",d:"OCR",t:new Date().toLocaleString("pt-BR")}]});
+    n++;
+  }
+  saveLeads(leads);updateBadge();closeModal("modal-ocr");toast(n+" lead(s) cadastrado(s) da foto!");renderDash();
+}
+
 // INIT
 updateBadge();renderDash();
-</script>
-<script>
-(function(){ if(localStorage.getItem('pcCrmAuth')==='1') return;
- var o=document.createElement('div'); o.id='pc-login';
- o.style.cssText='position:fixed;inset:0;z-index:99999;background:#0f1e33;display:flex;align-items:center;justify-content:center;font-family:sans-serif';
- o.innerHTML='<div style="background:#fff;padding:38px 34px;border-radius:16px;width:320px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4)"><div style="font-size:34px">&#128274;</div><div style="font-weight:900;font-size:20px;color:#14213d;margin:8px 0 2px">CRM Paulo Cotrim</div><div style="font-size:12px;color:#888;margin-bottom:18px">Area do administrador</div><input id="pc-user" type="text" placeholder="Login" autocomplete="username" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px;text-align:center;box-sizing:border-box;margin-bottom:10px" onkeydown="if(event.key===&quot;Enter&quot;)pcLogin()"/><input id="pc-pass" type="password" placeholder="Senha" style="width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:15px;text-align:center;box-sizing:border-box" onkeydown="if(event.key===&quot;Enter&quot;)pcLogin()"/><button onclick="pcLogin()" style="width:100%;margin-top:12px;padding:12px;background:#C9A227;color:#14213d;font-weight:800;border:0;border-radius:10px;font-size:15px;cursor:pointer">Entrar</button><div id="pc-err" style="color:#c0392b;font-size:12px;margin-top:8px;height:14px"></div></div>';
- document.body.appendChild(o); document.body.style.overflow='hidden';
- setTimeout(function(){var p=document.getElementById('pc-pass');if(p)p.focus();},120);
-})();
-function pcLogin(){var u=((document.getElementById('pc-user')||{}).value||'').trim().toLowerCase();var v=(document.getElementById('pc-pass')||{}).value;if((u==='paulo'||u==='admin')&&v==='102030'){localStorage.setItem('pcCrmAuth','1');var o=document.getElementById('pc-login');if(o)o.remove();document.body.style.overflow='';}else{document.getElementById('pc-err').textContent='Login ou senha incorretos';}}
-function pcLogout(){localStorage.removeItem('pcCrmAuth');location.reload();}
-function extrairContatos(txt){var out=[];var lines=(txt||'').split(/\n|;/);var telRe=/(\(?\d{2}\)?[\s.-]?)?(?:9[\s.-]?)?\d{4}[-\s.]?\d{4}/;var mailRe=/[\w.+-]+@[\w-]+\.[\w.-]+/;
- lines.forEach(function(ln){ln=ln.trim();if(ln.length<6)return;var t=(ln.match(telRe)||[])[0];var m=(ln.match(mailRe)||[])[0];if(!t&&!m)return;var nome=ln.replace(telRe,'').replace(mailRe,'').replace(/[|,;:\-–]+/g,' ').replace(/\d/g,'').trim();nome=nome.split(/\s+/).slice(0,4).join(' ')||'Sem nome';out.push({nome:nome,tel:(t||'').replace(/\D/g,''),email:m||''});});
- var seen={};return out.filter(function(x){var k=x.tel||x.email;if(!k||seen[k])return false;seen[k]=1;return true;});}
-function extrairLeads(){var c=extrairContatos(document.getElementById('imp-text').value);var box=document.getElementById('imp-preview');
- if(!c.length){box.innerHTML='<div class="card"><div class="card-body">Nenhum contato encontrado. Confira a lista.</div></div>';return;}
- var rows=c.map(function(x,i){return '<tr><td><input value="'+x.nome+'" id="pv-n'+i+'" style="width:100%;border:0;background:transparent;font-weight:600"/></td><td>'+(x.tel||'&mdash;')+'</td><td>'+(x.email||'&mdash;')+'</td></tr>';}).join('');
- box.innerHTML='<div class="card"><div class="card-header"><div class="card-title">'+c.length+' contatos encontrados</div><button class="btn-primary" onclick="confirmarImport()">Adicionar '+c.length+' leads</button></div><div class="card-body" style="padding:0"><table class="lead-table"><thead><tr><th>Nome</th><th>Telefone</th><th>Email</th></tr></thead><tbody>'+rows+'</tbody></table></div></div>';
- window._impCache=c;}
-function confirmarImport(){var c=window._impCache||[];var reg=document.getElementById('imp-regiao').value;var org=document.getElementById('imp-origem').value;var leads=getLeads();var now=new Date();
- c.forEach(function(x,i){var n=document.getElementById('pv-n'+i);leads.unshift({id:Date.now()+i,nome:(n?n.value:x.nome),tel:x.tel,email:x.email,origem:org,regiao:reg,interesse:'A definir',temp:'frio',status:'novo',orcamento:'',obs:'Importado de lista ('+reg+')',data:now.toLocaleDateString('pt-BR'),hora:now.toLocaleTimeString('pt-BR',{hour:'2-digit',minute:'2-digit'}),hist:[{a:'Importado de lista fria',d:'Regiao: '+reg+' | Origem: '+org,t:now.toLocaleString('pt-BR')}]});});
- saveLeads(leads);toast(c.length+' leads adicionados!');document.getElementById('imp-text').value='';document.getElementById('imp-preview').innerHTML='';try{updateBadge()}catch(e){}goPage('leads');}
-function ocrImportar(inp){var f=inp.files[0];if(!f)return;var st=document.getElementById('imp-ocr-status');st.textContent=' Lendo imagem (pode levar alguns segundos)...';
- if(!window.Tesseract){var sc=document.createElement('script');sc.src='https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js';sc.onload=function(){runOcr(f,st)};document.head.appendChild(sc);}else runOcr(f,st);}
-function runOcr(f,st){Tesseract.recognize(f,'por').then(function(r){var ta=document.getElementById('imp-text');ta.value+=(ta.value?'\n':'')+r.data.text;st.textContent=' Foto lida! Organizando os contatos...';try{extrairLeads()}catch(e){}}).catch(function(){st.textContent=' Nao consegui ler. Tente colar o texto.';});}
-</script>
-<script>
-function buscaRenda(){
-  var renda=parseFloat((document.getElementById('bq-renda').value||'0').replace(/\D/g,''))||0;
-  var reg=(document.getElementById('bq-reg').value||'').toLowerCase();
-  var ims=getImoveis().filter(function(x){ return (x.rendaMin||0)<=renda*1.05 && (!reg || (x.loc||'').toLowerCase().indexOf(reg)>-1); });
-  ims.sort(function(a,b){return (b.rendaMin||0)-(a.rendaMin||0);});
-  var box=document.getElementById('bq-res');
-  if(!renda){box.innerHTML='<div class="card"><div class="card-body">Digite a renda.</div></div>';return;}
-  if(!ims.length){box.innerHTML='<div class="card"><div class="card-body">Nenhum empreendimento para essa renda'+(reg?' nessa regiao':'')+'. Tente uma renda maior ou tire o filtro de regiao.</div></div>';return;}
-  var top=ims.slice(0,6);
-  var cards=top.map(function(x){
-    return '<div class="card" style="margin-bottom:10px"><div class="card-body" style="display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap">'
-     +'<div style="flex:1;min-width:200px"><div style="font-weight:900;color:var(--navy3);font-size:15px">'+x.icon+' '+x.nome+'</div>'
-     +'<div style="font-size:12px;color:var(--muted)">'+x.loc+' &middot; '+x.tip+'</div>'
-     +'<div style="font-size:13px;margin-top:4px"><b style="color:#16a34a">'+x.preco+'</b> &middot; renda ideal ~R$ '+(x.rendaMin||0).toLocaleString('pt-BR')+'</div>'
-     +'<div style="font-size:11px;color:var(--muted)">&#128205; Stand: '+x.ender+'</div></div>'
-     +'<div style="display:flex;gap:8px;flex-wrap:wrap">'
-     +'<a class="btn-sm" href="https://www.paulocotrim.com/'+x.url+'" target="_blank">Ver no site</a>'
-     +'<button class="btn-primary" onclick="zapResumo(&quot;'+x.url+'&quot;)">&#128241; Enviar resumo</button>'
-     +'</div></div></div>';
-  }).join('');
-  box.innerHTML='<div style="font-size:13px;color:var(--muted);margin-bottom:8px">'+ims.length+' empreendimentos cabem nessa renda (mostrando os '+top.length+' de maior valor):</div>'+cards;
-}
-function zapResumo(url){var x=getImoveis().find(function(i){return i.url===url});if(!x){return;}var rmin=(x.rendaMin||0).toLocaleString("pt-BR");var L=[];L.push("Oi! Separei um imovel que combina com voce \uD83D\uDD11");L.push("");L.push("*"+x.nome+"* - "+x.loc);L.push("\uD83C\uDFE0 "+x.tip);L.push("\uD83D\uDCB0 A partir de "+x.preco);L.push("\uD83D\uDCCA Renda ideal ~R$ "+rmin);L.push("\uD83D\uDCCD Stand: "+x.ender);L.push("");L.push("Veja fotos, planta e simule com a sua renda:");L.push("https://www.paulocotrim.com/"+x.url);L.push("");L.push("Uber, 99 e iFood contam como renda. Entrada parcelada e, no MCMV, ITBI e RGI de graca. Quer que eu simule com a SUA renda agora?");var msg=encodeURIComponent(L.join("\n"));window.open("https://wa.me/?text="+msg,"_blank");}
-</script>
-<script>
-function backupCRM(){var data={leads:getLeads(),imoveis:getImoveis(),data:new Date().toISOString()};var blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});var a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="backup-crm-paulocotrim-"+new Date().toISOString().slice(0,10)+".json";a.click();try{toast("Backup baixado! Guarde este arquivo.")}catch(e){}}
-function restoreCRM(inp){var f=inp.files[0];if(!f)return;var r=new FileReader();r.onload=function(){try{var d=JSON.parse(r.result);if(d.leads){saveLeads(d.leads)}if(d.imoveis){saveImoveis(d.imoveis)}try{toast("Backup restaurado!")}catch(e){}setTimeout(function(){location.reload()},700);}catch(e){try{toast("Arquivo invalido")}catch(x){}}};r.readAsText(f);}
-</script>
-<script>
-(function(){
- function daysAgo(id){return (Date.now()-(+id||Date.now()))/86400000;}
- var _gp=window.goPage;
- window.goPage=function(id){_gp(id);if(id==='dashboard')setTimeout(injectFU,60);};
- function injectFU(){
-   var page=document.getElementById('page-dashboard');if(!page)return;var oldc=document.getElementById('fu-card');if(oldc)oldc.remove();
-   var ls=getLeads().filter(function(l){var st=(l.status||'').toLowerCase();return st!=='fechado'&&st!=='perdido'&&daysAgo(l.id)>=2;});
-   ls.sort(function(a,b){return a.id-b.id;});
-   var rows=ls.slice(0,8).map(function(l){var d=Math.floor(daysAgo(l.id));return '<div style="display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #eef1f6;gap:10px;flex-wrap:wrap"><div><b>'+(l.nome||'-')+'</b> <span style="color:#c0392b;font-size:12px">&#128293; '+d+'d sem contato</span><br><span style="font-size:12px;color:#888">'+(l.regiao||l.interesse||'')+' &middot; '+(l.tel||'')+'</span></div><div style="display:flex;gap:6px"><button class="btn-sm" onclick="ligar('+l.id+')">Ligar</button><button class="btn-primary" onclick="zap('+l.id+')">WhatsApp</button></div></div>';}).join('');
-   var card=document.createElement('div');card.className='card';card.id='fu-card';card.style.marginBottom='16px';card.style.borderLeft='4px solid #C9A227';
-   card.innerHTML='<div class="card-header"><div><div class="card-title">&#9200; Follow-up &mdash; leads esfriando ('+ls.length+')</div><div class="card-sub">Contate hoje pra nao perder a venda</div></div></div><div class="card-body">'+(ls.length?rows:'<div style="color:#16a34a;font-weight:700">Tudo em dia! Nenhum lead esquecido. &#9989;</div>')+'</div>';
-   page.insertBefore(card,page.children[1]||null);
- }
- try{var last=localStorage.getItem('pcLastBackup');var need=!last||(Date.now()-(+last))>7*86400000;var ta=document.querySelector('.tactions');
-   if(ta&&!document.getElementById('bkp-top')){var w=document.createElement('span');w.id='bkp-top';w.innerHTML='<button class="btn-sm" onclick="backupCRM()" style="margin-right:8px">&#128190; Backup'+(need?' <b style="color:#c0392b">!</b>':'')+'</button>';ta.insertBefore(w,ta.firstChild);}
- }catch(e){}
- var _bk=window.backupCRM;window.backupCRM=function(){_bk();try{localStorage.setItem('pcLastBackup',Date.now());var b=document.querySelector('#bkp-top button');if(b)b.innerHTML='&#128190; Backup';}catch(e){}};
- try{var L=getLeads();var ch=false;L.forEach(function(l){var st=(l.status||'').toLowerCase();if(st==='fechado'||st==='perdido')return;var d=daysAgo(l.id);var t=d<1?'quente':d<3?'morno':'frio';if(l.temp!==t){l.temp=t;ch=true;}});if(ch)saveLeads(L);}catch(e){}
- setTimeout(function(){var dp=document.getElementById('page-dashboard');if(dp&&dp.classList.contains('active'))injectFU();},500);
-})();
 </script>
 </body>
 </html>
