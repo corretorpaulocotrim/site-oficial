@@ -15,8 +15,10 @@
       ua: navigator.userAgent.substring(0,80)
     }, dados || {});
 
+    // Espelha o mesmo evento pro GA4/Meta Pixel (tracking-config.js), se configurado
     if(window.trackEvent) window.trackEvent(evento, dados||{});
 
+    // Beacon API (non-blocking, works on page unload)
     if(navigator.sendBeacon){
       var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
       navigator.sendBeacon(SHEET_URL, blob);
@@ -30,18 +32,24 @@
     }
   }
 
+  // ─── EVENTOS AUTOMÁTICOS ─────────────────────────────────────────────
+
+  // 1. Visualização de página
   window.addEventListener('DOMContentLoaded', function(){
     capture('pagina_visualizada', {titulo: document.title});
   });
 
+  // 2. Mapa: propriedade clicada (disparado pelo mapa Órulo)
   window.leadMapaClick = function(imovel){
     capture('mapa_imovel_clicado', {imovel: imovel});
   };
 
+  // 3. Simulador usado
   window.leadSimulador = function(tipo){
     capture('simulador_usado', {simulador: tipo});
   };
 
+  // 4. Botão WhatsApp clicado (qualquer botão WA)
   document.addEventListener('click', function(e){
     var el = e.target.closest('a[href*="wa.me"]');
     if(el){
@@ -50,18 +58,17 @@
     }
   });
 
+  // 5. Formulário de contato enviado
   window.leadFormulario = function(nome, telefone, interesse){
     capture('formulario_enviado', {nome: nome||'', telefone: telefone||'', interesse: interesse||''});
   };
 
+  // 6. Tabela Direta usada
   window.leadTabelaDireta = function(empreendimento, tipologia, valor){
     capture('tabela_direta_calculada', {empreendimento: empreendimento||'', tipologia: tipologia||'', valor: valor||''});
   };
 
-  window.leadNewsletter = function(email){
-    capture('newsletter_inscricao', {email: email||''});
-  };
-
+  // 7. Scroll 50% — engajamento
   var scroll50fired = false;
   window.addEventListener('scroll', function(){
     if(!scroll50fired && (window.scrollY/(document.body.scrollHeight-window.innerHeight))>.5){
@@ -70,10 +77,15 @@
     }
   }, {passive:true});
 
+  // 8. Popup de engajamento — benefícios do Minha Casa Minha Vida
+  // Aparece uma vez por sessão, depois de 2 minutos de navegação no site,
+  // em qualquer página (leads.js é carregado em todas). Objetivo: reforçar,
+  // no momento em que a pessoa já demonstrou interesse (ficou navegando),
+  // os benefícios de comprar dentro do MCMV — gatilho de reciprocidade/
+  // educação que ajuda a converter em lead.
   (function(){
     if(sessionStorage.getItem('mcmv_popup_shown')) return;
-    if(sessionStorage.getItem('featuredPopupShown')) return; /* teto: 1 popup por sessão */
-    if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return;
+    if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return; // não interromper fluxos de conversão já em andamento
     setTimeout(function(){
       if(sessionStorage.getItem('mcmv_popup_shown')) return;
       sessionStorage.setItem('mcmv_popup_shown','1');
@@ -110,11 +122,18 @@
   }
   function mcmvBenefit(titulo, desc){
     return '<li style="display:flex;gap:11px;align-items:flex-start">'
-      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a8f4c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
+      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3E8E5A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
       +'<span style="font-size:13.5px;color:#0f2e36;line-height:1.5"><b>'+titulo+'</b><br><span style="color:#6b7280">'+desc+'</span></span>'
       +'</li>';
   }
 
+  // 9. Popup de saída (exit-intent) — captura quem já ia embora
+  // Desktop: dispara quando o mouse sai por cima da janela (indicando que a
+  // pessoa está indo fechar a aba ou trocar de aba). Mobile: não existe
+  // "mouse saindo", então usamos um proxy — inatividade de 40s combinada com
+  // ter rolado pelo menos uma tela — como sinal de que a pessoa está prestes
+  // a sair sem converter. Só uma vez por sessão, e só depois de pelo menos
+  // 15s no site (pra não disparar em quem só passou de raspão).
   (function(){
     if(sessionStorage.getItem('exitPopupShown'))return;
     if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname))return;
@@ -163,6 +182,7 @@
     document.getElementById('exitPopupCta').addEventListener('click', function(){ capture('exit_popup_clicado'); });
   }
 
+  // Indicador de horário/online perto do botão flutuante do WhatsApp
   (function(){
     var waBtn = document.querySelector('.wafloat');
     if(!waBtn) return;
@@ -194,6 +214,7 @@
     }
   })();
 
+  // Gatilho de escassez honesto — baseado no status real do empreendimento (sem números inventados)
   (function(){
     var badge = document.querySelector('.hero-status');
     if(!badge || document.getElementById('scarcityNote')) return;
@@ -210,12 +231,14 @@
     badge.insertAdjacentElement('afterend', note);
   })();
 
+  // Captura de lead (nome + WhatsApp) antes do primeiro redirecionamento à conversa
   (function(){
     if(/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname)) return;
     document.addEventListener('click', function(e){
       var link = e.target.closest && e.target.closest('a[href*="wa.me"]');
       if(!link) return;
-      if(sessionStorage.getItem('waLeadCaptured')) return;
+      if(sessionStorage.getItem('waLeadCaptured')) return; // já capturou nesta sessão, deixa passar direto
+      // CTAs dentro dos popups de mcmv/exit-intent/destaque já são o próprio momento de captura — não empilhar outro formulário
       if(link.closest('#mcmvPopupOverlay, #exitPopupOverlay, #featuredPopupOverlay')) return;
       e.preventDefault();
       showWaLeadModal(link.href);
@@ -252,7 +275,7 @@
         var fone = (document.getElementById('waLeadFone').value||'').trim();
         if(wantsCallback){
           var horario = document.getElementById('waLeadHorario').value;
-          if(!fone){ document.getElementById('waLeadFone').focus(); return; }
+          if(!fone){ document.getElementById('waLeadFone').focus(); return; } // telefone é obrigatório pra pedir ligação
           capture('pedido_de_ligacao', {nome: nome, telefone: fone, horario: horario});
           var msg = 'Olá! Meu nome é ' + (nome||'(não informado)') + ', meu telefone é ' + fone + ' e prefiro ser contatado no período: ' + horario + '. Pode me ligar?';
           wrap.remove();
@@ -282,6 +305,7 @@
     }
   })();
 
+  // FAQ Schema (dados estruturados) — gerado a partir do conteúdo real de "Perguntas frequentes" da página
   (function(){
     var items = document.querySelectorAll('.faq-item');
     if(!items.length) return;
@@ -306,6 +330,7 @@
     script.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: faq });
     document.head.appendChild(script);
 
+    // cross-link pro Guia do Comprador — mantém quem tem mais dúvidas dentro do site, em vez de sair pesquisando
     if(!/guia-do-comprador/.test(location.pathname)){
       var faqWrap = items[0].closest('.wrap') || items[0].parentElement;
       var xlink = document.createElement('p');
@@ -315,18 +340,19 @@
     }
   })();
 
+  // Structured data RealEstateListing — enriquece o JSON-LD já existente com imagem e faixa de preço reais
   (function(){
     var existing = document.querySelector('script[type="application/ld+json"]');
     if(!existing) return;
     var base;
     try{ base = JSON.parse(existing.textContent); }catch(e){ return; }
-    if(!base || base['@type'] !== 'Residence' || !base.name) return;
+    if(!base || base['@type'] !== 'Residence' || !base.name) return; // só roda nas páginas de empreendimento
 
     var img = document.querySelector('#heroLb img');
     var priceScope = document.querySelector('.tipo-table');
     var offers;
     if(priceScope){
-      var nums = (priceScope.innerText.match(/R\$\s?[\d.]+/g) || [])
+      var nums = (priceScope.innerText.match(/R\$\s?[\d.,]+/g) || [])
         .map(function(s){ return parseInt(s.replace(/[^\d]/g,''),10); })
         .filter(function(n){ return n > 30000 && n < 20000000; });
       if(nums.length){
@@ -343,6 +369,7 @@
     if(img && img.src) listing.image = img.src;
     if(offers) listing.offers = offers;
 
+    // quartos/m² reais, extraídos da mesma tabela (nada inventado)
     if(priceScope){
       var txt = priceScope.innerText;
       var m2 = (txt.match(/(\d+(?:,\d+)?)\s*m²/g) || []).map(function(s){ return parseFloat(s.replace(',','.').replace(/\s*m²/,'')); }).filter(function(n){ return n > 10 && n < 1000; });
@@ -361,6 +388,7 @@
     document.head.appendChild(script);
   })();
 
+  // Breadcrumbs (visual discreto no hero + schema.org BreadcrumbList)
   (function(){
     var heroC = document.querySelector('.hero-c');
     var h1 = heroC ? heroC.querySelector('h1') : null;
@@ -399,6 +427,7 @@
     document.head.appendChild(s);
   })();
 
+  // Botão de compartilhar (Web Share API com fallback de copiar link) + registro de "visto recentemente"
   (function(){
     var heroC = document.querySelector('.hero-c');
     var h1 = heroC ? heroC.querySelector('h1') : null;
@@ -406,6 +435,7 @@
     var pageName = h1.textContent.trim();
     if(!pageName) return;
 
+    // registra em "vistos recentemente" (lido pela home)
     try{
       var img = document.querySelector('#heroLb img');
       var list = JSON.parse(localStorage.getItem('recentlyViewed') || '[]');
@@ -415,6 +445,7 @@
       localStorage.setItem('recentlyViewed', JSON.stringify(list));
     }catch(e){}
 
+    // botão de compartilhar, ao lado do breadcrumb
     var shareBtn = document.createElement('button');
     shareBtn.setAttribute('aria-label', 'Compartilhar');
     shareBtn.setAttribute('style', 'margin-left:10px;display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.16);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.3);color:#fff;font-size:11.5px;font-weight:600;padding:5px 11px;border-radius:20px;cursor:pointer;vertical-align:middle');
@@ -430,6 +461,7 @@
         }).catch(function(){});
       }
     };
+    // selo de verificação CRECI (link real de consulta pública)
     var creciBadge = document.createElement('a');
     creciBadge.href = 'https://servico.creci-rj.gov.br/spw/ConsultaCadastral/TelaConsultaPubCompleta.aspx';
     creciBadge.target = '_blank';
@@ -441,6 +473,7 @@
     if(bcNav){ bcNav.appendChild(shareBtn); bcNav.appendChild(creciBadge); }
     else { heroC.insertBefore(creciBadge, heroC.firstChild); heroC.insertBefore(shareBtn, heroC.firstChild); }
 
+    // botão de favoritar (coração) — some junto com o breadcrumb, sempre visível
     function getFavorites(){ try{ return JSON.parse(localStorage.getItem('favoritos')||'[]'); }catch(e){ return []; } }
     function setFavorites(list){ try{ localStorage.setItem('favoritos', JSON.stringify(list)); }catch(e){} window.updateFavCounter && window.updateFavCounter(); }
     var favBtn = document.createElement('button');
@@ -468,9 +501,12 @@
     else heroC.insertBefore(favBtn, heroC.firstChild);
   })();
 
+  // Contador de favoritos + painel (ícone fixo, sitewide)
   (function(){
     function getFavorites(){ try{ return JSON.parse(localStorage.getItem('favoritos')||'[]'); }catch(e){ return []; } }
     var favStyle = document.createElement('style');
+    // no mobile a sticky-cta (barra de "Falar com Paulo") ocupa os últimos ~70px da tela,
+    // então o botão de favoritos sobe pra não ficar em cima dela
     favStyle.textContent = '#favCounterWrap{position:fixed;z-index:996;bottom:26px;left:20px;display:none}'
       + '@media(max-width:760px){#favCounterWrap{bottom:96px}}';
     document.head.appendChild(favStyle);
@@ -516,12 +552,10 @@
     };
   })();
 
+  // Banner de consentimento de cookies (LGPD)
   (function(){
     try{
-      if(document.getElementById('cookie-bar')) return;
-      var saved = localStorage.getItem('pc_cookie_consent');
-      if(saved === 'all'){ if(window.__initTrackingScripts) window.__initTrackingScripts(); return; }
-      if(saved) return;
+      if(localStorage.getItem('cookieConsent')) return; // já respondeu antes (aceitou ou recusou)
     }catch(e){ return; }
     var bar = document.createElement('div');
     bar.id = 'cookieConsentBar';
@@ -534,16 +568,17 @@
       + '</div>';
     document.body.appendChild(bar);
     document.getElementById('cookieAccept').onclick = function(){
-      try{ localStorage.setItem('pc_cookie_consent','all'); }catch(e){}
+      try{ localStorage.setItem('cookieConsent','accepted'); }catch(e){}
       if(window.__initTrackingScripts) window.__initTrackingScripts();
       bar.remove();
     };
     document.getElementById('cookieDecline').onclick = function(){
-      try{ localStorage.setItem('pc_cookie_consent','essential'); }catch(e){}
+      try{ localStorage.setItem('cookieConsent','declined'); }catch(e){}
       bar.remove();
     };
   })();
 
+  // Structured data Person/RealEstateAgent — reforço de autoridade (E-E-A-T) sitewide
   (function(){
     if(document.getElementById('personSchemaLd')) return;
     var s = document.createElement('script');
@@ -554,7 +589,7 @@
       '@type': 'RealEstateAgent',
       name: 'Paulo Cotrim',
       description: 'Corretor de imóveis com 18 anos de experiência, especialista em financiamento imobiliário e Minha Casa Minha Vida no Rio de Janeiro.',
-      url: 'https://paulocotrim.com/',
+      url: 'https://paulocotrim.com.br/',
       email: 'corretorpaulocotrim@gmail.com',
       areaServed: { '@type': 'City', name: 'Rio de Janeiro' },
       identifier: 'CRECI-RJ 77677-F'
@@ -562,6 +597,7 @@
     document.head.appendChild(s);
   })();
 
+  // Structured data Organization — a prática/marca de Paulo Cotrim como negócio (complementa o Person)
   (function(){
     if(document.getElementById('orgSchemaLd')) return;
     var s = document.createElement('script');
@@ -571,8 +607,8 @@
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'Paulo Cotrim — Inteligência Imobiliária',
-      url: 'https://paulocotrim.com/',
-      logo: 'https://paulocotrim.com/logo-wordmark.png',
+      url: 'https://paulocotrim.com.br/',
+      logo: 'https://paulocotrim.com.br/logo-wordmark.png',
       founder: { '@type': 'Person', name: 'Paulo Cotrim' },
       areaServed: { '@type': 'City', name: 'Rio de Janeiro' },
       contactPoint: { '@type': 'ContactPoint', contactType: 'vendas', email: 'corretorpaulocotrim@gmail.com', telephone: '+5521989150864', availableLanguage: 'pt-BR' }
@@ -580,6 +616,8 @@
     document.head.appendChild(s);
   })();
 
+  // Folha de estilo de impressão — esconde nav/popups/botões, mantém ficha técnica e tabela de preços
+  // (muita gente ainda imprime ou salva em PDF a tabela pra levar pro banco)
   (function(){
     var style = document.createElement('style');
     style.textContent = '@media print {'
@@ -593,6 +631,8 @@
     document.head.appendChild(style);
   })();
 
+  // Acessibilidade: foto do hero é clicável (abre lightbox) mas era só <div onclick>,
+  // sem foco de teclado. Adiciona role/tabindex/Enter-Space pra quem navega sem mouse.
   (function(){
     var heroBg = document.querySelector('.hero-bg');
     if(!heroBg || !heroBg.getAttribute('onclick')) return;
@@ -607,6 +647,7 @@
     });
   })();
 
+  // Acessibilidade: aria-expanded correto no botão de menu mobile (hambúrguer)
   (function(){
     var burger = document.querySelector('.burger');
     var mnav = document.getElementById('mnav');
@@ -620,6 +661,7 @@
     });
   })();
 
+  // Loading skeleton (shimmer) pro mapa e pro simulador enquanto carregam — evita tela em branco/pulando
   (function(){
     var style = document.createElement('style');
     style.textContent = '@keyframes skeletonShimmer{0%{background-position:-400px 0}100%{background-position:400px 0}}'
@@ -627,89 +669,19 @@
     document.head.appendChild(style);
   })();
 
+  // Padrão de fonte da marca (Fraunces) nos links/menu + menu uniforme
   (function(){
-    if(window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return;
-    if(navigator.standalone) return;
-    var deferredPrompt = null;
-    var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent) && !window.MSStream;
-
-    window.addEventListener('beforeinstallprompt', function(e){
-      e.preventDefault();
-      deferredPrompt = e;
-      if(!/aprovacao-expressa|simulador|documentos|admin|crm/.test(location.pathname) && !localStorage.getItem('pwaInstallDismissed')){
-        setTimeout(showInstallBanner, 20000);
-      }
-    });
-    window.addEventListener('appinstalled', function(){
-      localStorage.setItem('pwaInstallDismissed','1');
-      capture('pwa_instalado');
-      var b = document.getElementById('pwaInstallBanner');
-      if(b) b.remove();
-    });
-
-    function showIOSInstructions(){
-      if(document.getElementById('pwaIOSModal')) return;
-      var style = document.createElement('style');
-      style.textContent = '@keyframes pwaSlideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}';
-      document.head.appendChild(style);
-      var overlay = document.createElement('div');
-      overlay.id = 'pwaIOSModal';
-      overlay.setAttribute('style','position:fixed;inset:0;z-index:9999;background:rgba(9,20,24,.72);display:flex;align-items:flex-end;justify-content:center');
-      overlay.innerHTML = '<div style="background:#fff;border-radius:20px 20px 0 0;padding:28px 24px 32px;max-width:440px;width:100%;font-family:Inter,system-ui,sans-serif;animation:pwaSlideUp .35s cubic-bezier(.16,1,.3,1)">'
-        + '<div style="font-size:15px;font-weight:800;color:#0f2e36;margin-bottom:16px">Como instalar no iPhone</div>'
-        + '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px"><div style="width:26px;height:26px;border-radius:8px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#1a8f4c">1</div><div style="font-size:13.5px;color:#374151;line-height:1.5">Toque no ícone de compartilhar <svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#1a8f4c;fill:none;stroke-width:2;vertical-align:-2px;display:inline-block"><path d="M12 3v13m0-13l-4 4m4-4l4 4M5 12v7a2 2 0 002 2h10a2 2 0 002-2v-7"/></svg> na barra do Safari</div></div>'
-        + '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:14px"><div style="width:26px;height:26px;border-radius:8px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#1a8f4c">2</div><div style="font-size:13.5px;color:#374151;line-height:1.5">Escolha <strong>Adicionar à Tela de Início</strong></div></div>'
-        + '<div style="display:flex;align-items:flex-start;gap:12px;margin-bottom:22px"><div style="width:26px;height:26px;border-radius:8px;background:#eaf5ee;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:12px;font-weight:800;color:#1a8f4c">3</div><div style="font-size:13.5px;color:#374151;line-height:1.5">Toque em <strong>Adicionar</strong> — pronto, o app fica na sua tela</div></div>'
-        + '<button type="button" id="pwaIOSClose" style="width:100%;background:#1a8f4c;color:#fff;border:none;padding:13px;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer">Entendi</button>'
-        + '</div>';
-      document.body.appendChild(overlay);
-      capture('pwa_ios_instrucoes_exibidas');
-      overlay.addEventListener('click', function(e){ if(e.target===overlay) overlay.remove(); });
-      document.getElementById('pwaIOSClose').addEventListener('click', function(){ overlay.remove(); });
-    }
-
-    window.pcInstallApp = function(){
-      capture('pwa_campanha_clicada');
-      if(deferredPrompt){
-        deferredPrompt.prompt();
-        deferredPrompt.userChoice.then(function(choice){ capture('pwa_prompt_resultado', {escolha:choice.outcome}); });
-        deferredPrompt = null;
-        return;
-      }
-      if(isIOS){ showIOSInstructions(); return; }
-      alert('Para instalar, abra o menu do seu navegador (⋮ ou ...) e escolha "Instalar aplicativo" ou "Adicionar à tela inicial".');
-    };
-
-    function showInstallBanner(){
-      if(document.getElementById('pwaInstallBanner')) return;
-      var style = document.createElement('style');
-      style.textContent = '@keyframes pwaSlideUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}';
-      document.head.appendChild(style);
-      var el = document.createElement('div');
-      el.id = 'pwaInstallBanner';
-      el.setAttribute('style','position:fixed;left:16px;right:16px;bottom:16px;z-index:9998;max-width:420px;margin:0 auto;background:#0f2e36;color:#fff;border-radius:14px;padding:16px 18px;display:flex;align-items:center;gap:12px;box-shadow:0 14px 40px rgba(15,46,54,.4);font-family:Inter,system-ui,sans-serif;animation:pwaSlideUp .4s cubic-bezier(.16,1,.3,1)');
-      el.innerHTML = ''
-        + '<div style="width:40px;height:40px;border-radius:11px;background:rgba(26,143,76,.2);display:flex;align-items:center;justify-content:center;flex-shrink:0"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#3ddc84" stroke-width="2"><path d="M12 3v13m0 0l-4-4m4 4l4-4M5 21h14"/></svg></div>'
-        + '<div style="flex:1;min-width:0"><div style="font-size:13px;font-weight:700;margin-bottom:2px">Instalar o site como app</div><div style="font-size:11.5px;color:rgba(255,255,255,.65);line-height:1.4">O app é o próprio site — leve, rápido, sem baixar nada de loja. Acesso em 1 toque na tela inicial.</div></div>'
-        + '<div style="display:flex;flex-direction:column;gap:6px;flex-shrink:0">'
-        + '  <button id="pwaInstallBtn" style="background:#1a8f4c;color:#fff;border:none;padding:8px 14px;border-radius:8px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap">Instalar</button>'
-        + '  <button id="pwaInstallClose" aria-label="Fechar" style="background:none;border:none;color:rgba(255,255,255,.5);font-size:11px;cursor:pointer;text-decoration:underline">Agora não</button>'
-        + '</div>';
-      document.body.appendChild(el);
-      capture('pwa_banner_exibido');
-      document.getElementById('pwaInstallBtn').addEventListener('click', function(){
-        el.remove();
-        localStorage.setItem('pwaInstallDismissed','1');
-        window.pcInstallApp();
-      });
-      document.getElementById('pwaInstallClose').addEventListener('click', function(){
-        el.remove();
-        localStorage.setItem('pwaInstallDismissed','1');
-        capture('pwa_banner_dispensado');
-      });
-    }
+    if(document.getElementById('pcFontStd')) return;
+    var st=document.createElement('style'); st.id='pcFontStd';
+    st.textContent=
+      '.nav-links a,header .brand,.brand small{font-family:\'Fraunces\',Georgia,serif !important}'
+      +'.nav-links a{font-size:14px !important;font-weight:600 !important;white-space:nowrap !important;letter-spacing:.005em}'
+      +'header .brand{letter-spacing:.02em}'
+      +'.btn-gold,.btn-green,.btn-ghost,.sc-btn,.cta-band a,.hero-cta .btn,a.btn,button.btn,.rg-card span,.sticky-cta a{font-family:\'Fraunces\',Georgia,serif !important;font-weight:600 !important}';
+    document.head.appendChild(st);
   })();
 
+  // Expor para uso externo
   window.leadCapture = capture;
 })();
 
@@ -725,6 +697,7 @@
 
   var WA_NUM = '5521989150864';
 
+  /* ---------- 1) SELO DE CONFIANÇA VISUAL ---------- */
   (function(){
     var bar = document.querySelector('.trust-bar');
     if(!bar || document.getElementById('trustSealBlock')) return;
@@ -733,10 +706,11 @@
     seal.setAttribute('style','display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 16px;margin-top:12px;max-width:fit-content');
     seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#cf9f4f;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
       + '<div style="line-height:1.35"><div style="font-size:12.5px;font-weight:800;color:#fff">Corretor Oficial · CRECI-RJ 77677-F</div>'
-      + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 700+ famílias atendidas · Especialista em MCMV e financiamento imobiliário</div></div>';
+      + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 700+ famílias atendidas · Especialista em MCMV</div></div>';
     bar.insertAdjacentElement('afterend', seal);
   })();
 
+  /* ---------- 2) DATA DE VERIFICAÇÃO DA TABELA DE PREÇOS ---------- */
   (function(){
     var tabs = document.querySelectorAll('.tipo-table');
     if(!tabs.length) return;
@@ -751,6 +725,7 @@
     });
   })();
 
+  /* ---------- 3) BARRA FIXA DE CONTATO MULTI-AÇÃO (desktop + mobile) ---------- */
   (function(){
     var cta = document.querySelector('.sticky-cta');
     if(!cta || cta.dataset.upgraded) return;
@@ -765,9 +740,10 @@
     var waHref = oldLink ? oldLink.getAttribute('href') : ('https://wa.me/'+WA_NUM);
     cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
       + '<a class="sc-btn" style="background:#0f2e36;color:#fff" href="simulador.html">Simular financiamento</a>'
-      + '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
+      + '<a class="sc-btn" style="background:#b8873a;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
   })();
 
+  /* ---------- 4) COMPARADOR ENTRE PÁGINAS (até 3 imóveis) ---------- */
   (function(){
     var KEY = 'pc_compare_v2';
     function getList(){ try{ return JSON.parse(localStorage.getItem(KEY)||'[]'); }catch(e){ return []; } }
@@ -789,7 +765,7 @@
       var list = getList();
       var on = list.some(function(i){ return i.url === thisItem.url; });
       btn.textContent = on ? '✓ Adicionado à comparação' : '+ Comparar este imóvel';
-      btn.setAttribute('style','position:fixed;right:16px;bottom:150px;z-index:650;background:'+(on?'#1a8f4c':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#1a8f4c':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
+      btn.setAttribute('style','position:fixed;right:16px;bottom:90px;z-index:650;background:'+(on?'#1a8f4c':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#1a8f4c':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
     }
     renderBtn();
     btn.addEventListener('click', function(){
@@ -866,551 +842,4 @@
     document.getElementById('pcCompareCloseBtn').addEventListener('click', function(){ modal.classList.remove('show'); });
     renderBar();
   })();
-})();
-
-// ===== Empreendimentos Relacionados =====
-var REL_CATALOG = [
-  {nome:'Farol da Guanabara',url:'farol-da-guanabara.html',bairro:'Santo Cristo · Porto Maravilha',primary:'Santo Cristo',secondary:'Porto Maravilha'},
-  {nome:'Arcos do Porto',url:'arcos-do-porto.html',bairro:'Porto Maravilha',primary:'Porto Maravilha',secondary:'Porto Maravilha'},
-  {nome:'Orla Central',url:'orla-central.html',bairro:'Centro · Niterói',primary:'Centro',secondary:'Niterói'},
-  {nome:'Parque Piedade',url:'parque-piedade.html',bairro:'Piedade · Zona Norte',primary:'Piedade',secondary:'Zona Norte'},
-  {nome:'Luzes do Rio Lamparina',url:'luzes-do-rio-lamparina.html',bairro:'São Cristóvão',primary:'São Cristóvão',secondary:'São Cristóvão'},
-  {nome:'Caminhos da Guanabara',url:'caminhos-da-guanabara.html',bairro:'Pendotiba · Niterói',primary:'Pendotiba',secondary:'Niterói'},
-  {nome:'Cartola II',url:'cartola-ii.html',bairro:'São Cristóvão',primary:'São Cristóvão',secondary:'São Cristóvão'},
-  {nome:'Luzes do Rio Candeeiro',url:'luzes-do-rio-candeeiro.html',bairro:'São Cristóvão',primary:'São Cristóvão',secondary:'São Cristóvão'},
-  {nome:'A Noite',url:'emp-a-noite.html',bairro:'Praça Mauá, 7 · Centro',primary:'Praça Mauá, 7',secondary:'Centro'},
-  {nome:'Saudosa Praça Onze',url:'emp-saudosa-praca-onze.html',bairro:'Praça Onze · Centro',primary:'Praça Onze',secondary:'Centro'},
-  {nome:'Alma Carioca',url:'emp-alma-carioca.html',bairro:'Vila Valqueire · Zona Norte',primary:'Vila Valqueire',secondary:'Zona Norte'},
-  {nome:'Beon Porto Residencial',url:'emp-beon-porto.html',bairro:'São Cristóvão · Zona Norte',primary:'São Cristóvão',secondary:'Zona Norte'},
-  {nome:'Brise Studios Design',url:'emp-brise-studios.html',bairro:'Praça Pio X · Centro',primary:'Praça Pio X',secondary:'Centro'},
-  {nome:'Conquista Florianópolis',url:'emp-conquista-florianopolis.html',bairro:'Praça Seca · Jacarepaguá',primary:'Praça Seca',secondary:'Jacarepaguá'},
-  {nome:'Cores do Rio Residencial',url:'emp-cores-do-rio.html',bairro:'Centro',primary:'Centro',secondary:'Centro'},
-  {nome:'CTV Beat',url:'emp-ctv-beat.html',bairro:'Madureira · Zona Norte',primary:'Madureira',secondary:'Zona Norte'},
-  {nome:'CTV Vitória',url:'emp-ctv-vitoria.html',bairro:'Campinho · Zona Norte',primary:'Campinho',secondary:'Zona Norte'},
-  {nome:'East Side Harmony',url:'emp-east-side-harmony.html',bairro:'Méier · Zona Norte',primary:'Méier',secondary:'Zona Norte'},
-  {nome:'Wish Norte (Living)',url:'emp-living-wish-norte.html',bairro:'Cachambi · Zona Norte',primary:'Cachambi',secondary:'Zona Norte'},
-  {nome:'Meu Crescer Engenhão',url:'emp-meu-crescer-engenhao.html',bairro:'Engenho de Dentro · Zona Norte',primary:'Engenho de Dentro',secondary:'Zona Norte'},
-  {nome:'Only by Living',url:'emp-only-by-living.html',bairro:'Cachambi · Zona Norte',primary:'Cachambi',secondary:'Zona Norte'},
-  {nome:'Primor Carioca',url:'emp-primor-carioca.html',bairro:'Inhaúma · Zona Norte',primary:'Inhaúma',secondary:'Zona Norte'},
-  {nome:'Sal Rio Residencial',url:'emp-sal-rio.html',bairro:'Saúde · Porto Maravilha',primary:'Saúde',secondary:'Porto Maravilha'},
-  {nome:'URB Sole',url:'emp-urb-sole.html',bairro:'Todos os Santos · Zona Norte',primary:'Todos os Santos',secondary:'Zona Norte'},
-  {nome:'Village Caribe 1',url:'emp-village-caribe.html',bairro:'Praça Seca · Jacarepaguá',primary:'Praça Seca',secondary:'Jacarepaguá'},
-  {nome:'Vivaz Connection',url:'emp-vivaz-connection.html',bairro:'Riachuelo · Zona Norte',primary:'Riachuelo',secondary:'Zona Norte'},
-  {nome:'Vivaz Rua Honório',url:'emp-vivaz-honorio.html',bairro:'Todos os Santos · Zona Norte',primary:'Todos os Santos',secondary:'Zona Norte'},
-  {nome:'Império do Ouro',url:'emp-imperio-do-ouro.html',bairro:'Rio do Ouro · São Gonçalo',primary:'Rio do Ouro',secondary:'São Gonçalo'},
-  {nome:'Ritmos de Pilares',url:'emp-ritmos-de-pilares.html',bairro:'Pilares · Rio de Janeiro',primary:'Pilares',secondary:'Rio de Janeiro'},
-  {nome:'Encantos da Zona Norte',url:'emp-encantos-da-zona-norte.html',bairro:'Região de Bonsucesso · Rio de Janeiro',primary:'Região de Bonsucesso',secondary:'Rio de Janeiro'},
-  {nome:'Reserva Redentor',url:'emp-reserva-redentor.html',bairro:'Rocha · Rio de Janeiro',primary:'Rocha',secondary:'Rio de Janeiro'},
-  {nome:'Oceanside Recreio',url:'emp-oceanside-recreio.html',bairro:'Recreio dos Bandeirantes · Rio de Janeiro',primary:'Recreio dos Bandeirantes',secondary:'Rio de Janeiro'},
-  {nome:'Sensia Barra',url:'emp-sensia-barra.html',bairro:'Barra da Tijuca · Rio de Janeiro',primary:'Barra da Tijuca',secondary:'Rio de Janeiro'}
-];
-
-function renderRelacionados(){
-  try{
-    var el = document.getElementById('related-empreendimentos');
-    if(!el) return;
-    var slug = el.getAttribute('data-slug');
-    var self = null;
-    for(var i=0;i<REL_CATALOG.length;i++){ if(REL_CATALOG[i].url === slug){ self = REL_CATALOG[i]; break; } }
-    if(!self) return;
-    var picked = [];
-    var used = {};
-    used[self.url] = true;
-    function addFrom(list){
-      for(var i=0;i<list.length && picked.length<3;i++){
-        if(!used[list[i].url]){ picked.push(list[i]); used[list[i].url]=true; }
-      }
-    }
-    // tier 1: mesma zona (secundária), se não for genérico demais
-    if(self.secondary && self.secondary !== 'Rio de Janeiro'){
-      addFrom(REL_CATALOG.filter(function(x){ return x.secondary === self.secondary; }));
-    }
-    // tier 2: mesmo bairro/região primária (cobre casos onde a zona é genérica, ex: Campo Grande)
-    if(picked.length < 2){
-      addFrom(REL_CATALOG.filter(function(x){ return x.primary === self.primary; }));
-    }
-    // tier 3: qualquer outro, pra sempre ter pelo menos 2 sugestões
-    if(picked.length < 2){
-      addFrom(REL_CATALOG);
-    }
-    if(picked.length === 0){ el.closest('section').style.display='none'; return; }
-    el.innerHTML = picked.map(function(p){
-      return '<a class="related-card" href="'+p.url+'">'
-        + '<img src="emp-img/'+p.url.replace(/^emp-/,'').replace('.html','.jpg')+'" alt="'+p.nome+'" loading="lazy" onerror="this.style.display=\'none\'"/>'
-        + '<div><div class="rc-name">'+p.nome+'</div><div class="rc-loc">'+p.bairro+'</div></div>'
-        + '</a>';
-    }).join('');
-  }catch(e){}
-}
-document.addEventListener('DOMContentLoaded', renderRelacionados);
-
-/* ---------- MARCA D'AGUA: logo real de fundo em TODAS as fotos do site (sitewide, generico + observer p/ conteudo dinamico) ---------- */
-(function(){
-  function makeWM(size){
-    var wm = document.createElement('div');
-    wm.className = 'pc-watermark';
-    wm.style.cssText = 'position:absolute;right:'+(size>18?'10px':'6px')+';bottom:'+(size>18?'10px':'6px')+';width:auto;height:'+size+'px;opacity:.88;pointer-events:none;z-index:6;filter:drop-shadow(0 1px 3px rgba(0,0,0,.7))';
-    var img = document.createElement('img');
-    img.src = 'logo-wordmark-light.png';
-    img.alt = '';
-    img.style.cssText = 'height:100%;width:auto;display:block';
-    wm.appendChild(img);
-    return wm;
-  }
-  // Imagens que NUNCA devem levar marca d'agua: logos, favicons/icones, avatares de clientes/equipe, a propria marca.
-  var SKIP_SELECTOR = '.pc-watermark, .pc-watermark img, nav img, header img, footer img, .navbar img, .site-logo img, .logo-wordmark, .adc-icon img, .avatar img, .cliente-avatar img, .depo-avatar, .team-avatar img, .step-num img, .rg-card img, .authority-avatar img, .btn-wa-hdr img, .v3-card img, .v3-stage img';
-  function shouldSkip(img){
-    if(img.dataset.pcWm) return true;
-    if(img.matches(SKIP_SELECTOR) || img.closest(SKIP_SELECTOR)) return true;
-    var src = (img.getAttribute('src')||'').toLowerCase();
-    if(src.indexOf('logo')>-1 || src.indexOf('favicon')>-1 || src.indexOf('avatar')>-1) return true;
-    return false;
-  }
-  function sizeOk(img){
-    var w = img.clientWidth || img.naturalWidth || 0;
-    var h = img.clientHeight || img.naturalHeight || 0;
-    return w >= 90 && h >= 64;
-  }
-  function place(img){
-    var host = img.parentElement;
-    if(!host) return;
-    if(host.querySelector('.pc-watermark[data-for="'+ (img.dataset.pcId||'') +'"]')) return;
-    var cs = window.getComputedStyle(host);
-    if(cs.position === 'static') host.style.position = 'relative';
-    var h = img.clientHeight || img.naturalHeight || 60;
-    var size = Math.max(14, Math.min(26, Math.round(h*0.16)));
-    var wm = makeWM(size);
-    var id = 'wm'+Math.random().toString(36).slice(2,8);
-    img.dataset.pcId = id;
-    wm.setAttribute('data-for', id);
-    host.appendChild(wm);
-    img.dataset.pcWm = '1';
-  }
-  function applyWatermarkTo(img){
-    if(shouldSkip(img)) return;
-    if(!sizeOk(img)){
-      if(!img.complete){ img.addEventListener('load', function(){ applyWatermarkTo(img); }, {once:true}); }
-      return;
-    }
-    place(img);
-  }
-  function scan(root){
-    var imgs = root.tagName === 'IMG' ? [root] : root.querySelectorAll ? root.querySelectorAll('img') : [];
-    imgs.forEach && imgs.forEach(applyWatermarkTo);
-    if(!imgs.forEach){ Array.prototype.forEach.call(imgs, applyWatermarkTo); }
-  }
-  function initialScan(){ scan(document); }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', initialScan);
-  } else {
-    initialScan();
-  }
-  // Observer: cobre grids/catalogos/mapas renderizados via JS depois do load (favoritos, agende-sua-visita, relacionados, popups de mapa, resultados do simulador etc.)
-  if('MutationObserver' in window){
-    var mo = new MutationObserver(function(mutations){
-      mutations.forEach(function(m){
-        m.addedNodes && m.addedNodes.forEach(function(n){
-          if(!n || n.nodeType !== 1) return;
-          if(n.tagName === 'IMG'){ applyWatermarkTo(n); }
-          else if(n.querySelectorAll){ scan(n); }
-        });
-      });
-    });
-    var startObserver = function(){ mo.observe(document.body, {childList:true, subtree:true}); };
-    if(document.body) startObserver();
-    else document.addEventListener('DOMContentLoaded', startObserver);
-  }
-})();
-
-
-/* ---------- NEWSLETTER: opt-in de novidades no rodape (sitewide) ---------- */
-(function(){
-  function emailValido(v){
-    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
-  }
-  function injectNewsletter(){
-    var footer = document.querySelector('footer');
-    if(!footer || document.getElementById('nlStrip')) return;
-    if(localStorage.getItem('pc_newsletter_ok')) return;
-
-    var wrap = document.createElement('div');
-    wrap.id = 'nlStrip';
-    wrap.style.cssText = 'background:var(--petrol,#0f2e36);color:#fff;padding:36px 0';
-    wrap.innerHTML = ''
-      + '<div class="wrap" style="max-width:1100px;margin:0 auto;padding:0 32px;display:flex;gap:22px;align-items:center;justify-content:space-between;flex-wrap:wrap">'
-      + '  <div style="max-width:420px">'
-      + '    <div style="font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;margin-bottom:5px">Novidades de lançamentos e condições MCMV</div>'
-      + '    <div style="font-size:13px;color:rgba(255,255,255,.68);line-height:1.5">Receba por e-mail quando eu adicionar novos empreendimentos ou mudar uma tabela de preço. Sem spam, cancele quando quiser.</div>'
-      + '  </div>'
-      + '  <form id="nlForm" style="display:flex;gap:8px;flex-wrap:wrap;flex:1;max-width:420px;min-width:260px">'
-      + '    <input type="email" id="nlEmail" required placeholder="Seu melhor e-mail" style="flex:1;min-width:180px;padding:12px 14px;border-radius:10px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.08);color:#fff;font-size:14px;font-family:inherit">'
-      + '    <button type="submit" style="background:var(--gold,#b8873a);color:#fff;border:none;padding:12px 20px;border-radius:10px;font-size:13.5px;font-weight:700;cursor:pointer;white-space:nowrap">Quero receber</button>'
-      + '  </form>'
-      + '</div>';
-    footer.parentNode.insertBefore(wrap, footer);
-
-    var form = wrap.querySelector('#nlForm');
-    var input = wrap.querySelector('#nlEmail');
-    form.addEventListener('submit', function(e){
-      e.preventDefault();
-      var v = input.value.trim();
-      if(!emailValido(v)){
-        input.style.borderColor = '#e0736b';
-        return;
-      }
-      if(window.leadNewsletter) window.leadNewsletter(v);
-      localStorage.setItem('pc_newsletter_ok', '1');
-      wrap.querySelector('.wrap').innerHTML = '<div style="font-size:14.5px;font-weight:600">Inscrito! Você vai receber as novidades em '+v+'.</div>';
-    });
-  }
-  if(document.readyState==='loading'){
-    document.addEventListener('DOMContentLoaded', injectNewsletter);
-  } else {
-    injectNewsletter();
-  }
-})();
-
-
-/* ---------- PADRAO OURO SITEWIDE + FONTE DA LOGO NOS BOTOES + CINEMA (pedido Paulo 2026-07-17) ---------- */
-(function(){
-  var css = [
-    /* Clicaveis do site: VERDE com a fonte serif da logo (pedido Paulo) */
-    '.btn-gold,a.btn-gold,button.btn-gold,.wa-btn,.btn-wa-big,.btn-wa-hdr,.btn-primary,.cta,.sim-btn,.fs-btn,.btn-sim,.btn-wa,.hero-cta,input[type=submit],.btn-verde,.btn-green{',
-    '  background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;border-color:#157a3f !important;',
-    "  font-family:'Inter',system-ui,sans-serif !important;font-weight:700 !important;letter-spacing:.02em !important}",
-    '.btn-gold:hover,a.btn-gold:hover,button.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-wa-hdr:hover,.btn-primary:hover,.cta:hover,input[type=submit]:hover{',
-    '  background:linear-gradient(135deg,#157a3f,#116334) !important}',
-    /* Fluxo de DOCUMENTOS: AMARELO (pedido Paulo: enviar docs tudo com amarelo) */
-    ".upload-btn,.item-row-send,.wa-btn2,.btn-pg{background:linear-gradient(135deg,#1a8f4c,#157a3f) !important;color:#fff !important;font-family:'Inter',system-ui,sans-serif !important;font-weight:700 !important;letter-spacing:.02em !important}",
-    '.upload-btn:hover,.item-row-send:hover,.wa-btn2:hover,.btn-pg:hover{background:linear-gradient(135deg,#157a3f,#116334) !important}',
-    /* Botoes secundarios/outline: mesma fonte limpa, legivel em qualquer tamanho */
-    ".btn-ghost,.btn-outline-hero,.btn-outline{font-family:'Inter',system-ui,sans-serif !important;font-weight:700 !important;letter-spacing:.02em !important}",
-    /* Mata a seta/triangulo dos baloes do mapa (Leaflet) */
-    '.leaflet-tooltip:before,.leaflet-tooltip-top:before,.leaflet-tooltip-bottom:before,.leaflet-tooltip-left:before,.leaflet-tooltip-right:before{display:none !important}',
-    '.leaflet-popup-tip{display:none !important}',
-    /* fix icone preto gigante: paginas novas usam .depo-grid/.depo-photo/.depo-tag sem definir o CSS — regras completas aqui valem pra qualquer pagina */
-    '.depo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;max-width:720px}',
-    '@media(max-width:900px){.depo-grid{grid-template-columns:repeat(3,1fr);gap:8px}}',
-    '@media(max-width:600px){.depo-grid{grid-template-columns:repeat(1,1fr);max-width:320px;margin:0 auto}}',
-    '.depo-photo{border-radius:18px;overflow:hidden;aspect-ratio:4/5;position:relative;background:#eef2f2;box-shadow:0 18px 44px -18px rgba(15,46,54,.35),inset 0 0 55px rgba(15,46,54,.16);transition:transform .5s cubic-bezier(.16,1,.3,1)}',
-    '.depo-photo img{width:100%;height:100%;object-fit:cover;display:block;filter:contrast(1.08) saturate(1.06) brightness(1.02)}',
-    '.depo-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(15,46,54,.55) 0%,transparent 45%);pointer-events:none}',
-    '.depo-tag{position:absolute;left:12px;bottom:12px;color:#fff;font-size:12px;font-weight:600;display:flex;align-items:center;gap:6px;z-index:2}',
-    '.depo-tag svg{width:14px;height:14px;stroke:#cf9f4f;fill:none;stroke-width:2.2;flex-shrink:0}',
-    /* fix viz-card sem CSS em 7 paginas Cury (mesma familia do icone gigante) */
-    '.viz-card{display:flex;gap:14px;align-items:flex-start;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:16px 18px;margin-bottom:14px;box-shadow:0 1px 3px rgba(15,46,54,.05)}',
-    '.viz-card-icon{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:#0f2e36;display:flex;align-items:center;justify-content:center}',
-    '.viz-card-icon svg{width:18px;height:18px;stroke:#fff;fill:none;stroke-width:2}',
-    '.viz-card-label{font-size:10.5px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#b8873a;margin-bottom:4px}',
-    '.viz-card-text{font-size:13.5px;color:#4b5563;line-height:1.6;margin:0}',
-    /* mata rolagem lateral no mobile sem quebrar sticky (clip nao cria scroll container) */
-    'html{overflow-x:clip}',
-    '@supports not (overflow:clip){html{overflow-x:hidden}}',
-    '.leaflet-popup-content-wrapper{border-radius:14px !important;box-shadow:0 12px 32px rgba(15,46,54,.22) !important;border:1px solid rgba(184,135,58,.25) !important}',
-    '.leaflet-popup-content{margin:12px 14px !important}',
-    /* Cinema nas fotos de capa de todas as paginas de imovel */
-    '.hero .hero-bg,.hero-bg{animation:pcCineKB 24s cubic-bezier(.22,.61,.36,1) forwards;will-change:transform}',
-    '@keyframes pcCineKB{0%{transform:scale(1.03)}100%{transform:scale(1.14)}}',
-    '@media(prefers-reduced-motion:reduce){.hero .hero-bg,.hero-bg{animation:none !important}}',
-    '@media(prefers-reduced-motion:no-preference){',
-    '  .hero h1,.hero .display,.hero .hero-title{animation:pcCineTitle 1.1s cubic-bezier(.16,1,.3,1) .15s both}',
-    '  .hero .hero-lead,.hero .hero-eyebrow{animation:pcCineTitle 1.1s cubic-bezier(.16,1,.3,1) .35s both}',
-    '}',
-    '@keyframes pcCineTitle{0%{opacity:0;transform:translateY(16px);filter:blur(7px)}100%{opacity:1;transform:none;filter:none}}',
-    /* CINEMA DE ROLAGEM SITEWIDE: blocos entram desfocado->nitido em TODAS as paginas */
-    '@media(prefers-reduced-motion:no-preference){',
-    '  .reveal{filter:blur(7px);transition:opacity .95s cubic-bezier(.16,1,.3,1),transform .95s cubic-bezier(.16,1,.3,1),filter .95s cubic-bezier(.16,1,.3,1) !important}',
-    '  .reveal.in{filter:none}',
-    '  .pc-cine-sec{opacity:0;transform:translateY(20px);filter:blur(7px);transition:opacity .9s cubic-bezier(.16,1,.3,1),transform .9s cubic-bezier(.16,1,.3,1),filter .9s cubic-bezier(.16,1,.3,1)}',
-    '  .pc-cine-sec.pc-in{opacity:1;transform:none;filter:none}',
-    '}',
-    /* ARREMATE 10/10: micro-interacoes premium (transform/opacity only, guardadas p/ touch e reduced-motion) */
-    '@media(hover:hover) and (pointer:fine){',
-    '  .btn-gold:hover,a.btn-gold:hover,.wa-btn:hover,.btn-wa-big:hover,.btn-primary:hover,.cta:hover,.upload-btn:hover,.wa-btn2:hover,.btn-pg:hover{transform:translateY(-2px);box-shadow:0 10px 26px -8px rgba(15,46,54,.35) !important}',
-    '  .btn-gold:active,a.btn-gold:active,.wa-btn:active,.btn-primary:active,.cta:active{transform:translateY(0) scale(.98)}',
-    '}',
-    '.btn-gold,a.btn-gold,.wa-btn,.btn-wa-big,.btn-primary,.cta,.upload-btn,.wa-btn2,.btn-pg{transition:transform .3s cubic-bezier(.16,1,.3,1),box-shadow .3s cubic-bezier(.16,1,.3,1),background .3s !important}',
-    'a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible{outline:3px solid rgba(184,135,58,.55) !important;outline-offset:2px}',
-    '@media(prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}',
-    /* EMBELEZAMENTO FABLE NOTA 10 — acabamento tipografico, grao cinematografico, profundidade */
-    '::selection{background:#0f2e36;color:#e0b872}',
-    /* REPAGINADA FINAL (sobria): acabamento de site caro, sem efeito chamativo */
-    'body{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}',
-    'h1,h2,h3,.display,.stitle{text-rendering:optimizeLegibility}',
-    '[id]{scroll-margin-top:86px}',
-    '.pv2,.mv,.rv,.cat-price,.price,.preco{font-variant-numeric:tabular-nums}',
-    '@media(max-width:700px){input[type=text],input[type=number],input[type=tel],input[type=email],select,textarea{font-size:16px !important}}',
-    '@media(pointer:coarse){.nav-links a{padding-top:10px;padding-bottom:10px}.bairro-chips button{padding:10px 16px}}',
-    'h1,h2,h3,.display{text-wrap:balance}',
-    '.hero-bg{filter:saturate(1.1) contrast(1.07) brightness(.96)}',
-    '.hero-bg::before{content:"";position:absolute;inset:0;pointer-events:none;z-index:1;background:radial-gradient(125% 92% at 50% 38%,transparent 52%,rgba(8,22,27,.42) 100%)}',
-    '.hero-bg::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.06;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' width=\'140\' height=\'140\'%3E%3Cfilter id=\'n\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.85\' numOctaves=\'2\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23n)\'/%3E%3C/svg%3E")}',
-    '@media(hover:hover) and (pointer:fine){',
-    '  .related-card,.perfil-card,.crit-card,.faq-item,.viz-card{transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1)}',
-    '  .related-card:hover,.perfil-card:hover,.crit-card:hover{transform:translateY(-3px);box-shadow:0 16px 36px -14px rgba(15,46,54,.28)}',
-    '  .depo-photo img,.related-card img{transition:transform .7s cubic-bezier(.16,1,.3,1)}',
-    '  .depo-photo:hover img,.related-card:hover img{transform:scale(1.045)}',
-    '  ::-webkit-scrollbar{width:11px}',
-    '  ::-webkit-scrollbar-track{background:#f5f6f7}',
-    '  ::-webkit-scrollbar-thumb{background:#0f2e36;border-radius:99px;border:3px solid #f5f6f7}',
-    '  ::-webkit-scrollbar-thumb:hover{background:#173d47}',
-    '}',
-    '@media(prefers-reduced-motion:reduce){.related-card,.perfil-card,.crit-card,.depo-photo img,.related-card img{transition:none !important}}',
-    /* FOCO NAS FONTES — identidade tipografica da logo em todos os titulos, acabamento fino */
-    "h1,h2,.display,.stitle,.sec-h2,.sim-title,.inv-h1,.ae-h1,.step-title,.sel-title{font-family:'Fraunces',Georgia,serif !important;font-optical-sizing:auto;font-weight:600;letter-spacing:-.015em}",
-    "h3{font-family:'Fraunces',Georgia,serif;font-optical-sizing:auto;letter-spacing:-.01em}",
-    'body{text-rendering:optimizeLegibility;font-kerning:normal}',
-    "h1 em,h2 em,.display em{font-style:italic;color:#cf9f4f}",
-    '.ae-trust-num,.res-val,.mv,.pv2,.compare-num{font-variant-numeric:tabular-nums}',
-    ".eyebrow,.step-tag,.showcase-label,.inv-tag,.ae-badge,label{letter-spacing:.08em}",
-    /* SISTEMA TIPOGRAFICO DEFINITIVO: serif da logo (Fraunces) SÓ em titulos grandes; Inter (limpa, premium, legivel) no corpo, menus, campos e botoes — pedido Paulo apos "fontes não ficaram boas" com serif em tudo */
-    "body,p,a,li,span,label,button,input,select,textarea,.eyebrow,.step-tag,.showcase-label,.inv-tag,.ae-badge,.doc-item,.faq-q,.nav,nav{font-family:'Inter',system-ui,sans-serif !important}",
-    '.leaflet-container *{font-family:inherit}',
-    /* HEADER DE LUXO */
-    '.pc-hdr-lux{background:linear-gradient(180deg,rgba(10,32,39,.97),rgba(15,46,54,.93)) !important;backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);border-bottom:1px solid rgba(207,159,79,.3) !important;box-shadow:0 14px 44px -20px rgba(0,0,0,.65) !important;transition:transform .45s cubic-bezier(.16,1,.3,1)}',
-    '.pc-hdr-lux a{color:rgba(255,255,255,.87)}',
-    '.pc-hdr-lux nav a,.pc-hdr-lux .nav a{position:relative;padding-bottom:3px}',
-    '.pc-hdr-lux nav a::after,.pc-hdr-lux .nav a::after{content:"";position:absolute;left:0;bottom:-1px;width:100%;height:2px;background:linear-gradient(90deg,#b8873a,#cf9f4f);transform:scaleX(0);transform-origin:left;transition:transform .35s cubic-bezier(.16,1,.3,1)}',
-    '@media(hover:hover){.pc-hdr-lux nav a:hover::after,.pc-hdr-lux .nav a:hover::after{transform:scaleX(1)}.pc-hdr-lux nav a:hover,.pc-hdr-lux .nav a:hover{color:#cf9f4f}}',
-    '.pc-hdr-lux img{filter:drop-shadow(0 2px 8px rgba(0,0,0,.45))}',
-    /* ===== CAMADA UAU — assinatura cinematografica Paulo Cotrim (leve, CSS/JS puro) ===== */
-    '#pcScrollBar{position:fixed;top:0;left:0;height:3px;width:0;z-index:9500;background:linear-gradient(90deg,#b8873a,#cf9f4f 60%,#e0b872);box-shadow:0 0 12px rgba(207,159,79,.55);pointer-events:none;transition:opacity .4s ease}',
-    '@media(prefers-reduced-motion:reduce){#pcScrollBar{display:none}}',
-    '@keyframes pcShimmer{0%{background-position:200% center}100%{background-position:-200% center}}',
-    '@media(prefers-reduced-motion:no-preference){.hero h1 .accent,.rg-inner h1 em{background:linear-gradient(110deg,#b8873a 30%,#f4d9a4 47%,#e0b872 53%,#b8873a 70%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:pcShimmer 7s linear infinite}}',
-    'a,button{-webkit-tap-highlight-color:transparent}',
-    '@media(prefers-reduced-motion:no-preference){.btn-gold:active,.nav-cta:active,.search-btn:active,.btn-primary:active,.mini-sim-btn:active,.compare-bar-btn:active,button:active{transform:scale(.965)}}',
-    '@keyframes pcPageIn{from{opacity:0}to{opacity:1}}',
-    'html.pc-page-out body{opacity:0;transition:opacity .22s ease}',
-    '@media(prefers-reduced-motion:no-preference){body{animation:pcPageIn .35s ease}}',
-    '.pc-nums-live .trust-num,.pc-nums-live .ae-promo-stat-num{font-variant-numeric:tabular-nums}',
-    'html.pc-lite .hero h1 .accent,html.pc-lite .rg-inner h1 em{animation:none;-webkit-text-fill-color:#cf9f4f;background:none}',
-    'html.pc-lite .reveal,html.pc-lite .pc-cine-sec{opacity:1 !important;transform:none !important;filter:none !important;transition:none !important}'
-  ].join('\n');
-  var st = document.createElement('style');
-  st.id = 'pc-gold-cine';
-  st.textContent = css;
-  (document.head||document.documentElement).appendChild(st);
-})();
-
-/* Fallback: garante a fonte da logo (Fraunces) em toda pagina */
-(function(){
-  var has=false;
-  document.querySelectorAll('link[href*="fonts.googleapis"]').forEach(function(l){ if(l.href.indexOf('Fraunces')>-1) has=true; });
-  if(!has){
-    var l=document.createElement('link');
-    l.rel='stylesheet';
-    l.href='https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap';
-    (document.head||document.documentElement).appendChild(l);
-  }
-  var hasInter=false;
-  document.querySelectorAll('link[href*="fonts.googleapis"]').forEach(function(l){ if(l.href.indexOf('Inter')>-1) hasInter=true; });
-  if(!hasInter){
-    var ir=document.createElement('link');
-    ir.rel='stylesheet';
-    ir.href='https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap';
-    (document.head||document.documentElement).appendChild(ir);
-  }
-})();
-
-
-/* ---------- CINEMA GARANTIDO: Ken Burns via JS em toda foto de capa (independe de reduced-motion) ---------- */
-(function(){
-  function startCine(){
-    try{
-      document.querySelectorAll('.hero-bg').forEach(function(el){
-        if(el.dataset.pcCine) return;
-        el.dataset.pcCine='1';
-        if(el.animate){
-          el.animate(
-            [{transform:'scale(1.03)'},{transform:'scale(1.12)'}],
-            {duration:22000,direction:'alternate',iterations:Infinity,easing:'ease-in-out'}
-          );
-        }
-      });
-    }catch(e){}
-  }
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', startCine); } else { startCine(); }
-})();
-
-/* ---------- O QUE TEM POR PERTO: padarias, escolas, faculdades, comercio (todas as paginas de imovel) ---------- */
-(function(){
-  function coords(){
-    var scripts=document.querySelectorAll('script:not([src])');
-    for(var i=0;i<scripts.length;i++){
-      var m=scripts[i].textContent.match(/\[\s*(-2[23]\.\d+)\s*,\s*(-4[34]\.\d+)\s*\]/);
-      if(m) return [m[1],m[2]];
-    }
-    return null;
-  }
-  function addPerto(){
-    if(document.getElementById('pc-perto')) return;
-    if(!document.querySelector('.hero-bg')) return;
-    var c=coords();
-    if(!c) return;
-    var cats=[['Padarias','padarias'],['Mercados','supermercados'],['Escolas','escolas'],['Faculdades','faculdades'],['Farm\u00e1cias','farmacias'],['Com\u00e9rcio','comercio'],['\u00d4nibus e trem','transporte publico']];
-    var host=document.querySelector('.viz-card');
-    var target=host?host.parentElement:(document.getElementById('map-imovel')?document.getElementById('map-imovel').parentElement:null);
-    if(!target) return;
-    var box=document.createElement('div');
-    box.id='pc-perto';
-    box.style.cssText='margin:16px 0 6px';
-    var chips=cats.map(function(k){
-      return '<a href="https://www.google.com/maps/search/'+encodeURIComponent(k[1])+'/@'+c[0]+','+c[1]+',16z" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:5px;margin:0 8px 8px 0;padding:7px 14px;border:1.5px solid #1a8f4c;border-radius:30px;font-size:12px;font-weight:700;color:#157a3f;text-decoration:none;background:#f0f9f3">'+k[0]+'</a>';
-    }).join('');
-    box.innerHTML='<div style="font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:#0f2e36;margin-bottom:9px">Explore o que tem por perto</div>'+chips
-      +'<div style="font-size:10.5px;color:#9ca3af;margin-top:2px">Abre no Google Maps com tudo ao redor do empreendimento \u2014 padarias, escolas, faculdades, com\u00e9rcio e transporte.</div>';
-    if(host){ host.insertAdjacentElement('afterend', box); } else { target.insertAdjacentElement('afterbegin', box); }
-  }
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', addPerto); } else { addPerto(); }
-})();
-
-
-/* ---------- HEADER TOP: vidro escuro premium + some ao rolar, volta ao subir ---------- */
-(function(){
-  function initHdr(){
-    var h = document.querySelector('header') || document.querySelector('.hdr');
-    if(!h || h.dataset.pcLux) return;
-    h.dataset.pcLux = '1';
-    h.classList.add('pc-hdr-lux');
-    /* header e escuro: garante a versao CLARA da logo (fix definitivo do dark-on-dark) */
-    h.querySelectorAll('img').forEach(function(im){
-      var s = im.getAttribute('src')||'';
-      if(/logo/i.test(s) && s.indexOf('light') === -1){
-        im.setAttribute('src','logo-wordmark-light.png');
-      }
-    });
-    var pos = getComputedStyle(h).position;
-    if(pos === 'sticky' || pos === 'fixed'){
-      var lastY = 0;
-      window.addEventListener('scroll', function(){
-        var y = window.scrollY || 0;
-        if(y > 160 && y > lastY){ h.style.transform = 'translateY(-110%)'; }
-        else { h.style.transform = ''; }
-        lastY = y;
-      }, {passive:true});
-    }
-  }
-  /* CINEMA DE ROLAGEM AUTOMATICO: paginas sem sistema .reveal proprio ganham entrada de secoes */
-  function initCineScroll(){
-    try{
-      if(document.querySelector('.reveal')) return; // pagina ja tem o proprio sistema
-      if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-      var els = document.querySelectorAll('section, .sel-box, .ssec');
-      if(!els.length || els.length > 60) return;
-      els.forEach(function(el){ el.classList.add('pc-cine-sec'); });
-      var io = new IntersectionObserver(function(entries){
-        entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('pc-in'); io.unobserve(en.target); } });
-      }, {threshold:.06});
-      els.forEach(function(el){ io.observe(el); });
-    }catch(e){ document.querySelectorAll('.pc-cine-sec').forEach(function(el){ el.classList.add('pc-in'); }); }
-  }
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initCineScroll); } else { initCineScroll(); }
-
-  /* barra do navegador mobile na cor da marca (so injeta se a pagina nao definir) */
-  if(!document.querySelector('meta[name="theme-color"]')){
-    var tc = document.createElement('meta');
-    tc.name = 'theme-color'; tc.content = '#0f2e36';
-    document.head.appendChild(tc);
-  }
-  /* ===== CAMADA UAU JS — progresso, count-up, transicao de pagina ===== */
-  function initWow(){
-    try{
-      var rm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      try{ if(navigator.connection && navigator.connection.saveData){ rm = true; document.documentElement.classList.add('pc-lite'); } }catch(e){}
-      /* barra de progresso dourada */
-      if(!rm && !document.getElementById('pcScrollBar')){
-        var bar=document.createElement('div'); bar.id='pcScrollBar';
-        document.body.appendChild(bar);
-        var tick=false;
-        window.addEventListener('scroll',function(){
-          if(tick) return; tick=true;
-          requestAnimationFrame(function(){
-            var h=document.documentElement.scrollHeight-window.innerHeight;
-            var p=h>0?(window.scrollY/h)*100:0;
-            bar.style.width=p+'%';
-            bar.style.opacity=window.scrollY>40?'1':'0';
-            tick=false;
-          });
-        },{passive:true});
-      }
-      /* count-up cinematografico dos numeros de prova */
-      if(!rm && 'IntersectionObserver' in window){
-        var nums=document.querySelectorAll('.trust-num,.ae-promo-stat-num');
-        var io=new IntersectionObserver(function(es){
-          es.forEach(function(en){
-            if(!en.isIntersecting) return;
-            io.unobserve(en.target);
-            var el=en.target, raw=(el.textContent||'').trim();
-            var m=raw.match(/^([^0-9]*)([0-9][0-9.,]*)(.*)$/);
-            if(!m) return;
-            var pre=m[1], num=m[2], suf=m[3];
-            var target=parseInt(num.replace(/[.,]/g,''),10);
-            if(!isFinite(target)||target<=0||target>100000) return;
-            var sep=num.indexOf('.')>-1?'.':(num.indexOf(',')>-1?',':'');
-            var t0=null, dur=1100;
-            function fmt(v){ var st=String(v); return sep?st.replace(/\B(?=(\d{3})+(?!\d))/g,sep):st; }
-            function step(ts){
-              if(!t0) t0=ts;
-              var k=Math.min((ts-t0)/dur,1);
-              k=1-Math.pow(1-k,3);
-              el.textContent=pre+fmt(Math.round(target*k))+suf;
-              if(k<1) requestAnimationFrame(step);
-            }
-            requestAnimationFrame(step);
-          });
-        },{threshold:.6});
-        nums.forEach(function(el){ io.observe(el); });
-        if(nums.length) document.body.classList.add('pc-nums-live');
-      }
-      /* transicao de pagina: corte cinematografico entre paginas internas */
-      if(!rm){
-        document.addEventListener('click',function(e){
-          if(e.defaultPrevented||e.button!==0||e.metaKey||e.ctrlKey||e.shiftKey||e.altKey) return;
-          var a=e.target&&e.target.closest?e.target.closest('a[href]'):null;
-          if(!a||a.target==='_blank'||a.hasAttribute('download')) return;
-          var href=a.getAttribute('href')||'';
-          if(!/\.html(\?|#|$)/.test(href)||href.charAt(0)==='#') return;
-          if(/^https?:/i.test(href)&&a.host!==location.host) return;
-          e.preventDefault();
-          document.documentElement.classList.add('pc-page-out');
-          setTimeout(function(){ location.href=a.href; },200);
-        },true);
-      }
-    }catch(err){}
-  }
-  /* Ver no Google Maps / Waze sob o mapa das paginas de empreendimento */
-  function initMapRotas(){
-    try{
-      var el=document.getElementById('map-imovel');
-      if(!el || document.getElementById('pcMapRotas')) return;
-      var lat=null,lng=null;
-      var scripts=document.querySelectorAll('script:not([src])');
-      for(var i=0;i<scripts.length;i++){
-        var m=(scripts[i].textContent||'').match(/var\s+lat\s*=\s*(-?\d+\.?\d*)\s*,\s*lng\s*=\s*(-?\d+\.?\d*)/);
-        if(m){ lat=m[1]; lng=m[2]; break; }
-      }
-      if(lat===null) return;
-      var row=document.createElement('div');
-      row.id='pcMapRotas';
-      row.style.cssText='display:flex;gap:10px;margin-top:12px;flex-wrap:wrap';
-      function mk(label,href,svg){
-        var a=document.createElement('a');
-        a.href=href; a.target='_blank'; a.rel='noopener';
-        a.style.cssText='flex:1;min-width:150px;display:inline-flex;align-items:center;justify-content:center;gap:8px;background:#1a8f4c;color:#fff;font-weight:700;font-size:13.5px;padding:12px 16px;border-radius:11px;text-decoration:none;box-shadow:0 6px 18px rgba(26,143,76,.25)';
-        a.innerHTML=svg+label;
-        return a;
-      }
-      var pin='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>';
-      var nav='<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l19-9-9 19-2-8-8-2z"/></svg>';
-      row.appendChild(mk('Ver no Google Maps','https://www.google.com/maps/search/?api=1&query='+lat+','+lng,pin));
-      row.appendChild(mk('Consultar no Waze','https://waze.com/ul?ll='+lat+','+lng+'&navigate=yes',nav));
-      el.parentNode.insertBefore(row, el.nextSibling);
-    }catch(e){}
-  }
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initMapRotas); } else { initMapRotas(); }
-
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initWow); } else { initWow(); }
-
-  if(document.readyState==='loading'){ document.addEventListener('DOMContentLoaded', initHdr); } else { initHdr(); }
 })();
