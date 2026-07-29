@@ -669,18 +669,6 @@
     document.head.appendChild(style);
   })();
 
-  // Padrão de fonte da marca (Fraunces) nos links/menu + menu uniforme
-  (function(){
-    if(document.getElementById('pcFontStd')) return;
-    var st=document.createElement('style'); st.id='pcFontStd';
-    st.textContent=
-      '.nav-links a,header .brand,.brand small{font-family:\'Fraunces\',Georgia,serif !important}'
-      +'.nav-links a{font-size:14px !important;font-weight:600 !important;white-space:nowrap !important;letter-spacing:.005em}'
-      +'header .brand{letter-spacing:.02em}'
-      +'.btn-gold,.btn-green,.btn-ghost,.sc-btn,.cta-band a,.hero-cta .btn,a.btn,button.btn,.rg-card span,.sticky-cta a{font-family:\'Fraunces\',Georgia,serif !important;font-weight:600 !important}';
-    document.head.appendChild(st);
-  })();
-
   // Expor para uso externo
   window.leadCapture = capture;
 })();
