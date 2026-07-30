@@ -584,6 +584,15 @@ function render(){
     }
   }
 }
+// pré-seleção pelo ?emp= (nome do empreendimento) — vindo da página do imóvel
+(function(){
+  try{
+    var q=new URLSearchParams(location.search).get('emp'); if(!q) return;
+    function sl(x){return (x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'');}
+    var qs=sl(q);
+    for(var i=0;i<CATALOG.length;i++){ var ns=sl(CATALOG[i].n); if(ns===qs||ns.indexOf(qs)>=0||qs.indexOf(ns)>=0){ S.empIdx=i; S.useCustom=false; break; } }
+  }catch(e){}
+})();
 render();
 </script>
 <script src="crm-config.js"></script>
