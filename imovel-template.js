@@ -86,7 +86,7 @@ function render(){
     </a>
     <div class="im-hdr-right">
       <a href="index.html"><button class="btn-back">← Voltar</button></a>
-      <a href="${waLink()}" target="_blank"><button class="btn-wa-im">${WA_SVG} Falar com nossa equipe de vendas</button></a>
+      <a href="${waLink()}" target="_blank"><button class="btn-wa-im">${WA_SVG} Falar direto com Paulo Cotrim</button></a>
     </div>
   </header>
 
@@ -250,7 +250,7 @@ function render(){
 
       <div class="section-block">
         <h2><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><path d="M20.42 4.58a5.4 5.4 0 00-7.65 0L12 5.35l-.77-.77a5.4 5.4 0 00-7.65 7.65L12 20.5l8.42-8.27a5.4 5.4 0 000-7.65z"/></svg>Famílias que já receberam as chaves</h2>
-        <p class="im-desc" style="margin-bottom:16px">Mais de 700 famílias já aprovadas e com as chaves em mãos. Alguns momentos reais de entrega, com nossa equipe:</p>
+        <p class="im-desc" style="margin-bottom:16px">Mais de 700 famílias já aprovadas e com as chaves em mãos. Alguns momentos reais de entrega, com o Paulo Cotrim:</p>
         <div class="depo-grid">
           ${['cliente-2','cliente-3','cliente-7','cliente-9'].map(function(f){
             return `<div class="depo-photo"><img src="clientes-img/${f}.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>`;
@@ -312,7 +312,7 @@ function render(){
           <div class="sid-row"><span class="sid-label">Status</span><span class="sid-value" style="color:#b8873a">${PROP.tipo}</span></div>
         </div>
         <a href="${waLink()}" target="_blank" style="display:block;margin-bottom:10px">
-          <button class="btn-wa-sid">${WA_SVG} Falar com nossa equipe de vendas</button>
+          <button class="btn-wa-sid">${WA_SVG} Falar direto com Paulo Cotrim</button>
         </a>
         <a href="simulador.html" style="display:block;margin-bottom:10px">
           <button class="btn-sim-sid">Simular financiamento</button>
@@ -333,10 +333,10 @@ function render(){
           <img class="coord-av" src="${fotoCoord||'paulo-cotrim-profissional.jpeg'}" alt="Paulo Cotrim" onerror="this.onerror=null;this.style.background='#0f2e36'"/>
           <div class="coord-info">
             <div class="name">Paulo Cotrim</div>
-            <div class="role">Equipe Cury · coordenação de Paulo Cotrim, 18 anos de experiência</div>
+            <div class="role">Paulo Cotrim · Corretor de Imóveis · 18 anos de experiência</div>
           </div>
         </div>
-        <p style="margin-top:14px;font-size:13px;color:#475569;line-height:1.6">Especialistas em MCMV e financiamento imobiliário. Do primeiro contato até a entrega das chaves, nossa equipe cuida de tudo para você.</p>
+        <p style="margin-top:14px;font-size:13px;color:#475569;line-height:1.6">Especialistas em MCMV e financiamento imobiliário. Do primeiro contato até a entrega das chaves, o Paulo cuida de tudo para você.</p>
         <a href="https://instagram.com/corretorpaulocotrim" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:600;color:#64748b"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>@corretorpaulocotrim</a>
         <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;display:flex;align-items:center;gap:8px">
           <span style="font-size:11px;color:#94a3b8;font-weight:700">CRECI-RJ 77677-F</span>
@@ -344,15 +344,15 @@ function render(){
       </div>
 
       <div class="sid-highlight">
-        <strong><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Aprovação em 48h</strong> — nossa equipe já aprovou mais de 700 famílias. Envie seus documentos pelo WhatsApp e receba a resposta rapidinho.
+        <strong><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Aprovação em 48h</strong> — o Paulo já aprovou mais de 700 famílias. Envie seus documentos pelo WhatsApp e receba a resposta rapidinho.
       </div>
     </div>
   </div>
 
   <div class="im-footer">
-    <strong>Paulo Cotrim — Coordenador Cury</strong> &nbsp;|&nbsp; CRECI-RJ 77677-F &nbsp;|&nbsp; (21) 98915-0864 &nbsp;|&nbsp;
+    <strong>Paulo Cotrim — Corretor de Imóveis</strong> &nbsp;|&nbsp; CRECI-RJ 77677-F &nbsp;|&nbsp; (21) 98915-0864 &nbsp;|&nbsp;
     <a href="index.html" style="color:rgba(255,255,255,.6)">← Voltar ao site</a>
-    <div style="margin-top:10px;font-size:10.5px;color:rgba(255,255,255,.4);max-width:640px;margin-left:auto;margin-right:auto;line-height:1.5">Valores, condições de pagamento, disponibilidade e prazos de entrega são fornecidos pela construtora e estão sujeitos a alteração sem aviso prévio. Consulte sempre a tabela oficial atualizada com nossa equipe antes de decidir.</div>
+    <div style="margin-top:10px;font-size:10.5px;color:rgba(255,255,255,.4);max-width:640px;margin-left:auto;margin-right:auto;line-height:1.5">Valores, condições de pagamento, disponibilidade e prazos de entrega são fornecidos pela construtora e estão sujeitos a alteração sem aviso prévio. Consulte sempre a tabela oficial atualizada com o Paulo Cotrim antes de decidir.</div>
   </div>
 
   <div class="im-lightbox" id="im-lightbox" onclick="if(event.target===this)closeLightbox()">
@@ -364,7 +364,7 @@ function render(){
   </div>
 
   <div class="wa-msg" id="wa-msg">Atendimento direto com Paulo Cotrim. Clique no WhatsApp para receber valores atualizados, disponibilidade e condições de pagamento.</div>
-  <a href="${waLink()}" target="_blank" class="wafloat" aria-label="Falar com nossa equipe de vendas no WhatsApp">${WA_SVG}</a>
+  <a href="${waLink()}" target="_blank" class="wafloat" aria-label="Falar direto com Paulo Cotrim no WhatsApp">${WA_SVG}</a>
   `;
 
   window._lbImgs = galeria;
@@ -469,7 +469,7 @@ window.baixarPropostaSimples = function(){
     <div class="hdr">
       <div>
         <div class="hdr-name">Paulo Cotrim</div>
-        <div class="hdr-sub">Coordenador Cury · Especialista MCMV · RJ</div>
+        <div class="hdr-sub">Corretor de Imóveis · Especialista MCMV · RJ</div>
       </div>
       <div class="hdr-creci">CRECI-RJ 77677-F<br><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/></svg>(21) 98915-0864</div>
     </div>
@@ -485,7 +485,7 @@ window.baixarPropostaSimples = function(){
     <div class="cta-box">
       <h3>Pronto para dar o próximo passo?</h3>
       <p>Paulo Cotrim cuida de toda a documentação e aprovação do seu financiamento em até 48h.</p>
-      <a class="cta-wa" href="https://wa.me/5521989150864?text=Tenho%20interesse%20no%20${encodeURIComponent(p.nome)}!" target="_blank">Falar com nossa equipe de vendas</a>
+      <a class="cta-wa" href="https://wa.me/5521989150864?text=Tenho%20interesse%20no%20${encodeURIComponent(p.nome)}!" target="_blank">Falar direto com Paulo Cotrim</a>
     </div>
     <div class="footer">Proposta gerada em ${new Date().toLocaleDateString('pt-BR')} · paulocotrim.com.br · corretorpaulocotrim@gmail.com</div>
   </div>
