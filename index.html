@@ -464,22 +464,22 @@ footer .wrap{position:relative;z-index:1}
 .spotlight:hover::before{opacity:1}
 
 /* REGION GATE — splash de boas-vindas por região */
-#region-gate{position:fixed;inset:0;z-index:2000;background:var(--mist);display:flex;align-items:center;justify-content:center;padding:32px 20px;opacity:1;transition:opacity .45s var(--ease),visibility .45s var(--ease)}
+#region-gate{position:fixed;inset:0;z-index:2000;background:#0a1e23;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:32px 20px;opacity:1;transition:opacity .45s var(--ease),visibility .45s var(--ease)}
 #region-gate.hide{opacity:0;visibility:hidden;pointer-events:none}
-.rg-skip{position:absolute;top:22px;right:24px;font-size:13px;font-weight:600;color:var(--gray);background:#fff;border:1px solid var(--line);padding:8px 16px;border-radius:30px;transition:.2s;cursor:pointer}
-.rg-skip:hover{color:var(--ink);border-color:var(--ink)}
-.rg-inner{max-width:720px;width:100%;text-align:center}
+#region-gate::before{content:"";position:absolute;inset:0;background:url('img-porto.jpg') center/cover;animation:rgKen 22s ease-in-out infinite alternate;z-index:0}#region-gate::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,24,.5),rgba(8,20,24,.86));z-index:1}@keyframes rgKen{from{transform:scale(1.06)}to{transform:scale(1.17) translateY(-1.5%)}}.rg-skip{position:absolute;top:22px;right:24px;z-index:3;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:8px 16px;border-radius:30px;transition:.2s;cursor:pointer}
+.rg-skip:hover{color:#fff;border-color:#fff}
+.rg-inner{position:relative;z-index:2;max-width:720px;width:100%;text-align:center}
 .rg-logo{height:46px;width:auto;margin:0 auto 34px;display:block}
-.rg-inner h1{font-size:clamp(22px,3.4vw,30px);color:var(--ink);letter-spacing:-.01em;margin-bottom:10px}
-.rg-inner p{font-size:15px;color:var(--gray);max-width:46ch;margin:0 auto 36px}
+.rg-inner h1{font-size:clamp(22px,3.4vw,30px);color:#fff;letter-spacing:-.01em;margin-bottom:10px}
+.rg-inner p{font-size:15px;color:rgba(255,255,255,.82);max-width:46ch;margin:0 auto 36px}
 .rg-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
 @media(max-width:720px){.rg-grid{grid-template-columns:repeat(2,1fr)}}
-.rg-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:26px 14px 20px;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
+.rg-card{background:rgba(255,255,255,.12);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.22);border-radius:16px;padding:26px 14px 20px;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s var(--ease),border-color .3s var(--ease)}
 .rg-card:hover{transform:translateY(-4px);box-shadow:var(--shadow-lg);border-color:var(--gold)}
 .rg-card svg{width:52px;height:52px;margin:0 auto 16px;display:block}
-.rg-card span{display:block;font-size:14px;font-weight:700;color:var(--ink)}
-.rg-card small{display:block;font-size:11.5px;color:var(--gray);margin-top:3px;font-weight:500}
-.rg-foot{margin-top:30px;font-size:12.5px;color:var(--gray)}
+.rg-card span{display:block;font-size:14px;font-weight:700;color:#fff}
+.rg-card small{display:block;font-size:11.5px;color:rgba(255,255,255,.72);margin-top:3px;font-weight:500}
+.rg-foot{margin-top:30px;font-size:12.5px;color:rgba(255,255,255,.8)}
 .rg-foot a{color:var(--gold);font-weight:600}
 </style>
 </head>
@@ -490,7 +490,7 @@ footer .wrap{position:relative;z-index:1}
 <div id="region-gate">
   <button class="rg-skip" onclick="closeRegionGate()">Pular ×</button>
   <div class="rg-inner">
-    <img src="logo-wordmark.png" alt="Paulo Cotrim" class="rg-logo"/>
+    <img src="logo-wordmark-light.png" alt="Paulo Cotrim" class="rg-logo"/>
     <h1 class="display">Bem-vindo! É um prazer ter você por aqui.</h1>
     <p>Escolha sua região e eu já separo os empreendimentos certos para você — você pode trocar ou incluir outras regiões a qualquer momento.</p>
     <div class="rg-grid">
