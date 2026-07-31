@@ -639,6 +639,30 @@ footer .wrap{position:relative;z-index:1}
 </section>
 
 <!-- VISTOS RECENTEMENTE (só aparece se o visitante já viu algum imóvel nesta sessão/navegador) -->
+<section class="section" id="como-funciona">
+  <div class="wrap">
+    <div class="sec-eyebrow reveal" style="text-align:center">Do sofá à chave</div>
+    <h2 class="sec-title display reveal" style="text-align:center;margin:0 auto 10px;max-width:22ch">Você compra sem sair de casa</h2>
+    <p class="reveal" style="text-align:center;color:var(--gray);font-size:14.5px;max-width:60ch;margin:0 auto 40px">Do primeiro clique à chave na mão, cada etapa acontece pela tela — com o Paulo do seu lado no WhatsApp.</p>
+    <div class="jsteps reveal"><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">1</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M4 3h16v18l-4-3H4z M8 8h8M8 12h5"/></svg></div><div class="jstep-t">Simule online</div><div class="jstep-d">Informe sua renda e veja entrada e parcela na hora — com o valor real do imóvel.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">2</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M4 4h12l4 4v12H4z M14 4v4h4"/></svg></div><div class="jstep-t">Envie os documentos por foto</div><div class="jstep-d">RG, CPF e comprovante de renda pelo WhatsApp. Análise de crédito em até 48h.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">3</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M3 3v18h18 M7 14l3-3 3 3 4-5"/></svg></div><div class="jstep-t">Veja seu plano de pagamento</div><div class="jstep-d">Entrada parcelada, uso do FGTS e a melhor condição do dia — tudo claro, sem letra miúda.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">4</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M3 21V9l9-6 9 6v12h-6v-7H9v7z"/></svg></div><div class="jstep-t">Escolha a sua unidade</div><div class="jstep-d">Andar, planta e vista — você decide pela tela, no seu tempo.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">5</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M4 6h16v12H4z M4 7l8 6 8-6"/></svg></div><div class="jstep-t">Receba o contrato por email</div><div class="jstep-d">Assinatura digital com validade jurídica. Pronto: seu apê, sem sair de casa.</div></div></div>
+    <div style="text-align:center;margin-top:36px">
+      <a href="simulador.html" class="btn-gold" style="text-decoration:none;display:inline-flex;align-items:center;gap:9px">Começar pela simulação</a>
+    </div>
+  </div>
+</section>
+<style>
+.jsteps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
+@media(max-width:900px){.jsteps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.jsteps{grid-template-columns:1fr}}
+.jstep{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 18px;box-shadow:0 1px 2px rgba(15,46,54,.04);transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease)}
+.jstep:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(15,46,54,.10);border-color:#1a8f4c}
+.jstep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.jstep-num{width:34px;height:34px;border-radius:50%;background:#1a8f4c;color:#fff;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
+.jstep-ic{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.jstep-t{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:16px;color:var(--ink);line-height:1.25;margin-bottom:7px}
+.jstep-d{font-size:12.8px;color:var(--gray);line-height:1.55}
+</style>
+
 <section class="section" id="recentlyViewedSection" style="display:none;padding-top:0;padding-bottom:0">
   <div class="wrap">
     <div class="sec-eyebrow reveal" style="margin-bottom:6px">Continuar de onde parou</div>
@@ -781,29 +805,7 @@ footer .wrap{position:relative;z-index:1}
 </section>
 
 <!-- JORNADA 100% DIGITAL -->
-<section class="section" id="como-funciona">
-  <div class="wrap">
-    <div class="sec-eyebrow reveal" style="text-align:center">Do sofá à chave</div>
-    <h2 class="sec-title display reveal" style="text-align:center;margin:0 auto 10px;max-width:22ch">Você compra sem sair de casa</h2>
-    <p class="reveal" style="text-align:center;color:var(--gray);font-size:14.5px;max-width:60ch;margin:0 auto 40px">Do primeiro clique à chave na mão, cada etapa acontece pela tela — com o Paulo do seu lado no WhatsApp.</p>
-    <div class="jsteps reveal"><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">1</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M4 3h16v18l-4-3H4z M8 8h8M8 12h5"/></svg></div><div class="jstep-t">Simule online</div><div class="jstep-d">Informe sua renda e veja entrada e parcela na hora — com o valor real do imóvel.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">2</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M4 4h12l4 4v12H4z M14 4v4h4"/></svg></div><div class="jstep-t">Envie os documentos por foto</div><div class="jstep-d">RG, CPF e comprovante de renda pelo WhatsApp. Análise de crédito em até 48h.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">3</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M3 3v18h18 M7 14l3-3 3 3 4-5"/></svg></div><div class="jstep-t">Veja seu plano de pagamento</div><div class="jstep-d">Entrada parcelada, uso do FGTS e a melhor condição do dia — tudo claro, sem letra miúda.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">4</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M3 21V9l9-6 9 6v12h-6v-7H9v7z"/></svg></div><div class="jstep-t">Escolha a sua unidade</div><div class="jstep-d">Andar, planta e vista — você decide pela tela, no seu tempo.</div></div><div class="jstep reveal"><div class="jstep-top"><span class="jstep-num">5</span><svg viewBox="0 0 24 24" class="jstep-ic"><path d="M4 6h16v12H4z M4 7l8 6 8-6"/></svg></div><div class="jstep-t">Receba o contrato por email</div><div class="jstep-d">Assinatura digital com validade jurídica. Pronto: seu apê, sem sair de casa.</div></div></div>
-    <div style="text-align:center;margin-top:36px">
-      <a href="simulador.html" class="btn-gold" style="text-decoration:none;display:inline-flex;align-items:center;gap:9px">Começar pela simulação</a>
-    </div>
-  </div>
-</section>
-<style>
-.jsteps{display:grid;grid-template-columns:repeat(5,1fr);gap:16px}
-@media(max-width:900px){.jsteps{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:560px){.jsteps{grid-template-columns:1fr}}
-.jstep{background:#fff;border:1px solid var(--line);border-radius:16px;padding:22px 18px;box-shadow:0 1px 2px rgba(15,46,54,.04);transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .4s var(--ease)}
-.jstep:hover{transform:translateY(-5px);box-shadow:0 16px 36px rgba(15,46,54,.10);border-color:#1a8f4c}
-.jstep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-.jstep-num{width:34px;height:34px;border-radius:50%;background:#1a8f4c;color:#fff;font-family:Fraunces,Georgia,serif;font-weight:700;font-size:17px;display:flex;align-items:center;justify-content:center}
-.jstep-ic{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
-.jstep-t{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:16px;color:var(--ink);line-height:1.25;margin-bottom:7px}
-.jstep-d{font-size:12.8px;color:var(--gray);line-height:1.55}
-</style>
+
 
 <!-- BRANDS -->
 <section class="section section-mist">
