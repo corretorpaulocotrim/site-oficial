@@ -476,7 +476,7 @@ function renderSim(){
 }
 
 function renderGateEmp(){
-  var opts=CATALOG.map(function(e,i){return'<option value="'+i+'">'+e.n+' — '+STATUS_LABEL[e.s]+'</option>';}).join('');
+  var opts=CATALOG.map(function(e,i){return'<option value="'+i+'">'+e.n+' · '+e.b+'</option>';}).join('');
   return'<div class="sel-box" style="border-color:var(--gold);padding:2rem 1.5rem">'
     +'<div class="sel-title" style="justify-content:center;display:flex">Escolha o empreendimento</div>'
     +'<p style="font-size:12.5px;color:var(--text2);margin-bottom:14px;text-align:center">Selecione o im\u00f3vel e a simula\u00e7\u00e3o completa — entrada, parcela, subs\u00eddio, prazo — aparece na hora.</p>'
@@ -485,7 +485,7 @@ function renderGateEmp(){
 }
 
 function renderEmpSelector(c){
-  var opts=CATALOG.map(function(e,i){return'<option value="'+i+'" '+(!S.useCustom&&S.empIdx===i?'selected':'')+'>'+e.n+' — '+STATUS_LABEL[e.s]+'</option>';}).join('');
+  var opts=CATALOG.map(function(e,i){return'<option value="'+i+'" '+(!S.useCustom&&S.empIdx===i?'selected':'')+'>'+e.n+' · '+e.b+'</option>';}).join('');
   return'<div class="g2s" style="margin-bottom:10px">'
     +'<div class="fi2"><label>Empreendimento</label><select onchange="selEmp(this.value)">'+opts+'<option value="custom" '+(S.useCustom?'selected':'')+'>Outro valor (digitar manualmente)</option></select></div>'
     +(S.useCustom?'<div class="fi2 hl"><label>Valor do imóvel (R$)</label><input type="text" value="'+(S.customPreco?N2(S.customPreco):'')+'" placeholder="Ex: 300.000" oninput="updCustomPreco(this.value)"></div>'
