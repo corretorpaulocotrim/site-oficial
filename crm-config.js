@@ -6,8 +6,8 @@
  * enviar/sincronizar leads automaticamente.
  */
 window.CRM_CONFIG = {
-  // Cole aqui a URL /exec do seu Apps Script (vazio = só localStorage):
-  webhookUrl: '',
+  // URL /exec do Apps Script (backend do CRM):
+  webhookUrl: 'https://script.google.com/macros/s/AKfycbwAl107wFuwn54xIBG1fu49pVzt45GxYVJHkrQ-n961y8NDR3JAYK_buMmyV20__z70zw/exec',
   // Mesma senha do arquivo APPS-SCRIPT-CRM.gs (campo TOKEN):
   authToken: 'pcotrim2026',
   source: 'site-paulocotrim',
