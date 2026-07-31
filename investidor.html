@@ -5,17 +5,13 @@
 <title>Calculadora do Investidor Imobiliário — Simuladores Premium | Paulo Cotrim</title>
 <meta name="description" content="5 simuladores imobiliários: Airbnb, valorização, retorno total, entrada e FGTS. Calcule seu retorno antes de investir. Paulo Cotrim · CRECI-RJ 77677-F."/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
-<link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png"/>
-<link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png"/>
-<link rel="shortcut icon" href="favicon.ico"/>
-<link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#ffffff;--navy2:#f5f6f7;--navy3:#e7edee;--gold:#b8873a;--gold2:#cf9f4f;--green:#1a8f4c;--ink:#0f2e36;--gray:#6b7280;--line:#e8eaed;--mist:#f5f6f7;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
+:root{--navy:#ffffff;--navy2:#f5f6f7;--navy3:#e7edee;--gold:#b8873a;--gold2:#cf9f4f;--green:#3E8E5A;--ink:#0f2e36;--gray:#6b7280;--line:#e8eaed;--mist:#f5f6f7;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
 body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--ink);min-height:100vh}
 a{color:inherit;text-decoration:none}
 
@@ -45,16 +41,7 @@ a{color:inherit;text-decoration:none}
 .ic-sm{width:16px;height:16px}
 
 /* HERO */
-.inv-hero{position:relative;padding:88px 40px 60px;text-align:center;background:#0f2e36;overflow:hidden}
-.inv-hero::before{content:'';position:absolute;inset:0;background:url('img-porto.jpg') center/cover no-repeat;opacity:.48;animation:cineKB 16s ease-out forwards;will-change:transform}
-.inv-hero::after{content:'';position:absolute;inset:0;background:linear-gradient(180deg,rgba(15,46,54,.86) 0%,rgba(15,46,54,.6) 45%,rgba(15,46,54,.92) 100%)}
-.inv-hero>*{position:relative;z-index:2}
-@keyframes cineKB{0%{transform:scale(1.02)}100%{transform:scale(1.1)}}
-@media(prefers-reduced-motion:reduce){.inv-hero::before{animation:none}}
-.inv-hero .inv-h1{color:#fff}
-.inv-hero .inv-h1 span{color:var(--gold2)}
-.inv-hero .inv-sub{color:rgba(255,255,255,.8)}
-.inv-hero .inv-tag{background:rgba(255,255,255,.08);border-color:rgba(207,159,79,.45);color:var(--gold2);backdrop-filter:blur(8px)}
+.inv-hero{padding:56px 40px 36px;text-align:center;background:#fff}
 .inv-tag{display:inline-block;background:var(--petrol-soft);color:var(--gold);font-size:11px;font-weight:700;padding:6px 16px;border-radius:30px;border:1px solid rgba(184,135,58,.25);letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px}
 .inv-h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,4.5vw,46px);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px;color:var(--ink)}
 .inv-h1 span{color:var(--gold);font-style:italic}
@@ -202,7 +189,7 @@ a{color:inherit;text-decoration:none}
 .td-root .pct-half input[type=number]{-moz-appearance:textfield}
 .td-root .pct-sym{font-size:13px;font-weight:700;color:#6b7280}
 .td-root .pct-divider{width:1px;height:30px;background:#e8eaed}
-.td-root .pct-total-ok{font-size:11px;font-weight:700;color:#1a8f4c;display:flex;align-items:center;gap:4px}
+.td-root .pct-total-ok{font-size:11px;font-weight:700;color:#3E8E5A;display:flex;align-items:center;gap:4px}
 .td-root .pct-total-err{font-size:11px;font-weight:700;color:#B91C1C;display:flex;align-items:center;gap:4px}
 .td-root .split-bar{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:10px;overflow:hidden;margin-bottom:1rem}
 .td-root .split-half{padding:.75rem 1.1rem;display:flex;flex-direction:column;gap:3px}
@@ -236,7 +223,7 @@ a{color:inherit;text-decoration:none}
 .td-root .ch-total.pos span:last-child{color:#b8873a}
 .td-root .ch-note{font-size:9px;color:#9aa1a8;margin-top:5px}
 .td-root .saldo-alvo{display:flex;align-items:center;justify-content:space-between;border-radius:7px;padding:7px 10px;margin-top:8px;font-size:12px;font-weight:600;gap:6px}
-.td-root .saldo-alvo.ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#1a8f4c}
+.td-root .saldo-alvo.ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#3E8E5A}
 .td-root .saldo-alvo.falta{background:#faf6ec;border:1px solid #e8d4a8;color:#8a6416}
 .td-root .saldo-alvo.excede{background:#FFF1F2;border:1px solid #FECDD3;color:#B91C1C}
 .td-root .saldo-alvo i{font-size:14px;flex-shrink:0}
@@ -254,10 +241,10 @@ a{color:inherit;text-decoration:none}
 .td-root .btn-row{display:flex;gap:10px;margin-top:1.25rem;flex-wrap:wrap}
 .td-root .tdbtn{display:flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:9px;padding:13px 22px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .15s}
 .td-root .tdbtn:hover{opacity:.88}
-.td-root .btn-wa{background:#1a8f4c;color:#fff;flex:1;min-width:180px}
+.td-root .btn-wa{background:#3E8E5A;color:#fff;flex:1;min-width:180px}
 .td-root .btn-pdf{background:#0f2e36;color:#fff;flex:1;min-width:180px}
 .td-root .btn-google{background:#EA4335;color:#fff;min-width:160px}
-.td-root .btn-reset{background:#f5f6f7;color:#6b7280;border:1.5px solid #e8eaed;min-width:120px}.td-root .btn-share{background:#fff;color:#b8873a;border:1.5px solid #b8873a;min-width:150px}
+.td-root .btn-reset{background:#f5f6f7;color:#6b7280;border:1.5px solid #e8eaed;min-width:120px}
 .td-root .nota{font-size:10px;color:#9aa1a8;text-align:center;margin-top:1.5rem;line-height:1.8}
 @media(max-width:600px){
   .td-root .g2{grid-template-columns:1fr}
@@ -292,11 +279,11 @@ a{color:inherit;text-decoration:none}
 .cc-prev:hover,.cc-next:hover{background:rgba(201,153,58,.4);border-color:var(--gold);transform:translateY(-50%) scale(1.06)}
 @media(max-width:600px){.cond-carousel{height:220px}.cc-caption{left:16px;bottom:14px}.cc-caption-name{font-size:15px}.cc-prev,.cc-next{width:32px;height:32px;font-size:14px}}
 </style>
-<link rel="canonical" href="https://www.paulocotrim.com/investidor.html"/>
+<link rel="canonical" href="https://paulocotrim.com.br/investidor.html"/>
 <meta property="og:title" content="Calculadora do Investidor Imobiliário — 5 Simuladores Premium"/>
 <meta property="og:description" content="Simule Airbnb, valorização, retorno total, entrada e FGTS antes de comprar. Paulo Cotrim · CRECI-RJ 77677-F."/>
-<meta property="og:url" content="https://www.paulocotrim.com/investidor.html"/>
-<meta property="og:image" content="https://www.paulocotrim.com/paulo-cotrim-profissional.jpeg"/>
+<meta property="og:url" content="https://paulocotrim.com.br/investidor.html"/>
+<meta property="og:image" content="https://paulocotrim.com.br/paulo-cotrim-profissional.jpeg"/>
 <meta property="og:type" content="website"/>
 
 </head>
@@ -310,7 +297,7 @@ a{color:inherit;text-decoration:none}
     <a href="index.html#empreendimentos">Empreendimentos</a>
     <a href="aprovacao-expressa.html" class="nav-highlight">Aprovação Expressa</a>
     <a href="simulador.html">Simular financiamento</a>
-    <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20falar%20com%20a%20equipe%20de%20vendas." target="_blank" class="nav-cta"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Equipe de vendas online, chame agora</a>
+    <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20falar%20com%20a%20equipe%20de%20vendas." target="_blank" class="nav-cta"><svg class="ic ic-sm" viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Falar com Paulo Cotrim</a>
   </nav>
   <button class="burger" onclick="document.getElementById('mnav').style.display=document.getElementById('mnav').style.display==='block'?'none':'block'" aria-label="Menu">
     <svg class="ic" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
@@ -535,7 +522,7 @@ a{color:inherit;text-decoration:none}
       <div class="result-actions">
       <button class="btn-wa-res" onclick="enviarWA('fgts')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        Falar com nossa equipe sobre meu FGTS
+        Falar com o Paulo Cotrim sobre meu FGTS
       </button>
       <button class="btn-dl-res" onclick="baixarAnaliseInvestidor('Calculadora FGTS + Entrada','res-3')">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
@@ -670,7 +657,7 @@ a{color:inherit;text-decoration:none}
       <div style="position:absolute;inset:0;background:linear-gradient(to right,rgba(6,15,30,.85) 0%,rgba(6,15,30,.3) 60%,transparent 100%)"></div>
       <div style="position:absolute;bottom:0;left:0;padding:20px 24px">
         <div style="color:var(--gray);font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;margin-bottom:6px">Porto Maravilha · Rio de Janeiro</div>
-        <div style="color:#fff;font-size:18px;font-weight:800;font-family:Outfit,sans-serif;line-height:1.2">Tabela direta<br><span style="color:#e8b84b">Monte seu plano de pagamento</span></div>
+        <div style="color:#fff;font-size:18px;font-weight:800;font-family:Inter,sans-serif;line-height:1.2">Tabela direta<br><span style="color:#e8b84b">Monte seu plano de pagamento</span></div>
       </div>
       <div style="position:absolute;top:16px;right:16px;background:rgba(201,153,58,.2);backdrop-filter:blur(8px);border:1px solid rgba(201,153,58,.4);border-radius:8px;padding:6px 12px;color:#e8b84b;font-size:11px;font-weight:800">Tabela Julho 2026</div>
     </div>
@@ -681,15 +668,15 @@ a{color:inherit;text-decoration:none}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-30.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#3E8E5A;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-32.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#3E8E5A;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-28.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#3E8E5A;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="margin-left:auto;align-self:center;color:var(--gold2);font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px">+ 700 famílias<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg></div>
       </div>
@@ -721,7 +708,19 @@ a{color:inherit;text-decoration:none}
           </div>
           <div class="g2" id="td-custom-wrap" style="display:none;margin-top:10px">
             <div class="fi"><label>Nome do empreendimento</label><input type="text" id="td-inp-custom-nome" placeholder="Ex: Residencial Vista Verde" oninput="tdUpdCustom('nome',this.value)"></div>
-            <div class="fi"><label>Construtora</label><input type="text" id="td-inp-custom-cons" placeholder="Ex: MRV, Direcional, Vivaz, RJZ..." oninput="tdUpdCustom('cons',this.value)"></div>
+          </div>
+          <div class="g2" style="margin-top:10px">
+            <div class="fi"><label>Construtora <span style="font-weight:400;color:#94a3b8">— define prazo e percentual pré/pós-chaves</span></label>
+              <select id="td-sel-cons" onchange="tdSelCons(this.value)">
+                <option value="Cury">Cury</option>
+                <option value="MRV">MRV</option>
+                <option value="Direcional">Direcional</option>
+                <option value="Vivaz">Vivaz</option>
+                <option value="Vitale">Vitale</option>
+                <option value="_outra">Outra (digitar)</option>
+              </select>
+            </div>
+            <div class="fi" id="td-cons-outra-wrap" style="display:none"><label>Nome da construtora</label><input type="text" id="td-inp-cons-outra" placeholder="Ex: RJZ, Tegra..." oninput="tdUpdConsOutra(this.value)"></div>
           </div>
           <div id="td-camp-wrap"></div>
           <div id="td-cons-tag"></div>
@@ -867,13 +866,12 @@ a{color:inherit;text-decoration:none}
         </div>
 
         <div class="btn-row">
-          <a class="tdbtn btn-wa" href="#" onclick="tdSendWA();return false;"><i class="ti ti-brand-whatsapp"></i>Falar com nossa equipe</a>
+          <a class="tdbtn btn-wa" href="#" onclick="tdSendWA();return false;"><i class="ti ti-brand-whatsapp"></i>Falar com o Paulo Cotrim</a>
           <button class="tdbtn btn-pdf" onclick="tdBaixarProposta()"><i class="ti ti-download"></i>Baixar Proposta</button>
-          <button class="tdbtn btn-share" onclick="tdShareProposta(this)"><i class="ti ti-share-3"></i>Compartilhar</button>
           <button class="tdbtn btn-reset" onclick="tdResetar()"><i class="ti ti-refresh"></i>Resetar</button>
         </div>
 
-        <p class="nota">Tabela Julho 2026 · Valores sujeitos a confirmação<br>INCC-M 6,10% a.a. · IGP-M -1,05% a.a. (acumulado 2025, fonte FGV) — índices variam mês a mês, simulação apenas ilustrativa<br>Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</p>
+        <p class="nota">Tabela Julho 2026 · Valores sujeitos a confirmação<br>INCC 3,92% a.a. · IGPM +1% a.a. · Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</p>
       </div>
     </div>
   </div>
@@ -1023,9 +1021,8 @@ function baixarAnaliseInvestidor(simTitulo, resBoxId){
   }
   var noteEl = box.querySelector('.result-note');
   var note = noteEl ? noteEl.textContent : '';
-  var _dataGer = new Date().toLocaleDateString('pt-BR');
-  var waMsg = 'Olá Paulo! Baixei minha análise de \''+simTitulo+'\' no seu site e quero conversar sobre isso.';
-  var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent('https://wa.me/5521989150864?text='+encodeURIComponent(waMsg));
+  var url = window.location.href.split('#')[0];
+  var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(url);
   var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Análise — '+simTitulo+'</title>'
     +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
     +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
@@ -1038,31 +1035,15 @@ function baixarAnaliseInvestidor(simTitulo, resBoxId){
     +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e8eaed}'
     +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
     +'.cta{display:inline-block;margin-top:20px;background:#25d366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 22px;border-radius:10px}'
-    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}'
-    +'.wm{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:-1}'
-    +'.wm div{position:absolute;left:-20%;width:140%;text-align:center;transform:rotate(-27deg);font-family:Inter,sans-serif;font-weight:800;font-size:12.5px;letter-spacing:.16em;color:rgba(15,46,54,.055);white-space:nowrap}'
-    +'.pdf-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}'
-    +'.pdf-head img{height:24px;display:block}'
-    +'.gendate{font-size:10.5px;color:#94a3b8}'
-    +'@media print{.cta{display:none}body{padding:20px}}</style></head><body>'
-    +'<div class="wm" aria-hidden="true">'
-    +'<div style="top:-40px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:70px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:180px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:290px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:400px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:510px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'<div style="top:620px">PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR &nbsp;&nbsp;&nbsp; PAULO COTRIM · PAULOCOTRIM.COM.BR</div>'
-    +'</div>'
-    +'<div class="pdf-head"><img src="https://corretorpaulocotrim.github.io/site-oficial/logo-wordmark.png" alt="Paulo Cotrim"/><span class="gendate">Gerado em '+_dataGer+'</span></div>'
+    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{.cta{display:none}body{padding:20px}}</style></head><body>'
     +'<div class="kicker">Calculadora do Investidor · Porto Maravilha</div>'
     +'<h1>'+simTitulo+'</h1><div class="sub">Análise gerada por você · Paulo Cotrim · CRECI-RJ 77677-F</div>'
     + rows
     +(note?'<div class="note">'+note+'</div>':'')
-    +'<a class="cta" href="https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo! Baixei minha análise de \''+simTitulo+'\' no seu site e quero conversar sobre isso.')+'" target="_blank">Falar com a equipe de vendas sobre esta análise</a>'
-    +'<div class="qrbox"><img src="'+qr+'" alt="QR code do WhatsApp"/><div><b>Fale agora com o Paulo</b>Escaneie para abrir o WhatsApp direto com o Paulo Cotrim sobre esta análise.</div></div>'
+    +'<a class="cta" href="https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo! Baixei minha análise de \''+simTitulo+'\' no seu site e quero conversar sobre isso.')+'" target="_blank">Falar com Paulo sobre esta análise</a>'
+    +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar à calculadora</b>Refaça a simulação ou explore outras ferramentas do investidor direto do celular.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
-    +'<div class="foot">Paulo Cotrim · www.paulocotrim.com · Documento informativo e educativo, não substitui a simulação bancária real</div>'
+    +'<div class="foot">Paulo Cotrim · Documento informativo e educativo, não substitui a simulação bancária real</div>'
     +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
@@ -1203,7 +1184,25 @@ const TDDB={
 };
 
 const TDNAMES=Object.keys(TDDB);
-let TDS={cond:"Parque Piedade",tipIdx:0,vu:0,pctPre:50,pctPos:50,
+
+/* ================= REGRA DE PRAZO/PERCENTUAL POR CONSTRUTORA =================
+   Cada construtora tem sua própria política de pré-chaves (parcelado durante a obra)
+   e pós-chaves (parcelado depois da entrega). Vitale, Direcional e MRV têm pós-chaves
+   oficial; as demais, o padrão genérico (36/48 meses, 50/50%) segue disponível e
+   totalmente editável manualmente pelos campos de prazo e percentual.
+   Observação: prazo pós-chaves da Vitale ainda não confirmado pelo Paulo — usando
+   48x (mesmo padrão de Direcional/Vivaz) como referência inicial, editável. */
+const CONSTRUTORA_RULES={
+  'Cury':      {prazoPre:36, prazoPos:48, pctPre:50, pctPos:50, posChavesOficial:false},
+  'MRV':       {prazoPre:24, prazoPos:72, pctPre:40, pctPos:60, posChavesOficial:true},
+  'Direcional':{prazoPre:24, prazoPos:48, pctPre:45, pctPos:55, posChavesOficial:true},
+  'Vivaz':     {prazoPre:24, prazoPos:48, pctPre:45, pctPos:55, posChavesOficial:true},
+  'Vitale':    {prazoPre:24, prazoPos:48, pctPre:45, pctPos:55, posChavesOficial:true},
+  '_outra':    {prazoPre:36, prazoPos:48, pctPre:50, pctPos:50, posChavesOficial:false}
+};
+const CONSTRUTORA_NAMES=['Cury','MRV','Direcional','Vivaz','Vitale'];
+
+let TDS={cond:"Parque Piedade",tipIdx:0,vu:0,pctPre:50,pctPos:50,cons:'Cury',consOutra:'',
   custom:{nome:'',cons:'',vu:0},
   s4:{ato:0,pi:0,pqm:36,pvm:0,pqa:0,pva:0,chave:0,oqm:48,ovm:0,oqa:0,ova:0}};
 const tdAcoState={pre:true,pos:false,resumo:false};
@@ -1239,7 +1238,17 @@ function tdPopulaTip(){
 function tdSelCond(v){
   TDS.cond=v;TDS.tipIdx=0;
   if(v==='_custom'){TDS.vu=TDS.custom.vu||0;}
-  else{TDS.vu=TDDB[v].tips[0].p;}
+  else{
+    TDS.vu=TDDB[v].tips[0].p;
+    // catálogo é 100% Cury — reseta a construtora/regra ao trocar de empreendimento da base
+    TDS.cons='Cury';
+    var rule=CONSTRUTORA_RULES.Cury;
+    TDS.pctPre=rule.pctPre;TDS.pctPos=rule.pctPos;
+    var sc=document.getElementById('td-sel-cons');if(sc)sc.value='Cury';
+    var ow=document.getElementById('td-cons-outra-wrap');if(ow)ow.style.display='none';
+    var pp=document.getElementById('td-inp-pct-pre');if(pp)pp.value=TDS.pctPre;
+    var po=document.getElementById('td-inp-pct-pos');if(po)po.value=TDS.pctPos;
+  }
   tdPopulaTip();tdAutoCalc();tdSyncInputs();tdRender();
 }
 function tdSelTip(v){
@@ -1248,6 +1257,22 @@ function tdSelTip(v){
 }
 function tdUpdVU(v){TDS.vu=parseFloat(v)||0;if(TDS.cond==='_custom')TDS.custom.vu=TDS.vu;tdAutoCalc();tdSyncInputs();tdRender();}
 function tdUpdCustom(k,v){TDS.custom[k]=v;tdRender();}
+function tdSelCons(v){
+  TDS.cons=v;
+  var sel=document.getElementById('td-sel-cons');if(sel)sel.value=v;
+  var ow=document.getElementById('td-cons-outra-wrap');
+  if(v==='_outra'){
+    if(ow)ow.style.display='block';
+  }else{
+    if(ow)ow.style.display='none';
+    var rule=CONSTRUTORA_RULES[v]||CONSTRUTORA_RULES['_outra'];
+    TDS.pctPre=rule.pctPre;TDS.pctPos=rule.pctPos;
+    var pp=document.getElementById('td-inp-pct-pre');if(pp)pp.value=TDS.pctPre;
+    var po=document.getElementById('td-inp-pct-pos');if(po)po.value=TDS.pctPos;
+  }
+  tdAutoCalc();tdSyncInputs();tdRender();
+}
+function tdUpdConsOutra(v){TDS.consOutra=v;tdRender();}
 function tdUpdPct(side,v){
   const val=Math.min(100,Math.max(0,parseFloat(v)||0));
   if(side==='pre'){TDS.pctPre=val;TDS.pctPos=100-val;const el=document.getElementById('td-inp-pct-pos');if(el)el.value=TDS.pctPos;}
@@ -1257,15 +1282,18 @@ function tdUpdPct(side,v){
 function tdUpdS4(k,v){TDS.s4[k]=parseFloat(v)||0;tdRender();}
 function tdAutoCalc(){
   const vu=TDS.vu;
+  const rule=CONSTRUTORA_RULES[TDS.cons]||CONSTRUTORA_RULES['_outra'];
   const totalPre=vu*(TDS.pctPre/100);
   const chave=TDS.s4.chave||0;
   const ato=Math.round(vu*0.10*100)/100;
   const pi=Math.round(vu*0.05*100)/100;
   const restoPre=totalPre-ato-pi-chave;
-  const pvm=restoPre>0?Math.round((restoPre/36)*100)/100:0;
+  const prazoPre=rule.prazoPre;
+  const pvm=restoPre>0?Math.round((restoPre/prazoPre)*100)/100:0;
   const totalPos=vu*(TDS.pctPos/100);
-  const ovm=Math.round((totalPos/48)*100)/100;
-  TDS.s4={ato,pi,pqm:36,pvm,pqa:0,pva:0,chave,oqm:48,ovm,oqa:0,ova:0};
+  const prazoPos=rule.prazoPos;
+  const ovm=Math.round((totalPos/prazoPos)*100)/100;
+  TDS.s4={ato,pi,pqm:prazoPre,pvm,pqa:0,pva:0,chave,oqm:prazoPos,ovm,oqa:0,ova:0};
 }
 function tdSyncInputs(){
   const map={'td-inp-vu':TDS.vu,'td-inp-ato':TDS.s4.ato,'td-inp-pi':TDS.s4.pi,
@@ -1290,7 +1318,11 @@ function tdRender(){
   const cw=document.getElementById('td-camp-wrap');
   if(cw)cw.innerHTML=(!isCustom&&TDDB[TDS.cond].c)?'<div class="camp-tag"><i class="ti ti-star"></i>Campanha Junho 2026</div>':'';
   const ct=document.getElementById('td-cons-tag');
-  if(ct){const consNome=isCustom?(TDS.custom.cons||'a definir'):'Cury';ct.innerHTML='<div class="cons-tag"><i class="ti ti-building-skyscraper"></i>Construtora: '+consNome+'</div>';}
+  if(ct){
+    const rule=CONSTRUTORA_RULES[TDS.cons]||CONSTRUTORA_RULES['_outra'];
+    const pcTag=rule.posChavesOficial?' <span class="cons-tag" style="background:#f0f9f3;color:#157540"><i class="ti ti-calendar-time"></i>Pós-chaves oficial até '+rule.prazoPos+'x</span>':'';
+    ct.innerHTML='<div class="cons-tag"><i class="ti ti-building-skyscraper"></i>Construtora: '+tdConsLabel()+'</div>'+pcTag;
+  }
   const pdv=document.getElementById('td-pd-val');if(pdv)pdv.textContent=TDBRL(TDS.vu);
   const ps=document.getElementById('td-pct-status');
   if(ps){const ok=Math.abs(total-100)<0.01;ps.className=ok?'pct-total-ok':'pct-total-err';ps.innerHTML=ok?'<i class="ti ti-circle-check"></i>100%':'<i class="ti ti-alert-circle"></i>'+total.toFixed(0)+'%';}
@@ -1339,7 +1371,7 @@ function tdRender(){
   const cn=document.getElementById('td-cons-note');if(cn&&TDS.vu>0)cn.textContent='Total = '+((c.grand/TDS.vu)*100).toFixed(1)+'% do valor da unidade';
 }
 function tdCondLabel(){return TDS.cond==='_custom'?(TDS.custom.nome||'Empreendimento personalizado'):TDS.cond;}
-function tdConsLabel(){return TDS.cond==='_custom'?(TDS.custom.cons||'a definir'):'Cury';}
+function tdConsLabel(){return TDS.cons==='_outra'?(TDS.consOutra||'a definir'):TDS.cons;}
 function tdTipLabel(){return TDS.cond==='_custom'?{n:'Tipologia a definir'}:TDDB[TDS.cond].tips[TDS.tipIdx];}
 function tdSendWA(){
   const tip=tdTipLabel();
@@ -1355,33 +1387,11 @@ function tdResetar(){
   TDS.vu=TDS.cond==='_custom'?(TDS.custom.vu||0):TDDB[TDS.cond].tips[TDS.tipIdx].p;
   tdAutoCalc();tdSyncInputs();tdRender();
 }
-function tdCalcReajuste(c,s4){
-  var INCC_AA=0.0610;
-  var IGPM_AA=-0.0105;
-  var incM=Math.pow(1+INCC_AA,1/12)-1;
-  var igpM=Math.pow(1+IGPM_AA,1/12)-1;
-  var mPre=s4.pqm||0;
-  var mPos=s4.oqm||0;
-  var preR=c.tPre*Math.pow(1+incM,mPre);
-  var posR=c.tPos*Math.pow(1+igpM,mPos);
-  return{preR:preR,posR:posR,grandR:preR+posR,incAA:INCC_AA,igpAA:IGPM_AA};
-}
-function tdShareProposta(btn){
-  const c=tdCalc();
-  const txt='Proposta de investimento — '+tdCondLabel()+' ('+tdConsLabel()+'): total '+TDBRL(c.grand)+'. Fale com Paulo Cotrim:';
-  if(navigator.share){
-    navigator.share({title:'Proposta — '+tdCondLabel(),text:txt,url:location.href}).catch(function(){});
-  }else if(navigator.clipboard){
-    navigator.clipboard.writeText(location.href).then(function(){
-      if(btn){var orig=btn.innerHTML;btn.innerHTML='Link copiado!';setTimeout(function(){btn.innerHTML=orig;},2200);}
-    }).catch(function(){});
-  }
-}
 function tdBaixarProposta(){
   const tip=tdTipLabel();
-  const c=tdCalc();const{s4}=TDS;const rj=tdCalcReajuste(c,s4);
+  const c=tdCalc();const{s4}=TDS;
   const hoje=new Date().toLocaleDateString('pt-BR');
-  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Proposta — '+tdCondLabel()+'</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:40px;max-width:680px;margin:0 auto}.hdr{background:#0f2e36;border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hdr-role{font-size:9px;color:#cf9f4f;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}.hdr-name{font-family:Fraunces,serif;font-size:22px;color:#fff}.hdr-c{font-size:11px;color:#e8d4a8;margin-top:3px}.badge{background:rgba(184,135,58,.3);color:#e8d4a8;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:700}h1{font-family:Fraunces,serif;font-size:24px;color:#0f2e36;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}.box{background:#f5f6f7;border-radius:10px;padding:14px 18px;margin-bottom:14px;border:1px solid #e8eaed}.box-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#b8873a;margin-bottom:9px}.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8eaed;font-size:13px}.row:last-child{border:none}.rk{color:#6b7280}.rv{font-weight:600}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.half{border-radius:10px;padding:13px 15px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.half.pre{background:#0f2e36}.half.pos{background:#b8873a}.hl{font-size:9px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.hv{font-family:Fraunces,serif;font-size:20px;color:#fff}.grand{background:#0f2e36;border-radius:10px;padding:16px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.gt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e8d4a8;margin-bottom:10px}.gr{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:#e8d4a8}.gr span:last-child{color:#fff;font-weight:600}.gd{height:1px;background:rgba(255,255,255,.15);margin:10px 0}.gf{display:flex;justify-content:space-between;align-items:center}.gfk{font-size:14px;font-weight:700;color:#fff}.gfv{font-family:Fraunces,serif;font-size:24px;color:#e8b84b}.footer{margin-top:20px;font-size:10px;color:#9aa1a8;text-align:center;line-height:1.8;border-top:1px solid #e8eaed;padding-top:14px}</style></head><body><div class="hdr"><div><div class="hdr-role">Especialista em Financiamento Imobiliário</div><div class="hdr-name">Paulo Cotrim</div><div class="hdr-c">(21) 98915-0864</div></div><div class="badge">Julho 2026</div></div><h2>Proposta de Investimento</h2><div class="sub">Tabela Direta · '+hoje+'</div><div class="box"><div class="box-title">Empreendimento</div><div class="row"><span class="rk">Condomínio</span><span class="rv">'+tdCondLabel()+'</span></div><div class="row"><span class="rk">Construtora</span><span class="rv">'+tdConsLabel()+'</span></div><div class="row"><span class="rk">Tipologia</span><span class="rv">'+tip.n+'</span></div><div class="row"><span class="rk">Valor da unidade</span><span class="rv">'+TDBRL(TDS.vu)+'</span></div></div><div class="split"><div class="half pre"><div class="hl">Pré-chaves — '+TDS.pctPre+'%</div><div class="hv">'+TDBRL(c.tPre)+'</div></div><div class="half pos"><div class="hl">Pós-chaves — '+TDS.pctPos+'%</div><div class="hv">'+TDBRL(c.tPos)+'</div></div></div><div class="grand"><div class="gt">Resumo Consolidado</div><div class="gr"><span>Valor da unidade</span><span>'+TDBRL(TDS.vu)+'</span></div><div class="gr"><span>Total pré-chaves</span><span>'+TDBRL(c.tPre)+'</span></div><div class="gr"><span>Total pós-chaves</span><span>'+TDBRL(c.tPos)+'</span></div><div class="gd"></div><div class="gf"><span class="gfk">Total do investimento</span><span class="gfv">'+TDBRL(c.grand)+'</span></div></div><div class="box" style="border-color:#e8d4a8;background:#fdf9f0"><div class="box-title" style="color:#b8873a">Simulação com reajuste (INCC/IGP-M) — apenas ilustrativa</div><div class="row"><span class="rk">Pré-chaves reajustado (INCC-M 6,10% a.a.)</span><span class="rv">'+TDBRL(rj.preR)+'</span></div><div class="row"><span class="rk">Pós-chaves reajustado (IGP-M -1,05% a.a.)</span><span class="rv">'+TDBRL(rj.posR)+'</span></div><div class="row" style="border:none"><span class="rk" style="font-weight:700;color:#0f2e36">Total estimado com reajuste</span><span class="rv" style="color:#b8873a">'+TDBRL(rj.grandR)+'</span></div></div><div class="footer" style="text-align:left;border-top:2px solid #e8eaed">Esta é apenas uma simulação com base nas médias mensais dos índices INCC-M e IGP-M acumulados em 2025 (fonte: FGV IBRE). Os índices variam mês a mês e podem subir ou cair — em 2024, por exemplo, o IGP-M fechou em +6,54% a.a., bem diferente do -1,05% de 2025. Os valores reais de reajuste serão sempre os publicados pela FGV na data de cada parcela, não os valores simulados aqui. Tabela Julho 2026 · Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</div>';
+  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Proposta — '+tdCondLabel()+'</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:40px;max-width:680px;margin:0 auto}.hdr{background:#0f2e36;border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hdr-role{font-size:9px;color:#cf9f4f;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}.hdr-name{font-family:Fraunces,serif;font-size:22px;color:#fff}.hdr-c{font-size:11px;color:#e8d4a8;margin-top:3px}.badge{background:rgba(184,135,58,.3);color:#e8d4a8;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:700}h1{font-family:Fraunces,serif;font-size:24px;color:#0f2e36;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}.box{background:#f5f6f7;border-radius:10px;padding:14px 18px;margin-bottom:14px;border:1px solid #e8eaed}.box-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#b8873a;margin-bottom:9px}.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8eaed;font-size:13px}.row:last-child{border:none}.rk{color:#6b7280}.rv{font-weight:600}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.half{border-radius:10px;padding:13px 15px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.half.pre{background:#0f2e36}.half.pos{background:#b8873a}.hl{font-size:9px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.hv{font-family:Fraunces,serif;font-size:20px;color:#fff}.grand{background:#0f2e36;border-radius:10px;padding:16px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.gt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e8d4a8;margin-bottom:10px}.gr{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:#e8d4a8}.gr span:last-child{color:#fff;font-weight:600}.gd{height:1px;background:rgba(255,255,255,.15);margin:10px 0}.gf{display:flex;justify-content:space-between;align-items:center}.gfk{font-size:14px;font-weight:700;color:#fff}.gfv{font-family:Fraunces,serif;font-size:24px;color:#e8b84b}.footer{margin-top:20px;font-size:10px;color:#9aa1a8;text-align:center;line-height:1.8;border-top:1px solid #e8eaed;padding-top:14px}</style></head><body><div class="hdr"><div><div class="hdr-role">Especialista em Financiamento Imobiliário</div><div class="hdr-name">Paulo Cotrim</div><div class="hdr-c">(21) 98915-0864</div></div><div class="badge">Julho 2026</div></div><h2>Proposta de Investimento</h2><div class="sub">Tabela Direta · '+hoje+'</div><div class="box"><div class="box-title">Empreendimento</div><div class="row"><span class="rk">Condomínio</span><span class="rv">'+tdCondLabel()+'</span></div><div class="row"><span class="rk">Construtora</span><span class="rv">'+tdConsLabel()+'</span></div><div class="row"><span class="rk">Tipologia</span><span class="rv">'+tip.n+'</span></div><div class="row"><span class="rk">Valor da unidade</span><span class="rv">'+TDBRL(TDS.vu)+'</span></div></div><div class="split"><div class="half pre"><div class="hl">Pré-chaves — '+TDS.pctPre+'%</div><div class="hv">'+TDBRL(c.tPre)+'</div></div><div class="half pos"><div class="hl">Pós-chaves — '+TDS.pctPos+'%</div><div class="hv">'+TDBRL(c.tPos)+'</div></div></div><div class="grand"><div class="gt">Resumo Consolidado</div><div class="gr"><span>Valor da unidade</span><span>'+TDBRL(TDS.vu)+'</span></div><div class="gr"><span>Total pré-chaves</span><span>'+TDBRL(c.tPre)+'</span></div><div class="gr"><span>Total pós-chaves</span><span>'+TDBRL(c.tPos)+'</span></div><div class="gd"></div><div class="gf"><span class="gfk">Total do investimento</span><span class="gfv">'+TDBRL(c.grand)+'</span></div></div><div class="footer">Tabela Julho 2026 · Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</div>';
   const win = window.open('', '_blank');
   if(win){
     win.document.write(html);
@@ -1402,7 +1412,7 @@ function tdBaixarProposta(){
 </style>
 <div class="wa-fab">
   <a href="https://wa.me/5521989150864?text=Olá!%20Calculei%20meu%20retorno%20no%20simulador%20e%20quero%20conversar%20sobre%20investimento." target="_blank" rel="noopener">
-    <span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><span class="wa-fab-label">Falar com nossa equipe de vendas</span>
+    <span><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></span><span class="wa-fab-label">Falar com Paulo Cotrim</span>
   </a>
 </div>
 

@@ -669,6 +669,29 @@
     document.head.appendChild(style);
   })();
 
+  // Dica de WhatsApp rotativa (aparece / some) — chama pra ação sem ser spam
+  (function(){
+    var waBtn=document.querySelector('.wafloat'); if(!waBtn) return;
+    if(document.getElementById('waHintPill')) return;
+    var st=document.createElement('style');
+    st.textContent='@keyframes waHintIn{0%{opacity:0;transform:translateY(6px) scale(.96)}12%{opacity:1;transform:none}82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-4px) scale(.98)}}'
+      +'#waHintPill{position:fixed;right:88px;bottom:34px;z-index:600;background:#0f2e36;color:#fff;font-size:13px;font-weight:600;padding:9px 15px;border-radius:22px;box-shadow:0 10px 28px rgba(15,46,54,.28);white-space:nowrap;pointer-events:none;max-width:70vw}'
+      +'#waHintPill:after{content:"";position:absolute;right:-6px;bottom:16px;width:12px;height:12px;background:#0f2e36;transform:rotate(45deg)}'
+      +'#waHintPill b{color:#4ade80}'
+      +'@media(max-width:520px){#waHintPill{font-size:12px;right:80px;bottom:30px}}';
+    document.head.appendChild(st);
+    var pill=document.createElement('div'); pill.id='waHintPill'; pill.style.display='none';
+    document.body.appendChild(pill);
+    var msgs=['Me chama no <b>WhatsApp</b> 👋','Tira sua dúvida <b>agora</b>','<b>Simulo</b> com a sua renda','Sem compromisso — é rápido','Fala comigo, eu te respondo'];
+    var i=0, cycleMs=6500, showMs=4600;
+    function loop(){
+      pill.innerHTML=msgs[i%msgs.length]; i++;
+      pill.style.display='block'; pill.style.animation='waHintIn '+showMs+'ms ease forwards';
+      setTimeout(function(){ pill.style.display='none'; pill.style.animation='none'; }, showMs);
+    }
+    setTimeout(function(){ loop(); setInterval(loop, cycleMs); }, 3500);
+  })();
+
   // Expor para uso externo
   window.leadCapture = capture;
 })();
@@ -830,4 +853,167 @@
     document.getElementById('pcCompareCloseBtn').addEventListener('click', function(){ modal.classList.remove('show'); });
     renderBar();
   })();
+})();
+
+/* ============================================================
+   Valores "trancados" até Fazer simulação (agrega valor primeiro)
+   Roda em páginas de empreendimento com tabela de preços.
+   ============================================================ */
+(function(){
+  var tables = document.querySelectorAll('.tipo-table');
+  if(!tables.length) return;
+  var st = document.createElement('style');
+  st.textContent = '.pc-lock-wrap{position:relative}'
+    + '.pc-lock-blur{filter:blur(7px);pointer-events:none;user-select:none}'
+    + '.pc-lock-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;background:linear-gradient(180deg,rgba(247,244,238,.72),rgba(247,244,238,.9));border-radius:14px;padding:22px}'
+    + '.pc-lock-ov .pcl-ic{width:34px;height:34px;stroke:#1a8f4c;fill:none;stroke-width:1.8}'
+    + '.pc-lock-ov b{font-family:Fraunces,Georgia,serif;font-size:17px;color:#0f2e36}'
+    + '.pc-lock-ov span{font-size:12.8px;color:#6b7280;max-width:36ch;line-height:1.5}'
+    + '.pc-lock-btn{background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease}'
+    + '.pc-lock-btn:hover{transform:translateY(-2px)}';
+  document.head.appendChild(st);
+  tables.forEach(function(t){
+    if(t.closest('.pc-lock-wrap')) return;
+    var w = document.createElement('div'); w.className = 'pc-lock-wrap';
+    t.parentNode.insertBefore(w, t); w.appendChild(t);
+    t.classList.add('pc-lock-blur');
+    var ov = document.createElement('div'); ov.className = 'pc-lock-ov';
+    ov.innerHTML = '<svg class="pcl-ic" viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>'
+      + '<b>Veja os valores na sua simulação</b>'
+      + '<span>Faça a simulação rápida e eu te mostro entrada, parcela e as condições reais para o seu perfil — sem sair de casa.</span>'
+      + '<button class="pc-lock-btn" type="button">Fazer simulação</button>';
+    w.appendChild(ov);
+    ov.querySelector('button').addEventListener('click', function(){
+      t.classList.remove('pc-lock-blur'); ov.remove();
+      if(window.leadCapture) window.leadCapture('tabela_desbloqueada');
+      var sim = document.getElementById('simulador') || document.getElementById('fsimEmbed');
+      if(sim) sim.scrollIntoView({behavior:'smooth', block:'start'});
+    });
+  });
+})();
+
+/* Garante o crm-config.js (enviarLeadCRM) em qualquer página com leads.js */
+(function(){
+  if (window.enviarLeadCRM) return;
+  var s = document.createElement('script'); s.src = 'crm-config.js'; s.async = true;
+  document.head.appendChild(s);
+})();
+
+/* ============================================================
+   LEAD GATE — captura antes de ação financeira (baixar simulação/PDF, ver valores)
+   Grátis: e-mail sempre; "Continuar com Google" se social-login.js tiver Client ID.
+   ============================================================ */
+(function(){
+  var CAPKEY='pc_lead_captured';
+  function jaCapturou(){ try{ return !!localStorage.getItem(CAPKEY); }catch(e){ return false; } }
+  function salvarCap(d){ try{ localStorage.setItem(CAPKEY, JSON.stringify({t:Date.now(),d:d})); }catch(e){} }
+  var pendingCb=null;
+
+  var st=document.createElement('style');
+  st.textContent='#pcGate{position:fixed;inset:0;z-index:10000;background:rgba(15,46,54,.6);display:none;align-items:center;justify-content:center;padding:20px}'
+    +'#pcGate.on{display:flex}'
+    +'#pcGate .box{background:#fff;border-radius:18px;max-width:400px;width:100%;padding:28px 26px;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif}'
+    +'#pcGate h3{font-family:Fraunces,Georgia,serif;font-size:21px;color:#0f2e36;line-height:1.2;margin-bottom:6px}'
+    +'#pcGate p{font-size:13px;color:#6b7280;margin-bottom:16px;line-height:1.5}'
+    +'#pcGate input{width:100%;padding:12px 14px;margin-bottom:9px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;font-family:inherit}'
+    +'#pcGate input:focus{border-color:#1a8f4c}'
+    +'#pcGate .g-btn{width:100%;background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.3)}'
+    +'#pcGate .or{display:flex;align-items:center;gap:10px;margin:14px 0;color:#94a3b8;font-size:12px}'
+    +'#pcGate .or:before,#pcGate .or:after{content:"";flex:1;height:1px;background:#e8eaed}'
+    +'#pcGate .gg{display:flex;justify-content:center;min-height:4px}'
+    +'#pcGate .skip{display:block;width:100%;background:none;border:none;color:#94a3b8;font-size:12px;margin-top:10px;cursor:pointer;font-family:inherit}'
+    +'#pcGate .err{color:#dc2626;font-size:12px;min-height:15px}';
+  document.head.appendChild(st);
+
+  var ov=document.createElement('div'); ov.id='pcGate';
+  ov.innerHTML='<div class="box"><h3 id="pcGateTtl">Falta só um passo</h3>'
+    +'<p id="pcGateSub">Me diga pra quem eu envio — e já libero na hora.</p>'
+    +'<input id="pcgNome" placeholder="Seu nome"/>'
+    +'<input id="pcgTel" placeholder="Seu WhatsApp (com DDD)" inputmode="tel"/>'
+    +'<input id="pcgEmail" placeholder="Seu e-mail" inputmode="email"/>'
+    +'<div class="err" id="pcgErr"></div>'
+    +'<button class="g-btn" id="pcgOk">Ver agora</button>'
+    +'<div class="or" id="pcgOr" style="display:none">ou</div>'
+    +'<div class="gg" data-google-login-btn></div>'
+    +'<button class="skip" id="pcgSkip">Agora não</button></div>';
+  document.body.appendChild(ov);
+
+  function abrir(){ ov.classList.add('on');
+    // mostra Google se configurado + SDK disponível
+    try{
+      if(window.SOCIAL_LOGIN_CONFIG && SOCIAL_LOGIN_CONFIG.googleClientId && window.google && google.accounts){
+        document.getElementById('pcgOr').style.display='flex';
+        google.accounts.id.renderButton(ov.querySelector('[data-google-login-btn]'),{type:'standard',theme:'outline',size:'large',text:'continue_with',shape:'pill',locale:'pt-BR'});
+      }
+    }catch(e){}
+  }
+  function fechar(){ ov.classList.remove('on'); }
+  function concluir(d){ salvarCap(d);
+    if(window.enviarLeadCRM) window.enviarLeadCRM({nome:d.nome||'',telefone:d.tel||'',email:d.email||'',interesse:d.ctx||'material financeiro',origem:'gate:'+(d.ctx||'site'),temp:'quente'});
+    if(window.leadCapture) window.leadCapture('lead_gate', d);
+    fechar(); var cb=pendingCb; pendingCb=null; if(cb) setTimeout(cb,60);
+  }
+
+  window.pcLeadGate=function(opts){ opts=opts||{};
+    if(jaCapturou()){ if(opts.cb) opts.cb(); return; }
+    pendingCb=opts.cb||null;
+    document.getElementById('pcGateTtl').textContent=opts.titulo||'Falta só um passo pra ver isso';
+    document.getElementById('pcGateSub').textContent=opts.sub||'Me diga pra quem eu envio — e já libero na hora, sem compromisso.';
+    ov.setAttribute('data-ctx',opts.ctx||'material');
+    abrir();
+  };
+  document.getElementById('pcgOk').addEventListener('click',function(){
+    var nome=document.getElementById('pcgNome').value.trim();
+    var tel=document.getElementById('pcgTel').value.trim();
+    var email=document.getElementById('pcgEmail').value.trim();
+    if(!tel && !email){ document.getElementById('pcgErr').textContent='Deixe seu WhatsApp ou e-mail.'; return; }
+    concluir({nome:nome,tel:tel,email:email,ctx:ov.getAttribute('data-ctx')});
+  });
+  document.getElementById('pcgSkip').addEventListener('click',fechar);
+  ov.addEventListener('click',function(e){ if(e.target===ov) fechar(); });
+  // login Google dentro do gate
+  document.addEventListener('googleLoginSucesso',function(ev){
+    if(!ov.classList.contains('on')) return;
+    var p=ev.detail||{}; concluir({nome:p.name||'',email:p.email||'',ctx:ov.getAttribute('data-ctx')});
+  });
+
+  // Intercepta as ações financeiras (baixar simulação/resumo/apresentação)
+  ['baixarResumoSimulacao','fsimDownload','fsimAbrirApresentacao'].forEach(function(fn){
+    var orig=window[fn]; if(typeof orig!=='function') return;
+    window[fn]=function(){ var self=this,args=arguments;
+      pcLeadGate({ctx:fn, titulo:'Pra onde eu envio a sua simulação?', sub:'Deixe seu contato e eu já libero o download — e te ajudo se precisar.', cb:function(){ orig.apply(self,args); }});
+    };
+  });
+})();
+
+/* ============================================================
+   FASE 10 — Painel de Transparência (discreto, padronizado)
+   Só em páginas de empreendimento (tem .tipo-table). Sem selos falsos.
+   ============================================================ */
+(function(){
+  if(!document.querySelector('.tipo-table')) return;
+  if(document.getElementById('pcTransp')) return;
+  var d=new Date(); var dd=('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear();
+  var st=document.createElement('style');
+  st.textContent='#pcTransp{max-width:820px;margin:34px auto;padding:20px 22px;border:1px solid var(--line,#e8eaed);border-radius:14px;background:var(--mist,#f7f8f9);font-family:Inter,system-ui,sans-serif}'
+    +'#pcTransp .tt{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0f2e36;margin-bottom:12px;display:flex;align-items:center;gap:7px}'
+    +'#pcTransp .tt svg{width:15px;height:15px;stroke:#1a8f4c;fill:none;stroke-width:2}'
+    +'#pcTransp ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 22px}'
+    +'@media(max-width:560px){#pcTransp ul{grid-template-columns:1fr}}'
+    +'#pcTransp li{font-size:12.5px;color:#55606a;line-height:1.5;display:flex;gap:7px}'
+    +'#pcTransp li b{color:#0f2e36;font-weight:700}'
+    +'#pcTransp li .dot{color:#1a8f4c;font-weight:800}';
+  document.head.appendChild(st);
+  var box=document.createElement('section'); box.id='pcTransp';
+  box.innerHTML='<div class="tt"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Informações do empreendimento — transparência</div>'
+    +'<ul>'
+    +'<li><span class="dot">·</span><span><b>Dados revisados em:</b> '+dd+'</span></li>'
+    +'<li><span class="dot">·</span><span><b>Valor:</b> sujeito a disponibilidade e confirmação</span></li>'
+    +'<li><span class="dot">·</span><span><b>Condições:</b> podem ser alteradas pela construtora</span></li>'
+    +'<li><span class="dot">·</span><span><b>Simulações:</b> estimativas — não são aprovação</span></li>'
+    +'<li><span class="dot">·</span><span><b>Aprovação:</b> sujeita à análise da instituição financeira</span></li>'
+    +'<li><span class="dot">·</span><span><b>Informações técnicas:</b> baseadas em material oficial disponível</span></li>'
+    +'</ul>';
+  var footer=document.querySelector('footer');
+  if(footer) footer.parentNode.insertBefore(box,footer); else document.body.appendChild(box);
 })();

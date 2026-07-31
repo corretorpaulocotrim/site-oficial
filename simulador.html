@@ -4,7 +4,7 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1.0"/>
 <title>Simulador Financiamento — Paulo Cotrim | Rio de Janeiro</title>
-<link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="favicon.svg"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
@@ -487,6 +487,18 @@ function renderEmpSelector(c){
 
 function renderResumo(c){
   var emp=S.useCustom?null:CATALOG[S.empIdx];
+  var _cobre=(c.capacidadeCompra||0) >= (c.preco||0)*0.95;
+  var _nome=(S.clienteNome||'').trim().split(' ')[0];
+  var _ola=_nome?(', '+_nome):'';
+  var _lev = _cobre
+    ? '<div style="display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,#0f2e36,#14424e);border-radius:16px;padding:16px 18px;margin-bottom:16px;color:#fff">'
+      +'<div style="font-size:26px;line-height:1">\ud83c\udf89</div>'
+      +'<div><div style="font-family:Fraunces,Georgia,serif;font-size:16.5px;font-weight:600;line-height:1.35">Boa not\u00edcia'+_ola+'! D\u00e1 pra realizar.</div>'
+      +'<div style="font-size:12.5px;color:rgba(255,255,255,.8);margin-top:3px">Sua renda cobre este im\u00f3vel. Sua parcela ficaria em torno de <b style="color:#7ee0a6">'+BRL(c.prestacaoEstimada)+'/m\u00eas</b> \u2014 e voc\u00ea faz tudo sem sair de casa.</div></div></div>'
+    : '<div style="display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,#7a4a1a,#a5772e);border-radius:16px;padding:16px 18px;margin-bottom:16px;color:#fff">'
+      +'<div style="font-size:26px;line-height:1">\ud83d\udcaa</div>'
+      +'<div><div style="font-family:Fraunces,Georgia,serif;font-size:16.5px;font-weight:600;line-height:1.35">Voc\u00ea j\u00e1 est\u00e1 no caminho'+_ola+'!</div>'
+      +'<div style="font-size:12.5px;color:rgba(255,255,255,.85);margin-top:3px">Falta pouco \u2014 ajustando entrada, prazo ou FGTS a conta fecha. Me chama que a gente resolve juntos.</div></div></div>';
   var isSBPE=!c.faixa;
   return'<div class="sel-box">'
     +'<div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="1"/></svg>Sua renda &nbsp;<span style="color:#94a3b8;font-weight:400;font-size:10px">edite se precisar corrigir</span></div>'
@@ -496,7 +508,7 @@ function renderResumo(c){
     +(emp?'<span class="cb2">'+emp.c+' · '+STATUS_LABEL[emp.s]+'</span>':'')
     +(c.posChavesElegivel?' <span class="cb2" style="background:#f0f9f3;color:#157540">Pós-chaves até '+c.posChavesMax+'x</span>':'')
     +'</div>'
-    +'<div class="info-box2"><strong>Como calculamos:</strong> identificamos sua faixa no Minha Casa Minha Vida pela renda informada (tabela oficial 2026), aplicamos o limite de financiamento e a taxa de juros dessa faixa, e comparamos com o que sua renda comprova (30% dela, em até 420 meses) e com o teto que o próprio imóvel permite financiar. O menor entre os três é o crédito financiado — depois somamos o subsídio, se sua faixa tiver direito.</div>'
+    +_lev+'<div class="info-box2"><strong>Como calculamos:</strong> identificamos sua faixa no Minha Casa Minha Vida pela renda informada (tabela oficial 2026), aplicamos o limite de financiamento e a taxa de juros dessa faixa, e comparamos com o que sua renda comprova (30% dela, em até 420 meses) e com o teto que o próprio imóvel permite financiar. O menor entre os três é o crédito financiado — depois somamos o subsídio, se sua faixa tiver direito.</div>'
     +'<div class="pr2">'
     +'<div class="pi2 b"><span class="pl2">Valor do imóvel</span><span class="pv2">'+BRL(c.preco)+'</span></div>'
     +'<div class="pi2 v"><span class="pl2">Capacidade de compra (pela renda)</span><span class="pv2">'+BRL(c.capacidadeCompra)+'</span></div>'
@@ -514,7 +526,7 @@ function renderResumo(c){
     +'<p style="font-size:10.5px;color:#94a3b8;margin-top:12px">Estimativa educativa com base na tabela oficial do Minha Casa Minha Vida 2026 — a Caixa confirma taxa, subsídio, prazo e valor exatos após análise de crédito. Valores sujeitos à análise oficial da instituição financeira e da construtora.</p>'
     +'<div style="margin-top:16px;padding-top:14px;border-top:.5px solid var(--border)">'
     +'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Seu nome completo</label><input type="text" value="'+S.clienteNome+'" oninput="updCliente(\'clienteNome\',this.value)"></div><div class="fi2"><label>Seu WhatsApp</label><input type="text" value="'+S.clienteTel+'" oninput="updCliente(\'clienteTel\',this.value)"></div></div>'
-    +'<button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com nossa equipe no WhatsApp</button>'
+    +'<button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com o Paulo Cotrim no WhatsApp</button>'
     +'<button class="btn-pg" style="background:transparent;border:1.5px solid var(--gold);color:var(--navy)" onclick="baixarResumoSimulacao()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>Baixar Resumo + Simulação</button>'
     +'</div>';
 }
@@ -607,7 +619,7 @@ render();
 </style>
 <div class="wa-fab">
   <a href="https://wa.me/5521989150864?text=Olá%20Paulo!%20Fiz%20uma%20simulação%20de%20financiamento%20e%20quero%20evoluir." target="_blank" rel="noopener">
-    <span><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span class="wa-fab-label">Falar com nossa equipe</span>
+    <span><svg viewBox="0 0 24 24" style="width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.8"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></span><span class="wa-fab-label">Falar com o Paulo Cotrim</span>
   </a>
 </div>
 <script src="leads.js" defer></script>

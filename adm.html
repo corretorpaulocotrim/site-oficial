@@ -185,6 +185,7 @@ button{cursor:pointer}
 @media(max-width:900px){#sidebar{transform:translateX(-100%)}#sidebar.open{transform:translateX(0)}#main{margin-left:0}.mob-toggle{display:flex!important}.kpi-row{grid-template-columns:1fr 1fr}.pipeline{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+<script src="crm-config.js"></script>
 </head>
 <body>
 <div id="pc-login" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#060f1e,#0d2040);display:flex;align-items:center;justify-content:center;font-family:system-ui,Arial">
@@ -203,6 +204,7 @@ button{cursor:pointer}
   <div class="sb-logo"><div class="sb-mark">PC</div><div><div class="sb-name">Paulo Cotrim</div><div class="sb-sub">CRM Imobiliario</div></div></div>
   <div class="sb-nav">
     <div class="sb-sec">Principal</div>
+    <div class="sb-link" onclick="goPage('hoje')"><span class="sb-icon">&#9889;</span> Hoje <span class="sb-badge" id="badge-hoje" style="background:#16a34a">0</span></div>
     <div class="sb-link active" onclick="goPage('dashboard')"><span class="sb-icon">&#128202;</span> Dashboard</div>
     <div class="sb-link" onclick="goPage('leads')"><span class="sb-icon">&#128101;</span> Leads <span class="sb-badge" id="badge-leads">0</span></div>
     <div class="sb-link" onclick="goPage('pipeline')"><span class="sb-icon">&#128260;</span> Pipeline</div>
@@ -231,6 +233,7 @@ button{cursor:pointer}
   </div>
 
   <!-- DASHBOARD -->
+  <div class="page" id="page-hoje"></div>
   <div class="page active" id="page-dashboard">
     <div style="margin-bottom:20px"><div class="eyebrow">Visao geral</div><div style="font-size:22px;font-weight:900;color:var(--navy3)">Bom dia, Paulo! &#128075;</div><div style="font-size:13px;color:var(--muted);margin-top:3px" id="dash-subtitle">Carregando...</div></div>
     <div class="kpi-row">
@@ -437,10 +440,11 @@ function goPage(id){
   document.querySelectorAll(".sb-link").forEach(function(l){l.classList.remove("active")});
   var pg=document.getElementById("page-"+id);
   if(pg)pg.classList.add("active");
-  var titles={dashboard:"Dashboard",leads:"Leads",pipeline:"Pipeline",imoveis:"Empreendimentos",tabelas:"Tabelas de Precos","cadastro-imovel":"Cadastrar Imovel","novo-lead":"Novo Lead",discador:"Discador",metricas:"Metricas",campanhas:"Campanhas"};
+  var titles={hoje:"\u26a1 A\u00e7\u00e3o do dia",dashboard:"Dashboard",leads:"Leads",pipeline:"Pipeline",imoveis:"Empreendimentos",tabelas:"Tabelas de Precos","cadastro-imovel":"Cadastrar Imovel","novo-lead":"Novo Lead",discador:"Discador",metricas:"Metricas",campanhas:"Campanhas"};
   document.getElementById("topbar-title").textContent=titles[id]||id;
   document.querySelectorAll(".sb-link").forEach(function(l){if((l.getAttribute("onclick")||"").includes("'"+id+"'"))l.classList.add("active")});
   document.getElementById("sidebar").classList.remove("open");
+  if(id==="hoje"){renderHoje();}
   if(id==="dashboard")renderDash();
   if(id==="leads")renderLeads();
   if(id==="pipeline")renderPipeline();
@@ -655,5 +659,108 @@ function salvarOCR(){
 // INIT
 updateBadge();renderDash();
 </script>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
+.card-title,.kpi-val,.sel-title,#topbar-title,.modal-title,.sb-name{font-family:'Fraunces',Georgia,serif !important}
+.hoje-hero{background:linear-gradient(135deg,#0d2040,#16a34a);color:#fff;border-radius:16px;padding:20px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.hoje-hero b{font-family:'Fraunces',Georgia,serif;font-size:22px}
+.hoje-hero .hh-sub{font-size:12.5px;color:rgba(255,255,255,.8);margin-top:2px}
+.hoje-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.hcard{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 1px 3px rgba(13,32,64,.05)}
+.hcard .sc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:17px;color:#fff;flex-shrink:0}
+.hcard .nm{font-weight:800;color:var(--navy3);font-size:15px}
+.hcard .ph{font-size:12.5px;color:var(--muted)}
+.hcard .na{font-size:12.5px;margin-top:6px;padding:7px 10px;border-radius:8px;background:#f8fafc;color:#334155;line-height:1.4}
+.hcard .na.urg{background:#fef2f2;color:#b91c1c;font-weight:600}
+.hbtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.hbtn{border:none;border-radius:9px;padding:8px 13px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px}
+.hbtn.g{background:#16a34a;color:#fff}.hbtn.n{background:#0d2040;color:#fff}.hbtn.o{background:#f1f5f9;color:#0d2040}
+.rec-chip{display:inline-block;font-size:11px;font-weight:700;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;padding:3px 9px;border-radius:20px;margin-top:6px}
+@media(max-width:640px){.hcard{flex-direction:column}}
+</style>
+<script>
+(function(){
+  function bak(){ try{ var d={leads:getLeads(),imoveis:getImoveis(),v:2,ts:Date.now()}; localStorage.setItem('crm_bak_auto',JSON.stringify(d)); }catch(e){} }
+  var _sv=saveLeads; saveLeads=function(a){ _sv(a); bak(); if(typeof atualizarBadgeHoje==='function')atualizarBadgeHoje(); };
+  window.backupCRM=function(){ var d={leads:getLeads(),imoveis:getImoveis(),v:2,ts:Date.now()}; var a=document.createElement('a'); a.href='data:application/json;charset=utf-8,'+encodeURIComponent(JSON.stringify(d)); a.download='crm-paulo-backup-'+new Date().toISOString().slice(0,10)+'.json'; a.click(); toast('Backup baixado!'); };
+  window.restaurarCRM=function(inp){ var f=inp.files&&inp.files[0]; if(!f)return; var r=new FileReader(); r.onload=function(){ try{ var d=JSON.parse(r.result); if(d.leads)saveLeads(d.leads); if(d.imoveis)saveImoveis(d.imoveis); toast('Backup restaurado!'); goPage('hoje'); }catch(e){ toast('Arquivo inválido'); } }; r.readAsText(f); };
+
+  function dias(l){ return Math.floor((Date.now()-(l._lc||l.id||Date.now()))/86400000); }
+  function score(l){
+    var s=0; s += l.temp==='quente'?40:l.temp==='morno'?22:8;
+    s += ({proposta:20,visita:18,contato:10,novo:8,fechado:0,perdido:-60})[l.status||'novo']||0;
+    var eng=((l.obs||'')+' '+(l.origem||'')+' '+(l.interesse||'')+' '+(l.orcamento||'')).toLowerCase();
+    if(/simul/.test(eng))s+=15; if(l.orcamento||l.renda)s+=8; if(/whats|site|foto/.test(eng))s+=5;
+    var d=dias(l); s += d<=1?20:d<=3?10:d<=7?0:-10;
+    return Math.max(0,Math.min(100,Math.round(s)));
+  }
+  function rendaLead(l){ var t=(l.orcamento||'')+' '+(l.interesse||'')+' '+(l.obs||''); var m=t.match(/R\$\s*([\d.]+)/); return m?parseInt(m[1].replace(/\./g,''),10):0; }
+  function recomenda(renda){ var ims=getImoveis().filter(function(i){return i.rendaMin;}); if(!ims.length)return []; if(!renda)return ims.slice(0,3); var ok=ims.filter(function(i){return i.rendaMin<=renda;}).sort(function(a,b){return b.rendaMin-a.rendaMin;}); return (ok.length?ok:ims.slice().sort(function(a,b){return a.rendaMin-b.rendaMin;})).slice(0,3); }
+  function proxAcao(l){ var d=dias(l),st=l.status||'novo';
+    if(st==='novo')return{t:'⚡ Responder AGORA — lead novo. Rapidez é o que mais fecha.',u:true};
+    if(st==='proposta')return{t:'Fechar: reforce a proposta e marque a assinatura.',u:true};
+    if(st==='visita')return{t:'Pós-visita: pergunte o que achou e conduza pra proposta.',u:false};
+    if(st==='contato'&&d>=2)return{t:'Follow-up: já são '+d+' dias sem avanço. Traga uma condição nova.',u:d>=4};
+    if(d>=5)return{t:'Esfriando ('+d+' dias). Reative com conteúdo ou nova oportunidade.',u:true};
+    return{t:'Manter aquecido — envie um conteúdo útil.',u:false};
+  }
+  function msgRec(l){ var r=recomenda(rendaLead(l))[0]; var nome=(l.nome||'').split(' ')[0]||'tudo bem';
+    var m='Oi '+nome+'! Aqui é o Paulo Cotrim. ';
+    if(r)m+='Separei o '+r.nome+' ('+r.loc+') que combina com o seu perfil — a partir de '+r.preco+', com entrada facilitada. Quer que eu simule com a sua renda? Rápido e sem compromisso.';
+    else m+='Quero te mostrar lançamentos que cabem no seu perfil. Posso simular com a sua renda agora?';
+    return m;
+  }
+  window.zapRec=function(id){ var l=getLeads().find(function(x){return x.id===id;}); if(!l)return; var ls=getLeads(),i=ls.findIndex(function(x){return x.id===id;}); if(i>=0){ls[i]._lc=Date.now(); ls[i].hist=ls[i].hist||[]; ls[i].hist.unshift({a:'WhatsApp enviado (recomendação)',d:'',t:new Date().toLocaleString('pt-BR')}); saveLeads(ls);} window.open('https://wa.me/55'+(l.tel||'').replace(/\D/g,'')+'?text='+encodeURIComponent(msgRec(l)),'_blank'); };
+  window.avancarLead=function(id){ var fl=['novo','contato','proposta','visita','fechado']; var ls=getLeads(),i=ls.findIndex(function(x){return x.id===id;}); if(i<0)return; var cur=ls[i].status||'novo'; var ni=Math.min(fl.length-1,fl.indexOf(cur)+1); ls[i].status=fl[ni]; ls[i]._lc=Date.now(); ls[i].hist=(ls[i].hist||[]); ls[i].hist.unshift({a:'Avançou para '+fl[ni],d:'',t:new Date().toLocaleString('pt-BR')}); saveLeads(ls); toast('Movido para '+fl[ni]); renderHoje(); };
+
+  window.atualizarBadgeHoje=function(){ var n=getLeads().filter(function(l){return (l.status||'novo')==='novo';}).length; var b=document.getElementById('badge-hoje'); if(b)b.textContent=n; };
+
+  window.renderHoje=function(){
+    var pg=document.getElementById('page-hoje'); if(!pg)return;
+    var ls=getLeads();
+    var novos=ls.filter(function(l){return (l.status||'novo')==='novo';});
+    var fila=ls.filter(function(l){return ['novo','contato','proposta','visita'].indexOf(l.status||'novo')>=0;})
+      .map(function(l){l._sc=score(l);return l;}).sort(function(a,b){return b._sc-a._sc;}).slice(0,15);
+    var esfri=ls.filter(function(l){return dias(l)>=5 && ['fechado','perdido'].indexOf(l.status)<0;}).length;
+    var hero='<div class="hoje-hero"><div><b>Bom dia, Paulo ⚡</b><div class="hh-sub">'+(novos.length?(novos.length+' lead(s) novo(s) esperando resposta'):'Sem leads novos agora')+(esfri?' · '+esfri+' esfriando':'')+'</div></div>'
+      +'<div style="display:flex;gap:8px"><button class="hbtn g" onclick="crmSync()">↻ Sincronizar</button><button class="hbtn o" onclick="backupCRM()">⬇︎ Backup</button><label class="hbtn o" style="cursor:pointer">↺ Restaurar<input type="file" accept="application/json" style="display:none" onchange="restaurarCRM(this)"></label></div></div>';
+    if(!fila.length){ pg.innerHTML=hero+'<div class="empty-state" style="padding:40px"><div class="icon">&#9889;</div><p>Nenhum lead na fila.</p><small>Cadastre um lead ou importe de foto.</small></div>'; atualizarBadgeHoje(); return; }
+    var cards=fila.map(function(l){
+      var sc=l._sc, col=sc>=65?'#16a34a':sc>=40?'#c9993a':'#94a3b8';
+      var pa=proxAcao(l); var r=recomenda(rendaLead(l))[0];
+      return '<div class="hcard"><div class="sc" style="background:'+col+'">'+sc+'</div>'
+        +'<div style="flex:1"><div class="nm">'+(l.nome||'Sem nome')+' <span style="font-size:11px;color:#94a3b8;font-weight:600">· '+dias(l)+'d</span></div>'
+        +'<div class="ph">'+(l.tel||'sem telefone')+(l.interesse?(' · '+l.interesse):'')+'</div>'
+        +(r?'<div class="rec-chip">💡 Ofereça: '+r.nome+' · '+r.preco+'</div>':'')
+        +'<div class="na'+(pa.u?' urg':'')+'">'+pa.t+'</div>'
+        +'<div class="hbtns"><button class="hbtn g" onclick="zapRec('+l.id+')">💬 WhatsApp pronto</button>'
+        +'<button class="hbtn n" onclick="ligar('+l.id+')">📞 Ligar</button>'
+        +'<button class="hbtn o" onclick="avancarLead('+l.id+')">→ Avançar</button>'
+        +'<button class="hbtn o" onclick="verPerfil('+l.id+')">Ver</button></div></div></div>';
+    }).join('');
+    pg.innerHTML=hero+'<div style="font-size:13px;font-weight:800;color:var(--navy3);margin-bottom:10px">Sua fila de hoje — por prioridade de fechamento</div><div class="hoje-grid">'+cards+'</div>';
+    atualizarBadgeHoje();
+  };
+
+  window.crmSync=function(silent){
+    if(!window.crmBackendGet||!(window.CRM_CONFIG&&window.CRM_CONFIG.webhookUrl)){ if(!silent)toast('Configure o backend no crm-config.js (URL do Apps Script)'); return; }
+    crmBackendGet().then(function(remote){
+      if(!remote){ if(!silent)toast('Sem conexão com o backend'); return; }
+      var local=getLeads(); var byId={}; local.forEach(function(l){byId[String(l.id)]=l;});
+      var remoteIds={};
+      remote.forEach(function(r){ var rid=String(r.id); remoteIds[rid]=1;
+        if(!byId[rid]){ local.unshift({id:Number(r.id)||Date.now(),nome:r.nome||'Lead',tel:r.telefone||'',email:r.email||'',origem:r.origem||'Site',interesse:r.interesse||'',temp:r.temp||'morno',status:r.status||'novo',orcamento:r.renda||'',obs:r.obs||'',data:new Date().toLocaleDateString('pt-BR'),hist:[{a:'Sincronizado do site/backend',d:r.origem||'',t:new Date().toLocaleString('pt-BR')}]}); }
+      });
+      saveLeads(local);
+      local.forEach(function(l){ if(!remoteIds[String(l.id)] && window.enviarLeadCRM){ enviarLeadCRM({id:l.id,nome:l.nome,tel:l.tel,email:l.email,interesse:l.interesse,renda:l.orcamento,origem:l.origem,status:l.status,temp:l.temp,obs:l.obs}); } });
+      if(typeof renderHoje==='function')renderHoje(); if(typeof updateBadge==='function')updateBadge(); if(typeof atualizarBadgeHoje==='function')atualizarBadgeHoje();
+      if(!silent)toast('Sincronizado com o backend!');
+    });
+  };
+  try{ if(window.CRM_CONFIG&&window.CRM_CONFIG.webhookUrl){ setTimeout(function(){crmSync(true);},800); } }catch(e){}
+  try{ atualizarBadgeHoje(); }catch(e){}
+})();
+</script>
+
 </body>
 </html>

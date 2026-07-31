@@ -19,8 +19,8 @@
  * ver leads.js) — sem precisar editar mais nada.
  * ------------------------------------------------------------------
  */
-var GA4_MEASUREMENT_ID = 'G-FXTZPVZW2X';
-var META_PIXEL_ID = '1758733705251535';
+var GA4_MEASUREMENT_ID = '';   // ex: 'G-ABC1234XYZ'
+var META_PIXEL_ID = '';        // ex: '123456789012345'
 
 (function(){
   // Ponte com os eventos que leads.js já dispara — não precisa duplicar
@@ -31,7 +31,6 @@ var META_PIXEL_ID = '1758733705251535';
     if(window.fbq){
       // eventos-chave viram conversões padrão do Meta, o resto vira evento custom
       if(nome==='whatsapp_clicado' || nome==='formulario_enviado') fbq('track','Lead', dados||{});
-      if(window.gtag && (nome==='whatsapp_clicado'||nome==='formulario_enviado')) gtag('event','generate_lead',{method:nome});
       else fbq('trackCustom', nome, dados||{});
     }
   };
