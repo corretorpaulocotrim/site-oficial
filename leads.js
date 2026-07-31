@@ -4,7 +4,7 @@
  * Paulo Cotrim · corretorpaulocotrim@gmail.com
  */
 (function(){
-  var SHEET_URL = 'https://script.google.com/macros/s/SEU_SCRIPT_ID_AQUI/exec';
+  var SHEET_URL = '';  // desativado: leads vão pelo enviarLeadCRM (crm-config.js) + trackEvent
 
   function capture(evento, dados){
     var payload = Object.assign({
@@ -18,11 +18,11 @@
     // Espelha o mesmo evento pro GA4/Meta Pixel (tracking-config.js), se configurado
     if(window.trackEvent) window.trackEvent(evento, dados||{});
 
-    // Beacon API (non-blocking, works on page unload)
-    if(navigator.sendBeacon){
+    // Só envia pro sheet legado se houver URL configurada
+    if(SHEET_URL && navigator.sendBeacon){
       var blob = new Blob([JSON.stringify(payload)], {type:'application/json'});
       navigator.sendBeacon(SHEET_URL, blob);
-    } else {
+    } else if(SHEET_URL) {
       fetch(SHEET_URL, {
         method:'POST',
         body: JSON.stringify(payload),

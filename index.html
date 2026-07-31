@@ -1319,88 +1319,7 @@ function downloadComparacao(){
     +'<div class="note">Valores de tabela pública, sujeitos a alteração e disponibilidade — confirme condições atualizadas com Paulo antes de decidir.</div>'
     +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/><div><b>Aponte a câmera para voltar ao site</b>Refaça a comparação ou veja mais detalhes de cada imóvel.</div></div>'
     +'<div class="brandbar"><b>Paulo Cotrim</b>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</div>'
-    +'<div class="foot">Paulo Cotrim · Documento informativo, não substitui a tabela oficial</div><script>
-(function(){
-  var EMPS = window.EMP || (typeof EMP!=='undefined'?EMP:[]);
-  if(!EMPS.length) return;
-  function preco(e){ var m=(e.preco||'').match(/R\$\s*([\d.]+)/); return m?parseInt(m[1].replace(/\./g,'')):0; }
-  function rendaMin(e){ var p=preco(e); return p?Math.round(p*0.0095):0; }
-  function quartos(e){ var t=(e.tipologia||'').toLowerCase(); var o=[]; if(/studio|est[uú]dio/.test(t))o.push(0); var m=t.match(/(\d)\s*(a|e|,)\s*(\d)/); if(m){for(var k=+m[1];k<=+m[3];k++)o.push(k);} (t.match(/(\d)\s*quart/g)||[]).forEach(function(x){o.push(parseInt(x));}); return o.length?o:[1,2]; }
-  function regiao(e){ var b=(e.bairro||'').toLowerCase();
-    if(/niter/.test(b))return'niteroi';
-    if(/jacarepagu|pra[çc]a seca|taquara|barra|recreio/.test(b))return'zona-oeste';
-    if(/porto|santo cristo|gamboa|sa[uú]de|centro|pra[çc]a|mau[aá]|s[aã]o crist|cais/.test(b))return'centro';
-    return'zona-norte'; }
-
-  var st=document.createElement('style');
-  st.textContent='#mtOv{position:fixed;inset:0;z-index:9600;background:rgba(15,46,54,.62);display:none;align-items:center;justify-content:center;padding:18px}'
-   +'#mtOv.on{display:flex}#mtBox{background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:28px 26px;font-family:Inter,system-ui,sans-serif;box-shadow:0 30px 90px rgba(0,0,0,.4)}'
-   +'#mtBox h3{font-family:Fraunces,Georgia,serif;font-size:23px;color:#0f2e36;margin-bottom:4px}#mtBox p.sub{font-size:13px;color:#6b7280;margin-bottom:18px}'
-   +'.mtq{margin-bottom:14px}.mtq label{display:block;font-size:12px;font-weight:700;color:#0f2e36;margin-bottom:6px}'
-   +'.mtq select,.mtq input{width:100%;padding:11px 13px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;font-family:inherit;outline:none}'
-   +'.mtq select:focus,.mtq input:focus{border-color:#1a8f4c}'
-   +'#mtGo{width:100%;background:#1a8f4c;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 26px rgba(26,143,76,.3)}'
-   +'.mtcard{border:1px solid #e8eaed;border-radius:14px;padding:14px 16px;margin-bottom:10px;text-decoration:none;display:block}'
-   +'.mtcard b{color:#0f2e36;font-size:15px}.mtcard .l{font-size:12px;color:#6b7280}.mtcard .pr{font-family:Fraunces,serif;color:#1a8f4c;font-weight:700;font-size:16px;margin-top:4px}'
-   +'#mtBox .disc{font-size:11px;color:#94a3b8;line-height:1.5;margin-top:12px}'
-   +'#mtBox .x{float:right;background:#f5f6f7;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;color:#6b7280}';
-  document.head.appendChild(st);
-  var ov=document.createElement('div'); ov.id='mtOv';
-  ov.innerHTML='<div id="mtBox"></div>'; document.body.appendChild(ov);
-  ov.addEventListener('click',function(e){ if(e.target===ov) ov.classList.remove('on'); });
-  var box=document.getElementById('mtBox');
-
-  function form(){
-    box.innerHTML='<button class="x" onclick="fecharMatch()">✕</button>'
-     +'<h3>Encontre o seu imóvel ideal</h3><p class="sub">Responda 5 perguntas rápidas e eu mostro os lançamentos que combinam com o seu perfil.</p>'
-     +'<div class="mtq"><label>Sua renda familiar mensal</label><input id="mtRenda" inputmode="numeric" placeholder="Ex: 4.500" value="4.500"></div>'
-     +'<div class="mtq"><label>Quanto pretende dar de entrada (opcional)</label><input id="mtEnt" inputmode="numeric" placeholder="Ex: 20.000"></div>'
-     +'<div class="mtq"><label>Região preferida</label><select id="mtReg"><option value="">Qualquer região</option><option value="centro">Centro · Porto Maravilha</option><option value="zona-norte">Zona Norte</option><option value="zona-oeste">Zona Oeste · Jacarepaguá</option><option value="niteroi">Niterói</option></select></div>'
-     +'<div class="mtq"><label>Quantos quartos?</label><select id="mtQ"><option value="">Tanto faz</option><option value="0">Studio</option><option value="1">1 quarto</option><option value="2">2 quartos</option><option value="3">3 quartos</option></select></div>'
-     +'<div class="mtq"><label>Seu objetivo</label><select id="mtObj"><option>Morar</option><option>Primeira compra</option><option>Investir</option><option>Renda com aluguel</option></select></div>'
-     +'<button id="mtGo" onclick="rodarMatch()">Ver imóveis compatíveis</button>';
-  }
-  window.abrirMatch=function(){ form(); ov.classList.add('on'); };
-  window.fecharMatch=function(){ ov.classList.remove('on'); };
-  window.rodarMatch=function(){
-    var renda=parseInt((document.getElementById('mtRenda').value||'').replace(/\D/g,''))||0;
-    var reg=document.getElementById('mtReg').value; var q=document.getElementById('mtQ').value; var obj=document.getElementById('mtObj').value;
-    var cand=EMPS.filter(function(e){ return preco(e)>0; }).map(function(e){
-      var rm=rendaMin(e); var qs=quartos(e); var rg=regiao(e); var scoreOk=true;
-      var afford = !renda || rm<=renda*1.08;
-      var regOk = !reg || rg===reg;
-      var qOk = !q || qs.indexOf(parseInt(q))>=0;
-      var fit = (afford?2:0)+(regOk?2:0)+(qOk?1:0) - (rm>renda*1.08?3:0);
-      return {e:e,fit:fit,ok:(afford && regOk && qOk),rm:rm};
-    }).filter(function(x){return x.e;}).sort(function(a,b){ return b.fit-a.fit || preco(b.e)-preco(a.e); });
-    var exatos=cand.filter(function(x){return x.ok;});
-    var lista=(exatos.length?exatos:cand).slice(0,4);
-    if(window.leadCapture)leadCapture('match_imovel_ideal',{renda:renda,regiao:reg,quartos:q,objetivo:obj});
-    var cards=lista.map(function(x){var e=x.e; return '<a class="mtcard" href="'+e.url+'"><b>'+e.nome+'</b><div class="l">'+e.bairro+' · '+e.tipologia+'</div><div class="pr">'+(e.preco||'Consulte')+'</div></a>';}).join('');
-    box.innerHTML='<button class="x" onclick="fecharMatch()">✕</button>'
-     +'<h3>Encontramos opções pra você</h3><p class="sub">'+(exatos.length?'Compatíveis com o que você respondeu:':'Mais próximas do seu perfil:')+'</p>'
-     +(cards||'<p class="sub">Me chame no WhatsApp que eu busco a melhor opção pra você.</p>')
-     +'<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><a href="simulador.html" style="flex:1;text-align:center;background:#0f2e36;color:#fff;padding:12px;border-radius:11px;text-decoration:none;font-weight:700;font-size:13px">Simular</a>'
-     +'<a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20fiz%20o%20match%20no%20site%20e%20quero%20ver%20op%C3%A7%C3%B5es" target="_blank" style="flex:1;text-align:center;background:#1a8f4c;color:#fff;padding:12px;border-radius:11px;text-decoration:none;font-weight:700;font-size:13px">Falar com Paulo</a></div>'
-     +'<p class="disc">Compatibilidade estimada com base nas informações que você informou. A análise oficial depende da instituição financeira, da construtora e das condições vigentes.</p>';
-    if(window.enviarLeadCRM)enviarLeadCRM({nome:'',telefone:'',interesse:'Match: '+(reg||'qualquer')+' / '+(q||'qualquer')+'q / '+obj,renda:String(renda),regiao:reg,origem:'match-imovel-ideal',temp:'morno'});
-  };
-
-  // Lançador dentro da seção de empreendimentos
-  function injLauncher(){
-    var sec=document.getElementById('empreendimentos'); if(!sec) return;
-    if(document.getElementById('mtLauncher')) return;
-    var w=sec.querySelector('.wrap')||sec;
-    var b=document.createElement('div'); b.id='mtLauncher';
-    b.setAttribute('style','text-align:center;margin:0 auto 26px');
-    b.innerHTML='<button onclick="abrirMatch()" style="background:#fff;border:1.5px solid #1a8f4c;color:#1a8f4c;font-weight:700;font-size:14px;padding:12px 24px;border-radius:30px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px">✨ Não sabe qual escolher? Descubra seu imóvel ideal</button>';
-    var h=w.querySelector('h2'); if(h&&h.parentNode) h.parentNode.insertBefore(b,h.nextSibling); else w.insertBefore(b,w.firstChild);
-  }
-  if(document.readyState!=='loading') injLauncher(); else document.addEventListener('DOMContentLoaded',injLauncher);
-})();
-</script>
-
-</body></html>';
+    +'<div class="foot">Paulo Cotrim · Documento informativo, não substitui a tabela oficial</div></body></html>';
   var win=window.open("","_blank");
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
 }
@@ -1636,5 +1555,85 @@ if('serviceWorker' in navigator){
 </script>
 <script src="crm-config.js"></script>
 <script src="leads.js" defer></script>
+<script>
+(function(){
+  var EMPS = window.EMP || (typeof EMP!=='undefined'?EMP:[]);
+  if(!EMPS.length) return;
+  function preco(e){ var m=(e.preco||'').match(/R\$\s*([\d.]+)/); return m?parseInt(m[1].replace(/\./g,'')):0; }
+  function rendaMin(e){ var p=preco(e); return p?Math.round(p*0.0095):0; }
+  function quartos(e){ var t=(e.tipologia||'').toLowerCase(); var o=[]; if(/studio|est[uú]dio/.test(t))o.push(0); var m=t.match(/(\d)\s*(a|e|,)\s*(\d)/); if(m){for(var k=+m[1];k<=+m[3];k++)o.push(k);} (t.match(/(\d)\s*quart/g)||[]).forEach(function(x){o.push(parseInt(x));}); return o.length?o:[1,2]; }
+  function regiao(e){ var b=(e.bairro||'').toLowerCase();
+    if(/niter/.test(b))return'niteroi';
+    if(/jacarepagu|pra[çc]a seca|taquara|barra|recreio/.test(b))return'zona-oeste';
+    if(/porto|santo cristo|gamboa|sa[uú]de|centro|pra[çc]a|mau[aá]|s[aã]o crist|cais/.test(b))return'centro';
+    return'zona-norte'; }
+
+  var st=document.createElement('style');
+  st.textContent='#mtOv{position:fixed;inset:0;z-index:9600;background:rgba(15,46,54,.62);display:none;align-items:center;justify-content:center;padding:18px}'
+   +'#mtOv.on{display:flex}#mtBox{background:#fff;border-radius:20px;max-width:520px;width:100%;max-height:92vh;overflow:auto;padding:28px 26px;font-family:Inter,system-ui,sans-serif;box-shadow:0 30px 90px rgba(0,0,0,.4)}'
+   +'#mtBox h3{font-family:Fraunces,Georgia,serif;font-size:23px;color:#0f2e36;margin-bottom:4px}#mtBox p.sub{font-size:13px;color:#6b7280;margin-bottom:18px}'
+   +'.mtq{margin-bottom:14px}.mtq label{display:block;font-size:12px;font-weight:700;color:#0f2e36;margin-bottom:6px}'
+   +'.mtq select,.mtq input{width:100%;padding:11px 13px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;font-family:inherit;outline:none}'
+   +'.mtq select:focus,.mtq input:focus{border-color:#1a8f4c}'
+   +'#mtGo{width:100%;background:#1a8f4c;color:#fff;border:none;border-radius:12px;padding:14px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 26px rgba(26,143,76,.3)}'
+   +'.mtcard{border:1px solid #e8eaed;border-radius:14px;padding:14px 16px;margin-bottom:10px;text-decoration:none;display:block}'
+   +'.mtcard b{color:#0f2e36;font-size:15px}.mtcard .l{font-size:12px;color:#6b7280}.mtcard .pr{font-family:Fraunces,serif;color:#1a8f4c;font-weight:700;font-size:16px;margin-top:4px}'
+   +'#mtBox .disc{font-size:11px;color:#94a3b8;line-height:1.5;margin-top:12px}'
+   +'#mtBox .x{float:right;background:#f5f6f7;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer;font-size:16px;color:#6b7280}';
+  document.head.appendChild(st);
+  var ov=document.createElement('div'); ov.id='mtOv';
+  ov.innerHTML='<div id="mtBox"></div>'; document.body.appendChild(ov);
+  ov.addEventListener('click',function(e){ if(e.target===ov) ov.classList.remove('on'); });
+  var box=document.getElementById('mtBox');
+
+  function form(){
+    box.innerHTML='<button class="x" onclick="fecharMatch()">✕</button>'
+     +'<h3>Encontre o seu imóvel ideal</h3><p class="sub">Responda 5 perguntas rápidas e eu mostro os lançamentos que combinam com o seu perfil.</p>'
+     +'<div class="mtq"><label>Sua renda familiar mensal</label><input id="mtRenda" inputmode="numeric" placeholder="Ex: 4.500" value="4.500"></div>'
+     +'<div class="mtq"><label>Quanto pretende dar de entrada (opcional)</label><input id="mtEnt" inputmode="numeric" placeholder="Ex: 20.000"></div>'
+     +'<div class="mtq"><label>Região preferida</label><select id="mtReg"><option value="">Qualquer região</option><option value="centro">Centro · Porto Maravilha</option><option value="zona-norte">Zona Norte</option><option value="zona-oeste">Zona Oeste · Jacarepaguá</option><option value="niteroi">Niterói</option></select></div>'
+     +'<div class="mtq"><label>Quantos quartos?</label><select id="mtQ"><option value="">Tanto faz</option><option value="0">Studio</option><option value="1">1 quarto</option><option value="2">2 quartos</option><option value="3">3 quartos</option></select></div>'
+     +'<div class="mtq"><label>Seu objetivo</label><select id="mtObj"><option>Morar</option><option>Primeira compra</option><option>Investir</option><option>Renda com aluguel</option></select></div>'
+     +'<button id="mtGo" onclick="rodarMatch()">Ver imóveis compatíveis</button>';
+  }
+  window.abrirMatch=function(){ form(); ov.classList.add('on'); };
+  window.fecharMatch=function(){ ov.classList.remove('on'); };
+  window.rodarMatch=function(){
+    var renda=parseInt((document.getElementById('mtRenda').value||'').replace(/\D/g,''))||0;
+    var reg=document.getElementById('mtReg').value; var q=document.getElementById('mtQ').value; var obj=document.getElementById('mtObj').value;
+    var cand=EMPS.filter(function(e){ return preco(e)>0; }).map(function(e){
+      var rm=rendaMin(e); var qs=quartos(e); var rg=regiao(e); var scoreOk=true;
+      var afford = !renda || rm<=renda*1.08;
+      var regOk = !reg || rg===reg;
+      var qOk = !q || qs.indexOf(parseInt(q))>=0;
+      var fit = (afford?2:0)+(regOk?2:0)+(qOk?1:0) - (rm>renda*1.08?3:0);
+      return {e:e,fit:fit,ok:(afford && regOk && qOk),rm:rm};
+    }).filter(function(x){return x.e;}).sort(function(a,b){ return b.fit-a.fit || preco(b.e)-preco(a.e); });
+    var exatos=cand.filter(function(x){return x.ok;});
+    var lista=(exatos.length?exatos:cand).slice(0,4);
+    if(window.leadCapture)leadCapture('match_imovel_ideal',{renda:renda,regiao:reg,quartos:q,objetivo:obj});
+    var cards=lista.map(function(x){var e=x.e; return '<a class="mtcard" href="'+e.url+'"><b>'+e.nome+'</b><div class="l">'+e.bairro+' · '+e.tipologia+'</div><div class="pr">'+(e.preco||'Consulte')+'</div></a>';}).join('');
+    box.innerHTML='<button class="x" onclick="fecharMatch()">✕</button>'
+     +'<h3>Encontramos opções pra você</h3><p class="sub">'+(exatos.length?'Compatíveis com o que você respondeu:':'Mais próximas do seu perfil:')+'</p>'
+     +(cards||'<p class="sub">Me chame no WhatsApp que eu busco a melhor opção pra você.</p>')
+     +'<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap"><a href="simulador.html" style="flex:1;text-align:center;background:#0f2e36;color:#fff;padding:12px;border-radius:11px;text-decoration:none;font-weight:700;font-size:13px">Simular</a>'
+     +'<a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20fiz%20o%20match%20no%20site%20e%20quero%20ver%20op%C3%A7%C3%B5es" target="_blank" style="flex:1;text-align:center;background:#1a8f4c;color:#fff;padding:12px;border-radius:11px;text-decoration:none;font-weight:700;font-size:13px">Falar com Paulo</a></div>'
+     +'<p class="disc">Compatibilidade estimada com base nas informações que você informou. A análise oficial depende da instituição financeira, da construtora e das condições vigentes.</p>';
+    if(window.enviarLeadCRM)enviarLeadCRM({nome:'',telefone:'',interesse:'Match: '+(reg||'qualquer')+' / '+(q||'qualquer')+'q / '+obj,renda:String(renda),regiao:reg,origem:'match-imovel-ideal',temp:'morno'});
+  };
+
+  // Lançador dentro da seção de empreendimentos
+  function injLauncher(){
+    var sec=document.getElementById('empreendimentos'); if(!sec) return;
+    if(document.getElementById('mtLauncher')) return;
+    var w=sec.querySelector('.wrap')||sec;
+    var b=document.createElement('div'); b.id='mtLauncher';
+    b.setAttribute('style','text-align:center;margin:0 auto 26px');
+    b.innerHTML='<button onclick="abrirMatch()" style="background:#fff;border:1.5px solid #1a8f4c;color:#1a8f4c;font-weight:700;font-size:14px;padding:12px 24px;border-radius:30px;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:8px">✨ Não sabe qual escolher? Descubra seu imóvel ideal</button>';
+    var h=w.querySelector('h2'); if(h&&h.parentNode) h.parentNode.insertBefore(b,h.nextSibling); else w.insertBefore(b,w.firstChild);
+  }
+  if(document.readyState!=='loading') injLauncher(); else document.addEventListener('DOMContentLoaded',injLauncher);
+})();
+</script>
 </body>
 </html>
