@@ -269,7 +269,7 @@ function subsidioDaFaixa(f,renda){
 }
 
 var S={
-  renda:0, empIdx:0, useCustom:false, customPreco:0, customConstrutora:'', taxaAnual:10.9, useCustomTaxa:false, tab:0,
+  renda:0, empIdx:0, empChosen:false, useCustom:false, customPreco:0, customConstrutora:'', taxaAnual:10.9, useCustomTaxa:false, tab:0,
   ato:0, mensaisQtd:24, mensaisValor:0, anuaisQtd:2, anuaisValor:0, parcelaUnica:0, valorChaves:0,
   posChavesQtd:0, posChavesValor:0,
   clienteNome:'', clienteTel:'', zerarAlvo:'mensais'
@@ -360,7 +360,7 @@ function zerarFluxo(){
 function updRenda(v){S.renda=parseBRL(v);render();}
 function updTaxa(v){S.taxaAnual=parseFloat(v)||0;S.useCustomTaxa=true;render();}
 function resetTaxa(){S.useCustomTaxa=false;render();}
-function selEmp(v){if(v==='custom'){S.useCustom=true;}else{S.useCustom=false;S.empIdx=+v;}render();}
+function selEmp(v){if(v===''){S.empChosen=false;}else if(v==='custom'){S.useCustom=true;S.empChosen=true;}else{S.useCustom=false;S.empIdx=+v;S.empChosen=true;}render();}
 function updCustomPreco(v){S.customPreco=parseBRL(v);render();}
 function updCustomConstrutora(v){S.customConstrutora=v;render();}
 function setTab(t){S.tab=t;render();}
@@ -462,6 +462,9 @@ function renderSim(){
   if(S.renda<=0){
     return head+'<div class="sim-body" style="padding-top:1.25rem">'+renderGateRenda()+'</div>';
   }
+  if(!S.useCustom && !S.empChosen){
+    return head+'<div class="sim-body" style="padding-top:1.25rem">'+renderGateEmp()+'</div>';
+  }
 
   var c=calc();
   // Resumo e montagem da entrada ficam sempre visíveis, um abaixo do outro — nada escondido atrás de aba.
@@ -469,6 +472,15 @@ function renderSim(){
     +renderResumo(c)
     +'<div class="sim-divider"><span>Agora monte como você vai pagar a entrada</span></div>'
     +renderFluxo(c)
+    +'</div>';
+}
+
+function renderGateEmp(){
+  var opts=CATALOG.map(function(e,i){return'<option value="'+i+'">'+e.n+' — '+STATUS_LABEL[e.s]+'</option>';}).join('');
+  return'<div class="sel-box" style="border-color:var(--gold);padding:2rem 1.5rem">'
+    +'<div class="sel-title" style="justify-content:center;display:flex">Escolha o empreendimento</div>'
+    +'<p style="font-size:12.5px;color:var(--text2);margin-bottom:14px;text-align:center">Selecione o im\u00f3vel e a simula\u00e7\u00e3o completa — entrada, parcela, subs\u00eddio, prazo — aparece na hora.</p>'
+    +'<div style="max-width:440px;margin:0 auto"><select onchange="selEmp(this.value)" style="width:100%;padding:12px 14px;border:1.5px solid var(--border);border-radius:10px;font-size:14px;font-family:inherit;background:#fff"><option value="" selected>\u2014 Escolha o empreendimento \u2014</option>'+opts+'<option value="custom">Outro / valor personalizado</option></select></div>'
     +'</div>';
 }
 
@@ -602,7 +614,7 @@ function render(){
     var q=new URLSearchParams(location.search).get('emp'); if(!q) return;
     function sl(x){return (x||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'');}
     var qs=sl(q);
-    for(var i=0;i<CATALOG.length;i++){ var ns=sl(CATALOG[i].n); if(ns===qs||ns.indexOf(qs)>=0||qs.indexOf(ns)>=0){ S.empIdx=i; S.useCustom=false; break; } }
+    for(var i=0;i<CATALOG.length;i++){ var ns=sl(CATALOG[i].n); if(ns===qs||ns.indexOf(qs)>=0||qs.indexOf(ns)>=0){ S.empIdx=i; S.useCustom=false; S.empChosen=true; break; } }
   }catch(e){}
 })();
 render();
