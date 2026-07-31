@@ -482,6 +482,21 @@ footer .wrap{position:relative;z-index:1}
 .rg-foot{margin-top:30px;font-size:12.5px;color:rgba(255,255,255,.8)}
 .rg-foot a{color:var(--gold);font-weight:600}
 </style>
+<style>
+.constr-marquee{overflow:hidden;background:var(--mist);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;white-space:nowrap}
+.constr-marquee-track{display:inline-flex;gap:48px;animation:constrScroll 32s linear infinite}
+.constr-marquee:hover .constr-marquee-track{animation-play-state:paused}
+.constr-marquee-item{font-family:'Fraunces',serif;font-size:15px;font-weight:600;color:var(--gray);letter-spacing:.01em;opacity:.7;transition:opacity .3s var(--ease),color .3s var(--ease)}
+.constr-marquee-item:hover{opacity:1;color:var(--petrol)}
+.app-marquee{overflow:hidden;padding:4px 0;white-space:nowrap}
+.app-marquee-track{display:inline-flex;gap:14px;animation:appMarqueeScroll 11s linear infinite}
+.app-chip{display:inline-flex;align-items:center;padding:11px 22px;border-radius:12px;font-family:'Inter',sans-serif;font-weight:800;font-size:15px;letter-spacing:.01em;box-shadow:0 2px 10px rgba(0,0,0,.16)}
+.app-chip-uber{background:#000;color:#fff}
+.app-chip-99{background:#FFD100;color:#111}
+.app-chip-ifood{background:#EA1D2C;color:#fff}
+@keyframes constrScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+@keyframes appMarqueeScroll{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+</style>
 </head>
 <body>
 <div class="bg-glow" aria-hidden="true"></div>
@@ -612,6 +627,21 @@ footer .wrap{position:relative;z-index:1}
       </button>
     </div>
 
+    
+<style>
+.bairro-strip{margin-top:16px}
+.bairro-strip-label{font-size:10.5px;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--gray);margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.bairro-strip-label svg{width:13px;height:13px;stroke:var(--gold);fill:none;stroke-width:2}
+.bairro-chips{display:flex;gap:8px;flex-wrap:wrap}
+.bairro-chips button{font-family:inherit;font-size:12px;font-weight:700;color:var(--ink);background:#fff;border:1.5px solid var(--line);border-radius:30px;padding:7px 14px;cursor:pointer;transition:border-color .25s ease,background .25s ease,color .25s ease}
+.bairro-chips button:hover{border-color:#1a8f4c;background:#f0f9f3;color:#157a3f}
+.bairro-chips button.on{border-color:#1a8f4c;background:#1a8f4c;color:#fff}
+</style>
+    <div class="bairro-strip reveal">
+      <div class="bairro-strip-label"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Ou escolha direto o bairro</div>
+      <div class="bairro-chips"><button type="button" onclick="quickBairro('São Cristóvão')">São Cristóvão</button><button type="button" onclick="quickBairro('Centro')">Centro</button><button type="button" onclick="quickBairro('Praça Seca')">Praça Seca</button><button type="button" onclick="quickBairro('Cachambi')">Cachambi</button><button type="button" onclick="quickBairro('Todos os Santos')">Todos os Santos</button><button type="button" onclick="quickBairro('Santo Cristo')">Santo Cristo</button><button type="button" onclick="quickBairro('Porto Maravilha')">Porto Maravilha</button><button type="button" onclick="quickBairro('Piedade')">Piedade</button><button type="button" onclick="quickBairro('Pendotiba')">Pendotiba</button><button type="button" onclick="quickBairro('Praça Mauá')">Praça Mauá</button><button type="button" onclick="quickBairro('Praça Onze')">Praça Onze</button><button type="button" onclick="quickBairro('Vila Valqueire')">Vila Valqueire</button><button type="button" onclick="quickBairro('Praça Pio X')">Praça Pio X</button><button type="button" onclick="quickBairro('Madureira')">Madureira</button><button type="button" onclick="quickBairro('Campinho')">Campinho</button><button type="button" onclick="quickBairro('Méier')">Méier</button><button type="button" onclick="quickBairro('Engenho de Dentro')">Engenho de Dentro</button><button type="button" onclick="quickBairro('Inhaúma')">Inhaúma</button><button type="button" onclick="quickBairro('Saúde')">Saúde</button><button type="button" onclick="quickBairro('Riachuelo')">Riachuelo</button><button type="button" onclick="quickBairro('Rio do Ouro')">Rio do Ouro</button><button type="button" onclick="quickBairro('Pilares')">Pilares</button><button type="button" onclick="quickBairro('Bonsucesso')">Bonsucesso</button><button type="button" onclick="quickBairro('Rocha')">Rocha</button><button type="button" onclick="quickBairro('Barra da Tijuca')">Barra da Tijuca</button></div>
+    </div>
+
     <div class="hero-quicklinks reveal">
       <a href="aprovacao-expressa.html"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg>Aprovação de crédito em 48h</a>
       <a href="simulador.html"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M16 10h2M8 14h2M12 14h2M16 14h2M8 18h2"/></svg>Simular financiamento</a>
@@ -739,7 +769,12 @@ footer .wrap{position:relative;z-index:1}
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">48h</span><span class="ae-promo-stat-lbl">tempo médio de resposta</span></div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">18</span><span class="ae-promo-stat-lbl">anos de experiência</span></div>
           <div class="ae-promo-stat"><span class="ae-promo-stat-num">R$0</span><span class="ae-promo-stat-lbl">custo para o comprador</span></div>
-        </div>
+        <div class="ae-promo-stat" style="grid-column:1/-1"><div class="app-marquee"><div class="app-marquee-track">
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+              <span class="app-chip app-chip-uber">Uber</span><span class="app-chip app-chip-99">99</span><span class="app-chip app-chip-ifood">iFood</span>
+            </div></div><span class="ae-promo-stat-lbl">relatório de ganhos de app aceito — autônomo também financia</span></div></div>
       </div>
     </div>
   </div>
@@ -812,17 +847,7 @@ footer .wrap{position:relative;z-index:1}
   <div class="wrap" style="text-align:center">
     <div class="sec-eyebrow reveal" style="text-align:center">Sem favorecer ninguém</div>
     <h2 class="sec-title display reveal" style="margin:0 auto 32px;max-width:24ch">Trabalhamos com todas as principais construtoras do Rio</h2>
-    <div class="brands reveal">
-      <span class="brand-chip">Cury</span>
-      <span class="brand-chip">Direcional</span>
-      <span class="brand-chip">Cyrela · Living</span>
-      <span class="brand-chip">Brookfield / AZO</span>
-      <span class="brand-chip">Emccamp</span>
-      <span class="brand-chip">CTV</span>
-      <span class="brand-chip">W3 Engenharia</span>
-      <span class="brand-chip">Village</span>
-      <span class="brand-chip" style="color:var(--gray);opacity:.7">+8 outras construtoras</span>
-    </div>
+    <div class="constr-marquee"><div class="constr-marquee-track"><span class="constr-marquee-item">Cury</span><span class="constr-marquee-item">MRV</span><span class="constr-marquee-item">Emccamp</span><span class="constr-marquee-item">Direcional</span><span class="constr-marquee-item">Riva Incorporadora</span><span class="constr-marquee-item">Tegra Incorporadora</span><span class="constr-marquee-item">Cyrela · Living</span><span class="constr-marquee-item">CTV Engenharia</span><span class="constr-marquee-item">Crescer</span><span class="constr-marquee-item">Sensia · MRV&CO</span><span class="constr-marquee-item">Cury</span><span class="constr-marquee-item">MRV</span><span class="constr-marquee-item">Emccamp</span><span class="constr-marquee-item">Direcional</span><span class="constr-marquee-item">Riva Incorporadora</span><span class="constr-marquee-item">Tegra Incorporadora</span><span class="constr-marquee-item">Cyrela · Living</span><span class="constr-marquee-item">CTV Engenharia</span><span class="constr-marquee-item">Crescer</span><span class="constr-marquee-item">Sensia · MRV&CO</span></div></div>
   </div>
 </section>
 
@@ -1105,9 +1130,9 @@ function pickRegion(zona){
     filterZona(zona,btn);
   })();
 }
-var curZona="";
+var curZona="",curBairro="";
 function filterZona(z,btn){
-  curZona=z;
+  curZona=z;curBairro="";
   document.querySelectorAll("#map-filters-zona .mfilter").forEach(function(b){b.classList.remove("on");});
   if(btn)btn.classList.add("on");
   EMP.forEach(function(e,i){var m=markers[i];if(!m)return;if(visible(e)){m.addTo(map);}else{map.removeLayer(m);}});
@@ -1144,9 +1169,9 @@ function fitVisible(){
   var g=[];EMP.forEach(function(e,i){if(visible(e)&&markers[i])g.push(markers[i].getLatLng());});
   if(g.length){map.fitBounds(L.latLngBounds(g).pad(0.15));}
 }
-function visible(e){if(curFilter&&e.construtora!==curFilter)return false;if(curZona&&zonaKey(e)!==curZona)return false;if(!matchesQuartos(e))return false;if(!matchesValor(e))return false;return true;}
+function visible(e){if(curFilter&&e.construtora!==curFilter)return false;if(curZona&&zonaKey(e)!==curZona)return false;if(curBairro&&(e.bairro||"").toLowerCase().indexOf(curBairro.toLowerCase())<0)return false;if(!matchesQuartos(e))return false;if(!matchesValor(e))return false;return true;}
 function filterMap(c,btn){
-  curFilter=c;
+  curFilter=c;curBairro="";
   document.querySelectorAll(".mfilter").forEach(function(b){b.classList.remove("on");});
   if(btn)btn.classList.add("on");
   EMP.forEach(function(e,i){var m=markers[i];if(!m)return;if(visible(e)){m.addTo(map);}else{map.removeLayer(m);}});
@@ -1336,6 +1361,19 @@ function downloadComparacao(){
 }
 
 /* ---------- SEARCH ---------- */
+function quickBairro(b){
+  curBairro=b;curZona="";curFilter="";
+  document.querySelectorAll("#map-filters-zona .mfilter,.mfilter").forEach(function(x){x.classList.remove("on");});
+  document.querySelectorAll(".bairro-chips button").forEach(function(x){x.classList.toggle("on", x.textContent.trim()===b);});
+  document.getElementById("mapa").scrollIntoView({behavior:"smooth"});
+  setTimeout(function(){
+    if(typeof EMP!=="undefined"&&typeof markers!=="undefined"){
+      EMP.forEach(function(e,i){var m=markers[i];if(!m)return;if(visible(e)){m.addTo(map);}else{map.removeLayer(m);}});
+    }
+    renderList();fitVisible();
+  },340);
+}
+function limparBairro(){curBairro="";document.querySelectorAll(".bairro-chips button").forEach(function(x){x.classList.remove("on");});filterZona("",null);}
 function applySearch(){
   var st=document.getElementById("f-status").value;
   var rg=document.getElementById("f-regiao").value;
