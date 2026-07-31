@@ -749,8 +749,10 @@
     document.head.appendChild(style);
     var oldLink = cta.querySelector('a');
     var waHref = oldLink ? oldLink.getAttribute('href') : ('https://wa.me/'+WA_NUM);
+    var _nm = (window.FSIM_NOME || (document.querySelector('h1') ? document.querySelector('h1').textContent : '') || '').trim();
+    var simHref = 'simulador.html' + (_nm ? ('?emp=' + encodeURIComponent(_nm)) : '');
     cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
-      + '<a class="sc-btn" style="background:#0f2e36;color:#fff" href="simulador.html">Simular financiamento</a>'
+      + '<a class="sc-btn" style="background:#0f2e36;color:#fff" href="'+simHref+'">Simular financiamento</a>'
       + '<a class="sc-btn" style="background:#b8873a;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
   })();
 
