@@ -328,15 +328,15 @@ function render(){
       </div>
 
       <div class="sid-card">
-        <h3>Nossa equipe</h3>
+        <h3>Quem vai te atender</h3>
         <div class="coord-box">
           <img class="coord-av" src="${fotoCoord||'paulo-cotrim-profissional.jpeg'}" alt="Paulo Cotrim" onerror="this.onerror=null;this.style.background='#0f2e36'"/>
           <div class="coord-info">
             <div class="name">Paulo Cotrim</div>
-            <div class="role">Paulo Cotrim · Corretor de Imóveis · 18 anos de experiência</div>
+            <div class="role">Corretor de Imóveis · CRECI-RJ 77677-F · 18 anos</div>
           </div>
         </div>
-        <p style="margin-top:14px;font-size:13px;color:#475569;line-height:1.6">Especialistas em MCMV e financiamento imobiliário. Do primeiro contato até a entrega das chaves, o Paulo cuida de tudo para você.</p>
+        <p style="margin-top:14px;font-size:13px;color:#475569;line-height:1.6">Especialista em MCMV e financiamento imobiliário. Do primeiro contato até a entrega das chaves, o Paulo cuida de tudo para você — sem intermediário.</p>
         <a href="https://instagram.com/corretorpaulocotrim" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:600;color:#64748b"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>@corretorpaulocotrim</a>
         <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;display:flex;align-items:center;gap:8px">
           <span style="font-size:11px;color:#94a3b8;font-weight:700">CRECI-RJ 77677-F</span>
