@@ -442,7 +442,8 @@ function renderGateRenda(){
   return'<div class="sel-box" style="border-color:var(--gold);text-align:center;padding:2rem 1.5rem">'
     +'<div class="sel-title" style="justify-content:center;display:flex">Para começar, qual é a sua renda familiar mensal?</div>'
     +'<p style="font-size:12.5px;color:var(--text2);margin-bottom:14px">Sem essa informação não conseguimos estimar corretamente sua capacidade de financiamento — é o primeiro passo antes de qualquer resultado.</p>'
-    +'<div style="max-width:280px;margin:0 auto"><input type="text" placeholder="Ex: 4.500,00" oninput="updRenda(this.value)" style="width:100%;font-size:16px;padding:12px 14px;border:1.5px solid var(--gold);border-radius:9px;text-align:center;font-family:inherit"></div>'
+    +'<div style="max-width:280px;margin:0 auto"><input id="gateRendaInput" type="text" inputmode="decimal" value="'+(S.renda>0?N2(S.renda):'')+'" placeholder="Ex: 4.500,00" oninput="S.renda=parseBRL(this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();render();}" style="width:100%;font-size:16px;padding:12px 14px;border:1.5px solid var(--gold);border-radius:9px;text-align:center;font-family:inherit"></div>'
+    +'<button type="button" onclick="render()" style="margin-top:14px;background:#1a8f4c;color:#fff;border:none;border-radius:9px;padding:12px 30px;font-size:14px;font-weight:700;font-family:Fraunces,Georgia,serif;cursor:pointer">Continuar &rarr;</button>'
     +'<p style="font-size:10.5px;color:#94a3b8;margin-top:10px">Renda pode ser composta com familiares. Usada apenas para estimar sua simulação.</p>'
     +'</div>';
 }
