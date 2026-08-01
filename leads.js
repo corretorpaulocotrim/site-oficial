@@ -731,7 +731,7 @@
       var note = document.createElement('div');
       note.className = 'price-freshness';
       note.setAttribute('style','font-size:11px;color:#6b7280;margin-top:8px;display:flex;align-items:center;gap:5px');
-      note.innerHTML = '<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Tabela verificada em Julho/2026 — confirme disponibilidade e valores atualizados com Paulo antes de decidir.';
+      note.innerHTML = '<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Tabela verificada em Agosto/2026 — confirme disponibilidade e valores atualizados com Paulo antes de decidir.';
       t.insertAdjacentElement('afterend', note);
     });
   })();
@@ -752,7 +752,7 @@
     var _nm = (window.FSIM_NOME || (document.querySelector('h1') ? document.querySelector('h1').textContent : '') || '').trim();
     var simHref = 'simulador.html' + (_nm ? ('?emp=' + encodeURIComponent(_nm)) : '');
     cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
-      + '<a class="sc-btn" style="background:#0f2e36;color:#fff" href="'+simHref+'">Simular financiamento</a>'
+      + '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+simHref+'">Simular financiamento</a>'
       + '<a class="sc-btn" style="background:#b8873a;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
   })();
 
