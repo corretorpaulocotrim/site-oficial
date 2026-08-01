@@ -142,7 +142,7 @@ function fsimSugestoesHTML(nomeAtual, precoAlvo){
   if(!candidatos.length) return '';
   var cards = candidatos.map(function(e){
     return '<a href="'+e.url+'" style="display:block;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px 18px 16px;text-decoration:none;box-shadow:0 1px 2px rgba(15,46,54,.04);transition:box-shadow .3s ease,transform .3s ease" onmouseover="this.style.boxShadow=\'0 12px 28px rgba(15,46,54,.12)\';this.style.transform=\'translateY(-3px)\'" onmouseout="this.style.boxShadow=\'0 1px 2px rgba(15,46,54,.04)\';this.style.transform=\'none\'">'
-      +'<span style="display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#3E8E5A;background:rgba(62,142,90,.1);padding:3px 9px;border-radius:20px;margin-bottom:9px">Dentro do orçamento</span>'
+      +'<span style="display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#1a8f4c;background:rgba(62,142,90,.1);padding:3px 9px;border-radius:20px;margin-bottom:9px">Dentro do orçamento</span>'
       +'<b style="display:block;font-size:15px;color:#0f2e36;margin-bottom:3px;font-weight:700">'+e.nome+'</b>'
       +'<span style="display:block;font-size:12px;color:#6b7280;margin-bottom:2px">'+e.bairro+' · '+e.tip+'</span>'
       +(e.endereco?'<span style="display:block;font-size:11px;color:#9ca3af;margin-bottom:10px">'+e.endereco+'</span>':'<span style="display:block;margin-bottom:10px"></span>')
@@ -397,7 +397,7 @@ function fsimUpdate(){
   if(c.atoEntrada>0) out += '<div class="sim-out-card"><div class="l">Pago no ato da assinatura</div><div class="v">'+fmtBRL(c.atoEntrada)+'</div></div>';
   if(c.valorChave>0) out += '<div class="sim-out-card"><div class="l">Abatido com valor na entrega das chaves</div><div class="v">'+fmtBRL(c.valorChave)+'</div></div>';
   out += '<div class="sim-out-card"><div class="l">Parcelável sem juros na obra (até 20%)</div><div class="v">'+fmtBRL(c.parcelavelObra)+'</div></div>'
-    +'<div class="sim-out-card" style="position:relative"><span style="position:absolute;top:-9px;right:10px;background:#3E8E5A;color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:20px;box-shadow:0 3px 8px rgba(62,142,90,.35)">Sem juros</span><div class="l">Por mês, até a entrega das chaves ('+c.parcelasObra+'x)</div><div class="v">'+fmtBRL(c.parcelaObraMensal)+'</div></div>';
+    +'<div class="sim-out-card" style="position:relative"><span style="position:absolute;top:-9px;right:10px;background:#1a8f4c;color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:20px;box-shadow:0 3px 8px rgba(62,142,90,.35)">Sem juros</span><div class="l">Por mês, até a entrega das chaves ('+c.parcelasObra+'x)</div><div class="v">'+fmtBRL(c.parcelaObraMensal)+'</div></div>';
   if(c.fgtsAplicado>0) out += '<div class="sim-out-card"><div class="l">FGTS aplicado</div><div class="v">'+fmtBRL(c.fgtsAplicado)+'</div></div>';
   if(c.temPosChaves){
     out += '<div class="sim-out-card hl"><div class="l">Parcelamento pós-chaves ('+c.maxParcelasPosChaves+'x)</div><div class="v">'+fmtBRL(c.parcelaPosChaves)+'</div></div>';

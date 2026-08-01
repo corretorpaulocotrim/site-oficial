@@ -122,7 +122,7 @@
   }
   function mcmvBenefit(titulo, desc){
     return '<li style="display:flex;gap:11px;align-items:flex-start">'
-      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#3E8E5A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
+      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a8f4c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
       +'<span style="font-size:13.5px;color:#0f2e36;line-height:1.5"><b>'+titulo+'</b><br><span style="color:#6b7280">'+desc+'</span></span>'
       +'</li>';
   }
@@ -682,7 +682,7 @@
     document.head.appendChild(st);
     var pill=document.createElement('div'); pill.id='waHintPill'; pill.style.display='none';
     document.body.appendChild(pill);
-    var msgs=['Me chama no <b>WhatsApp</b> 👋','Tira sua dúvida <b>agora</b>','<b>Simulo</b> com a sua renda','Sem compromisso — é rápido','Fala comigo, eu te respondo'];
+    var msgs=['Me chama no <b>WhatsApp</b> ','Tira sua dúvida <b>agora</b>','<b>Simulo</b> com a sua renda','Sem compromisso — é rápido','Fala comigo, eu te respondo'];
     var i=0, cycleMs=6500, showMs=4600;
     function loop(){
       pill.innerHTML=msgs[i%msgs.length]; i++;
@@ -886,12 +886,54 @@
       + '<button class="pc-lock-btn" type="button">Fazer simulação</button>';
     w.appendChild(ov);
     ov.querySelector('button').addEventListener('click', function(){
-      t.classList.remove('pc-lock-blur'); ov.remove();
-      if(window.leadCapture) window.leadCapture('tabela_desbloqueada');
-      var sim = document.getElementById('simulador') || document.getElementById('fsimEmbed');
-      if(sim) sim.scrollIntoView({behavior:'smooth', block:'start'});
+      function _reveal(){
+        t.classList.remove('pc-lock-blur'); ov.remove();
+        if(window.leadCapture) window.leadCapture('tabela_desbloqueada');
+        var sim = document.getElementById('simulador') || document.getElementById('fsimEmbed');
+        if(sim) sim.scrollIntoView({behavior:'smooth', block:'start'});
+      }
+      if(window.pcLeadGate){ window.pcLeadGate({ctx:'ver_valores', titulo:'Veja os valores da sua simulação', sub:'Deixe seu nome e WhatsApp — eu libero a tabela e já te mando entrada, parcela e as condições reais.', cb:_reveal}); }
+      else { _reveal(); }
     });
   });
+})();
+
+/* ============================================================
+   Simulador inline (#fsimEmbed) também trancado até captar o lead
+   — sem WhatsApp, sem valores. Reaproveita pcLeadGate + estilos pc-lock.
+   ============================================================ */
+(function(){
+  var box = document.getElementById('fsimEmbed') || document.getElementById('simulador');
+  if(!box) return;
+  var captured=false; try{ captured=!!localStorage.getItem('pc_lead_captured'); }catch(e){}
+  if(captured) return;
+  // garante estilos pc-lock (caso a página não tenha .tipo-table)
+  if(!document.getElementById('pcLockStyle2')){
+    var st=document.createElement('style'); st.id='pcLockStyle2';
+    st.textContent='.pc-lock-wrap{position:relative}.pc-lock-blur{filter:blur(7px);pointer-events:none;user-select:none}'
+      +'.pc-lock-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;background:linear-gradient(180deg,rgba(247,244,238,.72),rgba(247,244,238,.92));border-radius:14px;padding:22px;z-index:2}'
+      +'.pc-lock-ov b{font-family:Fraunces,Georgia,serif;font-size:17px;color:#0f2e36}.pc-lock-ov span{font-size:12.8px;color:#6b7280;max-width:36ch;line-height:1.5}'
+      +'.pc-lock-btn{background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.32)}';
+    document.head.appendChild(st);
+  }
+  function lock(){
+    if(box.closest('.pc-lock-wrap')) return;
+    var minH = box.offsetHeight>140 ? box.offsetHeight : 300;
+    var w=document.createElement('div'); w.className='pc-lock-wrap'; w.style.minHeight=minH+'px';
+    box.parentNode.insertBefore(w,box); w.appendChild(box); box.classList.add('pc-lock-blur');
+    var ov=document.createElement('div'); ov.className='pc-lock-ov';
+    ov.innerHTML='<svg viewBox="0 0 24 24" style="width:34px;height:34px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>'
+      +'<b>Simular financiamento</b>'
+      +'<span>Informe seu nome e WhatsApp e eu libero na hora sua entrada, parcela e as condições reais — sem sair de casa.</span>'
+      +'<button class="pc-lock-btn" type="button">Simular financiamento</button>';
+    w.appendChild(ov);
+    ov.querySelector('button').addEventListener('click',function(){
+      function _rev(){ box.classList.remove('pc-lock-blur'); ov.remove(); w.style.minHeight=''; if(window.leadCapture) window.leadCapture('simulador_desbloqueado'); }
+      if(window.pcLeadGate){ window.pcLeadGate({ctx:'simular_financiamento', titulo:'Sua simulação está pronta', sub:'Deixe seu nome e WhatsApp — eu libero agora entrada, parcela e condições, e te ajudo se precisar.', cb:_rev}); }
+      else { _rev(); }
+    });
+  }
+  setTimeout(lock, 600);
 })();
 
 /* Garante o crm-config.js (enviarLeadCRM) em qualquer página com leads.js */
@@ -899,6 +941,78 @@
   if (window.enviarLeadCRM) return;
   var s = document.createElement('script'); s.src = 'crm-config.js'; s.async = true;
   document.head.appendChild(s);
+})();
+
+/* ============================================================
+   Marca da chave (logo) em todo CTA "Falar com Paulo Cotrim"
+   — usa currentColor, então nunca some (fica branca no verde,
+   dourada no claro). Substitui o ícone genérico pela SUA chave.
+   ============================================================ */
+(function(){
+  var KEY='<svg class="pc-keymark" viewBox="0 0 24 24" aria-hidden="true" style="width:15px;height:15px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:6px;display:inline-block;flex-shrink:0"><circle cx="8.5" cy="8.5" r="5.5"/><path d="M12.5 12.5 21 21M17.5 17.5l1.8-1.8M15 15l1.8-1.8"/></svg>';
+  function apply(){
+    var els=document.querySelectorAll('a,button');
+    for(var i=0;i<els.length;i++){
+      var el=els[i]; var t=(el.textContent||'').trim();
+      if(t.indexOf('Paulo Cotrim')>=0 && /^Falar/i.test(t) && !el.querySelector('.pc-keymark')){
+        // tira ícone genérico anterior (1º svg) pra não duplicar
+        var old=el.querySelector('svg'); if(old && !old.classList.contains('pc-keymark')) old.remove();
+        el.insertAdjacentHTML('afterbegin', KEY);
+      }
+    }
+  }
+  if(document.readyState!=='loading') apply(); else document.addEventListener('DOMContentLoaded',apply);
+  setTimeout(apply, 900); // pega CTAs injetados por JS (sticky, template)
+})();
+
+/* ============================================================
+   "No dia a dia do bairro" — dados reais (bairro-info.js) por condomínio
+   Transporte, saúde, educação e compras que pesam na decisão.
+   ============================================================ */
+(function(){
+  var isProp = !!document.querySelector('.trust-bar') || !!document.getElementById('fsimEmbed') || !!document.querySelector('.tipo-table');
+  if(!isProp) return;
+  function norm(t){ return (t||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,''); }
+  function detectBairro(){
+    var html=document.documentElement.innerHTML;
+    var m=html.match(/initSimuladorEmbed\([^)]*bairro\s*:\s*['"]([^'"]+)['"]/);
+    if(m) return m[1];
+    var rows=document.querySelectorAll('.sid-row');
+    for(var i=0;i<rows.length;i++){ if(/Bairro/i.test(rows[i].textContent)){ var v=rows[i].querySelector('.sid-value'); if(v) return v.textContent; } }
+    var d=document.querySelector('meta[name="description"]'); return d?d.getAttribute('content'):'';
+  }
+  function render(){
+    if(!window.BAIRRO_INFO){ return setTimeout(render,250); }
+    if(document.getElementById('pcDiaADia')) return;
+    var bn=norm(detectBairro()); if(!bn) return;
+    var key=null;
+    for(var k in window.BAIRRO_INFO){ if(bn.indexOf(k)>=0){ key=k; break; } }
+    if(!key) return;
+    var info=window.BAIRRO_INFO[key];
+    var cats=[['Transporte','transporte','M4 3h16v18l-4-3H4z'],['Saúde','saude','M12 5v14M5 12h14'],['Educação','educacao','M12 3 2 8l10 5 10-5-10-5z'],['Compras','compras','M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z']];
+    var cols='';
+    cats.forEach(function(c){
+      var arr=info[c[1]]; if(!arr||!arr.length) return;
+      cols+='<div style="background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px 18px 14px">'
+        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><path d="'+c[2]+'"/></svg><b style="font-family:Fraunces,Georgia,serif;font-size:15px;color:#0f2e36">'+c[0]+'</b></div>'
+        +'<ul style="list-style:none;padding:0;margin:0">'+arr.map(function(x){return '<li style="font-size:13px;color:#475569;line-height:1.5;padding:5px 0 5px 16px;position:relative"><span style="position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#1a8f4c"></span>'+x+'</li>';}).join('')+'</ul></div>';
+    });
+    if(!cols) return;
+    var sec=document.createElement('section');
+    sec.id='pcDiaADia'; sec.className='section';
+    sec.style.cssText='background:#f0f9f3';
+    sec.innerHTML='<div class="wrap"><div style="text-align:center;max-width:640px;margin:0 auto 26px">'
+      +'<div style="font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1a8f4c">No dia a dia</div>'
+      +'<h2 style="font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3.6vw,34px);color:#0f2e36;margin:6px 0 8px">Como é a vida ao redor</h2>'
+      +'<p style="font-size:14px;color:#6b7280;margin:0">O que faz diferença de verdade quando você mora aqui: transporte, saúde, estudo e compras a poucos minutos.</p></div>'
+      +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">'+cols+'</div>'
+      +'<p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:16px">Referências reais da região (SuperVia, MetrôRio, BRT Rio, Prefeitura). Distâncias e linhas podem variar — confirme com o Paulo.</p></div>';
+    var footer=document.querySelector('footer');
+    if(footer&&footer.parentNode) footer.parentNode.insertBefore(sec,footer); else document.body.appendChild(sec);
+  }
+  // carrega bairro-info.js e renderiza
+  if(window.BAIRRO_INFO){ render(); }
+  else { var s=document.createElement('script'); s.src='bairro-info.js'; s.onload=render; s.onerror=function(){}; document.head.appendChild(s); }
 })();
 
 /* ============================================================
