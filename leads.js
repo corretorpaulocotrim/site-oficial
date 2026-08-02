@@ -984,11 +984,11 @@
     if(!window.BAIRRO_INFO){ return setTimeout(render,250); }
     if(document.getElementById('pcDiaADia')) return;
     var bn=norm(detectBairro()); if(!bn) return;
-    var key=null;
-    for(var k in window.BAIRRO_INFO){ if(bn.indexOf(k)>=0){ key=k; break; } }
+    var key=null,keylen=0;
+    for(var k in window.BAIRRO_INFO){ if(bn.indexOf(k)>=0 && k.length>keylen){ key=k; keylen=k.length; } } // match mais específico (cidade antes de "centro")
     if(!key) return;
     var info=window.BAIRRO_INFO[key];
-    var cats=[['Transporte','transporte','M4 3h16v18l-4-3H4z'],['Saúde','saude','M12 5v14M5 12h14'],['Educação','educacao','M12 3 2 8l10 5 10-5-10-5z'],['Compras','compras','M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z']];
+    var cats=[['Transporte','transporte','M4 3h16v18l-4-3H4z'],['Saúde','saude','M12 5v14M5 12h14'],['Educação','educacao','M12 3 2 8l10 5 10-5-10-5z'],['Compras','compras','M6 2 3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z'],['Lazer &amp; Gastronomia','lazer','M12 7a5 5 0 100 10 5 5 0 000-10zM12 2v2M12 20v2M4 12H2M22 12h-2M5 5l1.5 1.5M17.5 17.5 19 19']];
     var cols='';
     cats.forEach(function(c){
       var arr=info[c[1]]; if(!arr||!arr.length) return;
