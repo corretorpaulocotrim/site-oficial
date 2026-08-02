@@ -717,7 +717,7 @@
     seal.setAttribute('style','display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 16px;margin-top:12px;max-width:fit-content');
     seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#cf9f4f;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
       + '<div style="line-height:1.35"><div style="font-size:12.5px;font-weight:800;color:#fff">Corretor Oficial · CRECI-RJ 77677-F</div>'
-      + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 700+ famílias atendidas · Especialista em MCMV</div></div>';
+      + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 18 anos ajudando famílias no RJ · Especialista em MCMV</div></div>';
     bar.insertAdjacentElement('afterend', seal);
   })();
 
@@ -828,9 +828,11 @@
 
     function renderBar(){
       var list = getList();
+      var wm=document.getElementById('wa-msg');
       if(list.length >= 2){
         bar.classList.add('show');
         document.getElementById('pcCompareBarTxt').innerHTML = '<b>'+list.length+'</b> imóveis selecionados para comparar';
+        if(wm) wm.style.display='none'; // evita colisão do balão com a barra de comparar
       } else {
         bar.classList.remove('show');
       }

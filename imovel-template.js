@@ -250,7 +250,7 @@ function render(){
 
       <div class="section-block">
         <h2><svg viewBox="0 0 24 24" style="width:16px;height:16px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><path d="M20.42 4.58a5.4 5.4 0 00-7.65 0L12 5.35l-.77-.77a5.4 5.4 0 00-7.65 7.65L12 20.5l8.42-8.27a5.4 5.4 0 000-7.65z"/></svg>Famílias que já receberam as chaves</h2>
-        <p class="im-desc" style="margin-bottom:16px">Mais de 700 famílias já aprovadas e com as chaves em mãos. Alguns momentos reais de entrega, com o Paulo Cotrim:</p>
+        <p class="im-desc" style="margin-bottom:16px">Famílias realizando o sonho da casa própria — há 18 anos no mercado em mãos. Alguns momentos reais de entrega, com o Paulo Cotrim:</p>
         <div class="depo-grid">
           ${['cliente-2','cliente-3','cliente-7','cliente-9'].map(function(f){
             return `<div class="depo-photo"><img src="clientes-img/${f}.jpg" alt="Cliente recebendo as chaves do apartamento" loading="lazy"/></div>`;
@@ -344,7 +344,7 @@ function render(){
       </div>
 
       <div class="sid-highlight">
-        <strong><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Aprovação em 48h</strong> — o Paulo já aprovou mais de 700 famílias. Envie seus documentos pelo WhatsApp e receba a resposta rapidinho.
+        <strong><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg>Aprovação em 48h</strong> — o Paulo já aprovou mais de famílias atendidas. Envie seus documentos pelo WhatsApp e receba a resposta rapidinho.
       </div>
     </div>
   </div>
@@ -363,7 +363,7 @@ function render(){
     <div class="lb-counter" id="lb-counter"></div>
   </div>
 
-  <div class="wa-msg" id="wa-msg">Atendimento direto com Paulo Cotrim. Clique no WhatsApp para receber valores atualizados, disponibilidade e condições de pagamento.</div>
+  <div class="wa-msg" id="wa-msg">Atendimento direto com Paulo Cotrim — valores e condições no WhatsApp.</div>
   <a href="${waLink()}" target="_blank" class="wafloat" aria-label="Falar direto com Paulo Cotrim no WhatsApp">${WA_SVG}</a>
   `;
 
