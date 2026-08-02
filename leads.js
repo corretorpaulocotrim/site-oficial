@@ -899,41 +899,38 @@
 })();
 
 /* ============================================================
-   Simulador inline (#fsimEmbed) também trancado até captar o lead
-   — sem WhatsApp, sem valores. Reaproveita pcLeadGate + estilos pc-lock.
+   Simulador inline (#fsimEmbed): em vez de simular direto, mostra um
+   CARD COMPACTO no padrão da home (sem bloco enorme vazio). Ao clicar,
+   captura o lead (WhatsApp) e SÓ ENTÃO revela o simulador real.
    ============================================================ */
 (function(){
-  var box = document.getElementById('fsimEmbed') || document.getElementById('simulador');
+  var box = document.getElementById('fsimEmbed');
   if(!box) return;
   var captured=false; try{ captured=!!localStorage.getItem('pc_lead_captured'); }catch(e){}
   if(captured) return;
-  // garante estilos pc-lock (caso a página não tenha .tipo-table)
-  if(!document.getElementById('pcLockStyle2')){
-    var st=document.createElement('style'); st.id='pcLockStyle2';
-    st.textContent='.pc-lock-wrap{position:relative}.pc-lock-blur{filter:blur(7px);pointer-events:none;user-select:none}'
-      +'.pc-lock-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;background:linear-gradient(180deg,rgba(247,244,238,.72),rgba(247,244,238,.92));border-radius:14px;padding:22px;z-index:2}'
-      +'.pc-lock-ov b{font-family:Fraunces,Georgia,serif;font-size:17px;color:#0f2e36}.pc-lock-ov span{font-size:12.8px;color:#6b7280;max-width:36ch;line-height:1.5}'
-      +'.pc-lock-btn{background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.32)}';
-    document.head.appendChild(st);
-  }
   function lock(){
-    if(box.closest('.pc-lock-wrap')) return;
-    var minH = box.offsetHeight>140 ? box.offsetHeight : 300;
-    var w=document.createElement('div'); w.className='pc-lock-wrap'; w.style.minHeight=minH+'px';
-    box.parentNode.insertBefore(w,box); w.appendChild(box); box.classList.add('pc-lock-blur');
-    var ov=document.createElement('div'); ov.className='pc-lock-ov';
-    ov.innerHTML='<svg viewBox="0 0 24 24" style="width:34px;height:34px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>'
-      +'<b>Simular financiamento</b>'
-      +'<span>Informe seu nome e WhatsApp e eu libero na hora sua entrada, parcela e as condições reais — sem sair de casa.</span>'
-      +'<button class="pc-lock-btn" type="button">Simular financiamento</button>';
-    w.appendChild(ov);
-    ov.querySelector('button').addEventListener('click',function(){
-      function _rev(){ box.classList.remove('pc-lock-blur'); ov.remove(); w.style.minHeight=''; if(window.leadCapture) window.leadCapture('simulador_desbloqueado'); }
+    if(box.getAttribute('data-pc-locked')) return;
+    box.setAttribute('data-pc-locked','1');
+    box.style.display='none';
+    var card=document.createElement('div');
+    card.className='pc-simgate';
+    card.style.cssText='background:#fff;border:1px solid #e8eaed;border-radius:18px;padding:34px 28px;text-align:center;max-width:560px;margin:0 auto;box-shadow:0 10px 30px rgba(15,46,54,.06)';
+    card.innerHTML='<div style="width:56px;height:56px;border-radius:16px;background:#f0f9f3;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg></div>'
+      +'<h3 style="font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;color:#0f2e36;line-height:1.25;margin:0 0 8px">Simule seu financiamento</h3>'
+      +'<p style="font-size:14px;color:#6b7280;line-height:1.55;max-width:40ch;margin:0 auto 20px">Informe seu WhatsApp e veja na hora <b style="color:#0f2e36">entrada, parcela e as condições reais</b> pra este imóvel — sem sair de casa.</p>'
+      +'<button type="button" class="pc-simgate-btn" style="background:#1a8f4c;color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease">Simular financiamento</button>'
+      +'<div style="font-size:11.5px;color:#94a3b8;margin-top:12px">Grátis · sem compromisso · resposta na hora</div>';
+    box.parentNode.insertBefore(card, box);
+    var btn=card.querySelector('.pc-simgate-btn');
+    btn.addEventListener('mouseenter',function(){btn.style.transform='translateY(-2px)';});
+    btn.addEventListener('mouseleave',function(){btn.style.transform='none';});
+    btn.addEventListener('click',function(){
+      function _rev(){ card.remove(); box.style.display=''; box.removeAttribute('data-pc-locked'); if(window.leadCapture) window.leadCapture('simulador_desbloqueado'); box.scrollIntoView({behavior:'smooth',block:'center'}); }
       if(window.pcLeadGate){ window.pcLeadGate({ctx:'simular_financiamento', titulo:'Sua simulação está pronta', sub:'Deixe seu nome e WhatsApp — eu libero agora entrada, parcela e condições, e te ajudo se precisar.', cb:_rev}); }
       else { _rev(); }
     });
   }
-  setTimeout(lock, 600);
+  if(document.readyState!=='loading') setTimeout(lock,300); else document.addEventListener('DOMContentLoaded',function(){setTimeout(lock,300);});
 })();
 
 /* Garante o crm-config.js (enviarLeadCRM) em qualquer página com leads.js */
