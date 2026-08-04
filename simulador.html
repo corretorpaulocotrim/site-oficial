@@ -133,7 +133,7 @@ tr.s2rx td{background:var(--bg)}
   <h1><svg viewBox="0 0 24 24" style="width:26px;height:26px;stroke:currentColor;fill:none;stroke-width:1.6;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><circle cx="8" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="11" r=".6" fill="currentColor" stroke="none"/><circle cx="8" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="12" cy="15" r=".6" fill="currentColor" stroke="none"/><circle cx="16" cy="15" r=".6" fill="currentColor" stroke="none"/></svg>Simulador Profissional</h1>
   <p>Informe sua renda e veja capacidade de financiamento, entrada e prestação estimadas na hora. Preços atualizados Agosto/2026.</p>
   <div class="sim-chips">
-    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>45 empreendimentos</span>
+    <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2.4;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M20 6 9 17l-5-5"/></svg>52 empreendimentos</span>
     <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Agosto/2026</span>
     <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>Rio de Janeiro</span>
     <span class="chip"><svg viewBox="0 0 24 24" style="width:12px;height:12px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M3 21h18M4 21V10l8-6 8 6v11M8 14v3M12 14v3M16 14v3"/></svg>Caixa Econômica</span>
@@ -176,7 +176,7 @@ const PCT=v=>(v*100).toFixed(2)+'%';
 const N2=v=>Number(v||0).toLocaleString('pt-BR',{minimumFractionDigits:2,maximumFractionDigits:2});
 const parseBRL=v=>parseFloat(String(v).replace(/\./g,'').replace(',','.'))||0;
 
-/* ================= CATALOGO COMPLETO (45 empreendimentos, mesma fonte do mapa da home) ================= */
+/* ================= CATALOGO COMPLETO (52 empreendimentos, mesma fonte do mapa da home) ================= */
 var CATALOG=[
 {n:'Farol da Guanabara',b:'Santo Cristo · Porto Maravilha',c:'Cury',s:'lancamento',p:'R$ 402.875',u:'farol-da-guanabara.html'},
 {n:'Arcos do Porto',b:'Porto Maravilha',c:'Cury',s:'obras',p:'R$ 360.588',u:'arcos-do-porto.html'},
@@ -222,7 +222,14 @@ var CATALOG=[
 {n:'Mirantes do Rio - Rio Mar',b:'Santa Cruz · Rio de Janeiro',c:'MRV',s:'pronto',p:'Consulte valores',u:'emp-mirantes-do-rio-rio-mar.html'},
 {n:'Mirante Da Luz',b:'Bairro da Luz · Nova Iguaçu',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-mirante-da-luz.html'},
 {n:'Marbelle Residence',b:'Região do Parque Aeroporto · Macaé',c:'MRV',s:'lancamento',p:'Consulte valores',u:'emp-marbelle-residence.html'},
-{n:'Jardim das Amoreiras',b:'Região de Campo Grande · Rio de Janeiro',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-jardim-das-amoreiras.html'}
+{n:'Jardim das Amoreiras',b:'Região de Campo Grande · Rio de Janeiro',c:'MRV',s:'obras',p:'Consulte valores',u:'emp-jardim-das-amoreiras.html'},
+{n:'Vitale Sky Clube Residencial',b:'Irajá · Zona Norte',c:'Vitale',s:'obras',p:'R$ 259.000',u:'emp-vitale-sky.html'},
+{n:'Vitale Tide Residencial',b:'Recreio · Zona Oeste',c:'Vitale',s:'obras',p:'R$ 295.000',u:'emp-vitale-tide.html'},
+{n:'Vitale Carioca Residencial',b:'Vila Kosmos · Zona Norte',c:'Vitale',s:'pronto',p:'R$ 289.000',u:'emp-vitale-carioca.html'},
+{n:'Vitale Wilk Residencial',b:'Pechincha · Jacarepaguá',c:'Vitale',s:'obras',p:'R$ 355.000',u:'emp-vitale-wilk.html'},
+{n:'Vitale Eco Residencial',b:'Vargem Grande · Zona Oeste',c:'Vitale',s:'pronto',p:'R$ 249.000',u:'emp-vitale-eco.html'},
+{n:'Vitale Park Residencial',b:'Freguesia · Jacarepaguá',c:'Vitale',s:'obras',p:'R$ 239.000',u:'emp-vitale-park.html'},
+{n:'Residencial Rebouças',b:'Rio Comprido · Centro',c:'Orkaae · NewView',s:'obras',p:'R$ 288.000',u:'emp-reboucas.html'}
 ];
 function parsePrecoStr(p){var m=(p||'').match(/R\$\s*([\d.]+)/);if(!m)return 0;return parseInt(m[1].replace(/\./g,''),10);}
 function mesesObraEstimado(status){if(status==='lancamento')return 42;if(status==='obras')return 24;return 0;}

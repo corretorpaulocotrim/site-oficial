@@ -210,5 +210,54 @@ window.BAIRRO_INFO = {
     educacao: ["UFRJ — Campus Macaé e UENF", "Faculdades particulares e cursos técnicos"],
     compras: ["Plaza Shopping Macaé", "Comércio do Centro e orla"],
     lazer: ["Praia dos Cavaleiros e orla de Macaé", "Costa do Sol e lagoas próximas", "Bares e restaurantes da orla"]
+  },
+  "iraja": {
+    transporte: ["Metrô Linha 2 — Irajá e Colégio", "Av. Brasil e Linha Amarela de fácil acesso", "Diversas linhas de ônibus para o Centro"],
+    saude: ["Hospital Carlos Chagas (Marechal Hermes) e UPAs próximos", "Rede de clínicas da Zona Norte"],
+    educacao: ["Faculdades da Zona Norte (Estácio, Unisuam) próximas", "Ampla rede de escolas"],
+    compras: ["Shopping Carioca (Vicente de Carvalho) próximo", "Comércio de rua consolidado de Irajá"],
+    lazer: ["Parque Madureira a poucos minutos", "Praças e clubes tradicionais", "Bares e gastronomia da Zona Norte"]
+  },
+  "vila kosmos": {
+    transporte: ["Metrô Linha 2 — Vicente de Carvalho próximo", "Av. Brasil e Linha Amarela", "Diversas linhas de ônibus"],
+    saude: ["Hospitais e UPAs de Irajá e Vicente de Carvalho próximos"],
+    educacao: ["Faculdades da Zona Norte (Estácio, Unisuam)", "Rede de escolas do bairro"],
+    compras: ["Shopping Carioca a poucos minutos", "Comércio de rua de Vila da Penha e Irajá"],
+    lazer: ["Parque Madureira próximo", "Praças arborizadas e clubes", "Bares do point de Vila da Penha"]
+  },
+  "recreio": {
+    transporte: ["BRT TransOeste — estações do Recreio", "Av. das Américas ligando à Barra", "Acesso pela Grota Funda a toda a Zona Oeste"],
+    saude: ["Hospital Rio Mar e rede privada do Recreio/Barra"],
+    educacao: ["Escolas e faculdades do Recreio e da Barra"],
+    compras: ["Recreio Shopping e comércio da Av. das Américas", "Supermercados e polos de serviço"],
+    lazer: ["Praia do Recreio e Prainha", "Parque Chico Mendes e Bosque da Barra", "Restaurantes e quiosques da orla"]
+  },
+  "vargem grande": {
+    transporte: ["BRT TransOeste (acesso pela Av. das Américas)", "Ligação rápida com Recreio e Barra", "Estrada dos Bandeirantes e Transolímpica"],
+    saude: ["Rede de saúde do Recreio e da Barra próximas"],
+    educacao: ["Escolas do Recreio e de Jacarepaguá próximas"],
+    compras: ["Comércio local e Recreio Shopping próximo", "Feiras e hortifrútis da região"],
+    lazer: ["Parque Estadual da Pedra Branca (trilhas e cachoeiras)", "Praias do Recreio e Grumari próximas", "Sítios, gastronomia rural e área verde"]
+  },
+  "freguesia": {
+    transporte: ["BRT TransCarioca e TransOlímpica (Jacarepaguá)", "Acesso rápido à Barra e ao Centro", "Diversas linhas de ônibus"],
+    saude: ["Hospital de Jacarepaguá e clínicas da Freguesia", "UPAs da região"],
+    educacao: ["Unisuam, Cândido Mendes e faculdades de Jacarepaguá", "Ampla rede de escolas"],
+    compras: ["Center Shopping Rio e comércio da Freguesia", "Supermercados e serviços completos"],
+    lazer: ["Bosque da Freguesia e praças", "Bares e gastronomia (point de Jacarepaguá)", "Praias da Barra a poucos minutos"]
+  },
+  "pechincha": {
+    transporte: ["BRT TransCarioca e TransOlímpica (Jacarepaguá)", "Acesso rápido à Barra e ao Centro", "Diversas linhas de ônibus"],
+    saude: ["Hospital de Jacarepaguá e clínicas da Freguesia próximos", "UPAs da região"],
+    educacao: ["Unisuam e Cândido Mendes (Jacarepaguá)", "Rede de escolas do bairro"],
+    compras: ["Center Shopping Rio ao lado", "Comércio da Freguesia e Taquara"],
+    lazer: ["Bosque da Freguesia próximo", "Bares e gastronomia de Jacarepaguá", "Praias da Barra a poucos minutos"]
+  },
+  "rio comprido": {
+    transporte: ["Metrô Estácio a ~2 km e van exclusiva do condomínio", "Túnel Rebouças — 5 min à Zona Sul", "Pontos finais de ônibus na Praça Condessa Paulo de Frontin (300 m)"],
+    saude: ["Hospitais da Tijuca e do Centro a poucos minutos"],
+    educacao: ["Faculdades da Tijuca e do Centro próximas", "Rede de escolas tradicionais"],
+    compras: ["Comércio do Rio Comprido e da Tijuca", "Supermercados e serviços a 300 m"],
+    lazer: ["Sambódromo (Marquês de Sapucaí) ao lado", "Lagoa Rodrigo de Freitas a ~5 km", "Praias de Botafogo, Flamengo e Ipanema pelo Túnel Rebouças"]
   }
 };
