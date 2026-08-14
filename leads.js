@@ -110,7 +110,7 @@
       +      mcmvBenefit('Prestação fixa pós-chaves','Você só começa a pagar o financiamento depois de receber as chaves.')
       +      mcmvBenefit('FGTS na compra','Pode ser usado para abater entrada ou parte do financiamento.')
       +'  </ul>'
-      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20entender%20os%20benef%C3%ADcios%20do%20Minha%20Casa%20Minha%20Vida%20na%20pr%C3%A1tica." id="mcmvPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#b8873a;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero entender na prática</a>'
+      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20entender%20os%20benef%C3%ADcios%20do%20Minha%20Casa%20Minha%20Vida%20na%20pr%C3%A1tica." id="mcmvPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#0058A3;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero entender na prática</a>'
       +'  <button id="mcmvPopupDismiss" style="display:block;width:100%;background:none;border:none;color:#6b7280;font-size:12.5px;margin-top:12px;cursor:pointer;text-decoration:underline">Agora não</button>'
       +'</div>';
     document.body.appendChild(wrap);
@@ -168,10 +168,10 @@
       +'<style>@keyframes exitFadeIn{from{opacity:0}to{opacity:1}}@keyframes exitPop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}</style>'
       +'<div style="background:#fff;border-radius:18px;max-width:440px;width:100%;padding:32px 28px 26px;position:relative;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif;animation:exitPop .4s cubic-bezier(.16,1,.3,1)">'
       +'  <button id="exitPopupClose" aria-label="Fechar" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:#f5f6f7;border:none;font-size:18px;color:#6b7280;cursor:pointer;line-height:1">&times;</button>'
-      +'  <div style="width:52px;height:52px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>'
+      +'  <div style="width:52px;height:52px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0058A3" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>'
       +'  <h3 style="font-family:Fraunces,Georgia,serif;font-size:21px;font-weight:600;color:#0f2e36;line-height:1.25;margin-bottom:10px">Antes de sair, uma coisa rápida</h3>'
       +'  <p style="font-size:13.5px;color:#6b7280;line-height:1.6;margin-bottom:20px">Me manda seu WhatsApp que eu te envio a tabela atualizada, com valores e condições, sem compromisso nenhum.</p>'
-      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20receber%20a%20tabela%20atualizada%20de%20valores%20e%20condi%C3%A7%C3%B5es." id="exitPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#b8873a;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero receber a tabela</a>'
+      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20receber%20a%20tabela%20atualizada%20de%20valores%20e%20condi%C3%A7%C3%B5es." id="exitPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#0058A3;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero receber a tabela</a>'
       +'  <button id="exitPopupDismiss" style="display:block;width:100%;background:none;border:none;color:#6b7280;font-size:12.5px;margin-top:12px;cursor:pointer;text-decoration:underline">Não, obrigado</button>'
       +'</div>';
     document.body.appendChild(wrap);
@@ -335,7 +335,7 @@
       var faqWrap = items[0].closest('.wrap') || items[0].parentElement;
       var xlink = document.createElement('p');
       xlink.setAttribute('style', 'margin-top:18px;font-size:13.5px;color:var(--gray,#6b7280)');
-      xlink.innerHTML = 'Mais dúvidas sobre financiamento, FGTS ou Minha Casa Minha Vida? <a href="guia-do-comprador.html" style="color:var(--gold,#b8873a);font-weight:600">Leia o Guia completo do Comprador →</a>';
+      xlink.innerHTML = 'Mais dúvidas sobre financiamento, FGTS ou Minha Casa Minha Vida? <a href="guia-do-comprador.html" style="color:var(--gold,#0058A3);font-weight:600">Leia o Guia completo do Comprador →</a>';
       faqWrap.appendChild(xlink);
     }
   })();
@@ -512,7 +512,7 @@
     document.head.appendChild(favStyle);
     var wrap = document.createElement('div');
     wrap.id = 'favCounterWrap';
-    wrap.innerHTML = '<button id="favCounterBtn" aria-label="Meus favoritos" style="display:flex;align-items:center;gap:7px;background:#0f2e36;color:#fff;border:none;padding:11px 16px;border-radius:30px;box-shadow:0 6px 20px rgba(15,46,54,.25);cursor:pointer;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:700"><svg width="15" height="15" viewBox="0 0 24 24" fill="#b8873a" stroke="#b8873a" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg><span id="favCounterN">0</span> favoritos</button>';
+    wrap.innerHTML = '<button id="favCounterBtn" aria-label="Meus favoritos" style="display:flex;align-items:center;gap:7px;background:#0f2e36;color:#fff;border:none;padding:11px 16px;border-radius:30px;box-shadow:0 6px 20px rgba(15,46,54,.25);cursor:pointer;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:700"><svg width="15" height="15" viewBox="0 0 24 24" fill="#0058A3" stroke="#0058A3" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg><span id="favCounterN">0</span> favoritos</button>';
     document.body.appendChild(wrap);
 
     window.updateFavCounter = function(){
@@ -564,7 +564,7 @@
       + '<p style="margin:0;font-size:12.5px;color:rgba(255,255,255,.85);max-width:520px;line-height:1.5;flex:1 1 260px">Usamos cookies para melhorar sua experiência e, quando você concorda, medir campanhas. Veja nossa <a href="politica-de-privacidade.html" style="color:#fff;text-decoration:underline">Política de Privacidade</a>.</p>'
       + '<div style="display:flex;gap:8px;flex-shrink:0">'
       + '  <button id="cookieDecline" style="background:none;border:1px solid rgba(255,255,255,.35);color:#fff;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:9px;cursor:pointer">Recusar</button>'
-      + '  <button id="cookieAccept" style="background:#b8873a;border:none;color:#fff;font-size:12.5px;font-weight:700;padding:9px 18px;border-radius:9px;cursor:pointer">Aceitar</button>'
+      + '  <button id="cookieAccept" style="background:#0058A3;border:none;color:#fff;font-size:12.5px;font-weight:700;padding:9px 18px;border-radius:9px;cursor:pointer">Aceitar</button>'
       + '</div>';
     document.body.appendChild(bar);
     document.getElementById('cookieAccept').onclick = function(){
@@ -753,7 +753,7 @@
     var simHref = 'simulador.html' + (_nm ? ('?emp=' + encodeURIComponent(_nm)) : '');
     cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
       + '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+simHref+'">Simular financiamento</a>'
-      + '<a class="sc-btn" style="background:#b8873a;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
+      + '<a class="sc-btn" style="background:#0058A3;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
   })();
 
   /* ---------- 4) COMPARADOR ENTRE PÁGINAS (até 3 imóveis) ---------- */
@@ -799,7 +799,7 @@
     style.textContent = '.pc-compare-bar{position:fixed;left:0;right:0;bottom:0;z-index:6000;background:#0f2e36;color:#fff;padding:14px 24px;display:none;align-items:center;justify-content:center;gap:20px;box-shadow:0 -10px 30px rgba(0,0,0,.18);flex-wrap:wrap}'
       + '.pc-compare-bar.show{display:flex}'
       + '.pc-compare-bar b{color:#cf9f4f}'
-      + '.pc-compare-btn{background:linear-gradient(135deg,#b8873a,#cf9f4f);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}'
+      + '.pc-compare-btn{background:linear-gradient(135deg,#0058A3,#cf9f4f);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}'
       + '.pc-compare-clear{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:600;cursor:pointer}'
       + '.pc-compare-modal{position:fixed;inset:0;z-index:7000;background:rgba(15,46,54,.6);display:none;align-items:center;justify-content:center;padding:24px}'
       + '.pc-compare-modal.show{display:flex}'

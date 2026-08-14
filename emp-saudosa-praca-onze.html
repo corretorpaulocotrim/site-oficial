@@ -22,7 +22,7 @@
 <script src="financing-sim.js"></script>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--ink2:#12252b;--gold:#b8873a;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--maxw:1100px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
+:root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--ink2:#12252b;--gold:#0058A3;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--maxw:1100px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
 html{scroll-behavior:smooth}
 body{font-family:'Inter',system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
 a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
@@ -246,7 +246,7 @@ footer{border-top:1px solid var(--line);padding:36px 0;font-size:13px;color:var(
 <section class="hero">
   <div class="hero-bg" onclick="openHeroLb()"></div><div class="hero-shade"></div><div class="hlb" id="heroLb" onclick="if(event.target===this)closeHeroLb()"><button class="hlb-close" onclick="closeHeroLb()" aria-label="Fechar">&times;</button><img src="emp-img/saudosa-praca-onze.jpg" alt="Saudosa Praça Onze"/></div>
   <div class="wrap hero-c">
-    <div class="hero-badges"><span class="hero-status" style="background:#B8873A">Lançamento</span><span class="hero-verified" title="Conferido por Paulo Cotrim, CRECI-RJ 77677-F"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9"/></svg>Conferido por Paulo · jul/2026</span></div>
+    <div class="hero-badges"><span class="hero-status" style="background:#0058A3">Lançamento</span><span class="hero-verified" title="Conferido por Paulo Cotrim, CRECI-RJ 77677-F"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M8.5 12.2l2.3 2.3 4.7-4.9"/></svg>Conferido por Paulo · jul/2026</span></div>
     <h1 class="display">Saudosa Praça Onze</h1>
     <div class="hero-meta">
       <span><b>Cury</b><br>Construtora</span>
@@ -408,8 +408,8 @@ initSimuladorEmbed('fsimEmbed', {preco:299000, construtora:'Cury', nome:'Saudosa
         <ul><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#1a8f4c"><path d="M20 6 9 17l-5-5"/></svg><span>A 300 metros do Metrô Praça Onze (Linha 1)</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#1a8f4c"><path d="M20 6 9 17l-5-5"/></svg><span>Ao lado da Marquês de Sapucaí e do futuro Boulevard do Samba</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#1a8f4c"><path d="M20 6 9 17l-5-5"/></svg><span>R$ 1,75 bilhão em investimentos públicos já anunciados para a região (Praça Onze Maravilha)</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#1a8f4c"><path d="M20 6 9 17l-5-5"/></svg><span>Varanda privativa em todas as unidades e lazer completo padrão clube</span></li></ul>
       </div>
       <div class="pontos-col">
-        <h3><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Pontos de atenção</h3>
-        <ul><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Lançamento — obra ainda não iniciada, sem data de entrega confirmada</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Região em transformação — valorização depende da execução das obras públicas anunciadas</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#B8873A"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Centro é uma região mais comercial e movimentada, diferente de bairros só residenciais</span></li></ul>
+        <h3><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#0058A3"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>Pontos de atenção</h3>
+        <ul><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#0058A3"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Lançamento — obra ainda não iniciada, sem data de entrega confirmada</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#0058A3"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Região em transformação — valorização depende da execução das obras públicas anunciadas</span></li><li><svg class="ic ic-sm" viewBox="0 0 24 24" style="stroke:#0058A3"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg><span>Centro é uma região mais comercial e movimentada, diferente de bairros só residenciais</span></li></ul>
       </div>
     </div>
   </div>
@@ -552,7 +552,7 @@ function openGalleryLb(src){var img=document.querySelector('#heroLb img');if(img
   }).addTo(map);
   var icon = L.divIcon({
     className:'',
-    html:'<div style="background:#b8873a;width:30px;height:30px;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 16px rgba(184,135,58,.55)"></div>',
+    html:'<div style="background:#0058A3;width:30px;height:30px;border-radius:50%;border:4px solid #fff;box-shadow:0 4px 16px rgba(184,135,58,.55)"></div>',
     iconSize:[30,30], iconAnchor:[15,15], popupAnchor:[0,-20]
   });
   L.marker([lat,lng], {icon:icon}).addTo(map).bindPopup(

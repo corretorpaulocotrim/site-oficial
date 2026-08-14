@@ -12,7 +12,7 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --navy:#0f2e36;--navy2:#0d2932;--navy3:#12252b;
-  --gold:#b8873a;--gold2:#cf9f4f;
+  --gold:#0058A3;--gold2:#cf9f4f;
   --green:#1a8f4c;--green2:#5aa87d;
   --bg:#f5f6f7;--card:#ffffff;
   --text:#0f2e36;--text2:#6b7280;--text3:#9ca3af;
@@ -545,7 +545,7 @@ async function enviarDocsReal(){
   if(!window._docFiles.length){ status.textContent='Selecione ao menos um arquivo.'; status.style.color='#b91c1c'; return; }
 
   if(!window.DOC_UPLOAD_CONFIG || !window.DOC_UPLOAD_CONFIG.uploadUrl || !window.enviarDocumentos){
-    status.innerHTML = 'Envio automático ainda não está ativo — <a href="https://wa.me/5521989150864?text=Vou+enviar+meus+documentos+para+aprova%C3%A7%C3%A3o+expressa!" target="_blank" style="color:#b8873a;font-weight:700">envie pelo WhatsApp</a> por enquanto.';
+    status.innerHTML = 'Envio automático ainda não está ativo — <a href="https://wa.me/5521989150864?text=Vou+enviar+meus+documentos+para+aprova%C3%A7%C3%A3o+expressa!" target="_blank" style="color:#0058A3;font-weight:700">envie pelo WhatsApp</a> por enquanto.';
     status.style.color='#8a6526';
     return;
   }

@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-:root{--petroleo:#0f2e36;--verde:#1a8f4c;--gold:#b8873a;--ink:#08191e}
+:root{--petroleo:#0f2e36;--verde:#1a8f4c;--gold:#0058A3;--ink:#08191e}
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 body{font-family:Inter,system-ui,sans-serif;background:var(--ink);color:#eef4f2;min-height:100vh;line-height:1.5}
 .frau{font-family:Fraunces,serif}
@@ -51,7 +51,7 @@ input:focus{outline:none;border-color:var(--verde)}
 </head>
 <body>
 <div id="lock"><div class="box">
-  <svg viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2" style="width:38px;height:38px;margin:0 auto 12px"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
+  <svg viewBox="0 0 24 24" fill="none" stroke="#0058A3" stroke-width="2" style="width:38px;height:38px;margin:0 auto 12px"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
   <div class="frau" style="font-size:20px;margin-bottom:16px">Abordagem de Rua</div>
   <input type="text" id="lu" placeholder="Usuário" autocomplete="username">
   <input type="password" id="lp" placeholder="Senha" autocomplete="current-password">
@@ -61,7 +61,7 @@ input:focus{outline:none;border-color:var(--verde)}
 
 <div class="wrap">
   <div class="top">
-    <svg viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
+    <svg viewBox="0 0 24 24" fill="none" stroke="#0058A3" stroke-width="2"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
     <b>Paulo Cotrim</b><span class="creci">CRECI-RJ 77677-F</span>
   </div>
   <div class="bar"><i id="prog"></i></div>
@@ -104,6 +104,9 @@ input:focus{outline:none;border-color:var(--verde)}
     {t:'Até R$ 2.640',v:'0-2640'},{t:'R$ 2.640 a 4.400',v:'2640-4400'},{t:'R$ 4.400 a 8.000',v:'4400-8000'},{t:'Acima de R$ 8.000',v:'8000+'}],'','renda')}; });
   steps.push(function(){ return {q:'Você tem FGTS ou tempo de carteira?', s:'Ajuda na entrada e no subsídio.', html:opts([{t:'Sim',v:'sim'},{t:'Não',v:'nao'},{t:'Não sei',v:'naosei'}],'','fgts')}; });
   steps.push(function(){ return {q:'Pensa em resolver isso quando?', s:'', html:opts([{t:'Agora / esse mês',v:'agora'},{t:'Em 3 a 6 meses',v:'3-6m'},{t:'Só pesquisando',v:'olhando'}],'','prazo')}; });
+  steps.push(function(){ return {q:'Quanto você tem de entrada hoje?', s:'Pode ser aproximado — o FGTS também conta.', html:opts([{t:'Ainda não tenho',v:'0'},{t:'Até R$ 5 mil',v:'ate5'},{t:'R$ 5 a 20 mil',v:'5-20'},{t:'Mais de R$ 20 mil',v:'20+'}],'','entrada')}; });
+  steps.push(function(){ return {q:'Quanto dá pra pagar por mês?', s:'Vale pra fase de obra e pra prestação pós-chaves.', html:opts([{t:'Até R$ 800',v:'0-800'},{t:'R$ 800 a 1.200',v:'800-1200'},{t:'R$ 1.200 a 2.000',v:'1200-2000'},{t:'Acima de R$ 2.000',v:'2000+'}],'','mensal')}; });
+  steps.push(function(){ return {q:'Quer as chaves logo ou pode esperar a obra?', s:'', html:opts([{t:'Quero morar logo (pronto)',v:'pronto'},{t:'Posso esperar (planta/obra)',v:'obra'}],'','morar')}; });
   steps.push(function(){ // captura
     return {q:'Que ótimo! 👏', s:'Me passa seu contato que eu te mando as melhores opções da sua região no WhatsApp.', html:
       '<input type="text" id="cnome" placeholder="Seu nome" autocomplete="name">'+
@@ -147,7 +150,7 @@ input:focus{outline:none;border-color:var(--verde)}
   function salvarLead(){
     var lead={nome:A.nome,tel:A.wa,regiao:A.regiao||'',interesse:'Abordagem rua · '+(A.regiao||'')+' · '+(A.obj||''),
       orcamento:A.renda||'',origem:'abordagem-rua',status:'novo',temp:temp(),
-      obs:'aluguel:'+(A.aluguel||'')+' fgts:'+(A.fgts||'')+' prazo:'+(A.prazo||''),
+      obs:'aluguel:'+(A.aluguel||'')+' fgts:'+(A.fgts||'')+' prazo:'+(A.prazo||'')+' entrada:'+(A.entrada||'')+' paga/mes:'+(A.mensal||'')+' morar:'+(A.morar||''),
       consentimento:new Date().toISOString(), ts:Date.now()};
     try{ var k='pc_leads_rua'; var arr=JSON.parse(localStorage.getItem(k)||'[]'); arr.push(lead); localStorage.setItem(k,JSON.stringify(arr)); }catch(e){}
     // tenta mandar pro CRM se a ponte existir
@@ -165,6 +168,7 @@ input:focus{outline:none;border-color:var(--verde)}
     stepEl.innerHTML=
       '<div class="final-h">Prontinho, '+(A.nome? A.nome.split(' ')[0] : '')+'! 🔑</div>'+
       '<div class="final-s">Aponte a câmera do celular pra levar tudo com você.</div>'+
+      '<div style="background:rgba(0,88,163,.14);border:1px solid rgba(0,88,163,.4);border-radius:12px;padding:12px 14px;font-size:13px;color:#dbe7e4;margin:6px 0 4px;text-align:center">Com sua renda, entrada e o quanto cabe por mês, o Paulo monta a <b>simulação real</b> (fase de obra + prestação pós-chaves) e te mostra o <b>condomínio mais compatível</b>.</div>'+
       '<div class="qrs"><div class="qrcard"><div id="qr1"></div><b>Falar com o Paulo</b></div>'+
       '<div class="qrcard"><div id="qr2"></div><b>Imóveis em '+(A.regiao||'sua região')+'</b></div></div>'+
       '<a class="cta gold" href="'+waUrl+'" style="text-decoration:none;margin-bottom:10px">Abrir meu WhatsApp agora</a>'+

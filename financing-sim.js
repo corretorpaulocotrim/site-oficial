@@ -146,7 +146,7 @@ function fsimSugestoesHTML(nomeAtual, precoAlvo){
       +'<b style="display:block;font-size:15px;color:#0f2e36;margin-bottom:3px;font-weight:700">'+e.nome+'</b>'
       +'<span style="display:block;font-size:12px;color:#6b7280;margin-bottom:2px">'+e.bairro+' · '+e.tip+'</span>'
       +(e.endereco?'<span style="display:block;font-size:11px;color:#9ca3af;margin-bottom:10px">'+e.endereco+'</span>':'<span style="display:block;margin-bottom:10px"></span>')
-      +'<span style="display:block;font-size:16px;font-weight:800;color:#b8873a;font-family:Fraunces,Georgia,serif">'+e.preco+'</span></a>';
+      +'<span style="display:block;font-size:16px;font-weight:800;color:#0058A3;font-family:Fraunces,Georgia,serif">'+e.preco+'</span></a>';
   }).join('');
   return '<div style="margin-top:24px;padding-top:22px;border-top:1px solid #e8eaed">'
     +'<div style="font-size:11.5px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0f2e36;margin-bottom:4px">Imóveis parecidos que também cabem no seu orçamento</div>'
@@ -510,7 +510,7 @@ function fsimDownload(nome){
       +(c.totalReforcos>0?'<div class="row"><span class="rk">Reforço de dezembro</span><span class="rv">'+fmtBRL(c.reforcoDez)+'/ano</span></div>':'')
       +(c.valorChave>0?'<div class="row"><span class="rk">Na entrega das chaves</span><span class="rv">'+fmtBRL(c.valorChave)+'</span></div>':'')
       +(c.temPosChaves?'<div class="row"><span class="rk">Pós-chaves</span><span class="rv">'+c.maxParcelasPosChaves+'x de '+fmtBRL(c.parcelaPosChaves)+'/mês</span></div>':'')
-      +'<div class="row" style="border-bottom:none;padding-top:14px"><span class="rk" style="font-weight:700;color:#0f2e36">Total pago por mês até as chaves</span><span class="rv" style="color:#b8873a;font-size:15px">'+fmtBRL(c.parcelaObraMensal)+'</span></div>';
+      +'<div class="row" style="border-bottom:none;padding-top:14px"><span class="rk" style="font-weight:700;color:#0f2e36">Total pago por mês até as chaves</span><span class="rv" style="color:#0058A3;font-size:15px">'+fmtBRL(c.parcelaObraMensal)+'</span></div>';
   }
   var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Resumo — '+nome+'</title>'
     +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
@@ -520,7 +520,7 @@ function fsimDownload(nome){
     +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
     +'.legal{font-size:10.5px;color:#94a3b8;margin-top:14px;line-height:1.7;padding:14px 16px;border:1px solid #e8eaed;border-radius:10px}'
     +'.fases{display:flex;gap:6px;margin-top:16px}.fase{flex:1;text-align:center}'
-    +'.fase-bar{height:6px;border-radius:6px;background:#e8eaed;margin-bottom:6px}.fase-bar.on{background:linear-gradient(90deg,#b8873a,#cf9f4f)}'
+    +'.fase-bar{height:6px;border-radius:6px;background:#e8eaed;margin-bottom:6px}.fase-bar.on{background:linear-gradient(90deg,#0058A3,#cf9f4f)}'
     +'.fase span{font-size:10px;color:#6b7280;font-weight:600}'
     +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e8eaed}'
     +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'

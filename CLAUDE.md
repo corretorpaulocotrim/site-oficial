@@ -37,7 +37,8 @@
 - `emp-img/` — capas. `tabelas/` — PDFs oficiais (ex: Saudosa agosto).
 
 ## 3. IDENTIDADE / REGRAS DE MARCA
-- Clicáveis/CTA de ação = **VERDE #1a8f4c** + fonte **Fraunces** (títulos). Fluxo de documentos = **dourado #b8873a**. Corpo = Inter. Petróleo #0f2e36.
+- Clicáveis/CTA de ação = **VERDE #1a8f4c** + fonte **Fraunces** (títulos). Corpo = Inter. Petróleo #0f2e36.
+- **DECISÃO NOVA do Paulo (substitui o dourado):** o dourado **#b8873a → azul Caixa #0058A3** em todo o site. Paleta agora = petróleo + verde + **azul Caixa** + neutro (sem dourado, sem amarelo). Aplicar via transform no publish (replace `#b8873a`/`#B8873A` → `#0058A3` em todos os arquivos). O amarelo do chip "99" também virou azul Caixa.
 - **Sem verde antigo #3E8E5A, sem roxo, sem rosa/arco-íris.** Paleta = petróleo + verde + dourado + neutro.
 - **De-Cury:** remover identidade de Paulo como Cury ("Coordenador/Equipe/especialista Cury", "nossa equipe"); manter dado factual de construtora. Paulo é **independente**.
 - **Nada de número de marketing sem base** (ex.: "700+/721 famílias" foi removido). Promessa responsável: "análise inicial em até 48h úteis", não "aprovado em 48h".
