@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#060f1e;--navy2:#0a1628;--navy3:#0d2040;--gold:#c9993a;--gold2:#e8b84b;--green:#1a8f4c;--green2:#15803d;--red:#dc2626;--text:#1e293b;--muted:#64748b;--white:#fff;--border:#e2e8f0;--radius:10px;--radius-lg:16px;--sidebar:260px}
+:root{--navy:#060f1e;--navy2:#0a1628;--navy3:#0d2040;--gold:#c9993a;--gold2:#e8b84b;--green:#0058A3;--green2:#15803d;--red:#dc2626;--text:#1e293b;--muted:#64748b;--white:#fff;--border:#e2e8f0;--radius:10px;--radius-lg:16px;--sidebar:260px}
 html,body{height:100%}
 body{font-family:"Inter",sans-serif;color:var(--text);background:#f0f4f8;min-height:100vh;display:flex;flex-direction:column}
 button,input,select,textarea{font-family:inherit}
@@ -42,7 +42,7 @@ button{cursor:pointer}
 .kpi{background:#fff;border:1px solid var(--border);border-radius:var(--radius-lg);padding:18px 20px;position:relative;overflow:hidden}
 .kpi::before{content:"";position:absolute;top:0;left:0;right:0;height:3px}
 .kpi.gold::before{background:linear-gradient(90deg,#c9993a,#e8b84b)}
-.kpi.green::before{background:linear-gradient(90deg,#1a8f4c,#22c55e)}
+.kpi.green::before{background:linear-gradient(90deg,#0058A3,#22c55e)}
 .kpi.blue::before{background:linear-gradient(90deg,#1e40af,#3b82f6)}
 .kpi.red::before{background:linear-gradient(90deg,#dc2626,#ef4444)}
 .kpi-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--muted);margin-bottom:10px}
@@ -69,15 +69,15 @@ button{cursor:pointer}
 .temp-frio{background:rgba(59,130,246,.1);color:#1e40af;border:1px solid rgba(59,130,246,.2)}
 .status-badge{display:inline-flex;font-size:10px;font-weight:700;padding:3px 9px;border-radius:6px}
 .status-novo{background:#eff6ff;color:#1e40af}
-.status-contato{background:#f0fdf4;color:#15803d}
+.status-contato{background:#eef4fb;color:#15803d}
 .status-proposta{background:rgba(201,153,58,.1);color:#c9993a}
 .status-visita{background:#fdf4ff;color:#7e22ce}
-.status-fechado{background:#f0fdf4;color:#15803d;font-weight:800}
+.status-fechado{background:#eef4fb;color:#15803d;font-weight:800}
 .status-perdido{background:#fef2f2;color:#dc2626}
 .origin-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:#f1f5f9;color:var(--muted);white-space:nowrap}
 .btn-sm{font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:#fff;transition:all .2s;white-space:nowrap;cursor:pointer}
 .btn-sm:hover{background:#f8fafc;border-color:#94a3b8}
-.btn-sm.green{background:#1a8f4c;color:#fff;border-color:#1a8f4c}
+.btn-sm.green{background:#0058A3;color:#fff;border-color:#0058A3}
 .btn-sm.green:hover{background:#15803d}
 .btn-sm.gold{background:linear-gradient(135deg,#c9993a,#e8b84b);color:var(--navy);border:none}
 .btn-sm.red{background:#dc2626;color:#fff;border-color:#dc2626}
@@ -89,7 +89,7 @@ button{cursor:pointer}
 .pipe-col{background:#f8fafc;border-radius:var(--radius-lg);padding:12px}
 .pipe-col-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding-bottom:10px;border-bottom:2px solid transparent}
 .pipe-col-header.novo{border-color:#3b82f6}
-.pipe-col-header.contato{border-color:#1a8f4c}
+.pipe-col-header.contato{border-color:#0058A3}
 .pipe-col-header.proposta{border-color:#e8b84b}
 .pipe-col-header.visita{border-color:#7c3aed}
 .pipe-col-header.fechado{border-color:var(--navy3)}
@@ -127,7 +127,7 @@ button{cursor:pointer}
 .price-table tr:nth-child(even) td{background:#fafbfc}
 .price-from{color:#c9993a;font-weight:800}
 .avail-badge{display:inline-flex;font-size:10px;font-weight:700;padding:2px 8px;border-radius:4px}
-.avail-ok{background:#f0fdf4;color:#15803d}
+.avail-ok{background:#eef4fb;color:#15803d}
 .avail-low{background:rgba(220,38,38,.08);color:#dc2626}
 .avail-none{background:#f1f5f9;color:var(--muted)}
 .form-group{margin-bottom:16px}
@@ -144,7 +144,7 @@ button{cursor:pointer}
 .act-item{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid #f1f5f9}
 .act-item:last-child{border-bottom:none}
 .act-dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0;margin-top:2px}
-.act-dot.green{background:rgba(22,163,74,.1);color:#1a8f4c}
+.act-dot.green{background:rgba(22,163,74,.1);color:#0058A3}
 .act-dot.gold{background:rgba(201,153,58,.12);color:#c9993a}
 .act-dot.blue{background:rgba(30,64,175,.1);color:#1e40af}
 .funnel-row{display:flex;align-items:center;gap:10px;margin-bottom:8px}
@@ -204,7 +204,7 @@ button{cursor:pointer}
   <div class="sb-logo"><div class="sb-mark">PC</div><div><div class="sb-name">Paulo Cotrim</div><div class="sb-sub">CRM Imobiliario</div></div></div>
   <div class="sb-nav">
     <div class="sb-sec">Principal</div>
-    <div class="sb-link" onclick="goPage('hoje')"><span class="sb-icon">&#9889;</span> Hoje <span class="sb-badge" id="badge-hoje" style="background:#1a8f4c">0</span></div>
+    <div class="sb-link" onclick="goPage('hoje')"><span class="sb-icon">&#9889;</span> Hoje <span class="sb-badge" id="badge-hoje" style="background:#0058A3">0</span></div>
     <div class="sb-link active" onclick="goPage('dashboard')"><span class="sb-icon">&#128202;</span> Dashboard</div>
     <div class="sb-link" onclick="goPage('leads')"><span class="sb-icon">&#128101;</span> Leads <span class="sb-badge" id="badge-leads">0</span></div>
     <div class="sb-link" onclick="goPage('pipeline')"><span class="sb-icon">&#128260;</span> Pipeline</div>
@@ -303,10 +303,10 @@ button{cursor:pointer}
     <tr><td>1 Quarto</td><td>36m2</td><td class="price-from">R$ 478.000</td><td>R$ 3.180</td><td>R$ 1.720</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
     <tr><td>3 Quartos</td><td>82m2</td><td class="price-from">R$ 798.000</td><td>R$ 5.320</td><td>R$ 2.870</td><td><span class="avail-badge avail-low">&#128308; Ultimas 3</span></td></tr>
     </tbody></table></div></div>
-    <div class="card"><div class="card-header"><div><div class="card-title">Parque Piedade &mdash; Aquarela (MCMV)</div><div class="card-sub" style="color:#1a8f4c;font-weight:700">&#128176; Subsidio de ate R$ 47.000</div></div><button class="btn-sm" onclick="toast('&#128228; Enviando...')">&#128228; WhatsApp</button></div>
+    <div class="card"><div class="card-header"><div><div class="card-title">Parque Piedade &mdash; Aquarela (MCMV)</div><div class="card-sub" style="color:#0058A3;font-weight:700">&#128176; Subsidio de ate R$ 47.000</div></div><button class="btn-sm" onclick="toast('&#128228; Enviando...')">&#128228; WhatsApp</button></div>
     <div class="card-body" style="padding:0"><table class="price-table"><thead><tr><th>Tipologia</th><th>Area</th><th>Valor Bruto</th><th>Subsidio</th><th>Valor Final</th><th>Parcela</th><th>Disponibilidade</th></tr></thead><tbody>
-    <tr><td>2Q Padrao</td><td>45m2</td><td>R$ 310.200</td><td style="color:#1a8f4c;font-weight:700">&minus;R$ 47.000</td><td class="price-from">R$ 263.200</td><td>R$ 1.640</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
-    <tr><td>2Q Garden</td><td>60m2</td><td>R$ 340.000</td><td style="color:#1a8f4c;font-weight:700">&minus;R$ 47.000</td><td class="price-from">R$ 293.000</td><td>R$ 1.820</td><td><span class="avail-badge avail-low">&#128308; Ultimas 2</span></td></tr>
+    <tr><td>2Q Padrao</td><td>45m2</td><td>R$ 310.200</td><td style="color:#0058A3;font-weight:700">&minus;R$ 47.000</td><td class="price-from">R$ 263.200</td><td>R$ 1.640</td><td><span class="avail-badge avail-ok">&#10003; Disponivel</span></td></tr>
+    <tr><td>2Q Garden</td><td>60m2</td><td>R$ 340.000</td><td style="color:#0058A3;font-weight:700">&minus;R$ 47.000</td><td class="price-from">R$ 293.000</td><td>R$ 1.820</td><td><span class="avail-badge avail-low">&#128308; Ultimas 2</span></td></tr>
     </tbody></table></div></div>
   </div>
 
@@ -342,7 +342,7 @@ button{cursor:pointer}
       </div></div>
       <div class="card"><div class="card-header"><div class="card-title">&#9889; Regras ativas</div></div><div class="card-body">
         <div style="display:flex;flex-direction:column;gap:10px">
-          <div style="background:#f0fdf4;border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:#1a8f4c;margin-bottom:5px">&#10003; REGRA ATIVA</div><div style="font-size:13px;font-weight:700">1a tentativa sem atendimento</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Status: Nao atendido + reagendar</div></div>
+          <div style="background:#eef4fb;border:1px solid rgba(22,163,74,.2);border-radius:10px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:#0058A3;margin-bottom:5px">&#10003; REGRA ATIVA</div><div style="font-size:13px;font-weight:700">1a tentativa sem atendimento</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Status: Nao atendido + reagendar</div></div>
           <div style="background:#fff9f0;border:1px solid rgba(201,153,58,.25);border-radius:10px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:#c9993a;margin-bottom:5px">&#10003; REGRA ATIVA</div><div style="font-size:13px;font-weight:700">2a tentativa sem atendimento</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Status: Enviar WhatsApp automatico</div></div>
           <div style="background:#fef2f2;border:1px solid rgba(220,38,38,.2);border-radius:10px;padding:14px"><div style="font-size:10px;font-weight:800;text-transform:uppercase;color:#dc2626;margin-bottom:5px">&#10003; REGRA ATIVA</div><div style="font-size:13px;font-weight:700">Lead quente sem contato em 1h</div><div style="font-size:12px;color:var(--muted);margin-top:3px">Alerta vermelho no painel</div></div>
         </div>
@@ -369,9 +369,9 @@ button{cursor:pointer}
   <div class="page" id="page-campanhas">
     <div style="margin-bottom:20px"><div class="eyebrow">Midia paga</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Campanhas Ativas</div></div>
     <div class="card"><div class="card-body" style="padding:0"><table class="lead-table"><thead><tr><th>Campanha</th><th>Plataforma</th><th>Empreendimento</th><th>Leads</th><th>CPA</th><th>Fechamentos</th><th>Status</th></tr></thead><tbody>
-    <tr><td class="lead-name">Lançamento &mdash; Orla Central</td><td><span class="origin-tag">Meta Ads</span></td><td>Orla Central</td><td style="font-weight:700">34</td><td style="font-weight:700;color:#1a8f4c">R$ 78</td><td style="font-weight:800;color:#1a8f4c">3</td><td><span style="background:#f0fdf4;color:#1a8f4c;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
-    <tr><td class="lead-name">Farol &mdash; Studio Lancamento</td><td><span class="origin-tag">Meta Ads</span></td><td>Farol Guanabara</td><td style="font-weight:700">23</td><td style="font-weight:700;color:#1a8f4c">R$ 91</td><td style="font-weight:800;color:#1a8f4c">2</td><td><span style="background:#f0fdf4;color:#1a8f4c;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
-    <tr><td class="lead-name">MCMV Piedade &mdash; Subsidio 47k</td><td><span class="origin-tag">Google Ads</span></td><td>Parque Piedade</td><td style="font-weight:700">19</td><td style="font-weight:700;color:#1a8f4c">R$ 63</td><td style="font-weight:800;color:#1a8f4c">3</td><td><span style="background:#f0fdf4;color:#1a8f4c;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
+    <tr><td class="lead-name">Lançamento &mdash; Orla Central</td><td><span class="origin-tag">Meta Ads</span></td><td>Orla Central</td><td style="font-weight:700">34</td><td style="font-weight:700;color:#0058A3">R$ 78</td><td style="font-weight:800;color:#0058A3">3</td><td><span style="background:#eef4fb;color:#0058A3;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
+    <tr><td class="lead-name">Farol &mdash; Studio Lancamento</td><td><span class="origin-tag">Meta Ads</span></td><td>Farol Guanabara</td><td style="font-weight:700">23</td><td style="font-weight:700;color:#0058A3">R$ 91</td><td style="font-weight:800;color:#0058A3">2</td><td><span style="background:#eef4fb;color:#0058A3;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
+    <tr><td class="lead-name">MCMV Piedade &mdash; Subsidio 47k</td><td><span class="origin-tag">Google Ads</span></td><td>Parque Piedade</td><td style="font-weight:700">19</td><td style="font-weight:700;color:#0058A3">R$ 63</td><td style="font-weight:800;color:#0058A3">3</td><td><span style="background:#eef4fb;color:#0058A3;font-size:10px;font-weight:700;padding:3px 9px;border-radius:20px">&#9679; Ativa</span></td></tr>
     </tbody></table></div></div>
   </div>
 </div>
@@ -529,7 +529,7 @@ function renderDash(){
   document.getElementById("kpi-fechados").textContent=fc;
   document.getElementById("kpi-sub1").textContent=qt>0?qt+" lead"+(qt!==1?"s":"")+" quente"+(qt!==1?"s":""):"Sem quentes ainda";
   document.getElementById("dash-subtitle").textContent=tot>0?"Voce tem "+qt+" lead"+(qt!==1?"s":"")+" quente"+(qt!==1?"s":"")+" aguardando contato.":"Cadastre seu primeiro lead para comecar.";
-  var steps=[{l:"Captados",v:tot,c:"linear-gradient(90deg,#060f1e,#0d2040)"},{l:"Contatados",v:ct+pr+fc,c:"linear-gradient(90deg,#1e40af,#3b82f6)"},{l:"Qualificados",v:qt+mn,c:"linear-gradient(90deg,#c9993a,#e8b84b)"},{l:"Propostas",v:pr,c:"linear-gradient(90deg,#7c3aed,#a78bfa)"},{l:"Fechados",v:fc,c:"linear-gradient(90deg,#1a8f4c,#22c55e)"}];
+  var steps=[{l:"Captados",v:tot,c:"linear-gradient(90deg,#060f1e,#0d2040)"},{l:"Contatados",v:ct+pr+fc,c:"linear-gradient(90deg,#1e40af,#3b82f6)"},{l:"Qualificados",v:qt+mn,c:"linear-gradient(90deg,#c9993a,#e8b84b)"},{l:"Propostas",v:pr,c:"linear-gradient(90deg,#7c3aed,#a78bfa)"},{l:"Fechados",v:fc,c:"linear-gradient(90deg,#0058A3,#22c55e)"}];
   document.getElementById("funil-body").innerHTML=steps.map(function(s){return"<div class='funnel-row'><div class='funnel-label'>"+s.l+"</div><div class='funnel-bar-wrap'><div class='funnel-bar' style='width:"+( s.v&&tot?Math.max(6,Math.round(s.v/tot*100)):0)+"%;background:"+s.c+"'>"+s.v+"</div></div><div class='funnel-count'>"+s.v+"</div></div>"}).join("")+"<div style='margin-top:14px;padding-top:12px;border-top:1px solid #f1f5f9;display:flex;gap:20px'><div><div style='font-size:20px;font-weight:900;color:var(--navy3)'>"+(tot?Math.round(fc/tot*100):0)+"%</div><div style='font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em'>Taxa de conversao</div></div><div><div style='font-size:20px;font-weight:900;color:var(--gold)'>"+pr+"</div><div style='font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em'>Propostas abertas</div></div></div>";
   var rec=ls.slice(0,5);
   document.getElementById("atividade-body").innerHTML=rec.length?rec.map(function(l){return"<div class='act-item'><div class='act-dot "+(l.temp==="quente"?"gold":l.temp==="frio"?"blue":"green")+"'>"+(l.temp==="quente"?"&#128293;":l.temp==="frio"?"&#10052;":"&#9898;")+"</div><div><div class='act-text'><strong>"+l.nome+"</strong> &mdash; "+(l.origem||"Manual")+"</div><div class='act-time'>"+(l.data||"—")+" "+(l.hora||"")+" &middot; "+(l.interesse||"—")+"</div></div></div>"}).join(""):"<div class='empty-state' style='padding:24px'><div class='icon'>&#128203;</div><p>Nenhuma atividade ainda</p></div>";
@@ -669,7 +669,7 @@ updateBadge();renderDash();
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
 .card-title,.kpi-val,.sel-title,#topbar-title,.modal-title,.sb-name{font-family:'Fraunces',Georgia,serif !important}
-.hoje-hero{background:linear-gradient(135deg,#0d2040,#1a8f4c);color:#fff;border-radius:16px;padding:20px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.hoje-hero{background:linear-gradient(135deg,#0d2040,#0058A3);color:#fff;border-radius:16px;padding:20px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
 .hoje-hero b{font-family:'Fraunces',Georgia,serif;font-size:22px}
 .hoje-hero .hh-sub{font-size:12.5px;color:rgba(255,255,255,.8);margin-top:2px}
 .hoje-grid{display:grid;grid-template-columns:1fr;gap:12px}
@@ -681,8 +681,8 @@ updateBadge();renderDash();
 .hcard .na.urg{background:#fef2f2;color:#b91c1c;font-weight:600}
 .hbtns{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
 .hbtn{border:none;border-radius:9px;padding:8px 13px;font-size:12.5px;font-weight:700;cursor:pointer;font-family:inherit;display:inline-flex;align-items:center;gap:5px}
-.hbtn.g{background:#1a8f4c;color:#fff}.hbtn.n{background:#0d2040;color:#fff}.hbtn.o{background:#f1f5f9;color:#0d2040}
-.rec-chip{display:inline-block;font-size:11px;font-weight:700;color:#15803d;background:#f0fdf4;border:1px solid #bbf7d0;padding:3px 9px;border-radius:20px;margin-top:6px}
+.hbtn.g{background:#0058A3;color:#fff}.hbtn.n{background:#0d2040;color:#fff}.hbtn.o{background:#f1f5f9;color:#0d2040}
+.rec-chip{display:inline-block;font-size:11px;font-weight:700;color:#15803d;background:#eef4fb;border:1px solid #bbf7d0;padding:3px 9px;border-radius:20px;margin-top:6px}
 @media(max-width:640px){.hcard{flex-direction:column}}
 </style>
 <script>
@@ -733,7 +733,7 @@ updateBadge();renderDash();
       +'<div style="display:flex;gap:8px"><button class="hbtn g" onclick="crmSync()">↻ Sincronizar</button><button class="hbtn o" onclick="backupCRM()">⬇︎ Backup</button><label class="hbtn o" style="cursor:pointer">↺ Restaurar<input type="file" accept="application/json" style="display:none" onchange="restaurarCRM(this)"></label></div></div>';
     if(!fila.length){ pg.innerHTML=hero+'<div class="empty-state" style="padding:40px"><div class="icon">&#9889;</div><p>Nenhum lead na fila.</p><small>Cadastre um lead ou importe de foto.</small></div>'; atualizarBadgeHoje(); return; }
     var cards=fila.map(function(l){
-      var sc=l._sc, col=sc>=65?'#1a8f4c':sc>=40?'#c9993a':'#94a3b8';
+      var sc=l._sc, col=sc>=65?'#0058A3':sc>=40?'#c9993a':'#94a3b8';
       var pa=proxAcao(l); var r=recomenda(rendaLead(l))[0];
       return '<div class="hcard"><div class="sc" style="background:'+col+'">'+sc+'</div>'
         +'<div style="flex:1"><div class="nm">'+(l.nome||'Sem nome')+' <span style="font-size:11px;color:#94a3b8;font-weight:600">· '+dias(l)+'d</span></div>'

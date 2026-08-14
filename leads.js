@@ -122,7 +122,7 @@
   }
   function mcmvBenefit(titulo, desc){
     return '<li style="display:flex;gap:11px;align-items:flex-start">'
-      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a8f4c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
+      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#0058A3" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
       +'<span style="font-size:13.5px;color:#0f2e36;line-height:1.5"><b>'+titulo+'</b><br><span style="color:#6b7280">'+desc+'</span></span>'
       +'</li>';
   }
@@ -202,7 +202,7 @@
         var bubble = document.createElement('div');
         bubble.id = 'waStatusBubble';
         bubble.setAttribute('style','position:fixed;z-index:998;bottom:88px;right:24px;background:#0f2e36;color:#fff;padding:9px 14px;border-radius:10px 10px 2px 10px;font-family:Inter,system-ui,sans-serif;font-size:12.5px;font-weight:600;box-shadow:0 8px 22px rgba(15,46,54,.3);display:flex;align-items:center;gap:7px;animation:waBubbleIn .3s ease;max-width:220px');
-        bubble.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:'+(online?'#4ade80':'#9ca3af')+';flex-shrink:0"></span>'
+        bubble.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:'+(online?'#2a7fc0':'#9ca3af')+';flex-shrink:0"></span>'
           + (online ? 'Paulo está online agora' : 'Responde em breve');
         document.body.appendChild(bubble);
         setTimeout(function(){
@@ -252,7 +252,7 @@
       wrap.innerHTML = ''
         +'<style>@keyframes exitFadeIn{from{opacity:0}to{opacity:1}}</style>'
         +'<div style="background:#fff;border-radius:18px;max-width:400px;width:100%;padding:28px 26px 22px;text-align:left;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif">'
-        +'  <div style="width:46px;height:46px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>'
+        +'  <div style="width:46px;height:46px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0058A3"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>'
         +'  <h3 style="font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;color:#0f2e36;margin-bottom:6px">Antes de ir pro WhatsApp</h3>'
         +'  <p style="font-size:13px;color:#6b7280;line-height:1.55;margin-bottom:16px">Deixe seu nome e WhatsApp pra eu já te chamar com a tabela pronta — ou pule e vá direto pra conversa.</p>'
         +'  <input id="waLeadNome" type="text" placeholder="Seu nome" autocomplete="name" style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;margin-bottom:9px;font-family:inherit;box-sizing:border-box">'
@@ -263,7 +263,7 @@
         +'      <option value="Manhã">Manhã</option><option value="Tarde">Tarde</option><option value="Noite">Noite</option>'
         +'    </select>'
         +'  </div>'
-        +'  <button id="waLeadGo" style="width:100%;background:#25D366;color:#fff;border:none;padding:13px;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;margin-bottom:8px">Continuar para o WhatsApp</button>'
+        +'  <button id="waLeadGo" style="width:100%;background:#0058A3;color:#fff;border:none;padding:13px;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;margin-bottom:8px">Continuar para o WhatsApp</button>'
         +'  <button id="waLeadCallback" style="width:100%;background:none;border:1.5px solid #e8eaed;color:#0f2e36;font-size:12.5px;font-weight:600;padding:10px;border-radius:10px;cursor:pointer;margin-bottom:8px">Prefiro que me liguem</button>'
         +'  <button id="waLeadSkip" style="width:100%;background:none;border:none;color:#6b7280;font-size:12.5px;padding:6px;cursor:pointer;text-decoration:underline">Pular e continuar</button>'
         +'</div>';
@@ -536,7 +536,7 @@
       overlay.innerHTML = '<div style="background:#fff;width:100%;max-width:440px;border-radius:18px 18px 0 0;padding:24px 22px;max-height:70vh;overflow-y:auto;font-family:Inter,system-ui,sans-serif">'
         + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h3 style="font-family:Fraunces,Georgia,serif;font-size:18px;color:#0f2e36">Meus favoritos</h3><button id="favPanelClose" style="background:#f5f6f7;border:none;width:30px;height:30px;border-radius:50%;font-size:16px;color:#6b7280;cursor:pointer">&times;</button></div>'
         + (itemsHtml || '<p style="font-size:13px;color:#6b7280">Você ainda não favoritou nenhum imóvel.</p>')
-        + (list.length ? '<a id="favSendWa" href="#" style="display:block;text-align:center;margin-top:16px;background:#25D366;color:#fff;padding:12px;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none">Enviar minha lista pelo WhatsApp</a>' : '')
+        + (list.length ? '<a id="favSendWa" href="#" style="display:block;text-align:center;margin-top:16px;background:#0058A3;color:#fff;padding:12px;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none">Enviar minha lista pelo WhatsApp</a>' : '')
         + '</div>';
       document.body.appendChild(overlay);
       document.getElementById('favPanelClose').onclick = function(){ overlay.remove(); };
@@ -677,7 +677,7 @@
     st.textContent='@keyframes waHintIn{0%{opacity:0;transform:translateY(6px) scale(.96)}12%{opacity:1;transform:none}82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-4px) scale(.98)}}'
       +'#waHintPill{position:fixed;right:88px;bottom:34px;z-index:600;background:#0f2e36;color:#fff;font-size:13px;font-weight:600;padding:9px 15px;border-radius:22px;box-shadow:0 10px 28px rgba(15,46,54,.28);white-space:nowrap;pointer-events:none;max-width:70vw}'
       +'#waHintPill:after{content:"";position:absolute;right:-6px;bottom:16px;width:12px;height:12px;background:#0f2e36;transform:rotate(45deg)}'
-      +'#waHintPill b{color:#4ade80}'
+      +'#waHintPill b{color:#2a7fc0}'
       +'@media(max-width:520px){#waHintPill{font-size:12px;right:80px;bottom:30px}}';
     document.head.appendChild(st);
     var pill=document.createElement('div'); pill.id='waHintPill'; pill.style.display='none';
@@ -715,7 +715,7 @@
     var seal = document.createElement('div');
     seal.id = 'trustSealBlock';
     seal.setAttribute('style','display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 16px;margin-top:12px;max-width:fit-content');
-    seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#cf9f4f;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
+    seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#2a7fc0;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
       + '<div style="line-height:1.35"><div style="font-size:12.5px;font-weight:800;color:#fff">Corretor Oficial · CRECI-RJ 77677-F</div>'
       + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 18 anos ajudando famílias no RJ · Especialista em MCMV</div></div>';
     bar.insertAdjacentElement('afterend', seal);
@@ -751,8 +751,8 @@
     var waHref = oldLink ? oldLink.getAttribute('href') : ('https://wa.me/'+WA_NUM);
     var _nm = (window.FSIM_NOME || (document.querySelector('h1') ? document.querySelector('h1').textContent : '') || '').trim();
     var simHref = 'simulador.html' + (_nm ? ('?emp=' + encodeURIComponent(_nm)) : '');
-    cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
-      + '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+simHref+'">Simular financiamento</a>'
+    cta.innerHTML = '<a class="sc-btn" style="background:#0058A3;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
+      + '<a class="sc-btn" style="background:#0058A3;color:#fff" href="'+simHref+'">Simular financiamento</a>'
       + '<a class="sc-btn" style="background:#0058A3;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
   })();
 
@@ -778,7 +778,7 @@
       var list = getList();
       var on = list.some(function(i){ return i.url === thisItem.url; });
       btn.textContent = on ? '✓ Adicionado à comparação' : '+ Comparar este imóvel';
-      btn.setAttribute('style','position:fixed;right:16px;bottom:90px;z-index:650;background:'+(on?'#1a8f4c':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#1a8f4c':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
+      btn.setAttribute('style','position:fixed;right:16px;bottom:90px;z-index:650;background:'+(on?'#0058A3':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#0058A3':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
     }
     renderBtn();
     btn.addEventListener('click', function(){
@@ -798,8 +798,8 @@
     var style = document.createElement('style');
     style.textContent = '.pc-compare-bar{position:fixed;left:0;right:0;bottom:0;z-index:6000;background:#0f2e36;color:#fff;padding:14px 24px;display:none;align-items:center;justify-content:center;gap:20px;box-shadow:0 -10px 30px rgba(0,0,0,.18);flex-wrap:wrap}'
       + '.pc-compare-bar.show{display:flex}'
-      + '.pc-compare-bar b{color:#cf9f4f}'
-      + '.pc-compare-btn{background:linear-gradient(135deg,#0058A3,#cf9f4f);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}'
+      + '.pc-compare-bar b{color:#2a7fc0}'
+      + '.pc-compare-btn{background:linear-gradient(135deg,#0058A3,#2a7fc0);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}'
       + '.pc-compare-clear{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:600;cursor:pointer}'
       + '.pc-compare-modal{position:fixed;inset:0;z-index:7000;background:rgba(15,46,54,.6);display:none;align-items:center;justify-content:center;padding:24px}'
       + '.pc-compare-modal.show{display:flex}'
@@ -823,7 +823,7 @@
       + '<h3 style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#0f2e36">Comparação de imóveis</h3>'
       + '<button id="pcCompareCloseBtn" type="button" style="background:#f5f6f7;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer">✕</button></div>'
       + '<div id="pcCompareTableWrap"></div>'
-      + '<a id="pcCompareWaBtn" href="#" target="_blank" style="display:inline-block;margin-top:16px;background:#1a8f4c;color:#fff;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Falar com Paulo sobre esses imóveis</a></div>';
+      + '<a id="pcCompareWaBtn" href="#" target="_blank" style="display:inline-block;margin-top:16px;background:#0058A3;color:#fff;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Falar com Paulo sobre esses imóveis</a></div>';
     document.body.appendChild(modal);
 
     function renderBar(){
@@ -870,10 +870,10 @@
   st.textContent = '.pc-lock-wrap{position:relative}'
     + '.pc-lock-blur{filter:blur(7px);pointer-events:none;user-select:none}'
     + '.pc-lock-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;background:linear-gradient(180deg,rgba(247,244,238,.72),rgba(247,244,238,.9));border-radius:14px;padding:22px}'
-    + '.pc-lock-ov .pcl-ic{width:34px;height:34px;stroke:#1a8f4c;fill:none;stroke-width:1.8}'
+    + '.pc-lock-ov .pcl-ic{width:34px;height:34px;stroke:#0058A3;fill:none;stroke-width:1.8}'
     + '.pc-lock-ov b{font-family:Fraunces,Georgia,serif;font-size:17px;color:#0f2e36}'
     + '.pc-lock-ov span{font-size:12.8px;color:#6b7280;max-width:36ch;line-height:1.5}'
-    + '.pc-lock-btn{background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease}'
+    + '.pc-lock-btn{background:#0058A3;color:#fff;border:none;border-radius:11px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease}'
     + '.pc-lock-btn:hover{transform:translateY(-2px)}';
   document.head.appendChild(st);
   tables.forEach(function(t){
@@ -917,10 +917,10 @@
     var card=document.createElement('div');
     card.className='pc-simgate';
     card.style.cssText='background:#fff;border:1px solid #e8eaed;border-radius:18px;padding:34px 28px;text-align:center;max-width:560px;margin:0 auto;box-shadow:0 10px 30px rgba(15,46,54,.06)';
-    card.innerHTML='<div style="width:56px;height:56px;border-radius:16px;background:#f0f9f3;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg></div>'
+    card.innerHTML='<div style="width:56px;height:56px;border-radius:16px;background:#eef4fb;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#0058A3;fill:none;stroke-width:1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg></div>'
       +'<h3 style="font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;color:#0f2e36;line-height:1.25;margin:0 0 8px">Simule seu financiamento</h3>'
       +'<p style="font-size:14px;color:#6b7280;line-height:1.55;max-width:40ch;margin:0 auto 20px">Informe seu WhatsApp e veja na hora <b style="color:#0f2e36">entrada, parcela e as condições reais</b> pra este imóvel — sem sair de casa.</p>'
-      +'<button type="button" class="pc-simgate-btn" style="background:#1a8f4c;color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease">Simular financiamento</button>'
+      +'<button type="button" class="pc-simgate-btn" style="background:#0058A3;color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease">Simular financiamento</button>'
       +'<div style="font-size:11.5px;color:#94a3b8;margin-top:12px">Grátis · sem compromisso · resposta na hora</div>';
     box.parentNode.insertBefore(card, box);
     var btn=card.querySelector('.pc-simgate-btn');
@@ -993,15 +993,15 @@
     cats.forEach(function(c){
       var arr=info[c[1]]; if(!arr||!arr.length) return;
       cols+='<div style="background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px 18px 14px">'
-        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><path d="'+c[2]+'"/></svg><b style="font-family:Fraunces,Georgia,serif;font-size:15px;color:#0f2e36">'+c[0]+'</b></div>'
-        +'<ul style="list-style:none;padding:0;margin:0">'+arr.map(function(x){return '<li style="font-size:13px;color:#475569;line-height:1.5;padding:5px 0 5px 16px;position:relative"><span style="position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#1a8f4c"></span>'+x+'</li>';}).join('')+'</ul></div>';
+        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#0058A3;fill:none;stroke-width:1.8"><path d="'+c[2]+'"/></svg><b style="font-family:Fraunces,Georgia,serif;font-size:15px;color:#0f2e36">'+c[0]+'</b></div>'
+        +'<ul style="list-style:none;padding:0;margin:0">'+arr.map(function(x){return '<li style="font-size:13px;color:#475569;line-height:1.5;padding:5px 0 5px 16px;position:relative"><span style="position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#0058A3"></span>'+x+'</li>';}).join('')+'</ul></div>';
     });
     if(!cols) return;
     var sec=document.createElement('section');
     sec.id='pcDiaADia'; sec.className='section';
-    sec.style.cssText='background:#f0f9f3';
+    sec.style.cssText='background:#eef4fb';
     sec.innerHTML='<div class="wrap"><div style="text-align:center;max-width:640px;margin:0 auto 26px">'
-      +'<div style="font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1a8f4c">No dia a dia</div>'
+      +'<div style="font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#0058A3">No dia a dia</div>'
       +'<h2 style="font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3.6vw,34px);color:#0f2e36;margin:6px 0 8px">Como é a vida ao redor</h2>'
       +'<p style="font-size:14px;color:#6b7280;margin:0">O que faz diferença de verdade quando você mora aqui: transporte, saúde, estudo e compras a poucos minutos.</p></div>'
       +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">'+cols+'</div>'
@@ -1031,8 +1031,8 @@
     +'#pcGate h3{font-family:Fraunces,Georgia,serif;font-size:21px;color:#0f2e36;line-height:1.2;margin-bottom:6px}'
     +'#pcGate p{font-size:13px;color:#6b7280;margin-bottom:16px;line-height:1.5}'
     +'#pcGate input{width:100%;padding:12px 14px;margin-bottom:9px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;font-family:inherit}'
-    +'#pcGate input:focus{border-color:#1a8f4c}'
-    +'#pcGate .g-btn{width:100%;background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.3)}'
+    +'#pcGate input:focus{border-color:#0058A3}'
+    +'#pcGate .g-btn{width:100%;background:#0058A3;color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.3)}'
     +'#pcGate .or{display:flex;align-items:center;gap:10px;margin:14px 0;color:#94a3b8;font-size:12px}'
     +'#pcGate .or:before,#pcGate .or:after{content:"";flex:1;height:1px;background:#e8eaed}'
     +'#pcGate .gg{display:flex;justify-content:center;min-height:4px}'
@@ -1112,12 +1112,12 @@
   var st=document.createElement('style');
   st.textContent='#pcTransp{max-width:820px;margin:34px auto;padding:20px 22px;border:1px solid var(--line,#e8eaed);border-radius:14px;background:var(--mist,#f7f8f9);font-family:Inter,system-ui,sans-serif}'
     +'#pcTransp .tt{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0f2e36;margin-bottom:12px;display:flex;align-items:center;gap:7px}'
-    +'#pcTransp .tt svg{width:15px;height:15px;stroke:#1a8f4c;fill:none;stroke-width:2}'
+    +'#pcTransp .tt svg{width:15px;height:15px;stroke:#0058A3;fill:none;stroke-width:2}'
     +'#pcTransp ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 22px}'
     +'@media(max-width:560px){#pcTransp ul{grid-template-columns:1fr}}'
     +'#pcTransp li{font-size:12.5px;color:#55606a;line-height:1.5;display:flex;gap:7px}'
     +'#pcTransp li b{color:#0f2e36;font-weight:700}'
-    +'#pcTransp li .dot{color:#1a8f4c;font-weight:800}';
+    +'#pcTransp li .dot{color:#0058A3;font-weight:800}';
   document.head.appendChild(st);
   var box=document.createElement('section'); box.id='pcTransp';
   box.innerHTML='<div class="tt"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Informações do empreendimento — transparência</div>'

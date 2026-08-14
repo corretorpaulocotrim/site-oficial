@@ -142,7 +142,7 @@ function fsimSugestoesHTML(nomeAtual, precoAlvo){
   if(!candidatos.length) return '';
   var cards = candidatos.map(function(e){
     return '<a href="'+e.url+'" style="display:block;background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px 18px 16px;text-decoration:none;box-shadow:0 1px 2px rgba(15,46,54,.04);transition:box-shadow .3s ease,transform .3s ease" onmouseover="this.style.boxShadow=\'0 12px 28px rgba(15,46,54,.12)\';this.style.transform=\'translateY(-3px)\'" onmouseout="this.style.boxShadow=\'0 1px 2px rgba(15,46,54,.04)\';this.style.transform=\'none\'">'
-      +'<span style="display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#1a8f4c;background:rgba(62,142,90,.1);padding:3px 9px;border-radius:20px;margin-bottom:9px">Dentro do orçamento</span>'
+      +'<span style="display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:#0058A3;background:rgba(62,142,90,.1);padding:3px 9px;border-radius:20px;margin-bottom:9px">Dentro do orçamento</span>'
       +'<b style="display:block;font-size:15px;color:#0f2e36;margin-bottom:3px;font-weight:700">'+e.nome+'</b>'
       +'<span style="display:block;font-size:12px;color:#6b7280;margin-bottom:2px">'+e.bairro+' · '+e.tip+'</span>'
       +(e.endereco?'<span style="display:block;font-size:11px;color:#9ca3af;margin-bottom:10px">'+e.endereco+'</span>':'<span style="display:block;margin-bottom:10px"></span>')
@@ -311,7 +311,7 @@ function fsimVerdictHTML(c){
     headline = 'Esse plano ainda deixa '+fmtBRL(c.aVistaFinal)+' pra cobrir à vista na assinatura. Antes de descartar o imóvel, vamos ver se o FGTS ou uma entrada maior resolvem — é rápido no WhatsApp.';
     tone = 'neutral';
   }
-  var bg = tone==='warn' ? 'linear-gradient(135deg,#7a4a1a,#a5772e)' : 'linear-gradient(135deg,#0f2e36,#173d47)';
+  var bg = tone==='warn' ? 'linear-gradient(135deg,#7a4a1a,#004a8a)' : 'linear-gradient(135deg,#0f2e36,#173d47)';
   return ''
     +'<div class="reveal" style="display:flex;gap:14px;align-items:flex-start;background:'+bg+';border-radius:16px;padding:20px 22px;margin-bottom:20px;color:#fff">'
     +'  <img src="paulo-cotrim-profissional.jpeg" alt="Paulo Cotrim" style="width:42px;height:42px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid rgba(255,255,255,.35)" loading="lazy">'
@@ -363,10 +363,10 @@ function fsimUpdate(){
   if(caixaEl){
     var an = fsimAnaliseCaixa(renda, preco, (fgtsChk && fgtsChk.checked));
     FSIM_LAST_CAIXA = an;
-    var okColor = an.rendaCobre ? '#1a8f4c' : '#a5772e';
+    var okColor = an.rendaCobre ? '#0058A3' : '#004a8a';
     var selo = an.rendaCobre
-      ? '<span style="background:rgba(26,143,76,.12);color:#1a8f4c;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 11px;border-radius:20px">Renda aprova este imóvel</span>'
-      : '<span style="background:rgba(165,119,46,.14);color:#a5772e;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 11px;border-radius:20px">Falta pouco — dá pra ajustar</span>';
+      ? '<span style="background:rgba(26,143,76,.12);color:#0058A3;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 11px;border-radius:20px">Renda aprova este imóvel</span>'
+      : '<span style="background:rgba(165,119,46,.14);color:#004a8a;font-size:10px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 11px;border-radius:20px">Falta pouco — dá pra ajustar</span>';
     function cell(l,v,hl){ return '<div style="flex:1;min-width:150px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:15px 16px">'
       +'<div style="font-size:11px;color:var(--gray);font-weight:600;margin-bottom:5px">'+l+'</div>'
       +'<div style="font-family:Fraunces,Georgia,serif;font-size:'+(hl?'22px':'19px')+';font-weight:600;color:'+(hl?okColor:'var(--ink)')+'">'+v+'</div></div>'; }
@@ -381,7 +381,7 @@ function fsimUpdate(){
       + (an.subsidio>0 ? cell('Subsídio estimado', fmtBRL(an.subsidio)) : cell('Entrada mínima estimada', fmtBRL(an.entradaMin)))
       + '</div>';
     var aviso = an.acimaTeto
-      ? '<div style="margin-top:10px;font-size:12px;color:#a5772e"><strong>Atenção:</strong> este imóvel ('+fmtBRL(preco)+') está acima do teto de '+an.faixa+' ('+fmtBRL(an.tetoImovel)+') — pode enquadrar em outra linha. O Paulo confirma na hora.</div>'
+      ? '<div style="margin-top:10px;font-size:12px;color:#004a8a"><strong>Atenção:</strong> este imóvel ('+fmtBRL(preco)+') está acima do teto de '+an.faixa+' ('+fmtBRL(an.tetoImovel)+') — pode enquadrar em outra linha. O Paulo confirma na hora.</div>'
       : '';
     caixaEl.innerHTML = '<div class="reveal" style="background:var(--petrol-soft);border:1px solid var(--line);border-radius:16px;padding:20px 20px 18px;margin-bottom:20px">'
       +'<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px;margin-bottom:14px">'
@@ -397,7 +397,7 @@ function fsimUpdate(){
   if(c.atoEntrada>0) out += '<div class="sim-out-card"><div class="l">Pago no ato da assinatura</div><div class="v">'+fmtBRL(c.atoEntrada)+'</div></div>';
   if(c.valorChave>0) out += '<div class="sim-out-card"><div class="l">Abatido com valor na entrega das chaves</div><div class="v">'+fmtBRL(c.valorChave)+'</div></div>';
   out += '<div class="sim-out-card"><div class="l">Parcelável sem juros na obra (até 20%)</div><div class="v">'+fmtBRL(c.parcelavelObra)+'</div></div>'
-    +'<div class="sim-out-card" style="position:relative"><span style="position:absolute;top:-9px;right:10px;background:#1a8f4c;color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:20px;box-shadow:0 3px 8px rgba(62,142,90,.35)">Sem juros</span><div class="l">Por mês, até a entrega das chaves ('+c.parcelasObra+'x)</div><div class="v">'+fmtBRL(c.parcelaObraMensal)+'</div></div>';
+    +'<div class="sim-out-card" style="position:relative"><span style="position:absolute;top:-9px;right:10px;background:#0058A3;color:#fff;font-size:9px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:3px 9px;border-radius:20px;box-shadow:0 3px 8px rgba(62,142,90,.35)">Sem juros</span><div class="l">Por mês, até a entrega das chaves ('+c.parcelasObra+'x)</div><div class="v">'+fmtBRL(c.parcelaObraMensal)+'</div></div>';
   if(c.fgtsAplicado>0) out += '<div class="sim-out-card"><div class="l">FGTS aplicado</div><div class="v">'+fmtBRL(c.fgtsAplicado)+'</div></div>';
   if(c.temPosChaves){
     out += '<div class="sim-out-card hl"><div class="l">Parcelamento pós-chaves ('+c.maxParcelasPosChaves+'x)</div><div class="v">'+fmtBRL(c.parcelaPosChaves)+'</div></div>';
@@ -438,7 +438,7 @@ function fsimUpdate(){
         +'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="flex-shrink:0;margin-top:1px"><path d="M12 9v4M12 17h.01M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg>'
         +'<span>A parcela mensal está em <strong>'+fmtBRL(c.parcelaObraMensal)+'</strong> — acima do teto de <strong>R$ 1.500</strong>. Aumente o número de meses, o ato de entrada ou o reforço de dezembro, ou clique em "Montar automaticamente".</span></div>';
     } else {
-      statusBox = '<div style="margin-top:12px;padding:10px 14px;background:#f0fdf4;border-radius:10px;font-size:12px;color:#15803d;display:flex;gap:8px;align-items:center">'
+      statusBox = '<div style="margin-top:12px;padding:10px 14px;background:#eef4fb;border-radius:10px;font-size:12px;color:#15803d;display:flex;gap:8px;align-items:center">'
         +'<svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M20 6 9 17l-5-5"/></svg>'
         +'<span>Plano fechado — parcela mensal dentro do teto de R$ 1.500.</span></div>';
     }
@@ -520,7 +520,7 @@ function fsimDownload(nome){
     +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
     +'.legal{font-size:10.5px;color:#94a3b8;margin-top:14px;line-height:1.7;padding:14px 16px;border:1px solid #e8eaed;border-radius:10px}'
     +'.fases{display:flex;gap:6px;margin-top:16px}.fase{flex:1;text-align:center}'
-    +'.fase-bar{height:6px;border-radius:6px;background:#e8eaed;margin-bottom:6px}.fase-bar.on{background:linear-gradient(90deg,#0058A3,#cf9f4f)}'
+    +'.fase-bar{height:6px;border-radius:6px;background:#e8eaed;margin-bottom:6px}.fase-bar.on{background:linear-gradient(90deg,#0058A3,#2a7fc0)}'
     +'.fase span{font-size:10px;color:#6b7280;font-weight:600}'
     +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e8eaed}'
     +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'

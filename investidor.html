@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#ffffff;--navy2:#f5f6f7;--navy3:#e7edee;--gold:#0058A3;--gold2:#cf9f4f;--green:#1a8f4c;--ink:#0f2e36;--gray:#6b7280;--line:#e8eaed;--mist:#f5f6f7;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
+:root{--navy:#ffffff;--navy2:#f5f6f7;--navy3:#e7edee;--gold:#0058A3;--gold2:#2a7fc0;--green:#0058A3;--ink:#0f2e36;--gray:#6b7280;--line:#e8eaed;--mist:#f5f6f7;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
 body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--ink);min-height:100vh}
 a{color:inherit;text-decoration:none}
 
@@ -101,12 +101,12 @@ a{color:inherit;text-decoration:none}
 .res-item:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
 .res-val{font-family:'Fraunces',Georgia,serif;font-size:25px;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;color:var(--ink)}
 .res-val.gold{color:var(--gold2)}
-.res-val.green{color:#1a8f4c}
+.res-val.green{color:#0058A3}
 .res-val.blue{color:#1d4ed8}
 .res-label{font-size:10.5px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .result-note{font-size:12.5px;color:var(--gray);line-height:1.7;border-top:1px solid var(--line);padding-top:16px;margin-top:16px}
 .result-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:18px}
-.btn-wa-res{display:flex;align-items:center;gap:8px;background:#25d366;color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:13px;font-weight:800;cursor:pointer;margin-top:0;box-shadow:0 6px 18px rgba(37,211,102,.3);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
+.btn-wa-res{display:flex;align-items:center;gap:8px;background:#0058A3;color:#fff;border:none;border-radius:10px;padding:12px 24px;font-size:13px;font-weight:800;cursor:pointer;margin-top:0;box-shadow:0 6px 18px rgba(37,211,102,.3);transition:transform .4s var(--ease),box-shadow .4s var(--ease)}
 .btn-wa-res:hover{transform:translateY(-3px);box-shadow:0 10px 26px rgba(37,211,102,.38)}
 .btn-dl-res{display:flex;align-items:center;gap:8px;background:#fff;color:var(--ink);border:1.5px solid var(--gold);border-radius:10px;padding:11px 22px;font-size:13px;font-weight:800;cursor:pointer;margin-top:0;transition:transform .4s var(--ease),box-shadow .4s var(--ease),background .3s var(--ease)}
 .btn-dl-res:hover{transform:translateY(-3px);background:var(--petrol-soft);box-shadow:0 10px 26px rgba(184,135,58,.2)}
@@ -119,7 +119,7 @@ a{color:inherit;text-decoration:none}
 .comp-table tr:hover td{background:var(--mist)}
 .comp-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700}
 .comp-badge.top{background:rgba(201,153,58,.2);color:var(--gold2)}
-.comp-badge.good{background:rgba(22,163,74,.15);color:#1a8f4c}
+.comp-badge.good{background:rgba(22,163,74,.15);color:#0058A3}
 .comp-badge.mid{background:rgba(15,46,54,.08);color:var(--ink)}
 
 /* RADAR */
@@ -144,7 +144,7 @@ a{color:inherit;text-decoration:none}
 .td-root .td-header-left{display:flex;align-items:center;gap:12px}
 .td-root .av{width:44px;height:44px;border-radius:50%;background:#12252b;border:2.5px solid #0058A3;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;color:#e8d4a8;flex-shrink:0;overflow:hidden}
 .td-root .av img{width:100%;height:100%;object-fit:cover}
-.td-root .hdr-role{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#cf9f4f;margin-bottom:1px}
+.td-root .hdr-role{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#2a7fc0;margin-bottom:1px}
 .td-root .hdr-name{font-family:'Fraunces',serif;font-size:18px;color:#fff;line-height:1.1}
 .td-root .badge-mes{background:rgba(184,135,58,.18);color:#e8d4a8;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;border:1px solid rgba(184,135,58,.35)}
 .td-root .wrap{padding:1.25rem 1.5rem 2rem}
@@ -175,7 +175,7 @@ a{color:inherit;text-decoration:none}
 .td-root .pd-right{display:flex;flex-direction:column;gap:4px;min-width:190px}
 .td-root .pd-right label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#e8d4a8}
 .td-root .pd-right input{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;padding:8px 11px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:8px;color:#fff;width:100%}
-.td-root .pd-right input:focus{outline:none;border-color:#cf9f4f}
+.td-root .pd-right input:focus{outline:none;border-color:#2a7fc0}
 .td-root .pd-right input::-webkit-outer-spin-button,.td-root .pd-right input::-webkit-inner-spin-button{-webkit-appearance:none}
 .td-root .pd-right input[type=number]{-moz-appearance:textfield}
 .td-root .pct-card{background:#faf6ec;border:1.5px solid #e8d4a8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem}
@@ -189,7 +189,7 @@ a{color:inherit;text-decoration:none}
 .td-root .pct-half input[type=number]{-moz-appearance:textfield}
 .td-root .pct-sym{font-size:13px;font-weight:700;color:#6b7280}
 .td-root .pct-divider{width:1px;height:30px;background:#e8eaed}
-.td-root .pct-total-ok{font-size:11px;font-weight:700;color:#1a8f4c;display:flex;align-items:center;gap:4px}
+.td-root .pct-total-ok{font-size:11px;font-weight:700;color:#0058A3;display:flex;align-items:center;gap:4px}
 .td-root .pct-total-err{font-size:11px;font-weight:700;color:#B91C1C;display:flex;align-items:center;gap:4px}
 .td-root .split-bar{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:10px;overflow:hidden;margin-bottom:1rem}
 .td-root .split-half{padding:.75rem 1.1rem;display:flex;flex-direction:column;gap:3px}
@@ -223,7 +223,7 @@ a{color:inherit;text-decoration:none}
 .td-root .ch-total.pos span:last-child{color:#0058A3}
 .td-root .ch-note{font-size:9px;color:#9aa1a8;margin-top:5px}
 .td-root .saldo-alvo{display:flex;align-items:center;justify-content:space-between;border-radius:7px;padding:7px 10px;margin-top:8px;font-size:12px;font-weight:600;gap:6px}
-.td-root .saldo-alvo.ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#1a8f4c}
+.td-root .saldo-alvo.ok{background:#eef4fb;border:1px solid #BBF7D0;color:#0058A3}
 .td-root .saldo-alvo.falta{background:#faf6ec;border:1px solid #e8d4a8;color:#8a6416}
 .td-root .saldo-alvo.excede{background:#FFF1F2;border:1px solid #FECDD3;color:#B91C1C}
 .td-root .saldo-alvo i{font-size:14px;flex-shrink:0}
@@ -241,7 +241,7 @@ a{color:inherit;text-decoration:none}
 .td-root .btn-row{display:flex;gap:10px;margin-top:1.25rem;flex-wrap:wrap}
 .td-root .tdbtn{display:flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:9px;padding:13px 22px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .15s}
 .td-root .tdbtn:hover{opacity:.88}
-.td-root .btn-wa{background:#1a8f4c;color:#fff;flex:1;min-width:180px}
+.td-root .btn-wa{background:#0058A3;color:#fff;flex:1;min-width:180px}
 .td-root .btn-pdf{background:#0f2e36;color:#fff;flex:1;min-width:180px}
 .td-root .btn-google{background:#EA4335;color:#fff;min-width:160px}
 .td-root .btn-reset{background:#f5f6f7;color:#6b7280;border:1.5px solid #e8eaed;min-width:120px}
@@ -259,7 +259,7 @@ a{color:inherit;text-decoration:none}
 .val-hero-label{font-size:11px;font-weight:700;color:rgba(201,153,58,.7);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
 .val-hero-val{font-size:clamp(32px,5vw,52px);font-weight:900;color:var(--gold2);line-height:1;margin-bottom:6px}
 .val-hero-sub{font-size:13px;color:var(--gray)}
-.val-hero-gain{font-size:15px;font-weight:700;color:#1a8f4c;margin-top:8px}
+.val-hero-gain{font-size:15px;font-weight:700;color:#0058A3;margin-top:8px}
 
 
 /* ── CAROUSEL DE FOTOS ── */
@@ -553,7 +553,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Orla Central</strong> <span class="comp-badge top">Mais procurado</span></td>
           <td>Porto Maravilha</td>
           <td>R$ 402.000</td>
-          <td><span style="color:#1a8f4c;font-weight:700">10–12% a.a.</span></td>
+          <td><span style="color:#0058A3;font-weight:700">10–12% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+85%</span></td>
           <td><span class="comp-badge good">92%</span></td>
         </tr>
@@ -561,7 +561,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Farol da Guanabara</strong></td>
           <td>Santo Cristo · Porto</td>
           <td>R$ 402.000</td>
-          <td><span style="color:#1a8f4c;font-weight:700">8–10% a.a.</span></td>
+          <td><span style="color:#0058A3;font-weight:700">8–10% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+80%</span></td>
           <td><span class="comp-badge good">88%</span></td>
         </tr>
@@ -569,7 +569,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Arcos do Porto</strong> <span class="comp-badge top">Premium</span></td>
           <td>Porto Maravilha</td>
           <td>Consultar</td>
-          <td><span style="color:#1a8f4c;font-weight:700">9–11% a.a.</span></td>
+          <td><span style="color:#0058A3;font-weight:700">9–11% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+90%</span></td>
           <td><span class="comp-badge mid">Alta renda</span></td>
         </tr>
@@ -668,15 +668,15 @@ a{color:inherit;text-decoration:none}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-30.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#0058A3;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-32.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#0058A3;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-28.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#0058A3;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="margin-left:auto;align-self:center;color:var(--gold2);font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px">+ 18 anos de experiência<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg></div>
       </div>
@@ -936,7 +936,7 @@ function calcValorizacao(){
   for(let i=1;i<=anos;i++){
     const v = valor * Math.pow(1+taxa, i);
     const g = ((v-valor)/valor)*100;
-    tabelaHTML += `<tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 10px;color:var(--ink)">Ano ${i}</td><td style="text-align:right;padding:6px 10px;color:var(--gold2);font-weight:700">${fmt(v)}</td><td style="text-align:right;padding:6px 10px;color:#1a8f4c">+${fmtPct(g)}</td></tr>`;
+    tabelaHTML += `<tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 10px;color:var(--ink)">Ano ${i}</td><td style="text-align:right;padding:6px 10px;color:var(--gold2);font-weight:700">${fmt(v)}</td><td style="text-align:right;padding:6px 10px;color:#0058A3">+${fmtPct(g)}</td></tr>`;
   }
   tabelaHTML += '</table></div>';
   document.getElementById('r-v-tabela').innerHTML = tabelaHTML;
@@ -959,7 +959,7 @@ function calcRetornoTotal(){
   document.getElementById('r-rt-breakdown').innerHTML = `
     <strong style="color:#fff">Composição do retorno em ${anos} anos:</strong><br>
     Valorização do imóvel: <strong style="color:var(--gold2)">${fmt(ganhoCapital)}</strong> (+${fmtPct((ganhoCapital/valor)*100)})<br>
-    Renda de aluguel acumulada: <strong style="color:#1a8f4c">${fmt(rendaAcum)}</strong> (${fmt(aluguel)}/mês)<br>
+    Renda de aluguel acumulada: <strong style="color:#0058A3">${fmt(rendaAcum)}</strong> (${fmt(aluguel)}/mês)<br>
     <strong>Retorno total: ${fmt(totalRetorno)}</strong> sobre investimento de ${fmt(valor)}
   `;
   document.getElementById('res-2').classList.add('show');
@@ -984,7 +984,7 @@ function calcFGTS(){
   document.getElementById('r-f-parcela').textContent = fmt(parcela)+'/mês';
   let analise = `Você entra com ${fmtPct(pctEntrada)} do valor total (${fmt(totalEntrada)} = FGTS ${fmt(fgts)} + entrada ${fmt(entrada)}).<br>`;
   analise += `O valor financiado será de ${fmt(financiado)}.<br>`;
-  analise += `A parcela estimada é de ${fmt(parcela)}/mês — <strong style="color:${pctRenda<=30?'#1a8f4c':'var(--gold2)'}">`;
+  analise += `A parcela estimada é de ${fmt(parcela)}/mês — <strong style="color:${pctRenda<=30?'#0058A3':'var(--gold2)'}">`;
   analise += pctRenda<=30 ? `${fmtPct(pctRenda)} da renda, dentro do limite da Caixa (30%)` : `${fmtPct(pctRenda)} da renda — Paulo pode ajudar a otimizar`;
   analise += '</strong>';
   if(renda <= 8000 && valor <= 350000) analise += '<br>⭐ Perfil elegível para <strong>Minha Casa Minha Vida</strong> — juros menores, subsídio de até R$ 47.000!';
@@ -1034,7 +1034,7 @@ function baixarAnaliseInvestidor(simTitulo, resBoxId){
     +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
     +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e8eaed}'
     +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
-    +'.cta{display:inline-block;margin-top:20px;background:#25d366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 22px;border-radius:10px}'
+    +'.cta{display:inline-block;margin-top:20px;background:#0058A3;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 22px;border-radius:10px}'
     +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{.cta{display:none}body{padding:20px}}</style></head><body>'
     +'<div class="kicker">Calculadora do Investidor · Porto Maravilha</div>'
     +'<h1>'+simTitulo+'</h1><div class="sub">Análise gerada por você · Paulo Cotrim · CRECI-RJ 77677-F</div>'
@@ -1320,7 +1320,7 @@ function tdRender(){
   const ct=document.getElementById('td-cons-tag');
   if(ct){
     const rule=CONSTRUTORA_RULES[TDS.cons]||CONSTRUTORA_RULES['_outra'];
-    const pcTag=rule.posChavesOficial?' <span class="cons-tag" style="background:#f0f9f3;color:#157540"><i class="ti ti-calendar-time"></i>Pós-chaves oficial até '+rule.prazoPos+'x</span>':'';
+    const pcTag=rule.posChavesOficial?' <span class="cons-tag" style="background:#eef4fb;color:#004a8a"><i class="ti ti-calendar-time"></i>Pós-chaves oficial até '+rule.prazoPos+'x</span>':'';
     ct.innerHTML='<div class="cons-tag"><i class="ti ti-building-skyscraper"></i>Construtora: '+tdConsLabel()+'</div>'+pcTag;
   }
   const pdv=document.getElementById('td-pd-val');if(pdv)pdv.textContent=TDBRL(TDS.vu);
@@ -1391,7 +1391,7 @@ function tdBaixarProposta(){
   const tip=tdTipLabel();
   const c=tdCalc();const{s4}=TDS;
   const hoje=new Date().toLocaleDateString('pt-BR');
-  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Proposta — '+tdCondLabel()+'</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:40px;max-width:680px;margin:0 auto}.hdr{background:#0f2e36;border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hdr-role{font-size:9px;color:#cf9f4f;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}.hdr-name{font-family:Fraunces,serif;font-size:22px;color:#fff}.hdr-c{font-size:11px;color:#e8d4a8;margin-top:3px}.badge{background:rgba(184,135,58,.3);color:#e8d4a8;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:700}h1{font-family:Fraunces,serif;font-size:24px;color:#0f2e36;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}.box{background:#f5f6f7;border-radius:10px;padding:14px 18px;margin-bottom:14px;border:1px solid #e8eaed}.box-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0058A3;margin-bottom:9px}.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8eaed;font-size:13px}.row:last-child{border:none}.rk{color:#6b7280}.rv{font-weight:600}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.half{border-radius:10px;padding:13px 15px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.half.pre{background:#0f2e36}.half.pos{background:#0058A3}.hl{font-size:9px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.hv{font-family:Fraunces,serif;font-size:20px;color:#fff}.grand{background:#0f2e36;border-radius:10px;padding:16px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.gt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e8d4a8;margin-bottom:10px}.gr{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:#e8d4a8}.gr span:last-child{color:#fff;font-weight:600}.gd{height:1px;background:rgba(255,255,255,.15);margin:10px 0}.gf{display:flex;justify-content:space-between;align-items:center}.gfk{font-size:14px;font-weight:700;color:#fff}.gfv{font-family:Fraunces,serif;font-size:24px;color:#0058A3}.footer{margin-top:20px;font-size:10px;color:#9aa1a8;text-align:center;line-height:1.8;border-top:1px solid #e8eaed;padding-top:14px}</style></head><body><div class="hdr"><div><div class="hdr-role">Especialista em Financiamento Imobiliário</div><div class="hdr-name">Paulo Cotrim</div><div class="hdr-c">(21) 98915-0864</div></div><div class="badge">Julho 2026</div></div><h2>Proposta de Investimento</h2><div class="sub">Tabela Direta · '+hoje+'</div><div class="box"><div class="box-title">Empreendimento</div><div class="row"><span class="rk">Condomínio</span><span class="rv">'+tdCondLabel()+'</span></div><div class="row"><span class="rk">Construtora</span><span class="rv">'+tdConsLabel()+'</span></div><div class="row"><span class="rk">Tipologia</span><span class="rv">'+tip.n+'</span></div><div class="row"><span class="rk">Valor da unidade</span><span class="rv">'+TDBRL(TDS.vu)+'</span></div></div><div class="split"><div class="half pre"><div class="hl">Pré-chaves — '+TDS.pctPre+'%</div><div class="hv">'+TDBRL(c.tPre)+'</div></div><div class="half pos"><div class="hl">Pós-chaves — '+TDS.pctPos+'%</div><div class="hv">'+TDBRL(c.tPos)+'</div></div></div><div class="grand"><div class="gt">Resumo Consolidado</div><div class="gr"><span>Valor da unidade</span><span>'+TDBRL(TDS.vu)+'</span></div><div class="gr"><span>Total pré-chaves</span><span>'+TDBRL(c.tPre)+'</span></div><div class="gr"><span>Total pós-chaves</span><span>'+TDBRL(c.tPos)+'</span></div><div class="gd"></div><div class="gf"><span class="gfk">Total do investimento</span><span class="gfv">'+TDBRL(c.grand)+'</span></div></div><div class="footer">Tabela Julho 2026 · Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</div>';
+  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Proposta — '+tdCondLabel()+'</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:40px;max-width:680px;margin:0 auto}.hdr{background:#0f2e36;border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hdr-role{font-size:9px;color:#2a7fc0;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}.hdr-name{font-family:Fraunces,serif;font-size:22px;color:#fff}.hdr-c{font-size:11px;color:#e8d4a8;margin-top:3px}.badge{background:rgba(184,135,58,.3);color:#e8d4a8;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:700}h1{font-family:Fraunces,serif;font-size:24px;color:#0f2e36;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}.box{background:#f5f6f7;border-radius:10px;padding:14px 18px;margin-bottom:14px;border:1px solid #e8eaed}.box-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0058A3;margin-bottom:9px}.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8eaed;font-size:13px}.row:last-child{border:none}.rk{color:#6b7280}.rv{font-weight:600}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.half{border-radius:10px;padding:13px 15px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.half.pre{background:#0f2e36}.half.pos{background:#0058A3}.hl{font-size:9px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.hv{font-family:Fraunces,serif;font-size:20px;color:#fff}.grand{background:#0f2e36;border-radius:10px;padding:16px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.gt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e8d4a8;margin-bottom:10px}.gr{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:#e8d4a8}.gr span:last-child{color:#fff;font-weight:600}.gd{height:1px;background:rgba(255,255,255,.15);margin:10px 0}.gf{display:flex;justify-content:space-between;align-items:center}.gfk{font-size:14px;font-weight:700;color:#fff}.gfv{font-family:Fraunces,serif;font-size:24px;color:#0058A3}.footer{margin-top:20px;font-size:10px;color:#9aa1a8;text-align:center;line-height:1.8;border-top:1px solid #e8eaed;padding-top:14px}</style></head><body><div class="hdr"><div><div class="hdr-role">Especialista em Financiamento Imobiliário</div><div class="hdr-name">Paulo Cotrim</div><div class="hdr-c">(21) 98915-0864</div></div><div class="badge">Julho 2026</div></div><h2>Proposta de Investimento</h2><div class="sub">Tabela Direta · '+hoje+'</div><div class="box"><div class="box-title">Empreendimento</div><div class="row"><span class="rk">Condomínio</span><span class="rv">'+tdCondLabel()+'</span></div><div class="row"><span class="rk">Construtora</span><span class="rv">'+tdConsLabel()+'</span></div><div class="row"><span class="rk">Tipologia</span><span class="rv">'+tip.n+'</span></div><div class="row"><span class="rk">Valor da unidade</span><span class="rv">'+TDBRL(TDS.vu)+'</span></div></div><div class="split"><div class="half pre"><div class="hl">Pré-chaves — '+TDS.pctPre+'%</div><div class="hv">'+TDBRL(c.tPre)+'</div></div><div class="half pos"><div class="hl">Pós-chaves — '+TDS.pctPos+'%</div><div class="hv">'+TDBRL(c.tPos)+'</div></div></div><div class="grand"><div class="gt">Resumo Consolidado</div><div class="gr"><span>Valor da unidade</span><span>'+TDBRL(TDS.vu)+'</span></div><div class="gr"><span>Total pré-chaves</span><span>'+TDBRL(c.tPre)+'</span></div><div class="gr"><span>Total pós-chaves</span><span>'+TDBRL(c.tPos)+'</span></div><div class="gd"></div><div class="gf"><span class="gfk">Total do investimento</span><span class="gfv">'+TDBRL(c.grand)+'</span></div></div><div class="footer">Tabela Julho 2026 · Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</div>';
   const win = window.open('', '_blank');
   if(win){
     win.document.write(html);
@@ -1405,7 +1405,7 @@ function tdBaixarProposta(){
 <!-- WhatsApp FAB -->
 <style>
 .wa-fab{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.wa-fab a{background:#25d366;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;white-space:nowrap;text-decoration:none}
+.wa-fab a{background:#0058A3;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 4px 20px rgba(37,211,102,.4);display:flex;align-items:center;gap:8px;transition:transform .2s,box-shadow .2s;white-space:nowrap;text-decoration:none}
 .wa-fab a:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(37,211,102,.5)}
 .wa-fab-pulse{width:56px;height:56px;border-radius:50%;padding:0;justify-content:center;font-size:24px}
 @media(max-width:600px){.wa-fab-label{display:none}}
