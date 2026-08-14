@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f2e36">
+<title>Modo Corretor — Paulo Cotrim</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--petroleo:#0f2e36;--verde:#1a8f4c;--gold:#b8873a;--ink:#08191e;--cream:#f7f4ee}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{font-family:Inter,system-ui,sans-serif;background:var(--ink);color:#eef4f2;line-height:1.5;min-height:100vh;padding:0 0 40px}
+.frau{font-family:Fraunces,serif}
+.top{position:sticky;top:0;z-index:10;background:rgba(8,25,30,.9);backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08);padding:16px 18px;display:flex;align-items:center;gap:10px}
+.top .key{width:26px;height:26px;flex:0 0 auto}
+.top b{font-family:Fraunces,serif;font-size:17px;letter-spacing:.01em}
+.top small{margin-left:auto;font-size:11px;color:#9fb3b0;letter-spacing:.14em;text-transform:uppercase}
+.wrap{max-width:560px;margin:0 auto;padding:18px}
+h1{font-size:26px;font-weight:600;letter-spacing:-.01em;margin:6px 0 2px}
+.sub{color:#9fb3b0;font-size:14px;margin-bottom:18px}
+.tiles{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:22px}
+.tile{background:linear-gradient(160deg,#12333c,#0c2229);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:16px 10px;text-align:center;text-decoration:none;color:#eef4f2;font-weight:600;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:8px;transition:transform .15s}
+.tile:active{transform:scale(.96)}
+.tile svg{width:24px;height:24px;stroke:var(--gold)}
+.card{background:linear-gradient(160deg,#12333c,#0a2027);border:1px solid rgba(184,135,58,.22);border-radius:22px;padding:22px;margin-bottom:16px}
+.card h2{font-family:Fraunces,serif;font-size:20px;margin-bottom:4px}
+.card .hint{color:#9fb3b0;font-size:13px;margin-bottom:16px}
+label{display:block;font-size:12px;color:#bcccc9;margin:12px 0 6px;font-weight:600;letter-spacing:.02em}
+input[type=text]{width:100%;background:#08191e;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 14px;color:#fff;font-size:16px;font-family:inherit}
+input[type=text]:focus{outline:none;border-color:var(--verde)}
+.bigbtn{display:flex;align-items:center;justify-content:center;gap:12px;width:100%;margin-top:18px;background:linear-gradient(135deg,#b8873a,#9a6f2b);color:#fff;border:none;border-radius:16px;padding:20px;font-size:17px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 14px 30px rgba(184,135,58,.35)}
+.bigbtn:active{transform:scale(.98)}
+.bigbtn svg{width:26px;height:26px}
+.send{background:linear-gradient(135deg,var(--verde),#127a3f);box-shadow:0 14px 30px rgba(26,143,76,.4)}
+.send[disabled]{opacity:.45;box-shadow:none;filter:grayscale(.4)}
+.thumbs{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:16px}
+.thumb{position:relative;aspect-ratio:1;border-radius:10px;overflow:hidden;background:#08191e;border:1px solid rgba(255,255,255,.1)}
+.thumb img{width:100%;height:100%;object-fit:cover}
+.thumb b{position:absolute;top:3px;right:5px;background:rgba(220,60,60,.92);width:20px;height:20px;border-radius:50%;font-size:13px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.count{margin-top:12px;font-size:13px;color:#bcccc9;text-align:center}
+.count b{color:var(--gold)}
+#file{display:none}
+.creci{font-size:10px;font-weight:700;letter-spacing:.06em;color:#cfe0dc;border:1px solid rgba(255,255,255,.28);padding:4px 9px;border-radius:20px;margin-left:8px}
+.btn-caixa{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;margin:2px 0 20px;background:#0058A3;color:#fff;border-radius:16px;padding:18px;font-weight:700;font-size:16px;text-decoration:none;box-shadow:0 12px 26px rgba(0,88,163,.35)}
+.btn-caixa:active{transform:scale(.98)}
+.btn-caixa .cx{font-weight:900;letter-spacing:.08em;font-size:19px}
+.btn-caixa svg{width:22px;height:22px}
+.note{color:#7f9793;font-size:12px;text-align:center;margin-top:8px;line-height:1.5}
+.divider{height:1px;background:rgba(255,255,255,.08);margin:18px 0}
+</style>
+</head>
+<body>
+<div id="lock" style="position:fixed;inset:0;z-index:1000;background:#08191e;display:flex;align-items:center;justify-content:center;padding:24px">
+  <div style="width:100%;max-width:340px;text-align:center">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2" style="width:40px;height:40px;margin:0 auto 14px"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
+    <div class="frau" style="font-size:22px;margin-bottom:4px">Modo Corretor</div>
+    <div style="color:#9fb3b0;font-size:13px;margin-bottom:20px">Acesso restrito — Paulo Cotrim</div>
+    <input id="lu" type="text" placeholder="Usuário" autocomplete="username" style="width:100%;background:#0f2e36;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 14px;color:#fff;font-size:16px;margin-bottom:10px">
+    <input id="lp" type="password" placeholder="Senha" autocomplete="current-password" style="width:100%;background:#0f2e36;border:1px solid rgba(255,255,255,.14);border-radius:12px;padding:13px 14px;color:#fff;font-size:16px;margin-bottom:14px">
+    <button id="lb" type="button" style="width:100%;background:#1a8f4c;color:#fff;border:none;border-radius:14px;padding:15px;font-size:16px;font-weight:700;font-family:inherit;cursor:pointer">Entrar</button>
+    <div id="le" style="color:#e88;font-size:13px;margin-top:10px;min-height:16px"></div>
+  </div>
+</div>
+<script>
+(function(){
+  var ok=sessionStorage.getItem('pc_corretor_ok')==='1';
+  var lock=document.getElementById('lock');
+  if(ok){lock.style.display='none';return;}
+  function tryLogin(){
+    var u=document.getElementById('lu').value.trim(), p=document.getElementById('lp').value;
+    if(u==='paulo'&&p==='102030'){sessionStorage.setItem('pc_corretor_ok','1');lock.style.display='none';}
+    else{document.getElementById('le').textContent='Usuário ou senha incorretos.';}
+  }
+  document.getElementById('lb').addEventListener('click',tryLogin);
+  document.getElementById('lp').addEventListener('keydown',function(e){if(e.key==='Enter')tryLogin();});
+})();
+</script>
+<div class="top">
+  <svg class="key" viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
+  <b>Paulo Cotrim</b><span class="creci">CRECI-RJ 77677-F</span><small>Modo Corretor</small>
+</div>
+
+<div class="wrap">
+  <h1 class="frau">Na rua, com o cliente.</h1>
+  <p class="sub">Tudo num lugar só — CRM, site e proposta na hora.</p>
+
+  <div class="tiles">
+    <a class="tile" href="crm.html"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M3 3h18v4H3zM3 10h18v11H3z"/></svg>CRM</a>
+    <a class="tile" href="index.html" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>Site / Apresentar</a>
+    <a class="tile" href="https://wa.me/5521989150864" target="_blank"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>WhatsApp</a>
+  </div>
+
+  <a class="btn-caixa" href="abordagem-rua.html" style="background:#12333c;border:1px solid rgba(184,135,58,.35);box-shadow:0 12px 26px rgba(0,0,0,.3)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2"><path d="M8 12h8M8 8h8M8 16h5"/><rect x="3" y="3" width="18" height="18" rx="2"/></svg>
+    Iniciar <span class="cx" style="color:#e9c98a">Abordagem de Rua</span>
+  </a>
+
+  <a class="btn-caixa" href="simulador.html">
+    <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20M6 14h5"/></svg>
+    Financiamento <span class="cx">CAIXA</span>
+  </a>
+
+  <div class="card">
+    <h2 class="frau">Gerar proposta</h2>
+    <p class="hint">Preencha, fotografe os documentos do cliente e envie pra aprovação — sem sair daqui.</p>
+    <label>Empreendimento</label>
+    <input type="text" id="emp" placeholder="Ex.: Saudosa Praça Onze" autocomplete="off">
+    <label>Cliente</label>
+    <input type="text" id="cli" placeholder="Nome do cliente" autocomplete="off">
+
+    <input type="file" id="file" accept="image/*" capture="environment" multiple>
+    <button class="bigbtn" id="btnFoto" type="button">
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      Fotografar documentos
+    </button>
+
+    <div class="thumbs" id="thumbs"></div>
+    <div class="count" id="count"></div>
+
+    <button class="bigbtn send" id="btnEnviar" type="button" disabled>
+      <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"/></svg>
+      Enviar para aprovação
+    </button>
+    <p class="note" id="note">As fotos vão anexadas pela bandeja de compartilhar do seu celular — escolha o Gmail e envie.</p>
+  </div>
+</div>
+
+<script>
+(function(){
+  var files=[], fileInput=document.getElementById('file');
+  var thumbs=document.getElementById('thumbs'), count=document.getElementById('count');
+  var btnEnviar=document.getElementById('btnEnviar'), note=document.getElementById('note');
+
+  document.getElementById('btnFoto').addEventListener('click',function(){ fileInput.click(); });
+
+  fileInput.addEventListener('change',function(e){
+    var list=e.target.files;
+    for(var i=0;i<list.length;i++){ files.push(list[i]); }
+    fileInput.value='';
+    render();
+  });
+
+  function render(){
+    thumbs.innerHTML='';
+    files.forEach(function(f,idx){
+      var d=document.createElement('div'); d.className='thumb';
+      var img=document.createElement('img'); img.src=URL.createObjectURL(f); img.onload=function(){URL.revokeObjectURL(this.src);};
+      var x=document.createElement('b'); x.textContent='×'; x.title='Remover';
+      x.addEventListener('click',function(){ files.splice(idx,1); render(); });
+      d.appendChild(img); d.appendChild(x); thumbs.appendChild(d);
+    });
+    count.innerHTML = files.length ? ('<b>'+files.length+'</b> documento'+(files.length>1?'s':'')+' pronto'+(files.length>1?'s':'')+' pra enviar') : '';
+    btnEnviar.disabled = files.length===0;
+  }
+
+  function corpo(){
+    var emp=(document.getElementById('emp').value||'—');
+    var cli=(document.getElementById('cli').value||'—');
+    return 'Documentos para aprovação\nEmpreendimento: '+emp+'\nCliente: '+cli+'\n\nEnviado por Paulo Cotrim — CRECI-RJ 77677-F · (21) 98915-0864';
+  }
+
+  btnEnviar.addEventListener('click',async function(){
+    if(!files.length) return;
+    var texto=corpo();
+    var emp=(document.getElementById('emp').value||'proposta');
+    if(navigator.canShare && navigator.canShare({files:files})){
+      try{
+        await navigator.share({files:files, title:'Documentos para aprovação', text:texto});
+      }catch(err){ /* usuário cancelou */ }
+    } else {
+      var url='https://mail.google.com/mail/?view=cm&fs=1&su='+encodeURIComponent('Documentos para aprovação — '+emp)+'&body='+encodeURIComponent(texto+'\n\n(As fotos estão salvas na sua galeria — anexe-as aqui.)');
+      window.open(url,'_blank');
+      note.textContent='Seu aparelho não anexa direto — abri o Gmail com o texto pronto. As fotos ficaram na galeria pra você anexar.';
+    }
+  });
+})();
+</script>
+</body>
+</html>

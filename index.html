@@ -466,7 +466,7 @@ footer .wrap{position:relative;z-index:1}
 /* REGION GATE — splash de boas-vindas por região */
 #region-gate{position:fixed;inset:0;z-index:2000;background:#0a1e23;overflow:hidden;display:flex;align-items:center;justify-content:center;padding:32px 20px;opacity:1;transition:opacity .45s var(--ease),visibility .45s var(--ease)}
 #region-gate.hide{opacity:0;visibility:hidden;pointer-events:none}
-#region-gate::before{content:"";position:absolute;inset:0;background:url('img-porto.jpg') center/cover;animation:rgKen 22s ease-in-out infinite alternate;z-index:0}#region-gate::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,24,.5),rgba(8,20,24,.86));z-index:1}@keyframes rgKen{from{transform:scale(1.06)}to{transform:scale(1.17) translateY(-1.5%)}}.rg-skip{position:absolute;top:22px;right:24px;z-index:3;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:8px 16px;border-radius:30px;transition:.2s;cursor:pointer}
+#region-gate::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 95% at 50% -10%,#17434e 0%,#0d2b32 46%,#07161b 100%);z-index:0}#region-gate::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,20,24,.5),rgba(8,20,24,.86));z-index:1}@keyframes rgKen{from{transform:scale(1.06)}to{transform:scale(1.17) translateY(-1.5%)}}.rg-skip{position:absolute;top:22px;right:24px;z-index:3;font-size:13px;font-weight:600;color:rgba(255,255,255,.85);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:8px 16px;border-radius:30px;transition:.2s;cursor:pointer}
 .rg-skip:hover{color:#fff;border-color:#fff}
 .rg-inner{position:relative;z-index:2;max-width:720px;width:100%;text-align:center}
 .rg-logo{height:46px;width:auto;margin:0 auto 34px;display:block}
@@ -481,6 +481,16 @@ footer .wrap{position:relative;z-index:1}
 .rg-card small{display:block;font-size:11.5px;color:rgba(255,255,255,.72);margin-top:3px;font-weight:500}
 .rg-foot{margin-top:30px;font-size:12.5px;color:rgba(255,255,255,.8)}
 .rg-foot a{color:var(--gold);font-weight:600}
+.rg-selos{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;margin:0 auto 32px}
+.selo{display:inline-flex;align-items:center;gap:11px;padding:11px 18px;border-radius:14px;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.24);backdrop-filter:blur(8px)}
+.selo svg{width:26px;height:26px;stroke:var(--gold);fill:none;stroke-width:1.7;flex:0 0 auto}
+.selo .txt{text-align:left;line-height:1.05}
+.selo .txt b{display:block;color:#fff;font-family:'Fraunces',serif;font-size:15px}
+.selo .txt small{display:block;color:rgba(255,255,255,.82);font-size:11.5px;font-weight:600}
+.selo-caixa{background:#0058A3;border-color:#0a63b0}
+.selo-caixa .cx{font-family:'Inter',sans-serif;font-weight:900;font-size:22px;letter-spacing:.08em;color:#fff}
+.selo-caixa .txt small{color:rgba(255,255,255,.9)}
+@media(max-width:520px){.selo{padding:9px 14px}.selo .txt b{font-size:13.5px}}
 </style>
 <style>
 .constr-marquee{overflow:hidden;background:var(--mist);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:16px 0;white-space:nowrap}
@@ -508,6 +518,15 @@ footer .wrap{position:relative;z-index:1}
     <img src="logo-wordmark-light.png" alt="Paulo Cotrim" class="rg-logo"/>
     <h1 class="display">Bem-vindo! É um prazer ter você por aqui.</h1>
     <p>Escolha sua região e eu já separo os empreendimentos certos para você — você pode trocar ou incluir outras regiões a qualquer momento.</p>
+    <div class="rg-selos">
+      <div class="selo">
+        <svg viewBox="0 0 24 24" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-7 9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></svg>
+        <div class="txt"><b>Minha Casa Minha Vida</b><small>Especialista em aprovação</small></div>
+      </div>
+      <div class="selo selo-caixa">
+        <div class="txt"><small>Financiamento</small></div><span class="cx">CAIXA</span>
+      </div>
+    </div>
     <div class="rg-grid">
       <div class="rg-card" onclick="pickRegion('centro')">
         <svg viewBox="0 0 24 24" style="stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round"><circle cx="12" cy="5" r="3"/><path d="M12 8v5"/><path d="M5 21v-7a7 7 0 0114 0v7"/><path d="M5 21h14"/></svg>

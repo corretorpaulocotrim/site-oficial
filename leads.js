@@ -1132,3 +1132,25 @@
   var footer=document.querySelector('footer');
   if(footer) footer.parentNode.insertBefore(box,footer); else document.body.appendChild(box);
 })();
+
+/* ===== Regra do Paulo: todo CTA de "financiamento" vira botão Financiamento CAIXA (azul #0058A3) ===== */
+(function(){
+  try{
+    function upgrade(){
+      var els=document.querySelectorAll('a,button');
+      Array.prototype.forEach.call(els,function(el){
+        if(el.getAttribute('data-fcx')) return;
+        var t=(el.textContent||'').trim();
+        if(!t || t.length>44) return;
+        if(!/financiamento/i.test(t)) return;
+        el.setAttribute('data-fcx','1');
+        el.style.background='#0058A3';
+        el.style.color='#fff';
+        el.style.borderColor='#0058A3';
+        if(!/caixa/i.test(t)) el.setAttribute('aria-label', t+' Caixa');
+      });
+    }
+    if(document.readyState!=='loading') upgrade(); else document.addEventListener('DOMContentLoaded',upgrade);
+    setTimeout(upgrade,1600);
+  }catch(e){}
+})();
