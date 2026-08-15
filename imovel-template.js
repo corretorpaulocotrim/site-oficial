@@ -461,7 +461,7 @@ window.baixarPropostaSimples = function(){
     .cta-box{background:linear-gradient(135deg,#0a1f26,#0f2e36);color:#fff;border-radius:12px;padding:24px;margin-top:32px;text-align:center}
     .cta-box h3{font-size:20px;font-weight:900;margin-bottom:8px}
     .cta-box p{font-size:13px;opacity:.8;margin-bottom:16px}
-    .cta-wa{display:inline-block;background:#0058A3;color:#fff;font-weight:800;font-size:14px;padding:12px 28px;border-radius:8px;text-decoration:none}
+    .cta-wa{display:inline-block;background:#25D366;color:#fff;font-weight:800;font-size:14px;padding:12px 28px;border-radius:8px;text-decoration:none}
     .footer{margin-top:40px;padding-top:16px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8;text-align:center}
     @media print{.cta-box a{color:#fff!important}.no-print{display:none}}
   </style></head><body>

@@ -252,7 +252,7 @@
       wrap.innerHTML = ''
         +'<style>@keyframes exitFadeIn{from{opacity:0}to{opacity:1}}</style>'
         +'<div style="background:#fff;border-radius:18px;max-width:400px;width:100%;padding:28px 26px 22px;text-align:left;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif">'
-        +'  <div style="width:46px;height:46px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="#0058A3"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>'
+        +'  <div style="width:46px;height:46px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>'
         +'  <h3 style="font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;color:#0f2e36;margin-bottom:6px">Antes de ir pro WhatsApp</h3>'
         +'  <p style="font-size:13px;color:#6b7280;line-height:1.55;margin-bottom:16px">Deixe seu nome e WhatsApp pra eu já te chamar com a tabela pronta — ou pule e vá direto pra conversa.</p>'
         +'  <input id="waLeadNome" type="text" placeholder="Seu nome" autocomplete="name" style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;margin-bottom:9px;font-family:inherit;box-sizing:border-box">'
@@ -263,7 +263,7 @@
         +'      <option value="Manhã">Manhã</option><option value="Tarde">Tarde</option><option value="Noite">Noite</option>'
         +'    </select>'
         +'  </div>'
-        +'  <button id="waLeadGo" style="width:100%;background:#0058A3;color:#fff;border:none;padding:13px;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;margin-bottom:8px">Continuar para o WhatsApp</button>'
+        +'  <button id="waLeadGo" style="width:100%;background:#25D366;color:#fff;border:none;padding:13px;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;margin-bottom:8px">Continuar para o WhatsApp</button>'
         +'  <button id="waLeadCallback" style="width:100%;background:none;border:1.5px solid #e8eaed;color:#0f2e36;font-size:12.5px;font-weight:600;padding:10px;border-radius:10px;cursor:pointer;margin-bottom:8px">Prefiro que me liguem</button>'
         +'  <button id="waLeadSkip" style="width:100%;background:none;border:none;color:#6b7280;font-size:12.5px;padding:6px;cursor:pointer;text-decoration:underline">Pular e continuar</button>'
         +'</div>';
@@ -536,7 +536,7 @@
       overlay.innerHTML = '<div style="background:#fff;width:100%;max-width:440px;border-radius:18px 18px 0 0;padding:24px 22px;max-height:70vh;overflow-y:auto;font-family:Inter,system-ui,sans-serif">'
         + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h3 style="font-family:Fraunces,Georgia,serif;font-size:18px;color:#0f2e36">Meus favoritos</h3><button id="favPanelClose" style="background:#f5f6f7;border:none;width:30px;height:30px;border-radius:50%;font-size:16px;color:#6b7280;cursor:pointer">&times;</button></div>'
         + (itemsHtml || '<p style="font-size:13px;color:#6b7280">Você ainda não favoritou nenhum imóvel.</p>')
-        + (list.length ? '<a id="favSendWa" href="#" style="display:block;text-align:center;margin-top:16px;background:#0058A3;color:#fff;padding:12px;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none">Enviar minha lista pelo WhatsApp</a>' : '')
+        + (list.length ? '<a id="favSendWa" href="#" style="display:block;text-align:center;margin-top:16px;background:#25D366;color:#fff;padding:12px;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none">Enviar minha lista pelo WhatsApp</a>' : '')
         + '</div>';
       document.body.appendChild(overlay);
       document.getElementById('favPanelClose').onclick = function(){ overlay.remove(); };
@@ -1152,5 +1152,119 @@
     }
     if(document.readyState!=='loading') upgrade(); else document.addEventListener('DOMContentLoaded',upgrade);
     setTimeout(upgrade,1600);
+  }catch(e){}
+})();
+
+/* ===== WhatsApp float limpo (verde padrão) + VENDEDOR 01 (bot) ===== */
+(function(){
+  try{
+    var WA='https://wa.me/5521989150864';
+    var css=document.createElement('style');
+    css.textContent=
+      '.wafloat,.wafloat *{background:#25D366!important;color:#fff!important;border-color:#25D366!important}'
+      +'.wafloat .wa-online,.wafloat small,.wafloat .wa-label{display:none!important}'
+      +'#v01btn{position:fixed;right:18px;bottom:92px;z-index:9998;width:60px;height:60px;border-radius:50%;background:#0058A3;color:#fff;border:none;cursor:pointer;box-shadow:0 10px 26px rgba(0,88,163,.45);display:flex;align-items:center;justify-content:center;animation:v01p 2s infinite}'
+      +'#v01btn svg{width:28px;height:28px}'
+      +'#v01tag{position:fixed;right:86px;bottom:104px;z-index:9998;background:#0f2e36;color:#fff;font:600 12px Inter,sans-serif;padding:7px 12px;border-radius:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);white-space:nowrap}'
+      +'@keyframes v01p{0%,100%{box-shadow:0 10px 26px rgba(0,88,163,.45)}50%{box-shadow:0 10px 30px rgba(0,88,163,.8)}}'
+      +'#v01{position:fixed;right:18px;bottom:92px;z-index:9999;width:min(360px,92vw);height:min(560px,74vh);background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(15,46,54,.3);display:none;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif}'
+      +'#v01 .hd{background:#0058A3;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}'
+      +'#v01 .hd b{font-family:Fraunces,serif;font-size:15px}#v01 .hd small{opacity:.85;font-size:11px;display:block}'
+      +'#v01 .hd .x{margin-left:auto;cursor:pointer;font-size:20px;opacity:.9}'
+      +'#v01 .bd{flex:1;overflow-y:auto;padding:14px;background:#f4f7fb;display:flex;flex-direction:column;gap:10px}'
+      +'#v01 .b{max-width:82%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.45}'
+      +'#v01 .bot{background:#fff;border:1px solid #e6ecf3;color:#12333c;align-self:flex-start;border-bottom-left-radius:4px}'
+      +'#v01 .me{background:#0058A3;color:#fff;align-self:flex-end;border-bottom-right-radius:4px}'
+      +'#v01 .qr{display:flex;flex-wrap:wrap;gap:7px;padding:10px 12px;border-top:1px solid #e6ecf3;background:#fff}'
+      +'#v01 .qr button{background:#eaf1f8;border:1px solid #cfe0f2;color:#0058A3;font:600 12.5px Inter;padding:8px 12px;border-radius:20px;cursor:pointer}'
+      +'#v01 .form{padding:12px;background:#fff;border-top:1px solid #e6ecf3}'
+      +'#v01 .form input{width:100%;padding:11px 12px;border:1.5px solid #e6ecf3;border-radius:10px;font-size:14px;margin-bottom:8px;box-sizing:border-box}'
+      +'#v01 .form button{width:100%;background:#0058A3;color:#fff;border:none;padding:12px;border-radius:10px;font-weight:700;cursor:pointer}'
+      +'#v01 .wa{display:block;text-align:center;background:#25D366;color:#fff;text-decoration:none;font-weight:700;padding:12px;border-radius:10px;margin:2px 0}';
+    document.head.appendChild(css);
+
+    var btn=document.createElement('button');btn.id='v01btn';
+    btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><path d="M21 11.5a8.5 8.5 0 01-12.3 7.6L3 21l1.9-5.7A8.5 8.5 0 1121 11.5z"/><path d="M8 10h8M8 13h5"/></svg>';
+    var tag=document.createElement('div');tag.id='v01tag';tag.textContent='Fale com o COTRIM 🔑';
+    var box=document.createElement('div');box.id='v01';
+    document.body.appendChild(btn);document.body.appendChild(tag);document.body.appendChild(box);
+
+    var lead={};
+    function add(t,who){var d=document.createElement('div');d.className='b '+(who||'bot');d.innerHTML=t;box.querySelector('.bd').appendChild(d);box.querySelector('.bd').scrollTop=99999;}
+    function crm(obj){try{if(window.enviarLeadCRM)window.enviarLeadCRM(obj);}catch(e){}}
+    function open(){btn.style.display='none';tag.style.display='none';box.style.display='flex';render();}
+    function close(){box.style.display='none';btn.style.display='flex';tag.style.display='block';}
+
+    function shellHtml(){return '<div class="hd"><div><b>COTRIM</b><small>Assistente do Paulo Cotrim · CRECI-RJ 77677-F</small></div><span class="x">&times;</span></div><div class="bd"></div><div class="foot"></div>';}
+
+    function render(){
+      box.innerHTML=shellHtml();
+      box.querySelector('.x').onclick=close;
+      if(!lead.email){
+        add('Oi! 👋 Sou o <b>COTRIM</b>, assistente do Paulo. Em 2 minutos eu descubro qual imóvel cabe no seu bolso — e você sai daqui sabendo o caminho pra <b>sair do aluguel</b>.');
+        add('Pra eu te atender direitinho e o Paulo já te acompanhar, me diz seu nome e e-mail:');
+        var f=box.querySelector('.foot');f.className='form';
+        f.innerHTML='<input id="v01n" placeholder="Seu nome" autocomplete="name"><input id="v01e" type="email" placeholder="Seu melhor e-mail" autocomplete="email"><button id="v01go">Começar agora</button>';
+        f.querySelector('#v01go').onclick=function(){
+          var n=f.querySelector('#v01n').value.trim(),e=f.querySelector('#v01e').value.trim();
+          if(!n||!/.+@.+\..+/.test(e)){add('Preciso do nome e de um e-mail válido pra continuar 🙂');return;}
+          lead.nome=n;lead.email=e;
+          crm({nome:n,email:e,origem:'bot-vendedor01',interesse:'Iniciou conversa com o Vendedor 01',status:'novo',temp:'morno'});
+          menu('Prazer, '+n.split(' ')[0]+'! 🔑 Me conta: qual é a sua hoje?');
+        };
+      } else { menu('Voltamos! O que você quer resolver?'); }
+    }
+    function menu(intro){
+      box.querySelector('.bd').innerHTML='';box.querySelector('.foot').className='qr';box.querySelector('.foot').innerHTML='';
+      if(intro)add(intro);
+      var opts=[
+        ['🎯 Fazer meu quiz (2 min)','quiz'],
+        ['Quero sair do aluguel','aluguel'],['Tenho pouca entrada','entrada'],['Sou autônomo','autonomo'],
+        ['Minha Casa Minha Vida','mcmv'],['Ver imóveis por região','regiao'],['Falar com o Paulo','wa']];
+      var f=box.querySelector('.foot');
+      opts.forEach(function(o){var b=document.createElement('button');b.textContent=o[0];b.onclick=function(){pick(o[0],o[1]);};f.appendChild(b);});
+    }
+    var R={
+      aluguel:'Cada ano de aluguel é praticamente um apartamento que você entrega pro dono. 😮 Muitas vezes a parcela do financiamento fica <b>parecida com o que você já paga</b> — só que no fim o imóvel é <b>SEU</b>. Bora ver com quanto você consegue?',
+      entrada:'Entrada baixa não te para. Dá pra usar o <b>FGTS</b> e, no Minha Casa Minha Vida, tem <b>subsídio do governo</b> que abate uma parte. Já aprovei muita gente que achava impossível.',
+      autonomo:'"Sou autônomo, não consigo" é o maior mito. 💪 Dá pra comprovar renda de outras formas — e eu sei exatamente como montar seu caso pra Caixa aprovar.',
+      mcmv:'Você pode ter direito a <b>subsídio</b> e nem saber. O enquadramento depende da sua renda — e a análise inicial sai em até <b>48h úteis</b> (sujeita à aprovação da instituição). Vale demais checar.',
+      regiao:'Tenho lançamento em quase toda a cidade — Porto Maravilha, Centro, Zona Norte, Niterói, Jacarepaguá e mais. No WhatsApp eu já te mando as opções da <b>sua</b> região com valor real.'
+    };
+    function pick(label,key){
+      add(label,'me');
+      crm({nome:lead.nome,email:lead.email,origem:'bot-vendedor01',interesse:'Bot: '+label,status:'novo',temp:'quente'});
+      if(key==='wa'){toWa(label);return;}
+      if(key==='quiz'){quiz();return;}
+      add(R[key]||'Ótimo! Isso a gente resolve rapidinho.');
+      setTimeout(function(){toWa(label);},400);
+    }
+    function toWa(label){
+      var f=box.querySelector('.foot');f.className='qr';
+      var msg='Oi Paulo! Falei com o Vendedor 01 no site. Meu nome é '+(lead.nome||'')+'. Assunto: '+label+'.';
+      f.innerHTML='<a class="wa" target="_blank" href="'+WA+'?text='+encodeURIComponent(msg)+'">Fechar isso no WhatsApp 👉</a>';
+      var b=document.createElement('button');b.textContent='Ver outra dúvida';b.onclick=function(){menu('Sobre o que mais?');};f.appendChild(b);
+      add('Bora fechar com o Paulo agora, '+((lead.nome||'').split(' ')[0])+'? É rápido e sem compromisso. 👇');
+    }
+    function quiz(){
+      var qs=[['Onde você quer morar?',['Porto Maravilha','Centro','Zona Norte','Niterói','Jacarepaguá','Outra']],
+        ['É pra morar ou investir?',['Morar','Investir']],
+        ['Você paga aluguel hoje?',['Pago aluguel','Moro com a família','Tenho imóvel']],
+        ['Sua renda familiar (faixa)?',['Até R$ 2.640','R$ 2.640–4.400','R$ 4.400–8.000','Acima de 8.000']],
+        ['Tem FGTS ou carteira assinada?',['Sim','Não','Não sei']]];
+      var keys=['q_regiao','q_obj','q_aluguel','q_renda','q_fgts'],i=0;
+      function step(){
+        if(i>=qs.length){
+          crm({nome:lead.nome,email:lead.email,origem:'bot-quiz',status:'novo',temp:'quente',regiao:(lead.q_regiao||''),orcamento:(lead.q_renda||''),interesse:'Quiz COTRIM: '+keys.map(function(k){return lead[k]||'';}).join(' / ')});
+          add('Perfeito! 🔑 Pelo seu perfil eu já sei por onde começar. O Paulo monta a <b>simulação real</b> (parcela + subsídio, sujeita à aprovação) e te mostra o imóvel que <b>mais cabe no seu bolso</b>.');
+          setTimeout(function(){toWa('Fiz o quiz — '+(lead.q_regiao||'')+' / '+(lead.q_renda||''));},400);return;
+        }
+        add(qs[i][0]);
+        var f=box.querySelector('.foot');f.className='qr';f.innerHTML='';
+        qs[i][1].forEach(function(a){var b=document.createElement('button');b.textContent=a;b.onclick=function(){add(a,'me');lead[keys[i]]=a;i++;step();};f.appendChild(b);});
+      }
+      step();
+    }
+    btn.onclick=open;tag.onclick=open;
   }catch(e){}
 })();
