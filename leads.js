@@ -589,7 +589,7 @@
       '@type': 'RealEstateAgent',
       name: 'Paulo Cotrim',
       description: 'Corretor de imóveis com 18 anos de experiência, especialista em financiamento imobiliário e Minha Casa Minha Vida no Rio de Janeiro.',
-      url: 'https://paulocotrim.com.br/',
+      url: 'https://www.paulocotrim.com/',
       email: 'corretorpaulocotrim@gmail.com',
       areaServed: { '@type': 'City', name: 'Rio de Janeiro' },
       identifier: 'CRECI-RJ 77677-F'
@@ -607,8 +607,8 @@
       '@context': 'https://schema.org',
       '@type': 'Organization',
       name: 'Paulo Cotrim — Inteligência Imobiliária',
-      url: 'https://paulocotrim.com.br/',
-      logo: 'https://paulocotrim.com.br/logo-wordmark.png',
+      url: 'https://www.paulocotrim.com/',
+      logo: 'https://www.paulocotrim.com/logo-wordmark.png',
       founder: { '@type': 'Person', name: 'Paulo Cotrim' },
       areaServed: { '@type': 'City', name: 'Rio de Janeiro' },
       contactPoint: { '@type': 'ContactPoint', contactType: 'vendas', email: 'corretorpaulocotrim@gmail.com', telephone: '+5521989150864', availableLanguage: 'pt-BR' }

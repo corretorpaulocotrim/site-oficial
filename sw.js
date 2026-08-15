@@ -4,7 +4,7 @@
    nunca mostrar versão velha; assets estáticos rápidos
    (stale-while-revalidate). Atualiza NA HORA (skipWaiting).
    ===================================================== */
-const CACHE_NAME = 'paulocotrim-v75';
+const CACHE_NAME = 'paulocotrim-v76';
 
 self.addEventListener('install', function (e) {
   self.skipWaiting();

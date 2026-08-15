@@ -562,7 +562,7 @@ function fsimDownload(nome){
     +'<div class="qrbox"><img src="'+qr+'" alt="QR code do WhatsApp"/><div><b>Fale agora com o Paulo</b>Escaneie para abrir o WhatsApp direto com o Paulo Cotrim sobre este resumo.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
     +'<div class="legal">Documento meramente informativo e educativo, sem valor contratual. Valores, prazos, condições de pagamento e disponibilidade de unidades são de responsabilidade da construtora/incorporadora e da instituição financeira, podendo ser alterados sem aviso prévio. A aprovação de crédito depende de análise cadastral própria do agente financeiro. Consulte sempre a tabela oficial atualizada e formalize as condições finais com Paulo Cotrim antes de tomar qualquer decisão.</div>'
-    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Financiamento Imobiliário · paulocotrim.com.br</div>'
+    +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Especialista em Financiamento Imobiliário · paulocotrim.com</div>'
     +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
