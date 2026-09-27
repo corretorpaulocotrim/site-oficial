@@ -1,87 +1,60 @@
 /**
- * preco-dolar.js — Preço em DÓLAR na frente, REAL escondido atrás da lupa.
- * ------------------------------------------------------------------------
- * Padrão alto padrão (comprador/investidor internacional):
- *  - Mostra o valor em US$ (convertido do preço real em R$).
- *  - O valor em R$ fica oculto; clicar na lupa revela.
- *  - A cotação do dólar é buscada ao vivo e CACHEADA por 3 dias
- *    (atualiza de 3 em 3 dias, conforme o valor do dólar do dia).
- *
- * Uso no HTML:
- *   <div class="preco-usd" data-brl="1250000"></div>
- *   (sem data-brl, ou vazio → "Sob consulta", sem inventar dólar)
- *   <script src="preco-dolar.js" defer></script>
- * ------------------------------------------------------------------------
+ * preco-dolar.js — Preço na moeda do país selecionado (bandeira), com o R$ real atrás da lupa.
+ * Idioma/moeda vêm do i18n.js (evento 'pc-ccy' + window.PC_CCY). Sem seleção, mostra US$.
+ *  - PT/BRL: mostra R$ (sem lupa).  EN/USD e ES·IT/EUR: mostra na moeda + lupa revela o R$ real.
+ *  - Cotações (USD-BRL, EUR-BRL) ao vivo, cacheadas por 3 dias. Nada inventado: sem data-brl → "Sob consulta".
  */
 (function(){
-  var TTL = 3*24*60*60*1000;            // 3 dias
-  var KEY = 'usdbrl_rate_v1';
-  var API = 'https://economia.awesomeapi.com.br/last/USD-BRL';  // cotação pública
+  var TTL=3*24*60*60*1000, KEY='fx_rates_v1';
+  var API='https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL';
+  var RATES=null; // {USD:brlPerUsd, EUR:brlPerEur}
 
-  function fmtUSD(v){ return 'US$ ' + Math.round(v).toLocaleString('en-US'); }
-  function fmtBRL(v){ return 'R$ ' + Math.round(v).toLocaleString('pt-BR'); }
+  function ccy(){ var c=(window.PC_CCY&&window.PC_CCY.code); if(c)return c;
+    try{return localStorage.getItem('pc_ccy')||'USD';}catch(e){return 'USD';} }
+  function sym(c){return c==='BRL'?'R$':c==='EUR'?'€':'US$';}
+  function loc(c){return c==='BRL'?'pt-BR':c==='EUR'?'de-DE':'en-US';}
+  function fmt(v,c){return sym(c)+' '+Math.round(v).toLocaleString(loc(c));}
+  function conv(brl,c){ if(c==='BRL'||!RATES)return brl; var r=RATES[c]; return r?brl/r:brl; }
 
-  function getCached(){
-    try{ var c = JSON.parse(localStorage.getItem(KEY)||'null');
-      if(c && c.rate && (Date.now()-c.ts) < TTL) return c; }catch(e){}
-    return null;
-  }
-  function setCached(rate){
-    try{ localStorage.setItem(KEY, JSON.stringify({rate:rate, ts:Date.now()})); }catch(e){}
-  }
-
-  function fetchRate(){
+  function getCached(){try{var x=JSON.parse(localStorage.getItem(KEY)||'null');
+    if(x&&x.USD&&(Date.now()-x.ts)<TTL)return x;}catch(e){}return null;}
+  function setCached(r){try{r.ts=Date.now();localStorage.setItem(KEY,JSON.stringify(r));}catch(e){}}
+  function fetchRates(){
     return fetch(API).then(function(r){return r.json();}).then(function(j){
-      var bid = j && j.USDBRL && parseFloat(j.USDBRL.bid);
-      if(!bid || isNaN(bid)) throw new Error('sem cotação');
-      setCached(bid); return bid;
+      var u=j&&j.USDBRL&&parseFloat(j.USDBRL.bid), e=j&&j.EURBRL&&parseFloat(j.EURBRL.bid);
+      if(!u)throw new Error('sem cotação'); RATES={USD:u,EUR:e||null}; setCached(RATES); return RATES;
     });
   }
 
-  function renderAll(rate, aprox){
-    document.querySelectorAll('.preco-usd').forEach(function(el){
-      if(el.dataset.done) return;
-      var brl = parseFloat(el.getAttribute('data-brl')||'');
-      if(!brl || isNaN(brl)){
-        el.innerHTML = '<span class="pu-consulta">Sob consulta</span>';
-        el.dataset.done = '1'; return;
-      }
-      var usd = brl / rate;
-      el.innerHTML =
-        '<span class="pu-usd">'+fmtUSD(usd)+'</span>'
-        +'<button class="pu-lupa" type="button" aria-label="Ver valor em reais" title="Ver em R$">'
-        +'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>'
-        +'<span class="pu-brl" hidden>'+fmtBRL(brl)+'</span>'
-        +'<span class="pu-cot">câmbio '+ (aprox?'aprox. ':'') +'US$ 1 = '+fmtBRL(rate).replace('R$ ','R$ ')+' · atualiza a cada 3 dias</span>';
-      var lupa = el.querySelector('.pu-lupa'), br = el.querySelector('.pu-brl');
-      lupa.addEventListener('click', function(){
-        var show = br.hasAttribute('hidden');
-        if(show){ br.removeAttribute('hidden'); lupa.classList.add('on'); }
-        else { br.setAttribute('hidden',''); lupa.classList.remove('on'); }
-        if(window.trackEvent) trackEvent('preco_real_revelado',{});
-      });
-      el.dataset.done = '1';
+  function one(el){
+    var brl=parseFloat(el.getAttribute('data-brl')||'');
+    if(!brl||isNaN(brl)){el.innerHTML='<span class="pu-consulta">Sob consulta</span>';return;}
+    var c=ccy();
+    if(c==='BRL'||!RATES){
+      el.innerHTML='<span class="pu-usd">'+fmt(brl,'BRL')+'</span>';
+      return;
+    }
+    var v=conv(brl,c);
+    el.innerHTML=
+      '<span class="pu-usd">'+fmt(v,c)+'</span>'
+      +'<button class="pu-lupa" type="button" aria-label="Ver em Reais" title="Ver em R$"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button>'
+      +'<span class="pu-brl" hidden>'+fmt(brl,'BRL')+'</span>'
+      +'<span class="pu-cot">'+sym(c)+' 1 = '+fmt((c==='EUR'?RATES.EUR:RATES.USD),'BRL').replace('R$ ','R$ ')+' · atualiza a cada 3 dias</span>';
+    var lupa=el.querySelector('.pu-lupa'), br=el.querySelector('.pu-brl');
+    lupa.addEventListener('click',function(){
+      if(br.hasAttribute('hidden')){br.removeAttribute('hidden');lupa.classList.add('on');}
+      else{br.setAttribute('hidden','');lupa.classList.remove('on');}
+      if(window.trackEvent)trackEvent('preco_real_revelado',{});
     });
   }
+  function renderAll(){ var els=document.querySelectorAll('.preco-usd'); [].forEach.call(els,one); }
 
   function boot(){
-    if(!document.querySelector('.preco-usd')) return;
-    var c = getCached();
-    if(c){ renderAll(c.rate,false); return; }
-    fetchRate().then(function(rate){ renderAll(rate,false); })
-      .catch(function(){
-        var c2 = null; try{ c2 = JSON.parse(localStorage.getItem(KEY)||'null'); }catch(e){}
-        if(c2 && c2.rate){ renderAll(c2.rate,true); }
-        else {
-          // sem cotação e sem cache: mostra o Real direto, sem inventar dólar
-          document.querySelectorAll('.preco-usd').forEach(function(el){
-            if(el.dataset.done) return;
-            var brl = parseFloat(el.getAttribute('data-brl')||'');
-            el.innerHTML = brl?('<span class="pu-usd">'+fmtBRL(brl)+'</span><span class="pu-cot">cotação do dólar indisponível no momento</span>'):'<span class="pu-consulta">Sob consulta</span>';
-            el.dataset.done='1';
-          });
-        }
-      });
+    if(!document.querySelector('.preco-usd'))return;
+    var c=getCached();
+    if(c){RATES={USD:c.USD,EUR:c.EUR};renderAll();}
+    else fetchRates().then(renderAll).catch(function(){RATES=null;renderAll();});
+    document.addEventListener('pc-ccy',renderAll);
   }
-  if(document.readyState!=='loading') boot(); else document.addEventListener('DOMContentLoaded', boot);
+  if(document.readyState!=='loading')boot(); else document.addEventListener('DOMContentLoaded',boot);
 })();

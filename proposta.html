@@ -1,0 +1,250 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="robots" content="noindex,nofollow"/>
+<title>Gerador de Proposta Premium · Paulo Cotrim</title>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ivory:#f6f2ea;--ivory2:#fbf9f4;--white:#fff;--ink:#1a1a19;--graphite:#2c2b28;--muted:#8a857b;--gold:#b0895b;--line:#e3ddd1}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--ivory);color:var(--ink);line-height:1.6;font-weight:300}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+.top{background:var(--ink);color:#fff;padding:16px 26px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+.top .bn{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:600}
+.top .bs{font-size:9px;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.top a{color:var(--gold);font-size:12px;text-decoration:none;letter-spacing:.06em}
+.grid{display:grid;grid-template-columns:380px 1fr;gap:0;min-height:100vh}
+@media(max-width:900px){.grid{grid-template-columns:1fr}}
+.form{background:var(--white);border-right:1px solid var(--line);padding:28px 26px}
+.form h2{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:500;margin-bottom:4px}
+.form .hint{font-size:12px;color:var(--muted);margin-bottom:20px}
+.f{margin-bottom:15px}
+.f label{display:block;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:6px}
+.f input,.f select,.f textarea{width:100%;border:1px solid var(--line);background:var(--ivory2);border-radius:3px;padding:10px 12px;font-family:inherit;font-size:14px;color:var(--ink);outline:none}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--gold)}
+.f textarea{resize:vertical;min-height:64px}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.btns{display:flex;flex-direction:column;gap:9px;margin-top:22px}
+.btn{border:none;border-radius:3px;padding:13px;font-family:inherit;font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;cursor:pointer;transition:.25s;font-weight:500}
+.btn-solid{background:var(--gold);color:var(--ink)}.btn-solid:hover{background:#c79c68}
+.btn-ink{background:var(--ink);color:#fff}.btn-ink:hover{background:var(--graphite)}
+.btn-o{background:none;border:1px solid var(--line);color:var(--ink)}.btn-o:hover{border-color:var(--gold)}
+.crmmsg{font-size:12px;margin-top:8px;color:var(--muted);min-height:16px}
+/* preview */
+.preview{padding:34px;overflow:auto}
+.sheet{background:var(--white);max-width:720px;margin:0 auto;border:1px solid var(--line);padding:52px 56px;box-shadow:0 30px 70px -40px rgba(26,26,25,.25)}
+@media(max-width:600px){.sheet{padding:32px 24px}.preview{padding:16px}}
+.sheet .crest{width:74px;height:74px;display:block;margin:0 auto 10px}
+.sheet .eyebrow{text-align:center;font-size:10px;letter-spacing:.28em;text-transform:uppercase;color:var(--gold)}
+.sheet h1{font-family:'Cormorant Garamond',serif;font-size:34px;font-weight:500;text-align:center;line-height:1.1;margin:8px 0 4px}
+.sheet .to{text-align:center;color:var(--muted);font-size:13px;margin-bottom:26px}
+.sheet .sec{margin:22px 0}
+.sheet .sec h3{font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:12px;border-bottom:1px solid var(--line);padding-bottom:6px}
+.rowline{display:flex;justify-content:space-between;gap:16px;padding:7px 0;font-size:14px;border-bottom:1px solid #f0ebe0}
+.rowline span{color:var(--muted)}.rowline b{font-weight:500;text-align:right}
+.big{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500;color:var(--ink)}
+.usd{color:var(--gold)}
+.steps{counter-reset:s;list-style:none}
+.steps li{counter-increment:s;position:relative;padding:8px 0 8px 34px;font-size:14px;border-bottom:1px solid #f0ebe0}
+.steps li:before{content:counter(s);position:absolute;left:0;top:7px;width:22px;height:22px;border:1px solid var(--gold);border-radius:50%;color:var(--gold);font-size:11px;display:flex;align-items:center;justify-content:center}
+.blind{font-size:11px;color:var(--muted);line-height:1.6;margin-top:22px;padding-top:14px;border-top:1px solid var(--line)}
+.sig{text-align:center;margin-top:26px;font-size:13px;color:var(--graphite)}
+.sig b{font-family:'Cormorant Garamond',serif;font-size:18px;display:block;font-weight:600}
+.wa{background:var(--ivory2);border:1px solid var(--line);border-radius:4px;padding:18px;margin:20px auto 0;max-width:720px}
+.wa h4{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
+.wa pre{white-space:pre-wrap;font-family:inherit;font-size:13.5px;color:var(--ink)}
+@media print{.top,.form,.btns,.wa,.noprint{display:none!important}.grid{display:block}.preview{padding:0}.sheet{border:none;box-shadow:none;max-width:100%}}
+</style>
+</head>
+<body>
+<div class="top">
+  <div><span class="bn">Paulo Cotrim</span> <span class="bs">· Gerador de Proposta Premium</span></div>
+  <a href="index.html">← Voltar ao site</a>
+</div>
+<div class="grid">
+  <div class="form">
+    <h2 class="serif">Nova proposta</h2>
+    <p class="hint">Preencha e a proposta monta ao lado. Nada é enviado sem você mandar.</p>
+    <div class="f"><label>Cliente</label><input id="cliente" placeholder="Nome do cliente"/></div>
+    <div class="row2">
+      <div class="f"><label>WhatsApp</label><input id="tel" placeholder="(21) 9...."/></div>
+      <div class="f"><label>E-mail</label><input id="email" placeholder="opcional"/></div>
+    </div>
+    <div class="f"><label>Empreendimento</label><select id="emp"><option value="">Selecione…</option></select></div>
+    <div class="row2">
+      <div class="f"><label>Bairro</label><input id="bairro" placeholder="—"/></div>
+      <div class="f"><label>Tipologia</label><input id="tipo" placeholder="ex.: 3 suítes"/></div>
+    </div>
+    <div class="f"><label>Metragem</label><input id="metragem" placeholder="ex.: 120 m²"/></div>
+    <div class="row2">
+      <div class="f"><label>Valor do imóvel (R$)</label><input id="valor" inputmode="numeric" placeholder="deixe vazio = sob consulta"/></div>
+      <div class="f"><label>Entrada / sinal (%)</label><input id="entrada" inputmode="numeric" placeholder="ex.: 20"/></div>
+    </div>
+    <div class="f"><label>Condição de pagamento</label><select id="cond">
+      <option>Fluxo direto com a incorporadora (sinal + obra + chaves)</option>
+      <option>À vista</option>
+      <option>Financiamento bancário</option>
+      <option>Permuta / a combinar</option>
+    </select></div>
+    <div class="f"><label>Observações (opcional)</label><textarea id="obs" placeholder="Ex.: vista mar, unidade específica, prazo de entrega…"></textarea></div>
+    <div class="btns">
+      <button class="btn btn-o" type="button" onclick="copiarWA()">Copiar mensagem de WhatsApp</button>
+      <button class="btn btn-ink" type="button" onclick="window.print()">Imprimir / Salvar PDF</button>
+      <button class="btn btn-solid" type="button" onclick="registrarCRM()">Registrar no CRM (Proposta)</button>
+      <div class="crmmsg" id="crmmsg"></div>
+    </div>
+  </div>
+
+  <div class="preview">
+    <div class="sheet" id="sheet">
+      <img class="crest" src="logo-crest.svg" alt="Paulo Cotrim"/>
+      <div class="eyebrow">Proposta de aquisição</div>
+      <h1 class="serif" id="p-emp">Empreendimento</h1>
+      <div class="to" id="p-to">Preparada para você</div>
+
+      <div class="sec"><h3>Imóvel</h3>
+        <div class="rowline"><span>Bairro</span><b id="p-bairro">—</b></div>
+        <div class="rowline"><span>Tipologia</span><b id="p-tipo">—</b></div>
+        <div class="rowline"><span>Metragem</span><b id="p-metragem">—</b></div>
+      </div>
+
+      <div class="sec"><h3>Investimento</h3>
+        <div class="rowline"><span>Valor do imóvel</span><b><span class="big" id="p-valor">Sob consulta</span></b></div>
+        <div class="rowline"><span>Equivalente aproximado</span><b class="usd" id="p-usd">—</b></div>
+        <div class="rowline"><span>Entrada / sinal estimado</span><b id="p-entrada">A combinar</b></div>
+        <div class="rowline"><span>Condição</span><b id="p-cond">—</b></div>
+      </div>
+
+      <div class="sec" id="p-obs-sec" style="display:none"><h3>Observações</h3>
+        <div id="p-obs" style="font-size:14px;color:var(--graphite)"></div>
+      </div>
+
+      <div class="sec"><h3>Próximos passos</h3>
+        <ol class="steps">
+          <li>Apresentação personalizada e esclarecimento de dúvidas</li>
+          <li>Visita ao decorado / à unidade</li>
+          <li>Reserva da unidade escolhida</li>
+          <li>Formalização e contrato com a incorporadora</li>
+        </ol>
+      </div>
+
+      <div class="sig">
+        <b class="serif">Paulo Cotrim</b>
+        Consultoria Imobiliária · Alto Padrão · CRECI-RJ 77.677<br/>
+        (21) 98915-0864 · @corretor.paulocotrim · paulocotrim.com
+      </div>
+
+      <div class="blind" id="p-blind">
+        Valores, metragens, tipologias e disponibilidade a confirmar na tabela oficial vigente de cada empreendimento. Câmbio meramente indicativo, atualizado periodicamente. Este documento é uma proposta de trabalho e não constitui oferta, reserva ou garantia de preço ou de unidade.
+      </div>
+    </div>
+
+    <div class="wa noprint">
+      <h4>Mensagem de WhatsApp (clique em copiar)</h4>
+      <pre id="wa-text"></pre>
+    </div>
+  </div>
+</div>
+
+<script src="crm-config.js"></script>
+<script>
+var RATE=null, DATA=[];
+function fmtBRL(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR');}
+function fmtUSD(v){return 'US$ '+Math.round(v).toLocaleString('en-US');}
+function num(id){var v=(document.getElementById(id).value||'').replace(/[^0-9]/g,'');return v?parseFloat(v):0;}
+function val(id){return (document.getElementById(id).value||'').trim();}
+
+function fetchRate(){
+  try{var c=JSON.parse(localStorage.getItem('usdbrl_rate_v1')||'null');
+    if(c&&c.rate&&(Date.now()-c.ts)<3*24*3600*1000){RATE=c.rate;render();return;}}catch(e){}
+  fetch('https://economia.awesomeapi.com.br/last/USD-BRL').then(function(r){return r.json();}).then(function(j){
+    var b=j&&j.USDBRL&&parseFloat(j.USDBRL.bid); if(b){RATE=b;try{localStorage.setItem('usdbrl_rate_v1',JSON.stringify({rate:b,ts:Date.now()}));}catch(e){}render();}
+  }).catch(function(){});
+}
+
+function loadEmp(){
+  fetch('data/alto-padrao.json').then(function(r){return r.json();}).then(function(d){
+    DATA=(d&&d.empreendimentos)||[];
+    var s=document.getElementById('emp');
+    DATA.forEach(function(e){var o=document.createElement('option');o.value=e.slug;o.textContent=e.nome+' · '+e.bairro;s.appendChild(o);});
+    var o2=document.createElement('option');o2.value='outro';o2.textContent='Outro (digitar)';s.appendChild(o2);
+  }).catch(function(){});
+}
+document.getElementById('emp').addEventListener('change',function(){
+  var e=DATA.filter(function(x){return x.slug===this.value;}.bind(this))[0];
+  if(e){document.getElementById('bairro').value=e.bairro||'';
+    document.getElementById('metragem').value=(e.metragem||'').split('·')[0].trim();
+    document.getElementById('tipo').value=e.quartos||'';}
+  render();
+});
+
+function proximaEmp(){
+  var sel=document.getElementById('emp'), s=sel.value;
+  if(s==='outro'||!s) return val('cliente')?('imóvel selecionado'):'Empreendimento';
+  var e=DATA.filter(function(x){return x.slug===s;})[0];
+  return e?e.nome:'Empreendimento';
+}
+
+function render(){
+  var nomeEmp=proximaEmp();
+  var cliente=val('cliente');
+  var valor=num('valor'), entradaPct=num('entrada');
+  document.getElementById('p-emp').textContent=nomeEmp;
+  document.getElementById('p-to').textContent=cliente?('Preparada para '+cliente):'Preparada para você';
+  document.getElementById('p-bairro').textContent=val('bairro')||'—';
+  document.getElementById('p-tipo').textContent=val('tipo')||'—';
+  document.getElementById('p-metragem').textContent=val('metragem')||'—';
+  var pv=document.getElementById('p-valor'), pu=document.getElementById('p-usd');
+  if(valor>0){pv.textContent=fmtBRL(valor); pu.textContent=RATE?('~ '+fmtUSD(valor/RATE)):'câmbio indisponível';}
+  else{pv.textContent='Sob consulta'; pu.textContent='—';}
+  var pe=document.getElementById('p-entrada');
+  if(valor>0&&entradaPct>0){pe.textContent=fmtBRL(valor*entradaPct/100)+' ('+entradaPct+'%)';}
+  else if(entradaPct>0){pe.textContent=entradaPct+'% (sobre a tabela)';}
+  else pe.textContent='A combinar';
+  document.getElementById('p-cond').textContent=val('cond');
+  var obs=val('obs'), os=document.getElementById('p-obs-sec');
+  if(obs){os.style.display='';document.getElementById('p-obs').textContent=obs;}else{os.style.display='none';}
+  buildWA(nomeEmp,cliente,valor,entradaPct);
+}
+
+function buildWA(nomeEmp,cliente,valor,entradaPct){
+  var linhas=[];
+  linhas.push('Olá'+(cliente?(' '+cliente):'')+'! Aqui é o Paulo Cotrim (CRECI-RJ 77.677).');
+  linhas.push('Preparei sua proposta para o '+nomeEmp+(val('bairro')?(', em '+val('bairro')):'')+':');
+  linhas.push('');
+  if(val('tipo'))linhas.push('• '+val('tipo')+(val('metragem')?(' · '+val('metragem')):''));
+  if(valor>0){linhas.push('• Valor: '+fmtBRL(valor)+(RATE?(' (~ '+fmtUSD(valor/RATE)+')'):''));
+    if(entradaPct>0)linhas.push('• Entrada/sinal estimado: '+fmtBRL(valor*entradaPct/100)+' ('+entradaPct+'%)');}
+  else linhas.push('• Valor: sob consulta na tabela oficial vigente');
+  linhas.push('• Condição: '+val('cond'));
+  if(val('obs'))linhas.push('• '+val('obs'));
+  linhas.push('');
+  linhas.push('Valores a confirmar na tabela oficial — não é oferta nem garantia de unidade. Quer que eu agende uma apresentação?');
+  document.getElementById('wa-text').textContent=linhas.join('\n');
+}
+
+function copiarWA(){
+  var t=document.getElementById('wa-text').textContent;
+  navigator.clipboard.writeText(t).then(function(){flash('Mensagem copiada.');},function(){flash('Selecione e copie o texto abaixo.');});
+}
+function flash(m){var e=document.getElementById('crmmsg');e.textContent=m;setTimeout(function(){if(e.textContent===m)e.textContent='';},4000);}
+
+function registrarCRM(){
+  var cliente=val('cliente'), tel=val('tel');
+  if(!cliente&&!tel){flash('Preencha ao menos nome ou WhatsApp.');return;}
+  var nomeEmp=proximaEmp(), valor=num('valor');
+  var lead={nome:cliente,telefone:tel,email:val('email'),
+    interesse:'Proposta · '+nomeEmp+(val('bairro')?(' / '+val('bairro')):''),
+    orcamento:valor?fmtBRL(valor):'sob consulta',
+    origem:'proposta-premium',status:'Proposta',temp:'quente',
+    obs:val('cond')+(val('obs')?(' · '+val('obs')):'')};
+  if(window.enviarLeadCRM){
+    enviarLeadCRM(lead); flash('Registrado no CRM como Proposta ✓');
+  } else { flash('CRM indisponível — lead guardado localmente.'); }
+}
+
+['cliente','tel','email','bairro','tipo','metragem','valor','entrada','cond','obs'].forEach(function(id){
+  document.getElementById(id).addEventListener('input',render);
+});
+loadEmp(); fetchRate(); render();
+</script>
+</body></html>

@@ -1,7 +1,7 @@
 {
  "gerado": "2026-09",
  "segmento": "alto padrão",
- "total": 7,
+ "total": 8,
  "observacao": "Dados factuais (nome/bairro/endereço/metragem/tipologia). Preço = consulte tabela oficial. Fotos = autorizadas, fornecidas pelo Paulo. Texto editorial original.",
  "empreendimentos": [
   {
@@ -108,6 +108,21 @@
    "img": "emp-img/luxo/peninsula-singular.jpg",
    "url": "emp-peninsula-singular.html",
    "fonte": "referência pública + representação do corretor (fotos autorizadas a fornecer)"
+  },
+  {
+   "slug": "emp-be-in-rio-barao-jaguaripe",
+   "nome": "Be.in.Rio — Barão de Jaguaripe",
+   "bairro": "Ipanema",
+   "end": "Rua Barão de Jaguaripe, 225 e 404",
+   "metragem": "33,46 a 48,14 m² · double suites 69,89 e 70,05 m²",
+   "quartos": "Apartamentos e double suites",
+   "vagas": "Consulte",
+   "ed": "Viver Ipanema em sua forma mais autêntica. Dois lançamentos na Rua Barão de Jaguaripe, com apartamentos e double suites, rooftop com piscina aquecida e arte na fachada, a poucos passos da praia.",
+   "construtora": "Opportunity Imobiliário",
+   "preco_texto": "Consulte tabela",
+   "img": "emp-img/luxo/bir-jaguaripe-hero.jpg",
+   "url": "emp-be-in-rio-barao-jaguaripe.html",
+   "fonte": "book oficial do empreendimento (material autorizado ao corretor)"
   }
  ]
 }
