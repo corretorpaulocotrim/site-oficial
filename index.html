@@ -131,22 +131,42 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 #pc-map{height:520px;border:1px solid var(--line);overflow:hidden}
 @media(max-width:680px){#pc-map{height:420px}}
 </style>
+<style>
+.brandmark{display:flex;align-items:center;gap:13px;color:#fff!important}
+.brandmark .round{width:44px;height:44px;display:block;color:#fff}
+.brandmark .round svg{width:100%;height:100%}
+.brandmark .lock{display:flex;align-items:center;gap:12px}
+.brandmark .bn{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600;letter-spacing:.06em;color:#fff}
+.brandmark .div{width:1px;height:22px;background:rgba(255,255,255,.4)}
+.brandmark .bsw{font-family:'Inter',sans-serif;font-size:13px;font-weight:600;letter-spacing:.22em;color:rgba(255,255,255,.9);font-style:normal}
+@media(max-width:520px){.brandmark .bn{font-size:16px}.brandmark .div,.brandmark .bsw{display:none}}
+.hero h1{font-family:'Inter',system-ui,sans-serif!important;font-weight:700!important;font-size:clamp(32px,5.4vw,64px)!important;line-height:1.06!important;letter-spacing:-.02em!important;margin:18px auto 18px!important;max-width:18ch}
+.hsearch{display:flex;align-items:center;max-width:640px;margin:0 auto;background:rgba(255,255,255,.97);border-radius:100px;padding:8px 8px 8px 28px;box-shadow:0 30px 70px -30px rgba(0,0,0,.5);gap:10px}
+.hs-field{flex:1;text-align:left;min-width:0}
+.hs-lb{display:block;font:600 10px 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:var(--gold)}
+.hs-field input{border:none;background:none;font:400 15px 'Inter',sans-serif;color:var(--ink);width:100%;outline:none;padding:2px 0}
+.hsearch .hgo{width:52px;height:52px;border-radius:50%;background:var(--gold);color:var(--ink);border:none;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:none;transition:.25s}
+.hsearch .hgo:hover{background:#c79c68}
+footer.jb{background:#1c1b19;color:rgba(255,255,255,.7);padding:66px 0 40px}
+.jb-grid{display:grid;grid-template-columns:1.3fr 1fr 1.1fr;gap:40px;align-items:start}
+@media(max-width:820px){.jb-grid{grid-template-columns:1fr;gap:34px;text-align:center}}
+.jb-tag .jb-round{width:52px;height:52px;color:#b0895b;margin-bottom:16px}
+@media(max-width:820px){.jb-tag .jb-round{margin:0 auto 16px}}
+.jb-tag h3{font-family:'Inter',sans-serif;font-weight:700;font-size:19px;line-height:1.35;color:#fff;text-transform:uppercase;letter-spacing:.02em;max-width:22ch}
+.jb-tag p{font-size:13px;margin-top:12px;max-width:34ch}
+.jb-h{display:block;font:600 12px 'Inter',sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#fff;margin-bottom:16px}
+.jb-crmlink{display:inline-flex;align-items:center;gap:10px;color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.2);border-radius:6px;padding:12px 16px}
+.jb-crmlink .r{width:26px;height:26px;color:#b0895b}
+.jb-crmlink b{font-family:'Cormorant Garamond',serif;font-size:16px}
+.jb-excl{display:block;font-weight:600;color:#fff;font-size:12px;margin-top:14px}
+.jb-contato p{font-size:13.5px;margin-bottom:8px}
+.jb-contato a{color:#b0895b}
+.jb-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:22px;font-size:12px;color:rgba(255,255,255,.45)}
+.jb-bottom a{color:#b0895b}
+</style>
 </head>
 <body>
-<header><div class="wrap nav">
-  <a href="index.html" class="brandmark">
-    <svg viewBox="0 0 34.4 34.4" xmlns="http://www.w3.org/2000/svg"><g transform="translate(4.37,30.19)"><path transform="translate(0.000000,0) scale(0.019174,-0.019174)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="#b0895b"/><path transform="translate(8.343974,0) scale(0.014169,-0.014169)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="#f4efe6"/></g></svg>
-    <span><span class="bn">Paulo Cotrim</span><span class="bs">Imóveis · Rio de Janeiro</span></span>
-  </a>
-  <nav class="menu">
-    <a href="#portfolio">Empreendimentos</a>
-    <a href="#regioes">Bairros</a>
-    <a href="#mapa">Mapa</a>
-    <a href="#sobre">Sobre Paulo</a>
-    <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20um%20atendimento%20personalizado." class="cta">Contato</a>
-  </nav>
-  <button class="burger" aria-label="Menu" onclick="document.querySelector('.menu').classList.toggle('open')"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
-</div></header>
+<header><div class="wrap nav"> <a href="index.html" class="brandmark"><span class="round"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/><g transform="translate(17.210177,47.221239)"><path transform="translate(0.000000,0) scale(0.022124,-0.022124)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="currentColor"/><path transform="translate(8.675961,0) scale(0.016406,-0.016406)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="currentColor"/></g></svg></span><span class="lock"><b class="bn">PAULO COTRIM</b><span class="div"></span><i class="bsw">SAWALA</i></span></a> <nav class="menu"><a href="#portfolio">Lançamentos</a><a href="#portfolio">Prontos</a><a href="#regioes">Bairros</a><a href="#mapa">Mapa</a><a href="#sobre">Sobre</a><a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo" class="cta">Contato</a></nav> <button class="burger" aria-label="Menu" onclick="document.querySelector(&#39;.menu&#39;).classList.toggle(&#39;open&#39;)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
 
 <style>
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;color:#fff;overflow:hidden;background:#161513}
@@ -173,11 +193,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
     <span class="eyebrow">Rio de Janeiro</span>
     <h1 class="serif">Onde viver o Rio encontra a decisão certa.</h1>
     <p>Todo o mercado de imóveis novos do Rio — da Zona Sul e Barra ao Centro — com análise de rentabilidade e o atendimento de quem faz isso há 18 anos.</p>
-    <form class="hsearch" onsubmit="return heroBuscar(event)">
-      <select id="hs-reg" aria-label="Região"><option value="">Todas as regiões</option><option>Zona Sul</option><option>Barra e Zona Oeste</option><option>Centro e Porto</option><option>Grande Tijuca</option><option>Zona Norte</option><option>Baixada e Grande Rio</option></select>
-      <input id="hs-q" type="search" placeholder="Bairro, empreendimento ou construtora"/>
-      <button class="hgo" type="submit">Buscar</button>
-    </form>
+    <form class="hsearch" onsubmit="return heroBuscar(event)"><div class="hs-field"><span class="hs-lb">Buscar imóvel</span><input id="hs-q" type="search" placeholder="Bairro, empreendimento ou construtora"/></div><button class="hgo" type="submit" aria-label="Buscar"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></button></form>
   </div>
   <div class="scrollcue">Role para descobrir</div>
 </section>
@@ -260,7 +276,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 <section class="section section-stone" id="mapa"><div class="wrap">
   <div class="shead reveal"><div><span class="eyebrow">No mapa</span><h2 class="serif">Onde estão os empreendimentos</h2></div>
     <span style="font-size:12px;color:var(--muted);max-width:26ch">Da Zona Sul e Barra ao Grande Rio — empreendimento por empreendimento.</span></div>
-  <div id="pc-map" class="reveal"></div>
+  <div id="pc-map"></div>
   <p style="font-size:11.5px;color:var(--muted);margin-top:14px">Pinos em champanhe = destaques da Zona Sul e Barra. Localização aproximada; confirme o endereço exato na página de cada empreendimento.</p>
 </div></section>
 
@@ -284,36 +300,16 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
   <a class="btn btn-solid" href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20conversar%20sobre%20um%20im%C3%B3vel%20de%20alto%20padr%C3%A3o.">Converse com Paulo Cotrim</a>
 </section>
 
-<footer><div class="wrap">
-  <div class="foot">
-    <div class="col">
-      <b>Paulo Cotrim</b>
-      <p>Consultoria imobiliária no Rio de Janeiro</p>
-      <p>Rio de Janeiro · CRECI-RJ 77677-F</p>
-    </div>
-    <div class="col">
-      <b>Navegar</b>
-      <a href="#portfolio">Empreendimentos</a>
-      <a href="#regioes">Regiões exclusivas</a>
-      <a href="#sobre">Sobre Paulo</a>
-    </div>
-    <div class="col">
-      <b>Contato</b>
-      <a href="https://wa.me/5521989150864">WhatsApp (21) 98915-0864</a>
-      <a href="https://instagram.com/corretor.paulocotrim">@corretor.paulocotrim</a>
-    </div>
-  </div>
-  <div class="foot other">Também atende Minha Casa Minha Vida e financiamento Caixa — <a href="mcmv.html">ver outras oportunidades</a>.</div>
-</div></footer>
+<footer class="jb"><div class="wrap"><div class="jb-grid"><div class="jb-tag"><div class="jb-round"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/><g transform="translate(17.210177,47.221239)"><path transform="translate(0.000000,0) scale(0.022124,-0.022124)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="currentColor"/><path transform="translate(8.675961,0) scale(0.016406,-0.016406)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="currentColor"/></g></svg></div><h3>Com Paulo Cotrim você tem a certeza do melhor negócio.</h3><p>Do primeiro contato à entrega das chaves — informação antes da decisão.</p></div><div class="jb-crm"><span class="jb-h">Acesso ao CRM</span><a href="crm.html" class="jb-crmlink"><span class="r"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/><g transform="translate(17.210177,47.221239)"><path transform="translate(0.000000,0) scale(0.022124,-0.022124)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="currentColor"/><path transform="translate(8.675961,0) scale(0.016406,-0.016406)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="currentColor"/></g></svg></span><b>Paulo Cotrim</b></a><span class="jb-excl">Acesso exclusivo do corretor</span></div><div class="jb-contato"><span class="jb-h">Contato</span><p>Fale com Paulo Cotrim · CRECI-RJ 77677-F</p><p><a href="https://wa.me/5521989150864">WhatsApp (21) 98915-0864</a></p><p><a href="https://instagram.com/corretor.paulocotrim">@corretor.paulocotrim</a></p><p>corretorpaulocotrim@gmail.com</p></div></div><div class="jb-bottom">Paulo Cotrim · CRECI-RJ 77677-F · Rio de Janeiro · também Minha Casa Minha Vida — <a href="mcmv.html">outras oportunidades</a></div></div></footer>
 
 <script>
 function heroBuscar(e){ if(e)e.preventDefault();
-  var reg=document.getElementById('hs-reg').value, q=document.getElementById('hs-q').value;
+  var reg='', q=(document.getElementById('hs-q')||{}).value||'';
   if(window.pcFilter) window.pcFilter(reg,q);
   var el=document.getElementById('portfolio'); if(el) el.scrollIntoView({behavior:'smooth'});
   return false; }
 (function(){
-  var imgs=['emp-img/luxo/bir-jaguaripe-hero.jpg','emp-img/farol-da-guanabara.jpg','emp-img/orla-central.jpg','emp-img/arcos-do-porto.jpg'];
+  var imgs=['emp-img/hero-rio-1.jpg','emp-img/hero-rio-2.jpg','emp-img/hero-rio-3.jpg'];
   var box=document.getElementById('hero-slides'); if(!box)return;
   var els=imgs.map(function(src,i){var d=document.createElement('div');d.className='hero-slide'+(i===0?' on':'');d.style.backgroundImage="url('"+src+"')";box.appendChild(d);return d;});
   var i=0; if(els.length>1) setInterval(function(){els[i].classList.remove('on');i=(i+1)%els.length;els[i].classList.add('on');},5500);
@@ -342,7 +338,9 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
      +'<div class="cta2"><a href="'+href+'">'+(e.url?'Ver imóvel':'Falar')+'</a><a class="an" href="'+est+'">Analisar rentabilidade →</a></div>'
      +'</div>';
  }
- function apply(){
+ var PAGE=12, shown=PAGE;
+ function apply(keep){
+   if(!keep) shown=PAGE;
    var list=ALL.filter(function(e){
      if(fReg!=='Todas'&&e.regiao!==fReg)return false;
      if(fStatus&&e.status!==fStatus)return false;
@@ -350,8 +348,12 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
      if(fQ){var q=fQ.toLowerCase();if(((e.nome||'')+' '+(e.local||'')+' '+(e.incorporadora||'')).toLowerCase().indexOf(q)<0)return false;}
      return true;
    });
-   document.getElementById('pf-grid').innerHTML=list.map(card).join('');
-   document.getElementById('pf-count').textContent=list.length+' empreendimentos';
+   var vis=list.slice(0,shown), more=list.length-vis.length;
+   document.getElementById('pf-grid').innerHTML=vis.map(card).join('');
+   var c='<span>'+list.length+' empreendimentos</span>';
+   if(more>0) c+=' <button id="pf-more" style="border:1px solid var(--gold);background:none;color:var(--ink);font:600 11px/1 \'Inter\',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:11px 22px;border-radius:100px;cursor:pointer;margin-left:14px">Ver mais ('+more+')</button>';
+   document.getElementById('pf-count').innerHTML=c;
+   var b=document.getElementById('pf-more'); if(b)b.onclick=function(){shown+=PAGE;apply(true);};
  }
  function chips(){
    var regs=['Todas','Zona Sul','Barra e Zona Oeste','Centro e Porto','Grande Tijuca','Zona Norte','Baixada e Grande Rio'];
@@ -382,6 +384,8 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
    var map=L.map('pc-map',{scrollWheelZoom:false}).setView([-22.92,-43.3],10);
    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,subdomains:'abcd',attribution:'© OpenStreetMap · © CARTO'}).addTo(map);
    setTimeout(function(){map.invalidateSize();},300);
+   try{var mo=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){setTimeout(function(){map.invalidateSize();},60);}});},{threshold:0.01});mo.observe(document.getElementById('pc-map'));}catch(e){}
+   window.addEventListener('resize',function(){map.invalidateSize();});
    var cluster=window.L.markerClusterGroup?L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:46}):null;
    fetch('data/mapa.json').then(function(r){return r.json();}).then(function(d){
      var pts=(d&&d.pontos)||[], bounds=[];
