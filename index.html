@@ -179,7 +179,30 @@ body::before{content:"";position:fixed;right:-6vw;bottom:-6vw;width:46vw;height:
 .inv{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}.inv th{font:600 11px 'Inter';letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:14px;border-bottom:1px solid var(--line)}
 .inv td{padding:13px 14px;border-bottom:1px solid #f0ebe0}.inv td b{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600}.inv a{color:var(--gold)}
 .inv-w{overflow-x:auto;border:1px solid var(--line);border-radius:4px}
-</style></head>
+</style><style>
+.im.noimg{background:#1c1b19 url("logo-round-gold.svg") center/34% no-repeat!important}
+.pcx{display:block}.pcx .pb{display:block;font-weight:600;color:var(--ink)}.pcx .po{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.02em;margin-top:2px}
+.inv .pcx .pb{font-weight:500}
+</style>
+<script>
+(function(){
+ var KEY='fx_rates_v1',R=null,busy=0;
+ function f(v,c){var s={BRL:'R$',USD:'US$',EUR:'€'}[c],l={BRL:'pt-BR',USD:'en-US',EUR:'de-DE'}[c];return s+' '+Math.round(v).toLocaleString(l);}
+ function cur(){var c=window.PC_CCY&&window.PC_CCY.code;if(!c){try{c=localStorage.getItem('pc_ccy')}catch(e){}}return c||'BRL';}
+ function draw(){var c=cur();[].forEach.call(document.querySelectorAll('.pcx'),function(el){var b=+el.getAttribute('data-brl');if(!b)return;
+  var main=f(b,'BRL'),oth=[];
+  if(R){var u=b/R.USD,e=R.EUR?b/R.EUR:null;
+   if(c==='USD'){main=f(u,'USD');oth=[f(b,'BRL')];if(e)oth.push(f(e,'EUR'));}
+   else if(c==='EUR'&&e){main=f(e,'EUR');oth=[f(b,'BRL'),f(u,'USD')];}
+   else{oth=[f(u,'USD')];if(e)oth.push(f(e,'EUR'));}}
+  el.innerHTML='<span class="pb">A partir de '+main+'</span>'+(oth.length?'<span class="po">'+oth.join(' · ')+'</span>':'');});}
+ window.pcFx=function(){draw();if(R||busy)return;
+  try{var x=JSON.parse(localStorage.getItem(KEY)||'null');if(x&&x.USD&&Date.now()-x.ts<259200000){R=x;draw();return;}}catch(e){}
+  busy=1;fetch('https://economia.awesomeapi.com.br/last/USD-BRL,EUR-BRL').then(function(r){return r.json()}).then(function(j){
+   R={USD:parseFloat(j.USDBRL.bid),EUR:parseFloat(j.EURBRL.bid),ts:Date.now()};try{localStorage.setItem(KEY,JSON.stringify(R))}catch(e){}draw();}).catch(function(){});};
+ document.addEventListener('pc-ccy',draw);
+})();
+</script></head>
 <body>
 <header><div class="wrap nav"> <a href="index.html" class="brandmark"><span class="round"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/><g transform="translate(17.210177,47.221239)"><path transform="translate(0.000000,0) scale(0.022124,-0.022124)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="currentColor"/><path transform="translate(8.675961,0) scale(0.016406,-0.016406)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="currentColor"/></g></svg></span><span class="lock"><b class="bn">PAULO COTRIM</b><span class="div"></span><i class="bsw">SAWALA</i></span></a> <nav class="menu"><a href="#portfolio">Lançamentos</a><a href="#portfolio">Prontos</a><a href="#regioes">Bairros</a><a href="#mapa">Mapa</a><a href="#investidor">Investidor</a><a href="#sobre">Sobre</a><a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo" class="cta">Contato</a></nav> <button class="burger" aria-label="Menu" onclick="document.querySelector(&#39;.menu&#39;).classList.toggle(&#39;open&#39;)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
 
@@ -341,19 +364,19 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
  function fmtBRL(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR');}
  function slug(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
  function card(e){
-   var img=e.img?("background-image:url('"+esc(e.img)+"')"):'';
+   var img=e.img?("background-image:url('"+esc(e.img)+"')"):'';var ni=e.img?'':' noimg';
    var st=e.status?('<span class="st">'+e.status+'</span>'):'';
-   var preco=e.preco?('<b>A partir de '+fmtBRL(e.preco)+'</b>'):(e.preco_texto||'Consulte valores');
+   var preco=e.preco?('<span class="pcx" data-brl="'+e.preco+'"></span>'):'Preço a consultar';
    var href=e.url?e.url:('https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo, quero informações do '+e.nome+' ('+e.regiao+').'));
    var est='estudo.html?emp='+encodeURIComponent(e.url||slug(e.nome));
    return '<div class="pcard">'
-     +'<a class="im" href="'+href+'" style="'+img+'">'+st+'<span class="rg">'+esc(e.local||e.regiao||'')+'</span></a>'
+     +'<a class="im'+ni+'" href="'+href+'" style="'+img+'">'+st+'<span class="rg">'+esc(e.local||e.regiao||'')+'</span></a>'
      +'<div class="bb"><h3>'+esc(e.nome||'')+'</h3>'
      +(e.incorporadora?('<div class="inc">'+esc(e.incorporadora)+'</div>'):'')
      +(e.plantas?('<div class="pl">'+esc(e.plantas)+'</div>'):'')
      +'<div class="pr">'+preco+'</div>'
      +'<div class="cta2"><button class="pv" data-n="'+esc(e.nome||'')+'">Ver prévia</button><a href="'+href+'">'+(e.url?'Ver imóvel':'Falar')+'</a><a class="an" href="'+est+'">Analisar rentabilidade →</a></div>'
-     +'</div>';
+     +'</div></div>';
  }
  var PAGE=12, shown=PAGE;
  function apply(keep){
@@ -369,7 +392,7 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
    document.getElementById('pf-grid').innerHTML=vis.map(card).join('');
    var c='<span>'+list.length+' empreendimentos</span>';
    if(more>0) c+=' <button id="pf-more" style="border:1px solid var(--gold);background:none;color:var(--ink);font:600 11px/1 \'Inter\',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:11px 22px;border-radius:100px;cursor:pointer;margin-left:14px">Ver mais ('+more+')</button>';
-   document.getElementById('pf-count').innerHTML=c;
+   document.getElementById('pf-count').innerHTML=c;if(window.pcFx)pcFx();
    var b=document.getElementById('pf-more'); if(b)b.onclick=function(){shown+=PAGE;apply(true);};
  }
  function chips(){
@@ -434,7 +457,7 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
  function br(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR');}
  function es(s){return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
  function wa(e){return 'https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo, quero informações do '+e.nome+'.');}
- function card(e){var h=e.url||wa(e);return '<div class="pcard"><a class="im" href="'+h+'" style="'+(e.img?"background-image:url('"+es(e.img)+"')":'')+'">'+(e.status?'<span class="st">'+es(e.status)+'</span>':'')+'<span class="rg">'+es(e.local||e.regiao||'')+'</span></a><div class="bb"><h3>'+es(e.nome)+'</h3>'+(e.incorporadora?'<div class="inc">'+es(e.incorporadora)+'</div>':'')+'<div class="pr">'+(e.preco?'<b>A partir de '+br(e.preco)+'</b>':'Consulte valores')+'</div><div class="cta2"><button class="pv" data-n="'+es(e.nome)+'">Ver prévia</button><a class="an" href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Rentabilidade →</a></div></div></div>';}
+ function card(e){var h=e.url||wa(e);return '<div class="pcard"><a class="im'+(e.img?'':' noimg')+'" href="'+h+'" style="'+(e.img?"background-image:url('"+es(e.img)+"')":'')+'">'+(e.status?'<span class="st">'+es(e.status)+'</span>':'')+'<span class="rg">'+es(e.local||e.regiao||'')+'</span></a><div class="bb"><h3>'+es(e.nome)+'</h3>'+(e.incorporadora?'<div class="inc">'+es(e.incorporadora)+'</div>':'')+'<div class="pr">'+(e.preco?'<span class="pcx" data-brl="'+e.preco+'"></span>':'Preço a consultar')+'</div><div class="cta2"><button class="pv" data-n="'+es(e.nome)+'">Ver prévia</button><a class="an" href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Rentabilidade →</a></div></div></div>';}
  fetch('data/catalogo.json').then(function(r){return r.json();}).then(function(d){
   var A=(d&&d.itens)||[]; window.__PCALL=window.__PCALL||A;
   var D=A.filter(function(e){return e.img;}); D.sort(function(a,b){return (/lan/i.test(b.status||'')?1:0)-(/lan/i.test(a.status||'')?1:0);});
@@ -442,16 +465,16 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
    function st(k){var c=dq.querySelector('.pcard');if(!c)return;var w=c.offsetWidth+22,mx=dq.scrollWidth-dq.clientWidth,n=dq.scrollLeft+k*w;if(n>mx+5)n=0;if(n<-5)n=mx;dq.scrollTo({left:n,behavior:'smooth'});}
    document.getElementById('dq-p').onclick=function(){st(-1)};document.getElementById('dq-n').onclick=function(){st(1)};
    var t=setInterval(function(){st(1)},4000);dq.addEventListener('mouseenter',function(){clearInterval(t)});dq.addEventListener('mouseleave',function(){t=setInterval(function(){st(1)},4000)});}
-  var ib=document.getElementById('inv-b'); if(ib){var P=A.filter(function(e){return e.preco;}).sort(function(a,b){return a.preco-b.preco;});
-   ib.innerHTML=P.map(function(e){return '<tr><td><b>'+es(e.nome)+'</b></td><td>'+es(e.regiao||'')+'</td><td>'+es(e.incorporadora||'—')+'</td><td>'+es(e.status||'—')+'</td><td>'+br(e.preco)+'</td><td><a href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Estudo →</a></td></tr>';}).join('');}
- }).catch(function(){});
+  var ib=document.getElementById('inv-b'); if(ib){var P=A.slice().sort(function(a,b){return (a.preco?0:1)-(b.preco?0:1)||(a.preco||0)-(b.preco||0);});
+   ib.innerHTML=P.map(function(e){return '<tr><td><b>'+es(e.nome)+'</b></td><td>'+es(e.regiao||'')+'</td><td>'+es(e.incorporadora||'—')+'</td><td>'+es(e.status||'—')+'</td><td>'+(e.preco?'<span class="pcx" data-brl="'+e.preco+'"></span>':'A consultar')+'</td><td><a href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Estudo →</a></td></tr>';}).join('');}
+ if(window.pcFx)pcFx();}).catch(function(){});
  var m=document.getElementById('pvm');
  document.addEventListener('click',function(ev){
   var b=ev.target.closest&&ev.target.closest('.pv'); if(b){ev.preventDefault();
    var n=b.getAttribute('data-n'),A=window.__PCALL||[],e=A.filter(function(x){return x.nome===n;})[0]; if(!e)return;
-   m.querySelector('.im').style.backgroundImage=e.img?"url('"+e.img+"')":'none';
-   m.querySelector('.ct').innerHTML='<span class="eyebrow">'+es(e.regiao||'')+'</span><h3>'+es(e.nome)+'</h3><div class="mt">'+es([e.local,e.incorporadora,e.status].filter(Boolean).join(' · '))+'</div>'+(e.plantas?'<p style="font-size:14px">'+es(e.plantas)+'</p>':'')+'<p style="font-size:18px;margin-top:10px">'+(e.preco?'A partir de <b>'+br(e.preco)+'</b>':'Consulte valores')+'</p><div class="ac">'+(e.url?'<a class="btn btn-solid" href="'+e.url+'">Ver empreendimento</a>':'')+'<a class="btn btn-solid" href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Analisar rentabilidade</a><a class="btn btn-outline" style="color:var(--ink);border-color:var(--line)" href="'+wa(e)+'">Falar com Paulo</a></div>';
-   m.classList.add('on'); return;}
+   m.querySelector('.im').style.backgroundImage=e.img?"url('"+e.img+"')":"url('logo-round-gold.svg')";m.querySelector('.im').style.backgroundSize=e.img?'cover':'30%';m.querySelector('.im').style.backgroundRepeat='no-repeat';
+   m.querySelector('.ct').innerHTML='<span class="eyebrow">'+es(e.regiao||'')+'</span><h3>'+es(e.nome)+'</h3><div class="mt">'+es([e.local,e.incorporadora,e.status].filter(Boolean).join(' · '))+'</div>'+(e.plantas?'<p style="font-size:14px">'+es(e.plantas)+'</p>':'')+'<p style="font-size:18px;margin-top:10px">'+(e.preco?'<span class="pcx" data-brl="'+e.preco+'"></span>':'Preço a consultar')+'</p><div class="ac">'+(e.url?'<a class="btn btn-solid" href="'+e.url+'">Ver empreendimento</a>':'')+'<a class="btn btn-solid" href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Analisar rentabilidade</a><a class="btn btn-outline" style="color:var(--ink);border-color:var(--line)" href="'+wa(e)+'">Falar com Paulo</a></div>';
+   m.classList.add('on');if(window.pcFx)pcFx(); return;}
   if(ev.target===m||(ev.target.classList&&ev.target.classList.contains('x')))m.classList.remove('on');
  });
  document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.remove('on');});
