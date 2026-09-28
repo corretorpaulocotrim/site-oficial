@@ -115,7 +115,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
     <span><span class="bn">Paulo Cotrim</span><span class="bs">Consultoria · Alto Padrão</span></span>
   </a>
   <nav class="menu">
-    <a href="#selecao">Comprar</a>
+    <a href="#portfolio">Comprar</a>
     <a href="#selecao">Lançamentos</a>
     <a href="#selecao">Alto Padrão</a>
     <a href="#regioes">Bairros</a>
@@ -160,6 +160,32 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
     <a class="card reveal" href="emp-peninsula-singular.html"><div class="ph"><span class="rg">Península · Barra</span></div><div class="bd"><div class="t">Exclusivo · À beira da lagoa</div><h3 class="serif">Península — Singular</h3><p>Exclusividade em um dos endereços mais valorizados da Barra, à beira da lagoa.</p><div class="meta"><span>221–452 m²</span><span><b>3–4 suítes</b></span></div></div></a>
   </div>
   <p style="font-size:12px;color:var(--muted);margin-top:24px;max-width:70ch">Seleção montada sob demanda a partir de fontes públicas e do relacionamento de Paulo Cotrim com o mercado. Valores, metragens e disponibilidade são confirmados na tabela oficial de cada empreendimento — nada é apresentado como garantia.</p>
+</div></section>
+
+<style>
+.pf{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+@media(max-width:1000px){.pf{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:760px){.pf{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.pf{grid-template-columns:1fr}}
+.pf-filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:30px;align-items:center}
+.pf-filters button{border:1px solid var(--line);background:none;color:var(--ink);font:500 11px/1 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:9px 15px;border-radius:100px;cursor:pointer;transition:.2s}
+.pf-filters button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.pf-filters .seg{margin-left:auto}
+.pcard{background:var(--white);border:1px solid var(--line);overflow:hidden;transition:.4s var(--ease);display:block}
+.pcard:hover{transform:translateY(-3px);box-shadow:0 30px 60px -40px rgba(26,26,25,.3)}
+.pcard .im{aspect-ratio:4/3;background:linear-gradient(150deg,#33302b,#1e1c19);position:relative;background-size:cover;background-position:center}
+.pcard .im .rg{position:absolute;bottom:12px;left:14px;color:#fff;font:500 10px/1 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;text-shadow:0 1px 6px rgba(0,0,0,.6)}
+.pcard .im .sgl{position:absolute;top:12px;left:14px;font:500 9px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;color:#1a1a19;background:var(--gold);padding:4px 8px;border-radius:2px}
+.pcard .bb{padding:16px 18px 20px}
+.pcard .bb h3{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:500;line-height:1.15;margin-bottom:5px}
+.pcard .bb .tp{font-size:12.5px;color:var(--muted);line-height:1.5;min-height:34px}
+.pcard .bb .pr{font-size:12px;color:var(--ink);margin-top:10px;border-top:1px solid var(--line);padding-top:10px}
+</style>
+<section class="section" id="portfolio"><div class="wrap">
+  <div class="shead reveal"><div><span class="eyebrow">Portfólio</span><h2 class="serif">Todos os empreendimentos</h2></div></div>
+  <div class="pf-filters reveal" id="pf-filters"></div>
+  <div class="pf" id="pf-grid"></div>
+  <p id="pf-count" style="font-size:12px;color:var(--muted);margin-top:22px"></p>
 </div></section>
 
 <section class="section section-stone" id="regioes"><div class="wrap">
@@ -220,6 +246,55 @@ function buscar(e){e.preventDefault();
   window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');return false;}
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
+</script>
+<script>
+(function(){
+ var ALL=[], fSeg='alto', fReg='Todos';
+ function regiao(b){b=(b||'').toLowerCase();
+   if(/barra|pen[ií]nsula|ilha pura|recreio|joá|jardim oce/.test(b))return 'Barra';
+   if(/leblon|ipanema|copacabana|lagoa|g[áa]vea|conrado|leme|jardim bot|humait|botafogo|flamengo|urca/.test(b))return 'Zona Sul';
+   if(/porto|mau[áa]|centro|santo cristo|gamboa|praça onze|cidade nova|s[ãa]o crist/.test(b))return 'Centro / Porto';
+   if(/niter[óo]i|icara[íi]|s[ãa]o gonç|maric/.test(b))return 'Niterói';
+   return 'Zona Norte';
+ }
+ function esc(s){return (s||'').replace(/'/g,'&#39;');}
+ function card(e){
+   var seg=e.seg==='alto'?'Alto Padrão':'Portfólio';
+   var img=e.img?("background-image:url('"+esc(e.img)+"')"):'';
+   return '<a class="pcard" href="'+(e.url||'#')+'">'
+     +'<div class="im" style="'+img+'"><span class="sgl">'+seg+'</span><span class="rg">'+(e.bairro||'')+'</span></div>'
+     +'<div class="bb"><h3>'+(e.nome||'')+'</h3><div class="tp">'+(e.tipologia||e.quartos||e.metragem||'')+'</div>'
+     +'<div class="pr">'+(e.preco_texto||'Consulte valores')+'</div></div></a>';
+ }
+ function render(){
+   var list=ALL.filter(function(e){
+     if(fSeg==='alto'&&e.seg!=='alto')return false;
+     if(fReg!=='Todos'&&regiao(e.bairro)!==fReg)return false;
+     return true;
+   });
+   document.getElementById('pf-grid').innerHTML=list.map(card).join('');
+   document.getElementById('pf-count').textContent=list.length+(fSeg==='alto'?' empreendimentos de alto padrão':' empreendimentos no portfólio');
+ }
+ function filters(){
+   var regs=['Todos','Zona Sul','Barra','Centro / Porto','Zona Norte','Niterói'];
+   var h=regs.map(function(r){return '<button data-r="'+r+'"'+(r===fReg?' class="on"':'')+'>'+r+'</button>';}).join('');
+   h+='<span class="seg"></span>';
+   h+='<button data-s="alto" class="'+(fSeg==='alto'?'on':'')+'">Alto Padrão</button>';
+   h+='<button data-s="todos" class="'+(fSeg==='todos'?'on':'')+'">Todos os imóveis</button>';
+   var box=document.getElementById('pf-filters'); box.innerHTML=h;
+   [].forEach.call(box.querySelectorAll('button'),function(b){
+     b.onclick=function(){ if(b.dataset.r)fReg=b.dataset.r; if(b.dataset.s)fSeg=b.dataset.s; filters(); render(); };
+   });
+ }
+ Promise.all([
+   fetch('data/alto-padrao.json').then(function(r){return r.json();}).catch(function(){return{empreendimentos:[]};}),
+   fetch('data/empreendimentos.json').then(function(r){return r.json();}).catch(function(){return{empreendimentos:[]};})
+ ]).then(function(res){
+   var a=((res[0]&&res[0].empreendimentos)||[]).map(function(e){e.seg='alto';return e;});
+   var m=((res[1]&&res[1].empreendimentos)||[]).map(function(e){e.seg='mcmv';return e;});
+   ALL=a.concat(m); filters(); render();
+ });
+})();
 </script>
 <script src="i18n.js" defer></script>
 </body></html>
