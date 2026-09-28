@@ -164,9 +164,24 @@ footer.jb{background:#1c1b19;color:rgba(255,255,255,.7);padding:66px 0 40px}
 .jb-bottom{border-top:1px solid rgba(255,255,255,.12);margin-top:40px;padding-top:22px;font-size:12px;color:rgba(255,255,255,.45)}
 .jb-bottom a{color:#b0895b}
 </style>
-</head>
+<style>
+body::before{content:"";position:fixed;right:-6vw;bottom:-6vw;width:46vw;height:46vw;max-width:620px;max-height:620px;background:url("logo-round.svg") center/contain no-repeat;opacity:.035;pointer-events:none;z-index:0}
+.dq-wrap{position:relative}.dq{display:flex;gap:22px;overflow-x:auto;scroll-behavior:smooth;scroll-snap-type:x mandatory;scrollbar-width:none}.dq::-webkit-scrollbar{display:none}
+.dq .pcard{flex:0 0 calc((100% - 44px)/3);scroll-snap-align:start}
+@media(max-width:900px){.dq .pcard{flex:0 0 calc((100% - 22px)/2)}}@media(max-width:600px){.dq .pcard{flex:0 0 88%}}
+.dq-nav{display:flex;gap:10px}.dq-nav button{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);background:#fff;font-size:22px;cursor:pointer;color:var(--ink)}.dq-nav button:hover{border-color:var(--gold);color:var(--gold)}
+.pv{border:none;background:none;font:500 10.5px/1.3 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);cursor:pointer;padding:0}
+#pvm{position:fixed;inset:0;z-index:90;background:rgba(15,14,12,.78);display:none;align-items:center;justify-content:center;padding:20px}
+#pvm.on{display:flex}#pvm .bx{background:#fff;max-width:760px;width:100%;border-radius:6px;overflow:hidden;max-height:92vh;overflow-y:auto}
+#pvm .im{aspect-ratio:16/9;background:#1c1b19 center/cover}#pvm .ct{padding:26px 28px}#pvm h3{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:500}
+#pvm .mt{color:var(--muted);font-size:13px;margin:4px 0 14px}#pvm .ac{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+#pvm .x{position:absolute;top:18px;right:22px;color:#fff;font-size:30px;background:none;border:none;cursor:pointer}
+.inv{width:100%;border-collapse:collapse;background:#fff;font-size:13.5px}.inv th{font:600 11px 'Inter';letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:14px;border-bottom:1px solid var(--line)}
+.inv td{padding:13px 14px;border-bottom:1px solid #f0ebe0}.inv td b{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:600}.inv a{color:var(--gold)}
+.inv-w{overflow-x:auto;border:1px solid var(--line);border-radius:4px}
+</style></head>
 <body>
-<header><div class="wrap nav"> <a href="index.html" class="brandmark"><span class="round"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/><g transform="translate(17.210177,47.221239)"><path transform="translate(0.000000,0) scale(0.022124,-0.022124)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="currentColor"/><path transform="translate(8.675961,0) scale(0.016406,-0.016406)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="currentColor"/></g></svg></span><span class="lock"><b class="bn">PAULO COTRIM</b><span class="div"></span><i class="bsw">SAWALA</i></span></a> <nav class="menu"><a href="#portfolio">Lançamentos</a><a href="#portfolio">Prontos</a><a href="#regioes">Bairros</a><a href="#mapa">Mapa</a><a href="#sobre">Sobre</a><a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo" class="cta">Contato</a></nav> <button class="burger" aria-label="Menu" onclick="document.querySelector(&#39;.menu&#39;).classList.toggle(&#39;open&#39;)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
+<header><div class="wrap nav"> <a href="index.html" class="brandmark"><span class="round"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/><g transform="translate(17.210177,47.221239)"><path transform="translate(0.000000,0) scale(0.022124,-0.022124)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="currentColor"/><path transform="translate(8.675961,0) scale(0.016406,-0.016406)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="currentColor"/></g></svg></span><span class="lock"><b class="bn">PAULO COTRIM</b><span class="div"></span><i class="bsw">SAWALA</i></span></a> <nav class="menu"><a href="#portfolio">Lançamentos</a><a href="#portfolio">Prontos</a><a href="#regioes">Bairros</a><a href="#mapa">Mapa</a><a href="#investidor">Investidor</a><a href="#sobre">Sobre</a><a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo" class="cta">Contato</a></nav> <button class="burger" aria-label="Menu" onclick="document.querySelector(&#39;.menu&#39;).classList.toggle(&#39;open&#39;)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>
 
 <style>
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;color:#fff;overflow:hidden;background:#161513}
@@ -244,8 +259,9 @@ footer.jb{background:#1c1b19;color:rgba(255,255,255,.7);padding:66px 0 40px}
   <a class="btn btn-solid" href="#portfolio" style="margin:0 auto">Analisar rentabilidade</a>
 </div></section>
 
+<section class="section" id="destaques"><div class="wrap"><div class="shead" style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:26px"><div><span class="eyebrow">Em destaque</span><h2 class="serif">Lançamentos em destaque</h2></div><div class="dq-nav"><button id="dq-p" aria-label="Anterior">&#8249;</button><button id="dq-n" aria-label="Próximo">&#8250;</button></div></div><div class="dq-wrap"><div class="dq" id="dq"></div></div></div></section>
 <section class="section" id="portfolio"><div class="wrap">
-  <div class="shead reveal"><div><span class="eyebrow">Empreendimentos</span><h2 class="serif">Todo o Rio, empreendimento por empreendimento</h2></div></div>
+  <div class="shead reveal"><div><span class="eyebrow">Imóveis especiais</span><h2 class="serif">Escolha pela apresentação</h2></div></div>
   <div class="pf-bar reveal">
     <div class="pf-chips" id="pf-chips"></div>
     <div class="pf-tools">
@@ -273,6 +289,7 @@ footer.jb{background:#1c1b19;color:rgba(255,255,255,.7);padding:66px 0 40px}
   </div>
 </div></section>
 
+<section class="section" id="investidor"><div class="wrap"><span class="eyebrow">Para investidor</span><h2 class="serif" style="margin:10px 0 8px">Tabela comparativa</h2><p style="color:var(--muted);font-size:14px;max-width:62ch;margin-bottom:24px">Compare preço de entrada, região e estágio. Clique em "Estudo" para ver rentabilidade, fluxo e payback com suas premissas. Valores a partir de, conforme tabela vigente.</p><div class="inv-w"><table class="inv"><thead><tr><th>Empreendimento</th><th>Região</th><th>Construtora</th><th>Estágio</th><th>A partir de</th><th></th></tr></thead><tbody id="inv-b"></tbody></table></div></div></section>
 <section class="section section-stone" id="mapa"><div class="wrap">
   <div class="shead reveal"><div><span class="eyebrow">No mapa</span><h2 class="serif">Onde estão os empreendimentos</h2></div>
     <span style="font-size:12px;color:var(--muted);max-width:26ch">Da Zona Sul e Barra ao Grande Rio — empreendimento por empreendimento.</span></div>
@@ -335,7 +352,7 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
      +(e.incorporadora?('<div class="inc">'+esc(e.incorporadora)+'</div>'):'')
      +(e.plantas?('<div class="pl">'+esc(e.plantas)+'</div>'):'')
      +'<div class="pr">'+preco+'</div>'
-     +'<div class="cta2"><a href="'+href+'">'+(e.url?'Ver imóvel':'Falar')+'</a><a class="an" href="'+est+'">Analisar rentabilidade →</a></div>'
+     +'<div class="cta2"><button class="pv" data-n="'+esc(e.nome||'')+'">Ver prévia</button><a href="'+href+'">'+(e.url?'Ver imóvel':'Falar')+'</a><a class="an" href="'+est+'">Analisar rentabilidade →</a></div>'
      +'</div>';
  }
  var PAGE=12, shown=PAGE;
@@ -363,7 +380,7 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
  }
  window.pcFilter=function(reg,q){ fReg=reg||'Todas'; fQ=q||''; var qi=document.getElementById('pf-q'); if(qi)qi.value=fQ; chips(); apply(); };
  fetch('data/catalogo.json').then(function(r){return r.json();}).then(function(d){
-   ALL=(d&&d.itens)||[];
+   ALL=(d&&d.itens)||[];window.__PCALL=ALL;
    var sts=[]; ALL.forEach(function(e){if(e.status&&sts.indexOf(e.status)<0)sts.push(e.status);});
    var ss=document.getElementById('pf-status'); sts.sort().forEach(function(s){var o=document.createElement('option');o.value=s;o.textContent=s;ss.appendChild(o);});
    chips(); apply();
@@ -410,4 +427,34 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 })();
 </script>
 <script src="i18n.js" defer></script>
+<div id="pvm"><button class="x" aria-label="Fechar">&times;</button><div class="bx"><div class="im"></div><div class="ct"></div></div></div>
+<script>
+(function(){
+ function sl(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+ function br(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR');}
+ function es(s){return String(s||'').replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+ function wa(e){return 'https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo, quero informações do '+e.nome+'.');}
+ function card(e){var h=e.url||wa(e);return '<div class="pcard"><a class="im" href="'+h+'" style="'+(e.img?"background-image:url('"+es(e.img)+"')":'')+'">'+(e.status?'<span class="st">'+es(e.status)+'</span>':'')+'<span class="rg">'+es(e.local||e.regiao||'')+'</span></a><div class="bb"><h3>'+es(e.nome)+'</h3>'+(e.incorporadora?'<div class="inc">'+es(e.incorporadora)+'</div>':'')+'<div class="pr">'+(e.preco?'<b>A partir de '+br(e.preco)+'</b>':'Consulte valores')+'</div><div class="cta2"><button class="pv" data-n="'+es(e.nome)+'">Ver prévia</button><a class="an" href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Rentabilidade →</a></div></div></div>';}
+ fetch('data/catalogo.json').then(function(r){return r.json();}).then(function(d){
+  var A=(d&&d.itens)||[]; window.__PCALL=window.__PCALL||A;
+  var D=A.filter(function(e){return e.img;}); D.sort(function(a,b){return (/lan/i.test(b.status||'')?1:0)-(/lan/i.test(a.status||'')?1:0);});
+  var dq=document.getElementById('dq'); if(dq){dq.innerHTML=D.slice(0,12).map(card).join('');
+   function st(k){var c=dq.querySelector('.pcard');if(!c)return;var w=c.offsetWidth+22,mx=dq.scrollWidth-dq.clientWidth,n=dq.scrollLeft+k*w;if(n>mx+5)n=0;if(n<-5)n=mx;dq.scrollTo({left:n,behavior:'smooth'});}
+   document.getElementById('dq-p').onclick=function(){st(-1)};document.getElementById('dq-n').onclick=function(){st(1)};
+   var t=setInterval(function(){st(1)},4000);dq.addEventListener('mouseenter',function(){clearInterval(t)});dq.addEventListener('mouseleave',function(){t=setInterval(function(){st(1)},4000)});}
+  var ib=document.getElementById('inv-b'); if(ib){var P=A.filter(function(e){return e.preco;}).sort(function(a,b){return a.preco-b.preco;});
+   ib.innerHTML=P.map(function(e){return '<tr><td><b>'+es(e.nome)+'</b></td><td>'+es(e.regiao||'')+'</td><td>'+es(e.incorporadora||'—')+'</td><td>'+es(e.status||'—')+'</td><td>'+br(e.preco)+'</td><td><a href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Estudo →</a></td></tr>';}).join('');}
+ }).catch(function(){});
+ var m=document.getElementById('pvm');
+ document.addEventListener('click',function(ev){
+  var b=ev.target.closest&&ev.target.closest('.pv'); if(b){ev.preventDefault();
+   var n=b.getAttribute('data-n'),A=window.__PCALL||[],e=A.filter(function(x){return x.nome===n;})[0]; if(!e)return;
+   m.querySelector('.im').style.backgroundImage=e.img?"url('"+e.img+"')":'none';
+   m.querySelector('.ct').innerHTML='<span class="eyebrow">'+es(e.regiao||'')+'</span><h3>'+es(e.nome)+'</h3><div class="mt">'+es([e.local,e.incorporadora,e.status].filter(Boolean).join(' · '))+'</div>'+(e.plantas?'<p style="font-size:14px">'+es(e.plantas)+'</p>':'')+'<p style="font-size:18px;margin-top:10px">'+(e.preco?'A partir de <b>'+br(e.preco)+'</b>':'Consulte valores')+'</p><div class="ac">'+(e.url?'<a class="btn btn-solid" href="'+e.url+'">Ver empreendimento</a>':'')+'<a class="btn btn-solid" href="estudo.html?emp='+encodeURIComponent(e.url||sl(e.nome))+'">Analisar rentabilidade</a><a class="btn btn-outline" style="color:var(--ink);border-color:var(--line)" href="'+wa(e)+'">Falar com Paulo</a></div>';
+   m.classList.add('on'); return;}
+  if(ev.target===m||(ev.target.classList&&ev.target.classList.contains('x')))m.classList.remove('on');
+ });
+ document.addEventListener('keydown',function(e){if(e.key==='Escape')m.classList.remove('on');});
+})();
+</script>
 </body></html>
