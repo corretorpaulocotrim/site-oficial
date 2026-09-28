@@ -29,7 +29,7 @@
       +'.pc-hd-brand img{width:30px;height:30px;display:block}'
       +'.pc-hd-brand b{font-family:\'Cormorant Garamond\',Georgia,serif;font-size:19px;font-weight:600;color:#fff}'
       +'.pc-hd-nav{display:flex;align-items:center;gap:24px}'
-      +'.pc-hd-nav a{color:rgba(255,255,255,.82)!important;text-decoration:none;font:400 12.5px/1 \'Inter\',sans-serif;letter-spacing:.04em}'
+      +'.pc-hd-nav a{color:rgba(255,255,255,.82)!important;text-decoration:none;font:600 14px/1 \'Cormorant Garamond\',serif;letter-spacing:.14em;text-transform:uppercase}'
       +'.pc-hd-nav a:hover{color:#fff!important}'
       +'.pc-hd-cta{border:1px solid rgba(255,255,255,.35);padding:9px 16px;border-radius:2px;font-size:11px!important;letter-spacing:.1em;text-transform:uppercase}'
       +'.pc-hd-cta:hover{background:#b0895b;border-color:#b0895b;color:#1a1a19!important}'
