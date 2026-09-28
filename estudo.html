@@ -162,7 +162,13 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
   var qs=new URLSearchParams(location.search);
   var key=(qs.get('emp')||'').toLowerCase();
   function slug(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
-  function num(id){var v=(document.getElementById(id).value||'').toString().replace(/[^0-9.,]/g,'').replace(/\./g,'').replace(',','.');var n=parseFloat(v);return isNaN(n)?null:n;}
+  function num(id){
+    var v=(document.getElementById(id).value||'').toString().trim().replace(/[^0-9.,]/g,'');
+    if(!v)return null;
+    if(v.indexOf(',')>=0){ v=v.replace(/\./g,'').replace(',','.'); }
+    else if(v.indexOf('.')>=0){ var p=v.split('.'), last=p[p.length-1]; if(p.length>2||last.length===3){ v=v.replace(/\./g,''); } }
+    var n=parseFloat(v); return isNaN(n)?null:n;
+  }
   function fmt(v){return v==null?null:'R$ '+Math.round(v).toLocaleString('pt-BR');}
   function pct(v){return v==null?null:v.toFixed(1).replace('.',',')+'%';}
   var NA='<span style="color:var(--muted)">Não informado</span>';

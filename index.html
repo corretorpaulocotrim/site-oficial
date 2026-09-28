@@ -114,7 +114,16 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 .reveal.in{opacity:1;transform:none}
 </style>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
+<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js" defer></script>
+<style>
+.pc-pin span{display:block;width:13px;height:13px;border-radius:50%;background:#b0895b;border:2px solid #fff;box-shadow:0 1px 4px rgba(0,0,0,.5)}
+.marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(176,137,91,.3)}
+.marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:#b0895b;color:#1a1a19;font:600 12px 'Inter',sans-serif}
+.leaflet-popup-content{margin:0}.leaflet-popup-content-wrapper{padding:0;overflow:hidden;border-radius:4px}
+</style>
 <style>
 .leaflet-container{background:#141311;font-family:'Inter',sans-serif}
 .leaflet-popup-content-wrapper{border-radius:3px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
@@ -126,7 +135,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 <body>
 <header><div class="wrap nav">
   <a href="index.html" class="brandmark">
-    <svg viewBox="0 0 34.4 34.4" xmlns="http://www.w3.org/2000/svg"><g transform="translate(4.37,30.19)"><path transform="translate(0.000000,0) scale(0.019174,-0.019174)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="#b0895b"/><path transform="translate(8.343974,0) scale(0.014169,-0.014169)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="#b0895b"/></g></svg>
+    <svg viewBox="0 0 34.4 34.4" xmlns="http://www.w3.org/2000/svg"><g transform="translate(4.37,30.19)"><path transform="translate(0.000000,0) scale(0.019174,-0.019174)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="#b0895b"/><path transform="translate(8.343974,0) scale(0.014169,-0.014169)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="#f4efe6"/></g></svg>
     <span><span class="bn">Paulo Cotrim</span><span class="bs">Imóveis · Rio de Janeiro</span></span>
   </a>
   <nav class="menu">
@@ -139,17 +148,36 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
   <button class="burger" aria-label="Menu" onclick="document.querySelector('.menu').classList.toggle('open')"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
 </div></header>
 
-<section class="hero">
-  <img class="hero-bg" src="emp-img/luxo/bir-jaguaripe-hero.jpg" alt="Empreendimento no Rio de Janeiro"/>
-  <div class="hero-lines"></div>
-  <div class="wrap hero-c">
+<style>
+.hero{position:relative;min-height:100vh;display:flex;align-items:center;justify-content:center;color:#fff;overflow:hidden;background:#161513}
+.hero-slides{position:absolute;inset:0;z-index:0}
+.hero-slide{position:absolute;inset:0;background-size:cover;background-position:center;opacity:0;transition:opacity 1.6s ease;animation:heroKen 18s ease-in-out infinite alternate}
+.hero-slide.on{opacity:1}
+.hero-scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,14,12,.55) 0%,rgba(15,14,12,.3) 40%,rgba(15,14,12,.82) 100%)}
+.hero-c{position:relative;z-index:2;text-align:center;max-width:820px;margin:0 auto;padding:0 24px}
+.hero-c .eyebrow{color:var(--gold)}
+.hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(34px,6vw,74px);line-height:1.03;letter-spacing:-.01em;margin:18px auto 20px;max-width:16ch}
+.hero p{font-size:clamp(15px,1.6vw,19px);font-weight:300;color:rgba(255,255,255,.85);max-width:58ch;margin:0 auto 34px;line-height:1.7}
+.hsearch{display:flex;gap:0;max-width:720px;margin:0 auto;background:rgba(255,255,255,.97);border-radius:4px;overflow:hidden;box-shadow:0 30px 70px -30px rgba(0,0,0,.5)}
+.hsearch select,.hsearch input{border:none;background:none;font-family:inherit;font-size:14px;color:var(--ink);padding:18px 18px;outline:none}
+.hsearch select{border-right:1px solid var(--line)}
+.hsearch input{flex:1;min-width:0}
+.hsearch .hgo{background:var(--gold);color:var(--ink);border:none;font:600 12px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;padding:0 26px;cursor:pointer;transition:.25s}
+.hsearch .hgo:hover{background:#c79c68}
+@media(max-width:640px){.hsearch{flex-wrap:wrap}.hsearch select,.hsearch input{flex:1 1 100%;border-right:none;border-bottom:1px solid var(--line)}.hsearch .hgo{flex:1 1 100%;padding:16px}}
+</style>
+<section class="hero" id="hero">
+  <div class="hero-slides" id="hero-slides"></div>
+  <div class="hero-scrim"></div>
+  <div class="hero-c">
     <span class="eyebrow">Rio de Janeiro</span>
-    <h1 class="serif">Viver o extraordinário começa pelo endereço.</h1>
-    <p>Todo o mercado de imóveis novos do Rio em um só lugar, com o atendimento e o acompanhamento de quem faz isso há 18 anos — do lançamento à entrega das chaves, sem você sair de casa.</p>
-    <div class="hero-actions">
-      <a class="btn btn-solid" href="#portfolio">Ver empreendimentos</a>
-      <a class="btn btn-outline" href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20um%20atendimento%20personalizado.">Falar com Paulo Cotrim</a>
-    </div>
+    <h1 class="serif">Onde viver o Rio encontra a decisão certa.</h1>
+    <p>Todo o mercado de imóveis novos do Rio — da Zona Sul e Barra ao Centro — com análise de rentabilidade e o atendimento de quem faz isso há 18 anos.</p>
+    <form class="hsearch" onsubmit="return heroBuscar(event)">
+      <select id="hs-reg" aria-label="Região"><option value="">Todas as regiões</option><option>Zona Sul</option><option>Barra e Zona Oeste</option><option>Centro e Porto</option><option>Grande Tijuca</option><option>Zona Norte</option><option>Baixada e Grande Rio</option></select>
+      <input id="hs-q" type="search" placeholder="Bairro, empreendimento ou construtora"/>
+      <button class="hgo" type="submit">Buscar</button>
+    </form>
   </div>
   <div class="scrollcue">Role para descobrir</div>
 </section>
@@ -161,15 +189,6 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
   <span><b>Todas as principais construtoras</b></span>
 </div></div>
 
-<div class="wrap">
-  <form class="search" onsubmit="return buscar(event)">
-    <div class="f"><label>Bairro</label><select id="s-bairro"><option value="">Todos</option><option>Barra da Tijuca</option><option>Leblon</option><option>Ipanema</option><option>São Conrado</option><option>Lagoa</option><option>Gávea</option><option>Copacabana</option><option>Recreio</option></select></div>
-    <div class="f"><label>Tipo</label><select id="s-tipo"><option value="">Todos</option><option>Apartamento</option><option>Cobertura</option><option>Casa em condomínio</option><option>Lançamento</option><option>Pronto</option></select></div>
-    <div class="f"><label>Quartos</label><select id="s-q"><option value="">Indiferente</option><option>2+</option><option>3+</option><option>4+</option></select></div>
-    <div class="f"><label>Faixa de investimento</label><select id="s-preco"><option value="">A consultar</option><option>até R$ 2 mi</option><option>R$ 2–5 mi</option><option>R$ 5–10 mi</option><option>acima de R$ 10 mi</option></select></div>
-    <button class="go" type="submit">Buscar</button>
-  </form>
-</div>
 
 <style>
 .pf-bar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-bottom:28px}
@@ -288,10 +307,17 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 </div></footer>
 
 <script>
-function buscar(e){e.preventDefault();
-  var b=document.getElementById('s-bairro').value,t=document.getElementById('s-tipo').value,q=document.getElementById('s-q').value,p=document.getElementById('s-preco').value;
-  var msg='Olá Paulo, tenho interesse em um imóvel'+(t?(' — '+t):'')+(b?(' em '+b):'')+(q?(', '+q+' quartos'):'')+(p?(', faixa '+p):'')+'. Pode me enviar a seleção?';
-  window.open('https://wa.me/5521989150864?text='+encodeURIComponent(msg),'_blank');return false;}
+function heroBuscar(e){ if(e)e.preventDefault();
+  var reg=document.getElementById('hs-reg').value, q=document.getElementById('hs-q').value;
+  if(window.pcFilter) window.pcFilter(reg,q);
+  var el=document.getElementById('portfolio'); if(el) el.scrollIntoView({behavior:'smooth'});
+  return false; }
+(function(){
+  var imgs=['emp-img/luxo/bir-jaguaripe-hero.jpg','emp-img/farol-da-guanabara.jpg','emp-img/orla-central.jpg','emp-img/arcos-do-porto.jpg'];
+  var box=document.getElementById('hero-slides'); if(!box)return;
+  var els=imgs.map(function(src,i){var d=document.createElement('div');d.className='hero-slide'+(i===0?' on':'');d.style.backgroundImage="url('"+src+"')";box.appendChild(d);return d;});
+  var i=0; if(els.length>1) setInterval(function(){els[i].classList.remove('on');i=(i+1)%els.length;els[i].classList.add('on');},5500);
+})();
 var io=new IntersectionObserver(function(es){es.forEach(function(x){if(x.isIntersecting){x.target.classList.add('in');io.unobserve(x.target)}})},{threshold:.12});
 document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 </script>
@@ -333,6 +359,7 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
    box.innerHTML=regs.map(function(r){return '<button data-r="'+r+'"'+(r===fReg?' class="on"':'')+'>'+r+'</button>';}).join('');
    [].forEach.call(box.querySelectorAll('button'),function(b){b.onclick=function(){fReg=b.dataset.r;chips();apply();};});
  }
+ window.pcFilter=function(reg,q){ fReg=reg||'Todas'; fQ=q||''; var qi=document.getElementById('pf-q'); if(qi)qi.value=fQ; chips(); apply(); };
  fetch('data/catalogo.json').then(function(r){return r.json();}).then(function(d){
    ALL=(d&&d.itens)||[];
    var sts=[]; ALL.forEach(function(e){if(e.status&&sts.indexOf(e.status)<0)sts.push(e.status);});
@@ -348,23 +375,34 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 </script>
 <script>
 (function(){
+ function slug(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
  function initMap(){
    if(!window.L||!document.getElementById('pc-map')||window.__pcmap)return;
    window.__pcmap=1;
    var map=L.map('pc-map',{scrollWheelZoom:false}).setView([-22.92,-43.3],10);
    L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,subdomains:'abcd',attribution:'© OpenStreetMap · © CARTO'}).addTo(map);
+   setTimeout(function(){map.invalidateSize();},300);
+   var cluster=window.L.markerClusterGroup?L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:46}):null;
    fetch('data/mapa.json').then(function(r){return r.json();}).then(function(d){
      var pts=(d&&d.pontos)||[], bounds=[];
      pts.forEach(function(p){
-       var alto=p.s==='alto';
-       var mk=L.circleMarker([p.lat,p.lng],{radius:alto?8:6,color:'#b0895b',weight:alto?2:1,fillColor:alto?'#b0895b':'#8a857b',fillOpacity:alto?0.95:0.7}).addTo(map);
-       mk.bindPopup('<div style="font-family:Inter,sans-serif"><div style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:18px;color:#1a1a19;margin-bottom:2px">'+p.n+'</div><div style="font-size:12px;color:#8a857b;margin-bottom:9px">'+p.b+'</div><a href="'+p.u+'" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#b0895b;text-decoration:none;border-bottom:1px solid #b0895b;padding-bottom:2px">Ver empreendimento →</a></div>');
+       var m=L.marker([p.lat,p.lng],{icon:L.divIcon({className:'pc-pin',html:'<span></span>',iconSize:[16,16]})});
+       var img=p.img?('<div style="height:100px;background:url(\''+p.img+'\') center/cover"></div>'):'';
+       var preco=p.preco?('<div style="font-family:Cormorant Garamond,serif;font-size:17px;color:#1a1a19">A partir de R$ '+Math.round(p.preco).toLocaleString('pt-BR')+'</div>'):'<div style="font-size:12px;color:#8a857b">Consulte valores</div>';
+       var est='estudo.html?emp='+encodeURIComponent(p.u||slug(p.n));
+       m.bindPopup('<div style="width:210px;font-family:Inter,sans-serif">'+img+'<div style="padding:11px 13px 13px"><div style="font-family:Cormorant Garamond,serif;font-size:18px;color:#1a1a19;line-height:1.15">'+p.n+'</div><div style="font-size:11px;color:#8a857b;margin:3px 0 8px">'+(p.b||'')+'</div>'+preco+'<div style="display:flex;gap:14px;margin-top:10px">'+(p.u?'<a href="'+p.u+'" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#8a857b;text-decoration:none">Ver imóvel</a>':'')+'<a href="'+est+'" style="font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:#b0895b;text-decoration:none">Rentabilidade →</a></div></div></div>',{maxWidth:240});
+       if(cluster)cluster.addLayer(m); else m.addTo(map);
        bounds.push([p.lat,p.lng]);
      });
-     if(bounds.length) map.fitBounds(bounds,{padding:[36,36]});
+     if(cluster)map.addLayer(cluster);
+     if(bounds.length)map.fitBounds(bounds,{padding:[40,40]});
+     setTimeout(function(){map.invalidateSize();},500);
    }).catch(function(){});
  }
- (function wait(){ if(window.L) initMap(); else setTimeout(wait,150); })();
+ (function wait(){ window.__t0=window.__t0||Date.now();
+   if(window.L && (window.L.markerClusterGroup || Date.now()-window.__t0>3000)) initMap();
+   else setTimeout(wait,150); })();
+ window.addEventListener('resize',function(){ if(window.__pcmap){} });
 })();
 </script>
 <script src="i18n.js" defer></script>
