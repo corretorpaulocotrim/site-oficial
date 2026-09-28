@@ -29,10 +29,16 @@ header{position:absolute;top:0;left:0;right:0;z-index:20}
 .menu.open a.cta{margin:14px 40px 4px;text-align:center;justify-content:center}}
 /* hero */
 .hero{position:relative;min-height:100vh;display:flex;align-items:center;color:#fff;overflow:hidden;background:linear-gradient(160deg,#232220 0%,#161513 60%,#1d1b18 100%)}
-.hero::after{content:"";position:absolute;inset:0;background:
-  radial-gradient(120% 80% at 80% 10%,rgba(176,137,91,.16),transparent 55%),
-  linear-gradient(90deg,rgba(0,0,0,.5),transparent 60%);pointer-events:none}
-.hero-lines{position:absolute;inset:0;opacity:.10;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px);background-size:100% 74px}
+.hero::after{content:"";position:absolute;inset:0;z-index:1;background:
+  linear-gradient(180deg,rgba(15,14,12,.55) 0%,rgba(15,14,12,.25) 35%,rgba(15,14,12,.82) 100%),
+  radial-gradient(120% 80% at 80% 10%,rgba(176,137,91,.14),transparent 55%);pointer-events:none}
+.hero-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;animation:heroKen 26s ease-in-out infinite alternate}
+@keyframes heroKen{from{transform:scale(1.04)}to{transform:scale(1.16)}}
+.hero-lines{position:absolute;inset:0;z-index:1;opacity:.06;background-image:linear-gradient(rgba(255,255,255,.5) 1px,transparent 1px);background-size:100% 74px}
+.trust{background:var(--ink);color:rgba(255,255,255,.85);border-top:1px solid rgba(176,137,91,.25)}
+.trust .wrap{display:flex;flex-wrap:wrap;justify-content:center;gap:14px 40px;padding:20px 40px;text-align:center}
+.trust span{font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.78)}
+.trust b{color:var(--gold);font-weight:500}
 .hero-c{position:relative;z-index:2;width:100%;padding:120px 0}
 .hero h1{font-family:'Cormorant Garamond',serif;font-weight:500;font-size:clamp(38px,6.4vw,82px);line-height:1.02;letter-spacing:-.01em;max-width:16ch;margin:22px 0 26px}
 .hero p{font-size:clamp(15px,1.5vw,18px);font-weight:300;color:rgba(255,255,255,.78);max-width:54ch;line-height:1.7}
@@ -107,6 +113,15 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 .reveal{opacity:0;transform:translateY(24px);transition:opacity 1s var(--ease),transform 1s var(--ease)}
 .reveal.in{opacity:1;transform:none}
 </style>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" defer></script>
+<style>
+.leaflet-container{background:#141311;font-family:'Inter',sans-serif}
+.leaflet-popup-content-wrapper{border-radius:3px;box-shadow:0 20px 50px -20px rgba(0,0,0,.5)}
+.leaflet-popup-content{margin:14px 16px}
+#pc-map{height:520px;border:1px solid var(--line);overflow:hidden}
+@media(max-width:680px){#pc-map{height:420px}}
+</style>
 </head>
 <body>
 <header><div class="wrap nav">
@@ -119,6 +134,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
     <a href="#selecao">Lançamentos</a>
     <a href="#selecao">Alto Padrão</a>
     <a href="#regioes">Bairros</a>
+    <a href="#mapa">Mapa</a>
     <a href="#sobre">Sobre Paulo</a>
     <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20um%20atendimento%20personalizado." class="cta">Contato</a>
   </nav>
@@ -126,18 +142,26 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 </div></header>
 
 <section class="hero">
+  <img class="hero-bg" src="emp-img/luxo/bir-jaguaripe-hero.jpg" alt="Empreendimento no Rio de Janeiro"/>
   <div class="hero-lines"></div>
   <div class="wrap hero-c">
     <span class="eyebrow">Rio de Janeiro</span>
     <h1 class="serif">Viver o extraordinário começa pelo endereço.</h1>
-    <p>Uma curadoria imobiliária para quem busca exclusividade, arquitetura e novas perspectivas de viver no Rio de Janeiro.</p>
+    <p>Todo o mercado de imóveis novos do Rio em um só lugar, com a curadoria e o atendimento de quem faz isso há 18 anos — do lançamento à entrega das chaves, sem você sair de casa.</p>
     <div class="hero-actions">
-      <a class="btn btn-solid" href="#selecao">Explorar imóveis</a>
-      <a class="btn btn-outline" href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20um%20atendimento%20personalizado.">Atendimento personalizado</a>
+      <a class="btn btn-solid" href="#portfolio">Ver empreendimentos</a>
+      <a class="btn btn-outline" href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20gostaria%20de%20um%20atendimento%20personalizado.">Falar com Paulo Cotrim</a>
     </div>
   </div>
   <div class="scrollcue">Role para descobrir</div>
 </section>
+<div class="trust"><div class="wrap">
+  <span><b>18 anos</b> no mercado do Rio</span>
+  <span><b>CRECI-RJ</b> 77.677</span>
+  <span><b>Jornada 100% digital</b> — sem sair de casa</span>
+  <span><b>Análise inicial</b> em até 48h úteis</span>
+  <span><b>Todas as principais construtoras</b></span>
+</div></div>
 
 <div class="wrap">
   <form class="search" onsubmit="return buscar(event)">
@@ -197,6 +221,13 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
   </div>
 </div></section>
 
+<section class="section section-stone" id="mapa"><div class="wrap">
+  <div class="shead reveal"><div><span class="eyebrow">No mapa</span><h2 class="serif">Onde estão os empreendimentos</h2></div>
+    <span style="font-size:12px;color:var(--muted);max-width:26ch">Do alto padrão da Zona Sul e Barra às oportunidades no Rio e Grande Rio.</span></div>
+  <div id="pc-map" class="reveal"></div>
+  <p style="font-size:11.5px;color:var(--muted);margin-top:14px">Pinos em champanhe = alto padrão. Localização aproximada; confirme o endereço exato na página de cada empreendimento.</p>
+</div></section>
+
 <section class="section" id="sobre"><div class="wrap">
   <div class="inst">
     <div class="ph reveal"></div>
@@ -249,7 +280,7 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
 </script>
 <script>
 (function(){
- var ALL=[], fSeg='alto', fReg='Todos';
+ var ALL=[], fSeg='todos', fReg='Todos';
  function regiao(b){b=(b||'').toLowerCase();
    if(/barra|pen[ií]nsula|ilha pura|recreio|joá|jardim oce/.test(b))return 'Barra';
    if(/leblon|ipanema|copacabana|lagoa|g[áa]vea|conrado|leme|jardim bot|humait|botafogo|flamengo|urca/.test(b))return 'Zona Sul';
@@ -294,6 +325,27 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
    var m=((res[1]&&res[1].empreendimentos)||[]).map(function(e){e.seg='mcmv';return e;});
    ALL=a.concat(m); filters(); render();
  });
+})();
+</script>
+<script>
+(function(){
+ function initMap(){
+   if(!window.L||!document.getElementById('pc-map')||window.__pcmap)return;
+   window.__pcmap=1;
+   var map=L.map('pc-map',{scrollWheelZoom:false}).setView([-22.92,-43.3],10);
+   L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png',{maxZoom:19,subdomains:'abcd',attribution:'© OpenStreetMap · © CARTO'}).addTo(map);
+   fetch('data/mapa.json').then(function(r){return r.json();}).then(function(d){
+     var pts=(d&&d.pontos)||[], bounds=[];
+     pts.forEach(function(p){
+       var alto=p.s==='alto';
+       var mk=L.circleMarker([p.lat,p.lng],{radius:alto?8:6,color:'#b0895b',weight:alto?2:1,fillColor:alto?'#b0895b':'#8a857b',fillOpacity:alto?0.95:0.7}).addTo(map);
+       mk.bindPopup('<div style="font-family:Inter,sans-serif"><div style="font-family:\'Cormorant Garamond\',Georgia,serif;font-size:18px;color:#1a1a19;margin-bottom:2px">'+p.n+'</div><div style="font-size:12px;color:#8a857b;margin-bottom:9px">'+p.b+'</div><a href="'+p.u+'" style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#b0895b;text-decoration:none;border-bottom:1px solid #b0895b;padding-bottom:2px">Ver empreendimento →</a></div>');
+       bounds.push([p.lat,p.lng]);
+     });
+     if(bounds.length) map.fitBounds(bounds,{padding:[36,36]});
+   }).catch(function(){});
+ }
+ (function wait(){ if(window.L) initMap(); else setTimeout(wait,150); })();
 })();
 </script>
 <script src="i18n.js" defer></script>
