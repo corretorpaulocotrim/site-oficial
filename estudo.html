@@ -202,18 +202,30 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
     // valorização
     var valorProj = (valor!=null&&cen!=null&&anos!=null)? valor*Math.pow(1+cen/100,anos) : null;
     var ganhoCapital = (valorProj!=null&&valor!=null)? valorProj-valor : null;
-    // fluxo mensal
+    // fluxo mensal (caixa: renda - parcela - condomínio - IPTU)
     var fluxoMensal = null;
     if(rendaMensalBruta!=null){ fluxoMensal = rendaMensalBruta - (parcela||0) - (cond||0) - (iptu!=null?iptu/12:0); }
-    // payback
-    var receitaLiqMensal = receitaLiquidaAnual!=null? receitaLiquidaAnual/12 : null;
-    var payback = (capitalInicial!=null&&receitaLiqMensal!=null&&receitaLiqMensal>0)? capitalInicial/receitaLiqMensal/12 : null;
-    // retorno total no horizonte
-    var rendaAcum = (receitaLiquidaAnual!=null&&anos!=null)? receitaLiquidaAnual*anos : null;
+    // amortização real (Price) até o horizonte → saldo devedor, juros e parcelas pagas
+    var mesesH = anos!=null? anos*12 : null;
+    var saldoDevedor = (financiado!=null? financiado : 0), jurosPagos=0, parcelasPagas=0;
+    if(financiado&&parcela&&prazo){
+      var im=juros/100/12, mm=Math.min(mesesH!=null?mesesH:prazo, prazo), s=financiado;
+      for(var k=0;k<mm;k++){ var jm=s*im; jurosPagos+=jm; s=s-(parcela-jm); if(s<0)s=0; }
+      saldoDevedor=s; parcelasPagas=parcela*mm;
+    }
+    var capitalTotalAportado = (capitalInicial!=null?capitalInicial:0) + parcelasPagas;
+    if(capitalInicial==null&&!parcelasPagas)capitalTotalAportado=null;
+    var valorLiquidoVenda = (valorProj!=null)? valorProj - saldoDevedor : null;
+    // payback pelo caixa líquido mensal (considera a parcela)
+    var payback = (capitalInicial!=null&&fluxoMensal!=null&&fluxoMensal>0)? capitalInicial/(fluxoMensal*12) : null;
+    // retorno total no horizonte (alavancado, líquido do saldo devedor)
+    var rendaAcum = (fluxoMensal!=null&&mesesH!=null)? Math.max(0,fluxoMensal)*mesesH : ((receitaLiquidaAnual!=null&&anos!=null)? receitaLiquidaAnual*anos : null);
     var resultado = null;
-    if(rendaAcum!=null||ganhoCapital!=null){ resultado=(rendaAcum||0)+(ganhoCapital||0); }
-    var retornoPct = (resultado!=null&&capInvest)? resultado/capInvest*100 : null;
-    return {valor,entrada,financiado,custosAq,capitalInicial,parcela,aluguel,rendaMensalBruta,rendaAnualBruta,custoCondAnual,iptu,adminAnual,platAnual,limpAnual,vacPerda,custosAnuais,receitaLiquidaAnual,yieldBruto,yieldLiquido,valorProj,ganhoCapital,fluxoMensal,payback,rendaAcum,resultado,retornoPct,capInvest,anos,cen};
+    if((valorLiquidoVenda!=null||rendaAcum!=null)&&capitalTotalAportado!=null){
+      resultado=(valorLiquidoVenda!=null?valorLiquidoVenda:0)+(rendaAcum||0)-capitalTotalAportado;
+    }
+    var retornoPct = (resultado!=null&&capitalTotalAportado)? resultado/capitalTotalAportado*100 : null;
+    return {valor,entrada,financiado,custosAq,capitalInicial,parcela,aluguel,rendaMensalBruta,rendaAnualBruta,custoCondAnual,iptu,adminAnual,platAnual,limpAnual,vacPerda,custosAnuais,receitaLiquidaAnual,yieldBruto,yieldLiquido,valorProj,ganhoCapital,fluxoMensal,payback,rendaAcum,resultado,retornoPct,capInvest,anos,cen,saldoDevedor,jurosPagos,parcelasPagas,capitalTotalAportado,valorLiquidoVenda,mesesH};
   }
 
   function kpi(l,v,na){return '<div class="kpi'+(v==null?' na':'')+'"><div class="l">'+l+'</div><div class="v">'+(v==null?(na||'Não calculado'):v)+'</div></div>';}
@@ -277,12 +289,14 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
     // projeção
     var pj='';
     pj+=line('Valor hoje',fmt(r.valor));
-    pj+=line('Cenário',(r.cen!=null?r.cen+'% a.a.':null));
+    pj+=line('Cenário de valorização',(r.cen!=null?r.cen+'% a.a.':null));
     pj+=line('Valor projetado ('+(r.anos||'—')+' anos)',fmt(r.valorProj));
-    pj+=line('Ganho de capital projetado',fmt(r.ganhoCapital),r.ganhoCapital!=null?'pos':'');
-    pj+=line('Renda líquida acumulada',fmt(r.rendaAcum),r.rendaAcum!=null?'pos':'');
-    pj+=line('Resultado estimado no horizonte',fmt(r.resultado),r.resultado!=null?'pos':'');
-    document.getElementById('e-proj').innerHTML=pj+'<div class="nota">Projeção não representa garantia de valorização futura.</div>';
+    if(r.financiado){ pj+=line('(–) Saldo devedor no horizonte', r.saldoDevedor!=null?'- '+fmt(r.saldoDevedor):null,'neg'); pj+=line('Valor líquido de venda',fmt(r.valorLiquidoVenda)); }
+    pj+=line('Capital total aportado (entrada + parcelas)',fmt(r.capitalTotalAportado));
+    if(r.jurosPagos) pj+=line('Juros pagos no período','- '+fmt(r.jurosPagos),'neg');
+    pj+=line('Caixa líquido acumulado (locação)',fmt(r.rendaAcum),r.rendaAcum!=null?'pos':'');
+    pj+=line('Resultado estimado no horizonte',fmt(r.resultado),r.resultado!=null?(r.resultado>=0?'pos':'neg'):'');
+    document.getElementById('e-proj').innerHTML=pj+'<div class="nota">Retorno considera a quitação do saldo devedor e os custos do financiamento. Projeção não representa garantia de valorização futura.</div>';
     // premissas
     var pr='';
     pr+=line('Valor do imóvel',fmt(r.valor));
