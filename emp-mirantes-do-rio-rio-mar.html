@@ -384,7 +384,7 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
   if(!el || typeof L === 'undefined') return;
   var lat = -22.9176248, lng = -43.6834907;
   var map = L.map('map-imovel', { center:[lat,lng], zoom:14, scrollWheelZoom:false, zoomControl:true });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:'&copy; <a href="https://openstreetmap.org">OSM</a> &copy; <a href="https://carto.com">CARTO</a>',
     subdomains:'abcd', maxZoom:19
   }).addTo(map);

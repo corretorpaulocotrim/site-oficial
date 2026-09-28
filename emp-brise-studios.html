@@ -582,7 +582,7 @@ function closeHeroLb(){document.getElementById('heroLb').classList.remove('open'
   if(!el || typeof L === 'undefined') return;
   var lat = -22.9004, lng = -43.178;
   var map = L.map('map-imovel', { center:[lat,lng], zoom:15, scrollWheelZoom:false, zoomControl:true });
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+  L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:'&copy; <a href="https://openstreetmap.org">OSM</a> &copy; <a href="https://carto.com">CARTO</a>',
     subdomains:'abcd', maxZoom:19
   }).addTo(map);
