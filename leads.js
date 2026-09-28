@@ -20,11 +20,28 @@
       +'--bg:#f6f2ea;--mist:#efeade;--cream:#fbf9f4;--ivory:#f6f2ea;--ivory2:#fbf9f4;--white:#ffffff;'
       +'--line:#e3ddd1;--border:#e3ddd1}'
       +'body{font-family:\'Inter\',system-ui,-apple-system,sans-serif}'
-      +'h1,h2,h3,.serif{font-family:\'Cormorant Garamond\',Georgia,serif;letter-spacing:.005em}';
+      +'h1,h2,h3,.serif{font-family:\'Cormorant Garamond\',Georgia,serif;letter-spacing:.005em}'
+      /* casco premium: cabeçalho unificado */
+      +'.pc-hd{position:sticky;top:0;z-index:50;background:#1a1a19;border-bottom:1px solid rgba(176,137,91,.32)}'
+      +'.pc-hd-in{max-width:1240px;margin:0 auto;padding:0 32px;height:62px;display:flex;align-items:center;justify-content:space-between}'
+      +'@media(max-width:680px){.pc-hd-in{padding:0 20px}}'
+      +'.pc-hd-brand{display:flex;align-items:center;gap:10px;text-decoration:none}'
+      +'.pc-hd-brand img{width:30px;height:30px;display:block}'
+      +'.pc-hd-brand b{font-family:\'Cormorant Garamond\',Georgia,serif;font-size:19px;font-weight:600;color:#fff}'
+      +'.pc-hd-nav{display:flex;align-items:center;gap:24px}'
+      +'.pc-hd-nav a{color:rgba(255,255,255,.82)!important;text-decoration:none;font:400 12.5px/1 \'Inter\',sans-serif;letter-spacing:.04em}'
+      +'.pc-hd-nav a:hover{color:#fff!important}'
+      +'.pc-hd-cta{border:1px solid rgba(255,255,255,.35);padding:9px 16px;border-radius:2px;font-size:11px!important;letter-spacing:.1em;text-transform:uppercase}'
+      +'.pc-hd-cta:hover{background:#b0895b;border-color:#b0895b;color:#1a1a19!important}'
+      +'@media(max-width:720px){.pc-hd-nav a:not(.pc-hd-cta){display:none}}';
     var s=document.createElement('style');
     s.id='pc-premium-theme';
     s.textContent=css;
     document.head.appendChild(s);
+    /* bandeiras/idioma/moeda em todas as páginas */
+    if(!document.querySelector('script[src*="i18n.js"]')){
+      var ig=document.createElement('script'); ig.src='i18n.js'; ig.defer=true; document.head.appendChild(ig);
+    }
   }catch(e){}
 })();
 (function(){
