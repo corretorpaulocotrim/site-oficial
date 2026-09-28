@@ -44,6 +44,25 @@
     }
   }catch(e){}
 })();
+/* Botão "Analisar rentabilidade" em toda página de empreendimento */
+(function(){
+  function isEmp(){
+    var p=(location.pathname.split('/').pop()||'').toLowerCase();
+    return /^emp-.+\.html$/.test(p) || ['farol-da-guanabara.html','arcos-do-porto.html','orla-central.html','parque-piedade.html','luzes-do-rio-lamparina.html','luzes-do-rio-candeeiro.html','cartola-ii.html','caminhos-da-guanabara.html'].indexOf(p)>=0;
+  }
+  function inject(){
+    try{
+      if(!isEmp()||document.getElementById('pc-rent'))return;
+      var file=(location.pathname.split('/').pop()||'');
+      var a=document.createElement('a');
+      a.id='pc-rent'; a.href='estudo.html?emp='+encodeURIComponent(file);
+      a.textContent='Analisar rentabilidade';
+      a.setAttribute('style','position:fixed;left:16px;bottom:18px;z-index:40;background:#b0895b;color:#1a1a19;font:600 12px/1 Inter,sans-serif;letter-spacing:.06em;text-transform:uppercase;padding:14px 18px;border-radius:100px;box-shadow:0 12px 30px -10px rgba(0,0,0,.4);text-decoration:none');
+      document.body.appendChild(a);
+    }catch(e){}
+  }
+  if(document.readyState!=='loading')inject(); else document.addEventListener('DOMContentLoaded',inject);
+})();
 (function(){
   var SHEET_URL = '';  // desativado: leads vão pelo enviarLeadCRM (crm-config.js) + trackEvent
 

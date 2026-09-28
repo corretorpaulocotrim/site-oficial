@@ -186,7 +186,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 @media(max-width:560px){.pf{grid-template-columns:1fr}}
 .pcard{background:var(--white);border:1px solid var(--line);overflow:hidden;transition:.4s var(--ease);display:flex;flex-direction:column;text-decoration:none;color:inherit}
 .pcard:hover{transform:translateY(-3px);box-shadow:0 30px 60px -40px rgba(26,26,25,.3);border-color:var(--gold)}
-.pcard .im{aspect-ratio:16/10;background:linear-gradient(150deg,#2a2620,#161513);background-size:cover;background-position:center;position:relative}
+.pcard .im{display:block;aspect-ratio:16/10;background:linear-gradient(150deg,#2a2620,#161513);background-size:cover;background-position:center;position:relative}
 .pcard .im .rg{position:absolute;bottom:12px;left:14px;color:#fff;font:500 10px/1 'Inter',sans-serif;letter-spacing:.1em;text-transform:uppercase;text-shadow:0 1px 6px rgba(0,0,0,.6)}
 .pcard .im .st{position:absolute;top:12px;left:14px;font:500 9px/1 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#1a1a19;background:var(--gold);padding:5px 9px;border-radius:2px}
 .pcard .bb{padding:18px 20px 22px;display:flex;flex-direction:column;gap:6px;flex:1}
@@ -195,8 +195,20 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:60px 0 40px;font-si
 .pcard .bb .pl{font-size:12.5px;color:var(--graphite);line-height:1.5}
 .pcard .bb .pr{margin-top:auto;padding-top:12px;border-top:1px solid var(--line);font-size:13px;color:var(--ink)}
 .pcard .bb .pr b{font-family:'Cormorant Garamond',serif;font-size:19px;font-weight:600}
-.pcard .bb .cta{margin-top:10px;font:500 11px/1 'Inter',sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--gold)}
+.pcard .bb .cta2{margin-top:12px;display:flex;justify-content:space-between;gap:10px;align-items:center;border-top:1px solid var(--line);padding-top:12px}
+.pcard .bb .cta2 a{font:500 10.5px/1.3 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.pcard .bb .cta2 a.an{color:var(--gold);text-align:right}
+.pcard .bb .cta2 a:hover{color:var(--ink)}
+.pcard .bb .cta2 a.an:hover{color:#c79c68}
 </style>
+<section class="section" style="background:var(--ink);color:#fff;text-align:center" id="decida"><div class="wrap">
+  <span class="eyebrow" style="color:var(--gold)">Inteligência imobiliária</span>
+  <h2 class="serif" style="font-size:clamp(28px,4.4vw,46px);font-weight:500;line-height:1.1;margin:14px auto 14px;max-width:20ch">Não escolha apenas pelo preço.</h2>
+  <p style="color:rgba(255,255,255,.8);max-width:62ch;margin:0 auto 8px;font-weight:300">Compare entrada, financiamento, renda potencial, custos e projeções de retorno antes de decidir. Cada empreendimento tem um estudo de rentabilidade.</p>
+  <p style="color:rgba(255,255,255,.55);max-width:62ch;margin:0 auto 28px;font-size:13px">Não vendo um apartamento. Ajudo você a decidir — informação antes da decisão.</p>
+  <a class="btn btn-solid" href="#portfolio" style="margin:0 auto">Analisar rentabilidade</a>
+</div></section>
+
 <section class="section" id="portfolio"><div class="wrap">
   <div class="shead reveal"><div><span class="eyebrow">Empreendimentos</span><h2 class="serif">Todo o Rio, empreendimento por empreendimento</h2></div></div>
   <div class="pf-bar reveal">
@@ -288,19 +300,21 @@ document.querySelectorAll('.reveal').forEach(function(el){io.observe(el)});
  var ALL=[], fReg='Todas', fStatus='', fPreco='', fQ='';
  function esc(s){return (s||'').replace(/'/g,'&#39;');}
  function fmtBRL(v){return 'R$ '+Math.round(v).toLocaleString('pt-BR');}
+ function slug(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
  function card(e){
    var img=e.img?("background-image:url('"+esc(e.img)+"')"):'';
    var st=e.status?('<span class="st">'+e.status+'</span>'):'';
    var preco=e.preco?('<b>A partir de '+fmtBRL(e.preco)+'</b>'):(e.preco_texto||'Consulte valores');
    var href=e.url?e.url:('https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo, quero informações do '+e.nome+' ('+e.regiao+').'));
-   return '<a class="pcard" href="'+href+'">'
-     +'<div class="im" style="'+img+'">'+st+'<span class="rg">'+esc(e.local||e.regiao||'')+'</span></div>'
+   var est='estudo.html?emp='+encodeURIComponent(e.url||slug(e.nome));
+   return '<div class="pcard">'
+     +'<a class="im" href="'+href+'" style="'+img+'">'+st+'<span class="rg">'+esc(e.local||e.regiao||'')+'</span></a>'
      +'<div class="bb"><h3>'+esc(e.nome||'')+'</h3>'
      +(e.incorporadora?('<div class="inc">'+esc(e.incorporadora)+'</div>'):'')
      +(e.plantas?('<div class="pl">'+esc(e.plantas)+'</div>'):'')
      +'<div class="pr">'+preco+'</div>'
-     +'<div class="cta">'+(e.url?'Ver empreendimento →':'Falar com Paulo →')+'</div>'
-     +'</div></a>';
+     +'<div class="cta2"><a href="'+href+'">'+(e.url?'Ver imóvel':'Falar')+'</a><a class="an" href="'+est+'">Analisar rentabilidade →</a></div>'
+     +'</div>';
  }
  function apply(){
    var list=ALL.filter(function(e){

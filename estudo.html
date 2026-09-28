@@ -1,0 +1,341 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#1a1a19"/>
+<title>Estudo de Rentabilidade · Paulo Cotrim</title>
+<meta name="robots" content="noindex,follow"/>
+<link rel="icon" type="image/svg+xml" href="favicon.svg"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--ivory:#f6f2ea;--ivory2:#fbf9f4;--white:#fff;--ink:#1a1a19;--graphite:#2c2b28;--muted:#8a857b;--gold:#b0895b;--line:#e3ddd1;--pos:#3f7d55;--neg:#a24b3a}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--ivory);color:var(--ink);line-height:1.6;font-weight:300}
+.serif{font-family:'Cormorant Garamond',Georgia,serif}
+a{color:inherit;text-decoration:none}
+.top{background:var(--ink);color:#fff;position:sticky;top:0;z-index:30}
+.top .in{max-width:1180px;margin:0 auto;padding:0 28px;height:60px;display:flex;align-items:center;justify-content:space-between}
+.brand{display:flex;align-items:center;gap:10px}
+.brand img{width:28px;height:28px}
+.brand b{font-family:'Cormorant Garamond',serif;font-size:18px;font-weight:600}
+.top a.back{font-size:12px;letter-spacing:.08em;color:rgba(255,255,255,.8)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 28px}
+@media(max-width:680px){.wrap,.top .in{padding:0 18px}}
+.head{padding:44px 0 8px}
+.eyebrow{font-size:11px;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);font-weight:500}
+.head h1{font-family:'Cormorant Garamond',serif;font-size:clamp(30px,5vw,50px);font-weight:500;line-height:1.05;margin:8px 0 6px}
+.head .loc{color:var(--muted);font-size:14px}
+.perfis{display:flex;gap:8px;margin:22px 0 6px;flex-wrap:wrap}
+.perfis button{border:1px solid var(--line);background:none;color:var(--ink);font:500 11px/1 'Inter',sans-serif;letter-spacing:.08em;text-transform:uppercase;padding:10px 16px;border-radius:100px;cursor:pointer;transition:.2s}
+.perfis button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.layout{display:grid;grid-template-columns:340px 1fr;gap:34px;padding:26px 0 60px;align-items:start}
+@media(max-width:900px){.layout{grid-template-columns:1fr}}
+.panel{background:var(--white);border:1px solid var(--line);border-radius:4px;padding:24px}
+.panel h2{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:500;margin-bottom:4px}
+.panel .sub{font-size:12px;color:var(--muted);margin-bottom:18px}
+.fld{margin-bottom:13px}
+.fld label{display:block;font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:5px}
+.fld .row{display:flex;align-items:center;border:1px solid var(--line);border-radius:3px;background:var(--ivory2);padding:0 10px}
+.fld .row span{font-size:12px;color:var(--muted)}
+.fld input,.fld select{border:none;background:none;font-family:inherit;font-size:14px;color:var(--ink);width:100%;padding:9px 6px;outline:none}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.hint{font-size:11px;color:var(--muted);margin-top:2px}
+.resumo{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:620px){.resumo{grid-template-columns:1fr 1fr}}
+.kpi{background:var(--white);border:1px solid var(--line);border-radius:4px;padding:18px 18px 20px}
+.kpi .l{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.kpi .v{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:600;line-height:1.1;margin-top:6px}
+.kpi .v small{font-size:14px;color:var(--muted);font-family:'Inter';font-weight:400}
+.kpi.na .v{color:var(--muted);font-size:18px}
+.sec{margin-top:30px}
+.sec h3{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;border-bottom:1px solid var(--line);padding-bottom:8px}
+.rowline{display:flex;justify-content:space-between;gap:16px;padding:8px 0;font-size:14px;border-bottom:1px solid #f0ebe0}
+.rowline span{color:var(--muted)}.rowline b{font-weight:500;text-align:right}
+.rowline b.pos{color:var(--pos)}.rowline b.neg{color:var(--neg)}
+.bars{display:flex;flex-direction:column;gap:10px;margin-top:6px}
+.bar{display:grid;grid-template-columns:120px 1fr auto;gap:12px;align-items:center;font-size:13px}
+.bar .track{height:10px;background:var(--ivory2);border:1px solid var(--line);border-radius:100px;overflow:hidden}
+.bar .fill{height:100%;background:var(--gold)}
+.bar .fill.g{background:var(--pos)}.bar .fill.r{background:var(--neg)}
+.acoes{display:flex;gap:10px;flex-wrap:wrap;margin-top:26px}
+.btn{display:inline-flex;align-items:center;gap:8px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;padding:14px 22px;border-radius:2px;cursor:pointer;border:none;font-family:inherit;font-weight:500;transition:.25s}
+.btn-solid{background:var(--gold);color:var(--ink)}.btn-solid:hover{background:#c79c68}
+.btn-ink{background:var(--ink);color:#fff}.btn-ink:hover{background:var(--graphite)}
+.btn-o{background:none;border:1px solid var(--line);color:var(--ink)}.btn-o:hover{border-color:var(--gold)}
+.nota{font-size:11.5px;color:var(--muted);line-height:1.7;margin-top:12px}
+.atencao li{font-size:14px;color:var(--graphite);padding:9px 0 9px 22px;border-bottom:1px solid #f0ebe0;position:relative;list-style:none}
+.atencao li:before{content:"—";position:absolute;left:0;color:var(--gold)}
+.disc{background:var(--ivory2);border:1px solid var(--line);border-radius:4px;padding:16px 18px;margin-top:24px;font-size:12px;color:var(--muted);line-height:1.7}
+.disc a{color:var(--gold);cursor:pointer}
+.tag{display:inline-block;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:3px 9px;margin-left:8px}
+footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12.5px;text-align:center}
+@media print{.top,.perfis,.panel,.acoes,.back,footer,.disc a{display:none!important}.layout{grid-template-columns:1fr}.printlogo{display:block!important}}
+.printlogo{display:none;text-align:center;margin-bottom:18px}
+.printlogo img{width:150px;margin:0 auto}
+</style>
+</head>
+<body>
+<div class="top"><div class="in">
+  <a class="brand" href="index.html"><img src="favicon.svg" alt="PC"/><b>Paulo Cotrim</b></a>
+  <a class="back" href="index.html#portfolio">← Empreendimentos</a>
+</div></div>
+
+<div class="wrap">
+  <div class="printlogo"><img src="logo-premium.svg" alt="Paulo Cotrim"/></div>
+  <div class="head">
+    <span class="eyebrow">Estudo de rentabilidade</span>
+    <h1 class="serif" id="e-nome">Empreendimento</h1>
+    <div class="loc" id="e-loc">—</div>
+    <div class="perfis" id="e-perfis">
+      <button data-p="moradia">Morar</button>
+      <button data-p="investimento" class="on">Investir (locação)</button>
+      <button data-p="temporada">Temporada</button>
+    </div>
+  </div>
+
+  <div class="layout">
+    <div class="panel" id="e-panel">
+      <h2 class="serif">Premissas</h2>
+      <div class="sub">Ajuste os valores. Nada é inventado: campos vazios ficam como "não informado".</div>
+      <div class="fld"><label>Valor do imóvel (R$)</label><div class="row"><span>R$</span><input id="i-valor" inputmode="numeric" placeholder="—"/></div><div class="hint" id="h-valor"></div></div>
+      <div class="two">
+        <div class="fld"><label>Entrada (%)</label><div class="row"><input id="i-entrada" inputmode="numeric" value="20"/><span>%</span></div></div>
+        <div class="fld"><label>Custos de aquisição (%)</label><div class="row"><input id="i-custoaq" inputmode="numeric" value="5"/><span>%</span></div></div>
+      </div>
+      <div class="two">
+        <div class="fld"><label>Juros financiamento (% a.a.)</label><div class="row"><input id="i-juros" inputmode="numeric" value="10.5"/><span>%</span></div></div>
+        <div class="fld"><label>Prazo (meses)</label><div class="row"><input id="i-prazo" inputmode="numeric" value="360"/></div></div>
+      </div>
+      <div class="grp-inv">
+        <div class="fld"><label>Aluguel mensal (R$)</label><div class="row"><span>R$</span><input id="i-aluguel" inputmode="numeric" placeholder="não informado"/></div></div>
+        <div class="two">
+          <div class="fld"><label>Condomínio (R$/mês)</label><div class="row"><span>R$</span><input id="i-cond" inputmode="numeric" placeholder="consultar"/></div></div>
+          <div class="fld"><label>IPTU (R$/ano)</label><div class="row"><span>R$</span><input id="i-iptu" inputmode="numeric" placeholder="consultar"/></div></div>
+        </div>
+        <div class="two">
+          <div class="fld"><label>Administração (%)</label><div class="row"><input id="i-admin" inputmode="numeric" value="8"/><span>%</span></div></div>
+          <div class="fld"><label>Vacância (%)</label><div class="row"><input id="i-vac" inputmode="numeric" value="8"/><span>%</span></div></div>
+        </div>
+      </div>
+      <div class="grp-temp" style="display:none">
+        <div class="two">
+          <div class="fld"><label>Diária média (R$)</label><div class="row"><span>R$</span><input id="i-diaria" inputmode="numeric" placeholder="não informado"/></div></div>
+          <div class="fld"><label>Ocupação (%)</label><div class="row"><input id="i-ocup" inputmode="numeric" value="60"/><span>%</span></div></div>
+        </div>
+        <div class="two">
+          <div class="fld"><label>Taxa plataforma (%)</label><div class="row"><input id="i-plat" inputmode="numeric" value="15"/><span>%</span></div></div>
+          <div class="fld"><label>Limpeza/manut. (R$/mês)</label><div class="row"><span>R$</span><input id="i-limp" inputmode="numeric" placeholder="0"/></div></div>
+        </div>
+      </div>
+      <div class="two">
+        <div class="fld"><label>Cenário de valorização</label><div class="row"><select id="i-cenario"><option value="4">Conservador (4% a.a.)</option><option value="6" selected>Referência (6% a.a.)</option><option value="8">Otimista (8% a.a.)</option></select></div></div>
+        <div class="fld"><label>Horizonte (anos)</label><div class="row"><input id="i-anos" inputmode="numeric" value="10"/></div></div>
+      </div>
+      <div class="hint">Valorização é <b>projeção</b>, não garantia. Ajuste conforme sua leitura de mercado.</div>
+    </div>
+
+    <div>
+      <div class="resumo" id="e-resumo"></div>
+
+      <div class="sec"><h3>Composição do investimento</h3><div id="e-comp"></div></div>
+      <div class="sec"><h3>Receita e custos (ano) <span class="tag" id="e-yieldform">yield</span></h3><div id="e-receita"></div></div>
+      <div class="sec"><h3>Fluxo de caixa mensal (estimado)</h3><div class="bars" id="e-fluxo"></div><div class="nota" id="e-fluxonota"></div></div>
+      <div class="sec"><h3>Projeção no horizonte</h3><div id="e-proj"></div></div>
+
+      <div class="sec"><h3>Premissas utilizadas</h3><div id="e-premissas"></div></div>
+      <div class="sec"><h3>Antes de investir, considere</h3><ul class="atencao" id="e-atencao"></ul></div>
+
+      <div class="acoes">
+        <button class="btn btn-solid" onclick="window.print()">Baixar estudo (PDF)</button>
+        <a class="btn btn-ink" id="e-wa">Falar com Paulo Cotrim</a>
+        <a class="btn btn-o" href="index.html#portfolio">Comparar outros</a>
+      </div>
+      <div class="disc" id="e-disc">
+        Estimativa baseada nas premissas informadas — não constitui oferta, recomendação de investimento nem garantia de renda ou valorização. Dados de preço/condições devem ser confirmados na tabela oficial vigente. Projeção de valorização é cenário matemático, não garantia. <a id="e-verdisc">Ver critérios e condições</a>
+        <div id="e-discfull" style="display:none;margin-top:10px">Os resultados dependem integralmente das premissas inseridas por você. Aprovação de crédito é análise separada e não influencia rentabilidade. Rentabilidade passada ou projetada não garante resultado futuro. Consulte um profissional para decisão. Paulo Cotrim · CRECI-RJ 77677-F. <span id="e-dataref"></span></div>
+      </div>
+    </div>
+  </div>
+</div>
+<footer>Paulo Cotrim · Corretor de Imóveis · CRECI-RJ 77677-F · (21) 98915-0864 · <span id="e-datafoot"></span></footer>
+
+<script>
+(function(){
+  var EMP=null;
+  var qs=new URLSearchParams(location.search);
+  var key=(qs.get('emp')||'').toLowerCase();
+  function slug(s){return (s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');}
+  function num(id){var v=(document.getElementById(id).value||'').toString().replace(/[^0-9.,]/g,'').replace(/\./g,'').replace(',','.');var n=parseFloat(v);return isNaN(n)?null:n;}
+  function fmt(v){return v==null?null:'R$ '+Math.round(v).toLocaleString('pt-BR');}
+  function pct(v){return v==null?null:v.toFixed(1).replace('.',',')+'%';}
+  var NA='<span style="color:var(--muted)">Não informado</span>';
+  var perfil='investimento';
+
+  function pmt(pv,i,n){ if(!pv||!n)return null; i=i/100/12; if(i<=0)return pv/n; return pv*i/(1-Math.pow(1+i,-n)); }
+
+  function calc(){
+    var valor=num('i-valor'), ent=num('i-entrada'), custoaq=num('i-custoaq'), juros=num('i-juros'), prazo=num('i-prazo');
+    var aluguel=num('i-aluguel'), cond=num('i-cond'), iptu=num('i-iptu'), admin=num('i-admin'), vac=num('i-vac');
+    var diaria=num('i-diaria'), ocup=num('i-ocup'), plat=num('i-plat'), limp=num('i-limp');
+    var cen=num('i-cenario'), anos=num('i-anos');
+    var entrada = (valor!=null&&ent!=null)? valor*ent/100 : null;
+    var financiado = (valor!=null&&entrada!=null)? valor-entrada : null;
+    var custosAq = (valor!=null&&custoaq!=null)? valor*custoaq/100 : null;
+    var capitalInicial = (entrada!=null? entrada:0) + (custosAq!=null?custosAq:0); if(entrada==null&&custosAq==null)capitalInicial=null;
+    var parcela = pmt(financiado,juros,prazo);
+    // receita locação
+    var aluguelAnual = aluguel!=null? aluguel*12 : null;
+    var receitaTemp = (perfil==='temporada'&&diaria!=null&&ocup!=null)? diaria*30.4*(ocup/100) : null; // mensal
+    var rendaMensalBruta = perfil==='temporada'? receitaTemp : aluguel;
+    var rendaAnualBruta = rendaMensalBruta!=null? rendaMensalBruta*12 : null;
+    // custos anuais
+    var custoCondAnual = cond!=null? cond*12 : null;
+    var adminAnual = (rendaAnualBruta!=null&&admin!=null)? rendaAnualBruta*admin/100 : null;
+    var platAnual = (perfil==='temporada'&&rendaAnualBruta!=null&&plat!=null)? rendaAnualBruta*plat/100 : null;
+    var limpAnual = (perfil==='temporada'&&limp!=null)? limp*12 : null;
+    var vacPerda = (perfil!=='temporada'&&rendaAnualBruta!=null&&vac!=null)? rendaAnualBruta*vac/100 : null;
+    var custosAnuais = 0, hasCusto=false;
+    [custoCondAnual,iptu,adminAnual,platAnual,limpAnual].forEach(function(x){if(x!=null){custosAnuais+=x;hasCusto=true;}});
+    if(!hasCusto)custosAnuais=null;
+    var receitaLiquidaAnual = null;
+    if(rendaAnualBruta!=null){ receitaLiquidaAnual = rendaAnualBruta - (vacPerda||0) - (custosAnuais||0); }
+    var yieldBruto = (rendaAnualBruta!=null&&valor)? rendaAnualBruta/valor*100 : null;
+    var capInvest = capitalInicial!=null?capitalInicial:(valor||null);
+    var yieldLiquido = (receitaLiquidaAnual!=null&&capInvest)? receitaLiquidaAnual/capInvest*100 : null;
+    // valorização
+    var valorProj = (valor!=null&&cen!=null&&anos!=null)? valor*Math.pow(1+cen/100,anos) : null;
+    var ganhoCapital = (valorProj!=null&&valor!=null)? valorProj-valor : null;
+    // fluxo mensal
+    var fluxoMensal = null;
+    if(rendaMensalBruta!=null){ fluxoMensal = rendaMensalBruta - (parcela||0) - (cond||0) - (iptu!=null?iptu/12:0); }
+    // payback
+    var receitaLiqMensal = receitaLiquidaAnual!=null? receitaLiquidaAnual/12 : null;
+    var payback = (capitalInicial!=null&&receitaLiqMensal!=null&&receitaLiqMensal>0)? capitalInicial/receitaLiqMensal/12 : null;
+    // retorno total no horizonte
+    var rendaAcum = (receitaLiquidaAnual!=null&&anos!=null)? receitaLiquidaAnual*anos : null;
+    var resultado = null;
+    if(rendaAcum!=null||ganhoCapital!=null){ resultado=(rendaAcum||0)+(ganhoCapital||0); }
+    var retornoPct = (resultado!=null&&capInvest)? resultado/capInvest*100 : null;
+    return {valor,entrada,financiado,custosAq,capitalInicial,parcela,aluguel,rendaMensalBruta,rendaAnualBruta,custoCondAnual,iptu,adminAnual,platAnual,limpAnual,vacPerda,custosAnuais,receitaLiquidaAnual,yieldBruto,yieldLiquido,valorProj,ganhoCapital,fluxoMensal,payback,rendaAcum,resultado,retornoPct,capInvest,anos,cen};
+  }
+
+  function kpi(l,v,na){return '<div class="kpi'+(v==null?' na':'')+'"><div class="l">'+l+'</div><div class="v">'+(v==null?(na||'Não calculado'):v)+'</div></div>';}
+  function line(l,v,cls){return '<div class="rowline"><span>'+l+'</span><b'+(cls?(' class="'+cls+'"'):'')+'>'+(v==null?'—':v)+'</b></div>';}
+
+  function render(){
+    var r=calc();
+    document.querySelector('.grp-inv').style.display = perfil==='temporada'?'none':'';
+    document.querySelector('.grp-temp').style.display = perfil==='temporada'?'':'none';
+    // resumo
+    var res='';
+    res+=kpi('Valor do imóvel', fmt(r.valor)||'Consultar');
+    res+=kpi('Capital inicial estimado', fmt(r.capitalInicial), 'Informe valor');
+    if(perfil==='moradia'){
+      res+=kpi('Parcela estimada', r.parcela!=null?(fmt(r.parcela)+'<small>/mês</small>'):null, 'Informe valor/juros');
+      res+=kpi('Custo mensal estimado', (r.parcela!=null||r.aluguel!=null)?fmt((r.parcela||0)+(num('i-cond')||0)+((num('i-iptu')||0)/12)):null,'—');
+      res+=kpi('Patrimônio projetado', fmt(r.valorProj),'—');
+      res+=kpi('Ganho de capital projetado', fmt(r.ganhoCapital),'—');
+    } else {
+      res+=kpi('Renda líquida estimada', r.receitaLiquidaAnual!=null?(fmt(r.receitaLiquidaAnual/12)+'<small>/mês</small>'):null,'Informe aluguel/custos');
+      res+=kpi('Yield líquido estimado', pct(r.yieldLiquido)?pct(r.yieldLiquido)+'<small> a.a.</small>':null,'Não calculado');
+      res+=kpi('Ganho de capital projetado', fmt(r.ganhoCapital),'—');
+      res+=kpi('Retorno total ('+(r.anos||'—')+' anos)', pct(r.retornoPct),'Não calculado');
+      res+=kpi('Payback estimado', r.payback!=null?(r.payback.toFixed(1).replace('.',',')+'<small> anos</small>'):null,'Não calculado');
+    }
+    document.getElementById('e-resumo').innerHTML=res;
+    // composição
+    var comp='';
+    comp+=line('Preço do imóvel',fmt(r.valor));
+    comp+=line('Entrada',fmt(r.entrada));
+    comp+=line('Custos de aquisição',fmt(r.custosAq));
+    comp+=line('Valor financiado',fmt(r.financiado));
+    comp+=line('Parcela estimada',r.parcela!=null?fmt(r.parcela)+'/mês':null);
+    comp+=line('Capital próprio inicial',fmt(r.capitalInicial));
+    document.getElementById('e-comp').innerHTML=comp;
+    // receita
+    document.getElementById('e-yieldform').textContent = perfil==='temporada'?'yield sobre capital investido':'yield líq. = receita líq. anual ÷ capital investido';
+    var rc='';
+    rc+=line(perfil==='temporada'?'Receita bruta mensal':'Aluguel mensal', fmt(r.rendaMensalBruta));
+    rc+=line('Receita bruta anual', fmt(r.rendaAnualBruta));
+    if(perfil!=='temporada') rc+=line('Perda por vacância', r.vacPerda!=null?'- '+fmt(r.vacPerda):null,'neg');
+    rc+=line('Condomínio (ano)', r.custoCondAnual!=null?'- '+fmt(r.custoCondAnual):null,'neg');
+    rc+=line('IPTU (ano)', r.iptu!=null?'- '+fmt(r.iptu):null,'neg');
+    rc+=line('Administração (ano)', r.adminAnual!=null?'- '+fmt(r.adminAnual):null,'neg');
+    if(perfil==='temporada'){ rc+=line('Taxa plataforma (ano)', r.platAnual!=null?'- '+fmt(r.platAnual):null,'neg'); rc+=line('Limpeza/manut. (ano)', r.limpAnual!=null?'- '+fmt(r.limpAnual):null,'neg'); }
+    rc+=line('Receita líquida anual', fmt(r.receitaLiquidaAnual), r.receitaLiquidaAnual!=null?(r.receitaLiquidaAnual>=0?'pos':'neg'):'');
+    rc+=line('Yield bruto', pct(r.yieldBruto));
+    rc+=line('Yield líquido', pct(r.yieldLiquido));
+    document.getElementById('e-receita').innerHTML=rc;
+    // fluxo bars
+    var fx='';
+    function bar(l,v,mx){var w=mx?Math.min(100,Math.abs(v)/mx*100):0;return '<div class="bar"><span>'+l+'</span><div class="track"><div class="fill '+(v>=0?'g':'r')+'" style="width:'+w+'%"></div></div><b>'+fmt(v)+'</b></div>';}
+    if(r.rendaMensalBruta!=null){
+      var comps=[['Receita',r.rendaMensalBruta],['Parcela',-(r.parcela||0)],['Condomínio',-(num('i-cond')||0)],['IPTU',-((num('i-iptu')||0)/12)]];
+      var mx=Math.max.apply(null,comps.map(function(c){return Math.abs(c[1])}));
+      comps.forEach(function(c){fx+=bar(c[0],c[1],mx);});
+      document.getElementById('e-fluxo').innerHTML=fx;
+      var f=r.fluxoMensal;
+      document.getElementById('e-fluxonota').innerHTML= f==null?'':('Fluxo mensal estimado: <b style="color:'+(f>=0?'var(--pos)':'var(--neg)')+'">'+fmt(f)+'</b> · '+(f>=0?'o imóvel tende a gerar caixa positivo com estas premissas.':'requer aporte mensal com estas premissas. Não é "lucro".'));
+    } else { document.getElementById('e-fluxo').innerHTML=''; document.getElementById('e-fluxonota').innerHTML='Informe aluguel/diária para estimar o fluxo de caixa.'; }
+    // projeção
+    var pj='';
+    pj+=line('Valor hoje',fmt(r.valor));
+    pj+=line('Cenário',(r.cen!=null?r.cen+'% a.a.':null));
+    pj+=line('Valor projetado ('+(r.anos||'—')+' anos)',fmt(r.valorProj));
+    pj+=line('Ganho de capital projetado',fmt(r.ganhoCapital),r.ganhoCapital!=null?'pos':'');
+    pj+=line('Renda líquida acumulada',fmt(r.rendaAcum),r.rendaAcum!=null?'pos':'');
+    pj+=line('Resultado estimado no horizonte',fmt(r.resultado),r.resultado!=null?'pos':'');
+    document.getElementById('e-proj').innerHTML=pj+'<div class="nota">Projeção não representa garantia de valorização futura.</div>';
+    // premissas
+    var pr='';
+    pr+=line('Valor do imóvel',fmt(r.valor));
+    pr+=line('Entrada',num('i-entrada')!=null?num('i-entrada')+'%':null);
+    pr+=line('Juros / prazo',(num('i-juros')!=null?num('i-juros')+'% a.a.':'—')+' / '+(num('i-prazo')||'—')+' meses');
+    if(perfil!=='temporada'){ pr+=line('Aluguel',fmt(r.aluguel)); pr+=line('Vacância',num('i-vac')!=null?num('i-vac')+'%':null); pr+=line('Administração',num('i-admin')!=null?num('i-admin')+'%':null); }
+    else { pr+=line('Diária / ocupação',(fmt(num('i-diaria'))||'—')+' / '+(num('i-ocup')||'—')+'%'); pr+=line('Taxa plataforma',num('i-plat')!=null?num('i-plat')+'%':null); }
+    pr+=line('Condomínio / IPTU',(fmt(num('i-cond'))||'consultar')+' / '+(fmt(num('i-iptu'))||'consultar'));
+    pr+=line('Valorização',(r.cen!=null?r.cen+'% a.a.':null)+' · '+(r.anos||'—')+' anos');
+    document.getElementById('e-premissas').innerHTML=pr;
+  }
+
+  function atencao(e){
+    var it=[]; var reg=(e&&e.regiao)||''; var st=(e&&e.status)||'';
+    if(/lançamento|obras|pré|início|comercial/i.test(st)) it.push('Prazo de entrega: imóvel em '+st.toLowerCase()+' — considere o tempo até a posse e o fluxo de pagamentos durante a obra.');
+    it.push('Custos de aquisição (ITBI e registro) não estão no preço da tabela — inclua-os no capital inicial.');
+    it.push('Condomínio e IPTU impactam a rentabilidade líquida — confirme os valores reais antes de decidir.');
+    if(/temporada/i.test(perfil)||/copacabana|ipanema|leme|barra|porto|centro/i.test(reg)) it.push('Locação por temporada depende de regras do condomínio e do município — verifique restrições.');
+    it.push('Vacância e liquidez variam por região e tipologia — a renda pode não ser contínua.');
+    it.push('Valores e disponibilidade mudam: confirme sempre a tabela oficial vigente com Paulo Cotrim.');
+    document.getElementById('e-atencao').innerHTML=it.map(function(x){return '<li>'+x+'</li>';}).join('');
+  }
+
+  function boot(){
+    var now=new Date(); var mmaa=('0'+(now.getMonth()+1)).slice(-2)+'/'+now.getFullYear();
+    document.getElementById('e-dataref').textContent='Dados consultados em: '+mmaa+'.';
+    document.getElementById('e-datafoot').textContent='Estudo gerado em '+mmaa;
+    fetch('data/catalogo.json').then(function(r){return r.json();}).then(function(d){
+      var list=(d&&d.itens)||[];
+      EMP=list.filter(function(e){ return (e.url&&e.url.toLowerCase()===key) || slug(e.nome)===slug(key) || slug(e.nome)===key; })[0] || null;
+      if(EMP){
+        document.getElementById('e-nome').textContent=EMP.nome;
+        document.getElementById('e-loc').textContent=(EMP.local||'')+(EMP.incorporadora?(' · '+EMP.incorporadora):'')+(EMP.status?(' · '+EMP.status):'');
+        if(EMP.preco){document.getElementById('i-valor').value=Math.round(EMP.preco).toLocaleString('pt-BR');document.getElementById('h-valor').innerHTML='Preço de referência do catálogo (a partir de). Confirme na tabela oficial.';}
+        else {document.getElementById('h-valor').innerHTML='Preço não informado — insira o valor da tabela oficial.';}
+        var wtxt='Olá Paulo, quero uma análise de rentabilidade personalizada do '+EMP.nome+'.';
+        document.getElementById('e-wa').href='https://wa.me/5521989150864?text='+encodeURIComponent(wtxt);
+      } else {
+        document.getElementById('e-nome').textContent='Estudo de rentabilidade';
+        document.getElementById('e-loc').textContent='Insira as premissas do imóvel abaixo.';
+        document.getElementById('e-wa').href='https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo, quero uma análise de rentabilidade personalizada.');
+      }
+      atencao(EMP); render();
+    }).catch(function(){ atencao(null); render(); });
+    // perfis
+    [].forEach.call(document.querySelectorAll('#e-perfis button'),function(b){
+      b.onclick=function(){perfil=b.dataset.p;[].forEach.call(document.querySelectorAll('#e-perfis button'),function(x){x.classList.toggle('on',x===b);});render();};
+    });
+    document.addEventListener('input',function(e){ if(e.target.closest('#e-panel'))render(); });
+    document.addEventListener('change',function(e){ if(e.target.closest('#e-panel'))render(); });
+    document.getElementById('e-verdisc').onclick=function(){var f=document.getElementById('e-discfull');f.style.display=f.style.display==='none'?'block':'none';};
+  }
+  if(document.readyState!=='loading')boot(); else document.addEventListener('DOMContentLoaded',boot);
+})();
+</script>
+</body></html>
