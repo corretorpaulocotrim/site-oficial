@@ -16,6 +16,68 @@
     it:'<svg viewBox="0 0 28 20"><rect width="28" height="20" fill="#fff"/><rect width="9.33" height="20" fill="#008c45"/><rect width="9.33" height="20" x="18.66" fill="#cd212a"/></svg>'
   };
   var D={
+   "Paulo Cotrim · 18 anos no mercado do Rio":{en:"Paulo Cotrim · 18 years in the Rio market",es:"Paulo Cotrim · 18 años en el mercado de Río",it:"Paulo Cotrim · 18 anni nel mercato di Rio"},
+   "Não vendo um apartamento. Ajudo você a decidir.":{en:"I don't sell apartments. I help you decide.",es:"No vendo un apartamento. Te ayudo a decidir.",it:"Non vendo un appartamento. Ti aiuto a decidere."},
+   "Comparo preço por m², financiamento e rentabilidade de cada lançamento — de Ipanema e Leblon à Barra — para você comprar certo, com números na mão e sem sair de casa.":{en:"I compare price per m², financing and rental yield for every new development — from Ipanema and Leblon to Barra — so you buy right, with real numbers, from anywhere in the world.",es:"Comparo precio por m², financiación y rentabilidad de cada lanzamiento — de Ipanema y Leblon a Barra — para que compres bien, con números reales y sin salir de casa.",it:"Confronto prezzo al m², finanziamento e rendimento di ogni nuova costruzione — da Ipanema e Leblon a Barra — perché tu compri bene, con numeri reali e senza muoverti da casa."},
+   "Buscar imóvel":{en:"Search property",es:"Buscar propiedad",it:"Cerca immobile"},
+   "Quero morar":{en:"I want to live",es:"Quiero vivir",it:"Voglio viverci"},
+   "Quero lucrar":{en:"I want to invest",es:"Quiero invertir",it:"Voglio investire"},
+   "Prontos":{en:"Ready to move",es:"Listos",it:"Pronti"},
+   "Mapa":{en:"Map",es:"Mapa",it:"Mappa"},
+   "Investidor":{en:"Investor",es:"Inversor",it:"Investitore"},
+   "Sobre":{en:"About",es:"Sobre mí",it:"Chi sono"},
+   "Inteligência imobiliária":{en:"Real estate intelligence",es:"Inteligencia inmobiliaria",it:"Intelligenza immobiliare"},
+   "Não escolha apenas pelo preço.":{en:"Don't choose by price alone.",es:"No elijas solo por el precio.",it:"Non scegliere solo in base al prezzo."},
+   "Todo empreendimento do site tem um estudo de rentabilidade. Você vê o que realmente importa antes de assinar.":{en:"Every development on this site has a rental yield study. You see what really matters before you sign.",es:"Cada emprendimiento del sitio tiene un estudio de rentabilidad. Ves lo que realmente importa antes de firmar.",it:"Ogni progetto del sito ha uno studio di rendimento. Vedi ciò che conta davvero prima di firmare."},
+   "Preço por m²":{en:"Price per m²",es:"Precio por m²",it:"Prezzo al m²"},
+   "Financiamento":{en:"Financing",es:"Financiación",it:"Finanziamento"},
+   "Rentabilidade":{en:"Rental yield",es:"Rentabilidad",it:"Rendimento"},
+   "Riscos":{en:"Risks",es:"Riesgos",it:"Rischi"},
+   "Ver estudos de rentabilidade":{en:"See yield studies",es:"Ver estudios de rentabilidad",it:"Vedi studi di rendimento"},
+   "Em destaque":{en:"Featured",es:"Destacados",it:"In evidenza"},
+   "Lançamentos em destaque":{en:"Featured new developments",es:"Lanzamientos destacados",it:"Nuove costruzioni in evidenza"},
+   "Imóveis especiais":{en:"Special properties",es:"Propiedades especiales",it:"Immobili speciali"},
+   "Escolha pela apresentação":{en:"Choose by presentation",es:"Elige por la presentación",it:"Scegli dalla presentazione"},
+   "Todos":{en:"All",es:"Todos",it:"Tutti"},
+   "Residências de assinatura":{en:"Signature residences",es:"Residencias de autor",it:"Residenze d'autore"},
+   "Primeiro imóvel & financiamento":{en:"First home & financing",es:"Primera vivienda y financiación",it:"Prima casa e finanziamento"},
+   "Ver prévia":{en:"Preview",es:"Vista previa",it:"Anteprima"},
+   "Rentabilidade →":{en:"Yield →",es:"Rentabilidad →",it:"Rendimento →"},
+   "Analisar rentabilidade →":{en:"Analyze yield →",es:"Analizar rentabilidad →",it:"Analizza rendimento →"},
+   "Ver imóvel":{en:"View property",es:"Ver propiedad",it:"Vedi immobile"},
+   "Falar":{en:"Contact",es:"Contactar",it:"Contatta"},
+   "Preço a consultar":{en:"Price on request",es:"Precio a consultar",it:"Prezzo su richiesta"},
+   "A consultar":{en:"On request",es:"A consultar",it:"Su richiesta"},
+   "Para investidor":{en:"For investors",es:"Para inversores",it:"Per investitori"},
+   "Tabela comparativa do investidor":{en:"Investor comparison table",es:"Tabla comparativa del inversor",it:"Tabella comparativa dell'investitore"},
+   "Empreendimento":{en:"Development",es:"Emprendimiento",it:"Progetto"},
+   "Região":{en:"Region",es:"Región",it:"Zona"},
+   "Estágio":{en:"Stage",es:"Etapa",it:"Fase"},
+   "A partir de":{en:"From",es:"Desde",it:"Da"},
+   "Aluguel est.*":{en:"Est. rent*",es:"Alquiler est.*",it:"Affitto stim.*"},
+   "Estudo →":{en:"Study →",es:"Estudio →",it:"Studio →"},
+   "Guia completo do investidor →":{en:"Full investor guide →",es:"Guía completa del inversor →",it:"Guida completa dell'investitore →"},
+   "Prova real":{en:"Real proof",es:"Prueba real",it:"Prova reale"},
+   "Quem já comprou com Paulo Cotrim":{en:"Clients who bought with Paulo Cotrim",es:"Quienes ya compraron con Paulo Cotrim",it:"Chi ha già comprato con Paulo Cotrim"},
+   "Agendar visita ou videochamada":{en:"Book a visit or video call",es:"Agendar visita o videollamada",it:"Prenota visita o videochiamata"},
+   "Atuações":{en:"Career",es:"Trayectoria",it:"Percorso"},
+   "Gerente":{en:"Manager",es:"Gerente",it:"Manager"},
+   "Coordenador":{en:"Coordinator",es:"Coordinador",it:"Coordinatore"},
+   "Supervisor":{en:"Supervisor",es:"Supervisor",it:"Supervisore"},
+   "Corretor":{en:"Broker",es:"Corredor",it:"Agente"},
+   "Fechador":{en:"Closer",es:"Cerrador",it:"Closer"},
+   "Construtoras com que já atuei":{en:"Developers I have worked with",es:"Constructoras con las que trabajé",it:"Costruttori con cui ho lavorato"},
+   "18 anos de mercado":{en:"18 years in the market",es:"18 años de mercado",it:"18 anni di mercato"},
+   "Ipanema, Barra e Leblon":{en:"Ipanema, Barra and Leblon",es:"Ipanema, Barra y Leblon",it:"Ipanema, Barra e Leblon"},
+   "Ver imóveis →":{en:"View properties →",es:"Ver propiedades →",it:"Vedi immobili →"},
+   "O endereço mais valorizado do Rio, entre o mar e a Lagoa.":{en:"Rio's most prized address, between the sea and the Lagoon.",es:"La dirección más valorada de Río, entre el mar y la Laguna.",it:"L'indirizzo più pregiato di Rio, tra il mare e la Laguna."},
+   "Praia icônica, cultura e vida a pé na Zona Sul.":{en:"Iconic beach, culture and walkable life in the South Zone.",es:"Playa icónica, cultura y vida a pie en la Zona Sur.",it:"Spiaggia iconica, cultura e vita a piedi nella Zona Sud."},
+   "Condomínios completos, orla extensa e lançamentos com lazer de clube.":{en:"Full-service condos, a long shoreline and club-style amenities.",es:"Condominios completos, costa extensa y lanzamientos con ocio de club.",it:"Condomini completi, lungomare esteso e servizi da club."},
+   "Com Paulo Cotrim você tem a certeza do melhor negócio.":{en:"With Paulo Cotrim you are sure of the best deal.",es:"Con Paulo Cotrim tienes la certeza del mejor negocio.",it:"Con Paulo Cotrim hai la certezza del miglior affare."},
+   "Acesso ao CRM":{en:"CRM access",es:"Acceso al CRM",it:"Accesso al CRM"},
+   "Acesso exclusivo do corretor":{en:"Broker-only access",es:"Acceso exclusivo del corredor",it:"Accesso riservato all'agente"},
+   "No mapa":{en:"On the map",es:"En el mapa",it:"Sulla mappa"},
+   "Onde estão os empreendimentos":{en:"Where the developments are",es:"Dónde están los emprendimientos",it:"Dove sono i progetti"},
    "Comprar":{en:"Buy",es:"Comprar",it:"Comprare"},
    "Lançamentos":{en:"New Developments",es:"Lanzamientos",it:"Nuove Costruzioni"},
    "Alto Padrão":{en:"Luxury",es:"Alto Standing",it:"Alto Livello"},
@@ -97,6 +159,7 @@
   }
   function apply(lang){
     var cf=CONF[lang]||CONF.pt;
+    CUR=lang;
     translate(lang);
     theme(cf);
     document.documentElement.lang=cf.loc;
@@ -123,8 +186,10 @@
     document.head.appendChild(st);
     document.body.appendChild(box);
   }
+  var CUR='pt',tmr;
   function boot(){
     ui();
+    try{new MutationObserver(function(){clearTimeout(tmr);tmr=setTimeout(function(){if(CUR!=='pt')translate(CUR);},150);}).observe(document.body,{childList:true,subtree:true});}catch(e){}
     var saved='pt'; try{saved=localStorage.getItem(LS)||'pt';}catch(e){}
     apply(saved);
   }

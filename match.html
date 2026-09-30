@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#0f2e36"/>
 <title>Qual é o Seu Imóvel Ideal? — Análise Gratuita | Paulo Cotrim</title>
 <meta name="description" content="Descubra qual empreendimento Cury combina com seu perfil financeiro. Análise personalizada em 2 minutos. Paulo Cotrim — especialista Porto Maravilha."/>
-<link rel="canonical" href="https://www.paulocotrim.com/match.html"/>
+<link rel="canonical" href="https://paulocotrim.com.br/match.html"/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <meta property="og:title" content="Encontre Seu Imóvel Ideal — Análise Personalizada"/>
 <meta property="og:description" content="Responda 10 perguntas e descubra qual empreendimento Cury tem maior potencial para o seu perfil."/>
-<meta property="og:image" content="https://www.paulocotrim.com/paulo-cotrim-profissional.jpeg"/>
+<meta property="og:image" content="https://paulocotrim.com.br/paulo-cotrim-profissional.jpeg"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <meta name="twitter:title" content="Encontre Seu Imóvel Ideal — Análise Personalizada"/>
 <meta name="twitter:description" content="Responda 10 perguntas e descubra qual empreendimento Cury tem maior potencial para o seu perfil."/>
-<meta name="twitter:image" content="https://www.paulocotrim.com/paulo-cotrim-profissional.jpeg"/>
-<meta property="og:url" content="https://www.paulocotrim.com/match.html"/>
+<meta name="twitter:image" content="https://paulocotrim.com.br/paulo-cotrim-profissional.jpeg"/>
+<meta property="og:url" content="https://paulocotrim.com.br/match.html"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#0a1f26;--navy3:#0f2e36;--gold:#0058A3;--gold2:#2a7fc0;--green:#0058A3;--green2:#6BAE85;--muted:#9ca3af;--ease:cubic-bezier(.16,1,.3,1)}
+:root{--navy:#0a1f26;--navy3:#0f2e36;--gold:#b8873a;--gold2:#cf9f4f;--green:#1a8f4c;--green2:#6BAE85;--muted:#9ca3af;--ease:cubic-bezier(.16,1,.3,1)}
 body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height:100vh;-webkit-font-smoothing:antialiased}
 
 /* HEADER */
@@ -99,7 +99,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 .bar-fill.green{background:linear-gradient(90deg,var(--green),var(--green2))}
 .bar-fill.gold{background:linear-gradient(90deg,var(--gold),var(--gold2))}
 .btn-wa-result{width:100%;padding:17px;background:var(--gold);color:#fff;border:none;border-radius:12px;font-size:15px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:10px;box-shadow:0 8px 24px rgba(184,135,58,.3);transition:transform .4s var(--ease),box-shadow .4s var(--ease),background-color .3s var(--ease)}
-.btn-wa-result:hover{background:#004a8a;transform:translateY(-3px);box-shadow:0 14px 34px rgba(184,135,58,.4)}
+.btn-wa-result:hover{background:#a5772e;transform:translateY(-3px);box-shadow:0 14px 34px rgba(184,135,58,.4)}
 .res-disclaimer{text-align:center;font-size:11px;color:rgba(255,255,255,.25);margin-top:16px;line-height:1.6}
 @media(max-width:600px){.q-grid{grid-template-columns:1fr}.rmc-row{grid-template-columns:1fr}.mh{padding:12px 20px}}
 </style>
@@ -254,7 +254,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
     </div>
     <div style="display:flex;margin-top:8px">
       <button class="btn-back-step" onclick="goStep(3)">← Voltar</button>
-      <button class="btn-next" onclick="gerarResultado()" id="btn-gerar" style="background:linear-gradient(135deg,#0058A3,#6BAE85)">
+      <button class="btn-next" onclick="gerarResultado()" id="btn-gerar" style="background:linear-gradient(135deg,#1a8f4c,#6BAE85)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="20 6 9 17 4 12"/></svg>
         Ver meu resultado →
       </button>
@@ -271,7 +271,7 @@ body{font-family:'Inter',sans-serif;background:var(--navy);color:#fff;min-height
 
     <div class="res-match-card">
       <div class="rmc-header">
-        <img class="rmc-img" id="res-img" src="https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg" alt="Empreendimento"/>
+        <img class="rmc-img" id="res-img" src="https://cury.net/storage/images/products/gallery/69e13d1c110eb.jpeg" alt="Empreendimento"/ loading="lazy">
         <div class="rmc-info">
           <div class="rmc-tag" id="res-tipo">Lançamento</div>
           <div class="rmc-name" id="res-nome">Orla Central</div>
@@ -504,5 +504,6 @@ function enviarResultadoWA(){
 <script src="crm-config.js"></script>
 <script src="tracking-config.js"></script>
 <script src="leads.js" defer></script>
+<script src="wa.js" defer></script>
 </body>
 </html>

@@ -665,7 +665,8 @@ function baixarManualPDF(){
     +simBlock
     +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/ loading="lazy"><div><b>Aponte a câmera para voltar à página</b>Reveja fotos, vídeo, mapa, refaça a simulação e fale com o Paulo pelo WhatsApp direto do celular.</div></div>'
     +'<div class="foot">Paulo Cotrim · CRECI-RJ 77677-F · Documento informativo, não substitui a tabela oficial nem a proposta da Caixa</div>'
-    +'</body></html>';
+    +'<script src="wa.js" defer></script>
+</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
 }

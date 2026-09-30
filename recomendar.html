@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#0f2e36"/><title>Descubra quanto você pode comprar · Recomendação de imóveis | Paulo Cotrim</title><meta name="description" content="Responda 3 perguntas rápidas e receba na hora os imóveis compatíveis com a sua renda e a sua região no Rio de Janeiro. Minha Casa Minha Vida e financiamento Caixa, com Paulo Cotrim (CRECI-RJ 77677-F)."/><meta property="og:title" content="Descubra quanto você pode comprar — Paulo Cotrim"/><meta property="og:description" content="3 perguntas → imóveis compatíveis com a sua renda no Rio. Sem sair de casa."/><meta property="og:image" content="https://paulocotrim.com.br/emp-img/farol-da-guanabara.jpg"/><meta property="og:url" content="https://paulocotrim.com.br/recomendar.html"/><meta property="og:type" content="website"/><link rel="canonical" href="https://paulocotrim.com.br/recomendar.html"/><link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="apple-touch-icon.png"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Recomendador de imóveis — Paulo Cotrim","applicationCategory":"RealEstateApplication","operatingSystem":"Web","offers":{"@type":"Offer","price":"0","priceCurrency":"BRL"},"provider":{"@type":"RealEstateAgent","name":"Paulo Cotrim","identifier":"CRECI-RJ 77677-F","areaServed":"Rio de Janeiro"}}</script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--gold:#b8873a;--blue:#0058A3;--green:#1a8f4c;--petrol:#0f2e36;--r:16px;--maxw:1080px;--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--white);color:var(--ink);line-height:1.6;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}img{max-width:100%;display:block}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+header{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.85);backdrop-filter:blur(18px);box-shadow:0 1px 0 rgba(15,46,54,.06)}
+.nav{display:flex;align-items:center;justify-content:space-between;height:58px}
+.brand-logo{height:26px}
+.nav a.back{font-size:13px;color:var(--gray);font-weight:600}
+.hero{background:radial-gradient(120% 90% at 50% -10%,#17434e,#0a1f25 72%);color:#fff;text-align:center;padding:64px 22px 54px}
+.hero .k{width:40px;height:40px;margin:0 auto 14px;display:block}
+.hero .eyebrow{color:#7eb7f0;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:12px}
+.hero h1{font-size:clamp(28px,5.4vw,46px);line-height:1.05;margin:.3em auto .35em;max-width:20ch}
+.hero p{color:#cfe0dc;max-width:52ch;margin:0 auto;font-size:16px}
+.card{background:#fff;border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--shadow-lg);padding:30px;max-width:680px;margin:-34px auto 0;position:relative;z-index:2}
+.step{display:none}.step.on{display:block;animation:fade .4s var(--ease)}
+@keyframes fade{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.qlabel{font-family:'Fraunces',serif;font-size:20px;margin-bottom:4px}
+.qsub{font-size:13px;color:var(--gray);margin-bottom:18px}
+.opts{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:520px){.opts{grid-template-columns:1fr}}
+.opt{border:1.5px solid var(--line);border-radius:12px;padding:14px 16px;font-size:14.5px;font-weight:600;cursor:pointer;transition:.2s;background:#fff;text-align:left}
+.opt:hover{border-color:var(--blue)}
+.opt.sel{border-color:var(--blue);background:#eef5fb;color:var(--blue)}
+.field{width:100%;padding:14px 16px;border:1.5px solid var(--line);border-radius:12px;font-size:16px;font-family:inherit}
+.field:focus{outline:none;border-color:var(--blue)}
+.rowbtn{display:flex;justify-content:space-between;gap:10px;margin-top:22px}
+.btn{border:none;border-radius:12px;padding:13px 22px;font-size:14.5px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.btn-primary{background:var(--blue);color:#fff}.btn-primary:hover{background:#00468a}
+.btn-ghost{background:#fff;border:1.5px solid var(--line);color:var(--ink)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed}
+.prog{display:flex;gap:6px;margin-bottom:22px}
+.prog span{height:4px;flex:1;background:var(--line);border-radius:4px}
+.prog span.on{background:var(--blue)}
+.results{max-width:1080px;margin:40px auto 0;padding:0 22px}
+.rgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:840px){.rgrid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.rgrid{grid-template-columns:1fr}}
+.rcard{border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:#fff;box-shadow:0 1px 2px rgba(15,46,54,.05);transition:.3s;display:flex;flex-direction:column}
+.rcard:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.rcard img{width:100%;aspect-ratio:3/2;object-fit:cover;background:var(--mist)}
+.rcard .b{padding:16px;display:flex;flex-direction:column;gap:6px;flex:1}
+.rcard .cn{font-size:11px;font-weight:700;color:var(--blue);text-transform:uppercase;letter-spacing:.04em}
+.rcard h3{font-family:'Fraunces',serif;font-size:19px;line-height:1.1}
+.rcard .loc{font-size:13px;color:var(--gray)}
+.rcard .tip{font-size:12.5px;color:var(--ink);margin-top:2px}
+.rcard .pr{font-size:14px;font-weight:700;color:var(--green);margin-top:4px}
+.rcard .cta{margin-top:auto;display:flex;gap:8px;padding-top:12px}
+.rcard .cta a{flex:1;text-align:center;font-size:12.5px;font-weight:700;padding:9px;border-radius:9px}
+.cta .ver{background:var(--mist);color:var(--ink)}
+.cta .wa{background:var(--green);color:#fff}
+.rtitle{text-align:center;margin-bottom:6px}
+.rsub{text-align:center;color:var(--gray);font-size:14px;margin-bottom:26px}
+.disc{max-width:720px;margin:30px auto 0;font-size:11.5px;color:var(--gray);text-align:center;line-height:1.6}
+.final{background:var(--petrol);color:#fff;text-align:center;padding:52px 22px;margin-top:52px}
+.final h2{font-family:'Fraunces',serif;font-size:clamp(24px,4vw,34px);margin-bottom:10px}
+.final p{color:#cfe0dc;margin-bottom:22px}
+.final a{display:inline-flex;align-items:center;gap:9px;background:var(--green);color:#fff;font-weight:700;padding:15px 28px;border-radius:13px}
+footer{border-top:1px solid var(--line);padding:26px 22px;font-size:12.5px;color:var(--gray);text-align:center}
+.spin{text-align:center;padding:30px;color:var(--gray)}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <a href="index.html"><img src="logo-wordmark.png" alt="Paulo Cotrim" class="brand-logo"/></a>
+  <a href="index.html" class="back">← Início</a>
+</div></header>
+
+<section class="hero">
+  <svg class="k" viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
+  <div class="eyebrow">Encontre o seu imóvel</div>
+  <h1 class="display">Descubra quanto você pode comprar</h1>
+  <p>Responda 3 perguntas rápidas e eu te mostro, na hora, os imóveis que combinam com a sua renda e a sua região — sem compromisso.</p>
+</section>
+
+<div class="card" id="quiz">
+  <div class="prog"><span class="on" id="p0"></span><span id="p1"></span><span id="p2"></span></div>
+
+  <div class="step on" data-step="0">
+    <div class="qlabel">Onde você quer morar?</div>
+    <div class="qsub">Pode escolher uma região — ou "tanto faz" que eu te mostro as melhores opções.</div>
+    <div class="opts" id="regOpts"></div>
+    <div class="rowbtn"><span></span><button class="btn btn-primary" id="n0" disabled onclick="next(0)">Continuar</button></div>
+  </div>
+
+  <div class="step" data-step="1">
+    <div class="qlabel">Qual a renda da família?</div>
+    <div class="qsub">Some a renda de quem vai comprar junto. É só pra eu filtrar o que cabe no seu bolso — nada é enviado ainda.</div>
+    <input class="field" id="renda" type="text" inputmode="numeric" placeholder="Ex.: R$ 3.500" oninput="maskRenda(this)"/>
+    <div class="qsub" style="margin-top:14px">Você tem FGTS pra usar na entrada?</div>
+    <div class="opts">
+      <div class="opt" data-fgts="sim" onclick="pick(this,'fgts')">Sim, tenho FGTS</div>
+      <div class="opt" data-fgts="nao" onclick="pick(this,'fgts')">Não / não sei</div>
+    </div>
+    <div class="rowbtn"><button class="btn btn-ghost" onclick="prev(1)">Voltar</button><button class="btn btn-primary" id="n1" disabled onclick="next(1)">Continuar</button></div>
+  </div>
+
+  <div class="step" data-step="2">
+    <div class="qlabel">É pra morar ou pra investir?</div>
+    <div class="qsub">Isso muda o tipo de recomendação que faz sentido pra você.</div>
+    <div class="opts">
+      <div class="opt" data-int="morar" onclick="pick(this,'int')">Pra morar</div>
+      <div class="opt" data-int="investir" onclick="pick(this,'int')">Pra investir</div>
+    </div>
+    <div class="rowbtn"><button class="btn btn-ghost" onclick="prev(2)">Voltar</button><button class="btn btn-primary" id="n2" disabled onclick="verResultado()">Ver meus imóveis</button></div>
+  </div>
+</div>
+
+<div class="results" id="results" style="display:none">
+  <div class="rtitle display" style="font-size:clamp(22px,3.4vw,30px)">Imóveis compatíveis com o seu perfil</div>
+  <div class="rsub" id="rsub"></div>
+  <div class="rgrid" id="rgrid"></div>
+  <p class="disc">Estas são recomendações indicativas com base na sua renda e região. <b>Não são uma aprovação</b> — o valor final e as condições dependem da análise de crédito da instituição financeira e da construtora. Valores "a partir de" variam por unidade e disponibilidade.</p>
+</div>
+
+<section class="final" id="finalCta" style="display:none">
+  <h2 class="display">Quero a análise completa</h2>
+  <p>Me chame no WhatsApp que eu confirmo as condições reais, simulo o seu financiamento e reservo a unidade — do primeiro contato à chave.</p>
+  <a id="finalWa" href="#"><svg viewBox="0 0 24 24" style="width:20px;height:20px" fill="none" stroke="#fff" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg>Falar com Paulo Cotrim</a>
+</section>
+
+<footer>Paulo Cotrim · Corretor de Imóveis · CRECI-RJ 77677-F · (21) 98915-0864 · Recomendação indicativa, sujeita a análise de crédito.</footer>
+
+<script>
+var STATE={regiao:null,renda:0,fgts:null,intencao:null};
+var REGIONS=[
+ ["Porto Maravilha","porto maravilha|santo cristo|gamboa|saúde|são cristóvão"],
+ ["Centro","centro|lapa|cidade nova|rio comprido|catumbi|estácio"],
+ ["Zona Norte","zona norte|ramos|cordovil|penha|méier|piedade|cachambi|todos os santos|del castilho|bonsucesso|engenho"],
+ ["Jacarepaguá / Taquara","jacarepaguá|taquara|freguesia|pechincha|curicica"],
+ ["Campo Grande / Z. Oeste","campo grande|guaratiba|santa cruz|bangu|realengo|senador|inhoaíba|cosmos"],
+ ["Niterói / São Gonçalo","niterói|são gonçalo|itaboraí|maria paula"],
+ ["Tanto faz","*"]
+];
+var DATA=[];
+function money(n){return 'R$ '+ (n||0).toLocaleString('pt-BR');}
+// carrega a camada de dados única
+fetch('data/empreendimentos.json').then(function(r){return r.json();}).then(function(j){
+  DATA=(j.empreendimentos||j||[]);
+}).catch(function(){ DATA=[]; });
+
+// monta opções de região
+(function(){var o=document.getElementById('regOpts');REGIONS.forEach(function(r){
+  var d=document.createElement('div');d.className='opt';d.textContent=r[0];d.setAttribute('data-reg',r[1]);
+  d.onclick=function(){pick(d,'reg');STATE.regiao=r;};o.appendChild(d);});})();
+
+function pick(el,grp){
+  var p=el.parentNode;p.querySelectorAll('.opt').forEach(function(x){x.classList.remove('sel');});
+  el.classList.add('sel');
+  if(grp==='reg'){document.getElementById('n0').disabled=false;}
+  if(grp==='fgts'){STATE.fgts=el.getAttribute('data-fgts');checkStep1();}
+  if(grp==='int'){STATE.intencao=el.getAttribute('data-int');document.getElementById('n2').disabled=false;}
+}
+function maskRenda(el){
+  var v=el.value.replace(/\D/g,'');STATE.renda=parseInt(v||'0',10);
+  el.value=v?('R$ '+parseInt(v,10).toLocaleString('pt-BR')):'';
+  checkStep1();
+}
+function checkStep1(){document.getElementById('n1').disabled=!(STATE.renda>=800 && STATE.fgts);}
+function show(i){document.querySelectorAll('.step').forEach(function(s){s.classList.remove('on');});
+  document.querySelector('.step[data-step="'+i+'"]').classList.add('on');
+  for(var k=0;k<3;k++)document.getElementById('p'+k).classList.toggle('on',k<=i);}
+function next(i){show(i+1);}
+function prev(i){show(i-1);}
+
+function matchRegion(bairro){
+  if(!STATE.regiao || STATE.regiao[1]==='*')return true;
+  var b=(bairro||'').toLowerCase();
+  return STATE.regiao[1].split('|').some(function(k){return k && b.indexOf(k)>=0;});
+}
+// teto indicativo de imóvel pela renda (regra simples e conservadora, MCMV)
+function tetoIndicativo(renda){ return Math.round(renda*100); } // ~ parcela 30% em ~ prazo longo; indicativo
+
+function verResultado(){
+  var teto=tetoIndicativo(STATE.renda);
+  var pool=DATA.filter(function(e){return matchRegion(e.bairro);});
+  // prioriza: preço conhecido e <= teto, depois preço conhecido, depois consulta
+  function score(e){
+    var s=0;
+    if(e.preco_min){ s+= (e.preco_min<=teto?100:40) - Math.min(60,Math.abs(e.preco_min-teto)/5000); }
+    else s+=55; // "consulte" ainda é match por região
+    if(STATE.intencao==='investir' && /studio|1 e|1 quarto/i.test(e.tipologia||''))s+=8;
+    return s;
+  }
+  pool.sort(function(a,b){return score(b)-score(a);});
+  if(pool.length<3){ // completa com qualquer região se filtro apertou demais
+    DATA.forEach(function(e){if(pool.indexOf(e)<0)pool.push(e);});
+  }
+  var sel=pool.slice(0,6);
+  render(sel,teto);
+  // registra o lead qualificado no CRM (mesma ponte do resto do site)
+  try{
+    var payload={origem:'recomendador',regiao:(STATE.regiao?STATE.regiao[0]:''),renda:STATE.renda,fgts:STATE.fgts,intencao:STATE.intencao,
+      recomendados:sel.map(function(e){return e.nome;}).join(', ')};
+    if(window.enviarLeadCRM) window.enviarLeadCRM(payload);
+  }catch(e){}
+  if(window.trackEvent) trackEvent('recomendacao_recebida',{regiao:STATE.regiao?STATE.regiao[0]:'',renda:STATE.renda});
+  document.getElementById('quiz').style.display='none';
+  document.getElementById('results').style.display='block';
+  document.getElementById('finalCta').style.display='block';
+  var wa='https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo! Fiz a recomendação no site (renda ~'+money(STATE.renda)+', região '+(STATE.regiao?STATE.regiao[0]:'')+') e quero a análise completa.');
+  document.getElementById('finalWa').href=wa;
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function render(list,teto){
+  var g=document.getElementById('rgrid');g.innerHTML='';
+  document.getElementById('rsub').textContent=list.length+' opções na região '+(STATE.regiao?STATE.regiao[0]:'')+' — com base numa renda de '+money(STATE.renda)+'.';
+  if(!list.length){g.innerHTML='<p class="spin">Não consegui carregar os imóveis agora. Me chame no WhatsApp que eu te mostro na hora.</p>';return;}
+  list.forEach(function(e){
+    var img=e.img||'emp-img/farol-da-guanabara.jpg';
+    var preco=e.preco_min?('a partir de '+money(e.preco_min)):(e.renda_min_texto?('Renda '+e.renda_min_texto.replace('R$','R$')):'Consulte valores');
+    var wa='https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo! Vi o '+e.nome+' na recomendação do site e quero saber se consigo comprar.');
+    var d=document.createElement('div');d.className='rcard';
+    d.innerHTML='<img src="'+img+'" alt="'+e.nome+'" loading="lazy" onerror="this.style.opacity=.25"/>'+
+      '<div class="b"><div class="cn">'+(e.construtora||'')+'</div><h3>'+e.nome+'</h3>'+
+      '<div class="loc">'+(e.bairro||'')+'</div>'+
+      (e.tipologia?'<div class="tip">'+e.tipologia+'</div>':'')+
+      '<div class="pr">'+preco+'</div>'+
+      '<div class="cta"><a class="ver" href="'+e.url+'">Ver imóvel</a><a class="wa" href="'+wa+'">WhatsApp</a></div></div>';
+    g.appendChild(d);
+  });
+}
+</script>
+<script src="tracking-config.js"></script><script src="leads.js" defer></script>
+<script src="wa.js" defer></script>
+</body></html>

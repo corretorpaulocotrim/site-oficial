@@ -95,6 +95,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
       <h2 class="serif">Premissas</h2>
       <div class="sub">Ajuste os valores. Nada é inventado: campos vazios ficam como "não informado".</div>
       <div class="fld"><label>Valor do imóvel (R$)</label><div class="row"><span>R$</span><input id="i-valor" inputmode="numeric" placeholder="—"/></div><div class="hint" id="h-valor"></div></div>
+      <div class="fld"><label>Área privativa (m²)</label><div class="row"><input id="i-area" inputmode="numeric" placeholder="não informado"/><span>m²</span></div><div class="hint" id="h-area"></div></div>
       <div class="two">
         <div class="fld"><label>Entrada (%)</label><div class="row"><input id="i-entrada" inputmode="numeric" value="20"/><span>%</span></div></div>
         <div class="fld"><label>Custos de aquisição (%)</label><div class="row"><input id="i-custoaq" inputmode="numeric" value="5"/><span>%</span></div></div>
@@ -104,7 +105,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
         <div class="fld"><label>Prazo (meses)</label><div class="row"><input id="i-prazo" inputmode="numeric" value="360"/></div></div>
       </div>
       <div class="grp-inv">
-        <div class="fld"><label>Aluguel mensal (R$)</label><div class="row"><span>R$</span><input id="i-aluguel" inputmode="numeric" placeholder="não informado"/></div></div>
+        <div class="fld"><label>Aluguel mensal (R$)</label><div class="row"><span>R$</span><input id="i-aluguel" inputmode="numeric" placeholder="não informado"/></div><div class="hint" id="h-alug"></div></div>
         <div class="two">
           <div class="fld"><label>Condomínio (R$/mês)</label><div class="row"><span>R$</span><input id="i-cond" inputmode="numeric" placeholder="consultar"/></div></div>
           <div class="fld"><label>IPTU (R$/ano)</label><div class="row"><span>R$</span><input id="i-iptu" inputmode="numeric" placeholder="consultar"/></div></div>
@@ -244,6 +245,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
     // resumo
     var res='';
     res+=kpi('Valor do imóvel', fmt(r.valor)||'Consultar');
+    var ar=num('i-area');res+=kpi('Preço por m²',(r.valor&&ar)?fmt(r.valor/ar)+'<small>/m²</small>':null,'Informe a área');
     res+=kpi('Capital inicial estimado', fmt(r.capitalInicial), 'Informe valor');
     if(perfil==='moradia'){
       res+=kpi('Parcela estimada', r.parcela!=null?(fmt(r.parcela)+'<small>/mês</small>'):null, 'Informe valor/juros');
@@ -305,7 +307,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
     document.getElementById('e-proj').innerHTML=pj+'<div class="nota">Retorno considera a quitação do saldo devedor e os custos do financiamento. Projeção não representa garantia de valorização futura.</div>';
     // premissas
     var pr='';
-    pr+=line('Valor do imóvel',fmt(r.valor));
+    pr+=line('Valor do imóvel',fmt(r.valor));pr+=line('Área / preço por m²',num('i-area')?(num('i-area')+' m² · '+(r.valor?fmt(r.valor/num('i-area'))+'/m²':'—')):null);
     pr+=line('Entrada',num('i-entrada')!=null?num('i-entrada')+'%':null);
     pr+=line('Juros / prazo',(num('i-juros')!=null?num('i-juros')+'% a.a.':'—')+' / '+(num('i-prazo')||'—')+' meses');
     if(perfil!=='temporada'){ pr+=line('Aluguel',fmt(r.aluguel)); pr+=line('Vacância',num('i-vac')!=null?num('i-vac')+'%':null); pr+=line('Administração',num('i-admin')!=null?num('i-admin')+'%':null); }
@@ -338,6 +340,9 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
         document.getElementById('e-loc').textContent=(EMP.local||'')+(EMP.incorporadora?(' · '+EMP.incorporadora):'')+(EMP.status?(' · '+EMP.status):'');
         if(EMP.preco){document.getElementById('i-valor').value=Math.round(EMP.preco).toLocaleString('pt-BR');document.getElementById('h-valor').innerHTML='Preço de referência do catálogo (a partir de). Confirme na tabela oficial.';}
         else {document.getElementById('h-valor').innerHTML='Preço não informado — insira o valor da tabela oficial.';}
+        if(EMP.cond)document.getElementById('i-cond').value=EMP.cond;if(EMP.iptu_mes)document.getElementById('i-iptu').value=EMP.iptu_mes*12;
+        if(EMP.preco){var rf=Math.round(EMP.preco*0.0625/12);document.getElementById('i-aluguel').value=rf.toLocaleString('pt-BR');document.getElementById('h-alug').innerHTML='Referência: rentabilidade média do aluguel no Rio de 6,25% a.a. (Índice FipeZap, jun/2026). Ajuste com o aluguel real da região.';}
+        var am=(EMP.plantas||'').match(/(\d+(?:[.,]\d+)?)\s*m[²2]/i);if(am){document.getElementById('i-area').value=am[1];document.getElementById('h-area').textContent='Menor planta informada ('+EMP.plantas+'). Ajuste para a unidade desejada.';}
         var wtxt='Olá Paulo, quero uma análise de rentabilidade personalizada do '+EMP.nome+'.';
         document.getElementById('e-wa').href='https://wa.me/5521989150864?text='+encodeURIComponent(wtxt);
       } else {
@@ -358,4 +363,5 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
   if(document.readyState!=='loading')boot(); else document.addEventListener('DOMContentLoaded',boot);
 })();
 </script>
+<script src="wa.js" defer></script>
 </body></html>

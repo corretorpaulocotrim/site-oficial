@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0f2e36"/>
+<title>Saudosa Praça Onze — vitrine cinematográfica (preview)</title><meta name="description" content="Saudosa Praça Onze — apartamentos no coração do Rio, na região da Praça Onze / Porto Maravilha. Minha Casa Minha Vida e financiamento Caixa com Paulo Cotrim (CRECI-RJ 77677-F)."/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--petroleo:#0f2e36;--verde:#1a8f4c;--gold:#b8873a;--ink:#0a1f25;--cream:#f5f1e8}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:#eef4f2;font-family:Inter,system-ui,sans-serif;overflow-x:hidden;line-height:1.55}
+.frau{font-family:Fraunces,serif}
+img{display:block;max-width:100%}
+a{color:inherit}
+
+/* progress bar */
+#prog{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--verde),var(--gold));z-index:99}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.7,.2,1),transform .9s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}
+
+/* ===== HERO ===== */
+.hero{position:relative;height:100svh;min-height:600px;overflow:hidden;display:flex;align-items:flex-end}
+.hero .bg{position:absolute;inset:-4%;background:url('emp-img/saudosa-praca-onze.jpg') center/cover;transform:scale(1.12);animation:ken 18s ease-in-out infinite alternate;z-index:0}
+@keyframes ken{from{transform:scale(1.12) translate(0,0)}to{transform:scale(1.22) translate(-2%,-2%)}}
+.hero .shade{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(6,18,22,.55) 0%,rgba(6,18,22,.1) 35%,rgba(6,18,22,.65) 78%,var(--ink) 100%)}
+.hero .grain{position:absolute;inset:0;z-index:2;opacity:.05;background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>")}
+.hero-inner{position:relative;z-index:3;width:100%;max-width:1080px;margin:0 auto;padding:0 24px 8vh}
+.kick{font-weight:600;letter-spacing:.34em;text-transform:uppercase;font-size:12px;color:var(--gold)}
+.hero h1{font-size:clamp(48px,10vw,120px);line-height:.9;letter-spacing:-.02em;font-weight:600;margin:.15em 0 .2em}
+.hero h1 span{display:block;opacity:0;transform:translateY(40px);filter:blur(8px);animation:rise 1s cubic-bezier(.2,.7,.2,1) forwards}
+.hero h1 span:nth-child(1){animation-delay:.35s}
+.hero h1 span:nth-child(2){animation-delay:.52s}
+@keyframes rise{to{opacity:1;transform:none;filter:blur(0)}}
+.hero .lead{font-size:clamp(16px,2.1vw,21px);color:#dbe7e4;max-width:540px}
+.pill{display:inline-flex;gap:8px;align-items:center;margin-top:18px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);backdrop-filter:blur(6px);border-radius:40px;padding:9px 16px;font-size:13px;font-weight:500}
+.pill b{color:var(--gold)}
+.cue{position:absolute;bottom:20px;left:50%;transform:translateX(-50%);z-index:3;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:#cfe0dc;opacity:.85}
+.cue::after{content:"";display:block;width:1px;height:30px;margin:8px auto 0;background:linear-gradient(#cfe0dc,transparent);animation:pulse 1.8s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:.3}50%{opacity:1}}
+
+/* ===== SECTION base ===== */
+section{position:relative}
+.wrap{max-width:1080px;margin:0 auto;padding:12vh 24px}
+.eyebrow{font-weight:600;letter-spacing:.28em;text-transform:uppercase;font-size:12px;color:var(--verde)}
+h2.big{font-size:clamp(30px,5.4vw,58px);line-height:1.02;letter-spacing:-.015em;font-weight:600;margin:.25em 0 .5em}
+.muted{color:#b9cbc7}
+
+/* localização — rota metrô */
+.loc{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:center}
+.route{position:relative;background:linear-gradient(160deg,#12333c,#0a2027);border:1px solid rgba(255,255,255,.08);border-radius:22px;padding:26px;overflow:hidden}
+.route svg{width:100%;height:auto}
+.route .ln{fill:none;stroke:var(--gold);stroke-width:3;stroke-linecap:round;stroke-dasharray:600;stroke-dashoffset:600;filter:drop-shadow(0 0 6px rgba(184,135,58,.8))}
+.route.in .ln{animation:draw 2.2s ease .2s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.node{font:600 12px Inter;fill:#eef4f2}
+.dotm{fill:var(--verde)}
+@media(max-width:760px){.loc{grid-template-columns:1fr}}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:8px}
+.stat{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:18px;padding:24px}
+.stat b{font-family:Fraunces,serif;font-size:clamp(30px,5vw,46px);color:#fff;display:block;line-height:1}
+.stat span{font-size:13px;color:#b9cbc7}
+@media(max-width:640px){.stats{grid-template-columns:1fr}}
+
+/* galeria cinematográfica */
+.gal{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.gcard{position:relative;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#0a2027}
+.gcard img{width:100%;height:100%;object-fit:cover;transition:transform 1s cubic-bezier(.2,.7,.2,1);filter:saturate(1.05)}
+.gcard:hover img{transform:scale(1.08)}
+.gcard .cap{position:absolute;left:0;right:0;bottom:0;padding:16px;background:linear-gradient(transparent,rgba(6,18,22,.85));font-weight:600;letter-spacing:.02em}
+@media(max-width:760px){.gal{grid-template-columns:1fr 1fr}.gcard:last-child{grid-column:1/-1;aspect-ratio:16/9}}
+
+/* preço + cta */
+.price{background:linear-gradient(160deg,#12333c,#08191e);border:1px solid rgba(184,135,58,.28);border-radius:26px;padding:44px;text-align:center;max-width:640px;margin:0 auto}
+.price .from{font-size:13px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.price .v{font-family:Fraunces,serif;font-size:clamp(40px,8vw,72px);line-height:1;margin:.1em 0}
+.price small{color:#b9cbc7;font-size:14px}
+.cta{display:inline-flex;align-items:center;gap:11px;background:var(--verde);color:#fff;font-weight:600;font-size:17px;text-decoration:none;padding:17px 32px;border-radius:14px;margin-top:22px;box-shadow:0 14px 34px rgba(26,143,76,.4);transition:transform .2s}
+.cta:hover{transform:translateY(-2px)}
+.cta svg{width:20px;height:20px}
+.gate{margin-top:16px;font-size:12.5px;color:#93a9a5}
+
+/* sticky whatsapp */
+.sticky{position:fixed;left:0;right:0;bottom:0;z-index:50;transform:translateY(120%);transition:transform .4s cubic-bezier(.2,.7,.2,1);background:rgba(8,25,30,.86);backdrop-filter:blur(10px);border-top:1px solid rgba(255,255,255,.1);padding:12px 16px;display:flex;gap:12px;align-items:center;justify-content:space-between}
+.sticky.show{transform:none}
+.sticky .t{font-size:13.5px}.sticky .t b{color:#fff}
+.sticky a{background:var(--verde);color:#fff;font-weight:600;text-decoration:none;padding:12px 18px;border-radius:12px;font-size:14px;white-space:nowrap}
+
+footer{padding:8vh 24px 12vh;text-align:center;color:#8fa6a2;font-size:12.5px}
+.note{max-width:620px;margin:0 auto 26px;font-size:12.5px;color:#7f9793;border:1px dashed rgba(184,135,58,.4);border-radius:14px;padding:14px 18px}
+@media(prefers-reduced-motion:reduce){*{animation:none!important}.rv{opacity:1;transform:none}}
+</style>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Residence", "name": "Saudosa Praça Onze", "url": "https://paulocotrim.com.br/emp-saudosa-praca-onze-CINE.html", "address": {"@type": "PostalAddress", "addressLocality": "vitrine cinematográfica (preview)", "addressRegion": "RJ", "addressCountry": "BR"}, "broker": {"@type": "RealEstateAgent", "name": "Paulo Cotrim", "identifier": "CRECI-RJ 77677-F", "telephone": "+5521989150864", "areaServed": "Rio de Janeiro"}}</script>
+<link rel="canonical" href="https://paulocotrim.com.br/emp-saudosa-praca-onze-CINE.html"/><meta property="og:image" content="https://paulocotrim.com.br/emp-img/farol-da-guanabara.jpg"/></head>
+<body>
+<div id="prog"></div>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="bg"></div><div class="shade"></div><div class="grain"></div>
+  <div class="hero-inner">
+    <div class="kick">Centro do Rio · a 300m do metrô</div>
+    <h1 class="frau"><span>SAUDOSA</span><span>PRAÇA ONZE</span></h1>
+    <p class="lead">Morar no coração do samba, com o metrô na esquina. Studio e 2 quartos por um preço de entrada raro no Centro.</p>
+    <div class="pill">🔑 <span>Construtora <b>Cury</b> · Minha Casa Minha Vida</span></div>
+  </div>
+  <div class="cue">role</div>
+</header>
+
+<!-- LOCALIZAÇÃO -->
+<section>
+  <div class="wrap loc">
+    <div class="rv">
+      <div class="eyebrow">A localização vende sozinha</div>
+      <h2 class="big frau">O Centro inteiro<br>a pé.</h2>
+      <p class="muted">Metrô a 300 metros, VLT, SAARA, Lapa e a Praça Onze — berço do samba carioca — na porta. Aqui você não depende de carro pra viver a cidade.</p>
+      <div class="stats">
+        <div class="stat"><b>300m</b><span>até o metrô</span></div>
+        <div class="stat"><b>Centro</b><span>trabalho e cultura</span></div>
+        <div class="stat"><b>24h</b><span>segurança e portaria</span></div>
+      </div>
+    </div>
+    <div class="route rv d1">
+      <svg viewBox="0 0 320 180" aria-label="Rota até o metrô">
+        <path class="ln" d="M30,150 C90,150 90,60 160,60 S250,40 292,40"/>
+        <circle class="dotm" cx="30" cy="150" r="7"/><text class="node" x="16" y="172">Saudosa</text>
+        <circle cx="292" cy="40" r="7" fill="#b8873a"/><text class="node" x="232" y="30">Metrô · 300m</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section>
+  <div class="wrap">
+    <div class="eyebrow rv">Por dentro</div>
+    <h2 class="big frau rv">Um rooftop de frente<br>pro samba.</h2>
+    <div class="gal">
+      <figure class="gcard rv"><img src="emp-img/saudosa-praca-onze-rooftop.jpg" alt="Rooftop com vista para a região do samba" loading="lazy"><figcaption class="cap">Rooftop</figcaption></figure>
+      <figure class="gcard rv d1"><img src="emp-img/saudosa-praca-onze-piscina.jpg" alt="Piscina adulta e infantil" loading="lazy"><figcaption class="cap">Piscina</figcaption></figure>
+      <figure class="gcard rv d2"><img src="emp-img/saudosa-praca-onze-portaria.jpg" alt="Portaria" loading="lazy"><figcaption class="cap">Portaria 24h</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- PREÇO + CTA (lead-gate) -->
+<section>
+  <div class="wrap">
+    <div class="price rv">
+      <div class="from">Studio a partir de</div>
+      <div class="v frau">R$ 290 mil</div>
+      <small>no Centro, com metrô a 300m — preço de entrada raro nessa localização.</small>
+      <div>
+        <a class="cta" href="#" onclick="return false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
+          Simular financiamento
+        </a>
+      </div>
+      <div class="gate">Tabela completa e sua parcela real liberam no WhatsApp — direto com o Paulo, sem sair de casa.</div>
+    </div>
+  </div>
+</section>
+
+<!-- STICKY -->
+<div class="sticky" id="sticky">
+  <div class="t"><b>Gostou do Saudosa Praça Onze?</b><br>Fale agora com o Paulo Cotrim.</div>
+  <a href="#" onclick="return false">Falar no WhatsApp</a>
+</div>
+
+<footer>
+  <div class="note">Preview cinematográfico da página do <b>Saudosa Praça Onze</b> — arquivo separado, não altera o site no ar. Conteúdo, imagens e preço reais. Quando você aprovar, aplico este padrão na página oficial preservando lead-gate, simulador e tracking.</div>
+  Valores e condições fornecidos pela construtora, sujeitos a alteração. Consulte a tabela oficial com o Paulo Cotrim (CRECI-RJ 77677-F).
+</footer>
+
+<script>
+(function(){
+  var prog=document.getElementById('prog'), sticky=document.getElementById('sticky');
+  function onScroll(){
+    var h=document.documentElement, sc=h.scrollTop||document.body.scrollTop;
+    var max=(h.scrollHeight-h.clientHeight)||1;
+    prog.style.width=(sc/max*100)+'%';
+    if(sc>window.innerHeight*0.9){sticky.classList.add('show');}else{sticky.classList.remove('show');}
+  }
+  window.addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:0.16});
+  document.querySelectorAll('.rv,.route').forEach(function(el){io.observe(el);});
+})();
+</script>
+<script src="wa.js" defer></script>
+</body>
+</html>

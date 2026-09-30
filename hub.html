@@ -1,0 +1,102 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#0f2e36"/><title>Central Cotrim · Hub de ferramentas</title><meta name="robots" content="noindex,follow"/><meta name="description" content="Central de ferramentas do Paulo Cotrim: recomendador, simulador, CRM, modo corretor, aprovação, depoimentos e o checklist de publicação."/><link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="apple-touch-icon.png"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--white:#fff;--mist:#f5f6f7;--line:#e8eaed;--gray:#6b7280;--ink:#0f2e36;--gold:#b8873a;--blue:#0058A3;--green:#1a8f4c;--petrol:#0f2e36;--r:16px;--maxw:1120px;--shadow:0 1px 2px rgba(15,46,54,.05),0 10px 30px -12px rgba(15,46,54,.16);--ease:cubic-bezier(.16,1,.3,1)}
+body{font-family:'Inter',system-ui,sans-serif;background:#f3f5f6;color:var(--ink);line-height:1.55;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.display{font-family:'Fraunces',Georgia,serif;font-weight:600;letter-spacing:-.01em}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 22px}
+.top{background:radial-gradient(120% 120% at 15% -20%,#17434e,#0a1f25 70%);color:#fff;padding:44px 0 40px}
+.top .k{width:38px;height:38px;margin-bottom:14px}
+.top .eyebrow{color:#7eb7f0;font-weight:700;letter-spacing:.16em;text-transform:uppercase;font-size:11.5px}
+.top h1{font-size:clamp(26px,4.6vw,40px);margin:.25em 0 .2em}
+.top p{color:#cfe0dc;max-width:60ch;font-size:15px}
+.stats{display:flex;gap:26px;flex-wrap:wrap;margin-top:22px}
+.stat b{font-family:'Fraunces',serif;font-size:26px;display:block;line-height:1}
+.stat span{font-size:12px;color:#9fb9b6}
+section{padding:38px 0 6px}
+.h2{display:flex;align-items:center;gap:10px;font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-bottom:16px}
+.h2 .dot{width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media(max-width:820px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:540px){.grid{grid-template-columns:1fr}}
+.tile{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:20px;box-shadow:var(--shadow);transition:.25s var(--ease);display:flex;flex-direction:column;gap:6px;min-height:118px}
+.tile:hover{transform:translateY(-3px);border-color:var(--blue)}
+.tile .ico{width:38px;height:38px;border-radius:10px;background:#eef5fb;display:flex;align-items:center;justify-content:center;margin-bottom:6px}
+.tile .ico svg{width:20px;height:20px;stroke:var(--blue);fill:none;stroke-width:1.8}
+.tile h3{font-size:16px;font-weight:700}
+.tile p{font-size:13px;color:var(--gray)}
+.tile .tag{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--green);margin-top:auto}
+.tile.locked .ico{background:#fdf3e6}.tile.locked .ico svg{stroke:var(--gold)}
+.tile.locked .tag{color:var(--gold)}
+.check{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:8px 8px 8px 8px;box-shadow:var(--shadow)}
+.ci{display:flex;gap:12px;padding:14px 14px;border-bottom:1px solid var(--line);align-items:flex-start}
+.ci:last-child{border-bottom:none}
+.ci .bx{width:20px;height:20px;border-radius:6px;border:2px solid var(--line);flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:12px;color:#fff}
+.ci.done .bx{background:var(--green);border-color:var(--green)}
+.ci.pend .bx{border-color:var(--gold)}
+.ci .t{font-size:14px;font-weight:600}
+.ci .d{font-size:12.5px;color:var(--gray)}
+.ci .pill{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.04em;padding:3px 8px;border-radius:20px;margin-left:auto;white-space:nowrap}
+.pill.ok{background:#e7f5ee;color:var(--green)}.pill.tok{background:#fdf3e6;color:var(--gold)}.pill.p1{background:#eef5fb;color:var(--blue)}
+footer{padding:30px 22px;text-align:center;font-size:12px;color:var(--gray)}
+</style>
+<link rel="canonical" href="https://paulocotrim.com.br/hub.html"/></head>
+<body>
+<div class="top"><div class="wrap">
+  <svg class="k" viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2"><circle cx="8" cy="8" r="4"/><path d="M11 11l8 8M16 16l3-3"/></svg>
+  <div class="eyebrow">Central Cotrim</div>
+  <h1 class="display">Sua sede digital, num lugar só</h1>
+  <p>Todas as ferramentas do site e da operação — para o cliente e para você — mais o checklist do que falta colocar no ar.</p>
+  <div class="stats">
+    <div class="stat"><b>59</b><span>empreendimentos na base</span></div>
+    <div class="stat"><b>89</b><span>páginas no site</span></div>
+    <div class="stat"><b>61+</b><span>páginas com SEO schema</span></div>
+    <div class="stat"><b>CRECI-RJ</b><span>77677-F</span></div>
+  </div>
+</div></div>
+
+<div class="wrap">
+  <section>
+    <div class="h2"><span class="dot"></span>Ferramentas para o cliente</div>
+    <div class="grid">
+      <a class="tile" href="recomendar.html"><div class="ico"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></div><h3>Descubra quanto pode comprar</h3><p>3 perguntas → imóveis compatíveis com a renda e a região. Gera lead qualificado no CRM.</p><span class="tag">Novo · P1</span></a>
+      <a class="tile" href="simulador.html"><div class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M8 6h8M8 10h2M12 10h2M8 14h2M12 14h2"/></svg></div><h3>Simulador de financiamento</h3><p>Motor real Caixa 2026: entrada, parcela, subsídio e uso do FGTS.</p><span class="tag">Ativo</span></a>
+      <a class="tile" href="aprovacao-expressa.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M13 2 3 14h7l-1 8 11-14h-7l1-6z"/></svg></div><h3>Aprovação Expressa</h3><p>Análise inicial de crédito em até 48h úteis (sujeita à instituição).</p><span class="tag">Ativo</span></a>
+      <a class="tile" href="depoimentos.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><h3>Depoimentos reais</h3><p>Clientes que já saíram do aluguel — prova social em vídeo.</p><span class="tag">Ativo</span></a>
+      <a class="tile" href="guia-do-comprador.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 4.5A2.5 2.5 0 016.5 2H20v20H6.5A2.5 2.5 0 014 19.5z"/></svg></div><h3>Guia do Comprador</h3><p>Passo a passo da compra sem sair de casa.</p><span class="tag">Ativo</span></a>
+      <a class="tile" href="index.html#mapa"><div class="ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3>Mapa de empreendimentos</h3><p>Todos os lançamentos por região, status e construtora.</p><span class="tag">Ativo</span></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><span class="dot" style="background:var(--green)"></span>Ferramentas do corretor</div>
+    <div class="grid">
+      <a class="tile" href="corretor.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><h3>Modo Corretor</h3><p>Seu painel de rua: CRECI, ferramentas e assinatura de documentos.</p><span class="tag">App instalável</span></a>
+      <a class="tile" href="crm.html"><div class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v16"/></svg></div><h3>CRM (leads)</h3><p>Leads capturados, OCR de listas e recomendação por renda. Login paulo.</p><span class="tag">App instalável</span></a>
+      <a class="tile" href="abordagem-rua.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M9 20l-5-2V6l5 2m0 12l6-2m-6 2V8m6 10l5-2V4l-5 2m0 12V6m0 0L9 8"/></svg></div><h3>Abordagem de Rua</h3><p>Quiz + QR pra captar lead na abordagem presencial.</p><span class="tag">Ativo</span></a>
+      <a class="tile" href="investidor.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M3 3v18h18M7 15l4-4 3 3 5-6"/></svg></div><h3>Investidor</h3><p>Página para o público de investimento e valorização.</p><span class="tag">Ativo</span></a>
+      <a class="tile" href="documentos.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/></svg></div><h3>Documentos</h3><p>O que enviar por foto pra dar entrada no financiamento.</p><span class="tag">Ativo</span></a>
+      <a class="tile" href="match.html"><div class="ico"><svg viewBox="0 0 24 24"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.7l-1-1.1a5.5 5.5 0 00-7.8 7.8l1 1.1L12 21l7.8-7.5 1-1.1a5.5 5.5 0 000-7.8z"/></svg></div><h3>Match (versão original)</h3><p>Quiz de match — substituído pelo Recomendador; mantido por ora.</p><span class="tag">Ativo</span></a>
+    </div>
+  </section>
+
+  <section>
+    <div class="h2"><span class="dot" style="background:var(--gold)"></span>Checklist de lançamento — o que falta pôr no ar</div>
+    <div class="check">
+      <div class="ci done"><div class="bx">✓</div><div><div class="t">Analytics + Pixel ligados no código</div><div class="d">GA4 G-FXTZPVZW2X + Meta Pixel 1758733705251535 colados no tracking-config.js.</div></div><span class="pill ok">Feito</span></div>
+      <div class="ci done"><div class="bx">✓</div><div><div class="t">6 empreendimentos Tenda</div><div class="d">Páginas + capas + dados reais prontos e validados.</div></div><span class="pill ok">Feito</span></div>
+      <div class="ci done"><div class="bx">✓</div><div><div class="t">Camada de dados única</div><div class="d">data/empreendimentos.json com 59 empreendimentos reais (fim da duplicação).</div></div><span class="pill ok">Feito</span></div>
+      <div class="ci done"><div class="bx">✓</div><div><div class="t">Recomendador "quanto posso comprar"</div><div class="d">recomendar.html — qualificador de 3 passos que gera lead no CRM.</div></div><span class="pill ok">Feito</span></div>
+      <div class="ci pend"><div class="bx"></div><div><div class="t">PUBLICAR tudo (precisa do seu token GitHub)</div><div class="d">Sobe tracking + Tenda + recomendador + hub + destrunca o index (52→59 no mapa). Um push só. Revogar o token depois.</div></div><span class="pill tok">Seu token</span></div>
+      <div class="ci pend"><div class="bx"></div><div><div class="t">Fotos reais dos 6 Tenda</div><div class="d">Baixar do book/site da Tenda e salvar em emp-img/ (capas provisórias já no lugar).</div></div><span class="pill tok">Você</span></div>
+      <div class="ci pend"><div class="bx"></div><div><div class="t">Qualificador na 1ª dobra da home</div><div class="d">Levar o recomendador pro topo da home (hoje é página à parte). Feito no publish do index.</div></div><span class="pill p1">P1</span></div>
+      <div class="ci pend"><div class="bx"></div><div><div class="t">Follow-up automático no CRM (dia 0/2/7)</div><div class="d">Requer editar o Apps Script da planilha — combino com você.</div></div><span class="pill p1">P1</span></div>
+      <div class="ci pend"><div class="bx"></div><div><div class="t">COTRIM com IA de verdade</div><div class="d">Requer API paga + proxy serverless pra proteger a chave. Plano no diagnóstico.</div></div><span class="pill p1">P2</span></div>
+    </div>
+  </section>
+</div>
+
+<footer>Central Cotrim · uso interno · CRECI-RJ 77677-F · atualizado em ago/2026 · <a href="index.html" style="color:var(--blue);font-weight:600">voltar ao site</a></footer>
+<script src="wa.js" defer></script>
+</body></html>
