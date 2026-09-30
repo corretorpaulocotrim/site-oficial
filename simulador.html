@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0f2e36;--navy2:#173d47;--gold:#b8873a;--gold2:#cf9f4f;--green:#1a8f4c;--green2:#157540;--bg:#f5f6f7;--border:#e8eaed;--text:#0f2e36;--text2:#6b7280;--ease:cubic-bezier(.16,1,.3,1)}
+:root{--navy:#0f2e36;--navy2:#173d47;--gold:#0058A3;--gold2:#cf9f4f;--green:#1a8f4c;--green2:#157540;--bg:#f5f6f7;--border:#e8eaed;--text:#0f2e36;--text2:#6b7280;--ease:cubic-bezier(.16,1,.3,1)}
 body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;min-height:100vh;-webkit-font-smoothing:antialiased}
 /* HEADER */
 .sim-hdr{background:rgba(15,46,54,.92);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(255,255,255,.06),0 12px 30px -18px rgba(0,0,0,.4)}
@@ -19,7 +19,7 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .sim-hdr-btns{display:flex;gap:10px}
 .btn-back{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background-color .3s cubic-bezier(.16,1,.3,1)}
 .btn-back:hover{background:rgba(255,255,255,.18)}
-.btn-wa-s{background:#b8873a;color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(184,135,58,.3);transition:background-color .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}
+.btn-wa-s{background:#0058A3;color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(184,135,58,.3);transition:background-color .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}
 .btn-wa-s:hover{background:#a5772e;transform:translateY(-1px)}
 /* HERO BAR */
 .sim-hero{background:linear-gradient(105deg,#0f2e36 55%,#12252b 100%);color:#fff;padding:32px;text-align:center}
@@ -408,7 +408,7 @@ function baixarResumoSimulacao(){
   var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Resumo + Simulação — '+nomeEmp+'</title>'
     +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
     +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
-    +'.kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#b8873a;margin-bottom:8px}'
+    +'.kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#0058A3;margin-bottom:8px}'
     +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}'
     +'.h2{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;margin:22px 0 6px}'
     +'.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e8eaed;font-size:13.5px}.rk{color:#6b7280}.rv{font-weight:700}'
