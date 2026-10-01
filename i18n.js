@@ -182,7 +182,7 @@
       box.appendChild(b);
     });
     var st=document.createElement('style');
-    st.textContent='#pc-lang button.on{opacity:1;box-shadow:0 0 0 2px #b0895b}#pc-lang button:hover{opacity:1}';
+    st.textContent='#pc-lang button.on{opacity:1;box-shadow:0 0 0 2px #b0895b}#pc-lang button:hover{opacity:1}@media(max-width:1024px){#pc-lang{top:78px!important;right:10px!important;transform:scale(.85);transform-origin:top right}}';
     document.head.appendChild(st);
     document.body.appendChild(box);
   }

@@ -160,21 +160,21 @@
   function injectMcmvPopup(){
     var wrap = document.createElement('div');
     wrap.id = 'mcmvPopupOverlay';
-    wrap.setAttribute('style','position:fixed;inset:0;z-index:9999;background:rgba(15,46,54,.62);display:flex;align-items:center;justify-content:center;padding:20px;animation:mcmvFadeIn .35s ease');
+    wrap.setAttribute('style','position:fixed;inset:0;z-index:9999;background:rgba(26,26,25,.62);display:flex;align-items:center;justify-content:center;padding:20px;animation:mcmvFadeIn .35s ease');
     wrap.innerHTML = ''
       +'<style>@keyframes mcmvFadeIn{from{opacity:0}to{opacity:1}}@keyframes mcmvPop{from{opacity:0;transform:translateY(14px) scale(.97)}to{opacity:1;transform:none}}</style>'
       +'<div style="background:#fff;border-radius:18px;max-width:460px;width:100%;padding:34px 30px 28px;position:relative;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif;animation:mcmvPop .4s cubic-bezier(.16,1,.3,1)">'
-      +'  <button id="mcmvPopupClose" aria-label="Fechar" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:#f5f6f7;border:none;font-size:18px;color:#6b7280;cursor:pointer;line-height:1">&times;</button>'
-      +'  <div style="display:inline-flex;align-items:center;gap:7px;background:#e7edee;color:#0f2e36;font-size:11.5px;font-weight:700;padding:6px 13px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:16px">Minha Casa Minha Vida</div>'
-      +'  <h3 style="font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;color:#0f2e36;line-height:1.25;margin-bottom:12px">O que você ganha comprando dentro do programa</h3>'
+      +'  <button id="mcmvPopupClose" aria-label="Fechar" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:#f6f2ea;border:none;font-size:18px;color:#8a857b;cursor:pointer;line-height:1">&times;</button>'
+      +'  <div style="display:inline-flex;align-items:center;gap:7px;background:#efe9df;color:#1a1a19;font-size:11.5px;font-weight:700;padding:6px 13px;border-radius:999px;text-transform:uppercase;letter-spacing:.04em;margin-bottom:16px">Minha Casa Minha Vida</div>'
+      +'  <h3 style="font-family:Cormorant Garamond,Georgia,serif;font-size:22px;font-weight:600;color:#1a1a19;line-height:1.25;margin-bottom:12px">O que você ganha comprando dentro do programa</h3>'
       +'  <ul style="list-style:none;display:flex;flex-direction:column;gap:11px;margin-bottom:22px">'
       +      mcmvBenefit('ITBI e RGI grátis','O comprador não paga documentação de cartório nem registro do imóvel.')
       +      mcmvBenefit('Entrada facilitada','Gratuita ou parcelada sem juros durante o período da obra.')
       +      mcmvBenefit('Prestação fixa pós-chaves','Você só começa a pagar o financiamento depois de receber as chaves.')
       +      mcmvBenefit('FGTS na compra','Pode ser usado para abater entrada ou parte do financiamento.')
       +'  </ul>'
-      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20entender%20os%20benef%C3%ADcios%20do%20Minha%20Casa%20Minha%20Vida%20na%20pr%C3%A1tica." id="mcmvPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#b8873a;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero entender na prática</a>'
-      +'  <button id="mcmvPopupDismiss" style="display:block;width:100%;background:none;border:none;color:#6b7280;font-size:12.5px;margin-top:12px;cursor:pointer;text-decoration:underline">Agora não</button>'
+      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20entender%20os%20benef%C3%ADcios%20do%20Minha%20Casa%20Minha%20Vida%20na%20pr%C3%A1tica." id="mcmvPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#b0895b;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero entender na prática</a>'
+      +'  <button id="mcmvPopupDismiss" style="display:block;width:100%;background:none;border:none;color:#8a857b;font-size:12.5px;margin-top:12px;cursor:pointer;text-decoration:underline">Agora não</button>'
       +'</div>';
     document.body.appendChild(wrap);
     function close(){ wrap.remove(); }
@@ -185,8 +185,8 @@
   }
   function mcmvBenefit(titulo, desc){
     return '<li style="display:flex;gap:11px;align-items:flex-start">'
-      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#1a8f4c" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
-      +'<span style="font-size:13.5px;color:#0f2e36;line-height:1.5"><b>'+titulo+'</b><br><span style="color:#6b7280">'+desc+'</span></span>'
+      +'<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#b0895b" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink:0;margin-top:2px"><path d="M20 6 9 17l-5-5"/></svg>'
+      +'<span style="font-size:13.5px;color:#1a1a19;line-height:1.5"><b>'+titulo+'</b><br><span style="color:#8a857b">'+desc+'</span></span>'
       +'</li>';
   }
 
@@ -226,16 +226,16 @@
   function injectExitPopup(){
     var wrap = document.createElement('div');
     wrap.id = 'exitPopupOverlay';
-    wrap.setAttribute('style','position:fixed;inset:0;z-index:9999;background:rgba(15,46,54,.66);display:flex;align-items:center;justify-content:center;padding:20px;animation:exitFadeIn .3s ease');
+    wrap.setAttribute('style','position:fixed;inset:0;z-index:9999;background:rgba(26,26,25,.66);display:flex;align-items:center;justify-content:center;padding:20px;animation:exitFadeIn .3s ease');
     wrap.innerHTML = ''
       +'<style>@keyframes exitFadeIn{from{opacity:0}to{opacity:1}}@keyframes exitPop{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}</style>'
       +'<div style="background:#fff;border-radius:18px;max-width:440px;width:100%;padding:32px 28px 26px;position:relative;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif;animation:exitPop .4s cubic-bezier(.16,1,.3,1)">'
-      +'  <button id="exitPopupClose" aria-label="Fechar" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:#f5f6f7;border:none;font-size:18px;color:#6b7280;cursor:pointer;line-height:1">&times;</button>'
-      +'  <div style="width:52px;height:52px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b8873a" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>'
-      +'  <h3 style="font-family:Fraunces,Georgia,serif;font-size:21px;font-weight:600;color:#0f2e36;line-height:1.25;margin-bottom:10px">Antes de sair, uma coisa rápida</h3>'
-      +'  <p style="font-size:13.5px;color:#6b7280;line-height:1.6;margin-bottom:20px">Me manda seu WhatsApp que eu te envio a tabela atualizada, com valores e condições, sem compromisso nenhum.</p>'
-      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20receber%20a%20tabela%20atualizada%20de%20valores%20e%20condi%C3%A7%C3%B5es." id="exitPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#b8873a;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero receber a tabela</a>'
-      +'  <button id="exitPopupDismiss" style="display:block;width:100%;background:none;border:none;color:#6b7280;font-size:12.5px;margin-top:12px;cursor:pointer;text-decoration:underline">Não, obrigado</button>'
+      +'  <button id="exitPopupClose" aria-label="Fechar" style="position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;background:#f6f2ea;border:none;font-size:18px;color:#8a857b;cursor:pointer;line-height:1">&times;</button>'
+      +'  <div style="width:52px;height:52px;border-radius:50%;background:#efe9df;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#b0895b" stroke-width="2"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div>'
+      +'  <h3 style="font-family:Cormorant Garamond,Georgia,serif;font-size:21px;font-weight:600;color:#1a1a19;line-height:1.25;margin-bottom:10px">Antes de sair, uma coisa rápida</h3>'
+      +'  <p style="font-size:13.5px;color:#8a857b;line-height:1.6;margin-bottom:20px">Me manda seu WhatsApp que eu te envio a tabela atualizada, com valores e condições, sem compromisso nenhum.</p>'
+      +'  <a href="https://wa.me/5521989150864?text=Ol%C3%A1%21%20Quero%20receber%20a%20tabela%20atualizada%20de%20valores%20e%20condi%C3%A7%C3%B5es." id="exitPopupCta" style="display:flex;align-items:center;justify-content:center;gap:9px;background:#b0895b;color:#fff;padding:14px 20px;border-radius:12px;font-size:14.5px;font-weight:700;text-decoration:none;box-shadow:0 10px 26px rgba(184,135,58,.3)">Quero receber a tabela</a>'
+      +'  <button id="exitPopupDismiss" style="display:block;width:100%;background:none;border:none;color:#8a857b;font-size:12.5px;margin-top:12px;cursor:pointer;text-decoration:underline">Não, obrigado</button>'
       +'</div>';
     document.body.appendChild(wrap);
     function close(){ wrap.remove(); }
@@ -264,7 +264,7 @@
       setTimeout(function(){
         var bubble = document.createElement('div');
         bubble.id = 'waStatusBubble';
-        bubble.setAttribute('style','position:fixed;z-index:998;bottom:88px;right:24px;background:#0f2e36;color:#fff;padding:9px 14px;border-radius:10px 10px 2px 10px;font-family:Inter,system-ui,sans-serif;font-size:12.5px;font-weight:600;box-shadow:0 8px 22px rgba(15,46,54,.3);display:flex;align-items:center;gap:7px;animation:waBubbleIn .3s ease;max-width:220px');
+        bubble.setAttribute('style','position:fixed;z-index:998;bottom:88px;right:24px;background:#1a1a19;color:#fff;padding:9px 14px;border-radius:10px 10px 2px 10px;font-family:Inter,system-ui,sans-serif;font-size:12.5px;font-weight:600;box-shadow:0 8px 22px rgba(26,26,25,.3);display:flex;align-items:center;gap:7px;animation:waBubbleIn .3s ease;max-width:220px');
         bubble.innerHTML = '<span style="width:8px;height:8px;border-radius:50%;background:'+(online?'#4ade80':'#9ca3af')+';flex-shrink:0"></span>'
           + (online ? 'Paulo está online agora' : 'Responde em breve');
         document.body.appendChild(bubble);
@@ -289,7 +289,7 @@
     else if(txt.indexOf('pronto') > -1 || txt.indexOf('entrega') > -1) msg = 'Pronto para morar — unidades remanescentes, chaves na entrega. Consulte quais tipologias ainda estão disponíveis.';
     var note = document.createElement('div');
     note.id = 'scarcityNote';
-    note.setAttribute('style','display:inline-block;margin-top:10px;font-size:12px;font-weight:600;color:#fff;background:rgba(15,46,54,.55);backdrop-filter:blur(6px);padding:6px 12px;border-radius:20px;max-width:360px;line-height:1.4');
+    note.setAttribute('style','display:inline-block;margin-top:10px;font-size:12px;font-weight:600;color:#fff;background:rgba(26,26,25,.55);backdrop-filter:blur(6px);padding:6px 12px;border-radius:20px;max-width:360px;line-height:1.4');
     note.textContent = msg;
     badge.insertAdjacentElement('afterend', note);
   })();
@@ -311,24 +311,24 @@
       if(document.getElementById('waLeadOverlay')) return;
       var wrap = document.createElement('div');
       wrap.id = 'waLeadOverlay';
-      wrap.setAttribute('style','position:fixed;inset:0;z-index:10000;background:rgba(15,46,54,.66);display:flex;align-items:center;justify-content:center;padding:20px;animation:exitFadeIn .25s ease');
+      wrap.setAttribute('style','position:fixed;inset:0;z-index:10000;background:rgba(26,26,25,.66);display:flex;align-items:center;justify-content:center;padding:20px;animation:exitFadeIn .25s ease');
       wrap.innerHTML = ''
         +'<style>@keyframes exitFadeIn{from{opacity:0}to{opacity:1}}</style>'
         +'<div style="background:#fff;border-radius:18px;max-width:400px;width:100%;padding:28px 26px 22px;text-align:left;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif">'
-        +'  <div style="width:46px;height:46px;border-radius:50%;background:#e7edee;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>'
-        +'  <h3 style="font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600;color:#0f2e36;margin-bottom:6px">Antes de ir pro WhatsApp</h3>'
-        +'  <p style="font-size:13px;color:#6b7280;line-height:1.55;margin-bottom:16px">Deixe seu nome e WhatsApp pra eu já te chamar com a tabela pronta — ou pule e vá direto pra conversa.</p>'
-        +'  <input id="waLeadNome" type="text" placeholder="Seu nome" autocomplete="name" style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;margin-bottom:9px;font-family:inherit;box-sizing:border-box">'
-        +'  <input id="waLeadFone" type="tel" placeholder="Seu WhatsApp (opcional)" autocomplete="tel" style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;margin-bottom:14px;font-family:inherit;box-sizing:border-box">'
+        +'  <div style="width:46px;height:46px;border-radius:50%;background:#efe9df;display:flex;align-items:center;justify-content:center;margin-bottom:14px"><svg width="22" height="22" viewBox="0 0 24 24" fill="#25D366"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg></div>'
+        +'  <h3 style="font-family:Cormorant Garamond,Georgia,serif;font-size:19px;font-weight:600;color:#1a1a19;margin-bottom:6px">Antes de ir pro WhatsApp</h3>'
+        +'  <p style="font-size:13px;color:#8a857b;line-height:1.55;margin-bottom:16px">Deixe seu nome e WhatsApp pra eu já te chamar com a tabela pronta — ou pule e vá direto pra conversa.</p>'
+        +'  <input id="waLeadNome" type="text" placeholder="Seu nome" autocomplete="name" style="width:100%;padding:11px 14px;border:1.5px solid #e3ddd1;border-radius:10px;font-size:14px;margin-bottom:9px;font-family:inherit;box-sizing:border-box">'
+        +'  <input id="waLeadFone" type="tel" placeholder="Seu WhatsApp (opcional)" autocomplete="tel" style="width:100%;padding:11px 14px;border:1.5px solid #e3ddd1;border-radius:10px;font-size:14px;margin-bottom:14px;font-family:inherit;box-sizing:border-box">'
         +'  <div id="waLeadHorarioWrap" style="display:none;margin-bottom:14px">'
-        +'    <label style="display:block;font-size:12px;color:#6b7280;margin-bottom:6px">Melhor horário para te ligarmos</label>'
-        +'    <select id="waLeadHorario" style="width:100%;padding:11px 14px;border:1.5px solid #e8eaed;border-radius:10px;font-size:14px;font-family:inherit;box-sizing:border-box">'
+        +'    <label style="display:block;font-size:12px;color:#8a857b;margin-bottom:6px">Melhor horário para te ligarmos</label>'
+        +'    <select id="waLeadHorario" style="width:100%;padding:11px 14px;border:1.5px solid #e3ddd1;border-radius:10px;font-size:14px;font-family:inherit;box-sizing:border-box">'
         +'      <option value="Manhã">Manhã</option><option value="Tarde">Tarde</option><option value="Noite">Noite</option>'
         +'    </select>'
         +'  </div>'
         +'  <button id="waLeadGo" style="width:100%;background:#25D366;color:#fff;border:none;padding:13px;border-radius:10px;font-size:14.5px;font-weight:700;cursor:pointer;margin-bottom:8px">Continuar para o WhatsApp</button>'
-        +'  <button id="waLeadCallback" style="width:100%;background:none;border:1.5px solid #e8eaed;color:#0f2e36;font-size:12.5px;font-weight:600;padding:10px;border-radius:10px;cursor:pointer;margin-bottom:8px">Prefiro que me liguem</button>'
-        +'  <button id="waLeadSkip" style="width:100%;background:none;border:none;color:#6b7280;font-size:12.5px;padding:6px;cursor:pointer;text-decoration:underline">Pular e continuar</button>'
+        +'  <button id="waLeadCallback" style="width:100%;background:none;border:1.5px solid #e3ddd1;color:#1a1a19;font-size:12.5px;font-weight:600;padding:10px;border-radius:10px;cursor:pointer;margin-bottom:8px">Prefiro que me liguem</button>'
+        +'  <button id="waLeadSkip" style="width:100%;background:none;border:none;color:#8a857b;font-size:12.5px;padding:6px;cursor:pointer;text-decoration:underline">Pular e continuar</button>'
         +'</div>';
       document.body.appendChild(wrap);
       var wantsCallback = false;
@@ -357,7 +357,7 @@
           wantsCallback = true;
           horarioWrap.style.display = '';
           this.textContent = 'Confirmar pedido de ligação';
-          this.style.background = '#0f2e36';
+          this.style.background = '#1a1a19';
           this.style.color = '#fff';
           document.getElementById('waLeadGo').style.display = 'none';
         } else {
@@ -397,8 +397,8 @@
     if(!/guia-do-comprador/.test(location.pathname)){
       var faqWrap = items[0].closest('.wrap') || items[0].parentElement;
       var xlink = document.createElement('p');
-      xlink.setAttribute('style', 'margin-top:18px;font-size:13.5px;color:var(--gray,#6b7280)');
-      xlink.innerHTML = 'Mais dúvidas sobre financiamento, FGTS ou Minha Casa Minha Vida? <a href="guia-do-comprador.html" style="color:var(--gold,#b8873a);font-weight:600">Leia o Guia completo do Comprador →</a>';
+      xlink.setAttribute('style', 'margin-top:18px;font-size:13.5px;color:var(--gray,#8a857b)');
+      xlink.innerHTML = 'Mais dúvidas sobre financiamento, FGTS ou Minha Casa Minha Vida? <a href="guia-do-comprador.html" style="color:var(--gold,#b0895b);font-weight:600">Leia o Guia completo do Comprador →</a>';
       faqWrap.appendChild(xlink);
     }
   })();
@@ -575,7 +575,7 @@
     document.head.appendChild(favStyle);
     var wrap = document.createElement('div');
     wrap.id = 'favCounterWrap';
-    wrap.innerHTML = '<button id="favCounterBtn" aria-label="Meus favoritos" style="display:flex;align-items:center;gap:7px;background:#0f2e36;color:#fff;border:none;padding:11px 16px;border-radius:30px;box-shadow:0 6px 20px rgba(15,46,54,.25);cursor:pointer;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:700"><svg width="15" height="15" viewBox="0 0 24 24" fill="#b8873a" stroke="#b8873a" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg><span id="favCounterN">0</span> favoritos</button>';
+    wrap.innerHTML = '<button id="favCounterBtn" aria-label="Meus favoritos" style="display:flex;align-items:center;gap:7px;background:#1a1a19;color:#fff;border:none;padding:11px 16px;border-radius:30px;box-shadow:0 6px 20px rgba(26,26,25,.25);cursor:pointer;font-family:Inter,system-ui,sans-serif;font-size:13px;font-weight:700"><svg width="15" height="15" viewBox="0 0 24 24" fill="#b0895b" stroke="#b0895b" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z"/></svg><span id="favCounterN">0</span> favoritos</button>';
     document.body.appendChild(wrap);
 
     window.updateFavCounter = function(){
@@ -590,15 +590,15 @@
       if(document.getElementById('favPanelOverlay')) return;
       var overlay = document.createElement('div');
       overlay.id = 'favPanelOverlay';
-      overlay.setAttribute('style', 'position:fixed;inset:0;z-index:9998;background:rgba(15,46,54,.6);display:flex;align-items:flex-end;justify-content:center;padding:0');
+      overlay.setAttribute('style', 'position:fixed;inset:0;z-index:9998;background:rgba(26,26,25,.6);display:flex;align-items:flex-end;justify-content:center;padding:0');
       var itemsHtml = list.map(function(it){
         return '<a href="'+it.url+'" style="display:flex;align-items:center;gap:12px;padding:10px 4px;text-decoration:none;color:inherit;border-bottom:1px solid #eee">'
           + (it.img ? '<div style="width:56px;height:56px;border-radius:10px;background:url(\''+it.img+'\') center/cover;flex-shrink:0"></div>' : '')
-          + '<div style="font-size:13.5px;font-weight:600;color:#0f2e36">'+it.nome+'</div></a>';
+          + '<div style="font-size:13.5px;font-weight:600;color:#1a1a19">'+it.nome+'</div></a>';
       }).join('');
       overlay.innerHTML = '<div style="background:#fff;width:100%;max-width:440px;border-radius:18px 18px 0 0;padding:24px 22px;max-height:70vh;overflow-y:auto;font-family:Inter,system-ui,sans-serif">'
-        + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h3 style="font-family:Fraunces,Georgia,serif;font-size:18px;color:#0f2e36">Meus favoritos</h3><button id="favPanelClose" style="background:#f5f6f7;border:none;width:30px;height:30px;border-radius:50%;font-size:16px;color:#6b7280;cursor:pointer">&times;</button></div>'
-        + (itemsHtml || '<p style="font-size:13px;color:#6b7280">Você ainda não favoritou nenhum imóvel.</p>')
+        + '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px"><h3 style="font-family:Cormorant Garamond,Georgia,serif;font-size:18px;color:#1a1a19">Meus favoritos</h3><button id="favPanelClose" style="background:#f6f2ea;border:none;width:30px;height:30px;border-radius:50%;font-size:16px;color:#8a857b;cursor:pointer">&times;</button></div>'
+        + (itemsHtml || '<p style="font-size:13px;color:#8a857b">Você ainda não favoritou nenhum imóvel.</p>')
         + (list.length ? '<a id="favSendWa" href="#" style="display:block;text-align:center;margin-top:16px;background:#25D366;color:#fff;padding:12px;border-radius:10px;font-size:13.5px;font-weight:700;text-decoration:none">Enviar minha lista pelo WhatsApp</a>' : '')
         + '</div>';
       document.body.appendChild(overlay);
@@ -622,12 +622,12 @@
     }catch(e){ return; }
     var bar = document.createElement('div');
     bar.id = 'cookieConsentBar';
-    bar.setAttribute('style', 'position:fixed;left:0;right:0;bottom:0;z-index:9998;background:#0f2e36;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;font-family:Inter,system-ui,sans-serif;box-shadow:0 -4px 20px rgba(0,0,0,.15)');
+    bar.setAttribute('style', 'position:fixed;left:0;right:0;bottom:0;z-index:9998;background:#1a1a19;color:#fff;padding:16px 20px;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:14px;font-family:Inter,system-ui,sans-serif;box-shadow:0 -4px 20px rgba(0,0,0,.15)');
     bar.innerHTML = ''
       + '<p style="margin:0;font-size:12.5px;color:rgba(255,255,255,.85);max-width:520px;line-height:1.5;flex:1 1 260px">Usamos cookies para melhorar sua experiência e, quando você concorda, medir campanhas. Veja nossa <a href="politica-de-privacidade.html" style="color:#fff;text-decoration:underline">Política de Privacidade</a>.</p>'
       + '<div style="display:flex;gap:8px;flex-shrink:0">'
       + '  <button id="cookieDecline" style="background:none;border:1px solid rgba(255,255,255,.35);color:#fff;font-size:12.5px;font-weight:600;padding:9px 16px;border-radius:9px;cursor:pointer">Recusar</button>'
-      + '  <button id="cookieAccept" style="background:#b8873a;border:none;color:#fff;font-size:12.5px;font-weight:700;padding:9px 18px;border-radius:9px;cursor:pointer">Aceitar</button>'
+      + '  <button id="cookieAccept" style="background:#b0895b;border:none;color:#fff;font-size:12.5px;font-weight:700;padding:9px 18px;border-radius:9px;cursor:pointer">Aceitar</button>'
       + '</div>';
     document.body.appendChild(bar);
     document.getElementById('cookieAccept').onclick = function(){
@@ -738,8 +738,8 @@
     if(document.getElementById('waHintPill')) return;
     var st=document.createElement('style');
     st.textContent='@keyframes waHintIn{0%{opacity:0;transform:translateY(6px) scale(.96)}12%{opacity:1;transform:none}82%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-4px) scale(.98)}}'
-      +'#waHintPill{position:fixed;right:88px;bottom:34px;z-index:600;background:#0f2e36;color:#fff;font-size:13px;font-weight:600;padding:9px 15px;border-radius:22px;box-shadow:0 10px 28px rgba(15,46,54,.28);white-space:nowrap;pointer-events:none;max-width:70vw}'
-      +'#waHintPill:after{content:"";position:absolute;right:-6px;bottom:16px;width:12px;height:12px;background:#0f2e36;transform:rotate(45deg)}'
+      +'#waHintPill{position:fixed;right:88px;bottom:34px;z-index:600;background:#1a1a19;color:#fff;font-size:13px;font-weight:600;padding:9px 15px;border-radius:22px;box-shadow:0 10px 28px rgba(26,26,25,.28);white-space:nowrap;pointer-events:none;max-width:70vw}'
+      +'#waHintPill:after{content:"";position:absolute;right:-6px;bottom:16px;width:12px;height:12px;background:#1a1a19;transform:rotate(45deg)}'
       +'#waHintPill b{color:#4ade80}'
       +'@media(max-width:520px){#waHintPill{font-size:12px;right:80px;bottom:30px}}';
     document.head.appendChild(st);
@@ -778,7 +778,7 @@
     var seal = document.createElement('div');
     seal.id = 'trustSealBlock';
     seal.setAttribute('style','display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.18);border-radius:12px;padding:10px 16px;margin-top:12px;max-width:fit-content');
-    seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#cf9f4f;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
+    seal.innerHTML = '<svg viewBox="0 0 24 24" style="width:26px;height:26px;flex-shrink:0;stroke:#c49a68;fill:none;stroke-width:1.6"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6l8-4z"/><path d="M9 12l2 2 4-4"/></svg>'
       + '<div style="line-height:1.35"><div style="font-size:12.5px;font-weight:800;color:#fff">Corretor Oficial · CRECI-RJ 77677-F</div>'
       + '<div style="font-size:11px;color:rgba(255,255,255,.68)">18 anos de mercado · 18 anos ajudando famílias no RJ · Especialista em MCMV</div></div>';
     bar.insertAdjacentElement('afterend', seal);
@@ -793,7 +793,7 @@
       if(nxt && nxt.classList && nxt.classList.contains('price-freshness')) return;
       var note = document.createElement('div');
       note.className = 'price-freshness';
-      note.setAttribute('style','font-size:11px;color:#6b7280;margin-top:8px;display:flex;align-items:center;gap:5px');
+      note.setAttribute('style','font-size:11px;color:#8a857b;margin-top:8px;display:flex;align-items:center;gap:5px');
       note.innerHTML = '<svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:currentColor;fill:none;stroke-width:2;flex-shrink:0"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>Tabela verificada em Agosto/2026 — confirme disponibilidade e valores atualizados com Paulo antes de decidir.';
       t.insertAdjacentElement('afterend', note);
     });
@@ -808,15 +808,15 @@
     style.textContent = '.sticky-cta{display:flex !important;flex-wrap:wrap;gap:8px}'
       + '.sticky-cta .sc-btn{flex:1;min-width:110px;text-align:center;padding:11px 10px;border-radius:10px;font-size:12.5px;font-weight:700;white-space:nowrap;text-decoration:none}'
       + 'body{padding-bottom:66px}'
-      + '@media(min-width:761px){.sticky-cta{max-width:640px;left:50%;right:auto;transform:translateX(-50%);bottom:18px;border-radius:14px;border:1px solid #e8eaed;box-shadow:0 12px 34px rgba(15,46,54,.18)}}';
+      + '@media(min-width:761px){.sticky-cta{max-width:640px;left:50%;right:auto;transform:translateX(-50%);bottom:18px;border-radius:14px;border:1px solid #e3ddd1;box-shadow:0 12px 34px rgba(26,26,25,.18)}}';
     document.head.appendChild(style);
     var oldLink = cta.querySelector('a');
     var waHref = oldLink ? oldLink.getAttribute('href') : ('https://wa.me/'+WA_NUM);
     var _nm = (window.FSIM_NOME || (document.querySelector('h1') ? document.querySelector('h1').textContent : '') || '').trim();
     var simHref = 'simulador.html' + (_nm ? ('?emp=' + encodeURIComponent(_nm)) : '');
-    cta.innerHTML = '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
-      + '<a class="sc-btn" style="background:#1a8f4c;color:#fff" href="'+simHref+'">Simular financiamento</a>'
-      + '<a class="sc-btn" style="background:#b8873a;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
+    cta.innerHTML = '<a class="sc-btn" style="background:#b0895b;color:#fff" href="'+waHref+'" target="_blank">WhatsApp</a>'
+      + '<a class="sc-btn" style="background:#b0895b;color:#fff" href="'+simHref+'">Simular financiamento</a>'
+      + '<a class="sc-btn" style="background:#b0895b;color:#fff" href="aprovacao-expressa.html">Aprovação Expressa</a>';
   })();
 
   /* ---------- 4) COMPARADOR ENTRE PÁGINAS (até 3 imóveis) ---------- */
@@ -841,7 +841,7 @@
       var list = getList();
       var on = list.some(function(i){ return i.url === thisItem.url; });
       btn.textContent = on ? '✓ Adicionado à comparação' : '+ Comparar este imóvel';
-      btn.setAttribute('style','position:fixed;right:16px;bottom:90px;z-index:650;background:'+(on?'#1a8f4c':'#fff')+';color:'+(on?'#fff':'#0f2e36')+';border:1.5px solid '+(on?'#1a8f4c':'#e8eaed')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(15,46,54,.15)');
+      btn.setAttribute('style','position:fixed;right:16px;bottom:90px;z-index:650;background:'+(on?'#b0895b':'#fff')+';color:'+(on?'#fff':'#1a1a19')+';border:1.5px solid '+(on?'#b0895b':'#e3ddd1')+';border-radius:30px;padding:9px 16px;font-size:11.5px;font-weight:700;cursor:pointer;box-shadow:0 6px 20px rgba(26,26,25,.15)');
     }
     renderBtn();
     btn.addEventListener('click', function(){
@@ -859,16 +859,16 @@
     document.body.appendChild(btn);
 
     var style = document.createElement('style');
-    style.textContent = '.pc-compare-bar{position:fixed;left:0;right:0;bottom:0;z-index:6000;background:#0f2e36;color:#fff;padding:14px 24px;display:none;align-items:center;justify-content:center;gap:20px;box-shadow:0 -10px 30px rgba(0,0,0,.18);flex-wrap:wrap}'
+    style.textContent = '.pc-compare-bar{position:fixed;left:0;right:0;bottom:0;z-index:6000;background:#1a1a19;color:#fff;padding:14px 24px;display:none;align-items:center;justify-content:center;gap:20px;box-shadow:0 -10px 30px rgba(0,0,0,.18);flex-wrap:wrap}'
       + '.pc-compare-bar.show{display:flex}'
-      + '.pc-compare-bar b{color:#cf9f4f}'
-      + '.pc-compare-btn{background:linear-gradient(135deg,#b8873a,#cf9f4f);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}'
+      + '.pc-compare-bar b{color:#c49a68}'
+      + '.pc-compare-btn{background:linear-gradient(135deg,#b0895b,#c49a68);color:#fff;border:none;border-radius:10px;padding:10px 22px;font-size:13px;font-weight:800;cursor:pointer}'
       + '.pc-compare-clear{background:none;border:1px solid rgba(255,255,255,.3);color:#fff;border-radius:10px;padding:10px 18px;font-size:12.5px;font-weight:600;cursor:pointer}'
-      + '.pc-compare-modal{position:fixed;inset:0;z-index:7000;background:rgba(15,46,54,.6);display:none;align-items:center;justify-content:center;padding:24px}'
+      + '.pc-compare-modal{position:fixed;inset:0;z-index:7000;background:rgba(26,26,25,.6);display:none;align-items:center;justify-content:center;padding:24px}'
       + '.pc-compare-modal.show{display:flex}'
       + '.pc-compare-modal-box{background:#fff;border-radius:20px;max-width:720px;width:100%;max-height:86vh;overflow:auto;padding:32px}'
       + '.pc-compare-table{width:100%;border-collapse:collapse;font-size:13px}'
-      + '.pc-compare-table td,.pc-compare-table th{padding:8px 10px;border-bottom:1px solid #e8eaed;text-align:left}';
+      + '.pc-compare-table td,.pc-compare-table th{padding:8px 10px;border-bottom:1px solid #e3ddd1;text-align:left}';
     document.head.appendChild(style);
 
     var bar = document.createElement('div');
@@ -883,10 +883,10 @@
     modal.className = 'pc-compare-modal';
     modal.id = 'pcCompareModal';
     modal.innerHTML = '<div class="pc-compare-modal-box"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px">'
-      + '<h3 style="font-family:Fraunces,Georgia,serif;font-size:20px;color:#0f2e36">Comparação de imóveis</h3>'
-      + '<button id="pcCompareCloseBtn" type="button" style="background:#f5f6f7;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer">✕</button></div>'
+      + '<h3 style="font-family:Cormorant Garamond,Georgia,serif;font-size:20px;color:#1a1a19">Comparação de imóveis</h3>'
+      + '<button id="pcCompareCloseBtn" type="button" style="background:#f6f2ea;border:none;width:34px;height:34px;border-radius:50%;cursor:pointer">✕</button></div>'
       + '<div id="pcCompareTableWrap"></div>'
-      + '<a id="pcCompareWaBtn" href="#" target="_blank" style="display:inline-block;margin-top:16px;background:#1a8f4c;color:#fff;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Falar com Paulo sobre esses imóveis</a></div>';
+      + '<a id="pcCompareWaBtn" href="#" target="_blank" style="display:inline-block;margin-top:16px;background:#b0895b;color:#fff;padding:11px 20px;border-radius:10px;font-size:13px;font-weight:700;text-decoration:none">Falar com Paulo sobre esses imóveis</a></div>';
     document.body.appendChild(modal);
 
     function renderBar(){
@@ -933,10 +933,10 @@
   st.textContent = '.pc-lock-wrap{position:relative}'
     + '.pc-lock-blur{filter:blur(7px);pointer-events:none;user-select:none}'
     + '.pc-lock-ov{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;background:linear-gradient(180deg,rgba(247,244,238,.72),rgba(247,244,238,.9));border-radius:14px;padding:22px}'
-    + '.pc-lock-ov .pcl-ic{width:34px;height:34px;stroke:#1a8f4c;fill:none;stroke-width:1.8}'
-    + '.pc-lock-ov b{font-family:Fraunces,Georgia,serif;font-size:17px;color:#0f2e36}'
-    + '.pc-lock-ov span{font-size:12.8px;color:#6b7280;max-width:36ch;line-height:1.5}'
-    + '.pc-lock-btn{background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease}'
+    + '.pc-lock-ov .pcl-ic{width:34px;height:34px;stroke:#b0895b;fill:none;stroke-width:1.8}'
+    + '.pc-lock-ov b{font-family:Cormorant Garamond,Georgia,serif;font-size:17px;color:#1a1a19}'
+    + '.pc-lock-ov span{font-size:12.8px;color:#8a857b;max-width:36ch;line-height:1.5}'
+    + '.pc-lock-btn{background:#b0895b;color:#fff;border:none;border-radius:11px;padding:12px 24px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(176,137,91,.32);transition:transform .3s ease}'
     + '.pc-lock-btn:hover{transform:translateY(-2px)}';
   document.head.appendChild(st);
   tables.forEach(function(t){
@@ -979,12 +979,12 @@
     box.style.display='none';
     var card=document.createElement('div');
     card.className='pc-simgate';
-    card.style.cssText='background:#fff;border:1px solid #e8eaed;border-radius:18px;padding:34px 28px;text-align:center;max-width:560px;margin:0 auto;box-shadow:0 10px 30px rgba(15,46,54,.06)';
-    card.innerHTML='<div style="width:56px;height:56px;border-radius:16px;background:#f0f9f3;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg></div>'
-      +'<h3 style="font-family:Fraunces,Georgia,serif;font-size:22px;font-weight:600;color:#0f2e36;line-height:1.25;margin:0 0 8px">Simule seu financiamento</h3>'
-      +'<p style="font-size:14px;color:#6b7280;line-height:1.55;max-width:40ch;margin:0 auto 20px">Informe seu WhatsApp e veja na hora <b style="color:#0f2e36">entrada, parcela e as condições reais</b> pra este imóvel — sem sair de casa.</p>'
-      +'<button type="button" class="pc-simgate-btn" style="background:#1a8f4c;color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px rgba(26,143,76,.32);transition:transform .3s ease">Simular financiamento</button>'
-      +'<div style="font-size:11.5px;color:#94a3b8;margin-top:12px">Grátis · sem compromisso · resposta na hora</div>';
+    card.style.cssText='background:#fff;border:1px solid #e3ddd1;border-radius:18px;padding:34px 28px;text-align:center;max-width:560px;margin:0 auto;box-shadow:0 10px 30px rgba(26,26,25,.06)';
+    card.innerHTML='<div style="width:56px;height:56px;border-radius:16px;background:#f4efe6;display:flex;align-items:center;justify-content:center;margin:0 auto 16px"><svg viewBox="0 0 24 24" style="width:28px;height:28px;stroke:#b0895b;fill:none;stroke-width:1.8"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="16" y2="10"/><line x1="8" y1="14" x2="12" y2="14"/></svg></div>'
+      +'<h3 style="font-family:Cormorant Garamond,Georgia,serif;font-size:22px;font-weight:600;color:#1a1a19;line-height:1.25;margin:0 0 8px">Simule seu financiamento</h3>'
+      +'<p style="font-size:14px;color:#8a857b;line-height:1.55;max-width:40ch;margin:0 auto 20px">Informe seu WhatsApp e veja na hora <b style="color:#1a1a19">entrada, parcela e as condições reais</b> pra este imóvel — sem sair de casa.</p>'
+      +'<button type="button" class="pc-simgate-btn" style="background:#b0895b;color:#fff;border:none;border-radius:12px;padding:14px 30px;font-size:15px;font-weight:700;font-family:inherit;cursor:pointer;box-shadow:0 10px 24px rgba(176,137,91,.32);transition:transform .3s ease">Simular financiamento</button>'
+      +'<div style="font-size:11.5px;color:#a39d92;margin-top:12px">Grátis · sem compromisso · resposta na hora</div>';
     box.parentNode.insertBefore(card, box);
     var btn=card.querySelector('.pc-simgate-btn');
     btn.addEventListener('mouseenter',function(){btn.style.transform='translateY(-2px)';});
@@ -1055,20 +1055,20 @@
     var cols='';
     cats.forEach(function(c){
       var arr=info[c[1]]; if(!arr||!arr.length) return;
-      cols+='<div style="background:#fff;border:1px solid #e8eaed;border-radius:14px;padding:18px 18px 14px">'
-        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#1a8f4c;fill:none;stroke-width:1.8"><path d="'+c[2]+'"/></svg><b style="font-family:Fraunces,Georgia,serif;font-size:15px;color:#0f2e36">'+c[0]+'</b></div>'
-        +'<ul style="list-style:none;padding:0;margin:0">'+arr.map(function(x){return '<li style="font-size:13px;color:#475569;line-height:1.5;padding:5px 0 5px 16px;position:relative"><span style="position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#1a8f4c"></span>'+x+'</li>';}).join('')+'</ul></div>';
+      cols+='<div style="background:#fff;border:1px solid #e3ddd1;border-radius:14px;padding:18px 18px 14px">'
+        +'<div style="display:flex;align-items:center;gap:8px;margin-bottom:10px"><svg viewBox="0 0 24 24" style="width:18px;height:18px;stroke:#b0895b;fill:none;stroke-width:1.8"><path d="'+c[2]+'"/></svg><b style="font-family:Cormorant Garamond,Georgia,serif;font-size:15px;color:#1a1a19">'+c[0]+'</b></div>'
+        +'<ul style="list-style:none;padding:0;margin:0">'+arr.map(function(x){return '<li style="font-size:13px;color:#475569;line-height:1.5;padding:5px 0 5px 16px;position:relative"><span style="position:absolute;left:0;top:10px;width:6px;height:6px;border-radius:50%;background:#b0895b"></span>'+x+'</li>';}).join('')+'</ul></div>';
     });
     if(!cols) return;
     var sec=document.createElement('section');
     sec.id='pcDiaADia'; sec.className='section';
-    sec.style.cssText='background:#f0f9f3';
+    sec.style.cssText='background:#f4efe6';
     sec.innerHTML='<div class="wrap"><div style="text-align:center;max-width:640px;margin:0 auto 26px">'
-      +'<div style="font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#1a8f4c">No dia a dia</div>'
-      +'<h2 style="font-family:Fraunces,Georgia,serif;font-size:clamp(24px,3.6vw,34px);color:#0f2e36;margin:6px 0 8px">Como é a vida ao redor</h2>'
-      +'<p style="font-size:14px;color:#6b7280;margin:0">O que faz diferença de verdade quando você mora aqui: transporte, saúde, estudo e compras a poucos minutos.</p></div>'
+      +'<div style="font-size:11.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#b0895b">No dia a dia</div>'
+      +'<h2 style="font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(24px,3.6vw,34px);color:#1a1a19;margin:6px 0 8px">Como é a vida ao redor</h2>'
+      +'<p style="font-size:14px;color:#8a857b;margin:0">O que faz diferença de verdade quando você mora aqui: transporte, saúde, estudo e compras a poucos minutos.</p></div>'
       +'<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:16px">'+cols+'</div>'
-      +'<p style="font-size:11px;color:#94a3b8;text-align:center;margin-top:16px">Referências reais da região (SuperVia, MetrôRio, BRT Rio, Prefeitura). Distâncias e linhas podem variar — confirme com o Paulo.</p></div>';
+      +'<p style="font-size:11px;color:#a39d92;text-align:center;margin-top:16px">Referências reais da região (SuperVia, MetrôRio, BRT Rio, Prefeitura). Distâncias e linhas podem variar — confirme com o Paulo.</p></div>';
     var footer=document.querySelector('footer');
     if(footer&&footer.parentNode) footer.parentNode.insertBefore(sec,footer); else document.body.appendChild(sec);
   }
@@ -1088,18 +1088,18 @@
   var pendingCb=null;
 
   var st=document.createElement('style');
-  st.textContent='#pcGate{position:fixed;inset:0;z-index:10000;background:rgba(15,46,54,.6);display:none;align-items:center;justify-content:center;padding:20px}'
+  st.textContent='#pcGate{position:fixed;inset:0;z-index:10000;background:rgba(26,26,25,.6);display:none;align-items:center;justify-content:center;padding:20px}'
     +'#pcGate.on{display:flex}'
     +'#pcGate .box{background:#fff;border-radius:18px;max-width:400px;width:100%;padding:28px 26px;box-shadow:0 30px 80px rgba(0,0,0,.35);font-family:Inter,system-ui,sans-serif}'
-    +'#pcGate h3{font-family:Fraunces,Georgia,serif;font-size:21px;color:#0f2e36;line-height:1.2;margin-bottom:6px}'
-    +'#pcGate p{font-size:13px;color:#6b7280;margin-bottom:16px;line-height:1.5}'
+    +'#pcGate h3{font-family:Cormorant Garamond,Georgia,serif;font-size:21px;color:#1a1a19;line-height:1.2;margin-bottom:6px}'
+    +'#pcGate p{font-size:13px;color:#8a857b;margin-bottom:16px;line-height:1.5}'
     +'#pcGate input{width:100%;padding:12px 14px;margin-bottom:9px;border:1.5px solid #e2e8f0;border-radius:10px;font-size:14px;outline:none;font-family:inherit}'
-    +'#pcGate input:focus{border-color:#1a8f4c}'
-    +'#pcGate .g-btn{width:100%;background:#1a8f4c;color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(26,143,76,.3)}'
-    +'#pcGate .or{display:flex;align-items:center;gap:10px;margin:14px 0;color:#94a3b8;font-size:12px}'
-    +'#pcGate .or:before,#pcGate .or:after{content:"";flex:1;height:1px;background:#e8eaed}'
+    +'#pcGate input:focus{border-color:#b0895b}'
+    +'#pcGate .g-btn{width:100%;background:#b0895b;color:#fff;border:none;border-radius:11px;padding:13px;font-size:15px;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 10px 24px rgba(176,137,91,.3)}'
+    +'#pcGate .or{display:flex;align-items:center;gap:10px;margin:14px 0;color:#a39d92;font-size:12px}'
+    +'#pcGate .or:before,#pcGate .or:after{content:"";flex:1;height:1px;background:#e3ddd1}'
     +'#pcGate .gg{display:flex;justify-content:center;min-height:4px}'
-    +'#pcGate .skip{display:block;width:100%;background:none;border:none;color:#94a3b8;font-size:12px;margin-top:10px;cursor:pointer;font-family:inherit}'
+    +'#pcGate .skip{display:block;width:100%;background:none;border:none;color:#a39d92;font-size:12px;margin-top:10px;cursor:pointer;font-family:inherit}'
     +'#pcGate .err{color:#dc2626;font-size:12px;min-height:15px}';
   document.head.appendChild(st);
 
@@ -1173,14 +1173,14 @@
   if(document.getElementById('pcTransp')) return;
   var d=new Date(); var dd=('0'+d.getDate()).slice(-2)+'/'+('0'+(d.getMonth()+1)).slice(-2)+'/'+d.getFullYear();
   var st=document.createElement('style');
-  st.textContent='#pcTransp{max-width:820px;margin:34px auto;padding:20px 22px;border:1px solid var(--line,#e8eaed);border-radius:14px;background:var(--mist,#f7f8f9);font-family:Inter,system-ui,sans-serif}'
-    +'#pcTransp .tt{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#0f2e36;margin-bottom:12px;display:flex;align-items:center;gap:7px}'
-    +'#pcTransp .tt svg{width:15px;height:15px;stroke:#1a8f4c;fill:none;stroke-width:2}'
+  st.textContent='#pcTransp{max-width:820px;margin:34px auto;padding:20px 22px;border:1px solid var(--line,#e3ddd1);border-radius:14px;background:var(--mist,#f7f8f9);font-family:Inter,system-ui,sans-serif}'
+    +'#pcTransp .tt{font-size:12px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:#1a1a19;margin-bottom:12px;display:flex;align-items:center;gap:7px}'
+    +'#pcTransp .tt svg{width:15px;height:15px;stroke:#b0895b;fill:none;stroke-width:2}'
     +'#pcTransp ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1fr 1fr;gap:8px 22px}'
     +'@media(max-width:560px){#pcTransp ul{grid-template-columns:1fr}}'
     +'#pcTransp li{font-size:12.5px;color:#55606a;line-height:1.5;display:flex;gap:7px}'
-    +'#pcTransp li b{color:#0f2e36;font-weight:700}'
-    +'#pcTransp li .dot{color:#1a8f4c;font-weight:800}';
+    +'#pcTransp li b{color:#1a1a19;font-weight:700}'
+    +'#pcTransp li .dot{color:#b0895b;font-weight:800}';
   document.head.appendChild(st);
   var box=document.createElement('section'); box.id='pcTransp';
   box.innerHTML='<div class="tt"><svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.4 8.4-8 10-4.6-1.6-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>Informações do empreendimento — transparência</div>'
@@ -1228,11 +1228,11 @@
       +'.wafloat .wa-online,.wafloat small,.wafloat .wa-label{display:none!important}'
       +'#v01btn{position:fixed;right:18px;bottom:92px;z-index:9998;width:60px;height:60px;border-radius:50%;background:#0058A3;color:#fff;border:none;cursor:pointer;box-shadow:0 10px 26px rgba(0,88,163,.45);display:flex;align-items:center;justify-content:center;animation:v01p 2s infinite}'
       +'#v01btn svg{width:28px;height:28px}'
-      +'#v01tag{position:fixed;right:86px;bottom:104px;z-index:9998;background:#0f2e36;color:#fff;font:600 12px Inter,sans-serif;padding:7px 12px;border-radius:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);white-space:nowrap}'
+      +'#v01tag{position:fixed;right:86px;bottom:104px;z-index:9998;background:#1a1a19;color:#fff;font:600 12px Inter,sans-serif;padding:7px 12px;border-radius:20px;box-shadow:0 6px 16px rgba(0,0,0,.25);white-space:nowrap}'
       +'@keyframes v01p{0%,100%{box-shadow:0 10px 26px rgba(0,88,163,.45)}50%{box-shadow:0 10px 30px rgba(0,88,163,.8)}}'
-      +'#v01{position:fixed;right:18px;bottom:92px;z-index:9999;width:min(360px,92vw);height:min(560px,74vh);background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(15,46,54,.3);display:none;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif}'
+      +'#v01{position:fixed;right:18px;bottom:92px;z-index:9999;width:min(360px,92vw);height:min(560px,74vh);background:#fff;border-radius:18px;box-shadow:0 24px 60px rgba(26,26,25,.3);display:none;flex-direction:column;overflow:hidden;font-family:Inter,system-ui,sans-serif}'
       +'#v01 .hd{background:#0058A3;color:#fff;padding:14px 16px;display:flex;align-items:center;gap:10px}'
-      +'#v01 .hd b{font-family:Fraunces,serif;font-size:15px}#v01 .hd small{opacity:.85;font-size:11px;display:block}'
+      +'#v01 .hd b{font-family:Cormorant Garamond,serif;font-size:15px}#v01 .hd small{opacity:.85;font-size:11px;display:block}'
       +'#v01 .hd .x{margin-left:auto;cursor:pointer;font-size:20px;opacity:.9}'
       +'#v01 .bd{flex:1;overflow-y:auto;padding:14px;background:#f4f7fb;display:flex;flex-direction:column;gap:10px}'
       +'#v01 .b{max-width:82%;padding:10px 13px;border-radius:14px;font-size:14px;line-height:1.45}'

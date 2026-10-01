@@ -1,22 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#0f2e36"/>
+<meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#1a1a19"/>
 <title>Calculadora do Investidor Imobiliário — Simuladores Premium | Paulo Cotrim</title>
 <meta name="description" content="5 simuladores imobiliários: Airbnb, valorização, retorno total, entrada e FGTS. Calcule seu retorno antes de investir. Paulo Cotrim · CRECI-RJ 77677-F."/>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
-:root{--navy:#ffffff;--navy2:#f5f6f7;--navy3:#e7edee;--gold:#0058A3;--gold2:#cf9f4f;--green:#1a8f4c;--ink:#0f2e36;--gray:#6b7280;--line:#e8eaed;--mist:#f5f6f7;--petrol:#0f2e36;--petrol-soft:#e7edee;--r:16px;--shadow:0 1px 2px rgba(15,46,54,.04),0 8px 30px rgba(15,46,54,.06);--shadow-lg:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);--ease:cubic-bezier(.16,1,.3,1)}
+:root{--navy:#ffffff;--navy2:#f6f2ea;--navy3:#efe9df;--gold:#0058A3;--gold2:#c49a68;--green:#b0895b;--ink:#1a1a19;--gray:#8a857b;--line:#e3ddd1;--mist:#f6f2ea;--petrol:#1a1a19;--petrol-soft:#efe9df;--r:6px;--shadow:0 1px 2px rgba(26,26,25,.04),0 8px 30px rgba(26,26,25,.06);--shadow-lg:0 4px 18px rgba(26,26,25,.07),0 26px 60px -10px rgba(26,26,25,.18);--ease:cubic-bezier(.16,1,.3,1)}
 body{font-family:'Inter',sans-serif;background:var(--navy);color:var(--ink);min-height:100vh}
 a{color:inherit;text-decoration:none}
 
 /* HEADER */
-.hdr{background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);position:sticky;top:0;z-index:500;padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(15,46,54,.06),0 12px 30px -18px rgba(15,46,54,.14)}
+.hdr{background:rgba(255,255,255,.82);backdrop-filter:blur(20px) saturate(150%);-webkit-backdrop-filter:blur(20px) saturate(150%);position:sticky;top:0;z-index:500;padding:0 32px;height:60px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(26,26,25,.06),0 12px 30px -18px rgba(26,26,25,.14)}
 .hdr-logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.02em;color:var(--ink)}
 .hdr-logo img{height:36px;width:auto;display:block}
 .hdr-logo small{display:block;font-size:10px;color:var(--gray);font-weight:500;letter-spacing:.02em;text-transform:none}
@@ -26,7 +26,7 @@ a{color:inherit;text-decoration:none}
 .btn-wa-hdr:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(184,135,58,.38)}
 @media(max-width:600px){.hdr{padding:0 20px}}
 .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px;letter-spacing:-.02em;color:var(--ink)}
-.brand-mark{width:28px;height:28px;border-radius:8px;background:var(--petrol);color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:14px;flex-shrink:0;box-shadow:0 3px 10px rgba(15,46,54,.3)}
+.brand-mark{width:28px;height:28px;border-radius:8px;background:var(--petrol);color:#fff;display:flex;align-items:center;justify-content:center;font-family:Cormorant Garamond,serif;font-size:14px;flex-shrink:0;box-shadow:0 3px 10px rgba(26,26,25,.3)}
 .brand-logo{height:26px;width:auto;display:block}
 .brand small{display:block;font-size:10px;color:var(--gray);font-weight:500}
 .nav-links{display:flex;align-items:center;gap:6px}
@@ -43,7 +43,7 @@ a{color:inherit;text-decoration:none}
 /* HERO */
 .inv-hero{padding:56px 40px 36px;text-align:center;background:#fff}
 .inv-tag{display:inline-block;background:var(--petrol-soft);color:var(--gold);font-size:11px;font-weight:700;padding:6px 16px;border-radius:30px;border:1px solid rgba(184,135,58,.25);letter-spacing:.07em;text-transform:uppercase;margin-bottom:18px}
-.inv-h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(28px,4.5vw,46px);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px;color:var(--ink)}
+.inv-h1{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(28px,4.5vw,46px);font-weight:600;letter-spacing:-.02em;line-height:1.15;margin-bottom:14px;color:var(--ink)}
 .inv-h1 span{color:var(--gold);font-style:italic}
 .inv-sub{font-size:15px;color:var(--gray);max-width:520px;margin:0 auto 32px;line-height:1.7}
 
@@ -76,7 +76,7 @@ a{color:inherit;text-decoration:none}
 .sim-panel{display:none}
 .sim-panel.active{display:block;animation:fadeUp .3s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-.sim-title{font-family:'Fraunces',Georgia,serif;font-size:26px;font-weight:600;margin-bottom:8px;color:var(--ink)}
+.sim-title{font-family:Cormorant Garamond,Georgia,serif;font-size:26px;font-weight:600;margin-bottom:8px;color:var(--ink)}
 .sim-sub{font-size:14px;color:var(--gray);margin-bottom:36px;line-height:1.6;max-width:560px}
 
 /* INPUTS */
@@ -91,17 +91,17 @@ a{color:inherit;text-decoration:none}
 .btn-calc:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(201,153,58,.42),inset 0 1px 0 rgba(255,255,255,.22)}
 
 /* RESULTS — premium/"milionário" treatment */
-.result-box{position:relative;background:linear-gradient(180deg,#fff,var(--mist) 140%);border:1px solid var(--line);border-radius:20px;padding:36px 32px 30px;margin-top:32px;display:none;box-shadow:0 1px 3px rgba(15,46,54,.04);overflow:hidden}
+.result-box{position:relative;background:linear-gradient(180deg,#fff,var(--mist) 140%);border:1px solid var(--line);border-radius:20px;padding:36px 32px 30px;margin-top:32px;display:none;box-shadow:0 1px 3px rgba(26,26,25,.04);overflow:hidden}
 .result-box::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--petrol),var(--gold) 55%,var(--gold2))}
 .result-box.show{display:block;animation:fadeUp .5s var(--ease)}
 .result-box-kicker{font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;display:flex;align-items:center;gap:8px}
 .result-box-kicker::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(184,135,58,.35),transparent)}
 .result-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-bottom:22px}
-.res-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;text-align:center;transition:box-shadow .4s var(--ease),transform .4s var(--ease);box-shadow:0 1px 2px rgba(15,46,54,.03)}
+.res-item{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px 16px;text-align:center;transition:box-shadow .4s var(--ease),transform .4s var(--ease);box-shadow:0 1px 2px rgba(26,26,25,.03)}
 .res-item:hover{box-shadow:var(--shadow-lg);transform:translateY(-2px)}
-.res-val{font-family:'Fraunces',Georgia,serif;font-size:25px;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;color:var(--ink)}
+.res-val{font-family:Cormorant Garamond,Georgia,serif;font-size:25px;font-weight:600;margin-bottom:6px;letter-spacing:-.01em;color:var(--ink)}
 .res-val.gold{color:var(--gold2)}
-.res-val.green{color:#1a8f4c}
+.res-val.green{color:#b0895b}
 .res-val.blue{color:#1d4ed8}
 .res-label{font-size:10.5px;color:var(--gray);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .result-note{font-size:12.5px;color:var(--gray);line-height:1.7;border-top:1px solid var(--line);padding-top:16px;margin-top:16px}
@@ -119,12 +119,12 @@ a{color:inherit;text-decoration:none}
 .comp-table tr:hover td{background:var(--mist)}
 .comp-badge{display:inline-block;padding:2px 8px;border-radius:6px;font-size:10px;font-weight:700}
 .comp-badge.top{background:rgba(201,153,58,.2);color:var(--gold2)}
-.comp-badge.good{background:rgba(22,163,74,.15);color:#1a8f4c}
-.comp-badge.mid{background:rgba(15,46,54,.08);color:var(--ink)}
+.comp-badge.good{background:rgba(22,163,74,.15);color:#b0895b}
+.comp-badge.mid{background:rgba(26,26,25,.08);color:var(--ink)}
 
 /* RADAR */
 .radar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
-.radar-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;transition:border-color .4s var(--ease),box-shadow .4s var(--ease),transform .4s var(--ease);cursor:pointer;box-shadow:0 1px 2px rgba(15,46,54,.04)}
+.radar-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;transition:border-color .4s var(--ease),box-shadow .4s var(--ease),transform .4s var(--ease);cursor:pointer;box-shadow:0 1px 2px rgba(26,26,25,.04)}
 .radar-card:hover,.radar-card.active-opp{border-color:rgba(201,153,58,.4);background:rgba(201,153,58,.06);box-shadow:var(--shadow-lg);transform:translateY(-2px)}
 .radar-icon{font-size:24px;margin-bottom:8px}
 .radar-name{font-size:13px;font-weight:800;margin-bottom:4px}
@@ -138,113 +138,113 @@ a{color:inherit;text-decoration:none}
 .fade-in.visible{opacity:1;transform:none}
 
 /* ─── TABELA DIRETA EMBED ─────────────────────────────────────────────── */
-.td-root{font-family:'Inter',sans-serif;background:#f5f6f7;color:#0f2e36;border-radius:16px;overflow:hidden;margin-top:8px}
+.td-root{font-family:'Inter',sans-serif;background:#f6f2ea;color:#1a1a19;border-radius:16px;overflow:hidden;margin-top:8px}
 .td-root *{box-sizing:border-box}
-.td-root .td-header{background:#0f2e36;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
+.td-root .td-header{background:#1a1a19;padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:.75rem}
 .td-root .td-header-left{display:flex;align-items:center;gap:12px}
-.td-root .av{width:44px;height:44px;border-radius:50%;background:#12252b;border:2.5px solid #0058A3;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-size:15px;color:#e8d4a8;flex-shrink:0;overflow:hidden}
+.td-root .av{width:44px;height:44px;border-radius:50%;background:#2c2b28;border:2.5px solid #0058A3;display:flex;align-items:center;justify-content:center;font-family:Cormorant Garamond,serif;font-size:15px;color:#e8d4a8;flex-shrink:0;overflow:hidden}
 .td-root .av img{width:100%;height:100%;object-fit:cover}
-.td-root .hdr-role{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#cf9f4f;margin-bottom:1px}
-.td-root .hdr-name{font-family:'Fraunces',serif;font-size:18px;color:#fff;line-height:1.1}
+.td-root .hdr-role{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#c49a68;margin-bottom:1px}
+.td-root .hdr-name{font-family:Cormorant Garamond,serif;font-size:18px;color:#fff;line-height:1.1}
 .td-root .badge-mes{background:rgba(184,135,58,.18);color:#e8d4a8;font-size:10px;font-weight:700;padding:4px 12px;border-radius:20px;border:1px solid rgba(184,135,58,.35)}
 .td-root .wrap{padding:1.25rem 1.5rem 2rem}
 .td-root .ptitle{margin-bottom:1.25rem}
-.td-root .ptitle-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#6b7280;margin-bottom:3px}
-.td-root .ptitle-h{font-family:'Fraunces',serif;font-size:26px;color:#0f2e36;line-height:1.1}
+.td-root .ptitle-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:#8a857b;margin-bottom:3px}
+.td-root .ptitle-h{font-family:Cormorant Garamond,serif;font-size:26px;color:#1a1a19;line-height:1.1}
 .td-root .ptitle-h em{color:#0058A3;font-style:normal}
-.td-root .card{background:#fff;border-radius:14px;border:1px solid #e8eaed;padding:1.1rem 1.25rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.td-root .card{background:#fff;border-radius:14px;border:1px solid #e3ddd1;padding:1.1rem 1.25rem;margin-bottom:1rem;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .td-root .card.blue-border{border:1.5px solid #0058A3}
 .td-root .card-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0058A3;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .td-root .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .td-root .fi{display:flex;flex-direction:column;gap:4px}
-.td-root .fi label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:#6b7280}
-.td-root .fi select,.td-root .fi input{font-family:'Inter',sans-serif;font-size:13px;padding:9px 11px;border:1.5px solid #e8eaed;border-radius:8px;background:#fff;color:#0f2e36;width:100%;transition:border .15s}
+.td-root .fi label{font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.4px;color:#8a857b}
+.td-root .fi select,.td-root .fi input{font-family:'Inter',sans-serif;font-size:13px;padding:9px 11px;border:1.5px solid #e3ddd1;border-radius:8px;background:#fff;color:#1a1a19;width:100%;transition:border .15s}
 .td-root .fi select:focus,.td-root .fi input:focus{outline:none;border-color:#0058A3;box-shadow:0 0 0 3px rgba(184,135,58,.14)}
 .td-root .fi input::-webkit-outer-spin-button,.td-root .fi input::-webkit-inner-spin-button{-webkit-appearance:none}
 .td-root .fi input[type=number]{-moz-appearance:textfield}
 .td-root .camp-tag{display:inline-flex;align-items:center;gap:5px;background:#FEF9C3;color:#854D0E;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid #FDE68A;margin-top:8px}
 .td-root .cons-tag{display:inline-flex;align-items:center;gap:5px;background:#faf6ec;color:#8a6416;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;border:1px solid #e8d4a8;margin-top:8px}
-.td-root .meses-chip{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#0f2e36,#12252b);border-radius:10px;padding:.7rem 1rem;margin-bottom:.75rem}
+.td-root .meses-chip{display:flex;align-items:center;justify-content:space-between;background:linear-gradient(135deg,#1a1a19,#2c2b28);border-radius:10px;padding:.7rem 1rem;margin-bottom:.75rem}
 .td-root .meses-chip .mc-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#e8d4a8}
-.td-root .meses-chip .mc-val{font-family:'Fraunces',serif;font-size:18px;color:#fff}
+.td-root .meses-chip .mc-val{font-family:Cormorant Garamond,serif;font-size:18px;color:#fff}
 .td-root .fi-meses input{border:1.5px solid #0058A3;background:#fffdf6;font-weight:800}
 .td-root .fi-meses label{color:#8a6416;font-weight:700}
-.td-root .preco-display{background:#0f2e36;border-radius:12px;padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem}
+.td-root .preco-display{background:#1a1a19;border-radius:12px;padding:1rem 1.25rem;display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem;flex-wrap:wrap;gap:.75rem}
 .td-root .pd-left .pd-label{color:#e8d4a8;font-size:11px;font-weight:600;margin-bottom:2px}
-.td-root .pd-left .pd-val{font-family:'Fraunces',serif;font-size:26px;color:#fff}
+.td-root .pd-left .pd-val{font-family:Cormorant Garamond,serif;font-size:26px;color:#fff}
 .td-root .pd-right{display:flex;flex-direction:column;gap:4px;min-width:190px}
 .td-root .pd-right label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:#e8d4a8}
 .td-root .pd-right input{font-family:'Inter',sans-serif;font-size:14px;font-weight:700;padding:8px 11px;background:rgba(255,255,255,.1);border:1.5px solid rgba(255,255,255,.2);border-radius:8px;color:#fff;width:100%}
-.td-root .pd-right input:focus{outline:none;border-color:#cf9f4f}
+.td-root .pd-right input:focus{outline:none;border-color:#c49a68}
 .td-root .pd-right input::-webkit-outer-spin-button,.td-root .pd-right input::-webkit-inner-spin-button{-webkit-appearance:none}
 .td-root .pd-right input[type=number]{-moz-appearance:textfield}
 .td-root .pct-card{background:#faf6ec;border:1.5px solid #e8d4a8;border-radius:12px;padding:1rem 1.25rem;margin-bottom:1rem}
 .td-root .pct-label{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#0058A3;margin-bottom:10px;display:flex;align-items:center;gap:6px}
 .td-root .pct-row{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
 .td-root .pct-half{display:flex;align-items:center;gap:8px;flex:1;min-width:140px}
-.td-root .pct-half label{font-size:11px;font-weight:700;color:#6b7280;white-space:nowrap}
-.td-root .pct-half input{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;padding:8px 10px;border:1.5px solid #e8eaed;border-radius:8px;width:80px;text-align:center;color:#0f2e36;background:#fff}
+.td-root .pct-half label{font-size:11px;font-weight:700;color:#8a857b;white-space:nowrap}
+.td-root .pct-half input{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;padding:8px 10px;border:1.5px solid #e3ddd1;border-radius:8px;width:80px;text-align:center;color:#1a1a19;background:#fff}
 .td-root .pct-half input:focus{outline:none;border-color:#0058A3;box-shadow:0 0 0 3px rgba(184,135,58,.14)}
 .td-root .pct-half input::-webkit-outer-spin-button,.td-root .pct-half input::-webkit-inner-spin-button{-webkit-appearance:none}
 .td-root .pct-half input[type=number]{-moz-appearance:textfield}
-.td-root .pct-sym{font-size:13px;font-weight:700;color:#6b7280}
-.td-root .pct-divider{width:1px;height:30px;background:#e8eaed}
-.td-root .pct-total-ok{font-size:11px;font-weight:700;color:#1a8f4c;display:flex;align-items:center;gap:4px}
+.td-root .pct-sym{font-size:13px;font-weight:700;color:#8a857b}
+.td-root .pct-divider{width:1px;height:30px;background:#e3ddd1}
+.td-root .pct-total-ok{font-size:11px;font-weight:700;color:#b0895b;display:flex;align-items:center;gap:4px}
 .td-root .pct-total-err{font-size:11px;font-weight:700;color:#B91C1C;display:flex;align-items:center;gap:4px}
 .td-root .split-bar{display:grid;grid-template-columns:1fr 1fr;gap:0;border-radius:10px;overflow:hidden;margin-bottom:1rem}
 .td-root .split-half{padding:.75rem 1.1rem;display:flex;flex-direction:column;gap:3px}
-.td-root .split-half.pre{background:#0f2e36}.td-root .split-half.pos{background:#0058A3}
+.td-root .split-half.pre{background:#1a1a19}.td-root .split-half.pos{background:#0058A3}
 .td-root .sh-label{font-size:9px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:rgba(255,255,255,.7)}
-.td-root .sh-val{font-family:'Fraunces',serif;font-size:20px;color:#fff}
+.td-root .sh-val{font-family:Cormorant Garamond,serif;font-size:20px;color:#fff}
 .td-root .sh-sub{font-size:10px;color:rgba(255,255,255,.75)}
 #accordion{display:flex;flex-direction:column;gap:.75rem;margin-bottom:1rem}
-.td-root .aco-card{border-radius:12px;overflow:hidden;border:1px solid #e8eaed;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+.td-root .aco-card{border-radius:12px;overflow:hidden;border:1px solid #e3ddd1;box-shadow:0 1px 4px rgba(0,0,0,.05)}
 .td-root .aco-head{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.25rem;cursor:pointer;user-select:none}
-.td-root .aco-head.pre{background:#0f2e36}.td-root .aco-head.pos{background:#0058A3}.td-root .aco-head.resumo{background:#0f2e36}
+.td-root .aco-head.pre{background:#1a1a19}.td-root .aco-head.pos{background:#0058A3}.td-root .aco-head.resumo{background:#1a1a19}
 .td-root .aco-head-left{display:flex;align-items:center;gap:12px}
-.td-root .aco-step{width:26px;height:26px;border-radius:50%;background:#eef1f0;color:#0f2e36;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.td-root .aco-step{width:26px;height:26px;border-radius:50%;background:#eef1f0;color:#1a1a19;font-size:13px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0}
 .td-root .aco-title{font-size:13px;font-weight:700;color:#fff}
 .td-root .aco-sub{font-size:11px;color:rgba(255,255,255,.7);margin-top:1px}
 .td-root .aco-icon{color:rgba(255,255,255,.8);font-size:16px;transition:transform .25s}
 .td-root .aco-icon.open{transform:rotate(180deg)}
 .td-root .aco-body{overflow:hidden;max-height:0;transition:max-height .35s ease;background:#fff}
 .td-root .aco-body.open{max-height:900px}
-.td-root .aco-resumo{padding:.9rem 1.25rem;border-bottom:1px solid #f5f6f7}
-.td-root .aco-inputs{padding:.9rem 1.25rem;background:#f5f6f7;border-bottom:1px solid #e8eaed}
+.td-root .aco-resumo{padding:.9rem 1.25rem;border-bottom:1px solid #f6f2ea}
+.td-root .aco-inputs{padding:.9rem 1.25rem;background:#f6f2ea;border-bottom:1px solid #e3ddd1}
 .td-root .aco-inputs .g2{gap:10px}
-.td-root .aco-next-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:.75rem;background:#0f2e36;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .15s}
+.td-root .aco-next-btn{display:flex;align-items:center;justify-content:center;gap:8px;padding:.75rem;background:#1a1a19;color:#fff;font-size:12px;font-weight:700;cursor:pointer;transition:opacity .15s}
 .td-root .aco-next-btn:hover{opacity:.88}
-.td-root .ch-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f5f6f7;font-size:12px}
+.td-root .ch-row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #f6f2ea;font-size:12px}
 .td-root .ch-row:last-child{border-bottom:none}
-.td-root .ch-sep{height:1px;background:#f5f6f7;margin:8px 0}
-.td-root .ch-key{color:#6b7280}.td-root .ch-val{font-weight:600;color:#0f2e36}
+.td-root .ch-sep{height:1px;background:#f6f2ea;margin:8px 0}
+.td-root .ch-key{color:#8a857b}.td-root .ch-val{font-weight:600;color:#1a1a19}
 .td-root .ch-total{display:flex;justify-content:space-between;font-size:13px;font-weight:700;padding-top:6px}
-.td-root .ch-total.pre span:last-child{color:#0f2e36}
+.td-root .ch-total.pre span:last-child{color:#1a1a19}
 .td-root .ch-total.pos span:last-child{color:#0058A3}
 .td-root .ch-note{font-size:9px;color:#9aa1a8;margin-top:5px}
 .td-root .saldo-alvo{display:flex;align-items:center;justify-content:space-between;border-radius:7px;padding:7px 10px;margin-top:8px;font-size:12px;font-weight:600;gap:6px}
-.td-root .saldo-alvo.ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#1a8f4c}
+.td-root .saldo-alvo.ok{background:#F0FDF4;border:1px solid #BBF7D0;color:#b0895b}
 .td-root .saldo-alvo.falta{background:#faf6ec;border:1px solid #e8d4a8;color:#8a6416}
 .td-root .saldo-alvo.excede{background:#FFF1F2;border:1px solid #FECDD3;color:#B91C1C}
 .td-root .saldo-alvo i{font-size:14px;flex-shrink:0}
 .td-root .saldo-alvo .sa-label{flex:1}
 .td-root .saldo-alvo .sa-val{white-space:nowrap}
-.td-root .consolidado{background:linear-gradient(135deg,#0f2e36,#12252b);border-radius:12px;padding:1.25rem 1.5rem}
+.td-root .consolidado{background:linear-gradient(135deg,#1a1a19,#2c2b28);border-radius:12px;padding:1.25rem 1.5rem}
 .td-root .cons-row{display:flex;justify-content:space-between;font-size:12px;padding:5px 0;border-bottom:1px solid rgba(255,255,255,.07)}
 .td-root .cons-row:last-of-type{border:none}
 .td-root .ck{color:#e8d4a8}.td-root .cv{color:#fff;font-weight:600}
 .td-root .cons-div{height:1px;background:rgba(255,255,255,.15);margin:10px 0}
 .td-root .cons-grand{display:flex;justify-content:space-between;align-items:center}
 .td-root .cg-key{font-size:14px;font-weight:700;color:#fff}
-.td-root .cg-val{font-family:'Fraunces',serif;font-size:24px;color:#0058A3}
+.td-root .cg-val{font-family:Cormorant Garamond,serif;font-size:24px;color:#0058A3}
 .td-root .cons-note{font-size:10px;color:#e8d4a8;margin-top:6px;text-align:right}
 .td-root .btn-row{display:flex;gap:10px;margin-top:1.25rem;flex-wrap:wrap}
 .td-root .tdbtn{display:flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:9px;padding:13px 22px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;transition:opacity .15s}
 .td-root .tdbtn:hover{opacity:.88}
-.td-root .btn-wa{background:#1a8f4c;color:#fff;flex:1;min-width:180px}
-.td-root .btn-pdf{background:#0f2e36;color:#fff;flex:1;min-width:180px}
+.td-root .btn-wa{background:#b0895b;color:#fff;flex:1;min-width:180px}
+.td-root .btn-pdf{background:#1a1a19;color:#fff;flex:1;min-width:180px}
 .td-root .btn-google{background:#EA4335;color:#fff;min-width:160px}
-.td-root .btn-reset{background:#f5f6f7;color:#6b7280;border:1.5px solid #e8eaed;min-width:120px}
+.td-root .btn-reset{background:#f6f2ea;color:#8a857b;border:1.5px solid #e3ddd1;min-width:120px}
 .td-root .nota{font-size:10px;color:#9aa1a8;text-align:center;margin-top:1.5rem;line-height:1.8}
 @media(max-width:600px){
   .td-root .g2{grid-template-columns:1fr}
@@ -259,7 +259,7 @@ a{color:inherit;text-decoration:none}
 .val-hero-label{font-size:11px;font-weight:700;color:rgba(201,153,58,.7);text-transform:uppercase;letter-spacing:.07em;margin-bottom:8px}
 .val-hero-val{font-size:clamp(32px,5vw,52px);font-weight:900;color:var(--gold2);line-height:1;margin-bottom:6px}
 .val-hero-sub{font-size:13px;color:var(--gray)}
-.val-hero-gain{font-size:15px;font-weight:700;color:#1a8f4c;margin-top:8px}
+.val-hero-gain{font-size:15px;font-weight:700;color:#b0895b;margin-top:8px}
 
 
 /* ── CAROUSEL DE FOTOS ── */
@@ -553,7 +553,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Orla Central</strong> <span class="comp-badge top">Mais procurado</span></td>
           <td>Porto Maravilha</td>
           <td>R$ 402.000</td>
-          <td><span style="color:#1a8f4c;font-weight:700">10–12% a.a.</span></td>
+          <td><span style="color:#b0895b;font-weight:700">10–12% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+85%</span></td>
           <td><span class="comp-badge good">92%</span></td>
         </tr>
@@ -561,7 +561,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Farol da Guanabara</strong></td>
           <td>Santo Cristo · Porto</td>
           <td>R$ 402.000</td>
-          <td><span style="color:#1a8f4c;font-weight:700">8–10% a.a.</span></td>
+          <td><span style="color:#b0895b;font-weight:700">8–10% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+80%</span></td>
           <td><span class="comp-badge good">88%</span></td>
         </tr>
@@ -569,7 +569,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Arcos do Porto</strong> <span class="comp-badge top">Premium</span></td>
           <td>Porto Maravilha</td>
           <td>Consultar</td>
-          <td><span style="color:#1a8f4c;font-weight:700">9–11% a.a.</span></td>
+          <td><span style="color:#b0895b;font-weight:700">9–11% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+90%</span></td>
           <td><span class="comp-badge mid">Alta renda</span></td>
         </tr>
@@ -577,7 +577,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Caminhos da Guanabara</strong></td>
           <td>Niterói</td>
           <td>R$ 334.999</td>
-          <td><span style="color:#0f2e36;font-weight:700">6–8% a.a.</span></td>
+          <td><span style="color:#1a1a19;font-weight:700">6–8% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+65%</span></td>
           <td><span class="comp-badge good">84%</span></td>
         </tr>
@@ -585,7 +585,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Luzes do Rio · Lamparina</strong></td>
           <td>São Cristóvão</td>
           <td>R$ 359.000</td>
-          <td><span style="color:#0f2e36;font-weight:700">5–7% a.a.</span></td>
+          <td><span style="color:#1a1a19;font-weight:700">5–7% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+60%</span></td>
           <td><span class="comp-badge good">86%</span></td>
         </tr>
@@ -593,7 +593,7 @@ a{color:inherit;text-decoration:none}
           <td><strong>Parque Piedade · Aquarela</strong> <span class="comp-badge good">MCMV</span></td>
           <td>Piedade · Zona Norte</td>
           <td>R$ 263.200</td>
-          <td><span style="color:#0f2e36;font-weight:700">4–6% a.a.</span></td>
+          <td><span style="color:#1a1a19;font-weight:700">4–6% a.a.</span></td>
           <td><span style="color:var(--gold2);font-weight:700">+55%</span></td>
           <td><span class="comp-badge good">94%</span></td>
         </tr>
@@ -631,7 +631,7 @@ a{color:inherit;text-decoration:none}
           <div class="radar-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></div>
           <div class="radar-name">Média da Cidade</div>
           <div class="radar-score">Score: 5.8/10 · base de comparação</div>
-          <div class="radar-bar"><div class="radar-fill" style="width:58%;background:linear-gradient(90deg,#64748b,#94a3b8)"></div></div>
+          <div class="radar-bar"><div class="radar-fill" style="width:58%;background:linear-gradient(90deg,#64748b,#a39d92)"></div></div>
         </div>
       </div>
     </div>
@@ -668,15 +668,15 @@ a{color:inherit;text-decoration:none}
       <div style="display:flex;gap:10px;flex-wrap:wrap">
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-30.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#b0895b;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-32.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#b0895b;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="display:flex;align-items:center;gap:8px">
           <div style="width:40px;height:40px;border-radius:50%;overflow:hidden;border:2px solid rgba(201,153,58,.4);flex-shrink:0"><img src="conquista-28.jpg" alt="Cliente Paulo Cotrim recebendo a chave do apartamento novo" style="width:100%;height:100%;object-fit:cover" loading="lazy"/></div>
-          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#1a8f4c;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
+          <div style="color:var(--ink);font-size:11px;font-weight:700;display:flex;align-items:center;gap:4px"><svg viewBox="0 0 24 24" style="width:11px;height:11px;stroke:#b0895b;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg>Chave entregue</div>
         </div>
         <div style="margin-left:auto;align-self:center;color:var(--gold2);font-size:12px;font-weight:700;display:flex;align-items:center;gap:4px">+ 18 anos de experiência<svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:3"><path d="M4 12l5 5L20 6"/></svg></div>
       </div>
@@ -710,7 +710,7 @@ a{color:inherit;text-decoration:none}
             <div class="fi"><label>Nome do empreendimento</label><input type="text" id="td-inp-custom-nome" placeholder="Ex: Residencial Vista Verde" oninput="tdUpdCustom('nome',this.value)"></div>
           </div>
           <div class="g2" style="margin-top:10px">
-            <div class="fi"><label>Construtora <span style="font-weight:400;color:#94a3b8">— define prazo e percentual pré/pós-chaves</span></label>
+            <div class="fi"><label>Construtora <span style="font-weight:400;color:#a39d92">— define prazo e percentual pré/pós-chaves</span></label>
               <select id="td-sel-cons" onchange="tdSelCons(this.value)">
                 <option value="Cury">Cury</option>
                 <option value="MRV">MRV</option>
@@ -741,7 +741,7 @@ a{color:inherit;text-decoration:none}
           <div class="pct-label"><i class="ti ti-adjustments-horizontal"></i>Distribuição do plano</div>
           <div class="pct-row">
             <div class="pct-half">
-              <label style="color:#0f2e36;font-weight:700">Pré-chaves</label>
+              <label style="color:#1a1a19;font-weight:700">Pré-chaves</label>
               <input type="number" id="td-inp-pct-pre" min="0" max="100" value="50" oninput="tdUpdPct('pre',this.value)">
               <span class="pct-sym">%</span>
             </div>
@@ -841,7 +841,7 @@ a{color:inherit;text-decoration:none}
           <div class="aco-card" id="td-aco-resumo">
             <div class="aco-head resumo" onclick="tdAcoToggle('resumo')">
               <div class="aco-head-left">
-                <div class="aco-step" style="background:#0f2e36">3</div>
+                <div class="aco-step" style="background:#1a1a19">3</div>
                 <div>
                   <div class="aco-title">Resumo consolidado</div>
                   <div class="aco-sub" id="td-resumo-sub">clique para ver o total</div>
@@ -936,7 +936,7 @@ function calcValorizacao(){
   for(let i=1;i<=anos;i++){
     const v = valor * Math.pow(1+taxa, i);
     const g = ((v-valor)/valor)*100;
-    tabelaHTML += `<tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 10px;color:var(--ink)">Ano ${i}</td><td style="text-align:right;padding:6px 10px;color:var(--gold2);font-weight:700">${fmt(v)}</td><td style="text-align:right;padding:6px 10px;color:#1a8f4c">+${fmtPct(g)}</td></tr>`;
+    tabelaHTML += `<tr style="border-bottom:1px solid var(--line)"><td style="padding:6px 10px;color:var(--ink)">Ano ${i}</td><td style="text-align:right;padding:6px 10px;color:var(--gold2);font-weight:700">${fmt(v)}</td><td style="text-align:right;padding:6px 10px;color:#b0895b">+${fmtPct(g)}</td></tr>`;
   }
   tabelaHTML += '</table></div>';
   document.getElementById('r-v-tabela').innerHTML = tabelaHTML;
@@ -959,7 +959,7 @@ function calcRetornoTotal(){
   document.getElementById('r-rt-breakdown').innerHTML = `
     <strong style="color:#fff">Composição do retorno em ${anos} anos:</strong><br>
     Valorização do imóvel: <strong style="color:var(--gold2)">${fmt(ganhoCapital)}</strong> (+${fmtPct((ganhoCapital/valor)*100)})<br>
-    Renda de aluguel acumulada: <strong style="color:#1a8f4c">${fmt(rendaAcum)}</strong> (${fmt(aluguel)}/mês)<br>
+    Renda de aluguel acumulada: <strong style="color:#b0895b">${fmt(rendaAcum)}</strong> (${fmt(aluguel)}/mês)<br>
     <strong>Retorno total: ${fmt(totalRetorno)}</strong> sobre investimento de ${fmt(valor)}
   `;
   document.getElementById('res-2').classList.add('show');
@@ -984,7 +984,7 @@ function calcFGTS(){
   document.getElementById('r-f-parcela').textContent = fmt(parcela)+'/mês';
   let analise = `Você entra com ${fmtPct(pctEntrada)} do valor total (${fmt(totalEntrada)} = FGTS ${fmt(fgts)} + entrada ${fmt(entrada)}).<br>`;
   analise += `O valor financiado será de ${fmt(financiado)}.<br>`;
-  analise += `A parcela estimada é de ${fmt(parcela)}/mês — <strong style="color:${pctRenda<=30?'#1a8f4c':'var(--gold2)'}">`;
+  analise += `A parcela estimada é de ${fmt(parcela)}/mês — <strong style="color:${pctRenda<=30?'#b0895b':'var(--gold2)'}">`;
   analise += pctRenda<=30 ? `${fmtPct(pctRenda)} da renda, dentro do limite da Caixa (30%)` : `${fmtPct(pctRenda)} da renda — Paulo pode ajudar a otimizar`;
   analise += '</strong>';
   if(renda <= 8000 && valor <= 350000) analise += '<br>⭐ Perfil elegível para <strong>Minha Casa Minha Vida</strong> — juros menores, subsídio de até R$ 47.000!';
@@ -1024,18 +1024,18 @@ function baixarAnaliseInvestidor(simTitulo, resBoxId){
   var url = window.location.href.split('#')[0];
   var qr = 'https://api.qrserver.com/v1/create-qr-code/?size=220x220&data='+encodeURIComponent(url);
   var html = '<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Análise — '+simTitulo+'</title>'
-    +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
-    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
+    +'<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#1a1a19;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
     +'.kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#0058A3;margin-bottom:8px}'
-    +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:28px}'
-    +'.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e8eaed;font-size:14px}.rk{color:#6b7280}.rv{font-weight:700}'
-    +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
-    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e8eaed}'
-    +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
-    +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e8eaed}'
-    +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
+    +'h1{font-family:Cormorant Garamond,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#8a857b;margin-bottom:28px}'
+    +'.row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid #e3ddd1;font-size:14px}.rk{color:#8a857b}.rv{font-weight:700}'
+    +'.note{font-size:11.5px;color:#8a857b;margin-top:18px;line-height:1.7;background:#efe9df;padding:14px 16px;border-radius:10px}'
+    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:28px;padding-top:20px;border-top:1px solid #e3ddd1}'
+    +'.qrbox img{width:110px;height:110px}.qrbox div{font-size:12px;color:#8a857b}.qrbox b{display:block;color:#1a1a19;font-size:13.5px;margin-bottom:4px}'
+    +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:24px;padding-top:16px;border-top:1px solid #e3ddd1}'
+    +'.brandbar b{font-size:13px;color:#1a1a19}.brandbar span{font-size:11.5px;color:#8a857b;display:block}'
     +'.cta{display:inline-block;margin-top:20px;background:#25d366;color:#fff;text-decoration:none;font-weight:700;font-size:13px;padding:12px 22px;border-radius:10px}'
-    +'.foot{margin-top:24px;font-size:10.5px;color:#94a3b8;text-align:center}@media print{.cta{display:none}body{padding:20px}}</style></head><body>'
+    +'.foot{margin-top:24px;font-size:10.5px;color:#a39d92;text-align:center}@media print{.cta{display:none}body{padding:20px}}</style></head><body>'
     +'<div class="kicker">Calculadora do Investidor · Porto Maravilha</div>'
     +'<h1>'+simTitulo+'</h1><div class="sub">Análise gerada por você · Paulo Cotrim · CRECI-RJ 77677-F</div>'
     + rows
@@ -1044,8 +1044,7 @@ function baixarAnaliseInvestidor(simTitulo, resBoxId){
     +'<div class="qrbox"><img src="'+qr+'" alt="QR code"/ loading="lazy"><div><b>Aponte a câmera para voltar à calculadora</b>Refaça a simulação ou explore outras ferramentas do investidor direto do celular.</div></div>'
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
     +'<div class="foot">Paulo Cotrim · Documento informativo e educativo, não substitui a simulação bancária real</div>'
-    +'<script src="wa.js" defer></script>
-</body></html>';
+    +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
 }
@@ -1321,7 +1320,7 @@ function tdRender(){
   const ct=document.getElementById('td-cons-tag');
   if(ct){
     const rule=CONSTRUTORA_RULES[TDS.cons]||CONSTRUTORA_RULES['_outra'];
-    const pcTag=rule.posChavesOficial?' <span class="cons-tag" style="background:#f0f9f3;color:#157540"><i class="ti ti-calendar-time"></i>Pós-chaves oficial até '+rule.prazoPos+'x</span>':'';
+    const pcTag=rule.posChavesOficial?' <span class="cons-tag" style="background:#f4efe6;color:#9c7748"><i class="ti ti-calendar-time"></i>Pós-chaves oficial até '+rule.prazoPos+'x</span>':'';
     ct.innerHTML='<div class="cons-tag"><i class="ti ti-building-skyscraper"></i>Construtora: '+tdConsLabel()+'</div>'+pcTag;
   }
   const pdv=document.getElementById('td-pd-val');if(pdv)pdv.textContent=TDBRL(TDS.vu);
@@ -1392,7 +1391,7 @@ function tdBaixarProposta(){
   const tip=tdTipLabel();
   const c=tdCalc();const{s4}=TDS;
   const hoje=new Date().toLocaleDateString('pt-BR');
-  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Proposta — '+tdCondLabel()+'</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Fraunces:wght@600&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:40px;max-width:680px;margin:0 auto}.hdr{background:#0f2e36;border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hdr-role{font-size:9px;color:#cf9f4f;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}.hdr-name{font-family:Fraunces,serif;font-size:22px;color:#fff}.hdr-c{font-size:11px;color:#e8d4a8;margin-top:3px}.badge{background:rgba(184,135,58,.3);color:#e8d4a8;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:700}h1{font-family:Fraunces,serif;font-size:24px;color:#0f2e36;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}.box{background:#f5f6f7;border-radius:10px;padding:14px 18px;margin-bottom:14px;border:1px solid #e8eaed}.box-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0058A3;margin-bottom:9px}.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e8eaed;font-size:13px}.row:last-child{border:none}.rk{color:#6b7280}.rv{font-weight:600}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.half{border-radius:10px;padding:13px 15px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.half.pre{background:#0f2e36}.half.pos{background:#0058A3}.hl{font-size:9px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.hv{font-family:Fraunces,serif;font-size:20px;color:#fff}.grand{background:#0f2e36;border-radius:10px;padding:16px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.gt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e8d4a8;margin-bottom:10px}.gr{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:#e8d4a8}.gr span:last-child{color:#fff;font-weight:600}.gd{height:1px;background:rgba(255,255,255,.15);margin:10px 0}.gf{display:flex;justify-content:space-between;align-items:center}.gfk{font-size:14px;font-weight:700;color:#fff}.gfv{font-family:Fraunces,serif;font-size:24px;color:#0058A3}.footer{margin-top:20px;font-size:10px;color:#9aa1a8;text-align:center;line-height:1.8;border-top:1px solid #e8eaed;padding-top:14px}</style></head><body><div class="hdr"><div><div class="hdr-role">Especialista em Financiamento Imobiliário</div><div class="hdr-name">Paulo Cotrim</div><div class="hdr-c">(21) 98915-0864</div></div><div class="badge">Julho 2026</div></div><h2>Proposta de Investimento</h2><div class="sub">Tabela Direta · '+hoje+'</div><div class="box"><div class="box-title">Empreendimento</div><div class="row"><span class="rk">Condomínio</span><span class="rv">'+tdCondLabel()+'</span></div><div class="row"><span class="rk">Construtora</span><span class="rv">'+tdConsLabel()+'</span></div><div class="row"><span class="rk">Tipologia</span><span class="rv">'+tip.n+'</span></div><div class="row"><span class="rk">Valor da unidade</span><span class="rv">'+TDBRL(TDS.vu)+'</span></div></div><div class="split"><div class="half pre"><div class="hl">Pré-chaves — '+TDS.pctPre+'%</div><div class="hv">'+TDBRL(c.tPre)+'</div></div><div class="half pos"><div class="hl">Pós-chaves — '+TDS.pctPos+'%</div><div class="hv">'+TDBRL(c.tPos)+'</div></div></div><div class="grand"><div class="gt">Resumo Consolidado</div><div class="gr"><span>Valor da unidade</span><span>'+TDBRL(TDS.vu)+'</span></div><div class="gr"><span>Total pré-chaves</span><span>'+TDBRL(c.tPre)+'</span></div><div class="gr"><span>Total pós-chaves</span><span>'+TDBRL(c.tPos)+'</span></div><div class="gd"></div><div class="gf"><span class="gfk">Total do investimento</span><span class="gfv">'+TDBRL(c.grand)+'</span></div></div><div class="footer">Tabela Julho 2026 · Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</div>';
+  const html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Proposta — '+tdCondLabel()+'</title><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet"><style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#1a1a19;background:#fff;padding:40px;max-width:680px;margin:0 auto}.hdr{background:#1a1a19;border-radius:12px;padding:20px 24px;margin-bottom:24px;display:flex;justify-content:space-between;align-items:center;-webkit-print-color-adjust:exact;print-color-adjust:exact}.hdr-role{font-size:9px;color:#c49a68;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:3px}.hdr-name{font-family:Cormorant Garamond,serif;font-size:22px;color:#fff}.hdr-c{font-size:11px;color:#e8d4a8;margin-top:3px}.badge{background:rgba(184,135,58,.3);color:#e8d4a8;font-size:10px;padding:4px 12px;border-radius:20px;font-weight:700}h1{font-family:Cormorant Garamond,serif;font-size:24px;color:#1a1a19;margin-bottom:4px}.sub{font-size:12px;color:#8a857b;margin-bottom:20px}.box{background:#f6f2ea;border-radius:10px;padding:14px 18px;margin-bottom:14px;border:1px solid #e3ddd1}.box-title{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#0058A3;margin-bottom:9px}.row{display:flex;justify-content:space-between;padding:4px 0;border-bottom:1px solid #e3ddd1;font-size:13px}.row:last-child{border:none}.rk{color:#8a857b}.rv{font-weight:600}.split{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px}.half{border-radius:10px;padding:13px 15px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.half.pre{background:#1a1a19}.half.pos{background:#0058A3}.hl{font-size:9px;font-weight:700;color:rgba(255,255,255,.7);text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px}.hv{font-family:Cormorant Garamond,serif;font-size:20px;color:#fff}.grand{background:#1a1a19;border-radius:10px;padding:16px 20px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.gt{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:#e8d4a8;margin-bottom:10px}.gr{display:flex;justify-content:space-between;font-size:12px;padding:4px 0;color:#e8d4a8}.gr span:last-child{color:#fff;font-weight:600}.gd{height:1px;background:rgba(255,255,255,.15);margin:10px 0}.gf{display:flex;justify-content:space-between;align-items:center}.gfk{font-size:14px;font-weight:700;color:#fff}.gfv{font-family:Cormorant Garamond,serif;font-size:24px;color:#0058A3}.footer{margin-top:20px;font-size:10px;color:#9aa1a8;text-align:center;line-height:1.8;border-top:1px solid #e3ddd1;padding-top:14px}</style></head><body><div class="hdr"><div><div class="hdr-role">Especialista em Financiamento Imobiliário</div><div class="hdr-name">Paulo Cotrim</div><div class="hdr-c">(21) 98915-0864</div></div><div class="badge">Julho 2026</div></div><h2>Proposta de Investimento</h2><div class="sub">Tabela Direta · '+hoje+'</div><div class="box"><div class="box-title">Empreendimento</div><div class="row"><span class="rk">Condomínio</span><span class="rv">'+tdCondLabel()+'</span></div><div class="row"><span class="rk">Construtora</span><span class="rv">'+tdConsLabel()+'</span></div><div class="row"><span class="rk">Tipologia</span><span class="rv">'+tip.n+'</span></div><div class="row"><span class="rk">Valor da unidade</span><span class="rv">'+TDBRL(TDS.vu)+'</span></div></div><div class="split"><div class="half pre"><div class="hl">Pré-chaves — '+TDS.pctPre+'%</div><div class="hv">'+TDBRL(c.tPre)+'</div></div><div class="half pos"><div class="hl">Pós-chaves — '+TDS.pctPos+'%</div><div class="hv">'+TDBRL(c.tPos)+'</div></div></div><div class="grand"><div class="gt">Resumo Consolidado</div><div class="gr"><span>Valor da unidade</span><span>'+TDBRL(TDS.vu)+'</span></div><div class="gr"><span>Total pré-chaves</span><span>'+TDBRL(c.tPre)+'</span></div><div class="gr"><span>Total pós-chaves</span><span>'+TDBRL(c.tPos)+'</span></div><div class="gd"></div><div class="gf"><span class="gfk">Total do investimento</span><span class="gfv">'+TDBRL(c.grand)+'</span></div></div><div class="footer">Tabela Julho 2026 · Paulo Cotrim — Especialista em Financiamento Imobiliário · (21) 98915-0864</div>';
   const win = window.open('', '_blank');
   if(win){
     win.document.write(html);
@@ -1466,5 +1465,6 @@ function tdBaixarProposta(){
 </script>
 <script src="financing-sim.js"></script>
 <script src="leads.js" defer></script>
+<script src="wa.js" defer></script>
 </body>
 </html>

@@ -247,6 +247,39 @@ header{transition:transform .35s ease,background .3s}header.fx{position:fixed;ba
 .inv .th{display:flex;align-items:center;gap:12px}.inv .th i{width:56px;height:42px;border-radius:3px;background:#1c1b19 center/cover;flex:none}.inv .th i.n{background:#1c1b19 url("logo-round-gold.svg") center/60% no-repeat}
 .inv .th small{display:block;color:var(--muted);font-size:11.5px}.inv .stg{font:600 10px Inter;letter-spacing:.08em;text-transform:uppercase;padding:4px 8px;border-radius:100px;background:#f0ebe0;color:var(--graphite)}
 .inv .m2{font-weight:600}.fxnote{font-size:11px;color:var(--muted);margin-top:10px}
+</style><style id="mob">
+@media(max-width:640px){
+ .section{padding:64px 0}
+ .hero-c .eyebrow{font-size:10px;letter-spacing:.16em}
+ .hsearch{flex-wrap:nowrap!important;padding:6px 6px 6px 20px!important}
+ .hsearch .hs-field{flex:1 1 auto!important}
+ .hsearch input{flex:1 1 auto!important;border:none!important;padding:2px 0!important}
+ .hsearch .hgo{flex:0 0 46px!important;width:46px!important;height:46px!important;padding:0!important}
+ .menu .cta{display:none!important}
+ .intent a{padding:11px 16px;font-size:10.5px}
+ .regions{display:flex!important;overflow-x:auto;scroll-snap-type:x mandatory;gap:14px;scrollbar-width:none}.regions::-webkit-scrollbar{display:none}
+ .regions .region{flex:0 0 86%;scroll-snap-align:start;min-height:380px!important}.region h3{font-size:32px!important}
+ .inv-w{overflow:visible;border:none}.inv thead{display:none}
+ .inv,.inv tbody,.inv tr,.inv td{display:block;width:100%}
+ .inv tr{border:1px solid var(--line);border-radius:4px;padding:14px;margin-bottom:10px;background:#fff}
+ .inv td{border:none!important;padding:3px 0!important;font-size:13px}
+ .inv td:nth-child(2):before{content:"Região · ";color:var(--muted)}
+ .inv td:nth-child(4):before{content:"A partir de";display:block;color:var(--muted);font-size:11px}
+ .inv td:nth-child(5):before{content:"R$/m² · ";color:var(--muted)}
+ .inv td:nth-child(6):before{content:"Aluguel est. · ";color:var(--muted)}
+ .inv td:last-child{padding-top:8px!important}
+ .inv td:nth-child(n+2):not(:last-child){display:inline-block;width:49%;vertical-align:top}
+ .inv td:nth-child(4):before{display:inline}
+ .inv-top{flex-direction:column;align-items:flex-start;gap:10px}.inv-f{width:100%}.inv-f select{flex:1}
+ .dvg{gap:12px}.atu .cons{gap:18px 30px}
+ .shead{flex-wrap:wrap}
+}
+@media(min-width:641px) and (max-width:1024px){
+ .hero h1{font-size:clamp(40px,6vw,56px)!important}
+ .ii-grid{grid-template-columns:1fr 1fr!important}
+ .dvg{grid-template-columns:repeat(4,1fr)}
+ .menu{gap:18px!important}.menu a{font-size:12.5px!important;letter-spacing:.1em!important}
+}
 </style></head>
 <body>
 <header><div class="wrap nav"> <a href="index.html" class="brandmark"><span class="round"><svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><circle cx="32" cy="32" r="29" fill="none" stroke="currentColor" stroke-width="1.4"/><g transform="translate(17.210177,47.221239)"><path transform="translate(0.000000,0) scale(0.022124,-0.022124)" d="M774 -20Q610 -20 481.5 26.0Q353 72 264.5 159.0Q176 246 130.0 371.5Q84 497 84 655Q84 835 130.5 967.0Q177 1099 265.5 1185.5Q354 1272 483.0 1314.0Q612 1356 778 1356Q847 1356 908.0 1351.5Q969 1347 1024.5 1340.0Q1080 1333 1130.0 1324.0Q1180 1315 1227 1305L1233 1012H1167L1137 1186Q1067 1229 974.5 1252.5Q882 1276 786 1276Q669 1276 577.5 1244.0Q486 1212 423.0 1139.5Q360 1067 326.5 948.5Q293 830 293 657Q293 505 326.0 392.5Q359 280 421.0 205.5Q483 131 572.5 94.0Q662 57 776 57Q838 57 894.5 65.0Q951 73 999.5 87.0Q1048 101 1086.5 119.5Q1125 138 1151 158L1188 358H1253L1247 43Q1205 31 1151.0 19.5Q1097 8 1036.0 -1.0Q975 -10 908.0 -15.0Q841 -20 774 -20Z" fill="currentColor"/><path transform="translate(8.675961,0) scale(0.016406,-0.016406)" d="M858 944Q858 1024 840.5 1082.0Q823 1140 783.5 1177.5Q744 1215 680.0 1233.0Q616 1251 522 1251H424V616H528Q622 616 685.5 638.5Q749 661 787.5 703.0Q826 745 842.0 806.0Q858 867 858 944ZM424 526V80L637 53V0H72V53L231 80V1262L59 1288V1341H565Q706 1341 800.5 1310.5Q895 1280 952.0 1226.5Q1009 1173 1033.0 1101.0Q1057 1029 1057 946Q1057 864 1033.5 788.0Q1010 712 954.5 654.0Q899 596 806.0 561.0Q713 526 575 526Z" fill="currentColor"/></g></svg></span><span class="lock"><b class="bn">PAULO COTRIM</b><span class="div"></span><i class="bsw">SAWALA</i></span></a> <nav class="menu"><a href="#portfolio">Lançamentos</a><a href="#portfolio">Prontos</a><a href="#regioes">Bairros</a><a href="#mapa">Mapa</a><a href="#investidor">Investidor</a><a href="#sobre">Sobre</a><a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo" class="cta">Contato</a></nav> <button class="burger" aria-label="Menu" onclick="document.querySelector(&#39;.menu&#39;).classList.toggle(&#39;open&#39;)"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button></div></header>

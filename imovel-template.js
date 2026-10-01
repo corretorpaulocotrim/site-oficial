@@ -2,8 +2,8 @@
 // Each page defines PROP before loading this script
 
 const WA_SVG=`<svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.373 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>`;
-const FALLBACK_ICON = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#1a8f4c;fill:none;stroke-width:3;vertical-align:-2px" class="amen-ic"><path d="M4 12l5 5L20 6"/></svg>`;
-const FALLBACK_ICON_INLINE = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#1a8f4c;fill:none;stroke-width:3;vertical-align:-2px" class="amen-ic"><path d="M4 12l5 5L20 6"/></svg>`;
+const FALLBACK_ICON = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#b0895b;fill:none;stroke-width:3;vertical-align:-2px" class="amen-ic"><path d="M4 12l5 5L20 6"/></svg>`;
+const FALLBACK_ICON_INLINE = `<svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#b0895b;fill:none;stroke-width:3;vertical-align:-2px" class="amen-ic"><path d="M4 12l5 5L20 6"/></svg>`;
 
 
 // Todos os empreendimentos — para mapa cruzado nas páginas individuais
@@ -81,7 +81,7 @@ function render(){
       <img src="logo-wordmark-light.png" alt="Paulo Cotrim" style="height:30px;width:auto;max-width:230px;object-fit:contain"/>
       <div style="display:flex;flex-direction:column;gap:1px;line-height:1">
         <span style="color:#fff;font-size:14px;font-weight:800;letter-spacing:-.01em;white-space:nowrap">Paulo Cotrim</span>
-        <span style="color:#cf9f4f;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Especialista em lançamentos · CRECI-RJ 77677-F</span>
+        <span style="color:#c49a68;font-size:9px;font-weight:700;letter-spacing:.1em;text-transform:uppercase">Especialista em lançamentos · CRECI-RJ 77677-F</span>
       </div>
     </a>
     <div class="im-hdr-right">
@@ -181,7 +181,7 @@ function render(){
           </div>`:''}
           ${PROP.endereco?`<div class="im-loc-pt">
             <div class="im-loc-pt-label"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#0058A3;fill:none;stroke-width:2;vertical-align:-2px;margin-right:4px" class="pin-ic"><path d="M12 21s-7-5.2-7-11a7 7 0 0114 0c0 5.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Empreendimento</div>
-            <div class="im-loc-pt-addr"><strong style="color:#0f2e36">${PROP.nome}</strong><br>${PROP.endereco}</div>
+            <div class="im-loc-pt-addr"><strong style="color:#1a1a19">${PROP.nome}</strong><br>${PROP.endereco}</div>
             <div class="im-loc-pt-links">
               <a href="https://waze.com/ul?ll=${PROP.lat},${PROP.lng}&navigate=yes" target="_blank">Waze</a>
               <a href="https://maps.google.com/maps?daddr=${PROP.lat},${PROP.lng}" target="_blank">Google Maps</a>
@@ -218,7 +218,7 @@ function render(){
           <div class="im-related-grid">
             ${related.map(function(im){
               return `<a class="im-related-card" href="${im.url}">
-                <img src="${im.img||PROP.imgDefault}" alt="${im.nome}" loading="lazy" onerror="this.style.background='#e7edee'"/>
+                <img src="${im.img||PROP.imgDefault}" alt="${im.nome}" loading="lazy" onerror="this.style.background='#efe9df'"/>
                 <div class="im-related-body">
                   <div class="im-related-tag">${im.tipo||'Lançamento'}</div>
                   <div class="im-related-name">${im.nome}</div>
@@ -321,16 +321,16 @@ function render(){
           <button class="btn-planta-sid">Receber planta</button>
         </a>
         <div style="border-top:1px solid #f1f5f9;padding-top:10px;margin-top:2px">
-          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#94a3b8;margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Baixar proposta</div>
-          <button class="btn-proposta-sid-simples" onclick="baixarPropostaSimples()" style="display:flex;align-items:center;gap:6px;width:100%;margin-bottom:6px;padding:9px 12px;background:#f5f6f7;border:1px solid #e8eaed;border-radius:8px;font-size:12px;font-weight:700;color:#0f2e36;cursor:pointer;font-family:inherit">Resumo (sem apresentação)</button>
-          <button class="btn-proposta-sid-completa" onclick="solicitarPropostaCompleta()" style="display:flex;align-items:center;gap:6px;width:100%;padding:9px 12px;background:linear-gradient(135deg,#0058A3,#a5772e);border:none;border-radius:8px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit">Com apresentação PDF</button>
+          <div style="font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.1em;color:#a39d92;margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:2px" class="ic-inline"><path d="M12 3v12M7 10l5 5 5-5M4 21h16"/></svg>Baixar proposta</div>
+          <button class="btn-proposta-sid-simples" onclick="baixarPropostaSimples()" style="display:flex;align-items:center;gap:6px;width:100%;margin-bottom:6px;padding:9px 12px;background:#f6f2ea;border:1px solid #e3ddd1;border-radius:8px;font-size:12px;font-weight:700;color:#1a1a19;cursor:pointer;font-family:inherit">Resumo (sem apresentação)</button>
+          <button class="btn-proposta-sid-completa" onclick="solicitarPropostaCompleta()" style="display:flex;align-items:center;gap:6px;width:100%;padding:9px 12px;background:linear-gradient(135deg,#0058A3,#9c7748);border:none;border-radius:8px;font-size:12px;font-weight:700;color:#fff;cursor:pointer;font-family:inherit">Com apresentação PDF</button>
         </div>
       </div>
 
       <div class="sid-card">
         <h3>Quem vai te atender</h3>
         <div class="coord-box">
-          <img class="coord-av" src="${fotoCoord||'paulo-cotrim-profissional.jpeg'}" alt="Paulo Cotrim" onerror="this.onerror=null;this.style.background='#0f2e36'"/>
+          <img class="coord-av" src="${fotoCoord||'paulo-cotrim-profissional.jpeg'}" alt="Paulo Cotrim" onerror="this.onerror=null;this.style.background='#1a1a19'"/>
           <div class="coord-info">
             <div class="name">Paulo Cotrim</div>
             <div class="role">Corretor de Imóveis · CRECI-RJ 77677-F · 18 anos</div>
@@ -339,7 +339,7 @@ function render(){
         <p style="margin-top:14px;font-size:13px;color:#475569;line-height:1.6">Especialista em MCMV e financiamento imobiliário. Do primeiro contato até a entrega das chaves, o Paulo cuida de tudo para você — sem intermediário.</p>
         <a href="https://instagram.com/corretorpaulocotrim" target="_blank" style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;font-size:12px;font-weight:600;color:#64748b"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1"/></svg>@corretorpaulocotrim</a>
         <div style="margin-top:10px;padding-top:10px;border-top:1px solid #f1f5f9;display:flex;align-items:center;gap:8px">
-          <span style="font-size:11px;color:#94a3b8;font-weight:700">CRECI-RJ 77677-F</span>
+          <span style="font-size:11px;color:#a39d92;font-weight:700">CRECI-RJ 77677-F</span>
         </div>
       </div>
 
@@ -434,35 +434,35 @@ window.baixarPropostaSimples = function(){
   const p = window.PROP || {};
   const tipos = (p.tipologias||[]).map(t=>`
     <tr>
-      <td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:600;color:#0f2e36">${t.n}</td>
+      <td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:600;color:#1a1a19">${t.n}</td>
       <td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;color:#64748b">${t.m2}</td>
       <td style="padding:10px 14px;border-bottom:1px solid #f1f5f9;font-weight:700;color:#0058A3">${t.preco}</td>
     </tr>`).join('');
-  const amens = (p.amenidades||[]).map(a=>`<li style="margin-bottom:4px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#1a8f4c;fill:none;stroke-width:3;vertical-align:-2px" class="amen-ic"><path d="M4 12l5 5L20 6"/></svg> ${a}</li>`).join('');
+  const amens = (p.amenidades||[]).map(a=>`<li style="margin-bottom:4px"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:#b0895b;fill:none;stroke-width:3;vertical-align:-2px" class="amen-ic"><path d="M4 12l5 5L20 6"/></svg> ${a}</li>`).join('');
   const w = window.open('','_blank');
   w.document.write(`<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/>
   <title>Proposta — ${p.nome}</title>
   <style>
     *{box-sizing:border-box;margin:0;padding:0}
-    body{font-family:'Arial',sans-serif;color:#0f2e36;background:#fff}
+    body{font-family:'Arial',sans-serif;color:#1a1a19;background:#fff}
     .pg{max-width:800px;margin:0 auto;padding:40px 32px}
     .hdr{display:flex;align-items:center;justify-content:space-between;border-bottom:3px solid #0058A3;padding-bottom:20px;margin-bottom:28px}
-    .hdr-name{font-size:22px;font-weight:900;color:#0f2e36}
+    .hdr-name{font-size:22px;font-weight:900;color:#1a1a19}
     .hdr-sub{font-size:11px;color:#64748b;margin-top:3px;letter-spacing:.05em;text-transform:uppercase}
-    .hdr-creci{font-size:11px;color:#94a3b8;font-weight:700}
+    .hdr-creci{font-size:11px;color:#a39d92;font-weight:700}
     .badge{display:inline-block;background:#faf3e7;color:#8a6526;border:1px solid #e8d4ab;border-radius:20px;font-size:11px;font-weight:700;padding:4px 12px;margin-bottom:16px;letter-spacing:.05em;text-transform:uppercase}
-    h1{font-size:28px;font-weight:900;color:#0f2e36;margin-bottom:6px}
+    h1{font-size:28px;font-weight:900;color:#1a1a19;margin-bottom:6px}
     .bairro{font-size:14px;color:#64748b;margin-bottom:24px}
     h2{font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.08em;color:#64748b;margin:24px 0 12px;padding-bottom:6px;border-bottom:1px solid #f1f5f9}
     table{width:100%;border-collapse:collapse;font-size:14px;background:#fff;border:1px solid #f1f5f9;border-radius:8px;overflow:hidden}
-    th{background:#0f2e36;color:#fff;padding:10px 14px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
+    th{background:#1a1a19;color:#fff;padding:10px 14px;text-align:left;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.07em}
     ul{list-style:none;columns:2;gap:12px;font-size:13px;color:#475569}
     .desc{font-size:14px;line-height:1.7;color:#475569}
-    .cta-box{background:linear-gradient(135deg,#0a1f26,#0f2e36);color:#fff;border-radius:12px;padding:24px;margin-top:32px;text-align:center}
+    .cta-box{background:linear-gradient(135deg,#0a1f26,#1a1a19);color:#fff;border-radius:12px;padding:24px;margin-top:32px;text-align:center}
     .cta-box h3{font-size:20px;font-weight:900;margin-bottom:8px}
     .cta-box p{font-size:13px;opacity:.8;margin-bottom:16px}
     .cta-wa{display:inline-block;background:#25d366;color:#fff;font-weight:800;font-size:14px;padding:12px 28px;border-radius:8px;text-decoration:none}
-    .footer{margin-top:40px;padding-top:16px;border-top:1px solid #f1f5f9;font-size:11px;color:#94a3b8;text-align:center}
+    .footer{margin-top:40px;padding-top:16px;border-top:1px solid #f1f5f9;font-size:11px;color:#a39d92;text-align:center}
     @media print{.cta-box a{color:#fff!important}.no-print{display:none}}
   </style></head><body>
   <div class="pg">
@@ -575,8 +575,8 @@ function initImovelMap(){
     .addTo(map)
     .bindPopup(
       '<div style="font-family:Outfit,Inter,sans-serif;min-width:180px">'
-      +'<div style="font-size:13px;font-weight:800;color:#0f2e36;margin-bottom:4px">'+PROP.nome+'</div>'
-      +'<div style="font-size:11px;color:#6b7280;line-height:1.4">'+(PROP.endereco||PROP.bairro+' · '+PROP.cidade)+'</div>'
+      +'<div style="font-size:13px;font-weight:800;color:#1a1a19;margin-bottom:4px">'+PROP.nome+'</div>'
+      +'<div style="font-size:11px;color:#8a857b;line-height:1.4">'+(PROP.endereco||PROP.bairro+' · '+PROP.cidade)+'</div>'
       +'</div>',
       {maxWidth:240, closeButton:false}
     );
@@ -587,11 +587,11 @@ function initImovelMap(){
     var standIcon = L.divIcon({
       className:'',
       html: '<div style="'
-        +'background:#0f2e36;'
+        +'background:#1a1a19;'
         +'width:26px;height:26px;'
         +'border-radius:50%;'
         +'border:4px solid #fff;'
-        +'box-shadow:0 4px 16px rgba(15,46,54,.45);'
+        +'box-shadow:0 4px 16px rgba(26,26,25,.45);'
         +'cursor:default;'
         +'"></div>',
       iconSize:[26,26], iconAnchor:[13,13], popupAnchor:[0,-18]
@@ -600,8 +600,8 @@ function initImovelMap(){
       .addTo(map)
       .bindPopup(
         '<div style="font-family:Outfit,Inter,sans-serif;min-width:180px">'
-        +'<div style="font-size:13px;font-weight:800;color:#0f2e36;margin-bottom:4px">Stand de Vendas</div>'
-        +'<div style="font-size:11px;color:#6b7280;line-height:1.4">'+(PROP.standEndereco||'')+'</div>'
+        +'<div style="font-size:13px;font-weight:800;color:#1a1a19;margin-bottom:4px">Stand de Vendas</div>'
+        +'<div style="font-size:11px;color:#8a857b;line-height:1.4">'+(PROP.standEndereco||'')+'</div>'
         +'</div>',
         {maxWidth:240, closeButton:false}
       );
@@ -611,7 +611,7 @@ function initImovelMap(){
   var smallIcon = L.divIcon({
     className:'',
     html: '<div style="'
-      +'background:#0f2e36;'
+      +'background:#1a1a19;'
       +'width:12px;height:12px;'
       +'border-radius:50%;'
       +'border:2.5px solid #0058A3;'
@@ -630,8 +630,8 @@ function initImovelMap(){
       .addTo(map)
       .bindPopup(
         '<div style="font-family:Outfit,Inter,sans-serif;min-width:180px">'
-        +'<div style="font-size:13px;font-weight:800;color:#0f2e36;margin-bottom:3px">'+im.nome+'</div>'
-        +'<div style="font-size:11px;color:#6b7280;margin-bottom:6px">'+im.regiao+'</div>'
+        +'<div style="font-size:13px;font-weight:800;color:#1a1a19;margin-bottom:3px">'+im.nome+'</div>'
+        +'<div style="font-size:11px;color:#8a857b;margin-bottom:6px">'+im.regiao+'</div>'
         +'<div style="font-size:12px;color:#9ca3af;margin-bottom:8px">'+im.preco+'</div>'
         +'<a href="'+im.url+'" style="display:inline-block;background:#0058A3;color:#fff;font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;text-decoration:none">Ver empreendimento →</a>'
         +'</div>',

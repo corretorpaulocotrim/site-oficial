@@ -7,7 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#060f1e;--navy2:#0a1628;--navy3:#0d2040;--gold:#c9993a;--gold2:#e8b84b;--green:#16a34a;--green2:#15803d;--red:#dc2626;--text:#1e293b;--muted:#64748b;--white:#fff;--border:#e2e8f0;--radius:10px;--radius-lg:16px;--sidebar:260px}
+:root{--navy:#141311;--navy2:#1a1a19;--navy3:#2c2b28;--gold:#b0895b;--gold2:#c49a68;--green:#16a34a;--green2:#15803d;--red:#dc2626;--text:#1a1a19;--muted:#8a857b;--white:#fff;--border:#e3ddd1;--radius:10px;--radius-lg:16px;--sidebar:260px}
 html,body{height:100%}
 body{font-family:"Inter",sans-serif;color:var(--text);background:#f0f4f8;min-height:100vh;display:flex;flex-direction:column}
 button,input,select,textarea{font-family:inherit}
@@ -76,7 +76,7 @@ button{cursor:pointer}
 .status-perdido{background:#fef2f2;color:#dc2626}
 .origin-tag{font-size:10px;font-weight:600;padding:2px 8px;border-radius:4px;background:#f1f5f9;color:var(--muted);white-space:nowrap}
 .btn-sm{font-size:11px;font-weight:700;padding:5px 10px;border-radius:6px;border:1px solid var(--border);background:#fff;transition:all .2s;white-space:nowrap;cursor:pointer}
-.btn-sm:hover{background:#f8fafc;border-color:#94a3b8}
+.btn-sm:hover{background:#f8fafc;border-color:#a39d92}
 .btn-sm.green{background:#16a34a;color:#fff;border-color:#16a34a}
 .btn-sm.green:hover{background:#15803d}
 .btn-sm.gold{background:linear-gradient(135deg,#c9993a,#e8b84b);color:var(--navy);border:none}
@@ -96,7 +96,7 @@ button{cursor:pointer}
 .pipe-col-name{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--navy3)}
 .pipe-count{font-size:10px;font-weight:700;background:rgba(0,0,0,.06);padding:2px 7px;border-radius:20px;color:var(--muted)}
 .pipe-card{background:#fff;border:1px solid var(--border);border-radius:10px;padding:12px;margin-bottom:8px;transition:all .2s;cursor:pointer}
-.pipe-card:hover{border-color:#94a3b8;box-shadow:0 4px 12px rgba(0,0,0,.06)}
+.pipe-card:hover{border-color:#a39d92;box-shadow:0 4px 12px rgba(0,0,0,.06)}
 .pipe-card-name{font-size:13px;font-weight:700;color:var(--navy3);margin-bottom:3px}
 .pipe-card-empr{font-size:11px;color:var(--muted);margin-bottom:6px}
 .pipe-card-foot{display:flex;align-items:center;justify-content:space-between;margin-top:8px}
@@ -185,8 +185,8 @@ button{cursor:pointer}
 @media(max-width:900px){#sidebar{transform:translateX(-100%)}#sidebar.open{transform:translateX(0)}#main{margin-left:0}.mob-toggle{display:flex!important}.kpi-row{grid-template-columns:1fr 1fr}.pipeline{grid-template-columns:1fr 1fr}.form-row{grid-template-columns:1fr}.grid-2{grid-template-columns:1fr}}
 </style>
 <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
-<script src="crm-config.js"></script>
-</head>
+<script src="../crm-config.js"></script>
+<style>h1,h2,h3,.page-title,.kpi-val,[style*="font-weight:900"]{font-family:"Cormorant Garamond",Georgia,serif!important;letter-spacing:.01em}body{background:#f6f2ea}</style></head>
 <body>
 <div id="pc-login" style="position:fixed;inset:0;z-index:99999;background:linear-gradient(135deg,#060f1e,#0d2040);display:flex;align-items:center;justify-content:center;font-family:system-ui,Arial">
   <div style="background:#0d2040;border:1px solid rgba(201,153,58,.3);border-radius:20px;padding:38px 32px;width:340px;text-align:center;box-shadow:0 30px 80px rgba(0,0,0,.5)">
@@ -548,7 +548,7 @@ function renderPipeline(){
 function renderImoveis(){
   var ims=getImoveis();var grid=document.getElementById("imovel-grid");if(!grid)return;
   if(!ims.length){grid.innerHTML="<div class='empty-state'><div class='icon'>&#127970;</div><p>Nenhum imovel cadastrado</p></div>";return}
-  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'><span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span><div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage(&quot;tabelas&quot;)'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast(&quot;Enviando por WhatsApp...&quot;)'>&#128228; Enviar</button></div></div></div>"}).join("");
+  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'"+(i.img?" style=\"background:url('../"+i.img+"') center/cover\"":"")+">"+(i.img?"":"<span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span>")+"<div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage(&quot;tabelas&quot;)'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast(&quot;Enviando por WhatsApp...&quot;)'>&#128228; Enviar</button></div></div></div>"}).join("");
 }
 function salvarImovel(){
   var nome=document.getElementById("ci-nome").value.trim();if(!nome){toast("Nome obrigatorio");return}
@@ -667,14 +667,14 @@ function salvarOCR(){
 updateBadge();renderDash();
 </script>
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&display=swap');
-.card-title,.kpi-val,.sel-title,#topbar-title,.modal-title,.sb-name{font-family:'Fraunces',Georgia,serif !important}
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&display=swap');
+.card-title,.kpi-val,.sel-title,#topbar-title,.modal-title,.sb-name{font-family:Cormorant Garamond,Georgia,serif !important}
 .hoje-hero{background:linear-gradient(135deg,#0d2040,#16a34a);color:#fff;border-radius:16px;padding:20px 22px;margin-bottom:18px;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.hoje-hero b{font-family:'Fraunces',Georgia,serif;font-size:22px}
+.hoje-hero b{font-family:Cormorant Garamond,Georgia,serif;font-size:22px}
 .hoje-hero .hh-sub{font-size:12.5px;color:rgba(255,255,255,.8);margin-top:2px}
 .hoje-grid{display:grid;grid-template-columns:1fr;gap:12px}
 .hcard{background:#fff;border:1px solid var(--border);border-radius:14px;padding:16px 18px;display:flex;gap:14px;align-items:flex-start;box-shadow:0 1px 3px rgba(13,32,64,.05)}
-.hcard .sc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:17px;color:#fff;flex-shrink:0}
+.hcard .sc{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-family:Cormorant Garamond,serif;font-weight:700;font-size:17px;color:#fff;flex-shrink:0}
 .hcard .nm{font-weight:800;color:var(--navy3);font-size:15px}
 .hcard .ph{font-size:12.5px;color:var(--muted)}
 .hcard .na{font-size:12.5px;margin-top:6px;padding:7px 10px;border-radius:8px;background:#f8fafc;color:#334155;line-height:1.4}
@@ -733,10 +733,10 @@ updateBadge();renderDash();
       +'<div style="display:flex;gap:8px"><button class="hbtn g" onclick="crmSync()">↻ Sincronizar</button><button class="hbtn o" onclick="backupCRM()">⬇︎ Backup</button><label class="hbtn o" style="cursor:pointer">↺ Restaurar<input type="file" accept="application/json" style="display:none" onchange="restaurarCRM(this)"></label></div></div>';
     if(!fila.length){ pg.innerHTML=hero+'<div class="empty-state" style="padding:40px"><div class="icon">&#9889;</div><p>Nenhum lead na fila.</p><small>Cadastre um lead ou importe de foto.</small></div>'; atualizarBadgeHoje(); return; }
     var cards=fila.map(function(l){
-      var sc=l._sc, col=sc>=65?'#16a34a':sc>=40?'#c9993a':'#94a3b8';
+      var sc=l._sc, col=sc>=65?'#16a34a':sc>=40?'#c9993a':'#a39d92';
       var pa=proxAcao(l); var r=recomenda(rendaLead(l))[0];
       return '<div class="hcard"><div class="sc" style="background:'+col+'">'+sc+'</div>'
-        +'<div style="flex:1"><div class="nm">'+(l.nome||'Sem nome')+' <span style="font-size:11px;color:#94a3b8;font-weight:600">· '+dias(l)+'d</span></div>'
+        +'<div style="flex:1"><div class="nm">'+(l.nome||'Sem nome')+' <span style="font-size:11px;color:#a39d92;font-weight:600">· '+dias(l)+'d</span></div>'
         +'<div class="ph">'+(l.tel||'sem telefone')+(l.interesse?(' · '+l.interesse):'')+'</div>'
         +(r?'<div class="rec-chip">💡 Ofereça: '+r.nome+' · '+r.preco+'</div>':'')
         +'<div class="na'+(pa.u?' urg':'')+'">'+pa.t+'</div>'
@@ -769,5 +769,6 @@ updateBadge();renderDash();
 })();
 </script>
 
+<script src="../crm-plus.js"></script>
 </body>
 </html>

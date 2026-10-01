@@ -2,41 +2,41 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#0f2e36"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#1a1a19"/>
 <title>Simulador Financiamento — Paulo Cotrim | Rio de Janeiro</title>
 <link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="apple-touch-icon" href="apple-touch-icon.png"/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,500;9..144,600&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500;600&display=swap" rel="stylesheet"/>
 <style>
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-:root{--navy:#0f2e36;--navy2:#173d47;--gold:#0058A3;--gold2:#cf9f4f;--green:#1a8f4c;--green2:#157540;--bg:#f5f6f7;--border:#e8eaed;--text:#0f2e36;--text2:#6b7280;--ease:cubic-bezier(.16,1,.3,1)}
-body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;min-height:100vh;-webkit-font-smoothing:antialiased}
+:root{--navy:#1a1a19;--navy2:#2c2b28;--gold:#0058A3;--gold2:#c49a68;--green:#b0895b;--green2:#9c7748;--bg:#f6f2ea;--border:#e3ddd1;--text:#1a1a19;--text2:#8a857b;--ease:cubic-bezier(.16,1,.3,1)}
+body{font-family:'Inter',system-ui,sans-serif;background:#f6f2ea;color:#1a1a19;min-height:100vh;-webkit-font-smoothing:antialiased}
 /* HEADER */
-.sim-hdr{background:rgba(15,46,54,.92);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(255,255,255,.06),0 12px 30px -18px rgba(0,0,0,.4)}
+.sim-hdr{background:rgba(26,26,25,.92);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);padding:14px 32px;display:flex;align-items:center;justify-content:space-between;box-shadow:0 1px 0 rgba(255,255,255,.06),0 12px 30px -18px rgba(0,0,0,.4)}
 .sim-hdr-logo img{height:44px;width:auto;display:block}.sim-hdr-logo{color:#fff;font-size:14px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;line-height:1.2}
 .sim-hdr-logo small{font-size:10px;opacity:.6;font-weight:500;letter-spacing:.08em;display:block}
 .sim-hdr-btns{display:flex;gap:10px}
 .btn-back{background:rgba(255,255,255,.1);color:#fff;border:1px solid rgba(255,255,255,.25);padding:8px 16px;border-radius:7px;font-size:13px;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;transition:background-color .3s cubic-bezier(.16,1,.3,1)}
 .btn-back:hover{background:rgba(255,255,255,.18)}
 .btn-wa-s{background:#0058A3;color:#fff;border:none;padding:8px 16px;border-radius:7px;font-size:13px;font-weight:700;cursor:pointer;display:inline-flex;align-items:center;gap:6px;box-shadow:0 4px 14px rgba(184,135,58,.3);transition:background-color .3s cubic-bezier(.16,1,.3,1),transform .3s cubic-bezier(.16,1,.3,1)}
-.btn-wa-s:hover{background:#a5772e;transform:translateY(-1px)}
+.btn-wa-s:hover{background:#9c7748;transform:translateY(-1px)}
 /* HERO BAR */
-.sim-hero{background:linear-gradient(105deg,#0f2e36 55%,#12252b 100%);color:#fff;padding:32px;text-align:center}
-.sim-hero h1{font-family:'Fraunces',Georgia,serif;font-size:clamp(22px,3vw,34px);font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
+.sim-hero{background:linear-gradient(105deg,#1a1a19 55%,#2c2b28 100%);color:#fff;padding:32px;text-align:center}
+.sim-hero h1{font-family:Cormorant Garamond,Georgia,serif;font-size:clamp(22px,3vw,34px);font-weight:600;letter-spacing:-.01em;margin-bottom:8px}
 .sim-hero p{font-size:14px;opacity:.8;max-width:540px;margin:0 auto}
 .sim-chips{display:flex;justify-content:center;gap:10px;flex-wrap:wrap;margin-top:16px}
 .chip{background:rgba(255,255,255,.12);color:rgba(255,255,255,.9);font-size:11px;font-weight:600;padding:5px 12px;border-radius:20px}
 /* APP WRAP */
 .app-wrap{max-width:960px;margin:32px auto;padding:0 16px 48px}
-.sim-card{background:#fff;border-radius:16px;box-shadow:0 4px 18px rgba(15,46,54,.07),0 26px 60px -10px rgba(15,46,54,.18);overflow:hidden}
+.sim-card{background:#fff;border-radius:16px;box-shadow:0 4px 18px rgba(26,26,25,.07),0 26px 60px -10px rgba(26,26,25,.18);overflow:hidden}
 /* simulator styles */
 .hdr2{background:var(--navy);padding:1.25rem 1.5rem 1rem}
 .hdr2-top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .hdr2-left{display:flex;align-items:center;gap:14px}
 .av{width:50px;height:50px;border-radius:50%;background:var(--navy2);border:2px solid var(--gold);display:flex;align-items:center;justify-content:center;font-size:17px;font-weight:700;color:var(--gold2);flex-shrink:0;overflow:hidden}
 .av img{width:100%;height:100%;object-fit:cover}
-.hdr2-name{font-family:'Fraunces',Georgia,serif;color:#fff;font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
+.hdr2-name{font-family:Cormorant Garamond,Georgia,serif;color:#fff;font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.2}
 .hdr2-sub{color:var(--gold2);font-size:11px;margin-top:2px;letter-spacing:.02em}
 .wa-btn2{display:flex;align-items:center;gap:7px;background:var(--green);color:#fff;border:none;border-radius:8px;padding:9px 14px;font-size:12px;font-weight:700;cursor:pointer;white-space:nowrap;transition:background-color .3s var(--ease)}
 .wa-btn2:hover{background:var(--green2)}
@@ -45,12 +45,12 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .hdr2-meta span{display:flex;align-items:center;gap:5px;font-size:11px;color:rgba(255,255,255,.62)}
 .stabs{display:flex;gap:2px;background:var(--bg);padding:3px;border-radius:10px;margin:1rem 1.5rem;border:.5px solid var(--border)}
 .stab{flex:1;padding:7px 4px;font-size:11px;font-weight:600;border:none;border-radius:8px;cursor:pointer;background:transparent;color:var(--text2);transition:all .2s var(--ease)}
-.stab.on{background:#fff;color:var(--navy);border:.5px solid var(--border);box-shadow:0 1px 3px rgba(15,46,54,.08)}
+.stab.on{background:#fff;color:var(--navy);border:.5px solid var(--border);box-shadow:0 1px 3px rgba(26,26,25,.08)}
 .sim-divider{display:flex;align-items:center;gap:12px;margin:1.5rem 0 1rem;text-align:center}
 .sim-divider::before,.sim-divider::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent)}
 .sim-divider span{font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--gold);white-space:nowrap}
 .sim-body{padding:.5rem 1.5rem 1.75rem}
-.sel-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1rem;box-shadow:0 4px 18px rgba(15,46,54,.06)}
+.sel-box{background:#fff;border:1px solid var(--border);border-radius:16px;padding:1.4rem 1.5rem;margin-bottom:1rem;box-shadow:0 4px 18px rgba(26,26,25,.06)}
 .sel-title{font-size:12px;font-weight:800;color:var(--navy);text-transform:uppercase;letter-spacing:.06em;margin-bottom:14px}
 .g2s{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .g4s{display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:10px}
@@ -58,14 +58,14 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .fi2 label{font-size:11px;color:var(--text2);font-weight:600;text-transform:uppercase;letter-spacing:.05em}
 .fi2 input,.fi2 select{font-size:14px;padding:11px 13px;border:1px solid var(--border);border-radius:10px;background:#fff;color:var(--text);width:100%;font-family:inherit}
 .fi2 input:focus,.fi2 select:focus{outline:none;border-color:var(--gold)}
-.fi2.hl input{border-color:var(--green);background:#f0f9f3}.fi2.hl label{color:var(--green)}
-.fi2.wn input{border-color:#a5691f;background:#fbf3e4}.fi2.wn label{color:#a5691f}
+.fi2.hl input{border-color:var(--green);background:#f4efe6}.fi2.hl label{color:var(--green)}
+.fi2.wn input{border-color:#a5691f;background:#f4efe6}.fi2.wn label{color:#a5691f}
 .pr2{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:7px;margin-top:10px}
 .pi2{padding:15px 16px;border-radius:12px;display:flex;flex-direction:column;gap:4px}
 .pi2.b{background:var(--bg);border:.5px solid var(--border)}.pi2.b .pv2{color:var(--navy)}
-.pi2.g{background:#f0f9f3;border:.5px solid #bfe3cc}.pi2.g .pv2{color:var(--green)}
-.pi2.o{background:#f3f5f8;border:.5px solid #e3e8ee}.pi2.o .pv2{color:#0f2e36}
-.pi2.r{background:#f3f5f8;border:.5px solid #e3e8ee}.pi2.r .pv2{color:#0f2e36}
+.pi2.g{background:#f4efe6;border:.5px solid #bfe3cc}.pi2.g .pv2{color:var(--green)}
+.pi2.o{background:#f6f2ea;border:.5px solid #e3ddd1}.pi2.o .pv2{color:#1a1a19}
+.pi2.r{background:#f6f2ea;border:.5px solid #e3ddd1}.pi2.r .pv2{color:#1a1a19}
 .pi2.v{background:#fbf7ee;border:.5px solid #ecdfba}.pi2.v .pv2{color:var(--gold)}
 .pl2{font-size:10.5px;font-weight:700;text-transform:uppercase;letter-spacing:.05em;color:var(--text2)}
 .pv2{font-size:16px;font-weight:800;letter-spacing:-.01em}
@@ -83,9 +83,9 @@ body{font-family:'Inter',system-ui,sans-serif;background:#f5f6f7;color:#0f2e36;m
 .mt2 .ml{font-size:10px;color:var(--text2);line-height:1.3}
 .mt2 .mv{font-size:15px;font-weight:800;margin-top:4px;color:var(--text)}
 .mt2.hi{background:var(--bg);border:.5px solid var(--border)}.mt2.hi .mv{color:var(--navy)}
-.mt2.gr{background:#f0f9f3;border:.5px solid #bfe3cc}.mt2.gr .mv{color:var(--green)}
-.mt2.am{background:#f3f5f8;border:.5px solid #e3e8ee}.mt2.am .mv{color:#0f2e36}
-.mt2.re{background:#f3f5f8;border:.5px solid #e3e8ee}.mt2.re .mv{color:#0f2e36}
+.mt2.gr{background:#f4efe6;border:.5px solid #bfe3cc}.mt2.gr .mv{color:var(--green)}
+.mt2.am{background:#f6f2ea;border:.5px solid #e3ddd1}.mt2.am .mv{color:#1a1a19}
+.mt2.re{background:#f6f2ea;border:.5px solid #e3ddd1}.mt2.re .mv{color:#1a1a19}
 .mt2.vi{background:#fbf7ee;border:.5px solid #ecdfba}.mt2.vi .mv{color:var(--gold)}
 .tw2{overflow-x:auto;margin-top:7px}
 .st2{max-height:260px;overflow-y:auto}
@@ -108,8 +108,8 @@ tr.s2rx td{background:var(--bg)}
 .or-div2::before,.or-div2::after{content:'';flex:1;height:.5px;background:var(--border)}
 .regra-tag2{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;border-radius:6px;font-size:11px;font-weight:600;margin-top:8px}
 .rt-sbpe2{background:var(--bg);color:var(--navy);border:.5px solid var(--border)}
-.rt-mcmv2{background:#f0f9f3;color:var(--green);border:.5px solid #bfe3cc}
-.cb2{display:inline-flex;align-items:center;gap:5px;background:#fbf3e4;color:#8a5c1c;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
+.rt-mcmv2{background:#f4efe6;color:var(--green);border:.5px solid #bfe3cc}
+.cb2{display:inline-flex;align-items:center;gap:5px;background:#f4efe6;color:#8a5c1c;font-size:10px;padding:2px 8px;border-radius:20px;font-weight:600;margin-top:5px}
 @media(max-width:600px){.g2s,.g4s,.pr2{grid-template-columns:1fr 1fr}.stabs{flex-wrap:wrap}}
 </style>
 <link rel="canonical" href="https://paulocotrim.com.br/simulador.html"/>
@@ -147,18 +147,18 @@ tr.s2rx td{background:var(--bg)}
   <!-- AVISO IMPORTANTE -->
   <div style="
     margin-top:20px;
-    background:#f5f6f7;
-    border:1px solid #e8eaed;
+    background:#f6f2ea;
+    border:1px solid #e3ddd1;
     border-radius:10px;
     padding:16px 20px;
     font-size:11.5px;
-    color:#6b7280;
+    color:#8a857b;
     line-height:1.4;
     text-align:justify;
     box-sizing:border-box;
     width:100%;
   ">
-    <p style="font-size:11.5px;font-weight:700;color:#0f2e36;margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>AVISO IMPORTANTE – INFORMAÇÕES, VALORES E CONDIÇÕES</p>
+    <p style="font-size:11.5px;font-weight:700;color:#1a1a19;margin-bottom:8px"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M10.29 3.86 1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>AVISO IMPORTANTE – INFORMAÇÕES, VALORES E CONDIÇÕES</p>
 
     <p style="margin-bottom:8px">Os valores, parcelas, taxas de juros, condições de financiamento e valores de seguro apresentados nesta simulação são <strong>estimativas e valores prévios</strong>, elaborados com base em parâmetros de mercado, tabelas referenciais e na minha experiência de 18 anos no mercado imobiliário. Eles servem apenas como orientação, projeção e referência inicial para seu planejamento, <strong>podendo sofrer alterações, ajustes, variações ou divergências</strong> a qualquer momento, sem aviso prévio, conforme regras, políticas, normas e tabelas vigentes.</p>
 
@@ -406,20 +406,20 @@ function baixarResumoSimulacao(){
     +(S.valorChaves>0?'<div class="row"><span class="rk">Na entrega das chaves</span><span class="rv">'+BRL(S.valorChaves)+'</span></div>':'')
     +(c.posChavesElegivel&&c.posChavesTotal>0?'<div class="row"><span class="rk">Pós-chaves ('+c.construtora+')</span><span class="rv">'+S.posChavesQtd+'x de '+BRL(S.posChavesValor)+'</span></div>':'');
   var html='<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"><title>Resumo + Simulação — '+nomeEmp+'</title>'
-    +'<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
-    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#0f2e36;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
+    +'<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">'
+    +'<style>*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,sans-serif;color:#1a1a19;background:#fff;padding:44px;max-width:680px;margin:0 auto}'
     +'.kicker{font-size:10.5px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#0058A3;margin-bottom:8px}'
-    +'h1{font-family:Fraunces,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#6b7280;margin-bottom:20px}'
-    +'.h2{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#6b7280;margin:22px 0 6px}'
-    +'.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e8eaed;font-size:13.5px}.rk{color:#6b7280}.rv{font-weight:700}'
-    +'.cliente{font-size:12px;color:#6b7280;margin-bottom:18px}'
-    +'.note{font-size:11.5px;color:#6b7280;margin-top:18px;line-height:1.7;background:#e7edee;padding:14px 16px;border-radius:10px}'
-    +'.legal{font-size:10px;color:#94a3b8;margin-top:14px;line-height:1.7;padding:14px 16px;border:1px solid #e8eaed;border-radius:10px}'
-    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:24px;padding-top:20px;border-top:1px solid #e8eaed}'
-    +'.qrbox img{width:100px;height:100px}.qrbox div{font-size:12px;color:#6b7280}.qrbox b{display:block;color:#0f2e36;font-size:13.5px;margin-bottom:4px}'
-    +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid #e8eaed}'
-    +'.brandbar b{font-size:13px;color:#0f2e36}.brandbar span{font-size:11.5px;color:#6b7280;display:block}'
-    +'.foot{margin-top:20px;font-size:10px;color:#94a3b8;text-align:center}@media print{body{padding:20px}}</style></head><body>'
+    +'h1{font-family:Cormorant Garamond,serif;font-size:24px;margin-bottom:4px}.sub{font-size:12px;color:#8a857b;margin-bottom:20px}'
+    +'.h2{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.05em;color:#8a857b;margin:22px 0 6px}'
+    +'.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #e3ddd1;font-size:13.5px}.rk{color:#8a857b}.rv{font-weight:700}'
+    +'.cliente{font-size:12px;color:#8a857b;margin-bottom:18px}'
+    +'.note{font-size:11.5px;color:#8a857b;margin-top:18px;line-height:1.7;background:#efe9df;padding:14px 16px;border-radius:10px}'
+    +'.legal{font-size:10px;color:#a39d92;margin-top:14px;line-height:1.7;padding:14px 16px;border:1px solid #e3ddd1;border-radius:10px}'
+    +'.qrbox{display:flex;align-items:center;gap:16px;margin-top:24px;padding-top:20px;border-top:1px solid #e3ddd1}'
+    +'.qrbox img{width:100px;height:100px}.qrbox div{font-size:12px;color:#8a857b}.qrbox b{display:block;color:#1a1a19;font-size:13.5px;margin-bottom:4px}'
+    +'.brandbar{display:flex;align-items:center;gap:10px;margin-top:20px;padding-top:14px;border-top:1px solid #e3ddd1}'
+    +'.brandbar b{font-size:13px;color:#1a1a19}.brandbar span{font-size:11.5px;color:#8a857b;display:block}'
+    +'.foot{margin-top:20px;font-size:10px;color:#a39d92;text-align:center}@media print{body{padding:20px}}</style></head><body>'
     +'<div class="kicker">Resumo + Simulação · Paulo Cotrim</div>'
     +'<h1>'+nomeEmp+'</h1><div class="sub">'+(emp?emp.b+' · '+emp.c:'Simulação personalizada')+' · CRECI-RJ 77677-F</div>'
     +(S.clienteNome?'<div class="cliente"><strong>Cliente:</strong> '+S.clienteNome+(S.clienteTel?' · '+S.clienteTel:'')+'</div>':'')
@@ -440,8 +440,7 @@ function baixarResumoSimulacao(){
     +'<div class="brandbar"><div><b>Paulo Cotrim</b><span>CRECI-RJ 77677-F · corretorpaulocotrim@gmail.com · (21) 98915-0864</span></div></div>'
     +'<div class="legal">Documento meramente informativo e educativo, sem valor contratual. Valores, prazos, taxas e condições de pagamento são estimativas sujeitas à análise oficial da instituição financeira e da construtora, podendo ser alterados sem aviso prévio. Consulte sempre a tabela oficial atualizada e formalize as condições finais com Paulo Cotrim antes de tomar qualquer decisão.</div>'
     +'<div class="foot">Paulo Cotrim · Documento informativo, não substitui a simulação bancária real</div>'
-    +'<script src="wa.js" defer></script>
-</body></html>';
+    +'</body></html>';
   var win=window.open('','_blank');
   if(win){win.document.write(html);win.document.close();win.focus();setTimeout(function(){win.print();},350);}
 }
@@ -451,8 +450,8 @@ function renderGateRenda(){
     +'<div class="sel-title" style="justify-content:center;display:flex">Para começar, qual é a sua renda familiar mensal?</div>'
     +'<p style="font-size:12.5px;color:var(--text2);margin-bottom:14px">Sem essa informação não conseguimos estimar corretamente sua capacidade de financiamento — é o primeiro passo antes de qualquer resultado.</p>'
     +'<div style="max-width:280px;margin:0 auto"><input id="gateRendaInput" type="text" inputmode="decimal" value="'+(S.renda>0?N2(S.renda):'')+'" placeholder="Ex: 4.500,00" oninput="S.renda=parseBRL(this.value)" onkeydown="if(event.key===\'Enter\'){event.preventDefault();render();}" style="width:100%;font-size:16px;padding:12px 14px;border:1.5px solid var(--gold);border-radius:9px;text-align:center;font-family:inherit"></div>'
-    +'<button type="button" onclick="render()" style="margin-top:14px;background:#1a8f4c;color:#fff;border:none;border-radius:9px;padding:12px 30px;font-size:14px;font-weight:700;font-family:Fraunces,Georgia,serif;cursor:pointer">Continuar &rarr;</button>'
-    +'<p style="font-size:10.5px;color:#94a3b8;margin-top:10px">Renda pode ser composta com familiares. Usada apenas para estimar sua simulação.</p>'
+    +'<button type="button" onclick="render()" style="margin-top:14px;background:#b0895b;color:#fff;border:none;border-radius:9px;padding:12px 30px;font-size:14px;font-weight:700;font-family:Cormorant Garamond,Georgia,serif;cursor:pointer">Continuar &rarr;</button>'
+    +'<p style="font-size:10.5px;color:#a39d92;margin-top:10px">Renda pode ser composta com familiares. Usada apenas para estimar sua simulação.</p>'
     +'</div>';
 }
 
@@ -501,7 +500,7 @@ function renderEmpSelector(c){
       :'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" oninput="updTaxa(this.value)">'
         +(S.useCustomTaxa?'<a href="#" onclick="resetTaxa();return false" style="font-size:10px;color:var(--gold);margin-top:3px;display:inline-block">← usar taxa automática da faixa</a>':'')+'</div>')
     +'</div>'
-    +(S.useCustom?'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Construtora <span style="font-weight:400;color:#94a3b8">— define regra de pós-chaves</span></label><input type="text" value="'+S.customConstrutora+'" placeholder="Ex: MRV, Direcional, Cury..." oninput="updCustomConstrutora(this.value)"></div>'
+    +(S.useCustom?'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Construtora <span style="font-weight:400;color:#a39d92">— define regra de pós-chaves</span></label><input type="text" value="'+S.customConstrutora+'" placeholder="Ex: MRV, Direcional, Cury..." oninput="updCustomConstrutora(this.value)"></div>'
       +'<div class="fi2"><label>Taxa de juros a.a. — '+(S.useCustomTaxa?'editada manualmente':'automática pela faixa')+'</label><input type="text" value="'+N2(c?c.taxaAnual:S.taxaAnual)+'" oninput="updTaxa(this.value)">'
         +(S.useCustomTaxa?'<a href="#" onclick="resetTaxa();return false" style="font-size:10px;color:var(--gold);margin-top:3px;display:inline-block">← usar taxa automática da faixa</a>':'')+'</div></div>':'');
 }
@@ -512,22 +511,22 @@ function renderResumo(c){
   var _nome=(S.clienteNome||'').trim().split(' ')[0];
   var _ola=_nome?(', '+_nome):'';
   var _lev = _cobre
-    ? '<div style="display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,#0f2e36,#14424e);border-radius:16px;padding:16px 18px;margin-bottom:16px;color:#fff">'
+    ? '<div style="display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,#1a1a19,#14424e);border-radius:16px;padding:16px 18px;margin-bottom:16px;color:#fff">'
       +'<div style="font-size:26px;line-height:1"></div>'
-      +'<div><div style="font-family:Fraunces,Georgia,serif;font-size:16.5px;font-weight:600;line-height:1.35">Boa not\u00edcia'+_ola+'! D\u00e1 pra realizar.</div>'
+      +'<div><div style="font-family:Cormorant Garamond,Georgia,serif;font-size:16.5px;font-weight:600;line-height:1.35">Boa not\u00edcia'+_ola+'! D\u00e1 pra realizar.</div>'
       +'<div style="font-size:12.5px;color:rgba(255,255,255,.8);margin-top:3px">Sua renda cobre este im\u00f3vel. Sua parcela ficaria em torno de <b style="color:#7ee0a6">'+BRL(c.prestacaoEstimada)+'/m\u00eas</b> \u2014 e voc\u00ea faz tudo sem sair de casa.</div></div></div>'
-    : '<div style="display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,#0f2e36,#14424e);border-radius:16px;padding:16px 18px;margin-bottom:16px;color:#fff">'
+    : '<div style="display:flex;gap:12px;align-items:flex-start;background:linear-gradient(135deg,#1a1a19,#14424e);border-radius:16px;padding:16px 18px;margin-bottom:16px;color:#fff">'
       +'<div style="font-size:26px;line-height:1"></div>'
-      +'<div><div style="font-family:Fraunces,Georgia,serif;font-size:16.5px;font-weight:600;line-height:1.35">Voc\u00ea j\u00e1 est\u00e1 no caminho'+_ola+'!</div>'
+      +'<div><div style="font-family:Cormorant Garamond,Georgia,serif;font-size:16.5px;font-weight:600;line-height:1.35">Voc\u00ea j\u00e1 est\u00e1 no caminho'+_ola+'!</div>'
       +'<div style="font-size:12.5px;color:rgba(255,255,255,.85);margin-top:3px">Falta pouco \u2014 ajustando entrada, prazo ou FGTS a conta fecha. Me chama que a gente resolve juntos.</div></div></div>';
   var isSBPE=!c.faixa;
   return'<div class="sel-box">'
-    +'<div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="1"/></svg>Sua renda &nbsp;<span style="color:#94a3b8;font-weight:400;font-size:10px">edite se precisar corrigir</span></div>'
+    +'<div class="sel-title"><svg viewBox="0 0 24 24" style="width:13px;height:13px;stroke:currentColor;fill:none;stroke-width:1.8;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="4" y="2" width="16" height="20" rx="1"/></svg>Sua renda &nbsp;<span style="color:#a39d92;font-weight:400;font-size:10px">edite se precisar corrigir</span></div>'
     +'<div class="g2s" style="margin-bottom:10px"><div class="fi2 hl"><label>Renda familiar mensal (R$)</label><input type="text" value="'+N2(S.renda)+'" oninput="updRenda(this.value)"></div>'
     +'<div style="display:flex;align-items:center;padding-top:18px"><span class="regra-tag2 '+(isSBPE?'rt-sbpe2':'rt-mcmv2')+'">'+c.modLabel+' — até '+(isSBPE?'90%':'80%')+' do imóvel'+(c.limiteFaixa!==Infinity?' · teto R$ '+N2(c.limiteFaixa):'')+'</span></div></div>'
     +renderEmpSelector(c)
     +(emp?'<span class="cb2">'+emp.c+' · '+STATUS_LABEL[emp.s]+'</span>':'')
-    +(c.posChavesElegivel?' <span class="cb2" style="background:#f0f9f3;color:#157540">Pós-chaves até '+c.posChavesMax+'x</span>':'')
+    +(c.posChavesElegivel?' <span class="cb2" style="background:#f4efe6;color:#9c7748">Pós-chaves até '+c.posChavesMax+'x</span>':'')
     +'</div>'
     +_lev+'<div class="info-box2"><strong>Como calculamos:</strong> identificamos sua faixa no Minha Casa Minha Vida pela renda informada (tabela oficial 2026), aplicamos o limite de financiamento e a taxa de juros dessa faixa, e comparamos com o que sua renda comprova (30% dela, em até 420 meses) e com o teto que o próprio imóvel permite financiar. O menor entre os três é o crédito financiado — depois somamos o subsídio, se sua faixa tiver direito.</div>'
     +'<div class="pr2">'
@@ -544,7 +543,7 @@ function renderResumo(c){
     +'<div class="mt2 gr"><div class="ml">Prazo considerado</div><div class="mv">'+c.prazo+' meses</div></div>'
     +(c.mesesObra>0?'<div class="mt2 vi"><div class="ml">Previsão até as chaves</div><div class="mv">'+c.mesesObra+' meses</div></div>':'<div class="mt2 vi"><div class="ml">Situação da obra</div><div class="mv">Pronto para morar</div></div>')
     +'</div>'
-    +'<p style="font-size:10.5px;color:#94a3b8;margin-top:12px">Estimativa educativa com base na tabela oficial do Minha Casa Minha Vida 2026 — a Caixa confirma taxa, subsídio, prazo e valor exatos após análise de crédito. Valores sujeitos à análise oficial da instituição financeira e da construtora.</p>'
+    +'<p style="font-size:10.5px;color:#a39d92;margin-top:12px">Estimativa educativa com base na tabela oficial do Minha Casa Minha Vida 2026 — a Caixa confirma taxa, subsídio, prazo e valor exatos após análise de crédito. Valores sujeitos à análise oficial da instituição financeira e da construtora.</p>'
     +'<div style="margin-top:16px;padding-top:14px;border-top:.5px solid var(--border)">'
     +'<div class="g2s" style="margin-bottom:10px"><div class="fi2"><label>Seu nome completo</label><input type="text" value="'+S.clienteNome+'" oninput="updCliente(\'clienteNome\',this.value)"></div><div class="fi2"><label>Seu WhatsApp</label><input type="text" value="'+S.clienteTel+'" oninput="updCliente(\'clienteTel\',this.value)"></div></div>'
     +'<button class="btn-pg" onclick="whatsappSim()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><rect x="7" y="2" width="10" height="20" rx="2"/><line x1="11" y1="18" x2="13" y2="18"/></svg>Falar com o Paulo Cotrim no WhatsApp</button>'
@@ -579,8 +578,8 @@ function renderFluxo(c){
       +'<div class="fi2"><label>Parcelas pós-chaves — até '+c.posChavesMax+'x ('+c.construtora+')</label><input type="number" value="'+(S.posChavesQtd>0?S.posChavesQtd:'')+'" placeholder="Ex: '+c.posChavesMax+'" oninput="updFluxo(\'posChavesQtd\',this.value)"></div>'
       +'<div class="fi2"><label>Valor de cada parcela pós-chaves (R$)</label><input type="text" value="'+N2(S.posChavesValor)+'" oninput="updFluxo(\'posChavesValor\',this.value)"></div>'
       +'</div>'
-      +'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' costuma estender o que exceder o parcelável da obra para depois da entrega das chaves, em até '+c.posChavesMax+'x. Digite a quantidade de parcelas que quer usar e o ZERAR calcula o valor de cada uma.</p>')
-      :(c.construtora?'<p style="font-size:10.5px;color:#94a3b8;margin-bottom:10px">'+c.construtora+' não trabalha com parcelamento pós-chaves nesta simulação — o que exceder o parcelável da obra e o FGTS costuma precisar ser pago à vista na assinatura. Vale confirmar com o Paulo se há condição especial para este empreendimento.</p>':''))
+      +'<p style="font-size:10.5px;color:#a39d92;margin-bottom:10px">'+c.construtora+' costuma estender o que exceder o parcelável da obra para depois da entrega das chaves, em até '+c.posChavesMax+'x. Digite a quantidade de parcelas que quer usar e o ZERAR calcula o valor de cada uma.</p>')
+      :(c.construtora?'<p style="font-size:10.5px;color:#a39d92;margin-bottom:10px">'+c.construtora+' não trabalha com parcelamento pós-chaves nesta simulação — o que exceder o parcelável da obra e o FGTS costuma precisar ser pago à vista na assinatura. Vale confirmar com o Paulo se há condição especial para este empreendimento.</p>':''))
     +'<button type="button" class="btn-pg" style="background:var(--gold)" onclick="zerarFluxo()"><svg viewBox="0 0 24 24" style="width:14px;height:14px;stroke:currentColor;fill:none;stroke-width:2;vertical-align:-2px;margin-right:5px;display:inline-block"><path d="M21 12a9 9 0 11-2.64-6.36"/><path d="M21 3v6h-6"/></svg>ZERAR — completar automaticamente</button>'
     +'</div>'
     +'<div class="ssec s1x"><div class="ssh" style="cursor:default"><h3>Total do fluxo montado</h3></div><div class="ssb">'
@@ -593,7 +592,7 @@ function renderFluxo(c){
     +(pc&&c.posChavesTotal>0?'<div class="mt2 gr"><div class="ml">Pós-chaves ('+S.posChavesQtd+'x)</div><div class="mv">'+BRL(c.posChavesTotal)+'</div></div>':'')
     +'<div class="mt2 '+(Math.abs(c.fluxoRestante)<0.5?'gr':'am')+'"><div class="ml">'+(c.fluxoRestante>0.5?'Ainda falta':(c.fluxoRestante<-0.5?'Passou do valor em':'Fechado certinho'))+'</div><div class="mv">'+BRL(Math.abs(c.fluxoRestante))+'</div></div>'
     +'</div>'
-    +(acimaTeto?'<div style="margin-top:12px;padding:10px 12px;background:#fbf3e4;border-radius:8px;font-size:11.5px;color:#8a5c1c">Parcela mensal ou anual está bem alta — considere aumentar a quantidade de parcelas ou usar ZERAR para redistribuir.</div>':'')
+    +(acimaTeto?'<div style="margin-top:12px;padding:10px 12px;background:#f4efe6;border-radius:8px;font-size:11.5px;color:#8a5c1c">Parcela mensal ou anual está bem alta — considere aumentar a quantidade de parcelas ou usar ZERAR para redistribuir.</div>':'')
     +'</div></div>';
 }
 
@@ -633,8 +632,8 @@ render();
 <!-- WhatsApp FAB -->
 <style>
 .wa-fab{position:fixed;bottom:24px;right:24px;z-index:9999;display:flex;flex-direction:column;align-items:flex-end;gap:8px}
-.wa-fab a{background:#1a8f4c;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(26,143,76,.35);display:flex;align-items:center;gap:8px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1);white-space:nowrap;text-decoration:none}
-.wa-fab a:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(26,143,76,.42)}
+.wa-fab a{background:#b0895b;color:#fff;border-radius:50px;padding:14px 20px;font-size:14px;font-weight:700;box-shadow:0 8px 24px rgba(176,137,91,.35);display:flex;align-items:center;gap:8px;transition:transform .35s cubic-bezier(.16,1,.3,1),box-shadow .35s cubic-bezier(.16,1,.3,1);white-space:nowrap;text-decoration:none}
+.wa-fab a:hover{transform:translateY(-2px);box-shadow:0 12px 30px rgba(176,137,91,.42)}
 .wa-fab-pulse{width:56px;height:56px;border-radius:50%;padding:0;justify-content:center;font-size:24px}
 @media(max-width:600px){.wa-fab-label{display:none}}
 </style>
@@ -644,5 +643,6 @@ render();
   </a>
 </div>
 <script src="leads.js" defer></script>
+<script src="wa.js" defer></script>
 </body>
 </html>
