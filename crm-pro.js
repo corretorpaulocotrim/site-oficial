@@ -11,15 +11,15 @@ function semAc(s){return String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLow
 var BN=BAIRROS.map(semAc).map(function(b,i){return[b,BAIRROS[i]]}).sort(function(a,b){return b[0].length-a[0].length});
 function achaBairro(s){var l=semAc(s);for(var i=0;i<BN.length;i++)if(new RegExp('\\b'+BN[i][0]+'\\b').test(l))return BN[i][1];return ''}
 var reTel=/(?:\+?55[\s.-]*)?\(?\d{2}\)?[\s.-]*9?\s?\d{4}[\s.-]*\d{4}/g, reMail=/[\w.+-]+@[\w-]+(?:\.[\w-]+)+/g;
-var LIXO=/\b(tel|telefone|whats(app)?|zap|cel(ular)?|fone|contato|nome|e-?mail|bairro|regi[aã]o|cliente|lead|online|digitando|visto por [úu]ltimo|hoje|ontem|mensagem|grupo|você|voce|admin)\b/gi;
+var LIXO=/\b(gmail|hotmail|outlook|yahoo|com|br|tel|telefone|whats(app)?|zap|cel(ular)?|fone|contato|nome|e-?mail|bairro|regi[aã]o|cliente|lead|online|digitando|visto por [úu]ltimo|hoje|ontem|mensagem|grupo|você|voce|admin)\b/gi;
 var STOP=/\b(oi|ol[aá]|quero|queria|gostaria|saber|bom dia|boa tarde|boa noite|tudo bem|obrigad\w*|sim|n[aã]o|informa\w*|apartamento|im[oó]vel|valor|pre[cç]o|lista|lead|leads|planilha|interessad\w*|vou|pode|preciso|tem|qual|quanto)\b/i;
-function soNome(s){if(STOP.test(semAc(s)))return '';var b0=achaBairro(s);if(b0)s=String(s).replace(new RegExp(b0.replace(/\s+/g,'\\s+'),'i'),' ').replace(new RegExp(semAc(b0),'i'),' ');var n=String(s).replace(reMail,'').replace(reTel,'').replace(/\b\d{1,2}:\d{2}\b/g,'').replace(LIXO,' ').replace(/[^A-Za-zÀ-ÿ\s'.]/g,' ').replace(/\s+/g,' ').trim();
+function soNome(s,keep){if(STOP.test(semAc(s)))return '';var b0=keep?'':achaBairro(s);if(b0)s=String(s).replace(new RegExp(b0.replace(/\s+/g,'\\s+'),'i'),' ').replace(new RegExp(semAc(b0),'i'),' ');var n=String(s).replace(reMail,'').replace(reTel,'').replace(/\b\d{1,2}:\d{2}\b/g,'').replace(LIXO,' ').replace(/[^A-Za-zÀ-ÿ\s'.]/g,' ').replace(/\s+/g,' ').trim();
  
  if(n.length<2||n.split(' ').length>6)return '';return n.split(' ').slice(0,4).map(function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()}).join(' ')}
 /* Leitura inteligente: 3 formatos — (1) linha com nome+telefone, (2) bloco vertical (nome em cima, dados embaixo — prints de WhatsApp), (3) colunas (todos os nomes, depois todos os telefones, depois e-mails) */
 window.parseContatosOCR=function(txt){
  var L=String(txt).split(/\n/).map(function(x){return x.trim()}).filter(Boolean),it=[],bairrosLista={};
- L.forEach(function(ln){var tels=(ln.match(reTel)||[]).map(tnorm).filter(function(t){return t.length>=10&&t.length<=11}),mails=ln.match(reMail)||[],nm=soNome(ln),b=achaBairro(ln);
+ L.forEach(function(ln){var tels=(ln.match(reTel)||[]).map(tnorm).filter(function(t){return t.length>=10&&t.length<=11}),mails=ln.match(reMail)||[];var cut=ln.search(/\(?\d{2}\)?[\s.-]*9?\s?\d{4}[\s.-]*\d{4}|[\w.+-]+@/);var antes=cut>0?ln.slice(0,cut):(cut===0?'':ln),depois=cut>=0?ln.slice(cut):'';var nm=(tels.length||mails.length)?soNome(antes,1):soNome(ln),b=(tels.length||mails.length)?achaBairro(depois.replace(reMail,' ').replace(reTel,' ')):achaBairro(ln);
   if(b&&!tels.length&&!mails.length)bairrosLista[b]=(bairrosLista[b]||0)+1;
   if(tels.length||mails.length||nm)it.push({tels:tels,mails:mails,nome:nm,b:b,both:!!(nm&&(tels.length||mails.length))})});
  var bairroUnico=Object.keys(bairrosLista).length===1?Object.keys(bairrosLista)[0]:'';
@@ -39,7 +39,7 @@ window.parseContatosOCR=function(txt){
    if(x.tels.length){if(cur.tel){var nn=cur.nome;push();cur={nome:nn==='Contato'?'Contato':'Contato',tel:'',email:'',regiao:bairroUnico,modo:'bloco'}}cur.tel=x.tels[0]}
    if(x.mails.length){if(cur.email&&cur.tel){push();cur={nome:'Contato',tel:'',email:'',regiao:bairroUnico,modo:'bloco'}}cur.email=x.mails[0]}
    if(x.b)cur.regiao=x.b});push()}
- var seen={};out=out.filter(function(c){var k=tnorm(c.tel).slice(-9)||c.email||c.nome;if(seen[k])return false;seen[k]=1;return true});
+ var seen={};out=out.filter(function(c){var t=tnorm(c.tel).slice(-9),e=(c.email||'').toLowerCase();if((t&&seen['t'+t])||(!t&&e&&seen['e'+e])||(!t&&!e))return false;if(t)seen['t'+t]=1;if(e)seen['e'+e]=1;return true});out.forEach(function(c){var e=(c.email||'').toLowerCase();if(e&&out.filter(function(x){return (x.email||'').toLowerCase()===e}).length>1&&!c.tel)c.drop=1});out=out.filter(function(c){return !c.drop});
  out.bairroUnico=bairroUnico;return out};
 
 /* Scanner: modal com fonte obrigatória, bairro da lista, data */
