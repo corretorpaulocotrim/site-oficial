@@ -154,5 +154,5 @@ var _sl=window.salvarLead;window.salvarLead=function(modal){var o=$('fl-origem')
  if(dup&&!confirm(dup.nome+' já está no CRM com esse telefone. Cadastrar mesmo assim?'))return;var b=$('fl-bairro')?$('fl-bairro').value:'';_sl(modal);if(b){var L=getLeads();L[0].bairro=b;saveLeads(L)}};
 var _rf=window.renderFormLead;window.renderFormLead=function(t,m){_rf(t,m);var o=$('fl-obs');if(o&&!$('fl-bairro'))o.closest('.form-group').insertAdjacentHTML('beforebegin',"<div class='form-group'><label class='form-label'>Bairro</label><input class='form-input' id='fl-bairro' list='sc-bl'/></div>")};
 document.addEventListener('DOMContentLoaded',function(){});
-setTimeout(function(){coach();if(!$('sc-bl')){var d=document.createElement('datalist');d.id='sc-bl';d.innerHTML=BAIRROS.map(function(b){return '<option>'+b+'</option>'}).join('');document.body.appendChild(d)}},300);
+setInterval(function(){var p=$('page-hoje');if(p&&p.classList.contains('active')&&!$('coach'))coach()},800);setTimeout(function(){coach();if(!$('sc-bl')){var d=document.createElement('datalist');d.id='sc-bl';d.innerHTML=BAIRROS.map(function(b){return '<option>'+b+'</option>'}).join('');document.body.appendChild(d)}},300);
 })();

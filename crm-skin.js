@@ -18,7 +18,7 @@ body{background:#f6f2ea!important;font-family:Inter,system-ui,sans-serif!importa
 .form-input:focus,.form-select:focus{border-color:#b0895b!important;box-shadow:0 0 0 3px rgba(176,137,91,.15)!important;outline:none}
 /* cards / KPIs */
 .card,.kpi,.icard,.pipe-col,.hcard,.modal{border-radius:6px!important;border:1px solid #e3ddd1!important;box-shadow:none!important;background:#fff!important}
-.kpi{border-top:2px solid #b0895b!important}
+.kpi,.kpi.green,.kpi.blue,.kpi.red,.kpi.gold{border-top:2px solid #b0895b!important}.kpi::before,.kpi::after{display:none!important}.funnel-bar-wrap{background:#efe9df!important}
 .kpi.green,.kpi.blue,.kpi.red,.kpi.gold{background:#fff!important}
 .kpi-label,.form-label,.eyebrow,.card-sub,.lp-key{font:600 10.5px Inter,sans-serif!important;letter-spacing:.14em!important;text-transform:uppercase!important;color:#8a857b!important}
 .kpi-val{font-family:'Cormorant Garamond',serif!important;font-weight:500!important;font-size:38px!important;color:#1a1a19!important}
@@ -58,7 +58,7 @@ css+='@media(max-width:760px){\n.topbar{padding:10px 12px 10px 60px!important;ga
 /* remove emojis da interface (o visual "infantil") sem tocar em dados */
 var RT=/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B50}\u{2B06}\u{2B07}\u{2705}\u{274C}]/u;var RE=/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2B50}\u{2B06}\u{2B07}\u{2705}\u{274C}\u{FE0F}]\s?/gu;
 function limpa(root){var w=document.createTreeWalker(root||document.body,NodeFilter.SHOW_TEXT,{acceptNode:function(n){var p=n.parentNode;if(!p||/SCRIPT|STYLE|TEXTAREA|INPUT/.test(p.nodeName))return 2;return RT.test(n.nodeValue)?1:2}}),n,L=[];while(n=w.nextNode())L.push(n);L.forEach(function(n){RE.lastIndex=0;n.nodeValue=n.nodeValue.replace(RE,'')})}
-function go(){tabbar();limpa();var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(function(){limpa()},60)}).observe(document.body,{childList:true,subtree:true,characterData:false})}
+function go(){tabbar();if(innerWidth<=760){setTimeout(function(){try{goPage('hoje')}catch(e){}},200)}limpa();var t;new MutationObserver(function(){clearTimeout(t);t=setTimeout(function(){limpa()},60)}).observe(document.body,{childList:true,subtree:true,characterData:false})}
 function tabbar(){if(document.getElementById('mtab'))return;var I={hoje:'<path d="M13 2L4 14h7l-1 8 9-12h-7z"/>',central:'<path d="M4 6h16M4 12h16M4 18h10"/>',discador:'<path d="M5 4h4l2 5-3 2a11 11 0 006 6l2-3 5 2v4a2 2 0 01-2 2A17 17 0 013 6a2 2 0 012-2"/>',scan:'<path d="M4 8V5a1 1 0 011-1h3M16 4h3a1 1 0 011 1v3M20 16v3a1 1 0 01-1 1h-3M8 20H5a1 1 0 01-1-1v-3M8 12h8"/>',imoveis:'<path d="M3 21h18M5 21V8l7-5 7 5v13M10 21v-6h4v6"/>'};
  var b=document.createElement('div');b.id='mtab';b.innerHTML=[['hoje','Hoje'],['central','Leads'],['discador','Ligar'],['scan','Scanner'],['imoveis','Imóveis']].map(function(x){return "<button data-p='"+x[0]+"'><svg viewBox='0 0 24 24'>"+I[x[0]]+"</svg>"+x[1]+"</button>"}).join('');document.body.appendChild(b);
  b.onclick=function(e){var t=e.target.closest('button');if(!t)return;var p=t.dataset.p;if(p==='scan'){window.abrirImportFoto&&abrirImportFoto();return}goPage(p);[].forEach.call(b.children,function(x){x.classList.toggle('on',x===t)});scrollTo(0,0)}}

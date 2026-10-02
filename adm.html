@@ -243,7 +243,7 @@ button{cursor:pointer}
       <div class="kpi red"><div class="kpi-label">Fechamentos</div><div class="kpi-val" id="kpi-fechados">0</div><div class="kpi-delta up">Parabéns! &#127881;</div><div class="kpi-icon">&#9989;</div></div>
     </div>
     <div class="grid-2">
-      <div class="card"><div class="card-header"><div><div class="card-title">Funil de Leads</div><div class="card-sub">Distribuicao por etapa</div></div></div><div class="card-body" id="funil-body"></div></div>
+      <div class="card"><div class="card-header"><div><div class="card-title">Funil de Leads</div><div class="card-sub">Distribuição por etapa</div></div></div><div class="card-body" id="funil-body"></div></div>
       <div class="card"><div class="card-header"><div><div class="card-title">Atividade Recente</div><div class="card-sub">Ultimos cadastros</div></div></div><div class="card-body" style="padding:14px 20px" id="atividade-body"></div></div>
     </div>
     <div class="card">
@@ -528,7 +528,7 @@ function renderDash(){
   document.getElementById("kpi-propostas").textContent=pr;
   document.getElementById("kpi-fechados").textContent=fc;
   document.getElementById("kpi-sub1").textContent=qt>0?qt+" lead"+(qt!==1?"s":"")+" quente"+(qt!==1?"s":""):"Sem quentes ainda";
-  document.getElementById("dash-subtitle").textContent=tot>0?"Voce tem "+qt+" lead"+(qt!==1?"s":"")+" quente"+(qt!==1?"s":"")+" aguardando contato.":"Cadastre seu primeiro lead para comecar.";
+  document.getElementById("dash-subtitle").textContent=tot>0?"Você tem "+qt+" lead"+(qt!==1?"s":"")+" quente"+(qt!==1?"s":"")+" aguardando contato.":"Cadastre seu primeiro lead para comecar.";
   var steps=[{l:"Captados",v:tot,c:"linear-gradient(90deg,#060f1e,#0d2040)"},{l:"Contatados",v:ct+pr+fc,c:"linear-gradient(90deg,#1e40af,#3b82f6)"},{l:"Qualificados",v:qt+mn,c:"linear-gradient(90deg,#c9993a,#e8b84b)"},{l:"Propostas",v:pr,c:"linear-gradient(90deg,#7c3aed,#a78bfa)"},{l:"Fechados",v:fc,c:"linear-gradient(90deg,#b0895b,#22c55e)"}];
   document.getElementById("funil-body").innerHTML=steps.map(function(s){return"<div class='funnel-row'><div class='funnel-label'>"+s.l+"</div><div class='funnel-bar-wrap'><div class='funnel-bar' style='width:"+( s.v&&tot?Math.max(6,Math.round(s.v/tot*100)):0)+"%;background:"+s.c+"'>"+s.v+"</div></div><div class='funnel-count'>"+s.v+"</div></div>"}).join("")+"<div style='margin-top:14px;padding-top:12px;border-top:1px solid #f1f5f9;display:flex;gap:20px'><div><div style='font-size:20px;font-weight:900;color:var(--navy3)'>"+(tot?Math.round(fc/tot*100):0)+"%</div><div style='font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em'>Taxa de conversao</div></div><div><div style='font-size:20px;font-weight:900;color:var(--gold)'>"+pr+"</div><div style='font-size:10px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.06em'>Propostas abertas</div></div></div>";
   var rec=ls.slice(0,5);
