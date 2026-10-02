@@ -8,10 +8,10 @@ function abrirRecorte(file){return new Promise(function(done){var u=URL.createOb
  var m=$('scan-crop');if(!m){m=document.createElement('div');m.id='scan-crop';document.body.appendChild(m)}
  m.setAttribute('style','position:fixed;inset:0;z-index:5000;background:#0f0e0c;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:12px;font-family:Inter,sans-serif;color:#fff');
  var maxW=Math.min(innerWidth-24,900),maxH=innerHeight-150,s=Math.min(maxW/img.width,maxH/img.height),W=Math.round(img.width*s),H=Math.round(img.height*s);
- m.innerHTML="<div style='font-size:13px;margin-bottom:8px;text-align:center'>Arraste os 4 cantos dourados até as bordas da lista · "+(QI+1)+" de "+Q.length+"</div><div id='sc-wrap' style='position:relative;width:"+W+"px;height:"+H+"px;touch-action:none'><canvas id='sc-cv' width='"+W*2+"' height='"+H*2+"' style='position:absolute;inset:0;width:"+W+"px;height:"+H+"px'></canvas></div>"
+ m.innerHTML="<div style='font-size:13px;margin-bottom:8px;text-align:center'>Detectei as bordas da folha — ajuste os cantos dourados se precisar · "+(QI+1)+" de "+Q.length+"</div><div id='sc-wrap' style='position:relative;width:"+W+"px;height:"+H+"px;touch-action:none'><canvas id='sc-cv' width='"+W*2+"' height='"+H*2+"' style='position:absolute;inset:0;width:"+W+"px;height:"+H+"px'></canvas></div>"
  +"<div style='display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;justify-content:center'><button id='sc-rot' style='padding:11px 14px;border:1px solid #555;background:none;color:#fff;border-radius:3px'>↻ Girar</button><button id='sc-all' style='padding:11px 14px;border:1px solid #555;background:none;color:#fff;border-radius:3px'>Imagem inteira</button><button id='sc-ok' style='padding:11px 18px;border:none;background:#b0895b;color:#1a1a19;border-radius:3px;font-weight:600'>Usar recorte</button><button id='sc-skip' style='padding:11px 14px;border:none;background:none;color:#aaa'>Pular imagem</button></div>";
  var cv=$('sc-cv'),cx=cv.getContext('2d'),rot=0,src=img;cx.scale(2,2);cx.imageSmoothingQuality='high';
- var P=[[.04,.04],[.96,.04],[.96,.96],[.04,.96]].map(function(p){return[p[0]*W,p[1]*H]});
+ var P=bordas(src,W,H);
  function draw(){cx.clearRect(0,0,W,H);cx.drawImage(src,0,0,W,H);cx.fillStyle='rgba(0,0,0,.45)';cx.beginPath();cx.rect(0,0,W,H);cx.moveTo(P[0][0],P[0][1]);for(var i=3;i>=0;i--)cx.lineTo(P[i][0],P[i][1]);cx.closePath();cx.fill('evenodd');
   cx.strokeStyle='#b0895b';cx.lineWidth=2;cx.beginPath();P.forEach(function(p,i){i?cx.lineTo(p[0],p[1]):cx.moveTo(p[0],p[1])});cx.closePath();cx.stroke();
   P.forEach(function(p){cx.beginPath();cx.arc(p[0],p[1],13,0,7);cx.fillStyle='#b0895b';cx.fill();cx.strokeStyle='#fff';cx.stroke()})}
@@ -26,6 +26,15 @@ function abrirRecorte(file){return new Promise(function(done){var u=URL.createOb
  $('sc-ok').onclick=function(){var k=src.width/W,q=P.map(function(p){return[p[0]*k,p[1]*k]});$('sc-ok').textContent='Ajustando…';setTimeout(function(){var out=warp(src,q);m.remove();done(out)},30)};
  draw()};img.src=u})}
 function abrirRecortesrc(img){var c=document.createElement('canvas');c.width=img.width;c.height=img.height;c.getContext('2d').drawImage(img,0,0);return new Promise(function(r){c.toBlob(function(b){abrirRecorte(b).then(r)},'image/jpeg',.95)})}
+function bordas(img,W,H){try{var w=320,h=Math.round(img.height*w/img.width),c=document.createElement('canvas');c.width=w;c.height=h;var x=c.getContext('2d');x.drawImage(img,0,0,w,h);var d=x.getImageData(0,0,w,h).data,n=w*h,g=new Uint8Array(n),hs=new Uint32Array(256);
+ for(var i=0,j=0;j<n;i+=4,j++){g[j]=(0.299*d[i]+0.587*d[i+1]+0.114*d[i+2])|0;hs[g[j]]++}
+ var B=[],C=[];for(var y0=0;y0<h;y0++)for(var x0=0;x0<w;x0++){var v0=g[y0*w+x0];if(y0<4||y0>=h-4||x0<4||x0>=w-4)B.push(v0);else if(x0>w*.3&&x0<w*.7&&y0>h*.3&&y0<h*.7)C.push(v0)}
+ B.sort(function(a,b){return a-b});C.sort(function(a,b){return a-b});var bm=B[B.length>>1],cm=C[C.length>>1];if(bm>cm*0.82)throw 0;
+ var srt=Array.prototype.slice.call(g).sort(function(a,b){return a-b}),p90=srt[Math.floor(n*.9)],th=bm+0.4*(p90-bm);
+ var best=[[1e9,0,0],[-1e9,0,0],[-1e9,0,0],[1e9,0,0]],cnt=0;for(var y=0;y<h;y++)for(var x2=0;x2<w;x2++){if(g[y*w+x2]<=th)continue;cnt++;var s1=x2+y,s2=x2-y;if(s1<best[0][0])best[0]=[s1,x2,y];if(s2>best[1][0])best[1]=[s2,x2,y];if(s1>best[2][0])best[2]=[s1,x2,y];if(s2<best[3][0])best[3]=[s2,x2,y]}
+ var area=cnt/n;if(area<0.2||area>0.97)throw 0;var k=W/w,P=best.map(function(b){return[b[1]*k,b[2]*k]});
+ var A=Math.abs((P[0][0]*P[1][1]-P[1][0]*P[0][1])+(P[1][0]*P[2][1]-P[2][0]*P[1][1])+(P[2][0]*P[3][1]-P[3][0]*P[2][1])+(P[3][0]*P[0][1]-P[0][0]*P[3][1]))/2;if(A<W*H*0.18)throw 0;return P}
+ catch(e){return[[.04,.04],[.96,.04],[.96,.96],[.04,.96]].map(function(p){return[p[0]*W,p[1]*H]})}}
 /* correção de perspectiva (homografia) */
 function warp(img,q){var dw=Math.max(Math.hypot(q[1][0]-q[0][0],q[1][1]-q[0][1]),Math.hypot(q[2][0]-q[3][0],q[2][1]-q[3][1])),dh=Math.max(Math.hypot(q[3][0]-q[0][0],q[3][1]-q[0][1]),Math.hypot(q[2][0]-q[1][0],q[2][1]-q[1][1]));
  var L=Math.max(dw,dh),sc=L<2200?2200/L:(L>3400?3400/L:1);dw=Math.round(dw*sc);dh=Math.round(dh*sc);
