@@ -20,7 +20,7 @@ function soNome(s){if(STOP.test(semAc(s)))return '';var b0=achaBairro(s);if(b0)s
 window.parseContatosOCR=function(txt){
  var L=String(txt).split(/\n/).map(function(x){return x.trim()}).filter(Boolean),it=[],bairrosLista={};
  L.forEach(function(ln){var tels=(ln.match(reTel)||[]).map(tnorm).filter(function(t){return t.length>=10&&t.length<=11}),mails=ln.match(reMail)||[],nm=soNome(ln),b=achaBairro(ln);
-  if(b)bairrosLista[b]=(bairrosLista[b]||0)+1;
+  if(b&&!tels.length&&!mails.length)bairrosLista[b]=(bairrosLista[b]||0)+1;
   if(tels.length||mails.length||nm)it.push({tels:tels,mails:mails,nome:nm,b:b,both:!!(nm&&(tels.length||mails.length))})});
  var bairroUnico=Object.keys(bairrosLista).length===1?Object.keys(bairrosLista)[0]:'';
  var rows=it.filter(function(x){return x.both}).length;
@@ -28,7 +28,7 @@ window.parseContatosOCR=function(txt){
  var tels=[].concat.apply([],it.map(function(x){return x.both?[]:x.tels})),mails=[].concat.apply([],it.map(function(x){return x.both?[]:x.mails}));
  function runs(){var mx={n:0,t:0},cur='',c=0;it.forEach(function(x){var k=x.both?'r':x.tels.length?'t':x.mails.length?'m':'n';if(k===cur)c++;else{cur=k;c=1}if(k==='n'||k==='t')mx[k]=Math.max(mx[k],c)});return mx}
  var R=runs(),out=[];
- if(R.n>=3&&R.t>=3&&rows<names.length/2){ // formato colunas
+ if(R.n>=2&&R.t>=2&&rows<names.length/2){ // formato colunas
   var n=Math.max(names.length,tels.length);for(var i=0;i<n;i++)out.push({nome:names[i]||'Contato',tel:tels[i]||'',email:mails[i]||'',regiao:bairroUnico,modo:'colunas'});
  }else{ // linhas + blocos verticais
   var cur=null;function push(){if(cur&&(cur.tel||cur.email))out.push(cur);cur=null}

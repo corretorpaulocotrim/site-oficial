@@ -590,7 +590,7 @@ function toast(msg){clearTimeout(toastTimer);var t=document.getElementById("toas
 function pcLogin(){
   var u=(document.getElementById("pc-u").value||"").trim().toLowerCase();
   var p=(document.getElementById("pc-p").value||"").trim();
-  if((u==="paulocotrim"||u==="paulo"||u==="admin")&&p==="102030"){localStorage.setItem("crm_auth","1");document.getElementById("pc-login").style.display="none";}
+  if(u==="cotrim"&&p==="1234"){localStorage.setItem("crm_auth","1");document.getElementById("pc-login").style.display="none";}
   else{document.getElementById("pc-err").textContent="Usuário ou senha incorretos.";}
 }
 if(localStorage.getItem("crm_auth")==="1"){var _o=document.getElementById("pc-login");if(_o)_o.style.display="none";}
@@ -771,5 +771,7 @@ updateBadge();renderDash();
 
 <script src="../crm-plus.js"></script>
 <script src="../crm-pro.js"></script>
+<script src="../crm-max.js"></script>
+<script src="../crm-skin.js"></script>
 </body>
 </html>
