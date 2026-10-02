@@ -15,7 +15,9 @@ var LIXO=/\b(gmail|hotmail|outlook|yahoo|com|br|tel|telefone|whats(app)?|zap|cel
 var STOP=/\b(oi|ol[aá]|quero|queria|gostaria|saber|bom dia|boa tarde|boa noite|tudo bem|obrigad\w*|sim|n[aã]o|informa\w*|apartamento|im[oó]vel|valor|pre[cç]o|lista|lead|leads|planilha|interessad\w*|vou|pode|preciso|tem|qual|quanto)\b/i;
 function soNome(s,keep){if(STOP.test(semAc(s)))return '';var b0=keep?'':achaBairro(s);if(b0)s=String(s).replace(new RegExp(b0.replace(/\s+/g,'\\s+'),'i'),' ').replace(new RegExp(semAc(b0),'i'),' ');var n=String(s).replace(reMail,'').replace(reTel,'').replace(/\b\d{1,2}:\d{2}\b/g,'').replace(LIXO,' ').replace(/[^A-Za-zÀ-ÿ\s'.]/g,' ').replace(/\s+/g,' ').trim();
  
- if(n.length<2||n.split(' ').length>6)return '';return n.split(' ').slice(0,4).map(function(w){return w.charAt(0).toUpperCase()+w.slice(1).toLowerCase()}).join(' ')}
+ var CON={da:1,de:1,do:1,das:1,dos:1,e:1};var ws=n.split(' ').filter(function(w){var l=w.toLowerCase().replace(/[.']/g,'');return l.length>1||CON[l]});while(ws.length&&CON[ws[0].toLowerCase()])ws.shift();while(ws.length&&CON[ws[ws.length-1].toLowerCase()])ws.pop();
+ ws=ws.filter(function(w){return /[aeiouáéíóúâêôãõà]/i.test(w)||w.length<=3});if(!ws.length||ws.join('').length<3||ws.length>7)return '';
+ return ws.slice(0,5).map(function(w,i){var l=w.toLowerCase();return i&&CON[l]?l:l.charAt(0).toUpperCase()+l.slice(1)}).join(' ')}
 /* Leitura inteligente: 3 formatos — (1) linha com nome+telefone, (2) bloco vertical (nome em cima, dados embaixo — prints de WhatsApp), (3) colunas (todos os nomes, depois todos os telefones, depois e-mails) */
 window.parseContatosOCR=function(txt){
  var L=String(txt).split(/\n/).map(function(x){return x.trim()}).filter(Boolean),it=[],bairrosLista={};
@@ -104,7 +106,7 @@ window.resLig=function(id,r){var l=getLeads().filter(function(x){return x.id==id
  if(r==='ret'){var q=prompt('Retornar em qual data? (dd/mm)','');if(q){var p=q.split('/');d=new Date(d.getFullYear(),(+p[1]||d.getMonth()+1)-1,+p[0]||d.getDate()+1)}else d.setDate(d.getDate()+1)}else if(dias!=null)d.setDate(d.getDate()+dias);
  var patch={retorno:r==='err'?null:d.toISOString().slice(0,10)};if(r==='int'){patch.temp='quente';patch.status='contato'}if(r==='sem'){patch.temp='frio'}if(r==='err'){patch.status='perdido';patch.obs=(l.obs||'')+' · número errado'}
  reg(id,{int:'Atendeu — interessado',sem:'Atendeu — sem interesse',nao:'Não atendeu (tentativa '+(l.tent||1)+')',ret:'Pediu retorno',err:'Número errado'}[r],patch.retorno?'Retorno: '+patch.retorno.split('-').reverse().join('/'):'',patch);
- closeModal('modal-pos');toast('Registrado'+(patch.retorno?' · retorno '+patch.retorno.split('-').reverse().slice(0,2).join('/'):''));if(window.__fila)discProx(1)};
+ if($('modal-pos'))closeModal('modal-pos');toast('Registrado'+(patch.retorno?' · retorno '+patch.retorno.split('-').reverse().slice(0,2).join('/'):''));if(window.__fila)discProx(1)};
 
 /* Discador inteligente: bairro + temperatura + status + retornos de hoje, ordenado por prioridade */
 function prio(l){var s=(l.temp==='quente'?40:l.temp==='morno'?22:8)+(({proposta:20,visita:18,contato:10,novo:12})[l.status||'novo']||0);var h=new Date().toISOString().slice(0,10);if(l.retorno&&l.retorno<=h)s+=30;if(!l.tent)s+=10;s-=(l.tent||0)*4;return s}

@@ -755,7 +755,9 @@ updateBadge();renderDash();
       if(!remote){ if(!silent)toast('Sem conexão com o backend'); return; }
       var local=getLeads(); var byId={}; local.forEach(function(l){byId[String(l.id)]=l;});
       var remoteIds={};
+      var LIMPO=+localStorage.getItem('crm_limpo_em')||0;
       remote.forEach(function(r){ var rid=String(r.id); remoteIds[rid]=1;
+        var rt=Number(r.id)||Date.parse(r.data||r.timestamp||'')||0; if(LIMPO&&rt&&rt<LIMPO)return;
         if(!byId[rid]){ local.unshift({id:Number(r.id)||Date.now(),nome:r.nome||'Lead',tel:r.telefone||'',email:r.email||'',origem:r.origem||'Site',interesse:r.interesse||'',temp:r.temp||'morno',status:r.status||'novo',orcamento:r.renda||'',obs:r.obs||'',data:new Date().toLocaleDateString('pt-BR'),hist:[{a:'Sincronizado do site/backend',d:r.origem||'',t:new Date().toLocaleString('pt-BR')}]}); }
       });
       saveLeads(local);
@@ -769,10 +771,10 @@ updateBadge();renderDash();
 })();
 </script>
 
-<script src="../crm-plus.js?v=20261006"></script>
-<script src="../crm-pro.js?v=20261006"></script>
-<script src="../crm-scan.js?v=20261006"></script>
-<script src="../crm-max.js?v=20261006"></script>
-<script src="../crm-skin.js?v=20261006"></script>
+<script src="../crm-plus.js?v=20261008"></script>
+<script src="../crm-pro.js?v=20261008"></script>
+<script src="../crm-scan.js?v=20261008"></script>
+<script src="../crm-max.js?v=20261008"></script>
+<script src="../crm-skin.js?v=20261008"></script>
 </body>
 </html>

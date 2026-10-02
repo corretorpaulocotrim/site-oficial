@@ -40,7 +40,7 @@ window.editarLead=function(id){var L=getLeads(),l=L.filter(function(x){return x.
  var b=fld('el-nome','Nome',l.nome)+fld('el-tel','WhatsApp',l.tel)+fld('el-email','E-mail',l.email)
  +sel('el-temp','Temperatura',l.temp||'frio',['frio','morno','quente'])+sel('el-status','Etapa',l.status||'novo',['novo','contato','proposta','visita','fechado','perdido'])
  +fld('el-int','Interesse',l.interesse)+fld('el-renda','Renda familiar (R$)',l.renda)+fld('el-fgts','FGTS (R$)',l.fgts)+fld('el-orc','Orçamento',l.orcamento)+fld('el-obs','Observações',l.obs,'ta');
- modal('modal-el','Editar lead',b,'Salvar',function(){
+ modal('modal-el','Editar lead',b,'Salvar',function(){L=getLeads();l=L.filter(function(x){return x.id==id})[0];if(!l)return;
   var n=function(x){return parseFloat(String($(x).value).replace(/\D/g,''))||''};
   l.nome=$('el-nome').value;l.tel=$('el-tel').value;l.email=$('el-email').value;l.temp=$('el-temp').value;
   if(l.status!==$('el-status').value)(l.hist=l.hist||[]).push({a:'Etapa: '+$('el-status').value,d:'edição',t:new Date().toLocaleString('pt-BR')});
