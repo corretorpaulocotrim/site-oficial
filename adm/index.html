@@ -238,9 +238,9 @@ button{cursor:pointer}
     <div style="margin-bottom:20px"><div class="eyebrow">Visao geral</div><div style="font-size:22px;font-weight:900;color:var(--navy3)">Bom dia, Paulo! &#128075;</div><div style="font-size:13px;color:var(--muted);margin-top:3px" id="dash-subtitle">Carregando...</div></div>
     <div class="kpi-row">
       <div class="kpi gold"><div class="kpi-label">Total de Leads</div><div class="kpi-val" id="kpi-total">0</div><div class="kpi-delta up" id="kpi-sub1">—</div><div class="kpi-icon">&#128101;</div></div>
-      <div class="kpi green"><div class="kpi-label">Leads Quentes</div><div class="kpi-val" id="kpi-quentes">0</div><div class="kpi-delta up">&#128293; Prioridade maxima</div><div class="kpi-icon">&#128293;</div></div>
+      <div class="kpi green"><div class="kpi-label">Leads Quentes</div><div class="kpi-val" id="kpi-quentes">0</div><div class="kpi-delta up">&#128293; Prioridade máxima</div><div class="kpi-icon">&#128293;</div></div>
       <div class="kpi blue"><div class="kpi-label">Propostas</div><div class="kpi-val" id="kpi-propostas">0</div><div class="kpi-delta up">Em andamento</div><div class="kpi-icon">&#128196;</div></div>
-      <div class="kpi red"><div class="kpi-label">Fechamentos</div><div class="kpi-val" id="kpi-fechados">0</div><div class="kpi-delta up">Parabens! &#127881;</div><div class="kpi-icon">&#9989;</div></div>
+      <div class="kpi red"><div class="kpi-label">Fechamentos</div><div class="kpi-val" id="kpi-fechados">0</div><div class="kpi-delta up">Parabéns! &#127881;</div><div class="kpi-icon">&#9989;</div></div>
     </div>
     <div class="grid-2">
       <div class="card"><div class="card-header"><div><div class="card-title">Funil de Leads</div><div class="card-sub">Distribuicao por etapa</div></div></div><div class="card-body" id="funil-body"></div></div>
@@ -255,7 +255,7 @@ button{cursor:pointer}
   <!-- LEADS -->
   <div class="page" id="page-leads">
     <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:20px;flex-wrap:wrap;gap:12px">
-      <div><div class="eyebrow">Gestao</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Todos os Leads</div></div>
+      <div><div class="eyebrow">Gestão</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Todos os Leads</div></div>
       <div style="display:flex;gap:10px"><button class="btn-sm" onclick="exportCSV()">&#11015; Exportar CSV</button><button class="btn-primary" onclick="openModal('modal-lead')">+ Novo Lead</button></div>
     </div>
     <div class="filter-row">
@@ -332,13 +332,13 @@ button{cursor:pointer}
 
   <!-- DISCADOR -->
   <div class="page" id="page-discador">
-    <div style="margin-bottom:20px"><div class="eyebrow">Automacao</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Discador Automatico</div></div>
+    <div style="margin-bottom:20px"><div class="eyebrow">Automação</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Discador Automatico</div></div>
     <div class="grid-2">
       <div class="card"><div class="card-header"><div class="card-title">&#128203; Fila de discagem</div></div><div class="card-body">
         <div class="form-group"><label class="form-label">Lista</label><select class="form-select" id="disc-lista" onchange="carregarFila()"><option value="quente">&#128293; Quentes</option><option value="morno">&#9898; Mornos</option><option value="frio">&#10052; Frios</option></select></div>
-        <div style="background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Proximo na fila</div><div style="font-size:15px;font-weight:800;color:var(--navy3)" id="disc-nome">—</div><div style="font-size:13px;color:var(--muted)" id="disc-fone">—</div></div>
+        <div style="background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:14px"><div style="font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:8px">Próximo na fila</div><div style="font-size:15px;font-weight:800;color:var(--navy3)" id="disc-nome">—</div><div style="font-size:13px;color:var(--muted)" id="disc-fone">—</div></div>
         <button class="btn-submit" onclick="ligarProximo()">&#128222; Ligar agora</button>
-        <div style="display:flex;gap:8px;margin-top:12px"><button class="btn-sm green" onclick="regStatus('contato')">&#10003; Atendeu</button><button class="btn-sm" onclick="regStatus('nao-atendeu')">&#10007; Nao atendeu</button><button class="btn-sm" onclick="zapProximo()">&#128172; WhatsApp</button></div>
+        <div style="display:flex;gap:8px;margin-top:12px"><button class="btn-sm green" onclick="regStatus('contato')">&#10003; Atendeu</button><button class="btn-sm" onclick="regStatus('nao-atendeu')">&#10007; Não atendeu</button><button class="btn-sm" onclick="zapProximo()">&#128172; WhatsApp</button></div>
       </div></div>
       <div class="card"><div class="card-header"><div class="card-title">&#9889; Regras ativas</div></div><div class="card-body">
         <div style="display:flex;flex-direction:column;gap:10px">
@@ -352,10 +352,10 @@ button{cursor:pointer}
 
   <!-- METRICAS -->
   <div class="page" id="page-metricas">
-    <div style="margin-bottom:20px"><div class="eyebrow">Analise</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Metricas e KPIs</div></div>
+    <div style="margin-bottom:20px"><div class="eyebrow">Análise</div><div style="font-size:20px;font-weight:900;color:var(--navy3)">Métricas e KPIs</div></div>
     <div class="kpi-row">
       <div class="kpi gold"><div class="kpi-label">Total de Leads</div><div class="kpi-val" id="m-total">0</div><div class="kpi-icon">&#128101;</div></div>
-      <div class="kpi green"><div class="kpi-label">Taxa Conversao</div><div class="kpi-val" id="m-taxa">0%</div><div class="kpi-icon">&#128202;</div></div>
+      <div class="kpi green"><div class="kpi-label">Taxa de conversão</div><div class="kpi-val" id="m-taxa">0%</div><div class="kpi-icon">&#128202;</div></div>
       <div class="kpi blue"><div class="kpi-label">Propostas</div><div class="kpi-val" id="m-prop">0</div><div class="kpi-icon">&#128196;</div></div>
       <div class="kpi red"><div class="kpi-label">Fechamentos</div><div class="kpi-val" id="m-fech">0</div><div class="kpi-icon">&#9989;</div></div>
     </div>
@@ -457,7 +457,7 @@ function goPage(id){
 // FORM LEAD
 function imovelOpts(){return getImoveis().map(function(i){return"<option>"+i.nome+"</option>"}).join("")}
 function formHTML(){
-  return"<div class='form-row'><div class='form-group'><label class='form-label'>Nome completo *</label><input class='form-input' id='fl-nome' placeholder='Nome do cliente'/></div><div class='form-group'><label class='form-label'>WhatsApp *</label><input class='form-input' id='fl-tel' type='tel' placeholder='(21) 99999-9999'/></div></div><div class='form-row'><div class='form-group'><label class='form-label'>E-mail</label><input class='form-input' id='fl-email' type='email' placeholder='email@exemplo.com'/></div><div class='form-group'><label class='form-label'>Origem *</label><select class='form-select' id='fl-origem'><option>Meta Ads</option><option>Google Ads</option><option>Site</option><option>WhatsApp</option><option>Indicacao</option><option>Foto/Documento</option><option>Outro</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Empreendimento</label><select class='form-select' id='fl-inter'>"+imovelOpts()+"</select></div><div class='form-group'><label class='form-label'>Tipologia</label><select class='form-select' id='fl-tipo'><option>Studio</option><option>1 Quarto</option><option>2 Quartos</option><option>3 Quartos</option><option>A definir</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Temperatura</label><select class='form-select' id='fl-temp'><option value='frio'>Frio</option><option value='morno'>Morno</option><option value='quente'>Quente</option></select></div><div class='form-group'><label class='form-label'>Status</label><select class='form-select' id='fl-status'><option value='novo'>Novo</option><option value='contato'>Contatado</option><option value='proposta'>Proposta</option><option value='visita'>Visita</option><option value='fechado'>Fechado</option><option value='perdido'>Perdido</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Orcamento</label><select class='form-select' id='fl-orc'><option>Ate R$ 300k</option><option>R$ 300k-R$ 450k</option><option>R$ 450k-R$ 600k</option><option>R$ 600k-R$ 900k</option><option>Acima de R$ 900k</option></select></div><div class='form-group'><label class='form-label'>Observacoes</label><input class='form-input' id='fl-obs' placeholder='Notas sobre o lead...'/></div></div>";
+  return"<div class='form-row'><div class='form-group'><label class='form-label'>Nome completo *</label><input class='form-input' id='fl-nome' placeholder='Nome do cliente'/></div><div class='form-group'><label class='form-label'>WhatsApp *</label><input class='form-input' id='fl-tel' type='tel' placeholder='(21) 99999-9999'/></div></div><div class='form-row'><div class='form-group'><label class='form-label'>E-mail</label><input class='form-input' id='fl-email' type='email' placeholder='email@exemplo.com'/></div><div class='form-group'><label class='form-label'>Origem *</label><select class='form-select' id='fl-origem'><option>Meta Ads</option><option>Google Ads</option><option>Site</option><option>WhatsApp</option><option>Indicacao</option><option>Foto/Documento</option><option>Outro</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Empreendimento</label><select class='form-select' id='fl-inter'>"+imovelOpts()+"</select></div><div class='form-group'><label class='form-label'>Tipologia</label><select class='form-select' id='fl-tipo'><option>Studio</option><option>1 Quarto</option><option>2 Quartos</option><option>3 Quartos</option><option>A definir</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Temperatura</label><select class='form-select' id='fl-temp'><option value='frio'>Frio</option><option value='morno'>Morno</option><option value='quente'>Quente</option></select></div><div class='form-group'><label class='form-label'>Status</label><select class='form-select' id='fl-status'><option value='novo'>Novo</option><option value='contato'>Contatado</option><option value='proposta'>Proposta</option><option value='visita'>Visita</option><option value='fechado'>Fechado</option><option value='perdido'>Perdido</option></select></div></div><div class='form-row'><div class='form-group'><label class='form-label'>Orçamento</label><select class='form-select' id='fl-orc'><option>Ate R$ 300k</option><option>R$ 300k-R$ 450k</option><option>R$ 450k-R$ 600k</option><option>R$ 600k-R$ 900k</option><option>Acima de R$ 900k</option></select></div><div class='form-group'><label class='form-label'>Observacoes</label><input class='form-input' id='fl-obs' placeholder='Notas sobre o lead...'/></div></div>";
 }
 function renderFormLead(tid,modal){
   var el=document.getElementById(tid);if(!el)return;
@@ -466,7 +466,7 @@ function renderFormLead(tid,modal){
 function salvarLead(modal){
   var nome=document.getElementById("fl-nome").value.trim();
   var tel=document.getElementById("fl-tel").value.trim();
-  if(!nome||!tel){toast("Nome e WhatsApp sao obrigatorios");return}
+  if(!nome||!tel){toast("Nome e WhatsApp são obrigatórios");return}
   var leads=getLeads();
   leads.unshift({id:Date.now(),nome:nome,tel:tel,email:document.getElementById("fl-email").value,origem:document.getElementById("fl-origem").value,interesse:document.getElementById("fl-inter").value+" - "+document.getElementById("fl-tipo").value,temp:document.getElementById("fl-temp").value,status:document.getElementById("fl-status").value,orcamento:document.getElementById("fl-orc").value,obs:document.getElementById("fl-obs").value,data:new Date().toLocaleDateString("pt-BR"),hora:new Date().toLocaleTimeString("pt-BR",{hour:"2-digit",minute:"2-digit"}),hist:[{a:"Lead cadastrado",d:"Origem: "+document.getElementById("fl-origem").value,t:new Date().toLocaleString("pt-BR")}]});
   saveLeads(leads);updateBadge();toast("Lead cadastrado com sucesso!");
@@ -494,7 +494,7 @@ function searchLeads(v){
 }
 
 // LEAD ACTIONS
-function ligar(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;toast("Ligando para "+l.nome+"...");var ls=getLeads();var i=ls.findIndex(function(x){return x.id===id});if(i>-1){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Ligacao realizada",d:"",t:new Date().toLocaleString("pt-BR")});saveLeads(ls)}}
+function ligar(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;toast("Ligando para "+l.nome+"...");var ls=getLeads();var i=ls.findIndex(function(x){return x.id===id});if(i>-1){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Ligação realizada",d:"",t:new Date().toLocaleString("pt-BR")});saveLeads(ls)}}
 function zap(id){var l=getLeads().find(function(x){return x.id===id});if(!l)return;var tel=l.tel.replace(/\D/g,"");var msg=encodeURIComponent("Ola "+l.nome.split(" ")[0]+"! Aqui e o Paulo Cotrim. Podemos conversar sobre "+l.interesse+"?");window.open("https://wa.me/55"+tel+"?text="+msg,"_blank")}
 function del(id){if(!confirm("Deletar este lead?"))return;saveLeads(getLeads().filter(function(x){return x.id!==id}));renderLeads();updateBadge();toast("Lead removido")}
 function verPerfil(id){
@@ -502,7 +502,7 @@ function verPerfil(id){
   document.getElementById("p-name").textContent=l.nome;
   document.getElementById("p-sub").textContent=l.interesse||"—";
   var hist=(l.hist||[]).map(function(h){return"<div class='tl-item'><div class='tl-dot act-dot gold'>&#11088;</div><div><div class='tl-action'>"+h.a+"</div><div class='tl-detail'>"+(h.d||"")+" &middot; "+h.t+"</div></div></div>"}).join("");
-  document.getElementById("modal-profile-body").innerHTML="<div style='display:flex;gap:8px;margin-bottom:16px'><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><span class='origin-tag'>"+(l.origem||"—")+"</span><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></div><div style='background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:16px'><div class='lp-row'><span class='lp-key'>WhatsApp</span><span>"+l.tel+"</span></div><div class='lp-row'><span class='lp-key'>E-mail</span><span>"+(l.email||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Orcamento</span><span>"+(l.orcamento||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Cadastro</span><span>"+(l.data||"—")+" "+(l.hora||"")+"</span></div>"+(l.obs?"<div class='lp-row'><span class='lp-key'>Obs.</span><span>"+l.obs+"</span></div>":"")+"</div><div style='font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px'>Historico</div><div>"+(hist||"<div style='font-size:13px;color:var(--muted)'>Sem registros</div>")+"</div><div style='display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9'><button class='btn-submit' style='flex:1' onclick='ligar("+l.id+");closeModal(&quot;modal-profile&quot;)'>&#128222; Ligar</button><button class='btn-sm green' onclick='zap("+l.id+")'>&#128172; WhatsApp</button><button class='btn-sm' onclick='editStatus("+l.id+")'>&#9998; Status</button></div>";
+  document.getElementById("modal-profile-body").innerHTML="<div style='display:flex;gap:8px;margin-bottom:16px'><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span><span class='origin-tag'>"+(l.origem||"—")+"</span><span class='status-badge status-"+(l.status||"novo")+"'>"+sLbl(l.status)+"</span></div><div style='background:#f8fafc;border-radius:10px;padding:14px;margin-bottom:16px'><div class='lp-row'><span class='lp-key'>WhatsApp</span><span>"+l.tel+"</span></div><div class='lp-row'><span class='lp-key'>E-mail</span><span>"+(l.email||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Orçamento</span><span>"+(l.orcamento||"—")+"</span></div><div class='lp-row'><span class='lp-key'>Cadastro</span><span>"+(l.data||"—")+" "+(l.hora||"")+"</span></div>"+(l.obs?"<div class='lp-row'><span class='lp-key'>Obs.</span><span>"+l.obs+"</span></div>":"")+"</div><div style='font-size:11px;font-weight:700;text-transform:uppercase;color:var(--muted);margin-bottom:10px'>Historico</div><div>"+(hist||"<div style='font-size:13px;color:var(--muted)'>Sem registros</div>")+"</div><div style='display:flex;gap:8px;margin-top:16px;padding-top:14px;border-top:1px solid #f1f5f9'><button class='btn-submit' style='flex:1' onclick='ligar("+l.id+");closeModal(&quot;modal-profile&quot;)'>&#128222; Ligar</button><button class='btn-sm green' onclick='zap("+l.id+")'>&#128172; WhatsApp</button><button class='btn-sm' onclick='editStatus("+l.id+")'>&#9998; Status</button></div>";
   openModal("modal-profile");
 }
 function editStatus(id){
@@ -547,8 +547,8 @@ function renderPipeline(){
 // IMOVEIS
 function renderImoveis(){
   var ims=getImoveis();var grid=document.getElementById("imovel-grid");if(!grid)return;
-  if(!ims.length){grid.innerHTML="<div class='empty-state'><div class='icon'>&#127970;</div><p>Nenhum imovel cadastrado</p></div>";return}
-  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'"+(i.img?" style=\"background:url('../"+i.img+"') center/cover\"":"")+">"+(i.img?"":"<span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span>")+"<div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage(&quot;tabelas&quot;)'>Ver precos &rarr;</button><button class='btn-icard outline' onclick='toast(&quot;Enviando por WhatsApp...&quot;)'>&#128228; Enviar</button></div></div></div>"}).join("");
+  if(!ims.length){grid.innerHTML="<div class='empty-state'><div class='icon'>&#127970;</div><p>Nenhum imóvel cadastrado</p></div>";return}
+  grid.innerHTML=ims.map(function(i){var tags=Array.isArray(i.tags)?i.tags:(i.tags||"").split(",");return"<div class='icard'><div class='icard-img'"+(i.img?" style=\"background:url('../"+i.img+"') center/cover\"":"")+">"+(i.img?"":"<span style='font-size:44px'>"+(i.icon||"&#127970;")+"</span>")+"<div class='icard-badges'><span class='icard-badge "+(i.badge||"ib-lanc")+"'>"+(i.status||"Lancamento")+"</span></div><div class='icard-roi'>"+(i.roi||"")+"</div></div>"+(i.urg?"<div class='urgency-strip'><span class='urg-dot'></span>"+i.urg+"</div>":"")+"<div class='icard-body'><div class='icard-title'>"+i.nome+"</div><div class='icard-loc'>&#128205; "+(i.loc||"")+"</div><div style='font-size:10px;color:var(--muted)'>a partir de</div><div class='icard-price'>"+(i.preco||"—")+"</div><div class='icard-tags'>"+tags.map(function(t){return"<span class='itag'>"+t.toString().trim()+"</span>"}).join("")+"</div><div class='icard-foot'><button class='btn-icard dark' onclick='goPage(&quot;tabelas&quot;)'>Ver preços &rarr;</button><button class='btn-icard outline' onclick='toast(&quot;Enviando por WhatsApp...&quot;)'>&#128228; Enviar</button></div></div></div>"}).join("");
 }
 function salvarImovel(){
   var nome=document.getElementById("ci-nome").value.trim();if(!nome){toast("Nome obrigatorio");return}
@@ -571,7 +571,7 @@ function renderMetricas(){
 function carregarFila(){var v=document.getElementById("disc-lista");if(!v)return;filaAtual=getLeads().filter(function(l){return l.temp===v.value});filaIdx=0;mostrarProx()}
 function mostrarProx(){var l=filaAtual[filaIdx];document.getElementById("disc-nome").textContent=l?l.nome:"Fila vazia";document.getElementById("disc-fone").textContent=l?l.tel+" - "+(l.interesse||"—"):""}
 function ligarProximo(){var l=filaAtual[filaIdx];if(!l){toast("Nenhum lead na fila");return}toast("Ligando para "+l.nome+"...");ligar(l.id)}
-function regStatus(s){var l=filaAtual[filaIdx];if(!l)return;var ls=getLeads();var i=ls.findIndex(function(x){return x.id===l.id});if(i>-1){if(s==="nao-atendeu"){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Nao atendeu",d:"",t:new Date().toLocaleString("pt-BR")});toast("Nao atendeu - registrado")}else{ls[i].status=s;toast("Status: "+s)};saveLeads(ls)}filaIdx++;mostrarProx()}
+function regStatus(s){var l=filaAtual[filaIdx];if(!l)return;var ls=getLeads();var i=ls.findIndex(function(x){return x.id===l.id});if(i>-1){if(s==="nao-atendeu"){ls[i].hist=ls[i].hist||[];ls[i].hist.unshift({a:"Não atendeu",d:"",t:new Date().toLocaleString("pt-BR")});toast("Não atendeu - registrado")}else{ls[i].status=s;toast("Status: "+s)};saveLeads(ls)}filaIdx++;mostrarProx()}
 function zapProximo(){var l=filaAtual[filaIdx];if(!l){toast("Nenhum lead na fila");return}zap(l.id);filaIdx++;mostrarProx()}
 
 // BADGE
@@ -770,5 +770,6 @@ updateBadge();renderDash();
 </script>
 
 <script src="../crm-plus.js"></script>
+<script src="../crm-pro.js"></script>
 </body>
 </html>

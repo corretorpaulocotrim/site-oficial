@@ -73,12 +73,12 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
 </head>
 <body>
 <div class="top"><div class="in">
-  <a class="brand" href="index.html"><img src="favicon.svg" alt="PC"/><b>Paulo Cotrim</b></a>
+  <a class="brand" href="index.html"><img loading="lazy" src="favicon.svg" alt="PC"/><b>Paulo Cotrim</b></a>
   <a class="back" href="index.html#portfolio">← Empreendimentos</a>
 </div></div>
 
 <div class="wrap">
-  <div class="printlogo"><img src="logo-premium.svg" alt="Paulo Cotrim"/></div>
+  <div class="printlogo"><img loading="lazy" src="logo-premium.svg" alt="Paulo Cotrim"/></div>
   <div class="head">
     <span class="eyebrow">Estudo de rentabilidade</span>
     <h1 class="serif" id="e-nome">Empreendimento</h1>
@@ -315,6 +315,7 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
     pr+=line('Condomínio / IPTU',(fmt(num('i-cond'))||'consultar')+' / '+(fmt(num('i-iptu'))||'consultar'));
     pr+=line('Valorização',(r.cen!=null?r.cen+'% a.a.':null)+' · '+(r.anos||'—')+' anos');
     document.getElementById('e-premissas').innerHTML=pr;
+    var en=(document.getElementById('e-nome')||{}).textContent||'';var msg='Olá Paulo, fiz o estudo de rentabilidade do '+en+': valor '+(fmt(r.valor)||'—')+', capital inicial '+(fmt(r.capitalInicial)||'—')+', yield líquido '+(pct(r.yieldLiquido)||'—')+', payback '+(r.payback?r.payback.toFixed(1)+' anos':'—')+'. Quero conversar sobre essa negociação.';var wa=document.getElementById('e-wa');if(wa){wa.href='https://wa.me/5521989150864?text='+encodeURIComponent(msg);wa.textContent='Enviar este estudo ao Paulo';}
   }
 
   function atencao(e){
@@ -364,4 +365,5 @@ footer{background:#141311;color:rgba(255,255,255,.6);padding:40px 0;font-size:12
 })();
 </script>
 <script src="wa.js" defer></script>
+<script src="i18n.js" defer></script>
 </body></html>

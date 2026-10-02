@@ -286,12 +286,12 @@ a{color:inherit;text-decoration:none}
 <meta property="og:image" content="https://paulocotrim.com.br/paulo-cotrim-profissional.jpeg"/>
 <meta property="og:type" content="website"/>
 
-</head>
+<style>.radar-fill{display:none!important}</style></head>
 <body>
 
 <header class="hdr">
   <a href="index.html" class="brand">
-    <img src="logo-wordmark.png" alt="Paulo Cotrim" class="brand-logo"/>
+    <img loading="lazy" src="logo-wordmark.png" alt="Paulo Cotrim" class="brand-logo"/>
   </a>
   <nav class="nav-links">
     <a href="index.html#empreendimentos">Empreendimentos</a>
@@ -428,10 +428,10 @@ a{color:inherit;text-decoration:none}
       </div>
       <div class="sim-field"><label class="sim-label">Região</label>
         <select class="sim-select" id="v-regiao">
-          <option value="porto">Porto Maravilha · +180% em 10 anos</option>
-          <option value="niteroi">Niterói · +95% em 10 anos</option>
-          <option value="piedade">Piedade · +65% em 10 anos</option>
-          <option value="cristovao">São Cristóvão · +70% em 10 anos</option>
+          <option value="porto">Porto Maravilha</option>
+          <option value="niteroi">Niterói</option>
+          <option value="piedade">Piedade</option>
+          <option value="cristovao">São Cristóvão</option>
         </select>
       </div>
     </div>
@@ -538,67 +538,8 @@ a{color:inherit;text-decoration:none}
     <div class="sim-sub">Comparativo de todos os empreendimentos disponíveis no Porto Maravilha — potencial de valorização, yield e aprovação.</div>
 
     <table class="comp-table">
-      <thead>
-        <tr>
-          <th>Empreendimento</th>
-          <th>Região</th>
-          <th>A partir de</th>
-          <th>Yield Airbnb</th>
-          <th>Val. 5 anos</th>
-          <th>Aprovação</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr onclick="location.href='orla-central.html'" style="cursor:pointer">
-          <td><strong>Orla Central</strong> <span class="comp-badge top">Mais procurado</span></td>
-          <td>Porto Maravilha</td>
-          <td>R$ 402.000</td>
-          <td><span style="color:#b0895b;font-weight:700">10–12% a.a.</span></td>
-          <td><span style="color:var(--gold2);font-weight:700">+85%</span></td>
-          <td><span class="comp-badge good">92%</span></td>
-        </tr>
-        <tr onclick="location.href='farol-da-guanabara.html'" style="cursor:pointer">
-          <td><strong>Farol da Guanabara</strong></td>
-          <td>Santo Cristo · Porto</td>
-          <td>R$ 402.000</td>
-          <td><span style="color:#b0895b;font-weight:700">8–10% a.a.</span></td>
-          <td><span style="color:var(--gold2);font-weight:700">+80%</span></td>
-          <td><span class="comp-badge good">88%</span></td>
-        </tr>
-        <tr onclick="location.href='arcos-do-porto.html'" style="cursor:pointer">
-          <td><strong>Arcos do Porto</strong> <span class="comp-badge top">Premium</span></td>
-          <td>Porto Maravilha</td>
-          <td>Consultar</td>
-          <td><span style="color:#b0895b;font-weight:700">9–11% a.a.</span></td>
-          <td><span style="color:var(--gold2);font-weight:700">+90%</span></td>
-          <td><span class="comp-badge mid">Alta renda</span></td>
-        </tr>
-        <tr onclick="location.href='caminhos-da-guanabara.html'" style="cursor:pointer">
-          <td><strong>Caminhos da Guanabara</strong></td>
-          <td>Niterói</td>
-          <td>R$ 334.999</td>
-          <td><span style="color:#1a1a19;font-weight:700">6–8% a.a.</span></td>
-          <td><span style="color:var(--gold2);font-weight:700">+65%</span></td>
-          <td><span class="comp-badge good">84%</span></td>
-        </tr>
-        <tr onclick="location.href='luzes-do-rio-lamparina.html'" style="cursor:pointer">
-          <td><strong>Luzes do Rio · Lamparina</strong></td>
-          <td>São Cristóvão</td>
-          <td>R$ 359.000</td>
-          <td><span style="color:#1a1a19;font-weight:700">5–7% a.a.</span></td>
-          <td><span style="color:var(--gold2);font-weight:700">+60%</span></td>
-          <td><span class="comp-badge good">86%</span></td>
-        </tr>
-        <tr onclick="location.href='parque-piedade.html'" style="cursor:pointer">
-          <td><strong>Parque Piedade · Aquarela</strong> <span class="comp-badge good">MCMV</span></td>
-          <td>Piedade · Zona Norte</td>
-          <td>R$ 263.200</td>
-          <td><span style="color:#1a1a19;font-weight:700">4–6% a.a.</span></td>
-          <td><span style="color:var(--gold2);font-weight:700">+55%</span></td>
-          <td><span class="comp-badge good">94%</span></td>
-        </tr>
-      </tbody>
-    </table>
+      <thead><tr><th>Empreendimento</th><th>Região</th><th>A partir de</th><th>Aluguel est.*</th><th></th></tr></thead><tbody><tr onclick="location.href='orla-central.html'" style="cursor:pointer"><td><strong>Orla Central</strong></td><td>Porto Maravilha</td><td>R$ 402.000</td><td>R$ 2.094/mês</td><td><a href="estudo.html?emp=orla-central.html" onclick="event.stopPropagation()">Estudo →</a></td></tr><tr onclick="location.href='farol-da-guanabara.html'" style="cursor:pointer"><td><strong>Farol da Guanabara</strong></td><td>Santo Cristo · Porto</td><td>R$ 402.000</td><td>R$ 2.094/mês</td><td><a href="estudo.html?emp=farol-da-guanabara.html" onclick="event.stopPropagation()">Estudo →</a></td></tr><tr onclick="location.href='arcos-do-porto.html'" style="cursor:pointer"><td><strong>Arcos do Porto</strong></td><td>Porto Maravilha</td><td>Consultar</td><td>—</td><td><a href="estudo.html?emp=arcos-do-porto.html" onclick="event.stopPropagation()">Estudo →</a></td></tr><tr onclick="location.href='caminhos-da-guanabara.html'" style="cursor:pointer"><td><strong>Caminhos da Guanabara</strong></td><td>Niterói</td><td>R$ 334.999</td><td>R$ 1.745/mês</td><td><a href="estudo.html?emp=caminhos-da-guanabara.html" onclick="event.stopPropagation()">Estudo →</a></td></tr><tr onclick="location.href='luzes-do-rio-lamparina.html'" style="cursor:pointer"><td><strong>Luzes do Rio · Lamparina</strong></td><td>São Cristóvão</td><td>R$ 359.000</td><td>R$ 1.870/mês</td><td><a href="estudo.html?emp=luzes-do-rio-lamparina.html" onclick="event.stopPropagation()">Estudo →</a></td></tr><tr onclick="location.href='parque-piedade.html'" style="cursor:pointer"><td><strong>Parque Piedade · Aquarela</strong></td><td>Piedade · Zona Norte</td><td>R$ 263.200</td><td>R$ 1.371/mês</td><td><a href="estudo.html?emp=parque-piedade.html" onclick="event.stopPropagation()">Estudo →</a></td></tr></tbody>
+    </table><p style="font-size:11.5px;color:#8a857b;margin-top:10px">*Aluguel estimado pela rentabilidade média do aluguel no Rio: 6,25% a.a. (Índice FipeZap, jun/2026). Referência, não garantia. Abra o estudo para simular com suas premissas.</p>
 
     <div style="margin-top:32px">
       <div class="sim-sub" style="margin-bottom:16px">Potencial de valorização por região · próximos 5 anos</div>
@@ -606,31 +547,31 @@ a{color:inherit;text-decoration:none}
         <div class="radar-card active-opp">
           <div class="radar-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2"><path d="M2 15c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/><path d="M2 19c2 0 2-2 4-2s2 2 4 2 2-2 4-2 2 2 4 2 2-2 4-2"/></svg></div>
           <div class="radar-name">Porto Maravilha</div>
-          <div class="radar-score">Score: 9.4/10</div>
+          <div class="radar-score">Análise do bairro</div>
           <div class="radar-bar"><div class="radar-fill" style="width:94%"></div></div>
         </div>
         <div class="radar-card">
           <div class="radar-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2"><path d="M12 3v6"/><path d="M4 21c3-6 7-9 8-9s5 3 8 9"/><path d="M3 21h18"/></svg></div>
           <div class="radar-name">Niterói</div>
-          <div class="radar-score">Score: 7.8/10</div>
+          <div class="radar-score">Perfil do bairro</div>
           <div class="radar-bar"><div class="radar-fill" style="width:78%"></div></div>
         </div>
         <div class="radar-card">
           <div class="radar-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2"><circle cx="6" cy="17" r="3"/><circle cx="18" cy="17" r="3"/><path d="M6 17l4-9h5l3 9M10 8h4"/></svg></div>
           <div class="radar-name">São Cristóvão</div>
-          <div class="radar-score">Score: 7.2/10</div>
+          <div class="radar-score">Perfil do bairro</div>
           <div class="radar-bar"><div class="radar-fill" style="width:72%"></div></div>
         </div>
         <div class="radar-card">
           <div class="radar-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2"><path d="M3 11.5 12 5l9 6.5"/><path d="M5 10v9h14v-9"/></svg></div>
           <div class="radar-name">Piedade</div>
-          <div class="radar-score">Score: 6.5/10</div>
+          <div class="radar-score">Perfil do bairro</div>
           <div class="radar-bar"><div class="radar-fill" style="width:65%"></div></div>
         </div>
         <div class="radar-card" style="grid-column:span 2">
           <div class="radar-icon"><svg viewBox="0 0 24 24" style="width:22px;height:22px;stroke:currentColor;fill:none;stroke-width:2"><path d="M4 20V10M12 20V4M20 20v-7"/></svg></div>
           <div class="radar-name">Média da Cidade</div>
-          <div class="radar-score">Score: 5.8/10 · base de comparação</div>
+          <div class="radar-score">Perfil do bairro</div>
           <div class="radar-bar"><div class="radar-fill" style="width:58%;background:linear-gradient(90deg,#64748b,#a39d92)"></div></div>
         </div>
       </div>
