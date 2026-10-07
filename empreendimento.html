@@ -1,0 +1,35 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#1a1a1a"/><title>Empreendimento | Paulo Cotrim</title><meta name="description" content="Apresentação, fotos, localização e condições do empreendimento. Atendimento: Paulo Cotrim, CRECI-RJ 77677-F."/><link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/><link rel="stylesheet" href="flow-emp.css"/></head><body>
+<header><div class="wrap nav"><a href="empreendimentos.html" class="brandmark"><span class="round" style="display:none"></span><span><span class="bn">Paulo Cotrim</span><span class="bs">Imóveis · Rio de Janeiro</span></span></a><nav class="menu"><a href="empreendimentos.html">Todos os empreendimentos</a> <a href="https://wa.me/5521989150864">Atendimento</a></nav></div></header>
+<main id="app"><section class="section"><div class="wrap"><p>Carregando…</p></div></section></main>
+<footer><div class="wrap foot"><span>Paulo Cotrim · Imóveis no Rio de Janeiro · CRECI-RJ 77677-F</span><span><a href="empreendimentos.html">← Todos os empreendimentos</a> · <a href="index.html">Início</a></span></div></footer>
+<script src="tracking-config.js"></script><script src="preco-dolar.js" defer></script>
+<script src="i18n.js" defer></script>
+<script src="leads.js" defer></script>
+<script src="wa.js" defer></script>
+<script>
+(function(){
+ var id=(new URLSearchParams(location.search).get('id')||'').replace(/\D/g,'');
+ var C='https://cdn.flowcrm.imb.br/emp/imgEmp.ashx?e=';
+ function es(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c];});}
+ function wa(t){return 'https://wa.me/5521989150864?text='+encodeURIComponent(t);}
+ var MES=['janeiro','fevereiro','março','abril','maio','junho','julho','agosto','setembro','outubro','novembro','dezembro'];
+ function mY(s){if(!s)return '';var p=s.split('-');return MES[+p[1]-1]+' de '+p[0];}
+ function v(x){return x&&x!=='0'?x:'Consulte';}
+ Promise.all([fetch('data/sawala-principais.json').then(function(r){return r.json();}),fetch('data/sawala-galeria.json').then(function(r){return r.json();}).catch(function(){return {};})]).then(function(a){
+  var P=a[0],G=a[1],all=[].concat(P.destaques,P.semestre),e=all.filter(function(x){return String(x.id)===id;})[0];
+  var app=document.getElementById('app');
+  if(!e){app.innerHTML='<section class="section"><div class="wrap"><h1 class="serif">Empreendimento não encontrado</h1><p><a class="btn btn-solid" href="empreendimentos.html">Ver todos os empreendimentos</a></p></div></section>';return;}
+  document.title=e.nome+' · '+e.bairro+' | Paulo Cotrim';
+  var loc=[e.bairro,e.cidade].filter(Boolean).join(', ');
+  var msg='Olá Paulo, vi o '+e.nome+' ('+loc+') no seu site e quero a apresentação completa, plantas e a tabela atualizada.';
+  var gal=(G[String(e.id)]||[]).map(function(i){return '<figure><a href="'+C+e.id+'&i='+i+'&wd=1800&ht=1800&m=prop" class="lb" target="_blank" rel="noopener"><img loading="lazy" src="'+C+e.id+'&i='+i+'&wd=700&ht=500&m=crop" alt="'+es(e.nome)+'" onerror="this.parentNode.parentNode.remove()"/></a></figure>';}).join('');
+  var facts=[['Bairro',e.bairro],['Cidade',e.cidade],['Endereço',e.endereco],['Incorporadora',e.incorporadora],['Tipologia',e.quartos],['Metragem',e.area],['Vagas',e.vagas],['Lançamento',mY(e.lancamento)],['Previsão de entrega',mY(e.entrega)],['Fase',e.status]].map(function(f){return '<div class="fc"><span class="l">'+f[0]+'</span><span class="v">'+es(v(f[1]))+'</span></div>';}).join('')+'<div class="fc"><span class="l">Valores</span><span class="v">'+(e.preco?'<span data-brl="'+e.preco+'">R$ '+Math.round(e.preco).toLocaleString('pt-BR')+'</span>':'Sob consulta · tabela atualizada')+'</span></div>';
+  var map=(e.lat&&e.lng)?'<section class="section"><div class="wrap"><span class="eyebrow">Localização</span><iframe title="Mapa" loading="lazy" style="width:100%;height:340px;border:0;margin-top:12px" src="https://www.openstreetmap.org/export/embed.html?bbox='+(e.lng-.006)+'%2C'+(e.lat-.004)+'%2C'+(e.lng+.006)+'%2C'+(e.lat+.004)+'&amp;layer=mapnik&amp;marker='+e.lat+'%2C'+e.lng+'"></iframe></div></section>':'';
+  app.innerHTML='<section class="hero"><img class="hero-bg" src="'+(e.hero||e.img)+'" alt="'+es(e.nome)+'" fetchpriority="high"/><div class="wrap hero-c"><span class="loc">'+es(loc)+'</span><h1 class="serif">'+es(e.nome)+'</h1><div class="badges"><span class="badge">'+es(e.status)+'</span>'+(e.entrega?'<span class="badge o">Entrega '+es(mY(e.entrega))+'</span>':'')+'</div></div></section>'+
+  '<section class="section"><div class="wrap"><div class="grid2"><div><span class="eyebrow">O empreendimento</span>'+(e.descricao?'<p class="lead" style="margin-top:12px">'+es(e.descricao)+'</p>':'')+'<p class="desc">Fale comigo para receber a apresentação completa, plantas disponíveis, tabela atualizada e condições de pagamento.</p></div><div><div class="ficha">'+facts+'</div><p class="note">Informações conforme material oficial da incorporadora, sujeitas a alteração sem aviso. Valores e condições confirmados na tabela vigente. Atendimento: Paulo Cotrim, CRECI-RJ 77677-F.</p><div class="side-cta"><a class="btn btn-solid" href="'+wa(msg)+'">Receber apresentação e tabela</a><a class="btn btn-o" href="'+wa('Olá Paulo, quero simular o financiamento do '+e.nome+'.')+'">Simular financiamento</a></div></div></div></div></section>'+
+  (gal?'<section class="section alt"><div class="wrap"><span class="eyebrow">Galeria</span><h2 class="serif h2">Imagens do projeto</h2><div class="gal">'+gal+'</div></div></section>':'')+map+
+  '<section class="cta"><img loading="lazy" src="logo-crest-light.svg" alt="Paulo Cotrim · CRECI-RJ 77.677" style="width:88px;height:88px;display:block;margin:0 auto 14px;opacity:.92"/><span class="eyebrow" style="color:var(--gold)">Atendimento personalizado</span><h2 class="serif">Conheça o '+es(e.nome)+'</h2><div class="actions"><a class="btn btn-solid" href="'+wa(msg)+'">Solicitar apresentação e tabela</a><a class="btn btn-o" href="'+wa('Olá Paulo, quero agendar uma visita ao '+e.nome+'.')+'">Agendar visita</a></div></section>';
+ }).catch(function(){document.getElementById('app').innerHTML='<section class="section"><div class="wrap"><p>Não foi possível carregar. <a href="empreendimentos.html">Ver empreendimentos</a></p></div></section>';});
+})();
+</script>
+</body></html>

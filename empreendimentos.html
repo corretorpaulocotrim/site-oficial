@@ -20,7 +20,7 @@ function filt(){
   if(f&&c.f!==f)return false;if(b&&c.b!==b)return false;if(i&&c.i!==i)return false;if(t&&c.t!==t)return false;
   if(qt){var n=+qt;if(n===4){if(maxQ(c.q)<4)return false}else if(!(minQ(c.q)<=n&&maxQ(c.q)>=n))return false}
   if(q&&c._s.indexOf(q)<0)return false;return true});
- if(o==='n')list.sort(function(a,b){return a.n.localeCompare(b.n,'pt')});
+ if(o==='d')list.sort(function(a,b){return (b._top?1:0)-(a._top?1:0)});if(o==='n')list.sort(function(a,b){return a.n.localeCompare(b.n,'pt')});
  if(o==='e')list.sort(function(a,b){return (a.e||'9999')<(b.e||'9999')?-1:1});
  if(o==='p')list.sort(function(a,b){return (b.p>0)-(a.p>0)});
  shown=0;$('grid').innerHTML='';draw();}
@@ -31,8 +31,11 @@ function draw(){
  $('grid').insertAdjacentHTML('beforeend',h);shown=end;
  $('cnt').textContent=list.length+' empreendimento'+(list.length===1?'':'s');
  $('more').hidden=shown>=list.length;$('empty').hidden=list.length>0;}
-fetch('data/flow-catalogo.json').then(function(r){return r.json()}).then(function(d){
- ALL=d.itens;ALL.forEach(function(c){c._s=nrm([c.n,c.b,c.c,c.i,c.q,c.t].join(' '))});
+Promise.all([fetch('data/flow-catalogo.json').then(function(r){return r.json()}),fetch('data/sawala-principais.json').then(function(r){return r.json()}).catch(function(){return null})]).then(function(rs){
+ var d=rs[0],P=rs[1],seen={},top=[];
+ if(P){[].concat(P.destaques,P.semestre).forEach(function(x){if(seen[x.id])return;seen[x.id]=1;top.push({id:x.id,n:x.nome,u:x.url,b:x.bairro,c:x.cidade,i:x.incorporadora,f:x.fase==='Lançamento'||x.fase==='Em Breve'?'L':'C',t:'Apartamentos',q:x.quartos,a:x.area,e:x.entrega,p:x.preco||0,img:x.img,_top:1})});}
+ var rest=d.itens.filter(function(c){return c.img&&!seen[c.id]});
+ ALL=top.concat(rest);ALL.forEach(function(c){c._s=nrm([c.n,c.b,c.c,c.i,c.q,c.t].join(' '))});
  function uniq(k){var s={};ALL.forEach(function(c){if(c[k])s[c[k]]=1});return Object.keys(s).sort(function(a,b){return a.localeCompare(b,'pt')})}
  opts($('bairro'),uniq('b'));opts($('inc'),uniq('i'));opts($('tp'),uniq('t'));
  var h=location.hash.replace('#','');if(h)$('q').value=decodeURIComponent(h);
