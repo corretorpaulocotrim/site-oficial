@@ -173,7 +173,7 @@
   function ui(){
     if(document.getElementById('pc-lang'))return;
     var box=document.createElement('div'); box.id='pc-lang';
-    box.setAttribute('style','position:fixed;top:12px;right:16px;z-index:75;display:flex;gap:4px;background:rgba(26,26,25,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:4px');
+    box.setAttribute('style','position:fixed;top:auto;bottom:18px;left:16px;right:auto;z-index:75;display:flex;gap:4px;background:rgba(26,26,25,.5);backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);border-radius:100px;padding:4px');
     Object.keys(CONF).forEach(function(l){
       var b=document.createElement('button'); b.dataset.l=l; b.title=CONF[l].name; b.innerHTML=FLAG[CONF[l].flag];
       b.setAttribute('style','border:none;background:none;padding:2px;width:30px;height:22px;border-radius:4px;cursor:pointer;opacity:.55;transition:.2s;overflow:hidden;display:flex');
@@ -182,7 +182,7 @@
       box.appendChild(b);
     });
     var st=document.createElement('style');
-    st.textContent='#pc-lang button.on{opacity:1;box-shadow:0 0 0 2px #b0895b}#pc-lang button:hover{opacity:1}@media(max-width:1024px){#pc-lang{top:78px!important;right:10px!important;transform:scale(.85);transform-origin:top right}}';
+    st.textContent='#pc-lang button.on{opacity:1;box-shadow:0 0 0 2px #b0895b}#pc-lang button:hover{opacity:1}@media(max-width:1024px){#pc-lang{top:auto!important;bottom:84px!important;left:10px!important;right:auto!important;transform:scale(.85);transform-origin:top right}}';
     document.head.appendChild(st);
     document.body.appendChild(box);
   }
