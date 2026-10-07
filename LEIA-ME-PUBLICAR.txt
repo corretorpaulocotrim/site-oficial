@@ -1,0 +1,9 @@
+PACOTE DE PUBLICACAO - paulocotrim.com
+1) Extraia este ZIP (nao envie o .zip ao GitHub).
+2) Copie TODO o conteudo para a raiz do repositorio site-oficial (substituir quando perguntar).
+   Arquivos: index.html, empreendimentos.html, empreendimento.html, sw.js
+   Pasta data/: catalogo.json, mapa.json, sawala-principais.json, sawala-galeria.json
+   Pasta emp-img/sawala/: 42 imagens .webp
+3) GitHub Desktop/Git Bash:  git add -A && git commit -m "Condominios principais com imagens" && git push
+   Ou pelo site do GitHub: Add file > Upload files (arraste os arquivos extraidos; ate 100 por envio).
+4) Aguarde ~1 min e abra com Ctrl+F5.
