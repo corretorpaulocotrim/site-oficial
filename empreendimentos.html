@@ -1,0 +1,45 @@
+<!DOCTYPE html><html lang="pt-BR"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1.0"/><meta name="theme-color" content="#1a1a1a"/><title>Lançamentos e imóveis na planta no Rio de Janeiro | Paulo Cotrim</title><meta name="description" content="Catálogo completo de lançamentos e empreendimentos em construção no Rio de Janeiro: Zona Sul, Barra, Centro, Zona Norte e Zona Oeste. Atendimento Paulo Cotrim, CRECI-RJ 77677-F."/><link rel="canonical" href="https://www.paulocotrim.com/empreendimentos.html"/><link rel="icon" type="image/svg+xml" href="favicon.svg"/><link rel="preconnect" href="https://fonts.googleapis.com"/><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/><link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/><link rel="stylesheet" href="flow-emp.css"/></head><body>
+<header><div class="wrap nav"><a href="index.html" class="brandmark"><span class="round" style="display:none"></span><span><span class="bn">Paulo Cotrim</span><span class="bs">Imóveis · Rio de Janeiro</span></span></a><nav class="menu"><a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20vim%20pelo%20cat%C3%A1logo%20do%20site.">Atendimento</a></nav></div></header>
+<section class="k-top"><div class="wrap"><span class="eyebrow">Catálogo completo</span><h1>Lançamentos e imóveis na planta<br>no Rio de Janeiro</h1><p>1029 empreendimentos entre lançamentos e obras em andamento, com descrição, lazer, plantas e fotos. Filtre por bairro, incorporadora e tipologia e fale direto com Paulo Cotrim.</p></div></section>
+<div class="k-bar"><div class="wrap"><div class="k-f"><input id="q" type="search" placeholder="Buscar por nome, bairro, rua ou incorporadora" aria-label="Buscar"/><select id="fase" aria-label="Fase"><option value="">Todas as fases</option><option value="L">Lançamento</option><option value="C">Em construção</option></select><select id="bairro" aria-label="Bairro"><option value="">Todos os bairros</option></select><select id="inc" aria-label="Incorporadora"><option value="">Todas as incorporadoras</option></select><select id="qt" aria-label="Quartos"><option value="">Quartos</option><option value="1">1 quarto</option><option value="2">2 quartos</option><option value="3">3 quartos</option><option value="4">4 ou mais</option></select><select id="tp" aria-label="Tipo"><option value="">Todos os tipos</option></select></div></div></div>
+<section class="section" style="padding-top:10px"><div class="wrap"><div class="k-meta"><span id="cnt"></span><select id="ord" aria-label="Ordenar" style="padding:8px 12px;border:1px solid var(--line);background:#fff"><option value="d">Destaques primeiro</option><option value="n">Nome (A-Z)</option><option value="e">Entrega mais próxima</option><option value="p">Com valor divulgado</option></select></div><div class="k-grid" id="grid"></div><div class="k-empty" id="empty" hidden>Nenhum empreendimento encontrado. Ajuste os filtros ou <a href="https://wa.me/5521989150864?text=Ol%C3%A1%20Paulo%2C%20n%C3%A3o%20achei%20no%20cat%C3%A1logo%20o%20que%20procuro." style="color:var(--gold)">fale com Paulo</a>.</div><button class="k-more" id="more" hidden>Ver mais</button><p class="note">Informações conforme material das incorporadoras, sujeitas a alteração. Valores e disponibilidade confirmados na tabela vigente. Paulo Cotrim, CRECI-RJ 77677-F.</p></div></section>
+<footer><div class="wrap foot"><span>Paulo Cotrim · Imóveis no Rio de Janeiro · CRECI-RJ 77677-F</span><span><a href="index.html">Início</a></span></div></footer>
+<script>
+(function(){
+var ALL=[],PAGE=24,shown=0,list=[];var $=function(i){return document.getElementById(i)};
+function nrm(s){return (s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
+function brl(v){return 'R$ '+Math.round(v).toString().replace(/\B(?=(\d{3})+(?!\d))/g,'.')}
+function fmtE(e){if(!e)return '';var p=e.split('-');var m=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];return m[+p[1]-1]+'/'+p[0]}
+function esc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function opts(sel,arr){arr.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o)})}
+function maxQ(q){var m=(q||'').match(/\d+/g);return m?Math.max.apply(null,m.map(Number)):0}
+function minQ(q){var m=(q||'').match(/\d+/g);return m?Math.min.apply(null,m.map(Number)):0}
+function filt(){
+ var q=nrm($('q').value),f=$('fase').value,b=$('bairro').value,i=$('inc').value,qt=$('qt').value,t=$('tp').value,o=$('ord').value;
+ list=ALL.filter(function(c){
+  if(f&&c.f!==f)return false;if(b&&c.b!==b)return false;if(i&&c.i!==i)return false;if(t&&c.t!==t)return false;
+  if(qt){var n=+qt;if(n===4){if(maxQ(c.q)<4)return false}else if(!(minQ(c.q)<=n&&maxQ(c.q)>=n))return false}
+  if(q&&c._s.indexOf(q)<0)return false;return true});
+ if(o==='n')list.sort(function(a,b){return a.n.localeCompare(b.n,'pt')});
+ if(o==='e')list.sort(function(a,b){return (a.e||'9999')<(b.e||'9999')?-1:1});
+ if(o==='p')list.sort(function(a,b){return (b.p>0)-(a.p>0)});
+ shown=0;$('grid').innerHTML='';draw();}
+function draw(){
+ var end=Math.min(list.length,shown+PAGE),h='';
+ for(var k=shown;k<end;k++){var c=list[k];
+  h+='<a class="k-c" href="'+esc(c.u)+'"><div class="k-im">'+(c.img?'<img loading="lazy" src="'+esc(c.img)+'" alt="'+esc(c.n)+'">':'')+'<span class="k-tag">'+(c.f==='L'?'Lançamento':'Em construção')+'</span></div><div class="k-b"><h3>'+esc(c.n)+'</h3><span class="s">'+esc([c.b,c.c].filter(Boolean).join(' · '))+(c.i?' · '+esc(c.i):'')+'</span><span class="m">'+esc([c.q,c.a].filter(Boolean).join(' · ')||c.t)+'</span>'+(c.e?'<span class="m">Entrega '+fmtE(c.e)+'</span>':'')+'<span class="p">'+(c.p?'A partir de '+brl(c.p):'Valores sob consulta')+'</span></div></a>';}
+ $('grid').insertAdjacentHTML('beforeend',h);shown=end;
+ $('cnt').textContent=list.length+' empreendimento'+(list.length===1?'':'s');
+ $('more').hidden=shown>=list.length;$('empty').hidden=list.length>0;}
+fetch('data/flow-catalogo.json').then(function(r){return r.json()}).then(function(d){
+ ALL=d.itens;ALL.forEach(function(c){c._s=nrm([c.n,c.b,c.c,c.i,c.q,c.t].join(' '))});
+ function uniq(k){var s={};ALL.forEach(function(c){if(c[k])s[c[k]]=1});return Object.keys(s).sort(function(a,b){return a.localeCompare(b,'pt')})}
+ opts($('bairro'),uniq('b'));opts($('inc'),uniq('i'));opts($('tp'),uniq('t'));
+ var h=location.hash.replace('#','');if(h)$('q').value=decodeURIComponent(h);
+ filt();});
+['q','fase','bairro','inc','qt','tp','ord'].forEach(function(id){$(id).addEventListener(id==='q'?'input':'change',filt)});
+$('more').addEventListener('click',draw);
+})();
+</script>
+<script src="tracking-config.js"></script><script src="i18n.js" defer></script><script src="leads.js" defer></script><script src="wa.js" defer></script><script src="kit.js" defer></script>
+</body></html>
