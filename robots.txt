@@ -7,3 +7,5 @@ Disallow: /admin.html
 Disallow: /documentos.html
 Disallow: /crm.html
 Disallow: /index-v2.html
+
+Sitemap: https://www.paulocotrim.com/sitemap-empreendimentos.xml
