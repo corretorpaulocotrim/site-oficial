@@ -1,7 +1,7 @@
 {
  "name": "Paulo Cotrim · Imóveis no Rio",
  "short_name": "Paulo Cotrim",
- "description": "Lançamentos de todas as principais construtoras no Rio de Janeiro. +700 famílias atendidas. Aprovação em 48h. CRECI-RJ 77677-F.",
+ "description": "Condomínios na planta e lançamentos no Rio de Janeiro. Atendimento personalizado de Paulo Cotrim, CRECI-RJ 77677-F.",
  "start_url": "/",
  "display": "standalone",
  "background_color": "#f6f2ea",
@@ -13,7 +13,19 @@
    "src": "favicon.svg",
    "sizes": "any",
    "type": "image/svg+xml",
-   "purpose": "any maskable"
+   "purpose": "any"
+  },
+  {
+   "src": "favicon-192.png",
+   "sizes": "192x192",
+   "type": "image/png",
+   "purpose": "any"
+  },
+  {
+   "src": "favicon-512.png",
+   "sizes": "512x512",
+   "type": "image/png",
+   "purpose": "any"
   }
  ],
  "screenshots": [
