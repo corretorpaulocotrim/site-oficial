@@ -1,0 +1,60 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Performance | Paulo Cotrim</title><meta name="robots" content="noindex,nofollow">
+<style>:root{--n:#0b1b33;--a:#d9a441;--bg:#f6f7f9;--c:#fff;--t:#1b2433;--m:#5b6676;--l:#e3e7ed;--ok:#1a8f4c;--bad:#d64545;--b1:#2d6cdf}
+@media(prefers-color-scheme:dark){:root{--bg:#0a1220;--c:#111c30;--t:#e8edf5;--m:#9aa8bc;--l:#22304a}}
+*{box-sizing:border-box}body{margin:0;font:15px/1.5 system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--t)}
+main{max-width:1000px;margin:0 auto;padding:14px 14px 60px}h1{font-size:22px;margin:.2em 0}h2{font-size:17px;margin:0 0 8px}
+.card{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:14px;margin:10px 0}.g{display:grid;gap:10px;grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}.g2{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+.k{background:var(--c);border:1px solid var(--l);border-radius:14px;padding:12px}.k b{font-size:26px;display:block;line-height:1.1}.k span{color:var(--m);font-size:13px}
+.btn{min-height:46px;padding:0 16px;border-radius:99px;border:1px solid var(--l);background:var(--c);color:var(--t);font:600 14px inherit;cursor:pointer}.btn.p{background:var(--a);border-color:var(--a);color:#1b1304}
+.row{display:flex;gap:8px;flex-wrap:wrap}input{min-height:44px;padding:6px 10px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--t);font:inherit;width:100%}label{font-size:12px;color:var(--m);display:block;margin-top:6px}.m{color:var(--m);font-size:13px}
+svg text{fill:var(--m);font:11px system-ui}.bar{fill:var(--b1)}.barg{fill:var(--a)}.pb{height:10px;background:var(--l);border-radius:9px;overflow:hidden}.pb i{display:block;height:100%;background:var(--ok)}</style></head><body><main>
+<h1>📈 Performance e Ligações</h1><p class="m">Seus números reais. Tudo fica neste aparelho; faça backup no fim da semana.</p>
+<div class="card"><h2>Registrar agora</h2><div class="row" id="reg"></div><p class="m" id="msg"></p></div>
+<div class="g" id="kp"></div>
+<div class="g2"><div class="card"><h2>Ligações por dia (14 dias)</h2><div id="c1"></div></div><div class="card"><h2>Funil do mês</h2><div id="c2"></div></div></div>
+<div class="g2"><div class="card"><h2>Leads por etapa (CRM)</h2><div id="c3"></div></div><div class="card"><h2>Leads por origem</h2><div id="c4"></div></div></div>
+<div class="card"><h2>Estudo: quantas ligações eu preciso?</h2><p class="m">Informe sua meta e suas taxas. Os valores iniciais são premissas para você substituir; com histórico suficiente o painel usa suas taxas reais.</p>
+<div class="g"><div><label>Meta de vendas no mês</label><input id="m-v" type="number" inputmode="numeric"></div><div><label>Dias úteis de prospecção</label><input id="m-d" type="number" inputmode="numeric"></div><div><label>% ligações atendidas</label><input id="m-a" type="number" inputmode="decimal"></div><div><label>% atendimentos que viram visita</label><input id="m-vi" type="number" inputmode="decimal"></div><div><label>% visitas que viram proposta</label><input id="m-p" type="number" inputmode="decimal"></div><div><label>% propostas que fecham</label><input id="m-f" type="number" inputmode="decimal"></div></div>
+<div id="est" style="margin-top:10px"></div></div>
+<div class="card"><h2>Estudo (Treinador)</h2><div id="tr"></div></div>
+<div class="card"><h2>Backup</h2><div class="row"><button class="btn" id="bx">Exportar ligações e metas</button><button class="btn" id="bi">Importar</button><input type="file" id="bf" accept=".json" style="display:none"></div></div>
+</main><script>
+(function(){var $=function(i){return document.getElementById(i)};
+function G(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d}catch(e){return d}}function Sx(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
+var TIPOS=[['lig','📞 Ligação feita'],['atd','✅ Atendeu'],['wa','💬 WhatsApp enviado'],['vis','📍 Visita agendada'],['prop','📄 Proposta enviada'],['ven','🏆 Venda']];
+var D=function(t){var d=new Date(t||Date.now());return d.getFullYear()+'-'+('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)};
+var log=G('pc_calls',[]),meta=G('pc_meta',{v:2,d:22,a:25,vi:15,p:40,f:30});
+function cnt(t,pref){return log.filter(function(x){return x.t==t&&x.d.indexOf(pref)==0}).length}
+function reg(){$('reg').innerHTML=TIPOS.map(function(t){return '<button class="btn '+(t[0]=='lig'?'p':'')+'" data-t="'+t[0]+'">'+t[1]+'</button>'}).join('')+'<button class="btn" data-u="1">↩ Desfazer</button>'}
+document.addEventListener('click',function(e){var b=e.target.closest('button');if(!b)return;var t=b.getAttribute('data-t');
+if(t){log.push({t:t,d:D(),h:Date.now()});Sx('pc_calls',log);$('msg').textContent='Registrado.';draw()}
+else if(b.getAttribute('data-u')){log.pop();Sx('pc_calls',log);$('msg').textContent='Último registro desfeito.';draw()}
+else if(b.id=='bx'){var o={pc_calls:log,pc_meta:meta},bl=new Blob([JSON.stringify(o)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(bl);a.download='performance-backup.json';a.click()}
+else if(b.id=='bi'){$('bf').click();$('bf').onchange=function(){var r=new FileReader();r.onload=function(){try{var o=JSON.parse(r.result);if(Array.isArray(o.pc_calls)){log=o.pc_calls;Sx('pc_calls',log)}if(o.pc_meta){meta=o.pc_meta;Sx('pc_meta',meta)}draw();alert('Importado.')}catch(x){alert('Arquivo inválido')}};r.readAsText(this.files[0])}}});
+function bars(el,data,cls,fmt){var W=480,H=150,mx=Math.max.apply(null,data.map(function(d){return d[1]}).concat([1])),n=data.length,bw=W/n,s='<svg viewBox="0 0 '+W+' '+(H+28)+'" width="100%" role="img" aria-label="gráfico">';
+data.forEach(function(d,i){var h=Math.round(d[1]/mx*H);s+='<rect class="'+cls+'" x="'+(i*bw+3)+'" y="'+(H-h)+'" width="'+(bw-6)+'" height="'+h+'" rx="3"><title>'+d[0]+': '+d[1]+'</title></rect><text x="'+(i*bw+bw/2)+'" y="'+(H+14)+'" text-anchor="middle">'+d[0]+'</text>'+(d[1]?'<text x="'+(i*bw+bw/2)+'" y="'+(H-h-3)+'" text-anchor="middle">'+d[1]+'</text>':'')});$(el).innerHTML=s+'</svg>'}
+function hbars(el,data){var mx=Math.max.apply(null,data.map(function(d){return d[1]}).concat([1])),s='';if(!data.length||!mx){$(el).innerHTML='<p class="m">Sem dados ainda.</p>';return}
+data.forEach(function(d){s+='<div style="margin:6px 0"><div style="display:flex;justify-content:space-between"><span>'+d[0]+'</span><b>'+d[1]+'</b></div><div class="pb"><i style="width:'+Math.round(d[1]/mx*100)+'%;background:var(--b1)"></i></div></div>'});$(el).innerHTML=s}
+function draw(){reg();var hoje=D(),mes=hoje.slice(0,7),sem=[];for(var i=0;i<7;i++)sem.push(D(Date.now()-i*864e5));
+var cw=function(t){return log.filter(function(x){return x.t==t&&sem.indexOf(x.d)>=0}).length};
+var kp=[['Ligações hoje',cnt('lig',hoje)],['Ligações 7 dias',cw('lig')],['Ligações no mês',cnt('lig',mes)],['Atendidas no mês',cnt('atd',mes)],['Visitas no mês',cnt('vis',mes)],['Vendas no mês',cnt('ven',mes)]];
+var meta_dia=Math.ceil((G('pc_est_dia',0)||0));kp.splice(1,0,['Meta de ligações/dia',meta_dia||'—']);
+$('kp').innerHTML=kp.map(function(k){return '<div class="k"><b>'+k[1]+'</b><span>'+k[0]+'</span></div>'}).join('');
+var dias=[];for(var j=13;j>=0;j--){var dd=D(Date.now()-j*864e5);dias.push([dd.slice(8),log.filter(function(x){return x.t=='lig'&&x.d==dd}).length])}bars('c1',dias,'bar');
+bars('c2',[['Lig.',cnt('lig',mes)],['Atend.',cnt('atd',mes)],['WA',cnt('wa',mes)],['Visitas',cnt('vis',mes)],['Prop.',cnt('prop',mes)],['Vendas',cnt('ven',mes)]],'barg');
+var L=G('crm_leads',[]),et={},or={};L.forEach(function(l){var s=l.status||'novo';et[s]=(et[s]||0)+1;var o=String(l.origem||'sem origem').replace(/^site:/,'site: ');or[o]=(or[o]||0)+1});
+hbars('c3',['novo','contato','proposta','visita','fechado'].map(function(s){return [s,et[s]||0]}));
+hbars('c4',Object.keys(or).map(function(k){return [k,or[k]]}).sort(function(a,b){return b[1]-a[1]}).slice(0,8));
+est();trn()}
+function est(){var f=['v','d','a','vi','p','f'];f.forEach(function(k){if(document.activeElement!==$('m-'+k))$('m-'+k).value=meta[k]});
+var v=+meta.v||0,d=+meta.d||1,a=(+meta.a||0)/100,vi=(+meta.vi||0)/100,p=(+meta.p||0)/100,fe=(+meta.f||0)/100;
+var el=document.getElementById('est');if(!(v&&a&&vi&&p&&fe)){el.innerHTML='<p class="m">Preencha todos os campos.</p>';return}
+var prop=v/fe,vis=prop/p,atd=vis/vi,lig=atd/a,dia=lig/d;Sx('pc_est_dia',dia);
+el.innerHTML='<div class="g"><div class="k"><b>'+Math.ceil(dia)+'</b><span>ligações por dia</span></div><div class="k"><b>'+Math.ceil(lig)+'</b><span>ligações no mês</span></div><div class="k"><b>'+Math.ceil(atd)+'</b><span>atendimentos</span></div><div class="k"><b>'+Math.ceil(vis)+'</b><span>visitas</span></div><div class="k"><b>'+Math.ceil(prop)+'</b><span>propostas</span></div></div>'+
+'<p class="m">Conta: vendas ÷ % fechamento = propostas; ÷ % de visita→proposta = visitas; ÷ % de atendimento→visita = atendimentos; ÷ % atendidas = ligações. Suas taxas reais no mês: atendidas '+pc(cnt('atd',D().slice(0,7)),cnt('lig',D().slice(0,7)))+', visitas por atendimento '+pc(cnt('vis',D().slice(0,7)),cnt('atd',D().slice(0,7)))+', fechamento '+pc(cnt('ven',D().slice(0,7)),cnt('prop',D().slice(0,7)))+'.</p>'}
+function pc(a,b){return b?Math.round(a/b*100)+'%':'sem dados'}
+document.addEventListener('input',function(e){var id=e.target.id;if(/^m-/.test(id)){meta[id.slice(2)]=e.target.value;Sx('pc_meta',meta);est();draw2()}});function draw2(){var meta_dia=Math.ceil(G('pc_est_dia',0));var k=document.querySelectorAll('#kp .k b')[1];if(k)k.textContent=meta_dia||'—'}
+function trn(){var s=G('pc_atend_v2',null),el=$('tr');if(!s){el.innerHTML='<p class="m">Abra o Treinador para começar. Aqui aparece seu progresso no curso e no quiz.</p><a class="btn" href="treinador/index.html" target="_self">Abrir Treinador</a>';return}
+var prog=s.prog||{},n=Object.keys(prog).filter(function(k){return prog[k]}).length,q=(s.quiz&&s.quiz.best)||0;el.innerHTML='<div class="g"><div class="k"><b>'+n+'</b><span>lições concluídas</span></div><div class="k"><b>'+q+'</b><span>melhor nota no quiz</span></div><div class="k"><b>'+(s.emps||[]).length+'</b><span>condomínios no Treinador</span></div></div><p class="m">Meta sugerida: estudar um condomínio novo por dia antes de ligar, e refazer o quiz toda semana.</p>'}
+draw()})();
+</script></body></html>

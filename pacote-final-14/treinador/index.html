@@ -1,0 +1,993 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f2e36"><meta name="apple-mobile-web-app-capable" content="yes">
+<link rel="manifest" href="manifest.webmanifest"><link rel="icon" href="icon.svg"><link rel="apple-touch-icon" href="icon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@500;600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<title>Atendimento Paulo Cotrim</title>
+<style>:root{--bg:#fbfbfc;--card:#fff;--ink:#0f2e36;--ink2:#2d5a66;--mut:#6b7280;--gold:#b8873a;--gold2:#d9b877;--line:#e8eaed;--fog:#f5f6f7;--warn:#fff8ea;--bad:#fdeeee;--ok:#eaf5ee;--r:14px;--sh:0 1px 0 rgba(15,46,54,.03)}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.55;padding-bottom:84px;-webkit-font-smoothing:antialiased}
+h1,h2,h3,h4{font-family:Fraunces,Georgia,"Times New Roman",serif;font-weight:600;margin:0 0 8px;letter-spacing:-.015em;line-height:1.15}
+h1{font-size:clamp(30px,6vw,46px);line-height:1.08;letter-spacing:-.025em}h2{font-size:22px}h3{font-size:17px}h4{font-size:14px;font-family:Inter,system-ui,sans-serif;margin:14px 0 4px;color:var(--ink2)}
+p{margin:0 0 10px}a{color:inherit}
+.top{background:rgba(255,255,255,.92);backdrop-filter:blur(12px);color:var(--ink);padding:10px 16px;padding-top:max(10px,env(safe-area-inset-top));display:flex;align-items:center;gap:12px;position:sticky;top:0;z-index:20;border-bottom:1px solid var(--line)}.top .grow{flex:1}.top .gear{border:0;background:none;color:var(--mut);cursor:pointer;padding:8px;border-radius:10px}.top .gear svg{width:22px;height:22px;display:block}
+.top .pc{width:36px;height:36px;border-radius:9px;background:var(--ink);display:grid;place-items:center;font-family:Fraunces,Georgia,serif;color:#fff;font-weight:700;font-size:15px;position:relative;letter-spacing:.02em}.top .pc:after{content:"";position:absolute;left:8px;right:8px;bottom:6px;height:2px;background:var(--gold2);border-radius:2px}
+.top b{display:block;font-family:Fraunces,Georgia,serif;font-size:16px;font-weight:600}.top small{color:var(--mut);font-size:12px}
+main{max-width:940px;margin:0 auto;padding:18px 16px 24px}
+#nav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:30}
+#nav button{flex:1;border:0;background:none;padding:9px 2px 8px;font:inherit;font-size:11px;color:var(--mut);cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:3px}
+#nav svg{width:22px;height:22px}#nav button{position:relative}#nav button.on{color:var(--ink);font-weight:600}#nav button.on:before{content:"";position:absolute;top:-1px;left:30%;right:30%;height:2px;background:var(--gold)}
+.mut{color:var(--mut)}.small{font-size:13px}.mt{margin-top:26px}.mt-s{margin-top:10px}.center{text-align:center}
+.kicker{font-size:12.5px;color:var(--gold);font-weight:600;display:block;margin-bottom:6px}.cover .kicker{color:var(--gold2)}
+.hero{background:var(--fog);border:1px solid var(--line);border-radius:22px;padding:30px 24px 26px;margin-bottom:16px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;left:24px;top:0;width:44px;height:3px;background:var(--gold)}.hero .greet{color:var(--mut);font-size:14px;margin:6px 0 10px}
+.hero p{color:var(--ink2);max-width:520px;font-size:16px}.hero2{background:#fff}
+.row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin:12px 0}
+.between{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.btn{display:inline-block;border:1px solid var(--ink);background:var(--ink);color:#fff;border-radius:99px;padding:12px 22px;font:inherit;font-weight:600;font-size:14px;cursor:pointer;text-decoration:none;text-align:center;transition:background .15s}.btn:hover{background:#16414c}
+.btn.small{padding:8px 16px;font-size:13px}.btn.gold{background:var(--gold);border-color:var(--gold)}.btn.ghost{background:transparent;color:var(--ink);border:1px solid #c9d1d4}
+.btn.ghost-d{background:#fff;color:var(--ink);border:1px solid var(--line)}.btn.danger{background:#b3261e}.btn:active{transform:scale(.98)}
+.link{border:0;background:none;color:var(--ink2);font:inherit;font-size:13px;font-weight:600;cursor:pointer;padding:6px 0;text-decoration:underline;text-underline-offset:3px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:10px}
+.stat{background:#fff;border:1px solid var(--line);border-radius:var(--r);padding:12px;text-align:center}.stat b{display:block;font-family:Fraunces,Georgia,serif;font-size:24px}.stat span{font-size:12px;color:var(--mut)}
+.bar{height:7px;background:var(--line);border-radius:9px;overflow:hidden;margin:8px 0 14px}.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),var(--gold2));border-radius:9px;transition:width .4s}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin:0 0 12px}
+.card.main{border:1px solid var(--line);border-top:3px solid var(--gold);background:#fff}
+.li{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-top:1px solid var(--line);cursor:pointer}
+.pill{font-size:12px;font-weight:600;background:var(--ok);color:#1f6b3a;border-radius:99px;padding:3px 10px}.pill.warn{background:var(--warn);color:#8a5a00}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 14px}.chips.sticky{position:sticky;top:57px;background:var(--bg);padding:8px 0;margin:0 0 8px;z-index:10;overflow-x:auto;flex-wrap:nowrap}
+.chips button{border:1px solid var(--line);background:#fff;border-radius:99px;padding:8px 14px;font:inherit;font-size:13px;cursor:pointer;white-space:nowrap}
+.chips button.on{background:var(--ink);color:#fff;border-color:var(--ink)}
+.search,input[type=text],input[type=month],select,.ta{width:100%;padding:12px;border:1px solid var(--line);border-radius:12px;font:inherit;font-size:15px;background:#fff;color:var(--ink)}
+.search{margin:10px 0}.ta{resize:vertical;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px}
+.emp{padding:0;overflow:hidden;cursor:pointer;margin:0;transition:border-color .15s}.emp:hover{border-color:var(--gold)}
+.thumb{height:130px;background:var(--ink);overflow:hidden}.thumb img{width:100%;height:100%;object-fit:cover;display:block}.thumb.big{height:180px;border-radius:12px;margin-bottom:10px}
+.ph{width:100%;height:100%;display:grid;place-items:center;background:linear-gradient(135deg,#0f2e36,#1f5563)}.ph span{font-family:Fraunces,Georgia,serif;font-size:40px;color:var(--gold);border:1.5px solid var(--gold);border-radius:14px;padding:4px 14px}
+.pad{padding:14px}
+.cover{position:relative;border-radius:22px;overflow:hidden;min-height:230px;background:var(--ink);box-shadow:var(--sh);margin:6px 0 10px}
+.cover .img{position:absolute;inset:0}.cover .img img{width:100%;height:100%;object-fit:cover}
+.cover .cap{position:absolute;left:0;right:0;bottom:0;padding:60px 20px 18px;background:linear-gradient(transparent,rgba(8,26,31,.92));color:#fff}.cover .cap p{margin:0;color:#c9d8db}.cover h1{margin-bottom:4px}
+.dif{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.dif .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin:0 0 12px}.dif .d3{grid-column:1/-1}
+.note{background:var(--warn);border:1px solid #f0d9a8;border-radius:12px;padding:10px 12px;font-size:13px;margin:10px 0}.note.bad{background:var(--bad);border-color:#f0b4b0}
+.gold-box{background:linear-gradient(135deg,#fffaf0,#fff4de);border-left:3px solid var(--gold);border-radius:10px;padding:10px 12px;margin:12px 0;font-size:14px}
+.ul{padding-left:18px;margin:6px 0}.ul li{margin-bottom:4px}
+.k{display:flex;justify-content:space-between;gap:12px;padding:8px 0;border-bottom:1px dashed var(--line);font-size:14px}.k span:first-child{color:var(--mut)}.k span:last-child,.k b{text-align:right}
+.seg{display:flex;height:16px;border-radius:9px;overflow:hidden;margin:6px 0 12px;background:var(--line)}.seg i{display:block;height:100%}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px}
+.scroll{overflow-x:auto}table.t{width:100%;border-collapse:collapse;font-size:13.5px;min-width:480px}.t td,.t th{padding:8px 6px;border-bottom:1px solid var(--line);text-align:right}.t td:first-child,.t th:first-child{text-align:left;color:var(--mut)}
+.mini{width:100%;min-width:70px;padding:6px 8px;border:1px solid var(--line);border-radius:8px;font:inherit;font-size:13px;text-align:right}.t th .mini{text-align:center;font-weight:600}
+.disc{font-size:12px;color:var(--mut);margin-top:12px}
+.f{display:block;margin-bottom:12px}.f>span{display:block;font-size:12px;color:var(--mut);margin-bottom:4px;font-weight:500}
+details{background:#fff;border:1px solid var(--line);border-radius:var(--r);margin:0 0 10px}
+summary{cursor:pointer;padding:14px;list-style:none;display:flex;gap:10px;align-items:center;font-weight:600}summary::-webkit-details-marker{display:none}
+summary .n{width:28px;height:28px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:12px;flex:none}summary .n.ok{background:var(--gold)}summary .tt{flex:1}
+details .b{padding:0 16px 16px;font-size:14.5px}
+.phase{margin:22px 0 10px;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}.phase span{font-size:20px}.phase small{font-family:Inter,sans-serif;font-weight:400;color:var(--mut);font-size:13px}
+.chk{display:flex;gap:10px;align-items:flex-start;padding:8px 0;font-size:14px;cursor:pointer}.chk input{margin-top:3px;width:18px;height:18px;accent-color:var(--gold);flex:none}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px}.two .card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:18px;margin:0 0 12px}
+.tag{display:inline-block;font-size:13px;padding:5px 10px;border-radius:99px;margin:0 6px 6px 0}.tag.ok{background:var(--ok);color:#1f6b3a}.tag.bad{background:var(--bad);color:#9a2a22}
+.big{font-family:Fraunces,Georgia,serif;font-size:46px;color:var(--gold)}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:#fff;border-radius:12px;padding:12px;margin:8px 0;font:inherit;font-size:14.5px;cursor:pointer}.opt.ok{background:var(--ok);border-color:#9fd3ae}.opt.no{background:var(--bad);border-color:#f0a8a8}
+#toast{position:fixed;left:50%;bottom:96px;transform:translate(-50%,20px);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-size:13px;opacity:0;pointer-events:none;transition:.25s;z-index:50;max-width:90vw}#toast.on{opacity:1;transform:translate(-50%,0)}
+@media(min-width:900px){body{padding-bottom:0;padding-left:92px}#nav{top:0;bottom:0;right:auto;width:92px;flex-direction:column;justify-content:center;gap:6px;border-top:0;border-right:1px solid var(--line)}#nav button{padding:12px 2px}#nav button.on:before{top:20%;bottom:20%;left:-1px;right:auto;width:2px;height:auto}.top{margin-left:-92px;padding-left:108px}#toast{bottom:30px}}
+@media print{body{margin:0;background:var(--bg);color:var(--ink);font-family:Inter,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;font-size:15px;line-height:1.55;padding-bottom:84px;-webkit-font-smoothing:antialiased}.top,#nav,#toast,.int{display:none!important}.card,details{background:#fff;border:1px solid var(--line);border-radius:var(--r);margin:0 0 10px}.cover{min-height:200px;-webkit-print-color-adjust:exact;print-color-adjust:exact}.cover .cap,.seg i,.dot,.hero{background:var(--fog);border:1px solid var(--line);border-radius:22px;padding:30px 24px 26px;margin-bottom:16px;position:relative;overflow:hidden}.hero:before{content:"";position:absolute;left:24px;top:0;width:44px;height:3px;background:var(--gold)}.hero .greet{color:var(--mut);font-size:14px;margin:6px 0 10px}input,.mini{border:0}.scroll{overflow:visible}}
+body.printing .top,body.printing #nav{position:fixed;left:0;right:0;bottom:0;background:rgba(255,255,255,.94);backdrop-filter:blur(12px);border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:30}
+
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:0 0 16px}
+.tile{display:flex;flex-direction:column;gap:6px;text-align:left;border:1px solid var(--line);background:#fff;border-radius:var(--r);padding:18px;font:inherit;color:var(--ink);cursor:pointer;transition:border-color .15s}
+.tile:hover{border-color:var(--gold)}.tile b{font-family:Fraunces,Georgia,serif;font-size:19px;font-weight:600}.tile span{color:var(--mut);font-size:13.5px}
+.tile svg{width:22px;height:22px;stroke:var(--gold);fill:none;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;margin-bottom:6px}
+.chips.sub{margin:-4px 0 12px}.chips.sub button{font-size:12.5px;padding:6px 12px;background:var(--fog);border-color:transparent}.chips.sub button.on{background:var(--ink);color:#fff}
+.chips.top2 button{font-weight:600}
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,summary:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+
+.cover .ph{place-items:start end;padding:16px}.cover .ph span{font-size:20px;padding:2px 10px;opacity:.7}
+</style></head><body>
+<div class="top"><div class="pc">PC</div><div class="grow"><b>Paulo Cotrim</b><small>Atendimento de alto padrão</small></div><button class="gear" onclick="go('cfg')" aria-label="Ajustes"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5a7 7 0 0 0 0 2.6l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/></svg></button></div>
+<main id="app"></main><nav id="nav"></nav><div id="toast"></div>
+<script>/* ===== CONTEÚDO DO APP: treinamento, glossário, gatilhos, perfis, scripts, quiz ===== */
+
+const PERFIS = {
+  inv: {
+    nome: 'Investidor de studio (Zona Sul)',
+    tom: 'Analítico e objetivo. Ele quer números, premissas e liquidez.',
+    abrir: 'Antes de falar do prédio: qual retorno você espera, em quanto tempo, e quanto do seu patrimônio quer alocar?',
+    perguntas: ['Você pretende alugar para moradia ou para temporada?', 'Já tem imóvel alugado hoje? Como foi a vacância e a gestão?', 'Prefere sair na entrega das chaves ou segurar para renda?', 'Quanto você aceita de variação de retorno?'],
+    gatilhos: ['Ancoragem: compare o R$/m² do prédio com o do bairro.', 'Prova social verificável: casos reais de locação na região.', 'Escassez real: poucos studios na planta bem localizados, sem inventar prazo.'],
+    evitar: 'Prometer ocupação ou aluguel garantido. Mostre cenários e diga que depende da convenção do condomínio.'
+  },
+  uhnw: {
+    nome: 'Altíssimo padrão / patrimônio',
+    tom: 'Sóbrio, discreto e preparado. Fale pouco, pergunte bem, nunca pressione.',
+    abrir: 'Obrigado pelo seu tempo. Para eu não desperdiçá-lo: o que um bom negócio imobiliário precisa entregar para você?',
+    perguntas: ['O imóvel é para preservar patrimônio, uso próprio ou os dois?', 'Quem mais participa da decisão (family office, advogado, contador)?', 'Tem preferência por assinatura de arquitetura, privacidade, serviços?', 'Como pretende estruturar a compra (pessoa física, holding)?'],
+    gatilhos: ['Autoridade: preparo, dados e histórico da incorporadora, não adjetivos.', 'Escassez geográfica: Ipanema e Leblon têm terreno limitado.', 'Exclusividade real: poucas unidades, assinatura do projeto, endereço.'],
+    evitar: 'Intimidade forçada, gírias, desconto como primeiro argumento e qualquer urgência artificial.'
+  },
+  moradia: {
+    nome: 'Moradia em alto padrão',
+    tom: 'Acolhedor e consultivo. Ele compra a rotina que vai viver.',
+    abrir: 'Me conta como é o seu dia hoje e o que você gostaria que mudasse na sua casa.',
+    perguntas: ['Quantas pessoas vão morar e quais os planos para os próximos 5 anos?', 'O que é inegociável: vista, metragem, vaga, serviços, caminhar a pé?', 'Quando você precisa estar morando?', 'Vai vender outro imóvel para comprar este?'],
+    gatilhos: ['Storytelling: descreva a manhã de domingo no bairro.', 'Aversão à perda: o custo de esperar quando o estoque bom acaba, com fatos.', 'Consistência: retome o que ele disse que era inegociável.'],
+    evitar: 'Falar só de investimento. Aqui o retorno é a qualidade de vida.'
+  },
+  remoto: {
+    nome: 'Investidor de fora / remoto',
+    tom: 'Claro e organizado. Ele precisa confiar sem estar presente.',
+    abrir: 'Vou te mostrar como funciona cada etapa à distância, do contrato à gestão do imóvel.',
+    perguntas: ['De onde você compra e qual a moeda de origem do recurso?', 'Tem alguém de confiança no Rio para assinar e acompanhar?', 'Prefere que eu indique administração de aluguel?', 'Precisa de reunião por vídeo com o contador?'],
+    gatilhos: ['Reciprocidade: envie material completo e organizado antes da conversa.', 'Redução de risco percebido: etapas, contratos, histórico.', 'Prova social: clientes de fora que já compraram, com autorização.'],
+    evitar: 'Falar de tributação e câmbio como certeza. Encaminhe para advogado e contador dele.'
+  },
+  prim: {
+    nome: 'Primeira aquisição',
+    tom: 'Didático e paciente. Explique cada etapa sem jargão.',
+    abrir: 'Vamos ver juntos quanto cabe no seu orçamento sem apertar.',
+    perguntas: ['Você tem FGTS e há quanto tempo?', 'Qual parcela cabe sem comprometer o mês?', 'Quando quer se mudar?'],
+    gatilhos: ['Clareza: tabela simples do que paga em cada fase.', 'Segurança: etapas e garantias.'],
+    evitar: 'Prometer aprovação de crédito ou benefício sem verificar.'
+  }
+};
+
+const GATILHOS = [
+  { t: 'Autoridade', c: 'Mostrar preparo e domínio técnico, não títulos.', u: 'Chegue com R$/m² comparado, memorial lido, histórico da incorporadora e premissas escritas.', l: 'Não invente credenciais nem estatísticas.' },
+  { t: 'Escassez real', c: 'Poucas unidades boas em endereço limitado.', u: 'Diga quantas unidades da planta desejada ainda existem, com a tabela atual na mão.', l: 'Nunca crie "última unidade" falsa.' },
+  { t: 'Ancoragem', c: 'A primeira referência de valor guia a comparação.', u: 'Comece pelo R$/m² do bairro (Ipanema, Leblon) e depois mostre o do produto.', l: 'Use âncoras verdadeiras e atuais.' },
+  { t: 'Prova social', c: 'Pessoas parecidas com ele já decidiram.', u: 'Cite casos reais e anônimos, com autorização: "um investidor com perfil parecido com o seu".', l: 'Sem depoimento fabricado.' },
+  { t: 'Reciprocidade', c: 'Quem recebe valor tende a retribuir com atenção.', u: 'Envie antes da reunião uma análise pronta de 1 página com os números dele.', l: 'Entregue valor sem cobrar nada em troca.' },
+  { t: 'Consistência', c: 'As pessoas querem agir de acordo com o que disseram.', u: 'Anote as palavras dele na descoberta e devolva na apresentação: "você disse que precisa de liquidez".', l: 'Cite exatamente o que ele disse.' },
+  { t: 'Aversão à perda', c: 'Perder dói mais que ganhar.', u: 'Mostre o custo de não decidir com fatos: reajuste de tabela anunciado, fim de condição.', l: 'Só use datas e condições reais.' },
+  { t: 'Redução de risco', c: 'Alto padrão compra segurança antes de retorno.', u: 'Apresente os riscos antes dele perguntar e mostre como são mitigados.', l: 'Não esconda risco para fechar.' }
+];
+
+const LINGUAGEM = {
+  usar: ['patrimônio', 'alocação', 'diversificação', 'preservação de capital', 'ativo real', 'liquidez', 'horizonte de investimento', 'retorno total', 'premissas', 'cenário conservador', 'escassez', 'assinatura do projeto', 'incorporadora', 'memorial de incorporação', 'fluxo de pagamento'],
+  evitar: ['oportunidade imperdível', 'última unidade (sem ser verdade)', 'pechincha', 'barato', 'garantido', 'sem risco', 'sonho', 'vai valorizar com certeza', 'gírias e intimidade forçada']
+};
+
+const ZONAS = [
+  { b: 'Leblon', m: 28232, v: 8.2, j: 25777, jv: 6.5, q: 'Endereço mais caro do país. Escassez de terreno, marca e liquidez. Cliente de patrimônio e moradia.' },
+  { b: 'Ipanema', m: 25719, v: 5.3, j: 25373, jv: 11.0, q: 'Segundo m² do país. Demanda de moradia e locação de alto padrão, gastronomia e praia.' },
+  { b: 'Lagoa', m: 17353, v: 1.4, j: 17473, jv: 3.7, q: 'Vista, natureza e perfil residencial de alto padrão.' },
+  { b: 'Barra da Tijuca', m: 14233, v: 5.6, j: 14052, jv: 6.6, q: 'Maior oferta de lançamentos, condomínio-clube e perfil familiar.' },
+  { b: 'Botafogo', m: null, v: null, j: 13086, jv: 2.2, q: 'Metrô, gastronomia, jovens profissionais. Forte para studios e locação residencial.' },
+  { b: 'Copacabana', m: 13181, v: 6.8, j: 12915, jv: 8.0, q: 'Liquidez e demanda de locação, ticket menor, forte para studios.' },
+  { b: 'Laranjeiras', m: null, v: null, j: 10822, jv: 4.9, q: 'Residencial tradicional e arborizado, perfil de família e studios em lançamentos recentes.' },
+  { b: 'Recreio', m: 7803, v: 3.8, j: 7753, jv: 2.8, q: 'Entrada acessível na Zona Oeste, perfil de família e primeiro imóvel.' },
+  { b: 'Centro / Porto Maravilha', m: null, v: null, j: null, jv: null, q: 'Revitalização, retrofit e ticket menor. Tese de transformação, não de certeza. O Centro não consta na tabela de bairros do FipeZAP consultada: use anúncios de portais como referência.' }
+];
+
+const FASES = [
+  { id: 'ini', n: 'Início', s: 'Entender quem é o cliente e falar a língua dele' },
+  { id: 'meio', n: 'Meio', s: 'Dominar a técnica sem engasgar na negociação' },
+  { id: 'fim', n: 'Fim', s: 'Conduzir a conversa até a decisão' }
+];
+
+const MODS = [
+  { f: 'ini', t: 'O cliente de alto e altíssimo padrão: o que ele pensa', min: 8,
+    b: `<ul><li><b>Primeiro preserva, depois multiplica.</b> Ele já tem patrimônio e teme perder mais do que deseja ganhar.</li>
+<li><b>Tempo e discrição</b> valem mais que desconto. Reunião curta, preparada e sem exposição.</li>
+<li><b>Decide em rede:</b> advogado, contador, family office, sócio ou cônjuge. Você precisa convencer a rede.</li>
+<li><b>Compara com outros ativos:</b> CDI, ações, dólar, ouro, outros imóveis. Fale a língua da alocação.</li>
+<li><b>Valoriza escassez e assinatura:</b> endereço, arquitetura, poucas unidades.</li>
+<li><b>Desconfia de pressa</b> e de adjetivo. Respeita dado verificável.</li></ul>`,
+    ouro: 'Meu trabalho é reduzir a incerteza da sua decisão.', erro: 'Tratar como cliente de baixo padrão: urgência, parcela e "oportunidade imperdível".' },
+  { f: 'ini', t: 'Linguagem: o que dizer e o que evitar', min: 6, tab: 'linguagem',
+    b: `<p>Tom próximo, mas sóbrio. Use vocabulário de patrimônio e deixe a intimidade para o cliente propor.</p>`,
+    ouro: 'Com estas premissas, a estimativa é esta. Vamos testar um cenário pior juntos.', erro: 'Falar "garantido", "sem risco" ou "vai valorizar com certeza".' },
+  { f: 'ini', t: 'Mapa do Rio premium: cada bairro tem uma tese', min: 8, tab: 'zonas',
+    b: `<p>Cada bairro vende uma tese diferente. Leblon e Ipanema vendem escassez e marca. Copacabana e Botafogo vendem liquidez e demanda de locação. Centro e Porto vendem transformação. A Barra vende lançamento e vida de condomínio.</p>`,
+    ouro: 'Este bairro serve ao seu objetivo por este motivo.', erro: 'Vender o mesmo argumento para todos os bairros.' },
+  { f: 'meio', t: 'Compra na planta de A a Z', min: 10,
+    b: `<ol><li><b>Proposta e reserva:</b> escolha da unidade e sinal.</li>
+<li><b>Contrato:</b> fluxo de pagamento, prazo de entrega, tolerância de atraso e regras de distrato.</li>
+<li><b>Obra:</b> parcelas mensais e intermediárias, corrigidas por índice (em geral INCC).</li>
+<li><b>Chaves:</b> pagamento do saldo, com recurso próprio ou financiamento.</li>
+<li><b>Financiamento (repasse):</b> banco avalia renda e imóvel. Alternativa: financiamento direto com a construtora, conforme contrato.</li>
+<li><b>Escritura e registro:</b> ITBI (no Rio, alíquota municipal em torno de 3%, confirme a vigente), escritura e registro em cartório.</li>
+<li><b>Condomínio e IPTU</b> passam a correr após a entrega.</li></ol>
+<p><b>Segurança:</b> registro da incorporação, memorial, patrimônio de afetação, SPE e histórico de entregas da incorporadora.</p>`,
+    ouro: 'Vou te mostrar quanto você paga em cada fase e o que corrige cada parcela.', erro: 'Deixar o cliente descobrir o INCC só depois da assinatura.' },
+  { f: 'meio', t: 'Índices sem engasgar: INCC, IGP-M, IPCA, CUB, CDI', min: 9, tab: 'glossario',
+    b: `<ul><li><b>INCC</b> (FGV) mede o custo da construção e costuma corrigir as parcelas durante a obra.</li>
+<li><b>IGP-M e IPCA</b> são índices de preços usados, conforme o contrato, para corrigir o saldo depois das chaves (o contrato define o índice e os juros).</li>
+<li><b>CUB</b> é o custo unitário básico por m² de construção, base de referência das incorporações.</li>
+<li><b>CDI e Selic</b> são a régua do investidor: quanto a renda fixa paga.</li></ul>
+<p>Veja o glossário completo com a frase pronta para cada termo.</p>`,
+    ouro: 'Durante a obra a parcela anda com o INCC. Depois das chaves, o contrato define o índice.', erro: 'Dizer que "não tem correção". Sempre tem, em algum índice.' },
+  { f: 'meio', t: 'Rentabilidade: yield, cap rate, payback e retorno total', min: 10,
+    b: `<ul><li><b>Yield bruto</b> = aluguel anual ÷ preço. <b>Yield líquido</b> = (aluguel anual − custos) ÷ preço.</li>
+<li><b>Cap rate</b> = renda líquida anual ÷ valor do imóvel (visão do ativo, sem financiamento).</li>
+<li><b>Payback</b> = preço ÷ renda líquida anual (anos para o aluguel devolver o capital).</li>
+<li><b>Retorno total</b> = renda líquida + valorização. Mostre separados e com cenários.</li>
+<li><b>Ganho de capital</b> na venda ou cessão tem imposto de renda em faixas progressivas, a partir de 15%. Confirme com o contador do cliente.</li>
+<li><b>Aluguel</b> entra na tabela progressiva do IR da pessoa física, ou da pessoa jurídica, conforme a estrutura.</li></ul>
+<p>Use a calculadora e o simulador de negociação do app durante a conversa.</p>`,
+    ouro: 'Veja o retorno de aluguel e o de valorização separados, em três cenários.', erro: 'Misturar yield com valorização numa só porcentagem.' },
+  { f: 'meio', t: 'Studios na Zona Sul: por que a demanda é grande e onde estão os riscos', min: 9,
+    b: `<ul><li><b>Por que procuram:</b> ticket de entrada menor num endereço premium, boa liquidez de locação, perto de metrô, praia e serviços.</li>
+<li><b>Locação residencial x temporada:</b> temporada rende mais por noite, mas dá mais trabalho e <b>depende da convenção do condomínio</b>. Há condomínios que proíbem. Confira antes de prometer.</li>
+<li><b>Custos que corroem o yield:</b> condomínio (alto em prédio com serviços), IPTU, vacância, mobília e administração.</li>
+<li><b>Riscos:</b> concentração de oferta de studios, regras do condomínio, ciclo de lançamentos, liquidez na revenda.</li>
+<li><b>Pergunta-chave:</b> o cliente quer gerir ou receber o imóvel administrado?</li></ul>`,
+    ouro: 'Antes de falar de rentabilidade, vamos confirmar se a convenção permite o uso que você planeja.', erro: 'Calcular yield com diária de temporada sem checar a convenção.' },
+  { f: 'meio', t: 'Segurança do negócio: due diligence da incorporadora e do contrato', min: 8,
+    b: `<ul><li><b>Incorporação registrada</b> em cartório e memorial de incorporação disponível.</li>
+<li><b>Patrimônio de afetação:</b> separa o dinheiro da obra do resto da empresa e protege o comprador.</li>
+<li><b>Histórico:</b> prédios entregues, prazos reais, reputação na região.</li>
+<li><b>Contrato:</b> prazo, tolerância de atraso, correção, regras de distrato (Lei 13.786/2018: retenção limitada, em regra até 25% dos valores pagos, e até 50% com patrimônio de afetação; confirme o contrato).</li>
+<li><b>Quem assina:</b> SPE, incorporadora e parceiros. Deixe claro o papel da Sawala e como ela é remunerada.</li></ul>`,
+    ouro: 'Se você quiser, envio o checklist para o seu advogado revisar.', erro: 'Esconder o contrato até a hora de assinar.' },
+  { f: 'fim', t: 'Descoberta: as perguntas que abrem o negócio', min: 8,
+    b: `<ul><li>Qual é o objetivo: renda, valorização, moradia ou herança?</li>
+<li>Em quanto tempo você espera retorno ou pretende usar o imóvel?</li>
+<li>Quanto do patrimônio quer alocar e de onde vem o recurso?</li>
+<li>Que imóveis você já tem e o que funcionou ou não?</li>
+<li>Quem participa da decisão?</li>
+<li>O que faria você dizer não a um negócio?</li>
+<li>Prefere gerir ou receber o imóvel administrado?</li></ul>
+<p>Anote com as palavras dele. Na apresentação, devolva essas palavras.</p>`,
+    ouro: 'O que precisa acontecer para este ser um bom negócio para você?', erro: 'Começar apresentando o prédio antes de entender o objetivo.' },
+  { f: 'fim', t: 'Apresentação em 7 passos usando o app', min: 8,
+    b: `<ol><li><b>Tese:</b> por que este bairro e este produto servem ao objetivo dele.</li>
+<li><b>Endereço e entorno:</b> abra a ficha do empreendimento, mostre foto e mapa.</li>
+<li><b>Produto:</b> metragem, plantas, incorporadora, entrega.</li>
+<li><b>Negociação:</b> mostre o fluxo de pagamento da construtora no simulador.</li>
+<li><b>Retorno:</b> rentabilidade em três cenários, com premissas à vista.</li>
+<li><b>Riscos:</b> você apresenta, ele não precisa perguntar.</li>
+<li><b>Próximo passo:</b> visita, tabela e data de retorno combinada.</li></ol>`,
+    ouro: 'Estas são as premissas. Mude qualquer uma e vemos o efeito na hora.', erro: 'Mostrar só o cenário bom.' },
+  { f: 'fim', t: 'Gatilhos mentais éticos para o alto padrão', min: 7, tab: 'gatilhos',
+    b: `<p>Gatilho é a forma de apresentar um fato verdadeiro de modo que a decisão fique mais clara. No alto padrão, gatilho falso destrói a confiança e o negócio.</p>`,
+    ouro: 'Vou te dar os fatos e as condições reais. Você decide.', erro: 'Inventar urgência.' },
+  { f: 'fim', t: 'Objeções do alto padrão e como responder', min: 8, tab: 'objecoes',
+    b: `<p>Objeção é pedido de informação. Pergunte antes de responder: "O que exatamente te preocupa?"</p>`,
+    ouro: 'Faz sentido. Vamos olhar isso com números.', erro: 'Rebater antes de entender a objeção.' },
+  { f: 'fim', t: 'Fechamento, follow-up e pós-venda', min: 6,
+    b: `<ul><li>Fechar é consequência de dúvidas respondidas: "O que falta para você se sentir seguro em avançar?"</li>
+<li><b>Cadência:</b> resumo em 24h, retorno na data combinada, novidade relevante a cada 15 dias.</li>
+<li><b>Pós-venda:</b> acompanhe pagamentos, entrega, vistoria e locação. Peça indicação cerca de 30 dias após a assinatura.</li>
+<li>No alto padrão a indicação é o principal canal de novos clientes.</li></ul>`,
+    ouro: 'O que falta para você se sentir seguro em avançar?', erro: 'Sumir depois da assinatura.' },
+  { f: 'fim', t: 'Postura, ética e conformidade', min: 6,
+    b: `<ul><li><b>Sempre:</b> pontualidade, vestimenta sóbria, celular silenciado, materiais revisados.</li>
+<li><b>Sigilo:</b> nunca comente outros clientes.</li>
+<li><b>LGPD:</b> peça autorização para guardar documentos e contatos.</li>
+<li><b>Prevenção à lavagem de dinheiro:</b> o setor imobiliário tem obrigações de identificação de clientes e comunicação ao COAF. Confirme as regras vigentes com a Sawala e o CRECI-RJ.</li>
+<li><b>Transparência:</b> diga quando o produto é de parceiro e quem recebe a comissão.</li>
+<li><b>Nunca prometa</b> aprovação de crédito, valorização ou prazo que dependam de terceiros.</li></ul>`,
+    ouro: 'Prefiro te dizer o risco agora a você descobrir depois.', erro: 'Prometer o que depende de terceiros.' }
+];
+
+const OBJECOES = [
+  ['Está caro', 'Compare o R$/m² do produto com o do bairro e com a escassez do endereço. Pergunte com que referência ele compara.'],
+  ['Studio não rende', 'Mostre yield líquido com custos reais (condomínio, IPTU, vacância) em três cenários e inclua o retorno de valorização separado.'],
+  ['Obra atrasa', 'Apresente histórico da incorporadora, patrimônio de afetação e a cláusula de atraso do contrato.'],
+  ['Prefiro dólar ou renda fixa', 'Reconheça onde eles ganham. O imóvel é ativo real, com renda e proteção patrimonial; sugira alocar uma parte, não tudo.'],
+  ['Quero ver pronto', 'Mostre unidades prontas comparáveis e explique a diferença de preço e de fluxo entre planta e pronto.'],
+  ['Preciso falar com meu contador ou sócio', 'Ofereça um resumo técnico para ele e marque a data de retorno.'],
+  ['Vou pensar', 'Pergunte o que ainda falta decidir e combine uma data. Não pressione.'],
+  ['Já tenho corretor', 'Respeite. Ofereça uma segunda opinião técnica sobre um produto específico.']
+];
+
+const GLOSS = [
+  ['INCC', 'Índice Nacional de Custo da Construção (FGV). Mede a variação do custo de construir.', 'Durante a obra, as parcelas costumam acompanhar o INCC.', 'Não diga que não há correção.'],
+  ['IGP-M', 'Índice Geral de Preços do Mercado (FGV). Índice de preços amplo, usado em contratos.', 'Depois das chaves, o contrato pode usar IGP-M ou IPCA mais juros.', 'Confira no contrato qual índice vale.'],
+  ['IPCA', 'Índice oficial de inflação do IBGE.', 'O IPCA é a inflação oficial. Alguns contratos corrigem o saldo por ele.', ''],
+  ['CUB', 'Custo Unitário Básico por m² de construção, divulgado pelos sindicatos da construção.', 'O CUB é a referência do custo de construir por metro quadrado.', ''],
+  ['Selic', 'Taxa básica de juros da economia.', 'A Selic define a régua da renda fixa e pesa nas taxas de financiamento.', ''],
+  ['CDI', 'Taxa de referência dos investimentos de renda fixa, próxima da Selic.', 'O CDI é o que o cliente ganharia sem risco imobiliário. Compare com honestidade.', ''],
+  ['TR', 'Taxa Referencial, usada na correção de financiamentos habitacionais.', 'No financiamento bancário, a TR costuma corrigir o saldo, conforme o contrato.', ''],
+  ['SBPE', 'Sistema Brasileiro de Poupança e Empréstimo. Financiamento com recursos da poupança.', 'Acima do teto do MCMV, o financiamento é pelo SBPE.', ''],
+  ['SAC', 'Tabela de amortização com parcelas decrescentes.', 'No SAC a primeira parcela é maior e cai ao longo do tempo.', ''],
+  ['Price', 'Tabela de amortização com parcelas fixas.', 'Na Price a parcela é fixa, mas o saldo cai mais devagar no começo.', ''],
+  ['LTV', 'Loan to Value: percentual do imóvel que é financiado.', 'LTV de 70% significa financiar 70% do valor do imóvel.', ''],
+  ['VGV', 'Valor Geral de Vendas: soma do valor de todas as unidades de um lançamento.', 'O VGV mostra o tamanho do projeto e da incorporadora.', ''],
+  ['VSO', 'Velocidade de Vendas sobre Oferta: percentual do estoque vendido no período.', 'Alta VSO indica demanda forte por aquele produto.', ''],
+  ['Yield bruto', 'Aluguel anual dividido pelo preço do imóvel.', 'O yield bruto é a renda de aluguel antes dos custos.', ''],
+  ['Yield líquido', 'Aluguel anual menos custos, dividido pelo preço.', 'O líquido já desconta condomínio, IPTU, vacância e administração.', 'Mostre sempre o líquido ao investidor.'],
+  ['Cap rate', 'Renda líquida anual dividida pelo valor do imóvel, sem considerar financiamento.', 'O cap rate compara o imóvel como ativo, independentemente de como será pago.', ''],
+  ['Payback', 'Tempo para o fluxo de renda devolver o capital investido.', 'Com estas premissas, o aluguel devolve o capital em tantos anos.', ''],
+  ['TIR', 'Taxa Interna de Retorno: retorno anual que iguala entradas e saídas no tempo.', 'A TIR considera quando cada parcela é paga e quando o dinheiro volta.', 'Explique que depende das premissas.'],
+  ['Valorização', 'Aumento do valor do imóvel ao longo do tempo.', 'Valorização é projeção, não garantia. Vamos usar três cenários.', 'Nunca prometa.'],
+  ['Cessão de direitos (ágio)', 'Venda do contrato de compra na planta a outra pessoa, antes das chaves.', 'Existe a possibilidade de ceder o contrato, conforme as regras da construtora.', 'Depende do contrato e tem custos e imposto.'],
+  ['Patrimônio de afetação', 'Separa o dinheiro e os bens da obra do restante do patrimônio da incorporadora.', 'Protege você se a incorporadora tiver problemas em outra obra.', ''],
+  ['Memorial de incorporação', 'Conjunto de documentos registrados que descreve o empreendimento.', 'Posso enviar o memorial para o seu advogado conferir.', ''],
+  ['SPE', 'Sociedade de Propósito Específico: empresa criada para um único empreendimento.', 'Cada obra costuma ter sua própria empresa, a SPE.', ''],
+  ['Habite-se', 'Documento da prefeitura que atesta que a obra está apta a ser habitada.', 'O habite-se é a licença da prefeitura para morar ou alugar.', ''],
+  ['Distrato', 'Desfazimento do contrato de compra.', 'As regras de distrato estão no contrato e na Lei 13.786/2018.', 'Peça ao cliente para ler.'],
+  ['Alienação fiduciária', 'Garantia em que o imóvel fica em nome do banco até a quitação.', 'No financiamento, o imóvel é a garantia do banco.', ''],
+  ['ITBI', 'Imposto de transmissão de bens imóveis, municipal, pago na compra.', 'O ITBI é pago na escritura e varia por município.', 'Confirme a alíquota vigente.'],
+  ['Short stay', 'Locação por temporada em plataformas.', 'Rende mais por noite, mas depende da convenção do condomínio.', 'Confirme antes de prometer.'],
+  ['Retrofit', 'Reforma que moderniza um prédio antigo mantendo a estrutura.', 'No Centro, o retrofit transforma prédios antigos em residências e studios.', ''],
+  ['Tolerância de atraso', 'Prazo adicional previsto em contrato para a entrega da obra.', 'O contrato tem prazo de entrega e tolerância. Vamos ler juntos.', 'Confirme o número exato no contrato.'],
+  ['Repasse', 'Transferência da dívida da construtora para o banco com o financiamento do comprador.', 'No repasse o banco paga a construtora e você passa a pagar o banco.', '']
+];
+
+const CHECKLIST = [
+  'Pesquisei o cliente (setor, patrimônio público, quem decide).',
+  'Escolhi no máximo 2 empreendimentos e abri as fichas.',
+  'Conferi preço, tabela e disponibilidade com a construtora ou a Sawala.',
+  'Montei 3 cenários no simulador com as premissas visíveis.',
+  'Chequei a convenção do condomínio (se o plano é locação por temporada).',
+  'Preparei os riscos que vou apresentar sem ele perguntar.',
+  'Tenho a próxima etapa definida (visita, tabela, data de retorno).',
+  'Celular silenciado e material revisado.'
+];
+
+const SCRIPTS = [
+  { t: 'Primeiro contato (investidor)', s: 'Olá, [Nome]. Sou Paulo Cotrim, corretor especializado em lançamentos na Zona Sul do Rio. Preparei uma análise objetiva de [empreendimento] com preço por m², fluxo de pagamento e cenários de retorno. Posso te enviar em uma página, sem compromisso?' },
+  { t: 'Depois da reunião', s: 'Boa tarde, [Nome]. Obrigado pela conversa de hoje. Resumo: [empreendimento], [metragem], valor de [R$], fluxo [resumo] e retorno estimado de [x]% a.a. com as premissas que apresentei. Os números dependem de mercado, correção e uso do imóvel. Fico à disposição para a visita em [data].' },
+  { t: 'Follow-up de 15 dias', s: 'Olá, [Nome]. Passando com uma informação relevante sobre [empreendimento/bairro]: [fato verificável]. Se fizer sentido, retomamos de onde paramos. Sem pressa.' },
+  { t: 'Objeção de preço', s: 'Faz sentido olhar o preço com cuidado. Comparei o R$/m² de [empreendimento] com o do bairro e com [alternativa]. Posso te mostrar a comparação em um minuto?' },
+  { t: 'Convite para visita', s: 'Olá, [Nome]. Reservei [dia/horário] para você conhecer [empreendimento/decorado/endereço]. Levo as plantas e a tabela atualizada. Prefere esse horário ou outro?' }
+];
+
+const QUIZ = [
+  { q: 'Durante a obra, o que costuma corrigir as parcelas?', o: ['IPCA', 'INCC', 'Selic'], a: 1 },
+  { q: 'Yield líquido é:', o: ['Aluguel anual ÷ preço', 'Valorização anual', '(Aluguel anual − custos) ÷ preço'], a: 2 },
+  { q: 'Cliente pede garantia de retorno. A melhor resposta é:', o: ['Mostrar cenários com premissas e riscos', 'Garantir o yield da planilha', 'Dizer que imóvel nunca cai'], a: 0 },
+  { q: 'Antes de prometer renda de temporada em studio, confira:', o: ['A convenção do condomínio', 'A cor da fachada', 'O Instagram do prédio'], a: 0 },
+  { q: 'Patrimônio de afetação serve para:', o: ['Reduzir o ITBI', 'Separar o dinheiro da obra do resto da incorporadora', 'Aumentar o valor do aluguel'], a: 1 },
+  { q: 'Qual a melhor forma de usar escassez?', o: ['Dizer que resta uma unidade, mesmo sem ser verdade', 'Informar quantas unidades da planta ainda existem de fato', 'Evitar falar de estoque'], a: 1 },
+  { q: 'CDI representa:', o: ['O custo da construção', 'Uma referência de renda fixa, a régua do investidor', 'O imposto de compra'], a: 1 },
+  { q: 'Payback é:', o: ['Tempo para a renda devolver o capital', 'Parcela do financiamento', 'Imposto sobre aluguel'], a: 0 },
+  { q: 'Na descoberta, o mais importante é:', o: ['Apresentar todos os produtos', 'Entender objetivo, prazo, origem do recurso e quem decide', 'Falar do preço logo'], a: 1 },
+  { q: 'Ao ouvir "preciso falar com meu contador", o melhor passo é:', o: ['Pressionar com prazo', 'Enviar resumo técnico e combinar a data de retorno', 'Esperar ele ligar'], a: 1 },
+  { q: 'Quem deve falar primeiro dos riscos da compra na planta?', o: ['O corretor, de forma proativa', 'O cliente, se perguntar', 'Ninguém'], a: 0 },
+  { q: 'Qual abordagem funciona melhor com cliente de altíssimo padrão?', o: ['Intimidade e gírias', 'Preparo, dados, discrição e sem pressão', 'Desconto como primeiro argumento'], a: 1 }
+];
+
+/* ===== ROTEIRO DE LIGAÇÃO E WHATSAPP (das anotações da reunião de 08/10/2026) ===== */
+const TEL = {
+  funil: ['Despertar curiosidade', 'Despertar atenção', 'Reter atenção', 'Vender uma visita'],
+  regras: ['Faça pergunta e não dê informação.', 'Evite mandar 1 ou 2 fotos do condomínio.', 'Nunca mande a tabela por mensagem.', 'Direcione tudo para a visita.'],
+  ligacao: [
+    { t: '1. Abertura', s: 'Olá, {nome}. Aqui é o Paulo Cotrim. Estou retornando a sua solicitação de informações sobre o {cond}. Pelo seu contato, imagino que você tenha vontade de comprar. Estou certo?' },
+    { t: '2. Gancho de curiosidade: entrada', s: 'Você sabia que, com R$ {entrada} de entrada, dá para entrar num imóvel de até R$ {valor}?', a: 'Só diga se a tabela da construtora confirmar o valor do imóvel e o fluxo de pagamento.' },
+    { t: '3. Gancho de curiosidade: parcelas', s: 'Você sabia que dá para comprar com parcelas fixas e saldo congelado?', a: 'Confirme no contrato o que exatamente fica congelado, até quando e qual índice corrige depois. Suas notas citam IPCA de 3,11% ao ano: confirme a data e a fonte.' },
+    { t: '4. Colher informações (uma pergunta por vez)', s: 'Há quanto tempo você está procurando?\nVocê conhece a região?\nJá ouviu falar do {cond}?\nOnde você mora hoje?\nQuanto você precisa investir?\nEm quanto tempo pretende decidir?' },
+    { t: '5. Se ele estiver com pressa', s: 'Eu consigo te atender de forma rápida. Me conta só duas coisas e eu te passo o essencial.' },
+    { t: '6. Se ele não responder sobre valores', s: 'Vou falar do ato: R$ {entrada} está bom para você? Ou prefere olhar a parcela?' },
+    { t: '7. Escolher a planta', s: 'Este produto tem studios de {s1} m² e duplex studios de {s2} m². Qual planta atende melhor o que você procura?', a: 'A análise da planta depende do objetivo que ele definir. Pergunte o objetivo antes de recomendar.' },
+    { t: '8. Argumento de mercado (compactos)', s: 'Você acompanha o que está acontecendo no Rio com os imóveis compactos? Cada ano chegam mais turistas à cidade. O mesmo hóspede que paga diária de R$ 300 pode pagar R$ 1.000: é diferença de perfil e de estratégia.', a: 'A anotação cita 1,5 milhão de turistas a mais a cada ano: confirme a fonte antes de usar o número. Antes de falar de temporada, confira a convenção do condomínio.' },
+    { t: '9. Como ele pretende pagar', s: 'Como você pretende pagar? Uma entrada de R$ {entrada} estaria dentro do seu orçamento?' },
+    { t: '10. Levar para a visita (objetivo da ligação)', s: 'Se você pode pagar essa entrada, vamos marcar a visita. Assim você entende comigo o pagamento dos valores. É possível entrar com pouca entrada, e eu te mostro as condições pessoalmente.' },
+    { t: '11. Explicar o saldo', s: 'Depois de pagar os 30%, a diferença se paga no financiamento ou na tabela direta, conforme as condições do produto. Para democratizar o mercado, o exemplo é R$ {entrada} de entrada e R$ 5.000 por mês.', a: 'O exemplo de R$ 5.000 por mês vem da sua anotação. Confirme valores e condições na tabela do produto.' },
+    { t: '12. Sobre valorização', s: 'Quando o condomínio fica pronto, a tendência é de valorização. Não é garantia, mas é por isso que quem entra na planta costuma sair na frente.', a: 'Sua anotação diz "certeza de valorização". Não prometa: diga tendência, sem garantia.' }
+  ],
+  zap: [
+    { t: 'Mensagem 1: confirmar o material', s: 'Oi, {nome}, tudo bem? Aqui é o Paulo Cotrim. Você chegou a receber o material do {cond}? Gostou?' },
+    { t: 'Mensagem 2: contextualizar', s: 'Em algum momento você se cadastrou como investidor no mercado imobiliário? Você recebeu o material promocional do {cond}?' },
+    { t: 'Mensagem 3: curiosidade (sem informar)', s: 'Você já ouviu falar do {cond}?' },
+    { t: 'Mensagem 4: planta', s: 'Qual tipo de planta mais te interessa? Posso fazer a análise conforme o seu objetivo.' },
+    { t: 'Mensagem 5: visita', s: 'Que tal marcarmos uma visita? Assim você entende comigo o pagamento dos valores, e é possível com pouca entrada.' }
+  ],
+  apoio: [
+    'O cliente pode conhecer a região, mas não conhece o condomínio nem a estrutura.',
+    'Tenha na ponta da língua o m² de cada produto.',
+    'Saiba os 5 diferenciais principais de cada produto (ficha do app).',
+    'Fale de parcela + saldo congelado, com a regra do contrato à mão.',
+    'Diga o que ainda está disponível: "ainda tenho oportunidades".',
+    'Pergunte se ele conhece a região, se já investiu no mercado e o que o empreendimento tem de melhor.',
+    'Fale o nome do arquiteto que assinou o decorado.'
+  ],
+  verificar: [
+    '"Com 100 mil você opera 1 milhão": confirmar com a tabela de cada produto.',
+    '"Saldo congelado": confirmar no contrato o que é congelado e qual índice corrige.',
+    '"1,5 milhão de turistas a mais por ano": confirmar a fonte.',
+    '"Certeza de valorização": trocar por "tendência, sem garantia".',
+    '"IPCA 3,11% ao ano": confirmar a data e a que se refere.',
+    '"Desconto de 20% nos móveis": confirmar a condição na construtora.',
+    'Trechos de leitura incerta: "Green View, 2ª da Barão", "Tabela D..." (tabela direta?) e a linha sobre loja boutique e nascimento da filha.'
+  ]
+};
+MODS.push({ f: 'fim', t: 'Telefone e WhatsApp: da curiosidade à visita', min: 10, tab: 'tel',
+  b: '<p>Objetivo do primeiro contato: <b>vender uma visita</b>, não o imóvel. Quatro passos: despertar curiosidade, despertar atenção, reter atenção e vender a visita. Faça perguntas e guarde a informação para a visita.</p>',
+  ouro: 'Se você pode pagar essa entrada, vamos marcar a visita para você entender o pagamento comigo.', erro: 'Mandar tabela e fotos por mensagem e perder o motivo da visita.' });
+
+/* ===== CONTEÚDO 2: telefone e WhatsApp em profundidade ===== */
+
+const TIPOS = [
+  { k: 'info', nome: 'Pediu informações (site, anúncio, formulário)', quando: 'O cliente deixou o contato pedindo informações.',
+    lig: 'Olá, {nome}. Aqui é o Paulo Cotrim. Estou retornando a sua solicitação de informações sobre o {cond}. Você tem dois minutinhos agora?',
+    zap: 'Oi, {nome}, tudo bem? Aqui é o Paulo Cotrim, retornando a sua solicitação sobre o {cond}. Posso te ligar agora ou prefere conversar por aqui?',
+    nota: 'Quanto mais rápido o retorno, melhor. Registre o horário em que o lead chegou e o horário do primeiro contato.' },
+  { k: 'material', nome: 'Recebeu o material (cadastro de investidor)', quando: 'O cliente se cadastrou como investidor e recebeu o material promocional.',
+    lig: 'Olá, {nome}. Paulo Cotrim. Em algum momento você se cadastrou como investidor no mercado imobiliário e recebeu o material do {cond}. Você chegou a olhar?',
+    zap: 'Oi, {nome}, tudo bem? Aqui é o Paulo Cotrim. Você recebeu o material do {cond}? Gostou?',
+    nota: 'Confirmar o recebimento é o pretexto natural para abrir a conversa. Depois, faça perguntas.' },
+  { k: 'indic', nome: 'Indicação', quando: 'Alguém indicou o cliente.',
+    lig: 'Olá, {nome}. Aqui é o Paulo Cotrim. [Quem indicou] me passou o seu contato por achar que você poderia se interessar por [objetivo]. Posso te explicar em dois minutos como funciona?',
+    zap: 'Oi, {nome}, tudo bem? Paulo Cotrim aqui. [Quem indicou] me passou o seu contato. Posso te contar rapidamente sobre o {cond}?',
+    nota: 'Indicação é o canal mais forte no alto padrão. Agradeça quem indicou e mantenha-o informado, com discrição.' },
+  { k: 'antigo', nome: 'Cliente antigo ou lead parado (reativação)', quando: 'Já conversaram antes e o contato esfriou.',
+    lig: 'Olá, {nome}, aqui é o Paulo Cotrim. Conversamos há um tempo sobre imóveis na planta. Surgiu uma condição nova no {cond} e lembrei de você. Faz sentido eu te contar em um minuto?',
+    zap: 'Oi, {nome}, tudo bem? Paulo Cotrim. Lembrei de você: surgiu uma novidade no {cond}. Quer que eu te conte rapidamente?',
+    nota: 'Só reative com um fato novo e verdadeiro (condição, obra, entorno). Evite o "só passando para lembrar".' },
+  { k: 'pos_visita', nome: 'Pós-visita', quando: 'O cliente visitou o decorado ou o local.',
+    lig: 'Olá, {nome}. Foi um prazer te receber. O que mais chamou a sua atenção na visita? Ficou alguma dúvida que eu possa resolver?',
+    zap: '{nome}, foi um prazer te receber hoje. Qual planta chamou mais a sua atenção? Posso montar a simulação com os números que conversamos.',
+    nota: 'Ligue ou escreva no mesmo dia. Devolva as palavras que ele usou na visita.' },
+  { k: 'pos_proposta', nome: 'Pós-proposta (sem resposta)', quando: 'A proposta foi enviada e ele não respondeu.',
+    lig: 'Olá, {nome}. Passando para saber se ficou alguma dúvida sobre a proposta. Posso conferir com a construtora o que é possível ajustar no fluxo.',
+    zap: '{nome}, tudo bem? Ficou alguma dúvida sobre a proposta? Se quiser, converso com a construtora sobre o fluxo e te retorno.',
+    nota: 'Não prometa ajuste. Diga que vai conferir. Combine uma data para o retorno.' },
+  { k: 'sumiu', nome: 'Lead que sumiu (mensagem de encerramento)', quando: 'Várias tentativas sem resposta.',
+    lig: '',
+    zap: '{nome}, não quero ser inconveniente. Vou encerrar o contato por aqui, mas se fizer sentido retomar sobre o {cond}, é só me chamar. Obrigado pela atenção.',
+    nota: 'A mensagem de encerramento respeita o cliente e muitas vezes reabre a conversa. Depois mova o lead para Nutrição.' },
+  { k: 'fria', nome: 'Lista fria (sem contato prévio)', quando: 'O contato veio de lista, sem pedido de informação.',
+    lig: 'Olá, {nome}. Aqui é o Paulo Cotrim, corretor de imóveis na Zona Sul do Rio. Falo rápido: você investe ou pretende investir em imóvel? Se não for um bom momento, me diga e eu não incomodo mais.',
+    zap: '',
+    nota: 'Cuidado: mensagem por WhatsApp sem relacionamento prévio pode violar a política do WhatsApp (risco de bloqueio) e a LGPD. Prefira ligação de apresentação, ofereça sair da lista e registre a origem do contato.' }
+];
+
+const RESP = [
+  ['Me manda a tabela por aqui', 'Mando sim. Como a tabela muda conforme a unidade e o fluxo, prefiro te mandar a certa e não te confundir. Me diz: qual planta e quanto de entrada você imagina? Na visita eu mostro com simulação na hora.', 'Segue a regra: tabela só na visita ou com contexto.'],
+  ['Quanto custa?', 'O valor depende da planta e do andar. Para eu te dar um número real: qual metragem te interessa e qual entrada ficaria confortável?', 'Responda com pergunta, não com preço solto.'],
+  ['Só quero informação', 'Perfeito, vou ser breve. Me conta só o que você está buscando e eu te passo apenas o que faz sentido para você.', ''],
+  ['Manda foto ou vídeo', 'Para não te mostrar só um pedaço, prefiro te mostrar o conjunto na visita: foto não mostra localização nem fluxo de pagamento. Posso reservar um horário?', 'Regra das suas notas: evite mandar 1 ou 2 fotos.'],
+  ['Está caro', 'Entendo. Com que valor você está comparando? Eu comparo o preço por m² com o do bairro e com as alternativas e te mostro.', ''],
+  ['Vou ver com minha esposa/marido ou sócio', 'Claro. Que tal marcarmos a visita com essa pessoa junto? Assim as dúvidas dela já são respondidas na hora.', 'Transforme a objeção em convite para a visita.'],
+  ['Estou sem tempo agora', 'Sem problema. Qual o melhor horário, hoje ou amanhã, para eu te ligar por cinco minutos?', 'Combine hora marcada e cumpra.'],
+  ['Já tenho corretor', 'Respeito. Se fizer sentido, posso te dar uma segunda opinião técnica sobre este produto, sem compromisso.', ''],
+  ['Não é o momento', 'Entendo. O que precisaria mudar para ser o momento? Na planta, o pagamento é distribuído na obra, o que muda a conta.', 'Pergunte antes de rebater.'],
+  ['Quanto é a entrada?', 'Depende do fluxo da planta escolhida. Para você ter uma ideia, um ato de R$ {entrada} é um ponto de partida. Qual valor ficaria confortável para você?', 'Confirme os números na tabela antes de citar.'],
+  ['Quando entrega?', 'A previsão é de [data], conforme contrato. Na visita posso te mostrar o histórico de entregas da incorporadora.', ''],
+  ['Tem desconto?', 'As condições variam por unidade e momento. O que pesa mais para você: o valor da entrada ou o das parcelas? Assim eu vejo o que consigo.', 'Nunca prometa desconto que não existe.'],
+  ['Aceita financiamento ou FGTS?', 'Depende do valor do imóvel e do seu perfil. Na visita eu simulo com você; quem aprova o crédito é o banco.', 'Não garanta aprovação.'],
+  ['A construtora é confiável?', 'Boa pergunta. Posso te mostrar o histórico de prédios entregues, o registro da incorporação e o patrimônio de afetação. Se quiser, envio para o seu advogado conferir.', ''],
+  ['Rende quanto?', 'Depende das premissas. Com aluguel de R$ [x] e custos de [y]%, a estimativa é de [z]% ao ano, sem garantia. Na visita monto três cenários com você.', 'Sempre com premissas e sem promessa.'],
+  ['Posso alugar por temporada?', 'Depende da convenção do condomínio. Vou confirmar para você antes de qualquer conta.', ''],
+  ['Pode mandar o contrato?', 'Claro. Envio a minuta para o seu advogado revisar com calma antes da decisão.', 'Transparência gera confiança.'],
+  ['Onde conseguiu meu número?', 'Você solicitou informações sobre o {cond} em [origem]. Se preferir não receber contato, é só me dizer e eu retiro seu número agora.', 'Tenha sempre a origem registrada.'],
+  ['Não quero mais receber mensagens', 'Perfeito, vou retirar o seu contato da minha lista agora. Obrigado pela atenção.', 'Obrigatório: respeite na hora e marque o lead como Perdido/não contatar.'],
+  ['Me liga depois', 'Combinado. Qual dia e horário? Vou colocar na agenda e te ligo no minuto marcado.', 'Registre o retorno no lead.']
+];
+
+const CADENCIA = [
+  { d: 'Dia 0', c: 'Ligação + WhatsApp', o: 'Primeiro contato rápido', s: 'Oi, {nome}, tudo bem? Paulo Cotrim. Tentei te ligar sobre o {cond}. Qual o melhor horário para falarmos cinco minutinhos?' },
+  { d: 'Dia 1', c: 'Ligação', o: 'Outro horário do dia', s: '' },
+  { d: 'Dia 2', c: 'WhatsApp', o: 'Curiosidade, sem informar', s: 'Você já ouviu falar do {cond}?' },
+  { d: 'Dia 4', c: 'WhatsApp', o: 'Conteúdo útil (um dado do bairro)', s: '{nome}, separei um dado que pode te interessar sobre a região do {cond}: [dado verificável]. Faz sentido conversarmos?' },
+  { d: 'Dia 7', c: 'Ligação', o: 'Convite para a visita', s: 'Que tal marcarmos uma visita? Assim você entende comigo o pagamento dos valores.' },
+  { d: 'Dia 14', c: 'WhatsApp', o: 'Novidade verdadeira', s: '{nome}, houve uma novidade no {cond}: [condição, obra ou entorno]. Quer que eu te conte?' },
+  { d: 'Dia 21', c: 'WhatsApp', o: 'Pergunta aberta', s: '{nome}, o que mudou desde nossa última conversa? Ainda faz sentido olhar imóvel na planta?' },
+  { d: 'Dia 30', c: 'WhatsApp', o: 'Encerramento respeitoso e nutrição', s: '{nome}, não quero ser inconveniente. Vou encerrar o contato por aqui. Se fizer sentido retomar, é só me chamar.' }
+];
+
+const AUDIOS = [
+  { t: 'Áudio 1: apresentação (até 30 s)', s: 'Oi, {nome}, aqui é o Paulo Cotrim. Estou retornando sua solicitação sobre o {cond}. Prefiro entender o que você procura antes de te mandar qualquer coisa, para não te passar informação que não serve. Me responde por aqui ou me diz o melhor horário para eu te ligar.' },
+  { t: 'Áudio 2: pós-ligação sem resposta (até 20 s)', s: 'Oi, {nome}, Paulo Cotrim de novo. Tentei te ligar agora há pouco. Sem pressa: me diz o melhor horário que eu te chamo, combinado?' },
+  { t: 'Áudio 3: convite para a visita (até 30 s)', s: '{nome}, pelo que você me contou, vale muito você conhecer o {cond} pessoalmente. Na visita eu te mostro a planta, o entorno e como funciona o pagamento, com simulação na hora. Qual dia fica melhor para você?' }
+];
+
+const CAIXA_POSTAL = 'Olá, {nome}, aqui é o Paulo Cotrim, retornando a sua solicitação sobre o {cond}. Vou te mandar uma mensagem por WhatsApp para combinarmos o melhor horário. Obrigado!';
+
+const VOZ = {
+  ligacao: [
+    'Os primeiros 10 segundos decidem a ligação: diga quem é, de onde vem o contato e o motivo, em uma frase.',
+    'Peça licença: "tem dois minutinhos agora?". Se não tiver, marque o horário.',
+    'Sorria ao falar: a voz transmite.',
+    'Fale um pouco mais devagar que o normal e baixe o tom no fim das frases.',
+    'Uma pergunta por vez. Depois de perguntar, fique em silêncio e escute.',
+    'Repita com as palavras dele o que entendeu: "então o seu objetivo é renda, certo?"',
+    'Anote durante a ligação (objetivo, entrada, prazo, quem decide).',
+    'Termine sempre com o próximo passo e a data: visita, retorno ou envio combinado.',
+    'Teste horários diferentes e registre quando mais atendem. O melhor horário é o que seus dados mostrarem.'
+  ],
+  zap: [
+    'Mensagens curtas, uma ideia por mensagem, sem blocos de texto.',
+    'Termine com uma pergunta fácil de responder.',
+    'Evite enviar a tabela e muitas fotos. Conduza para a visita.',
+    'Use áudios curtos (até 30 segundos) quando o cliente responde por áudio.',
+    'Não faça vários disparos iguais em sequência.',
+    'Mantenha um tom sóbrio, sem excesso de emojis.',
+    'Registre cada contato no lead para nunca repetir a mesma abordagem.'
+  ],
+  compliance: [
+    'Registre sempre a origem do contato e a autorização (formulário, cadastro, indicação).',
+    'Se o cliente pedir para parar, pare na hora e marque o lead como não contatar.',
+    'Contato frio por WhatsApp sem relacionamento prévio pode violar a política do WhatsApp e a LGPD. Evite disparos em massa.',
+    'Guarde dados pessoais só pelo tempo necessário e peça autorização para armazenar documentos.',
+    'Não prometa valorização, aprovação de crédito ou retorno garantido.',
+    'Ofereça sempre a saída: "se preferir não receber contato, é só me dizer".'
+  ]
+};
+
+const QUALIF = [
+  'Qual é o objetivo: investir, morar ou os dois?',
+  'Qual entrada fica confortável hoje? E quanto por mês?',
+  'Em quanto tempo pretende decidir?',
+  'Quem mais participa da decisão?',
+  'De onde vem o recurso (poupança, venda de imóvel, FGTS, financiamento)?',
+  'Que planta ou metragem mais interessa?',
+  'Já conhece a região e o empreendimento?',
+  'Já investiu em imóvel antes? Como foi?'
+];
+
+QUIZ.push(
+  { q: 'Cliente pede a tabela pelo WhatsApp. O que a sua regra manda fazer?', o: ['Mandar a tabela completa na hora', 'Perguntar planta e entrada e conduzir para a visita', 'Ignorar a mensagem'], a: 1 },
+  { q: 'O objetivo principal da primeira ligação é:', o: ['Fechar a venda', 'Vender uma visita', 'Mandar fotos'], a: 1 },
+  { q: 'Lead pede para não receber mais contato. Você deve:', o: ['Insistir mais uma vez', 'Parar na hora e marcar como não contatar', 'Mandar uma promoção'], a: 1 },
+  { q: 'Qual mensagem respeita o cliente após muitas tentativas sem resposta?', o: ['Encerramento educado e abertura para retomar', 'Mensagem de cobrança', 'Dez mensagens seguidas'], a: 0 },
+  { q: 'A frase "certeza de valorização" deve ser trocada por:', o: ['Tendência de valorização, sem garantia', 'Lucro garantido', 'Não falar de valorização nunca'], a: 0 },
+  { q: 'Ao ouvir "vou ver com minha esposa", o melhor movimento é:', o: ['Mandar a tabela para ela', 'Propor a visita com ela junto', 'Desistir do cliente'], a: 1 }
+);
+
+/* ===== ESTUDO: respostas, cadência, tipos de abordagem, voz ===== */
+/* ---------- Aprender: respostas, cadência, tipos, voz ---------- */
+function cpBlock(id, txt, rows) { return `<textarea class="ta" id="${id}" rows="${rows || 3}">${esc(txt)}</textarea><button class="btn small" onclick="copyT('${id}')">Copiar</button>`; }
+function sResp() {
+  const q = (V.rq || '').toLowerCase(), r = RESP.map((x, i) => [x, i]).filter(([x]) => !q || (x[0] + x[1]).toLowerCase().includes(q));
+  return `<div class="card hero2"><h2>Respostas rápidas</h2><p class="mut">${RESP.length} objeções e pedidos comuns por telefone e WhatsApp. Ajuste ao seu jeito antes de enviar.</p></div>
+<input class="search" type="search" placeholder="Buscar (tabela, preço, depois...)" value="${esc(V.rq || '')}" oninput="V.rq=this.value;keep();render();const i=$('.search');i.focus();i.setSelectionRange(V.rq.length,V.rq.length)">
+${r.map(([x, i]) => `<div class="card"><h3>"${esc(x[0])}"</h3>${cpBlock('rp' + i, telFill(x[1]), 4)}<div class="gold-box">${esc(x[2])}</div></div>`).join('') || '<p class="mut">Nenhuma resposta encontrada.</p>'}`;
+}
+function sCad() {
+  return `<div class="card hero2"><h2>Cadência de 30 dias</h2><p class="mut">Sequência de contatos para quem não respondeu. Pare se o cliente pedir. Máximo respeitoso, sem insistir.</p></div>` +
+    CADENCIA.map((c, i) => `<div class="card"><div class="between"><h3>${c.d}</h3><span class="pill">${esc(c.c)}</span></div><p class="mut small">${esc(c.o)}</p>${c.s ? cpBlock('cd' + i, telFill(c.s), 3) : ''}</div>`).join('');
+}
+function sTipos() {
+  return `<div class="card hero2"><h2>Tipos de lead</h2><p class="mut">Cada origem pede uma abertura diferente. O app escolhe sozinho ao abrir um lead.</p></div>` +
+    TIPOS.map((x, i) => `<div class="card"><h3>${esc(x.nome)}</h3><p class="mut small">${esc(x.quando)}</p><h4>Ligação</h4>${cpBlock('tpl' + i, telFill(x.lig), 3)}<h4>WhatsApp</h4>${cpBlock('tpz' + i, telFill(x.zap), 3)}<div class="gold-box">${esc(x.nota)}</div></div>`).join('');
+}
+function sVoz() {
+  const ul = a => `<ul class="ul">${a.map(x => `<li>${esc(x)}</li>`).join('')}</ul>`;
+  return `<div class="card hero2"><h2>Voz, WhatsApp e regras</h2><p class="mut">O que muda o resultado antes mesmo do conteúdo.</p></div>
+<div class="card"><h3>Na ligação</h3>${ul(VOZ.ligacao)}</div><div class="card"><h3>No WhatsApp</h3>${ul(VOZ.zap)}</div>
+<div class="card"><h3>8 perguntas de qualificação</h3>${ul(QUALIF)}</div>
+<h2 class="mt">Áudios</h2>${AUDIOS.map((a, i) => `<div class="card"><h3>${esc(a.t)}</h3>${cpBlock('au' + i, telFill(a.s), 4)}</div>`).join('')}
+<div class="card"><h3>Caixa postal</h3>${cpBlock('cp0', telFill(CAIXA_POSTAL), 3)}</div>
+<div class="note bad"><h3>Conformidade</h3>${ul(VOZ.compliance)}<p class="small">Confirme as regras vigentes do WhatsApp e da LGPD; este texto não é parecer jurídico.</p></div>`;
+}
+function relCard() {
+  return `<div class="card"><h3>Simulação relâmpago (na ligação)</h3><p class="mut small">Para responder "quanto fica por mês?" sem travar.</p>${cin('x1', 'Valor do imóvel (R$)', 1000000)}${cin('x2', 'Entrada total (R$)', 100000)}${cin('x3', 'Meses até as chaves', 36)}${cin('x4', 'Parcela mensal na obra (R$)', 6000)}<div id="xo"></div></div>`;
+}
+function relCalc() {
+  const P = g('x1'), en = g('x2'), n = g('x3'), m = g('x4'); if (!$('#xo') || !P) return;
+  const pago = en + m * n, saldo = P - pago;
+  $('#xo').innerHTML = `<div class="k"><span>Entrada</span><b>${fmtP(en / P * 100)} do valor</b></div><div class="k"><span>Total pago até as chaves</span><b>${fmtR(pago)} (${fmtP(pago / P * 100)})</b></div><div class="k"><span>Saldo nas chaves (financiar ou quitar)</span><b>${fmtR(Math.max(0, saldo))}</b></div>${saldo < 0 ? '<div class="note bad">Os pagamentos superam o valor do imóvel: revise os números.</div>' : ''}<p class="disc">Sem correção pelo INCC. Valores aproximados para orientar a conversa; a proposta oficial vem da construtora.</p>`;
+}
+
+/* ===== LÓGICA DO APP ===== */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const num = v => { let s = String(v ?? '').trim(); if (!s) return 0; if (/^\d{1,3}(\.\d{3})+$/.test(s)) s = s.replace(/\./g, ''); else if (s.includes(',')) s = s.replace(/\./g, '').replace(',', '.'); const n = parseFloat(s); return isNaN(n) ? 0 : n; };
+const fmtR = n => 'R$ ' + Math.round(n).toLocaleString('pt-BR');
+const fmtP = (n, d = 1) => n.toFixed(d).replace('.', ',') + '%';
+const lines = s => String(s || '').split('\n').map(x => x.trim()).filter(Boolean);
+const uid = () => 'e' + Date.now().toString(36) + Math.random().toString(36).slice(2, 5);
+
+/* ---------- estado ---------- */
+const K = 'pc_atend_v2';
+function mk(o) {
+  return Object.assign({ id: uid(), nome: '', construtora: '', bairro: '', endereco: '', tipologia: '', perfis: [], estagio: '', entrega: '', metragemMin: '', metragemMax: '', precoDe: '', aluguelEst: '', custosPct: 25, diferenciais: '', entorno: '', historico: '', fonte: '', foto: '', notas: '', alerta: '', grupo: false }, o, {
+    negoc: Object.assign({ precoRef: '', atoPct: '', entCompPct: '', nEnt: '', mensaisPct: '', nMens: '', intPct: '', nInt: '', chavesPct: '', descAvistaPct: '', indiceObra: 'INCC', indicePos: '', validade: '', obs: '' }, (o && o.negoc) || {})
+  });
+}
+const SEED = [
+  mk({ id: 'arb26', nome: 'ARB 26', construtora: 'TIME + WPX Empreendimentos', bairro: 'Centro / Porto Maravilha', endereco: 'Avenida Rio Branco, 26, Centro, Rio de Janeiro', tipologia: '8 tipologias de 26,94 a 43,50 m²', perfis: ['inv'], metragemMin: '26,94', metragemMax: '43,5', precoDe: '263000',
+    diferenciais: 'Arquitetura Art Déco Streamline\nPorto Maravilha em revitalização\nVista para a baía\nSalão gourmet, academia e piscina', fonte: 'Base 21/09/2026 (book ARB 26, 10 págs)',
+    negoc: { obs: 'Base: simulação com unidade de R$ 550 mil, entrada de R$ 150 mil e parcela de R$ 2.270/mês. Preencher a tabela da construtora.' } }),
+  mk({ id: 'barao', nome: 'Barão de Jaguaripe', construtora: 'Be.in.Rio (confirmar incorporadora)', bairro: 'Ipanema', endereco: 'Rua Barão de Jaguaripe, 225 e 404, Ipanema, Rio de Janeiro', tipologia: '2 torres independentes; studio e unidades maiores', perfis: ['uhnw', 'inv', 'moradia'], precoDe: '800000', aluguelEst: '8000',
+    diferenciais: 'Ipanema: praia, metrô Nossa Senhora da Paz, gastronomia e comércio\nDuas torres independentes, projeto Be.in.Rio\nOpção de morar (a partir de R$ 1,5 mi) ou investir em studio (a partir de R$ 800 mil)\n31+ pontos de interesse mapeados no entorno',
+    alerta: 'Rentabilidade registrada de 6,4% a.a. não fecha com aluguel de R$ 8 mil num studio de R$ 800 mil (12% bruto). Confirme aluguel e premissas antes de apresentar.',
+    fonte: 'Base 21/09/2026 (book 67 págs)', negoc: { obs: 'Base: entrada de 30% (R$ 300 mil) e parcela de R$ 6.261 em 20 anos. Preencher a tabela da construtora.' } }),
+  mk({ id: 'cita', nome: 'CITÁ Riva Gran Tijuca', construtora: 'Riva Incorporadora', bairro: 'Andaraí', endereco: 'Rua Barão de São Francisco, Andaraí, Rio de Janeiro', tipologia: '2 quartos, 2 torres, térreo + 16 andares', perfis: ['prim', 'inv'], estagio: 'Lançamento', entrega: '2030-12', metragemMin: '39', metragemMax: '65', precoDe: '399000', aluguelEst: '2800',
+    diferenciais: 'Piscinas adulto e infantil\nAcademia, spa e sauna\nCoworking e pet place\nChurrasqueira', fonte: 'Base 21/09/2026', negoc: { obs: 'Base: entrada de R$ 120 mil (FGTS R$ 60 mil + R$ 60 mil de recurso próprio) e parcela de R$ 1.378/mês em 30 anos.' } }),
+  mk({ id: 'citta-renascenca', nome: 'Citta Renascença (Renascença Residencial)', construtora: 'Riva Incorporadora', bairro: 'Andaraí', endereco: 'Rua Barão de São Francisco, 217, Andaraí, Rio de Janeiro', tipologia: 'Apartamentos de 2 quartos (com e sem suíte), garden e tipo, 1 quarto PcD', perfis: ['inv', 'prim'], estagio: 'Lançamento', metragemMin: '39', metragemMax: '43',
+    diferenciais: 'Complexo Città Riva Gran Tijuca, condomínio fechado com portaria e segurança 24h\nPiscinas adulto e infantil, spa, sauna e academia\nCoworking, cinema, pet place, espaço gourmet e salão de festas\nBrinquedoteca, quadra poliesportiva, praça e bicicletário\nPreparação para ar-condicionado split, medição individualizada e automação predial',
+    alerta: 'Incorporadora confirmada por você: Riva. Preço, fluxo de pagamento, entrega e vagas não constam: a página diz que a venda só ocorre após o registro da incorporação. Uma das páginas é de corretor independente, não o site oficial.',
+    fonte: 'rivaincorporadora.com.br/empreendimentos/citta-riva-gran-tijuca e cittarivagrantijuca.com.br/renascenca-residencial (consulta 08/10/2026)',
+    tabelas: [{"t": "Tabela Direta", "c": ["Tipologia", "m²", "Valor de venda", "Renda ideal", "Ato 5%", "30 dias 2%", "60 dias", "5 semestrais 10%", "34 mensais 11%", "Saldo financiamento"], "r": [["Tipo Ponta 2Q", "39", "382.000", "10.000", "19.100", "7.640", "7.640", "7.640", "1.300", "267.400"], ["Tipo Meio 2Q", "42", "423.000", "12.000", "21.150", "8.460", "8.460", "8.460", "1.400", "296.100"], ["Tipo 2QS c/ vaga", "43", "485.000", "14.000", "24.250", "9.700", "9.700", "9.700", "1.600", "339.500"]]}, {"t": "Tabela Associativo", "c": ["Tipologia", "m²", "Valor de venda", "Renda ideal", "Parcela Caixa", "Financiamento Caixa", "Sinais", "Pró-soluto pré-chaves", "Valor da parcela"], "r": [["Tipo Ponta 2Q", "39", "370.000", "8.000", "2.400", "320.000", "3.000", "36x", "1.300"], ["Tipo Meio 2Q", "42", "410.000", "10.000", "3.000", "339.000", "3.000", "36x", "1.900"], ["Tipo 2QS c/ vaga", "43", "470.000", "12.000", "3.200", "368.000", "3.000", "36x", "2.750"]]}, {"t": "Tabela Investidor", "c": ["Tipologia", "m²", "Valor de venda", "Ato 10%", "5 semestrais 25%", "35 mensais 65%"], "r": [["Tipo Ponta 2Q", "39", "370.000", "37.000", "18.500", "6.900"], ["Tipo Meio 2Q", "42", "410.000", "41.000", "20.500", "7.600"], ["Tipo 2QS c/ vaga", "43", "470.000", "47.000", "23.500", "8.700"]]}], tabNota: "Tabela recebida da corretora Karen Carilo em 08/10/2026 (print de WhatsApp). Fluxo sem correção de INCC e juros. Confirmar que é a tabela vigente do Citta Renascença antes de usar com cliente. A coluna 60 dias da Direta aparece como 9% no print, mas o valor (R$ 7.640) equivale a 2%: conferir. O título do print diz 'a partir de 349 mil', mas a menor unidade da tabela é R$ 370.000.",
+    negoc: { precoRef: '370000', atoPct: '10', intPct: '25', nInt: '5', mensaisPct: '65', nMens: '35', validade: '08/10/2026 (tabela Investidor)', obs: 'Simulador preenchido com a tabela Investidor (ato 10%, 5 semestrais 25%, 35 mensais 65%, unidade Ponta 2Q de R$ 370.000), sem correção. Veja as três tabelas abaixo.' } }),
+  mk({ id: 'ceu-laranjeiras', nome: 'CÉU Laranjeiras', construtora: 'Progress (confirmar: outra fonte lista na CTV)', bairro: 'Laranjeiras', endereco: 'Rua Moura Brasil, Laranjeiras, Rio de Janeiro', tipologia: 'Studio a 3 quartos, até 1 suíte, até 1 vaga, 1 torre', perfis: ['inv', 'moradia'], estagio: 'Em obras', entrega: '2028-12', metragemMin: '30', metragemMax: '74', precoDe: '670200',
+    diferenciais: 'Piscina e academia\nEspaço gourmet\nCoworking\nStudios a partir de 30 m² em Laranjeiras',
+    alerta: 'Preço divergente entre fontes: R$ 670.200 (planta de 30 m², apto.vc) x R$ 515.000 (listagem de lançamentos). Incorporadora também diverge (Progress x CTV). Confirmar tabela atual.',
+    fonte: 'apto.vc/ceu-laranjeiras e lancamento.invexo.com.br/construtora/ctv (consulta 08/10/2026). Lançamento em 06/2025, entrega aproximada 12/2028.' }),
+  mk({ id: 'amare-arpoador', nome: 'Amaré Arpoador', construtora: 'Confirmar incorporadora', bairro: 'Arpoador / Copacabana', endereco: 'Rua Raul Pompéia, 12, Copacabana, Rio de Janeiro', tipologia: 'Studios e duplex de 1 a 2 quartos', perfis: ['uhnw', 'inv'], metragemMin: '30', metragemMax: '82', precoDe: '990000',
+    diferenciais: 'Conceito de hotelaria com unidades compactas\nRooftop, piscina e academia\nCoworking, lounge, lavanderia, mini market e storage (segundo legendas das fotos)\nEndereço junto ao Arpoador',
+    alerta: 'Preço de R$ 990 mil vem de uma listagem de lançamentos; a página da Lopes não informa preço, incorporadora nem entrega e marca a obra como "não iniciada". Confirmar tudo com a Sawala antes de apresentar.',
+    fonte: 'lopes.com.br/lancamento/REM23370 e lancamento.invexo.com.br (consulta 08/10/2026)' }),
+  mk({ id: 'lumiere-centro', nome: 'Lumière Studios Boutique Centro', construtora: 'CTV (confirmar)', bairro: 'Centro', tipologia: 'Studios de 22 m²', perfis: ['inv'], estagio: 'Lançamento', metragemMin: '22', precoDe: '289000', diferenciais: 'Studio compacto no Centro para renda de locação', fonte: 'lancamento.invexo.com.br/construtora/ctv (lançamento maio/2026; consulta 08/10/2026)', alerta: 'Dados de listagem de portal. Confirmar endereço, tabela e entrega.' }),
+  mk({ id: 'sal-rio-centro', nome: 'Sal Rio Residencial Centro', construtora: 'CTV (confirmar)', bairro: 'Centro', tipologia: 'Studios e 1 quarto de 22 a 35 m²', perfis: ['inv'], estagio: 'Lançamento', metragemMin: '22', metragemMax: '35', precoDe: '279000', diferenciais: 'Studios e 1 quarto no Centro, ticket de entrada baixo', fonte: 'lancamento.invexo.com.br/construtora/ctv (consulta 08/10/2026)', alerta: 'Dados de listagem de portal. Confirmar endereço, tabela e entrega.' }),
+  ...[['Ipanema', '3 empreendimentos. R$/m² R$ 25.719. Ticket R$ 1,5 mi a R$ 3 mi+. Investidores qualificados e UHNW.'],
+      ['Barra da Tijuca', '17 empreendimentos. R$/m² R$ 14.233. Ticket R$ 1,2 mi a R$ 2 mi. Investidores e famílias.'],
+      ['Recreio', '3 empreendimentos. R$/m² R$ 7.803. Ticket R$ 600 mil a R$ 1,2 mi.'],
+      ['Barra Olímpica', '2 empreendimentos. R$/m² cerca de R$ 12 mil. Ticket R$ 800 mil a R$ 1,5 mi.'],
+      ['Camorim', '2 empreendimentos. R$/m² cerca de R$ 9 mil. Ticket R$ 700 mil a R$ 1,2 mi.'],
+      ['Armação dos Búzios', '1 empreendimento. R$/m² cerca de R$ 11 mil. Segunda residência.'],
+      ['Outros bairros', '5 empreendimentos dispersos.']].map(([b, n]) => mk({ id: 'sw-' + b.toLowerCase().replace(/[^a-z]/g, ''), nome: 'Sawala: ' + b, construtora: 'Sawala (parceria)', bairro: b, grupo: true, notas: n, fonte: 'Base 21/09/2026. Detalhar produto a produto no Flow Sawala.' }))
+];
+const SCEN0 = [{ n: 'Conservador', incc: 7, val: 3 }, { n: 'Base', incc: 5, val: 5 }, { n: 'Otimista', incc: 4, val: 8 }];
+let S = load();
+function mergeSeed(r) {
+  if ((r.seedV || 0) >= 5) return r;
+  SEED.forEach(s => {
+    const c = r.emps.find(e => e.id === s.id);
+    if (!c) { r.emps.push(JSON.parse(JSON.stringify(s))); return; }
+    Object.keys(s).forEach(k => {
+      if (k === 'id') return;
+      if (k === 'negoc') { Object.keys(s.negoc).forEach(nk => { if (c.negoc[nk] === '' || c.negoc[nk] == null) c.negoc[nk] = s.negoc[nk]; }); }
+      else if (Array.isArray(s[k])) { if (!c[k] || !c[k].length) c[k] = s[k]; }
+      else if (c[k] === '' || c[k] == null) c[k] = s[k];
+    });
+  });
+  const ct = r.emps.find(e => e.id === 'citta-renascenca'); if (ct) { ct.construtora = 'Riva Incorporadora'; const s0 = SEED.find(e => e.id === 'citta-renascenca'); if (/CTV/.test(ct.alerta || '')) ct.alerta = s0.alerta; }
+  if (ct) { const s0 = SEED.find(e => e.id === 'citta-renascenca'); if (!ct.tabelas || !ct.tabelas.length) { ct.tabelas = s0.tabelas; ct.tabNota = s0.tabNota; if (!num(ct.negoc.atoPct) && !num(ct.negoc.mensaisPct)) Object.assign(ct.negoc, s0.negoc); } }
+  r.seedV = 5; return r;
+}
+function load() {
+  try { const r = JSON.parse(localStorage.getItem(K)); if (r && Array.isArray(r.emps)) { r.scen = r.scen || JSON.parse(JSON.stringify(SCEN0)); r.prog = r.prog || {}; r.checks = r.checks || {}; r.quiz = r.quiz || { best: 0 }; return mergeSeed(r); } } catch (e) {}
+  return { emps: JSON.parse(JSON.stringify(SEED)), prog: {}, checks: {}, quiz: { best: 0 }, scen: JSON.parse(JSON.stringify(SCEN0)), v: 2, seedV: 5 };
+}
+function save() { try { localStorage.setItem(K, JSON.stringify(S)); return true; } catch (e) { toast('Memória cheia. Remova fotos pesadas ou exporte um backup.'); return false; } }
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('on'); clearTimeout(toast.h); toast.h = setTimeout(() => t.classList.remove('on'), 2600); }
+const E = id => S.emps.find(e => e.id === id);
+
+/* ---------- cálculos ---------- */
+function monthsTo(ym) { if (!ym) return 0; const [y, m] = ym.split('-').map(Number); const n = new Date(); return Math.max(0, (y - n.getFullYear()) * 12 + (m - 1 - n.getMonth())); }
+const fac = (i, t) => Math.pow(1 + i / 100, t / 12);
+function sim(e, incc, val) {
+  const n = e.negoc, P = num(n.precoRef) || num(e.precoDe);
+  const g = k => num(n[k]);
+  const filled = ['atoPct', 'entCompPct', 'mensaisPct', 'intPct', 'chavesPct'].some(k => g(k) > 0);
+  if (!P) return { P: 0, filled };
+  const M = monthsTo(e.entrega);
+  const parts = [
+    { l: 'Ato / sinal', pct: g('atoPct'), cnt: 1, ts: [0], c: '#0f2e36' },
+    { l: 'Entrada complementar', pct: g('entCompPct'), cnt: Math.max(1, g('nEnt')), st: 1, c: '#2d5a66' },
+    { l: 'Mensais na obra', pct: g('mensaisPct'), cnt: Math.max(1, g('nMens')), st: 1, c: '#5b8a95' },
+    { l: 'Intermediárias', pct: g('intPct'), cnt: Math.max(1, g('nInt')), mid: true, c: '#b8873a' },
+    { l: 'Chaves', pct: g('chavesPct'), cnt: 1, ts: [M], c: '#d9b877' }
+  ];
+  let sumPct = 0, cor = 0, nom = 0;
+  parts.forEach(p => {
+    p.val = P * p.pct / 100; sumPct += p.pct; nom += p.val;
+    let ts = p.ts;
+    if (!ts) { ts = []; if (p.mid) for (let k = 1; k <= p.cnt; k++) ts.push(Math.round(M * k / (p.cnt + 1))); else for (let k = 0; k < p.cnt; k++) ts.push(p.st + k); }
+    p.cor = 0; ts.forEach(t => { p.cor += p.val / p.cnt * fac(incc, Math.min(t, M)); });
+    cor += p.cor; p.parc = p.cnt > 1 ? p.val / p.cnt : p.val;
+  });
+  const finPct = 100 - sumPct, finNom = P * finPct / 100, finCor = finNom * fac(incc, M);
+  const totalCor = cor + finCor, Vk = P * Math.pow(1 + val / 100, M / 12);
+  const alu = num(e.aluguelEst), cus = num(e.custosPct) / 100;
+  const renda = alu * 12 * (1 - cus);
+  const ganho = Vk - totalCor;
+  return { P, M, filled, parts, sumPct, finPct, finNom, finCor, cor, totalCor, Vk, ganho, roiCap: cor > 0 ? ganho / cor * 100 : null,
+    yb: alu * 12 / P * 100, yl: renda / P * 100, payback: renda > 0 ? P / renda : null, rendaMes: renda / 12,
+    mensalObra: (cor - parts[4].cor) / Math.max(M, 1), overMens: g('nMens') > M && M > 0 };
+}
+function completeness(e) {
+  const c = [e.nome, e.construtora, e.bairro, e.endereco, e.foto, e.metragemMin, e.precoDe, e.entrega, e.aluguelEst, lines(e.diferenciais).length >= 3 ? 'x' : '', e.entorno,
+    num(e.negoc.atoPct) + num(e.negoc.entCompPct) + num(e.negoc.mensaisPct) + num(e.negoc.chavesPct) > 0 ? 'x' : '', e.negoc.indicePos, e.negoc.validade];
+  return Math.round(c.filter(Boolean).length / c.length * 100);
+}
+
+/* ---------- navegação ---------- */
+const V = { tab: 'home', cur: null, sub: 'trilha', perfil: 'inv', q: '', filt: 'all', quiz: null, gloss: '' };
+const ICONS = {
+  leads: '<path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/>',
+  home: '<path d="M3 11l9-8 9 8v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"/>',
+  atender: '<path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M14 9h5a1 1 0 0 1 1 1v11M8 8h2M8 12h2M8 16h2M3 21h18"/>',
+  aprender: '<path d="M2 8l10-5 10 5-10 5zM6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/>',
+  ferr: '<path d="M4 4h16v16H4zM8 8h8M8 12h3M13 12h3M8 16h3M13 16h3"/>',
+  cfg: '<circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.3l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2.2-1.3L14 3h-4l-.4 2.5a7 7 0 0 0-2.2 1.3l-2.3-1-2 3.4 2 1.5a7 7 0 0 0 0 2.6l-2 1.5 2 3.4 2.3-1a7 7 0 0 0 2.2 1.3L10 21h4l.4-2.5a7 7 0 0 0 2.2-1.3l2.3 1 2-3.4-2-1.5c.1-.4.1-.9.1-1.3z"/>'
+};
+const TABS = [['home', 'Início'], ['atender', 'Atender'], ['aprender', 'Aprender'], ['ferr', 'Ferramentas']];
+function go(tab, extra) { Object.assign(V, { tab }, extra || {}); if (tab !== 'atender') V.cur = null; render(); scrollTo(0, 0); }
+function render() {
+  const t = V.tab;
+  $('#nav').innerHTML = TABS.map(([k, l]) => `<button class="${t === k ? 'on' : ''}" onclick="go('${k}')" aria-label="${l}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICONS[k]}</svg><span>${l}</span></button>`).join('');
+  const v = { home: vHome, atender: vAtender, aprender: vAprender, ferr: vFerr, cfg: vCfg }[t];
+  const y = scrollY; $('#app').innerHTML = v(); if (t === 'ferr') calcAll(); if (V.keep) { scrollTo(0, y); V.keep = false; }
+}
+function keep() { V.keep = true; }
+
+/* ---------- INÍCIO ---------- */
+function progAll() { const d = Object.keys(S.prog).filter(k => S.prog[k]).length; return { d, t: MODS.length, p: Math.round(d / MODS.length * 100) }; }
+const IC = {
+  a: '<svg viewBox="0 0 24 24"><path d="M4 21V5a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v16M14 9h5a1 1 0 0 1 1 1v11M8 8h2M8 12h2M8 16h2M3 21h18"/></svg>',
+  b: '<svg viewBox="0 0 24 24"><path d="M2 8l10-5 10 5-10 5zM6 10.5V16c0 1.5 2.7 3 6 3s6-1.5 6-3v-5.5"/></svg>',
+  c: '<svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1 1A16 16 0 0 1 4 5a1 1 0 0 1 1-1z"/></svg>',
+  d: '<svg viewBox="0 0 24 24"><path d="M4 4h16v16H4zM8 8h8M8 12h3M13 12h3M8 16h3M13 16h3"/></svg>'
+};
+function vHome() {
+  const h = new Date().getHours(), sd = h < 12 ? 'Bom dia' : h < 18 ? 'Boa tarde' : 'Boa noite';
+  const pr = progAll(), nxt = MODS.findIndex((m, i) => !S.prog[i]);
+  const low = S.emps.filter(e => !e.grupo).map(e => [e, completeness(e)]).sort((a, b) => a[1] - b[1]).slice(0, 3);
+  const ck = CHECKLIST.filter((c, i) => S.checks[i]).length;
+  return `<section class="hero"><p class="greet">${sd}, Paulo.</p><h1>Atenda o alto padrão com método.</h1>
+<p>Escolha o que fazer agora. Tudo o que você precisa para atender e estudar está a um toque.</p></section>
+<div class="tiles">
+<button class="tile" onclick="go('atender')">${IC.a}<b>Atender um cliente</b><span>Abra a ficha do empreendimento: endereço, negociação, valor e produto.</span></button>
+<button class="tile" onclick="go('aprender',{sub:'${nxt >= 0 ? 'trilha' : 'quiz'}'})">${IC.b}<b>Continuar o curso</b><span>${nxt >= 0 ? esc(MODS[nxt].t) + ' · ' + MODS[nxt].min + ' min' : 'Curso concluído. Refaça o quiz.'}</span></button>
+<button class="tile" onclick="go('aprender',{sub:'tel'})">${IC.c}<b>Treinar a ligação</b><span>Roteiro, respostas prontas e regras do WhatsApp.</span></button>
+<button class="tile" onclick="go('ferr')">${IC.d}<b>Simular na hora</b><span>Rentabilidade, financiamento, INCC e fluxo de pagamento.</span></button></div>
+<div class="card"><div class="between"><h3 style="margin:0">Seu progresso</h3><span class="mut small">${pr.p}% do curso · quiz ${S.quiz.best || 0}/${QUIZ.length}</span></div><div class="bar" style="margin-bottom:0"><i style="width:${pr.p}%"></i></div></div>
+<details><summary><span class="tt">Antes da reunião</span><small class="mut">${ck}/${CHECKLIST.length}</small></summary><div class="b">
+${CHECKLIST.map((c, i) => `<label class="chk"><input type="checkbox" ${S.checks[i] ? 'checked' : ''} onchange="S.checks[${i}]=this.checked;save();keep();render()"><span>${esc(c)}</span></label>`).join('')}
+<button class="link" onclick="S.checks={};save();keep();render()">Limpar checklist</button></div></details>
+<details><summary><span class="tt">Fichas para completar</span></summary><div class="b">
+${low.map(([e, p]) => `<div class="li" onclick="openEmp('${e.id}')"><div><b>${esc(e.nome || 'Sem nome')}</b><div class="mut small">${esc(e.construtora || '')}</div></div><div class="pill ${p < 50 ? 'warn' : ''}">${p}%</div></div>`).join('')}</div></details>`;
+}
+
+/* ---------- ATENDER ---------- */
+const PF = [['all', 'Todos'], ['uhnw', 'Altíssimo padrão'], ['inv', 'Investidor'], ['moradia', 'Moradia'], ['prim', 'Primeira aquisição']];
+function ph(e) { return e.foto ? `<img src="${e.foto}" alt="${esc(e.nome)}">` : `<div class="ph"><span>PC</span></div>`; }
+function vAtender() {
+  if (V.cur) { const e = E(V.cur); if (e) return V.edit ? vForm(e) : vEmp(e); }
+  const q = V.q.toLowerCase();
+  const f = e => (V.filt === 'all' || e.perfis.includes(V.filt)) && (!q || [e.nome, e.bairro, e.construtora].join(' ').toLowerCase().includes(q));
+  const main = S.emps.filter(e => !e.grupo && f(e)), gr = S.emps.filter(e => e.grupo && f(e));
+  return `<div class="between"><h2>Empreendimentos</h2><button class="btn small" onclick="newEmp()">+ Novo</button></div>
+<input class="search" type="search" placeholder="Buscar por nome, bairro ou construtora" value="${esc(V.q)}" oninput="V.q=this.value;keep();renderList()">
+<div class="chips">${PF.map(([k, l]) => `<button class="${V.filt === k ? 'on' : ''}" onclick="V.filt='${k}';render()">${l}</button>`).join('')}</div>
+<div class="grid" id="lst">${main.map(cardE).join('') || '<p class="mut">Nenhum empreendimento.</p>'}</div>
+<h3 class="mt">Comparativo</h3>${cmp(S.emps.filter(e => !e.grupo && f(e)))}
+<h3 class="mt">Carteira Sawala por região</h3><div class="grid">${gr.map(cardE).join('')}</div>`;
+}
+function cmp(list) {
+  const rows = list.filter(e => num(e.precoDe)).map(e => { const p = num(e.precoDe), m = num(e.metragemMin), al = num(e.aluguelEst); return { e, p, m, pm: m ? p / m : 0, y: al ? al * 12 / p * 100 : 0 }; }).sort((x, y) => (x.pm || 1e12) - (y.pm || 1e12));
+  if (!rows.length) return '<p class="mut small">Cadastre o preço dos empreendimentos para comparar.</p>';
+  return `<div class="card scroll"><table class="t"><tr><th>Empreendimento</th><th>Bairro</th><th>A partir de</th><th>m² mín.</th><th>R$/m²</th><th>Yield bruto</th><th>Entrega</th></tr>${rows.map(r => `<tr onclick="openEmp('${r.e.id}')" style="cursor:pointer"><td><b>${esc(r.e.nome)}</b></td><td>${esc(r.e.bairro)}</td><td>${fmtR(r.p)}</td><td>${r.m ? String(r.m).replace('.', ',') : '—'}</td><td>${r.pm ? fmtR(r.pm) : '—'}</td><td>${r.y ? fmtP(r.y) : '—'}</td><td>${r.e.entrega ? esc(r.e.entrega.split('-').reverse().join('/')) : '—'}</td></tr>`).join('')}</table><p class="disc">Ordenado do menor para o maior R$/m². O preço "a partir de" é o da menor unidade, então o R$/m² é indicativo. Dados de portais e da sua base: confirme a tabela atual.</p></div>`;
+}
+function renderList() { const y = scrollY; render(); scrollTo(0, y); const i = $('.search'); if (i) { i.focus(); i.setSelectionRange(V.q.length, V.q.length); } }
+function cardE(e) {
+  const c = completeness(e), pm = num(e.precoDe), m = num(e.metragemMin);
+  return `<div class="card emp" onclick="openEmp('${e.id}')"><div class="thumb">${ph(e)}</div><div class="pad"><div class="between"><b>${esc(e.nome || 'Sem nome')}</b><span class="pill ${c < 50 ? 'warn' : ''}">${c}%</span></div>
+<div class="mut small">${esc([e.bairro, e.construtora].filter(Boolean).join(' · '))}</div>
+${pm ? `<div class="small mt-s">A partir de <b>${fmtR(pm)}</b>${m ? ` · ${fmtR(pm / m)}/m²` : ''}</div>` : ''}</div></div>`;
+}
+function openEmp(id) { V.tab = 'atender'; V.cur = id; V.edit = false; render(); scrollTo(0, 0); }
+function newEmp() { const e = mk({ nome: 'Novo empreendimento' }); S.emps.unshift(e); save(); V.cur = e.id; V.edit = true; render(); scrollTo(0, 0); }
+function dupEmp(id) { const o = E(id), e = JSON.parse(JSON.stringify(o)); e.id = uid(); e.nome = o.nome + ' (cópia)'; e.foto = ''; S.emps.unshift(e); save(); V.cur = e.id; V.edit = true; render(); toast('Cópia criada'); }
+function delEmp(id) { if (!confirm('Excluir este empreendimento?')) return; S.emps = S.emps.filter(e => e.id !== id); save(); V.cur = null; V.edit = false; render(); }
+function mapUrl(e) { return 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(e.endereco || (e.nome + ' ' + e.bairro + ' Rio de Janeiro')); }
+
+function simBlock(e) {
+  const rows = S.scen.map(s => ({ s, r: sim(e, s.incc, s.val) }));
+  const r0 = rows[1].r;
+  if (!r0.P) return `<div class="note">Informe o preço de referência (ou "A partir de") na ficha para simular.</div>`;
+  if (!r0.filled) return `<div class="note">Cadastre a estrutura de negociação da construtora (ato, entrada, mensais, intermediárias, chaves) para ver o fluxo e os cenários.<br><button class="btn small mt-s" onclick="V.edit=true;render()">Cadastrar negociação</button></div>`;
+  const tot = r0.sumPct + Math.max(0, r0.finPct);
+  const seg = r0.parts.concat([{ l: 'Financiamento / saldo', pct: Math.max(0, r0.finPct), c: '#c9ced3' }]).filter(p => p.pct > 0)
+    .map(p => `<i style="width:${p.pct / tot * 100}%;background:${p.c}" title="${esc(p.l)} ${fmtP(p.pct)}"></i>`).join('');
+  const leg = r0.parts.concat([{ l: 'Financiamento / saldo', pct: Math.max(0, r0.finPct), val: r0.finNom, c: '#c9ced3', cnt: 1 }]).filter(p => p.pct > 0)
+    .map(p => `<div class="k"><span><i class="dot" style="background:${p.c}"></i>${p.l}</span><span>${fmtP(p.pct)} · ${fmtR(p.val)}${p.cnt > 1 ? `<br><small class="mut">${p.cnt}x de ${fmtR(p.val / p.cnt)}</small>` : ''}</span></div>`).join('');
+  const warn = (r0.finPct < 0 ? '<div class="note bad">As porcentagens somam mais de 100%. Revise a negociação.</div>' : '') + (r0.overMens ? '<div class="note">O número de mensais é maior que os meses até a entrega. Confira a tabela.</div>' : '') + (!e.entrega ? '<div class="note">Informe o mês de entrega para calcular a correção e a valorização.</div>' : '');
+  const colH = rows.map((x, i) => `<th><input class="mini" value="${esc(x.s.n)}" onchange="S.scen[${i}].n=this.value;save()"></th>`).join('');
+  const inp = (k, lbl) => `<tr><td>${lbl}</td>${rows.map((x, i) => `<td><input class="mini num" inputmode="decimal" value="${x.s[k]}" onchange="S.scen[${i}].${k}=num(this.value);save();keep();render()"></td>`).join('')}</tr>`;
+  const out = (lbl, fn) => `<tr><td>${lbl}</td>${rows.map(x => `<td><b>${fn(x.r)}</b></td>`).join('')}</tr>`;
+  return `${warn}<div class="seg">${seg}</div>${leg}
+<div class="k"><span>Meses até a entrega</span><span>${r0.M}</span></div>
+<div class="k"><span>Desembolso médio mensal na obra (cenário base, corrigido)</span><span>${fmtR(r0.mensalObra)}</span></div>
+<h4 class="mt">Cenários (premissas editáveis)</h4>
+<div class="scroll"><table class="t"><tr><th></th>${colH}</tr>${inp('incc', 'INCC ao ano (%)')}${inp('val', 'Valorização ao ano (%)')}
+${out('Pago até as chaves (corrigido)', r => fmtR(r.cor))}${out('Saldo corrigido nas chaves', r => fmtR(r.finCor))}${out('Custo total corrigido', r => fmtR(r.totalCor))}
+${out('Valor estimado na entrega', r => fmtR(r.Vk))}${out('Diferença (valor − custo corrigido)', r => fmtR(r.ganho))}
+${out('Sobre o capital pago até as chaves', r => r.roiCap == null ? '—' : fmtP(r.roiCap, 0))}</table></div>
+${num(e.aluguelEst) ? `<div class="k"><span>Yield bruto / líquido (aluguel ${fmtR(num(e.aluguelEst))}, custos ${num(e.custosPct)}%)</span><span>${fmtP(r0.yb)} / ${fmtP(r0.yl)}</span></div><div class="k"><span>Renda líquida mensal estimada</span><span>${fmtR(r0.rendaMes)}</span></div><div class="k"><span>Payback só com aluguel</span><span>${r0.payback ? r0.payback.toFixed(0) + ' anos' : '—'}</span></div>` : '<div class="note">Informe o aluguel estimado para calcular o yield.</div>'}
+<p class="disc">Simulação ilustrativa. Parcelas corrigidas por INCC até as chaves e saldo corrigido no mesmo índice (simplificação). Não considera juros do financiamento, impostos, corretagem nem custos de venda. Valorização e aluguel são premissas, não garantias.</p>`;
+}
+
+function vEmp(e) {
+  const pf = PERFIS[V.perfil], dif = lines(e.diferenciais), pm = num(e.precoDe), m = num(e.metragemMin);
+  const mz = ZONAS.find(z => e.bairro && z.b.toLowerCase() === e.bairro.toLowerCase()), r0 = sim(e, S.scen[1].incc, S.scen[1].val);
+  const sumTxt = r0.filled ? [['Ato', 'atoPct'], ['Entrada compl.', 'entCompPct'], ['Mensais', 'mensaisPct'], ['Intermed.', 'intPct'], ['Chaves', 'chavesPct']].filter(([, k]) => num(e.negoc[k]) > 0).map(([l, k]) => `${l} ${fmtP(num(e.negoc[k]), 0)}`).join(' · ') + (r0.finPct > 0 ? ` · Financ. ${fmtP(r0.finPct, 0)}` : '') : '';
+  return `<button class="link int" onclick="V.cur=null;render()">← Empreendimentos</button>
+<section class="cover"><div class="img">${ph(e)}</div><div class="cap"><small class="kicker">${esc([e.bairro, e.estagio].filter(Boolean).join(' · '))}</small><h1>${esc(e.nome)}</h1><p>${esc(e.construtora)}</p></div></section>
+<div class="row int"><button class="btn small" onclick="V.edit=true;render()">Editar</button><button class="btn small ghost-d" onclick="printEmp()">Ficha para o cliente</button><a class="btn small ghost-d" target="_blank" rel="noopener" href="${mapUrl(e)}">Abrir mapa</a><button class="btn small ghost-d" onclick="dupEmp('${e.id}')">Duplicar como molde</button></div>
+${e.alerta ? `<div class="note bad int"><b>Confirmar antes de apresentar:</b> ${esc(e.alerta)}</div>` : ''}
+<h2 class="mt">Os 5 diferenciais</h2>
+<div class="dif">
+<div class="card d1"><small class="kicker">1 · Endereço</small><b>${esc(e.endereco || 'Preencher endereço')}</b>${e.tipologia ? `<p class="mut small">${esc(e.tipologia)}</p>` : ''}<a class="link" target="_blank" rel="noopener" href="${mapUrl(e)}">Ver no mapa</a></div>
+<div class="card d2"><small class="kicker">2 · Imagem</small><p class="mut small">${e.foto ? 'Foto cadastrada, exibida na capa.' : 'Sem foto. Adicione na ficha (Editar).'}</p></div>
+<div class="card d3 main"><small class="kicker">3 · Negociação (principal)</small><b>${sumTxt ? esc(sumTxt) : 'Cadastrar a estrutura da construtora'}</b>${e.negoc.validade ? `<p class="mut small">Tabela válida até/ref.: ${esc(e.negoc.validade)}</p>` : ''}${e.negoc.obs ? `<p class="small">${esc(e.negoc.obs)}</p>` : ''}</div>
+<div class="card d4"><small class="kicker">4 · Valor e rentabilidade</small><b>${pm ? 'A partir de ' + fmtR(pm) : 'Informar preço'}</b>${pm && m ? `<p class="small">${fmtR(pm / m)}/m²${mz && (mz.j || mz.m) ? ` · bairro (FipeZAP ${mz.j ? 'jan/2026' : 'base'}): ${fmtR(mz.j || mz.m)}/m²` : ''}</p>` : ''}${r0.P && num(e.aluguelEst) ? `<p class="small">Yield bruto ${fmtP(r0.yb)} · líquido ${fmtP(r0.yl)}</p>` : ''}</div>
+<div class="card d5"><small class="kicker">5 · Produto</small>${dif.length ? '<ul class="ul">' + dif.map(x => `<li>${esc(x)}</li>`).join('') + '</ul>' : '<p class="mut small">Liste os diferenciais na ficha.</p>'}${e.entrega ? `<p class="small">Entrega: ${esc(e.entrega.split('-').reverse().join('/'))}</p>` : ''}</div>
+</div>
+${e.tabelas && e.tabelas.length ? `<h2 class="mt">Tabelas da construtora</h2>${e.tabelas.map(t => `<div class="card"><h3>${esc(t.t)}</h3><div class="scroll"><table class="t"><tr>${t.c.map(c => `<th>${esc(c)}</th>`).join('')}</tr>${t.r.map(r => `<tr>${r.map(x => `<td>${esc(x)}</td>`).join('')}</tr>`).join('')}</table></div></div>`).join('')}<div class="note">${esc(e.tabNota || '')}</div>` : ''}
+<h2 class="mt">Negociação e simulador</h2><div class="card">${simBlock(e)}</div>
+${e.entorno ? `<h2 class="mt">Entorno e tese</h2><div class="card"><p>${esc(e.entorno).replace(/\n/g, '<br>')}</p></div>` : ''}
+${e.historico ? `<h3>Incorporadora e histórico</h3><div class="card"><p>${esc(e.historico).replace(/\n/g, '<br>')}</p></div>` : ''}
+<div class="int"><h2 class="mt">Conduzir com este cliente</h2>
+<div class="chips">${Object.entries(PERFIS).map(([k, p]) => `<button class="${V.perfil === k ? 'on' : ''}" onclick="V.perfil='${k}';keep();render()">${p.nome.split(' (')[0].split(' /')[0]}</button>`).join('')}</div>
+<div class="card"><h3>${esc(pf.nome)}</h3><p class="mut">${esc(pf.tom)}</p>
+<h4>Abertura</h4><p>"${esc(pf.abrir)}"</p><h4>Perguntas</h4><ul class="ul">${pf.perguntas.map(x => `<li>${esc(x)}</li>`).join('')}</ul>
+<h4>Gatilhos éticos</h4><ul class="ul">${pf.gatilhos.map(x => `<li>${esc(x)}</li>`).join('')}</ul><div class="note"><b>Evite:</b> ${esc(pf.evitar)}</div></div>
+<h3>Resumo para enviar</h3><div class="card"><textarea id="wtxt" class="ta" rows="7">${esc(resumo(e))}</textarea><div class="row"><button class="btn small" onclick="copyT('wtxt')">Copiar</button><a class="btn small ghost-d" target="_blank" rel="noopener" id="wlnk" onclick="this.href='https://wa.me/?text='+encodeURIComponent($('#wtxt').value)">Abrir no WhatsApp</a></div></div>
+<h3>Notas da reunião</h3><div class="card"><textarea class="ta" rows="5" placeholder="Objetivo do cliente, objeções, próximos passos, data de retorno" onchange="E('${e.id}').notas=this.value;save();toast('Notas salvas')">${esc(e.notas)}</textarea></div></div>`;
+}
+function resumo(e) {
+  const r = sim(e, S.scen[1].incc, S.scen[1].val), pm = num(e.precoDe), m = num(e.metragemMin);
+  return [`${e.nome}${e.bairro ? ', ' + e.bairro : ''}`, e.endereco, e.construtora ? 'Incorporadora: ' + e.construtora : '', pm ? `A partir de ${fmtR(pm)}${m ? ` (${fmtR(pm / m)}/m²)` : ''}` : '', e.entrega ? 'Entrega prevista: ' + e.entrega.split('-').reverse().join('/') : '',
+    r.filled ? 'Negociação: ' + r.parts.filter(p => p.pct > 0).map(p => `${p.l.toLowerCase()} ${fmtP(p.pct, 0)}`).join(', ') + (r.finPct > 0 ? `, financiamento/saldo ${fmtP(r.finPct, 0)}` : '') : '',
+    r.P && num(e.aluguelEst) ? `Rentabilidade estimada: ${fmtP(r.yl)} líquido ao ano (premissas: aluguel ${fmtR(num(e.aluguelEst))}/mês, custos ${num(e.custosPct)}%).` : '',
+    'Valores e rentabilidade são estimativas, sujeitas a confirmação de tabela, disponibilidade e condições de mercado.'].filter(Boolean).join('\n');
+}
+function copyT(id) { const t = $('#' + id); t.select(); try { navigator.clipboard.writeText(t.value); } catch (e) { document.execCommand('copy'); } toast('Copiado'); }
+function printEmp() { document.body.classList.add('printing'); setTimeout(() => { print(); }, 100); }
+addEventListener('afterprint', () => document.body.classList.remove('printing'));
+
+/* ---------- FORMULÁRIO ---------- */
+function setF(id, path, v) { const e = E(id), p = path.split('.'); let o = e; while (p.length > 1) o = o[p.shift()]; o[p[0]] = v; save(); }
+function togP(id, k) { const e = E(id); e.perfis = e.perfis.includes(k) ? e.perfis.filter(x => x !== k) : e.perfis.concat(k); save(); keep(); render(); }
+function fld(e, path, l, o = {}) {
+  const v = path.split('.').reduce((a, k) => a[k], e);
+  const ph = o.ph ? ` placeholder="${esc(o.ph)}"` : '';
+  const inp = o.ta ? `<textarea class="ta" rows="${o.ta}"${ph} onchange="setF('${e.id}','${path}',this.value)">${esc(v)}</textarea>` : `<input ${o.t === 'month' ? 'type="month"' : 'type="text"'} ${o.n ? 'inputmode="decimal"' : ''}${ph} value="${esc(v)}" onchange="setF('${e.id}','${path}',this.value);keep();render()">`;
+  return `<label class="f"><span>${l}</span>${inp}</label>`;
+}
+function vForm(e) {
+  const c = completeness(e);
+  return `<div class="between"><button class="link" onclick="V.edit=false;render()">← Voltar à ficha</button><span class="pill ${c < 50 ? 'warn' : ''}">${c}% completa</span></div>
+<h2>Ficha do empreendimento</h2>
+<div class="card"><h3>Identificação</h3>${fld(e, 'nome', 'Nome')}${fld(e, 'construtora', 'Construtora / incorporadora')}${fld(e, 'bairro', 'Bairro')}${fld(e, 'endereco', 'Endereço completo')}${fld(e, 'tipologia', 'Tipologias')}
+<label class="f"><span>Estágio</span><select onchange="setF('${e.id}','estagio',this.value)">${['', 'Lançamento', 'Em obras', 'Pronto'].map(x => `<option ${e.estagio === x ? 'selected' : ''}>${x}</option>`).join('')}</select></label>
+${fld(e, 'entrega', 'Entrega prevista', { t: 'month' })}
+<div class="f"><span>Perfis de cliente</span><div class="chips">${PF.slice(1).map(([k, l]) => `<button type="button" class="${e.perfis.includes(k) ? 'on' : ''}" onclick="togP('${e.id}','${k}')">${l}</button>`).join('')}</div></div></div>
+<div class="card"><h3>Foto</h3>${e.foto ? `<div class="thumb big">${ph(e)}</div>` : ''}<input type="file" accept="image/*" onchange="upFoto('${e.id}',this)">${e.foto ? `<button class="link" onclick="setF('${e.id}','foto','');keep();render()">Remover foto</button>` : ''}</div>
+<div class="card"><h3>Valores</h3>${fld(e, 'metragemMin', 'Metragem mínima (m²)', { n: 1 })}${fld(e, 'metragemMax', 'Metragem máxima (m²)', { n: 1 })}${fld(e, 'precoDe', 'Preço a partir de (R$)', { n: 1, ph: '399000' })}${fld(e, 'aluguelEst', 'Aluguel mensal estimado (R$)', { n: 1 })}${fld(e, 'custosPct', 'Custos sobre o aluguel (%)', { n: 1 })}</div>
+<div class="card"><h3>Negociação da construtora</h3><p class="mut small">Preencha em % do preço. O financiamento/saldo é calculado automaticamente pelo que sobra.</p>
+${fld(e, 'negoc.precoRef', 'Preço da unidade simulada (R$, opcional)', { n: 1 })}${fld(e, 'negoc.atoPct', 'Ato / sinal (%)', { n: 1 })}${fld(e, 'negoc.entCompPct', 'Entrada complementar (%)', { n: 1 })}${fld(e, 'negoc.nEnt', 'Nº de parcelas da entrada complementar', { n: 1 })}
+${fld(e, 'negoc.mensaisPct', 'Mensais na obra (% total)', { n: 1 })}${fld(e, 'negoc.nMens', 'Nº de mensais', { n: 1 })}${fld(e, 'negoc.intPct', 'Intermediárias (% total)', { n: 1 })}${fld(e, 'negoc.nInt', 'Nº de intermediárias', { n: 1 })}${fld(e, 'negoc.chavesPct', 'Na entrega das chaves (%)', { n: 1 })}
+${fld(e, 'negoc.descAvistaPct', 'Desconto à vista (%)', { n: 1 })}${fld(e, 'negoc.indiceObra', 'Índice durante a obra')}${fld(e, 'negoc.indicePos', 'Índice e juros após as chaves', { ph: 'Conforme contrato' })}${fld(e, 'negoc.validade', 'Validade ou data da tabela')}${fld(e, 'negoc.obs', 'Condições especiais e observações', { ta: 3 })}</div>
+<div class="card"><h3>Conteúdo de atendimento</h3>${fld(e, 'diferenciais', 'Diferenciais do produto (um por linha)', { ta: 5 })}${fld(e, 'entorno', 'Entorno e tese de investimento', { ta: 4 })}${fld(e, 'historico', 'Histórico da incorporadora', { ta: 3 })}${fld(e, 'alerta', 'Alerta interno (dado a confirmar)', { ta: 2 })}${fld(e, 'fonte', 'Fonte e data dos dados')}</div>
+<div class="row"><button class="btn" onclick="V.edit=false;render();toast('Ficha salva')">Concluir</button><button class="btn danger" onclick="delEmp('${e.id}')">Excluir</button></div>`;
+}
+function upFoto(id, inp) {
+  const f = inp.files[0]; if (!f) return; const r = new FileReader();
+  r.onload = () => { const im = new Image(); im.onload = () => { const m = 900, s = Math.min(1, m / Math.max(im.width, im.height)), c = document.createElement('canvas'); c.width = im.width * s; c.height = im.height * s; c.getContext('2d').drawImage(im, 0, 0, c.width, c.height); setF(id, 'foto', c.toDataURL('image/jpeg', .7)); keep(); render(); }; im.src = r.result; };
+  r.readAsDataURL(f);
+}
+
+/* ---------- APRENDER ---------- */
+const SUBS = [['trilha', 'Curso'], ['tel', 'Roteiro de ligação'], ['resp', 'Respostas prontas'], ['cad', 'Sequência'], ['tipos', 'Tipos de contato'], ['voz', 'Voz e regras'], ['glossario', 'Glossário'], ['gatilhos', 'Gatilhos'], ['linguagem', 'Linguagem'], ['zonas', 'Bairros'], ['objecoes', 'Objeções'], ['quiz', 'Quiz']];
+const GRP = [['trilha', 'Curso', ['trilha']], ['tel', 'Telefone e WhatsApp', ['tel', 'resp', 'cad', 'tipos', 'voz']], ['ref', 'Consulta rápida', ['glossario', 'gatilhos', 'linguagem', 'zonas', 'objecoes']], ['quiz', 'Quiz', ['quiz']]];
+function vAprender() {
+  const gr = GRP.find(x => x[2].includes(V.sub)) || GRP[0];
+  const nm = k => SUBS.find(s => s[0] === k)[1];
+  const sub = `<div class="chips sticky top2">${GRP.map(x => `<button class="${gr === x ? 'on' : ''}" onclick="V.sub='${x[2][0]}';V.quiz=null;render();scrollTo(0,0)">${x[1]}</button>`).join('')}</div>` +
+    (gr[2].length > 1 ? `<div class="chips sub">${gr[2].map(k => `<button class="${V.sub === k ? 'on' : ''}" onclick="V.sub='${k}';render();scrollTo(0,0)">${nm(k)}</button>`).join('')}</div>` : '');
+  const body = { trilha: sTrilha, tel: sTel, resp: sResp, cad: sCad, tipos: sTipos, voz: sVoz, glossario: sGloss, gatilhos: sGat, linguagem: sLing, zonas: sZonas, objecoes: sObj, quiz: sQuiz }[V.sub]();
+  return sub + body;
+}
+function sTrilha() {
+  const pr = progAll();
+  return `<div class="card hero2"><h2>Curso: do início ao fim da conversa</h2><p class="mut">Três fases. Marque cada módulo ao concluir.</p><div class="bar"><i style="width:${pr.p}%"></i></div><small class="mut">${pr.d} de ${pr.t} módulos</small></div>` +
+    FASES.map(f => { const ms = MODS.map((m, i) => [m, i]).filter(([m]) => m.f === f.id), d = ms.filter(([, i]) => S.prog[i]).length;
+      return `<h3 class="phase"><span>${f.n}</span><small>${f.s} · ${d}/${ms.length}</small></h3>` + ms.map(([m, i]) => `<details ${V.open === i ? 'open' : ''}><summary><span class="n ${S.prog[i] ? 'ok' : ''}">${S.prog[i] ? '✓' : i + 1}</span><span class="tt">${esc(m.t)}</span><small class="mut">${m.min} min</small></summary><div class="b">${m.b}
+${m.tab ? `<button class="btn small" onclick="V.sub='${m.tab}';render();scrollTo(0,0)">Abrir: ${SUBS.find(s => s[0] === m.tab)[1]}</button>` : ''}
+<div class="gold-box"><b>Frase de ouro</b><br>"${esc(m.ouro)}"</div><div class="note"><b>Erro comum:</b> ${esc(m.erro)}</div>
+<label class="chk"><input type="checkbox" ${S.prog[i] ? 'checked' : ''} onchange="S.prog[${i}]=this.checked;save();V.open=${i};keep();render()"><span>Concluí este módulo</span></label></div></details>`).join(''); }).join('');
+}
+V.tel = { emp: '', nome: '', entrada: '100 mil', valor: '1 milhão', s1: '33', s2: '40' };
+function telFill(s) {
+  const t = V.tel, e = E(t.emp);
+  const m = { nome: t.nome || '[nome]', cond: (e && e.nome) || '[condomínio]', entrada: t.entrada || '[entrada]', valor: t.valor || '[valor]', s1: t.s1 || '[m²]', s2: t.s2 || '[m²]' };
+  return s.replace(/\{(\w+)\}/g, (x, k) => m[k] ?? x);
+}
+function setTel(k, v) { V.tel[k] = v; keep(); render(); }
+function sTel() {
+  const t = V.tel, ops = S.emps.filter(e => !e.grupo);
+  const fl = (k, l) => `<label class="f"><span>${l}</span><input type="text" value="${esc(t[k])}" onchange="setTel('${k}',this.value)"></label>`;
+  const blk = (arr, p) => arr.map((x, i) => `<div class="card"><h3>${esc(x.t)}</h3><textarea class="ta" id="${p}${i}" rows="${Math.min(7, 2 + Math.ceil(telFill(x.s).length / 60))}">${esc(telFill(x.s))}</textarea>${x.a ? `<div class="note"><b>Cuidado:</b> ${esc(x.a)}</div>` : ''}<button class="btn small" onclick="copyT('${p}${i}')">Copiar</button></div>`).join('');
+  return `<div class="card hero2"><h2>Ligação e WhatsApp: vender a visita</h2><p class="mut">Roteiro das suas anotações de 08/10/2026. Escolha o empreendimento e os números: os textos se preenchem sozinhos.</p>
+<div class="row">${TEL.funil.map((f, i) => `<span class="pill">${i + 1}. ${f}</span>`).join('')}</div>
+<div class="note"><b>Regras:</b><ul class="ul">${TEL.regras.map(r => `<li>${r}</li>`).join('')}</ul></div></div>
+<div class="card"><h3>Personalizar</h3><label class="f"><span>Empreendimento</span><select onchange="setTel('emp',this.value)"><option value="">Escolher</option>${ops.map(e => `<option value="${e.id}" ${t.emp === e.id ? 'selected' : ''}>${esc(e.nome)}</option>`).join('')}</select></label>
+${fl('nome', 'Nome do cliente')}${fl('entrada', 'Entrada (ex.: 100 mil)')}${fl('valor', 'Valor do imóvel citado (ex.: 1 milhão)')}${fl('s1', 'Studio (m²)')}${fl('s2', 'Duplex studio (m²)')}</div>
+<div class="note bad"><b>Confirmar antes de usar:</b><ul class="ul">${TEL.verificar.map(r => `<li>${esc(r)}</li>`).join('')}</ul></div>
+<h2 class="mt">Roteiro da ligação</h2>${blk(TEL.ligacao, 'tl')}
+<h2 class="mt">Sequência de WhatsApp</h2>${blk(TEL.zap, 'tz')}
+<h3 class="mt">Argumentos de apoio</h3><div class="card"><ul class="ul">${TEL.apoio.map(x => `<li>${esc(x)}</li>`).join('')}</ul></div>`;
+}
+function sGloss() {
+  const q = V.gloss.toLowerCase(), l = GLOSS.filter(g => !q || (g[0] + g[1]).toLowerCase().includes(q));
+  return `<input class="search" type="search" placeholder="Buscar termo (INCC, yield, TIR...)" value="${esc(V.gloss)}" oninput="V.gloss=this.value;keep();render();const i=$('.search');i.focus();i.setSelectionRange(V.gloss.length,V.gloss.length)">
+${l.map(g => `<div class="card"><h3>${esc(g[0])}</h3><p>${esc(g[1])}</p><div class="gold-box"><b>Como falar</b><br>"${esc(g[2])}"</div>${g[3] ? `<p class="small mut">Cuidado: ${esc(g[3])}</p>` : ''}</div>`).join('') || '<p class="mut">Nenhum termo encontrado.</p>'}`;
+}
+function sGat() {
+  return `<div class="note">Gatilho ético é apresentar um fato verdadeiro de modo que a decisão fique mais clara. Gatilho falso destrói a confiança de quem compra patrimônio.</div>` +
+    GATILHOS.map(g => `<div class="card"><h3>${g.t}</h3><p class="mut">${esc(g.c)}</p><p><b>Como usar:</b> ${esc(g.u)}</p><p class="small mut"><b>Limite:</b> ${esc(g.l)}</p></div>`).join('');
+}
+function sLing() {
+  return `<div class="two"><div class="card"><h3>Use</h3><div>${LINGUAGEM.usar.map(x => `<span class="tag ok">${esc(x)}</span>`).join('')}</div></div><div class="card"><h3>Evite</h3><div>${LINGUAGEM.evitar.map(x => `<span class="tag bad">${esc(x)}</span>`).join('')}</div></div></div>
+<div class="card"><h3>Tom de voz</h3><ul class="ul"><li>Fale em primeira pessoa e com premissas: "com estas premissas, a estimativa é..."</li><li>Faça pergunta antes de dar resposta.</li><li>Silêncio é ferramenta: depois de uma pergunta importante, espere.</li><li>Próximo e sóbrio. Deixe a intimidade para o cliente propor.</li></ul></div>`;
+}
+function sZonas() {
+  const pv = (v) => (v > 0 ? '+' : '') + String(v).replace('.', ',') + '% em 12m';
+  return `<div class="note">Duas fontes de preço por m². <b>Jan/2026:</b> Índice FipeZAP de venda residencial (extraído do PDF da edição de janeiro/2026; a correspondência bairro e valor foi lida pela ordem da tabela, então confira no original). <b>Base:</b> números da sua base de 21/09/2026, de outra edição. Use sempre a edição mais recente do FipeZAP na reunião.</div>` +
+    ZONAS.map(z => `<div class="card"><h3>${z.b}</h3>
+${z.j ? `<div class="k"><span>FipeZAP jan/2026</span><b>${fmtR(z.j)}/m² <small class="mut">(${pv(z.jv)})</small></b></div>` : ''}
+${z.m ? `<div class="k"><span>Sua base (21/09/2026)</span><b>${fmtR(z.m)}/m² <small class="mut">(${pv(z.v)})</small></b></div>` : ''}
+${!z.j && !z.m ? '<span class="pill warn">sem dado de m²</span>' : ''}<p class="mut mt-s">${esc(z.q)}</p></div>`).join('');
+}
+function sObj() { return OBJECOES.map(([o, r]) => `<div class="card"><h3>"${esc(o)}"</h3><p>${esc(r)}</p></div>`).join('') + '<div class="note">Antes de responder, pergunte: "O que exatamente te preocupa?"</div>'; }
+function sQuiz() {
+  if (!V.quiz) V.quiz = { i: 0, s: 0, ord: QUIZ.map((q, i) => i).sort(() => Math.random() - .5), done: false, ans: null };
+  const z = V.quiz;
+  if (z.done) return `<div class="card center"><div class="big">${z.s}/${QUIZ.length}</div><p>${z.s >= 10 ? 'Excelente domínio.' : z.s >= 7 ? 'Bom. Revise os módulos dos erros.' : 'Releia o curso e o glossário e tente de novo.'}</p><button class="btn" onclick="V.quiz=null;render()">Refazer</button></div>`;
+  const q = QUIZ[z.ord[z.i]];
+  return `<div class="between"><small class="mut">Pergunta ${z.i + 1} de ${QUIZ.length}</small><small class="mut">Acertos: ${z.s}</small></div><div class="bar"><i style="width:${z.i / QUIZ.length * 100}%"></i></div>
+<div class="card"><h3>${esc(q.q)}</h3>${q.o.map((o, j) => `<button class="opt ${z.ans != null ? (j === q.a ? 'ok' : j === z.ans ? 'no' : '') : ''}" ${z.ans != null ? 'disabled' : ''} onclick="ansQ(${j})">${esc(o)}</button>`).join('')}
+${z.ans != null ? `<button class="btn mt-s" onclick="nextQ()">${z.i + 1 < QUIZ.length ? 'Próxima' : 'Ver resultado'}</button>` : ''}</div>`;
+}
+function ansQ(j) { const z = V.quiz, q = QUIZ[z.ord[z.i]]; z.ans = j; if (j === q.a) z.s++; keep(); render(); }
+function nextQ() { const z = V.quiz; z.ans = null; z.i++; if (z.i >= QUIZ.length) { z.done = true; if (z.s > (S.quiz.best || 0)) { S.quiz.best = z.s; save(); } } render(); scrollTo(0, 0); }
+
+/* ---------- FERRAMENTAS ---------- */
+function vFerr() {
+  return `<h2>Ferramentas</h2>
+<div class="card"><h3>Rentabilidade do imóvel</h3>${cin('r1', 'Preço (R$)', 800000)}${cin('r2', 'Aluguel mensal bruto (R$)', 6000)}${cin('r3', 'Custos sobre o aluguel (%)', 25)}<div id="ro"></div></div>
+${relCard()}
+<div class="card"><h3>Financiamento: SAC x Price</h3>${cin('f1', 'Valor financiado (R$)', 500000)}${cin('f2', 'Taxa de juros ao ano (%)', 10.5)}${cin('f3', 'Prazo (meses)', 360)}<div id="fo"></div><p class="disc">Cálculo simples de juros e amortização, sem seguros, taxas nem correção. A taxa é premissa sua, não oferta de banco.</p></div>
+<div class="card"><h3>Correção pelo INCC</h3>${cin('i1', 'Valor da parcela ou saldo (R$)', 100000)}${cin('i2', 'Meses até pagar', 24)}${cin('i3', 'INCC ao ano (%)', 5)}<div id="io"></div></div>
+<div class="card"><h3>Imóvel x renda fixa</h3>${cin('c1', 'Capital (R$)', 800000)}${cin('c2', 'Renda líquida mensal do imóvel (R$)', 4500)}${cin('c3', 'CDI líquido de impostos ao ano (%)', 10)}<div id="co"></div></div>
+<h2 class="mt">Mensagens prontas</h2>${SCRIPTS.map((s, i) => `<div class="card"><h3>${s.t}</h3><textarea class="ta" id="sc${i}" rows="4">${esc(s.s)}</textarea><button class="btn small" onclick="copyT('sc${i}')">Copiar</button></div>`).join('')}`;
+}
+function cin(id, l, v) { return `<label class="f"><span>${l}</span><input id="${id}" type="text" inputmode="decimal" value="${v}" oninput="calcAll()"></label>`; }
+function g(id) { return num($('#' + id).value); }
+function calcAll() {
+  if (!$('#ro')) return;
+  relCalc();
+  const P = g('r1'), a = g('r2'), c = g('r3') / 100;
+  $('#ro').innerHTML = P && a ? `<div class="k"><span>Yield bruto</span><b>${fmtP(a * 12 / P * 100)}</b></div><div class="k"><span>Yield líquido</span><b>${fmtP(a * 12 * (1 - c) / P * 100)}</b></div><div class="k"><span>Renda líquida mensal</span><b>${fmtR(a * (1 - c))}</b></div><div class="k"><span>Payback só com aluguel</span><b>${(P / (a * 12 * (1 - c))).toFixed(0)} anos</b></div>` : '';
+  const F = g('f1'), tA = g('f2'), n = Math.round(g('f3')), i = Math.pow(1 + tA / 100, 1 / 12) - 1;
+  if (F && n > 0) {
+    const am = F / n, p1 = am + F * i, pn = am * (1 + i), pr = i > 0 ? F * i / (1 - Math.pow(1 + i, -n)) : F / n;
+    $('#fo').innerHTML = `<div class="k"><span>SAC: primeira / última parcela</span><b>${fmtR(p1)} / ${fmtR(pn)}</b></div><div class="k"><span>SAC: juros totais</span><b>${fmtR(F * i * (n + 1) / 2)}</b></div><div class="k"><span>Price: parcela fixa</span><b>${fmtR(pr)}</b></div><div class="k"><span>Price: juros totais</span><b>${fmtR(pr * n - F)}</b></div><div class="k"><span>Renda mínima (parcela até 30%) SAC / Price</span><b>${fmtR(p1 / .3)} / ${fmtR(pr / .3)}</b></div>`;
+  }
+  const V0 = g('i1'), m = g('i2'), ii = g('i3');
+  $('#io').innerHTML = V0 ? `<div class="k"><span>Valor corrigido</span><b>${fmtR(V0 * fac(ii, m))}</b></div><div class="k"><span>Acréscimo</span><b>${fmtR(V0 * fac(ii, m) - V0)} (${fmtP((fac(ii, m) - 1) * 100)})</b></div>` : '';
+  const C = g('c1'), r = g('c2'), cdi = g('c3');
+  $('#co').innerHTML = C ? `<div class="k"><span>Rendimento do imóvel (líquido)</span><b>${fmtP(r * 12 / C * 100)} a.a.</b></div><div class="k"><span>Rendimento do CDI informado</span><b>${fmtP(cdi)} a.a.</b></div><div class="k"><span>Valorização anual necessária para empatar</span><b>${fmtP(Math.max(0, cdi - r * 12 / C * 100))}</b></div><p class="disc">O imóvel não compete só em renda: tem valorização e proteção patrimonial, mas também vacância e baixa liquidez. Mostre os dois lados.</p>` : '';
+}
+
+/* ---------- AJUSTES ---------- */
+function vCfg() {
+  let kb = 0; try { kb = Math.round((localStorage.getItem(K) || '').length / 1024); } catch (e) {}
+  return `<h2>Ajustes</h2>
+<div class="card"><h3>Instalar o app</h3><p class="small"><b>Android:</b> Chrome, menu de três pontos, "Instalar app".<br><b>iPhone:</b> Safari, Compartilhar, "Adicionar à Tela de Início".<br><b>Computador:</b> Chrome ou Edge, ícone de instalar na barra de endereço.<br>Também funciona abrindo o index.html direto da pasta.</p><button id="inst" class="btn" style="display:none" onclick="doInst()">Instalar agora</button></div>
+<div class="card"><h3>Backup dos seus dados</h3><p class="small mut">Seus empreendimentos, negociações, fotos e progresso ficam salvos neste aparelho (${kb} KB). Exporte um backup para levar ao outro aparelho.</p>
+<div class="row"><button class="btn small" onclick="expo()">Exportar backup</button><label class="btn small ghost-d">Importar backup<input type="file" accept="application/json" hidden onchange="impo(this)"></label></div></div>
+<div class="card"><h3>Zerar</h3><button class="btn danger small" onclick="if(confirm('Apagar tudo e voltar ao início?')){localStorage.removeItem(K);S=load();V.cur=null;render()}">Apagar dados deste aparelho</button></div>
+<div class="note">Os dados do app vêm da sua base de 21/09/2026 e do que você cadastrar. Confirme preço, tabela e disponibilidade com a construtora ou a Sawala antes de enviar a qualquer cliente.</div>`;
+}
+function expo() { const b = new Blob([JSON.stringify(S)], { type: 'application/json' }), a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'atendimento-paulo-cotrim-backup-' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); }
+function impo(inp) { const f = inp.files[0]; if (!f) return; const r = new FileReader(); r.onload = () => { try { const d = JSON.parse(r.result); if (!Array.isArray(d.emps)) throw 0; if (!confirm('Substituir os dados atuais pelo backup?')) return; S = d; localStorage.setItem(K, JSON.stringify(S)); S = load(); render(); toast('Backup importado'); } catch (e) { toast('Arquivo de backup inválido'); } }; r.readAsText(f); }
+let dp; addEventListener('beforeinstallprompt', e => { e.preventDefault(); dp = e; const b = $('#inst'); if (b) b.style.display = 'inline-block'; });
+function doInst() { if (dp) { dp.prompt(); dp = null; } }
+if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('sw.js').catch(() => {});
+render();
+/* ---- Integração com o site: acrescenta ao Treinador os condomínios do catálogo do site (sem sobrescrever o que você já preencheu) ---- */
+(function(){
+  const norm = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const root = /\/treinador\//.test(location.pathname) ? '../' : '';
+  Promise.all([fetch(root + 'data/catalogo.json').then(r => r.json()), fetch(root + 'data/sawala-principais.json').then(r => r.json())]).then(([cat, pr]) => {
+    const det = {}; ['destaques', 'semestre', 'embreve'].forEach(k => (pr[k] || []).forEach(x => det[x.id] = x));
+    const have = S.emps.map(e => norm(e.nome));
+    let add = 0;
+    (cat.itens || []).forEach(c => {
+      const id = 'site-' + (c.sid || norm(c.nome).replace(/ /g, '-'));
+      if (S.emps.some(e => e.id === id)) return;
+      const n = norm(c.nome); if (!n) return;
+      if (have.some(h => h && (h === n || h.includes(n) || n.includes(h)))) return;
+      const d = det[c.sid] || {}; const nums = String(c.plantas || d.area || '').match(/\d+(?:,\d+)?/g) || [];
+      const dif = [d.descricao, d.vagas && 'Vagas: ' + d.vagas, d.quartos && 'Quartos: ' + d.quartos].filter(Boolean).join('\n');
+      const e = mk({ id, nome: c.nome, construtora: c.incorporadora || '', bairro: c.local || c.regiao || '', endereco: [d.endereco, d.cidade].filter(Boolean).join(', '), tipologia: c.plantas || d.quartos || '', estagio: c.status || '', entrega: d.entrega || '', perfis: /Ipanema|Leblon|Copacabana|Botafogo|Laranjeiras|Gávea|Lagoa|Arpoador|Zona Sul/i.test((c.local || '') + (c.regiao || '')) ? ['uhnw', 'inv'] : ['inv'],
+        metragemMin: nums[0] || '', metragemMax: nums.length > 1 ? nums[nums.length - 1].replace(/\s/g, '') : '', diferenciais: dif, foto: c.img ? '/' + c.img : '', fonte: 'Site paulocotrim.com (catálogo Sawala). Preço e tabela: preencher quando a construtora confirmar.', alerta: c.preco ? '' : 'Preço: Consulte. Sem tabela confirmada no site.' });
+      S.emps.push(e); have.push(n); add++;
+    });
+    if (add) { save(); render(); toast(add + ' condomínios do site adicionados ao Treinador'); }
+  }).catch(() => {});
+})();
+
+</script></body></html>
