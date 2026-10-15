@@ -438,6 +438,7 @@ form.rs-f input[type=text],form.rs-f input[type=tel],form.rs-f input[type=email]
   /* ---------- modo apresentação ---------- */
   function setApres(on){
     document.documentElement.classList.toggle('apres',on);
+    try{on?sessionStorage.setItem('pc_apres','1'):sessionStorage.removeItem('pc_apres');}catch(x){}
     $('btnAp').setAttribute('aria-pressed',on?'true':'false');
     $('btnAp').textContent=on?'Sair da apresentação':'Modo apresentação';
     try{ if(on&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(function(){}); else if(!on&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen(); }catch(x){}
@@ -491,7 +492,8 @@ form.rs-f input[type=text],form.rs-f input[type=tel],form.rs-f input[type=email]
     $('zapTop').href=z; $('fZap').href='https://wa.me/'+CFG.whatsapp; $('fZap').textContent='WhatsApp '+CFG.telefoneExibicao;
     $('fIg').href='https://instagram.com/'+CFG.instagram; $('fIg').textContent='@'+CFG.instagram; $('fCreci').textContent=CFG.creci; $('tCreci').textContent=CFG.creci;
     popFiltros(); bind(); iniciaMapa(); render();
-    if(/[?&]apresentar=1/.test(location.search)){document.documentElement.classList.add('apres');$('btnAp').setAttribute('aria-pressed','true');$('btnAp').textContent='Sair da apresentação';}
+    var jaApres=false; try{jaApres=!!sessionStorage.getItem('pc_apres');}catch(x){}
+    if(jaApres||/[?&]apresentar=1/.test(location.search)){document.documentElement.classList.add('apres');$('btnAp').setAttribute('aria-pressed','true');$('btnAp').textContent='Sair da apresentação';}
     var h=(location.hash||'').replace('#',''); if(h&&byId(h))ficha(h);
   }
   if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);

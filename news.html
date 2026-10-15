@@ -24,4 +24,5 @@ $('lista').innerHTML='<div class="g">'+a.map(function(x){var u=x.prazo?' urg':''
 document.addEventListener('googleLoginSucesso',function(e){$('ola').textContent='Olá, '+(e.detail.given_name||e.detail.name||'')+'! Você está na lista de alertas.';try{localStorage.setItem('pc_user',JSON.stringify({n:e.detail.name,e:e.detail.email}))}catch(x){}});
 var dp;addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;$('inst').style.display='inline-flex'});$('inst').onclick=function(){if(dp)dp.prompt()};
 if(!(window.SOCIAL_LOGIN_CONFIG&&SOCIAL_LOGIN_CONFIG.googleClientId)){$('login').querySelector('[data-google-login-btn]').outerHTML='<a class="btn" target="_blank" rel="noopener" href="https://wa.me/5521989150864?text=Quero%20receber%20os%20alertas">Receber alertas no WhatsApp</a>'}
-})();</script><script src="pc-alertas.js" defer></script></body></html>
+})();</script><script src="pc-alertas.js" defer></script><script src="apresentacao.js" defer></script>
+</body></html>
