@@ -203,5 +203,6 @@ document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
 const ht=document.querySelector('.hero .htext');
 addEventListener('scroll',()=>{const y=scrollY;if(y<700&&ht){ht.style.opacity=Math.max(0,1-y/500);ht.style.transform=`translateY(${-y*0.08}px)`;}},{passive:true});
 </script>
+<script src="apresentacao.js" defer></script>
 </body>
 </html>

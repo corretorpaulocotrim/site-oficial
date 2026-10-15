@@ -998,6 +998,13 @@
   if(document.readyState!=='loading') setTimeout(lock,300); else document.addEventListener('DOMContentLoaded',function(){setTimeout(lock,300);});
 })();
 
+/* Modo apresentação + resumo para o cliente (apresentacao.js) em toda página com leads.js */
+(function(){
+  if (window.__pcApres) return;
+  var s = document.createElement('script'); s.src = 'apresentacao.js'; s.async = true;
+  document.head.appendChild(s);
+})();
+
 /* Garante o crm-config.js (enviarLeadCRM) em qualquer página com leads.js */
 (function(){
   if (window.enviarLeadCRM) return;
