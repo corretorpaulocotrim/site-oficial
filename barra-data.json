@@ -1,0 +1,830 @@
+{
+ "versao": 1,
+ "gerado_de": {
+  "catalogo": "2026-10-07",
+  "mapa": "2026-09"
+ },
+ "aviso": "Dados importados do catálogo/mapa do site. Campos em \"pendencias\" não estão confirmados e não devem ser apresentados como fato.",
+ "empreendimentos": [
+  {
+   "id": "marino-by-breton",
+   "nome": "Marino by Breton",
+   "incorporadora": "Avanço",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Lançamento",
+   "tipologia_texto": "4 quartos · 135,76 a 289,26m²",
+   "quartos": [
+    4,
+    4
+   ],
+   "area_m2": [
+    135.76,
+    289.26
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -23.006826,
+   "lng": -43.343241,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/1527.webp",
+   "ficha": "ficha-marino-by-breton.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "kronos",
+   "nome": "Kronos",
+   "incorporadora": "Tegra",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Lançamento",
+   "tipologia_texto": "2 a 4 quartos · 78 a 287m²",
+   "quartos": [
+    2,
+    4
+   ],
+   "area_m2": [
+    78.0,
+    287.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -23.009165,
+   "lng": -43.323146,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2303.webp",
+   "ficha": "ficha-kronos.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "riio-by-lissoni",
+   "nome": "Riio by Lissoni",
+   "incorporadora": "Tegra",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Lançamento",
+   "tipologia_texto": "4 a 6 suítes · 262m² - 1042m²",
+   "quartos": [
+    4,
+    6
+   ],
+   "area_m2": [
+    262.0,
+    1042.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -23.009939,
+   "lng": -43.346079,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2199.webp",
+   "ficha": "ficha-riio-by-lissoni.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "ilha-pura-oro-by-ornare",
+   "nome": "Ilha Pura - Oro By Ornare",
+   "incorporadora": "BTG",
+   "bairro": "Barra Olímpica",
+   "local_original": "Barra Olímpica",
+   "status": "Em breve",
+   "tipologia_texto": "Apartamentos de 3 a 5 quartos · 171m² - 461m²",
+   "quartos": [
+    3,
+    5
+   ],
+   "area_m2": [
+    171.0,
+    461.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -22.988593,
+   "lng": -43.419613,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2148.webp",
+   "ficha": "empreendimento.html?id=2148",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "peninsula-collection-gran-thai",
+   "nome": "Peninsula Collection - Gran Thai",
+   "incorporadora": "Tegra",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Em breve",
+   "tipologia_texto": "3 e 4 suítes · 127m² - 405m²",
+   "quartos": [
+    3,
+    4
+   ],
+   "area_m2": [
+    127.0,
+    405.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -22.987966,
+   "lng": -43.35348,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2163.webp",
+   "ficha": "empreendimento.html?id=2163",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "peninsula-collection-singular",
+   "nome": "Peninsula Collection - Singular",
+   "incorporadora": "Tegra",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Em breve",
+   "tipologia_texto": "3 e 4 suítes · 221m² - 452m²",
+   "quartos": [
+    3,
+    4
+   ],
+   "area_m2": [
+    221.0,
+    452.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -22.989773,
+   "lng": -43.35346,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2164.webp",
+   "ficha": "empreendimento.html?id=2164",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "green-park-barra-green-view",
+   "nome": "Green Park Barra - Green View",
+   "incorporadora": "Opportunity",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Lançamento",
+   "tipologia_texto": "Apartamentos de 2 a 4 quartos · 64m² - 265m²",
+   "quartos": [
+    2,
+    4
+   ],
+   "area_m2": [
+    64.0,
+    265.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -23.000687,
+   "lng": -43.328205,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2129.webp",
+   "ficha": "ficha-green-park-barra-green-view.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "ilha-pura-astra-smart-facilities",
+   "nome": "Ilha Pura - Astra Smart Facilities",
+   "incorporadora": "BTG",
+   "bairro": "Barra Olímpica",
+   "local_original": "Barra Olímpica",
+   "status": "Lançamento",
+   "tipologia_texto": "2 · 86 - 93m²",
+   "quartos": null,
+   "area_m2": [
+    86.0,
+    93.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -22.98426422119111,
+   "lng": -43.417278917253455,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2109.webp",
+   "ficha": "ficha-ilha-pura-astra-smart-facilities.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "cyano-exclusive-residences",
+   "nome": "Cyano Exclusive Residences",
+   "incorporadora": "Gafisa",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Lançamento",
+   "tipologia_texto": "4 a 6 quartos · Apartamentos de 285 a 889m²",
+   "quartos": [
+    4,
+    6
+   ],
+   "area_m2": [
+    285.0,
+    889.0
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -23.0100427,
+   "lng": -43.340376,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/1526.webp",
+   "ficha": "ficha-cyano-exclusive-residences.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "vista-joa",
+   "nome": "Vista Joá",
+   "incorporadora": "Martins Ferreira",
+   "bairro": "Joá",
+   "local_original": "Joá",
+   "status": "Lançamento",
+   "tipologia_texto": "Studios, 1 a 2 quartos · 46,70 a 243,80m²",
+   "quartos": [
+    1,
+    2
+   ],
+   "area_m2": [
+    46.7,
+    243.8
+   ],
+   "preco": null,
+   "preco_texto": null,
+   "lat": -23.000154,
+   "lng": -43.273873,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2274.webp",
+   "ficha": "ficha-vista-joa.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "ilhamar-beach-home",
+   "nome": "Ilhamar Beach & Home",
+   "incorporadora": "Riva",
+   "bairro": "Barra Olímpica",
+   "local_original": "Barra Olímpica",
+   "status": "Lançamento",
+   "tipologia_texto": "2 e 3 quartos · 53 a 90m²",
+   "quartos": [
+    2,
+    3
+   ],
+   "area_m2": [
+    53.0,
+    90.0
+   ],
+   "preco": 516900,
+   "preco_texto": null,
+   "lat": -22.98464,
+   "lng": -43.421299,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2200.webp",
+   "ficha": "ficha-ilhamar-beach-home.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "duet-barra-residence",
+   "nome": "Duet Barra Residence",
+   "incorporadora": "Riva",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Pronto",
+   "tipologia_texto": "2 e 3 quartos · 52 a 79m²",
+   "quartos": [
+    2,
+    3
+   ],
+   "area_m2": [
+    52.0,
+    79.0
+   ],
+   "preco": 461700,
+   "preco_texto": null,
+   "lat": -22.9879378,
+   "lng": -43.4217906,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/1705.webp",
+   "ficha": "empreendimento.html?id=1705",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "stillo-barra-residencial",
+   "nome": "Stillo Barra Residencial",
+   "incorporadora": null,
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca",
+   "status": "Lançamento",
+   "tipologia_texto": null,
+   "quartos": null,
+   "area_m2": null,
+   "preco": 515100,
+   "preco_texto": null,
+   "lat": -22.986043,
+   "lng": -43.42424,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/1613.webp",
+   "ficha": "ficha-stillo-barra-residencial.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "vibe-sunset",
+   "nome": "Vibe Sunset",
+   "incorporadora": "Riva",
+   "bairro": "Recreio dos Bandeirantes",
+   "local_original": "Recreio dos Bandeirantes",
+   "status": "Em obras",
+   "tipologia_texto": "2 e 3 quartos · 43,05 a 84,57m²",
+   "quartos": [
+    2,
+    3
+   ],
+   "area_m2": [
+    43.05,
+    84.57
+   ],
+   "preco": 528300,
+   "preco_texto": null,
+   "lat": -22.9923911,
+   "lng": -43.4209854,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2019.webp",
+   "ficha": "ficha-vibe-sunset.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "oceanside-recreio",
+   "nome": "OceanSide Recreio",
+   "incorporadora": "EMCCAMP e Riva",
+   "bairro": "Recreio dos Bandeirantes",
+   "local_original": "Recreio dos Bandeirantes",
+   "status": "Em obras",
+   "tipologia_texto": "2 e 3 quartos · 47 a 78m²",
+   "quartos": [
+    2,
+    3
+   ],
+   "area_m2": [
+    47.0,
+    78.0
+   ],
+   "preco": 450000,
+   "preco_texto": null,
+   "lat": -23.0221335,
+   "lng": -43.5091751,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/sawala/2055.webp",
+   "ficha": "ficha-oceanside-recreio.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "refugio-camorim",
+   "nome": "Refúgio Camorim",
+   "incorporadora": "MRV",
+   "bairro": "Camorim",
+   "local_original": "Região do Camorim — Rio de Janeiro, RJ",
+   "status": null,
+   "tipologia_texto": "2 quartos (opção de suíte e varanda)",
+   "quartos": [
+    2,
+    2
+   ],
+   "area_m2": null,
+   "preco": null,
+   "preco_texto": "Consulte valores",
+   "lat": -22.97114,
+   "lng": -43.43118,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/mrv-refugio-camorim-em-breve.jpg",
+   "ficha": "emp-refugio-camorim.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "estágio da obra",
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "sensia-barra",
+   "nome": "Sensia Barra",
+   "incorporadora": "Sensia · MRV&CO",
+   "bairro": "Barra da Tijuca",
+   "local_original": "Barra da Tijuca — Rio de Janeiro, RJ",
+   "status": null,
+   "tipologia_texto": "2 e 3 quartos com suíte e varanda gourmet (opções garden e cobertura, até 148m²)",
+   "quartos": [
+    2,
+    3
+   ],
+   "area_m2": [
+    148.0,
+    148.0
+   ],
+   "preco": null,
+   "preco_texto": "Consulte valores",
+   "lat": -22.99974,
+   "lng": -43.36599,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/mrv-sensia-barra.jpg",
+   "ficha": "emp-sensia-barra.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "estágio da obra",
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "vitale-eco-residencial",
+   "nome": "Vitale Eco Residencial",
+   "incorporadora": "Vitale",
+   "bairro": "Vargem Grande",
+   "local_original": "Vargem Grande · Zona Oeste",
+   "status": null,
+   "tipologia_texto": "1 quarto (Garden 65,49m², com vaga)",
+   "quartos": [
+    1,
+    1
+   ],
+   "area_m2": [
+    65.49,
+    65.49
+   ],
+   "preco": null,
+   "preco_texto": "a partir de R$ 249.000",
+   "lat": -22.997,
+   "lng": -43.49,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/vitale-eco.jpg",
+   "ficha": "emp-vitale-eco.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "estágio da obra",
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  },
+  {
+   "id": "vitale-tide-residencial",
+   "nome": "Vitale Tide Residencial",
+   "incorporadora": "Vitale",
+   "bairro": "Recreio dos Bandeirantes",
+   "local_original": "Recreio · Zona Oeste",
+   "status": null,
+   "tipologia_texto": "1 e 2 quartos (com suíte e vaga)",
+   "quartos": [
+    1,
+    2
+   ],
+   "area_m2": null,
+   "preco": null,
+   "preco_texto": "a partir de R$ 295.000",
+   "lat": -23.023,
+   "lng": -43.467,
+   "coord_exata": true,
+   "coord_fonte": "mapa.json do site (geocodificação já existente)",
+   "img": "emp-img/vitale-tide.jpg",
+   "ficha": "emp-vitale-tide.html",
+   "fontes": [
+    {
+     "tipo": "catalogo.json",
+     "gerado_em": "2026-10-07"
+    },
+    {
+     "tipo": "mapa.json",
+     "gerado_em": "2026-09"
+    }
+   ],
+   "verificado_em": null,
+   "disponibilidade": "consultar com Paulo",
+   "pendencias": [
+    "estágio da obra",
+    "preço",
+    "previsão de entrega",
+    "condições de pagamento",
+    "vagas",
+    "data de verificação comercial"
+   ]
+  }
+ ]
+}
