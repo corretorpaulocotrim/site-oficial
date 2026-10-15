@@ -16,8 +16,8 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 <style>
-:root{--petroleo:#0f2e36;--verde:#1a8f4c;--caixa:#0058A3;--fundo:#fff;--nevoa:#f5f6f7;--borda:#e3e6e8;--txt:#1d2a2e;--mudo:#5d6b70;--aviso:#8a5a00;--aviso-bg:#fff6e0;--r:14px}
-@media (prefers-color-scheme:dark){:root{--fundo:#101a1d;--nevoa:#16242a;--borda:#27383f;--txt:#e8eef0;--mudo:#9db0b6;--aviso:#f1c46b;--aviso-bg:#2b2410}}
+:root{--petroleo:#0f2e36;--verde:#1a8f4c;--caixa:#0058A3;--fundo:#fff;--nevoa:#f5f6f7;--borda:#e3e6e8;--txt:#1d2a2e;--mudo:#5d6b70;--aviso:#0b3d6b;--aviso-bg:#e4effa;--r:14px}
+@media (prefers-color-scheme:dark){:root{--fundo:#101a1d;--nevoa:#16242a;--borda:#27383f;--txt:#e8eef0;--mudo:#9db0b6;--aviso:#a9cff0;--aviso-bg:#0f2840}}
 *{box-sizing:border-box}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--fundo);color:var(--txt);font:400 15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
@@ -57,7 +57,7 @@ select{width:100%;padding:10px;border:1px solid var(--borda);border-radius:10px;
 .meta{font-size:13px;color:var(--mudo);margin:3px 0 6px}
 .badge{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:99px;background:var(--nevoa);border:1px solid var(--borda)}
 .badge.l{background:#e6f4ec;border-color:#bfe0cd;color:#116a38}
-.badge.o{background:#fff1dc;border-color:#f1d4a3;color:#8a5a00}
+.badge.o{background:#e3edef;border-color:#c3d6da;color:var(--petroleo)}
 .badge.p{background:#e4effa;border-color:#b9d4ee;color:#0058A3}
 .preco{font-weight:600;margin-top:6px;font-size:14px}
 .preco small{font-weight:400;color:var(--mudo)}
@@ -108,12 +108,43 @@ footer a{color:#fff}
  .main[data-v=mapa] #lista{display:none}
  dl.f{grid-template-columns:1fr}
 }
+
+/* ===== modo apresentação (videochamada) ===== */
+.apres body,.apres{font-size:17px}
+.apres .hero{padding:22px 0 16px}
+.apres .hero p{display:none}
+.apres .hero h1{margin-bottom:16px}
+.apres .filtros .grid{grid-template-columns:repeat(6,1fr)}
+.apres .card{grid-template-columns:150px 1fr}
+.apres .card h3{font-size:21px}
+.apres .meta,.apres .preco{font-size:15px}
+.apres #lista{max-height:calc(100vh - 220px)}
+.apres .mapcol{height:calc(100vh - 220px)}
+.apres dialog{max-width:1080px}
+.apres .dl-b{max-height:calc(100vh - 90px)}
+.apres .zap-top{display:none}
+.apres .foot-hide{display:none}
+@media(min-width:900px){.apres dialog .fx{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:20px;align-items:start}.apres .hero-img{max-height:340px;height:340px}}
+.top .acts{display:flex;gap:8px;align-items:center}
+.top .ap{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:99px;padding:8px 13px;font:500 13px Inter;cursor:pointer}
+.top .ap[aria-pressed=true]{background:#fff;color:var(--petroleo)}
+.trust{display:flex;flex-wrap:wrap;gap:6px 16px;margin-top:14px;font-size:12.5px;color:#cfe0e4}
+.trust span::before{content:"✓ ";color:#7fd6a3}
+.cmpbar .rs{background:#fff;color:var(--petroleo)}
+form.rs-f{display:grid;gap:10px;margin:8px 0}
+form.rs-f input[type=text],form.rs-f input[type=tel],form.rs-f input[type=email]{width:100%;padding:11px;border:1px solid var(--borda);border-radius:10px;background:var(--fundo);color:var(--txt);font:inherit}
+.chk{display:flex;gap:8px;align-items:flex-start;font-size:13px;color:var(--mudo);line-height:1.4}
+.chk input{margin-top:3px;flex:none;width:18px;height:18px}
+.err{color:#b3261e;font-size:13px;min-height:18px}
+.prev{white-space:pre-wrap;font:13px/1.5 Inter,sans-serif;background:var(--nevoa);border:1px solid var(--borda);border-radius:12px;padding:12px;max-height:240px;overflow:auto}
+.sel-l{margin:6px 0 10px;padding-left:18px;font-size:14px}
+@media(max-width:900px){.top .ap{display:none}}
 </style>
 </head>
 <body>
 <header class="top"><div class="wrap in">
   <a class="brand" href="index.html" aria-label="Paulo Cotrim - página inicial"><img src="logo-crest-light.svg" alt="" onerror="this.style.display='none'"><span>PAULO COTRIM</span></a>
-  <a class="zap" id="zapTop" href="#" target="_blank" rel="noopener">Falar com Paulo</a>
+  <div class="acts"><button type="button" class="ap" id="btnAp" aria-pressed="false" title="Tela cheia, letras maiores, ideal para videochamada">Modo apresentação</button><a class="zap zap-top" id="zapTop" href="#" target="_blank" rel="noopener">Falar com Paulo</a></div>
 </div></header>
 
 <section class="hero"><div class="wrap">
@@ -127,6 +158,7 @@ footer a{color:#fff}
     <button type="button" data-p="comparar">Quero comparar condomínios</button>
   </div>
   <div class="dica" id="dica" aria-live="polite"></div>
+  <div class="trust"><span>Corretor independente, compara construtoras</span><span>Valores com data do catálogo</span><span>Pendências mostradas, sem esconder nada</span><span id="tCreci"></span></div>
 </div></section>
 
 <section class="filtros"><div class="wrap grid">
@@ -152,9 +184,11 @@ footer a{color:#fff}
   <p class="nota">Valores e condições vêm do catálogo do site e podem ter mudado. Preço, disponibilidade e condições de pagamento só valem após confirmação com Paulo. Simulações são estimativas e não representam proposta oficial de financiamento; a aprovação depende da análise de crédito do banco. Nenhum retorno de investimento ou valorização é garantido.</p>
 </main>
 
-<div class="cmpbar" id="cmpbar"><span id="cmpTxt"></span><span><button type="button" class="cl" id="cmpLimpa">Limpar</button> <button type="button" class="go" id="cmpGo">Comparar</button></span></div>
+<div class="cmpbar" id="cmpbar"><span id="cmpTxt"></span><span><button type="button" class="cl" id="cmpLimpa">Limpar</button> <button type="button" class="rs" id="cmpRs">Enviar resumo</button> <button type="button" class="go" id="cmpGo">Comparar</button></span></div>
 
 <dialog id="dlg" aria-labelledby="dlgT"><div class="dl-h"><h2 id="dlgT"></h2><button type="button" class="x" id="dlgX" aria-label="Fechar">×</button></div><div class="dl-b" id="dlgB"></div></dialog>
+
+<dialog id="dlgR" aria-labelledby="dlgRT"><div class="dl-h"><h2 id="dlgRT">Resumo completo para o cliente</h2><button type="button" class="x" id="dlgRX" aria-label="Fechar">×</button></div><div class="dl-b" id="dlgRB"></div></dialog>
 
 <footer><div class="wrap">
   <strong style="color:#fff">Paulo Cotrim</strong> · <span id="fCreci"></span> · Rio de Janeiro<br>
@@ -165,6 +199,7 @@ footer a{color:#fff}
 <script src="barra-config.js"></script>
 <script src="barra-data.js"></script>
 <script src="bairro-info.js"></script>
+<script src="crm-config.js"></script>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script>
 (function(){
@@ -284,23 +319,25 @@ footer a{color:#fff}
       var rot={transporte:'Transporte',saude:'Saúde',educacao:'Educação',compras:'Compras',lazer:'Lazer e gastronomia'};
       dia='<div class="box"><h4>No dia a dia do bairro</h4><ul>'+Object.keys(rot).filter(function(k){return inf[k]&&inf[k].length;}).map(function(k){return '<li><strong>'+rot[k]+':</strong> '+esc(inf[k].join('; '))+'</li>';}).join('')+'</ul><p class="nota">Informações gerais do bairro, não do empreendimento.</p></div>';
     }
-    $('dlgB').innerHTML=
+    $('dlgB').innerHTML='<div class="fx"><div>'+
       (e.img?'<img class="hero-img" src="'+esc(e.img)+'" alt="" onerror="this.style.display=\'none\'">':'')+
       '<span class="badge '+estClass(e.status)+'">'+esc(estTxt(e))+'</span>'+
       '<dl class="f"><dt>Incorporadora</dt><dd>'+esc(e.incorporadora||'A confirmar')+'</dd>'+
       '<dt>Bairro</dt><dd>'+esc(e.bairro)+'</dd>'+
       '<dt>Tipologia</dt><dd>'+esc(e.tipologia_texto||'A confirmar')+'</dd>'+
       '<dt>Preço</dt><dd>'+(e.preco?'a partir de <strong>'+brl(e.preco)+'</strong> <span class="nota">(catálogo de '+dataBR(DT)+'; confirmar tabela vigente)</span>':'Consulte com Paulo')+'</dd>'+
-      '<dt>Disponibilidade</dt><dd>'+esc(e.disponibilidade||'Consulte com Paulo')+'</dd></dl>'+
+      '<dt>Disponibilidade</dt><dd>'+esc(e.disponibilidade||'Consulte com Paulo')+'</dd></dl></div><div>'+
       '<div class="box av"><h4>Pendente de validação</h4><ul>'+pend+'</ul><p class="nota" style="color:inherit">Estes pontos ainda não estão confirmados e vale checá-los antes de decidir.</p></div>'+
       dia+
-      '<div class="box"><h4>Financiamento</h4><p style="margin:0 0 8px">Simule entrada e parcela com a sua renda. É uma estimativa, não uma proposta oficial, e a aprovação depende da análise do banco.</p><a class="btn cx" href="simulador.html">Financiamento CAIXA · simular</a></div>'+
+      '<div class="box"><h4>Financiamento</h4><p style="margin:0 0 8px">Simule entrada e parcela com a sua renda. É uma estimativa, não uma proposta oficial, e a aprovação depende da análise do banco.</p><a class="btn cx" href="simulador.html">Financiamento CAIXA · simular</a></div></div></div>'+
       '<div class="cta"><a class="btn z" target="_blank" rel="noopener" href="'+wa(msgEmp(e))+'">Conversar com Paulo sobre este imóvel</a>'+
+      '<button type="button" class="btn cx" id="dlgRs">Enviar resumo completo</button>'+
       (e.ficha?'<a class="btn g" href="'+esc(e.ficha)+'">Ficha completa no site</a>':'')+
       '<button type="button" class="btn g" id="dlgCmp">'+(st.cmp.indexOf(e.id)>=0?'Remover da comparação':'Adicionar à comparação')+'</button></div>'+
       '<p class="nota">Localização: '+(e.coord_exata?'coordenada exata':'aproximada')+' (fonte: '+esc(e.coord_fonte||'a confirmar')+').</p>';
     var d=$('dlg'); if(!d.open){ if(d.showModal)d.showModal(); else d.setAttribute('open',''); }
     var b=$('dlgCmp'); if(b)b.onclick=function(){toggleCmp(e.id);ficha(e.id);};
+    var rb=$('dlgRs'); if(rb)rb.onclick=function(){resumo([e]);};
     selecionar(id,true);
   }
   function fechaFicha(){var d=$('dlg');if(d.close)d.close();else d.removeAttribute('open');try{history.replaceState(null,'',location.pathname+location.search);}catch(x){}}
@@ -331,8 +368,80 @@ footer a{color:#fff}
       row('A partir de',function(e){return e.preco?brl(e.preco):'Consulte';})+
       row('Itens pendentes',function(e){return (e.pendencias||[]).length+' a validar';})+
       '</table></div><p class="nota">Preços do catálogo de '+dataBR(DT)+'. Diferenças reais, mas sujeitas à confirmação das condições vigentes.</p>'+
-      '<div class="cta"><a class="btn z" target="_blank" rel="noopener" href="'+wa('Olá, Paulo! Quero comparar estes empreendimentos da Barra: '+L2.map(function(e){return e.nome;}).join(', ')+'. Pode me ajudar com valores e condições?')+'">Pedir comparação ao Paulo</a></div>';
+      '<div class="cta"><a class="btn z" target="_blank" rel="noopener" href="'+wa('Olá, Paulo! Quero comparar estes empreendimentos da Barra: '+L2.map(function(e){return e.nome;}).join(', ')+'. Pode me ajudar com valores e condições?')+'">Pedir comparação ao Paulo</a><button type="button" class="btn cx" id="cmpRs2">Enviar resumo completo</button></div>';
+    var r2=$('cmpRs2'); if(r2)r2.onclick=function(){resumo(L2);};
     var d=$('dlg'); if(!d.open){ if(d.showModal)d.showModal(); else d.setAttribute('open',''); }
+  }
+
+
+  /* ---------- resumo completo (WhatsApp / e-mail) ---------- */
+  function apres(){return document.documentElement.classList.contains('apres');}
+  function fone(v){var d=String(v||'').replace(/\D/g,''); if(d.length===10||d.length===11)d='55'+d; return (d.length>=12&&d.length<=13&&d.indexOf('55')===0)?d:'';}
+  function resumoTxt(list,nome,zap){
+    var B=zap?'*':'', L=[B+'Resumo — Barra da Tijuca'+B+(nome?' | para '+nome:''),''];
+    list.forEach(function(e,i){
+      L.push((i+1)+') '+B+e.nome+B+' — '+e.bairro+(e.incorporadora?' ('+e.incorporadora+')':''));
+      L.push('Estágio: '+estTxt(e)+(e.tipologia_texto?' | '+e.tipologia_texto:''));
+      L.push('Valor: '+(e.preco?'a partir de '+brl(e.preco)+' (catálogo de '+dataBR(DT)+'; confirmar tabela vigente)':'consultar com Paulo'));
+      var pd=(e.pendencias||[]).map(function(p){return PEND[p]||p;});
+      if(pd.length)L.push('A confirmar: '+pd.join(', '));
+      L.push('Ficha: '+link(e)); L.push('');
+    });
+    L.push('Valores e condições podem ter mudado e só valem após confirmação. Simulação de financiamento é estimativa, não é proposta oficial, e a aprovação depende da análise do banco. Nenhum retorno ou valorização é garantido.','');
+    L.push('Paulo Cotrim · '+CFG.creci+' · WhatsApp '+CFG.telefoneExibicao+' · '+CFG.siteUrl+CFG.rota);
+    return L.join('\n');
+  }
+  function resumo(list){
+    if(!list||!list.length)return;
+    var ap=apres();
+    $('dlgRT').textContent=ap?'Resumo completo para o cliente':'Receber resumo completo';
+    $('dlgRB').innerHTML='<p style="margin:4px 0 8px">Resumo de:</p><ul class="sel-l">'+list.map(function(e){return '<li>'+esc(e.nome)+' ('+esc(e.bairro)+')</li>';}).join('')+'</ul>'+
+      '<form class="rs-f" id="rsF" novalidate>'+
+      '<div><label for="rsN">Nome</label><input type="text" id="rsN" autocomplete="name" required></div>'+
+      '<div><label for="rsT">WhatsApp com DDD</label><input type="tel" id="rsT" autocomplete="tel" inputmode="tel" placeholder="(21) 99999-9999" required></div>'+
+      '<div><label for="rsE">E-mail (para receber por e-mail)</label><input type="email" id="rsE" autocomplete="email"></div>'+
+      '<label class="chk"><input type="checkbox" id="rsC"><span>'+(ap?'O cliente autoriza':'Autorizo')+' Paulo Cotrim a usar estes dados para enviar este resumo e falar sobre os imóveis escolhidos. Dados protegidos conforme a <a href="politica-de-privacidade.html" target="_blank" rel="noopener">política de privacidade</a>; pode pedir a exclusão quando quiser.</span></label>'+
+      '<div class="err" id="rsErr" role="alert"></div>'+
+      '<button type="submit" class="btn cx">Gerar resumo</button></form>';
+    var d=$('dlgR'); if(!d.open){ if(d.showModal)d.showModal(); else d.setAttribute('open',''); }
+    $('rsF').onsubmit=function(ev){
+      ev.preventDefault();
+      var nome=$('rsN').value.trim(), tel=fone($('rsT').value), em=$('rsE').value.trim(), er=$('rsErr');
+      if(nome.length<2){er.textContent='Informe o nome.';$('rsN').focus();return;}
+      if(!tel){er.textContent='Informe o WhatsApp com DDD, por exemplo (21) 99999-9999.';$('rsT').focus();return;}
+      if(em&&!/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(em)){er.textContent='Confira o e-mail digitado.';$('rsE').focus();return;}
+      if(!$('rsC').checked){er.textContent='É preciso concordar com o uso dos dados para gerar o resumo.';$('rsC').focus();return;}
+      er.textContent='';
+      try{ if(window.enviarLeadCRM)window.enviarLeadCRM({nome:nome,telefone:tel,email:em,interesse:'Barra: '+list.map(function(e){return e.nome;}).join(', '),origem:ap?'barradatijuca-videochamada':'barradatijuca',temp:'quente',obs:'Pediu resumo completo. Perfil: '+(st.perfil||'não informado')+'. Consentimento LGPD marcado em '+new Date().toISOString().slice(0,10)+'.',extras:{empreendimentos:list.map(function(e){return e.id;})}}); }catch(x){}
+      resumoPronto(list,nome,tel,em,ap);
+    };
+  }
+  function resumoPronto(list,nome,tel,em,ap){
+    var tz=resumoTxt(list,nome,true), te=resumoTxt(list,nome,false);
+    var assunto='Resumo — Barra da Tijuca | Paulo Cotrim';
+    var zapUrl=ap?'https://wa.me/'+tel+'?text='+encodeURIComponent(tz):wa(tz+'\n\nMeu contato: '+nome+' · '+tel);
+    var gm=em?'https://mail.google.com/mail/?view=cm&fs=1&to='+encodeURIComponent(em)+'&su='+encodeURIComponent(assunto)+'&body='+encodeURIComponent(te):'';
+    var mt=em?'mailto:'+encodeURIComponent(em)+'?subject='+encodeURIComponent(assunto)+'&body='+encodeURIComponent(te):'';
+    $('dlgRB').innerHTML='<p style="margin:4px 0 8px"><strong>Resumo pronto.</strong> '+(ap?'Os botões abrem o seu WhatsApp e o seu e-mail com a mensagem pronta para '+esc(nome)+'. Você confere e envia.':'Escolha como receber. Nada é enviado sem o seu clique.')+'</p>'+
+      '<div class="prev" id="rsPrev">'+esc(te)+'</div>'+
+      '<div class="cta"><a class="btn z" target="_blank" rel="noopener" href="'+zapUrl+'">'+(ap?'Enviar ao cliente pelo WhatsApp':'Enviar ao Paulo pelo WhatsApp')+'</a>'+
+      (em?'<a class="btn cx" target="_blank" rel="noopener" href="'+gm+'">'+(ap?'Enviar por e-mail (Gmail)':'Abrir e-mail (Gmail)')+'</a><a class="btn g" href="'+mt+'">Outro programa de e-mail</a>':'')+
+      '<button type="button" class="btn g" id="rsCp">Copiar resumo</button></div>'+
+      (em?'':'<p class="nota">Sem e-mail informado, o envio por e-mail fica indisponível.</p>')+
+      '<p class="nota">Os dados ficam registrados no atendimento de Paulo Cotrim apenas para este contato.</p>';
+    $('rsCp').onclick=function(){var t=te; if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(t).then(function(){$('rsCp').textContent='Copiado';},function(){selPrev();});}else selPrev();};
+    function selPrev(){var r=document.createRange();r.selectNodeContents($('rsPrev'));var g=getSelection();g.removeAllRanges();g.addRange(r);}
+  }
+  function fechaR(){var d=$('dlgR');if(d.close)d.close();else d.removeAttribute('open');}
+  function alvoResumo(){ if(st.cmp.length)return st.cmp.map(byId).filter(Boolean); return lista().slice(0,5); }
+
+  /* ---------- modo apresentação ---------- */
+  function setApres(on){
+    document.documentElement.classList.toggle('apres',on);
+    $('btnAp').setAttribute('aria-pressed',on?'true':'false');
+    $('btnAp').textContent=on?'Sair da apresentação':'Modo apresentação';
+    try{ if(on&&document.documentElement.requestFullscreen)document.documentElement.requestFullscreen().catch(function(){}); else if(!on&&document.fullscreenElement&&document.exitFullscreen)document.exitFullscreen(); }catch(x){}
+    if(map)setTimeout(function(){map.invalidateSize();},120);
   }
 
   /* ---------- perfis ---------- */
@@ -363,6 +472,11 @@ footer a{color:#fff}
     $('dlgX').addEventListener('click',fechaFicha);
     $('dlg').addEventListener('click',function(ev){if(ev.target===this)fechaFicha();});
     $('cmpGo').addEventListener('click',comparar);
+    $('cmpRs').addEventListener('click',function(){resumo(alvoResumo());});
+    $('dlgRX').addEventListener('click',fechaR);
+    $('dlgR').addEventListener('click',function(ev){if(ev.target===this)fechaR();});
+    $('btnAp').addEventListener('click',function(){setApres(!apres());});
+    document.addEventListener('fullscreenchange',function(){ if(!document.fullscreenElement&&apres()){document.documentElement.classList.remove('apres');$('btnAp').setAttribute('aria-pressed','false');$('btnAp').textContent='Modo apresentação';if(map)setTimeout(function(){map.invalidateSize();},120);} });
     $('cmpLimpa').addEventListener('click',function(){st.cmp=[];cmpBar();});
     var tb=document.querySelectorAll('.tabs button');
     for(var i=0;i<tb.length;i++)tb[i].addEventListener('click',function(){
@@ -375,8 +489,9 @@ footer a{color:#fff}
   function init(){
     var z=wa('Olá, Paulo! Conheci seu guia da Barra da Tijuca e quero ajuda para encontrar o imóvel certo.');
     $('zapTop').href=z; $('fZap').href='https://wa.me/'+CFG.whatsapp; $('fZap').textContent='WhatsApp '+CFG.telefoneExibicao;
-    $('fIg').href='https://instagram.com/'+CFG.instagram; $('fIg').textContent='@'+CFG.instagram; $('fCreci').textContent=CFG.creci;
+    $('fIg').href='https://instagram.com/'+CFG.instagram; $('fIg').textContent='@'+CFG.instagram; $('fCreci').textContent=CFG.creci; $('tCreci').textContent=CFG.creci;
     popFiltros(); bind(); iniciaMapa(); render();
+    if(/[?&]apresentar=1/.test(location.search)){document.documentElement.classList.add('apres');$('btnAp').setAttribute('aria-pressed','true');$('btnAp').textContent='Sair da apresentação';}
     var h=(location.hash||'').replace('#',''); if(h&&byId(h))ficha(h);
   }
   if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);
