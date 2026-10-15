@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Barra da Tijuca · Paulo Cotrim</title>
+<meta name="description" content="Compare localizações, conheça os empreendimentos da Barra da Tijuca e entenda as condições antes de decidir. Atendimento de Paulo Cotrim, CRECI-RJ 77677-F.">
+<link rel="canonical" href="https://www.paulocotrim.com/barradatijuca">
+<meta property="og:title" content="Barra da Tijuca · Paulo Cotrim">
+<meta property="og:description" content="Mapa, comparação e fichas dos empreendimentos da Barra e entorno.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.paulocotrim.com/barradatijuca">
+<meta property="og:image" content="https://www.paulocotrim.com/emp-img/og-paulocotrim.jpg">
+<meta name="theme-color" content="#0f2e36">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<style>
+:root{--petroleo:#0f2e36;--verde:#1a8f4c;--caixa:#0058A3;--fundo:#fff;--nevoa:#f5f6f7;--borda:#e3e6e8;--txt:#1d2a2e;--mudo:#5d6b70;--aviso:#8a5a00;--aviso-bg:#fff6e0;--r:14px}
+@media (prefers-color-scheme:dark){:root{--fundo:#101a1d;--nevoa:#16242a;--borda:#27383f;--txt:#e8eef0;--mudo:#9db0b6;--aviso:#f1c46b;--aviso-bg:#2b2410}}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--fundo);color:var(--txt);font:400 15px/1.55 Inter,system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Fraunces,Georgia,serif;font-weight:500;letter-spacing:-.01em;margin:0}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--caixa);outline-offset:2px}
+.wrap{max-width:1240px;margin:0 auto;padding:0 16px}
+header.top{background:var(--petroleo);color:#fff;position:sticky;top:0;z-index:50}
+header.top .in{display:flex;align-items:center;justify-content:space-between;height:60px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:#fff;font:600 16px Fraunces,serif;letter-spacing:.08em}
+.brand img{height:34px;width:auto}
+.top a.zap{background:var(--verde);color:#fff;text-decoration:none;font-weight:600;font-size:13px;padding:9px 14px;border-radius:99px}
+.hero{background:linear-gradient(180deg,var(--petroleo),#143c46);color:#fff;padding:34px 0 26px}
+.hero h1{font-size:clamp(26px,5vw,42px);line-height:1.12;max-width:20ch}
+.hero p{margin:12px 0 20px;max-width:56ch;color:#cfe0e4}
+.perfis{display:flex;gap:8px;flex-wrap:wrap}
+.perfis button{border:1px solid rgba(255,255,255,.35);background:rgba(255,255,255,.08);color:#fff;font:500 14px Inter;padding:10px 14px;border-radius:99px;cursor:pointer}
+.perfis button[aria-pressed=true]{background:#fff;color:var(--petroleo);border-color:#fff}
+.dica{margin-top:14px;font-size:13px;color:#cfe0e4;min-height:20px}
+.filtros{background:var(--nevoa);border-bottom:1px solid var(--borda);padding:12px 0}
+.filtros .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;align-items:end}
+label{display:block;font-size:12px;color:var(--mudo);margin-bottom:4px}
+select{width:100%;padding:10px;border:1px solid var(--borda);border-radius:10px;background:var(--fundo);color:var(--txt);font:inherit}
+.btn-l{border:1px solid var(--borda);background:var(--fundo);color:var(--txt);border-radius:10px;padding:10px;font:500 14px Inter;cursor:pointer}
+.cont{font-size:13px;color:var(--mudo);padding:10px 0 4px}
+.tabs{display:none;gap:8px;margin:6px 0 10px}
+.tabs button{flex:1;padding:10px;border:1px solid var(--borda);background:var(--fundo);color:var(--txt);border-radius:10px;font:500 14px Inter;cursor:pointer}
+.tabs button[aria-pressed=true]{background:var(--petroleo);color:#fff;border-color:var(--petroleo)}
+.main{display:grid;grid-template-columns:minmax(0,430px) 1fr;gap:16px;padding-bottom:30px}
+#lista{display:flex;flex-direction:column;gap:12px;max-height:calc(100vh - 150px);overflow:auto;padding-right:4px}
+.card{flex:none;border:1px solid var(--borda);border-radius:var(--r);overflow:hidden;background:var(--fundo);display:grid;grid-template-columns:112px 1fr;cursor:pointer}
+.card[aria-current=true]{border-color:var(--caixa);box-shadow:0 0 0 2px rgba(0,88,163,.25)}
+.card .im{background:var(--nevoa);min-height:104px}
+.card .im img{width:100%;height:100%;object-fit:cover;display:block}
+.card .tx{padding:10px 12px;min-width:0}
+.card h3{font-size:17px;line-height:1.2}
+.meta{font-size:13px;color:var(--mudo);margin:3px 0 6px}
+.badge{display:inline-block;font-size:11.5px;font-weight:600;padding:3px 8px;border-radius:99px;background:var(--nevoa);border:1px solid var(--borda)}
+.badge.l{background:#e6f4ec;border-color:#bfe0cd;color:#116a38}
+.badge.o{background:#fff1dc;border-color:#f1d4a3;color:#8a5a00}
+.badge.p{background:#e4effa;border-color:#b9d4ee;color:#0058A3}
+.preco{font-weight:600;margin-top:6px;font-size:14px}
+.preco small{font-weight:400;color:var(--mudo)}
+.acoes{display:flex;gap:8px;margin-top:8px;align-items:center;flex-wrap:wrap}
+.acoes .cmp{font-size:12.5px;display:flex;align-items:center;gap:6px;color:var(--mudo)}
+.mapcol{position:sticky;top:72px;height:calc(100vh - 150px);min-height:380px}
+#mapa{height:100%;border-radius:var(--r);border:1px solid var(--borda);background:var(--nevoa)}
+.mapmsg{padding:20px;color:var(--mudo)}
+.vazio{padding:24px;border:1px dashed var(--borda);border-radius:var(--r);color:var(--mudo)}
+.pin{width:26px;height:26px;border-radius:50% 50% 50% 0;transform:rotate(-45deg);background:var(--petroleo);border:2px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,.4)}
+.pin.on{background:var(--caixa);width:32px;height:32px}
+.cmpbar{position:fixed;left:0;right:0;bottom:0;background:var(--petroleo);color:#fff;padding:10px 16px;display:none;z-index:60;align-items:center;justify-content:space-between;gap:10px}
+.cmpbar.on{display:flex}
+.cmpbar button{border:0;border-radius:99px;padding:10px 16px;font:600 14px Inter;cursor:pointer}
+.cmpbar .go{background:var(--verde);color:#fff}
+.cmpbar .cl{background:transparent;color:#cfe0e4;text-decoration:underline}
+dialog{border:0;border-radius:18px;padding:0;max-width:760px;width:calc(100% - 24px);max-height:calc(100vh - 24px);background:var(--fundo);color:var(--txt)}
+dialog::backdrop{background:rgba(8,20,24,.6)}
+.dl-h{display:flex;justify-content:space-between;align-items:start;gap:10px;padding:16px 18px 6px}
+.dl-b{padding:6px 18px 18px;overflow:auto;max-height:calc(100vh - 110px)}
+.x{border:1px solid var(--borda);background:var(--fundo);color:var(--txt);border-radius:99px;width:38px;height:38px;font-size:18px;cursor:pointer;flex:none}
+.hero-img{width:100%;max-height:230px;object-fit:cover;border-radius:12px;margin-bottom:12px;background:var(--nevoa)}
+dl.f{display:grid;grid-template-columns:130px 1fr;gap:6px 12px;margin:10px 0}
+dl.f dt{color:var(--mudo);font-size:13px}
+dl.f dd{margin:0}
+.box{border:1px solid var(--borda);border-radius:12px;padding:12px 14px;margin:12px 0;background:var(--nevoa)}
+.box.av{background:var(--aviso-bg);border-color:transparent;color:var(--aviso)}
+.box h4{margin:0 0 6px;font:600 14px Inter}
+.box ul{margin:0;padding-left:18px}
+.box li{margin:2px 0}
+.cta{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;text-decoration:none;font:600 14.5px Inter;padding:12px 18px;border-radius:99px;border:0;cursor:pointer}
+.btn.z{background:var(--verde);color:#fff}
+.btn.cx{background:var(--caixa);color:#fff}
+.btn.g{background:var(--nevoa);color:var(--txt);border:1px solid var(--borda)}
+table.cp{width:100%;border-collapse:collapse;font-size:14px}
+table.cp th,table.cp td{border-bottom:1px solid var(--borda);padding:8px;text-align:left;vertical-align:top}
+table.cp th:first-child{color:var(--mudo);font-weight:500;width:28%}
+footer{background:var(--petroleo);color:#cfe0e4;padding:24px 0 80px;font-size:13px}
+footer a{color:#fff}
+.nota{font-size:12.5px;color:var(--mudo);margin:8px 0 0}
+@media(max-width:900px){
+ .tabs{display:flex}
+ .main{grid-template-columns:1fr}
+ .mapcol{position:relative;top:0;height:62vh}
+ #lista{max-height:none;overflow:visible}
+ .main[data-v=lista] .mapcol{display:none}
+ .main[data-v=mapa] #lista{display:none}
+ dl.f{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<header class="top"><div class="wrap in">
+  <a class="brand" href="index.html" aria-label="Paulo Cotrim - página inicial"><img src="logo-crest-light.svg" alt="" onerror="this.style.display='none'"><span>PAULO COTRIM</span></a>
+  <a class="zap" id="zapTop" href="#" target="_blank" rel="noopener">Falar com Paulo</a>
+</div></header>
+
+<section class="hero"><div class="wrap">
+  <h1>BARRA DA TIJUCA — ENCONTRE O IMÓVEL CERTO PARA VOCÊ</h1>
+  <p>Compare localizações, conheça os empreendimentos e entenda as condições antes de decidir.</p>
+  <div class="perfis" id="perfis" role="group" aria-label="O que você procura">
+    <button type="button" data-p="morar">Quero comprar para morar</button>
+    <button type="button" data-p="investir">Quero investir</button>
+    <button type="button" data-p="lancamentos">Quero conhecer lançamentos</button>
+    <button type="button" data-p="pronto">Quero um imóvel pronto</button>
+    <button type="button" data-p="comparar">Quero comparar condomínios</button>
+  </div>
+  <div class="dica" id="dica" aria-live="polite"></div>
+</div></section>
+
+<section class="filtros"><div class="wrap grid">
+  <div><label for="fBairro">Região ou bairro</label><select id="fBairro"><option value="">Todos</option></select></div>
+  <div><label for="fEst">Estágio</label><select id="fEst"><option value="">Todos</option></select></div>
+  <div><label for="fInc">Incorporadora</label><select id="fInc"><option value="">Todas</option></select></div>
+  <div><label for="fQ">Quartos</label><select id="fQ"><option value="">Qualquer</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4 ou mais</option></select></div>
+  <div><label for="fPreco">Faixa de preço</label><select id="fPreco"><option value="">Qualquer</option><option value="0-480000">até R$ 480 mil</option><option value="480000-520000">R$ 480 a 520 mil</option><option value="520000-9e9">acima de R$ 520 mil</option></select></div>
+  <div><button type="button" class="btn-l" id="limpar" style="width:100%">Limpar filtros</button></div>
+</div></section>
+
+<main class="wrap">
+  <div class="cont" id="cont" aria-live="polite"></div>
+  <div class="tabs" role="group" aria-label="Alternar lista e mapa">
+    <button type="button" data-v="lista" aria-pressed="true">Lista</button>
+    <button type="button" data-v="mapa" aria-pressed="false">Mapa</button>
+  </div>
+  <div class="main" id="main" data-v="lista">
+    <div id="lista" aria-label="Empreendimentos"></div>
+    <div class="mapcol"><div id="mapa" role="region" aria-label="Mapa dos empreendimentos"></div></div>
+  </div>
+  <p class="nota" id="notaFiltro"></p>
+  <p class="nota">Valores e condições vêm do catálogo do site e podem ter mudado. Preço, disponibilidade e condições de pagamento só valem após confirmação com Paulo. Simulações são estimativas e não representam proposta oficial de financiamento; a aprovação depende da análise de crédito do banco. Nenhum retorno de investimento ou valorização é garantido.</p>
+</main>
+
+<div class="cmpbar" id="cmpbar"><span id="cmpTxt"></span><span><button type="button" class="cl" id="cmpLimpa">Limpar</button> <button type="button" class="go" id="cmpGo">Comparar</button></span></div>
+
+<dialog id="dlg" aria-labelledby="dlgT"><div class="dl-h"><h2 id="dlgT"></h2><button type="button" class="x" id="dlgX" aria-label="Fechar">×</button></div><div class="dl-b" id="dlgB"></div></dialog>
+
+<footer><div class="wrap">
+  <strong style="color:#fff">Paulo Cotrim</strong> · <span id="fCreci"></span> · Rio de Janeiro<br>
+  <a id="fZap" href="#" target="_blank" rel="noopener"></a> · <a id="fIg" href="#" target="_blank" rel="noopener"></a><br>
+  <a href="index.html">Voltar ao site</a>
+</div></footer>
+
+<script src="barra-config.js"></script>
+<script src="barra-data.js"></script>
+<script src="bairro-info.js"></script>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+(function(){
+  var CFG=window.BARRA_CFG||{}, DATA=window.BARRA_DATA||{empreendimentos:[]}, ALL=DATA.empreendimentos||[];
+  var INFO=window.BAIRRO_INFO||{};
+  var DT=(DATA.gerado_de&&DATA.gerado_de.catalogo)||'';
+  var st={bairro:'',est:'',inc:'',q:'',preco:'',perfil:'',sel:null,cmp:[]};
+  var map=null, markers={};
+  function $(id){return document.getElementById(id);}
+  function esc(s){return String(s==null?'':s).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function brl(n){return 'R$ '+Math.round(n).toLocaleString('pt-BR');}
+  function dataBR(iso){var p=String(iso||'').split('-');return p.length===3?p[2]+'/'+p[1]+'/'+p[0]:'';}
+  function wa(msg){return 'https://wa.me/'+CFG.whatsapp+'?text='+encodeURIComponent(msg);}
+  function byId(id){for(var i=0;i<ALL.length;i++){if(ALL[i].id===id)return ALL[i];}return null;}
+  function estClass(s){return s==='Lançamento'||s==='Em breve'?'l':(s==='Em obras'?'o':(s==='Pronto'?'p':''));}
+  function estTxt(e){return e.status||'Estágio a confirmar';}
+  function link(e){return CFG.siteUrl+CFG.rota+'#'+e.id;}
+  function msgEmp(e){
+    var m='Olá, Paulo! Conheci o '+e.nome+' ('+e.bairro+') pelo seu guia da Barra da Tijuca. Quero entender as opções de plantas, valores e condições de pagamento.';
+    if(st.perfil==='investir')m+=' Tenho interesse em investimento.';
+    if(st.perfil==='morar')m+=' Tenho interesse em morar.';
+    return m+' '+link(e);
+  }
+
+  /* ---------- filtros ---------- */
+  function opts(sel,vals){vals.sort(function(a,b){return a.localeCompare(b,'pt-BR');});vals.forEach(function(v){var o=document.createElement('option');o.value=v;o.textContent=v;sel.appendChild(o);});}
+  function uniq(f){var s={},r=[];ALL.forEach(function(e){var v=f(e);if(v&&!s[v]){s[v]=1;r.push(v);}});return r;}
+  function popFiltros(){
+    opts($('fBairro'),uniq(function(e){return e.bairro;}));
+    opts($('fEst'),uniq(function(e){return e.status;}));
+    var o=document.createElement('option');o.value='__nd';o.textContent='A confirmar';$('fEst').appendChild(o);
+    opts($('fInc'),uniq(function(e){return e.incorporadora;}));
+  }
+  function passa(e){
+    if(st.bairro&&e.bairro!==st.bairro)return false;
+    if(st.est){ if(st.est==='__nd'){ if(e.status)return false; } else if(e.status!==st.est)return false; }
+    if(st.inc&&e.incorporadora!==st.inc)return false;
+    if(st.q){ if(!e.quartos)return false; var n=+st.q; if(n===4){ if(e.quartos[1]<4)return false; } else if(n<e.quartos[0]||n>e.quartos[1])return false; }
+    if(st.preco){ if(!e.preco)return false; var p=st.preco.split('-'); if(e.preco<+p[0]||e.preco>=+p[1])return false; }
+    if(st.perfil==='lancamentos'&&e.status!=='Lançamento'&&e.status!=='Em breve')return false;
+    if(st.perfil==='pronto'&&e.status!=='Pronto')return false;
+    return true;
+  }
+  function lista(){
+    var r=ALL.filter(passa);
+    if(st.perfil==='investir'){r.sort(function(a,b){return (a.preco||9e9)-(b.preco||9e9);});}
+    return r;
+  }
+
+  /* ---------- render lista ---------- */
+  function card(e){
+    var cmp=st.cmp.indexOf(e.id)>=0;
+    return '<article class="card" data-id="'+esc(e.id)+'"'+(st.sel===e.id?' aria-current="true"':'')+'>'+
+      '<div class="im">'+(e.img?'<img loading="lazy" src="'+esc(e.img)+'" alt="" onerror="this.parentNode.style.display=\'none\'">':'')+'</div>'+
+      '<div class="tx"><h3>'+esc(e.nome)+'</h3>'+
+      '<div class="meta">'+esc(e.bairro)+(e.incorporadora?' · '+esc(e.incorporadora):'')+'</div>'+
+      '<span class="badge '+estClass(e.status)+'">'+esc(estTxt(e))+'</span>'+
+      (e.tipologia_texto?'<div class="meta" style="margin:6px 0 0">'+esc(e.tipologia_texto)+'</div>':'')+
+      '<div class="preco">'+(e.preco?'a partir de '+brl(e.preco)+' <small>(catálogo '+dataBR(DT)+')</small>':'<small>Valor: consulte com Paulo</small>')+'</div>'+
+      '<div class="acoes"><button type="button" class="btn g" data-ficha="'+esc(e.id)+'" style="padding:8px 12px;font-size:13px">Ver ficha</button>'+
+      '<label class="cmp"><input type="checkbox" data-cmp="'+esc(e.id)+'"'+(cmp?' checked':'')+'> Comparar</label></div>'+
+      '</div></article>';
+  }
+  function render(){
+    var r=lista();
+    $('cont').textContent=r.length+' de '+ALL.length+' empreendimentos';
+    $('lista').innerHTML=r.length?r.map(card).join(''):'<div class="vazio">Nenhum empreendimento com esses filtros. Limpe os filtros ou fale com Paulo, que acompanha as novidades dos lançamentos.</div>';
+    var nota='';
+    if(st.q)nota+='Empreendimentos sem tipologia confirmada ficam de fora do filtro de quartos. ';
+    if(st.preco)nota+='Só aparecem empreendimentos com preço no catálogo; os demais exigem consulta. ';
+    $('notaFiltro').textContent=nota;
+    mapa(r);
+    cmpBar();
+  }
+
+  /* ---------- mapa ---------- */
+  function iniciaMapa(){
+    if(!window.L){$('mapa').innerHTML='<div class="mapmsg">Não foi possível carregar o mapa agora. A lista ao lado continua disponível.</div>';return;}
+    map=L.map('mapa',{scrollWheelZoom:true}).setView([-23.0, -43.38],11);
+    L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'}).addTo(map);
+  }
+  function icone(on){return L.divIcon({className:'',html:'<div class="pin'+(on?' on':'')+'"></div>',iconSize:on?[32,32]:[26,26],iconAnchor:on?[16,32]:[13,26]});}
+  function mapa(r){
+    if(!map)return;
+    Object.keys(markers).forEach(function(k){map.removeLayer(markers[k]);});
+    markers={};
+    var pts=[];
+    r.forEach(function(e){
+      if(e.lat==null||e.lng==null)return;
+      var m=L.marker([e.lat,e.lng],{icon:icone(st.sel===e.id),title:e.nome,keyboard:true}).addTo(map);
+      m.bindPopup('<strong>'+esc(e.nome)+'</strong><br>'+esc(e.bairro)+'<br>'+esc(estTxt(e))+(e.preco?'<br>a partir de '+brl(e.preco):'')+'<br><a href="#'+esc(e.id)+'" data-ficha="'+esc(e.id)+'">Ver ficha completa</a>');
+      m.on('click',function(){selecionar(e.id,false);});
+      markers[e.id]=m;pts.push([e.lat,e.lng]);
+    });
+    if(pts.length&&!st.sel)map.fitBounds(pts,{padding:[30,30],maxZoom:14});
+    setTimeout(function(){map.invalidateSize();},50);
+  }
+  function selecionar(id,pan){
+    st.sel=id;
+    var cs=document.querySelectorAll('.card');
+    for(var i=0;i<cs.length;i++){ if(cs[i].getAttribute('data-id')===id){cs[i].setAttribute('aria-current','true');cs[i].scrollIntoView({block:'nearest',behavior:'smooth'});} else cs[i].removeAttribute('aria-current'); }
+    Object.keys(markers).forEach(function(k){markers[k].setIcon(icone(k===id));});
+    var e=byId(id);
+    if(pan&&map&&e&&e.lat!=null){map.setView([e.lat,e.lng],Math.max(map.getZoom(),14),{animate:true});if(markers[id])markers[id].openPopup();}
+  }
+
+  /* ---------- ficha ---------- */
+  var PEND={'preço':'Preço atual','previsão de entrega':'Previsão de entrega','condições de pagamento':'Condições de pagamento','vagas':'Número de vagas','estágio da obra':'Estágio da obra','data de verificação comercial':'Data da última verificação comercial','coordenadas':'Localização exata no mapa','coordenada aproximada (endereço exato não confirmado)':'Endereço exato'};
+  function ficha(id){
+    var e=byId(id); if(!e)return;
+    st.sel=id; try{history.replaceState(null,'','#'+id);}catch(x){}
+    $('dlgT').textContent=e.nome;
+    var pend=(e.pendencias||[]).map(function(p){return '<li>'+esc(PEND[p]||p)+'</li>';}).join('');
+    var inf=INFO[String(e.bairro).toLowerCase()]||INFO[String(e.local_original||'').toLowerCase()]||null;
+    var dia='';
+    if(inf){
+      var rot={transporte:'Transporte',saude:'Saúde',educacao:'Educação',compras:'Compras',lazer:'Lazer e gastronomia'};
+      dia='<div class="box"><h4>No dia a dia do bairro</h4><ul>'+Object.keys(rot).filter(function(k){return inf[k]&&inf[k].length;}).map(function(k){return '<li><strong>'+rot[k]+':</strong> '+esc(inf[k].join('; '))+'</li>';}).join('')+'</ul><p class="nota">Informações gerais do bairro, não do empreendimento.</p></div>';
+    }
+    $('dlgB').innerHTML=
+      (e.img?'<img class="hero-img" src="'+esc(e.img)+'" alt="" onerror="this.style.display=\'none\'">':'')+
+      '<span class="badge '+estClass(e.status)+'">'+esc(estTxt(e))+'</span>'+
+      '<dl class="f"><dt>Incorporadora</dt><dd>'+esc(e.incorporadora||'A confirmar')+'</dd>'+
+      '<dt>Bairro</dt><dd>'+esc(e.bairro)+'</dd>'+
+      '<dt>Tipologia</dt><dd>'+esc(e.tipologia_texto||'A confirmar')+'</dd>'+
+      '<dt>Preço</dt><dd>'+(e.preco?'a partir de <strong>'+brl(e.preco)+'</strong> <span class="nota">(catálogo de '+dataBR(DT)+'; confirmar tabela vigente)</span>':'Consulte com Paulo')+'</dd>'+
+      '<dt>Disponibilidade</dt><dd>'+esc(e.disponibilidade||'Consulte com Paulo')+'</dd></dl>'+
+      '<div class="box av"><h4>Pendente de validação</h4><ul>'+pend+'</ul><p class="nota" style="color:inherit">Estes pontos ainda não estão confirmados e vale checá-los antes de decidir.</p></div>'+
+      dia+
+      '<div class="box"><h4>Financiamento</h4><p style="margin:0 0 8px">Simule entrada e parcela com a sua renda. É uma estimativa, não uma proposta oficial, e a aprovação depende da análise do banco.</p><a class="btn cx" href="simulador.html">Financiamento CAIXA · simular</a></div>'+
+      '<div class="cta"><a class="btn z" target="_blank" rel="noopener" href="'+wa(msgEmp(e))+'">Conversar com Paulo sobre este imóvel</a>'+
+      (e.ficha?'<a class="btn g" href="'+esc(e.ficha)+'">Ficha completa no site</a>':'')+
+      '<button type="button" class="btn g" id="dlgCmp">'+(st.cmp.indexOf(e.id)>=0?'Remover da comparação':'Adicionar à comparação')+'</button></div>'+
+      '<p class="nota">Localização: '+(e.coord_exata?'coordenada exata':'aproximada')+' (fonte: '+esc(e.coord_fonte||'a confirmar')+').</p>';
+    var d=$('dlg'); if(!d.open){ if(d.showModal)d.showModal(); else d.setAttribute('open',''); }
+    var b=$('dlgCmp'); if(b)b.onclick=function(){toggleCmp(e.id);ficha(e.id);};
+    selecionar(id,true);
+  }
+  function fechaFicha(){var d=$('dlg');if(d.close)d.close();else d.removeAttribute('open');try{history.replaceState(null,'',location.pathname+location.search);}catch(x){}}
+
+  /* ---------- comparação ---------- */
+  function toggleCmp(id){
+    var i=st.cmp.indexOf(id);
+    if(i>=0)st.cmp.splice(i,1);
+    else{ if(st.cmp.length>=3){$('notaFiltro').textContent='Compare até 3 empreendimentos por vez. Remova um para adicionar outro.';cmpBar();return;} st.cmp.push(id); }
+    cmpBar();
+  }
+  function cmpBar(){
+    var b=$('cmpbar'); b.className='cmpbar'+(st.cmp.length?' on':'');
+    $('cmpTxt').textContent=st.cmp.length+' selecionado'+(st.cmp.length===1?'':'s')+' para comparar';
+    $('cmpGo').disabled=st.cmp.length<2; $('cmpGo').style.opacity=st.cmp.length<2?.5:1;
+    var cs=document.querySelectorAll('input[data-cmp]');
+    for(var i=0;i<cs.length;i++)cs[i].checked=st.cmp.indexOf(cs[i].getAttribute('data-cmp'))>=0;
+  }
+  function comparar(){
+    var L2=st.cmp.map(byId).filter(Boolean); if(L2.length<2)return;
+    function row(t,f){return '<tr><th>'+t+'</th>'+L2.map(function(e){return '<td>'+f(e)+'</td>';}).join('')+'</tr>';}
+    $('dlgT').textContent='Comparação';
+    $('dlgB').innerHTML='<div style="overflow:auto"><table class="cp"><tr><th></th>'+L2.map(function(e){return '<td><strong>'+esc(e.nome)+'</strong></td>';}).join('')+'</tr>'+
+      row('Bairro',function(e){return esc(e.bairro);})+
+      row('Incorporadora',function(e){return esc(e.incorporadora||'A confirmar');})+
+      row('Estágio',function(e){return esc(estTxt(e));})+
+      row('Tipologia',function(e){return esc(e.tipologia_texto||'A confirmar');})+
+      row('A partir de',function(e){return e.preco?brl(e.preco):'Consulte';})+
+      row('Itens pendentes',function(e){return (e.pendencias||[]).length+' a validar';})+
+      '</table></div><p class="nota">Preços do catálogo de '+dataBR(DT)+'. Diferenças reais, mas sujeitas à confirmação das condições vigentes.</p>'+
+      '<div class="cta"><a class="btn z" target="_blank" rel="noopener" href="'+wa('Olá, Paulo! Quero comparar estes empreendimentos da Barra: '+L2.map(function(e){return e.nome;}).join(', ')+'. Pode me ajudar com valores e condições?')+'">Pedir comparação ao Paulo</a></div>';
+    var d=$('dlg'); if(!d.open){ if(d.showModal)d.showModal(); else d.setAttribute('open',''); }
+  }
+
+  /* ---------- perfis ---------- */
+  var DICAS={morar:'Use bairro e quartos. Na ficha, veja o dia a dia do bairro e o que ainda falta confirmar.',
+    investir:'Ordenado do menor preço. Estudo de rentabilidade só aparece quando houver dados confirmados, e nenhum retorno é garantido.',
+    lancamentos:'Mostrando lançamentos e empreendimentos em breve.',
+    pronto:'Mostrando imóveis prontos.',
+    comparar:'Marque até 3 empreendimentos em "Comparar" e use a barra inferior.'};
+  function perfil(p){
+    st.perfil=(st.perfil===p?'':p);
+    var bs=document.querySelectorAll('#perfis button');
+    for(var i=0;i<bs.length;i++)bs[i].setAttribute('aria-pressed',bs[i].getAttribute('data-p')===st.perfil?'true':'false');
+    $('dica').textContent=st.perfil?DICAS[st.perfil]:'';
+    st.sel=null; render();
+  }
+
+  /* ---------- eventos ---------- */
+  function bind(){
+    [['fBairro','bairro'],['fEst','est'],['fInc','inc'],['fQ','q'],['fPreco','preco']].forEach(function(p){$(p[0]).addEventListener('change',function(){st[p[1]]=this.value;st.sel=null;render();});});
+    $('limpar').addEventListener('click',function(){st.bairro=st.est=st.inc=st.q=st.preco='';['fBairro','fEst','fInc','fQ','fPreco'].forEach(function(i){$(i).value='';});st.sel=null;render();});
+    $('perfis').addEventListener('click',function(ev){var b=ev.target.closest('button[data-p]');if(b)perfil(b.getAttribute('data-p'));});
+    $('lista').addEventListener('click',function(ev){
+      var c=ev.target.closest('input[data-cmp]'); if(c){toggleCmp(c.getAttribute('data-cmp'));return;}
+      var f=ev.target.closest('[data-ficha]'); if(f){ficha(f.getAttribute('data-ficha'));return;}
+      var k=ev.target.closest('.card'); if(k){selecionar(k.getAttribute('data-id'),true);}
+    });
+    document.addEventListener('click',function(ev){var f=ev.target.closest('.leaflet-popup a[data-ficha]');if(f){ev.preventDefault();ficha(f.getAttribute('data-ficha'));}});
+    $('dlgX').addEventListener('click',fechaFicha);
+    $('dlg').addEventListener('click',function(ev){if(ev.target===this)fechaFicha();});
+    $('cmpGo').addEventListener('click',comparar);
+    $('cmpLimpa').addEventListener('click',function(){st.cmp=[];cmpBar();});
+    var tb=document.querySelectorAll('.tabs button');
+    for(var i=0;i<tb.length;i++)tb[i].addEventListener('click',function(){
+      var v=this.getAttribute('data-v'); $('main').setAttribute('data-v',v);
+      for(var j=0;j<tb.length;j++)tb[j].setAttribute('aria-pressed',tb[j]===this?'true':'false');
+      if(map)setTimeout(function(){map.invalidateSize();},60);
+    });
+  }
+
+  function init(){
+    var z=wa('Olá, Paulo! Conheci seu guia da Barra da Tijuca e quero ajuda para encontrar o imóvel certo.');
+    $('zapTop').href=z; $('fZap').href='https://wa.me/'+CFG.whatsapp; $('fZap').textContent='WhatsApp '+CFG.telefoneExibicao;
+    $('fIg').href='https://instagram.com/'+CFG.instagram; $('fIg').textContent='@'+CFG.instagram; $('fCreci').textContent=CFG.creci;
+    popFiltros(); bind(); iniciaMapa(); render();
+    var h=(location.hash||'').replace('#',''); if(h&&byId(h))ficha(h);
+  }
+  if(document.readyState!=='loading')init(); else document.addEventListener('DOMContentLoaded',init);
+})();
+</script>
+</body>
+</html>
