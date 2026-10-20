@@ -14,8 +14,8 @@
    "entrega": "2029-09",
    "quartos": "4 quartos",
    "area": "135,76 a 289,26m²",
-   "vagas": "2 a 4 vagas",
-   "endereco": "Avenida Sobral Pinto",
+   "vagas": "2 a 3 vagas nos aptos; 4 nas coberturas",
+   "endereco": "Avenida Sobral Pinto, 4.225 (Posto 6)",
    "descricao": "No Quadrilátero mais charmoso da Orla da Praia da Barra",
    "lat": -23.006826,
    "lng": -43.343241,
@@ -23,7 +23,30 @@
    "url": "ficha-marino-by-breton.html",
    "hero": "emp-img/sawala/1527-hero.webp",
    "preco": null,
-   "rank": 1
+   "rank": 1,
+   "diferenciais": [
+    "47 unidades, 3 aptos por andar",
+    "Primeiro branded residence da Breton no Brasil",
+    "Vista 360° (Recreio, Quebra-Mar, Lagoa, Pedra da Gávea e mar)",
+    "Perto da praia e do Metrô Jardim Oceânico",
+    "Coberturas com piscina privativa e churrasqueira a carvão",
+    "Certificação EDGE",
+    "Segurança 24h com biometria facial e CFTV"
+   ],
+   "lazer": [
+    "Piscina adulta e infantil",
+    "Academia e Smart Bike",
+    "Spa com hidromassagem",
+    "Sauna e sala de massagem",
+    "Espaço gourmet",
+    "Espaço kids e teen",
+    "Pet care",
+    "Meeting room",
+    "Estúdio de podcast",
+    "Coworking",
+    "Minimercado"
+   ],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2303,
@@ -34,9 +57,9 @@
    "fase": "Lançamento",
    "status": "Lançamento",
    "lancamento": "2026-08-29",
-   "entrega": "2029-08",
+   "entrega": "2029-10",
    "quartos": "2 a 4 quartos",
-   "area": "78 a 287m²",
+   "area": "77 a 147m² (coberturas até 301m²)",
    "vagas": "até 2 vagas",
    "endereco": "Avenida Afonso Arinos de Melo Franco",
    "descricao": "Um Lugar onde o tempo não tem pressa",
@@ -45,8 +68,31 @@
    "img": "emp-img/sawala/2303.webp",
    "url": "ficha-kronos.html",
    "hero": "emp-img/sawala/2303-hero.webp",
-   "preco": null,
-   "rank": 2
+   "preco": 1400000.0,
+   "rank": 2,
+   "diferenciais": [
+    "Ao lado da ABM (Associação Bosque Marapendi)",
+    "A poucos passos do Posto 5 da praia",
+    "Paisagismo integrado à arquitetura"
+   ],
+   "lazer": [
+    "Playground",
+    "Salão de festas",
+    "Bosque",
+    "Lounge",
+    "Churrasqueira",
+    "Quadra de areia",
+    "Bar da piscina",
+    "Brinquedoteca",
+    "Piscina indoor",
+    "Academia",
+    "Pomar",
+    "Piscina adulto e infantil",
+    "Fitness externo",
+    "Rooftop",
+    "Pet place"
+   ],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2199,
@@ -59,8 +105,8 @@
    "lancamento": "2025-10-27",
    "entrega": "",
    "quartos": "4 a 6 suítes",
-   "area": "262m2 - 1042m2",
-   "vagas": "até 6 Vagas",
+   "area": "262 a 1.042m²",
+   "vagas": "até 6 vagas",
    "endereco": "Avenida Lúcio Costa",
    "descricao": "Apartamentos de 4 a 6 suítes na orla da praia da barra da tijuca",
    "lat": -23.009939,
@@ -69,7 +115,14 @@
    "url": "ficha-riio-by-lissoni.html",
    "hero": "emp-img/sawala/2199-hero.webp",
    "preco": null,
-   "rank": 3
+   "rank": 3,
+   "diferenciais": [
+    "Terreno único, de frente para o mar",
+    "Projeto Tegra + Pierro Lissoni",
+    "Perto de Barra Shopping e Village Mall"
+   ],
+   "lazer": [],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2148,
@@ -82,9 +135,9 @@
    "lancamento": "2025-09-06",
    "entrega": "",
    "quartos": "Apartamentos de 3 a 5 quartos",
-   "area": "171m2 - 461m2",
-   "vagas": "Até 4 vagas",
-   "endereco": "Avenida Salvador Allende",
+   "area": "171 a 461m² (conferir)",
+   "vagas": "conferir",
+   "endereco": "Av. Salvador Allende, Ilha Pura",
    "descricao": "Apartamentos de 3 a 5 suítes no Ilha Pura",
    "lat": -22.988593,
    "lng": -43.419613,
@@ -92,7 +145,12 @@
    "url": "empreendimento.html?id=2148",
    "hero": "emp-img/sawala/2148-hero.webp",
    "preco": null,
-   "rank": 4
+   "rank": 4,
+   "diferenciais": [
+    "Assinatura Ornare"
+   ],
+   "lazer": [],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2163,
@@ -128,8 +186,8 @@
    "lancamento": "2025-08-30",
    "entrega": "",
    "quartos": "3 e 4 suítes",
-   "area": "221m2 - 452m2",
-   "vagas": "Até 4 vagas",
+   "area": "221 a 452m²",
+   "vagas": "até 4 vagas",
    "endereco": "Avenida das Acácias da Península",
    "descricao": "Apartamentos de 3 e 4 suítes no coração da Península",
    "lat": -22.989773,
@@ -138,7 +196,12 @@
    "url": "empreendimento.html?id=2164",
    "hero": null,
    "preco": null,
-   "rank": 6
+   "rank": 6,
+   "diferenciais": [
+    "3 ou 4 suítes"
+   ],
+   "lazer": [],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2129,
@@ -149,19 +212,37 @@
    "fase": "Lançamento",
    "status": "Lançamento",
    "lancamento": "2025-07-05",
-   "entrega": "",
+   "entrega": "2028-09",
    "quartos": "Apartamentos de 2 a 4 quartos",
-   "area": "64m2 - 265m2",
-   "vagas": "Até 2 vagas",
-   "endereco": "Avenida das Américas",
+   "area": "64 a 265m²",
+   "vagas": "até 2 vagas",
+   "endereco": "Avenida das Américas, 1300 (antigo Extra Barra)",
    "descricao": "Apartamentos tipo, gardens e coberturas duplex de 2 a 4 quartos, com metragens entre 64,29 m² e 265,98 m², no KM01 da Barra da Tijuca",
    "lat": -23.000687,
    "lng": -43.328205,
    "img": "emp-img/sawala/2129.webp",
    "url": "ficha-green-park-barra-green-view.html",
    "hero": null,
-   "preco": null,
-   "rank": 7
+   "preco": 1198000.0,
+   "rank": 7,
+   "diferenciais": [
+    "Cerca de 3 minutos da praia",
+    "Vista para a Pedra da Gávea",
+    "Condomínio clube, mais de 40 itens de lazer",
+    "Coberturas de 2, 3 e 4 quartos"
+   ],
+   "lazer": [
+    "Piscinas aquecidas, uma no rooftop",
+    "Espaços gourmet",
+    "Spa",
+    "Academia (crossfit e yoga)",
+    "Cinema privativo",
+    "Brinquedoteca",
+    "Pet",
+    "Quadras",
+    "Salões de jogos"
+   ],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2140,
@@ -184,7 +265,24 @@
    "url": "ficha-brasil-surfe-clube-arete-buzios.html",
    "hero": "emp-img/sawala/2140-hero.webp",
    "preco": null,
-   "rank": 8
+   "rank": 8,
+   "diferenciais": [
+    "Primeiro clube de surfe totalmente privado do RJ",
+    "Piscina de ondas Endless Surf (WhiteWater)",
+    "Títulos Legacy (família) e Individual",
+    "Mensalidade de R$ 500 (informada no site da Sawala)"
+   ],
+   "lazer": [
+    "Piscina de ondas",
+    "Restaurante",
+    "Spa",
+    "Academia",
+    "Sauna seca e a vapor",
+    "Piscinas recreativas",
+    "Quadras",
+    "Coworking"
+   ],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2109,
@@ -197,9 +295,9 @@
    "lancamento": "2025-03-15",
    "entrega": "2026-01",
    "quartos": "2",
-   "area": "86 - 93m²",
-   "vagas": "1-2",
-   "endereco": "Av. Salvador Allende",
+   "area": "86 a 93m²",
+   "vagas": "1 vaga (conferir)",
+   "endereco": "Av. Salvador Allende, Ilha Pura",
    "descricao": "Apartamentos de 2 quartos e lazer completo na Barra Olímpica",
    "lat": -22.98426422119111,
    "lng": -43.417278917253455,
@@ -207,7 +305,24 @@
    "url": "ficha-ilha-pura-astra-smart-facilities.html",
    "hero": null,
    "preco": null,
-   "rank": 9
+   "rank": 9,
+   "diferenciais": [
+    "Desenvolvido pelo BTG Pactual",
+    "Conceito facilities: coworking, salas de reunião, estúdio de podcast",
+    "Perto do Parque Olímpico e das praias da Barra e Recreio",
+    "Portaria 24h"
+   ],
+   "lazer": [
+    "Academia by Cia Athletica",
+    "Spa com hidromassagem",
+    "Sauna seca e úmida",
+    "Salas de massagem",
+    "Parque aquático aquecido",
+    "Brinquedoteca",
+    "Salão de festas",
+    "Espaço gourmet"
+   ],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 1258,
@@ -404,7 +519,7 @@
    "fase": "Em Breve",
    "status": "Em breve",
    "lancamento": "2026-10-10",
-   "entrega": "",
+   "entrega": "2028-11",
    "quartos": "1 quarto e Double Suites",
    "area": "32,42 a 73,52m²",
    "vagas": "sem vagas",
@@ -415,7 +530,7 @@
    "img": "emp-img/sawala/2313.webp",
    "url": "empreendimento.html?id=2313",
    "hero": null,
-   "preco": null,
+   "preco": 1572700.0,
    "rank": 1
   },
   {
@@ -450,7 +565,7 @@
    "fase": "Lançamento",
    "status": "Lançamento",
    "lancamento": "2026-10-20",
-   "entrega": "",
+   "entrega": "2029-04",
    "quartos": "1 quarto e Studios",
    "area": "29,02 a 72,63 m²",
    "vagas": "",
@@ -461,7 +576,7 @@
    "img": "emp-img/sawala/2300.webp",
    "url": "ficha-jaguaripe-289-piimo.html",
    "hero": null,
-   "preco": null,
+   "preco": 1405000.0,
    "rank": 3
   },
   {
@@ -496,7 +611,7 @@
    "fase": "Em Breve",
    "status": "Em breve",
    "lancamento": "2026-09-25",
-   "entrega": "",
+   "entrega": "2029-03",
    "quartos": "1 quarto e Studios",
    "area": "23,48 a 94,11m²",
    "vagas": "sem vagas",
@@ -507,7 +622,7 @@
    "img": "emp-img/sawala/2293.webp",
    "url": "empreendimento.html?id=2293",
    "hero": null,
-   "preco": 263000,
+   "preco": 486000.0,
    "rank": 5
   },
   {
@@ -519,7 +634,7 @@
    "fase": "Lançamento",
    "status": "Lançamento",
    "lancamento": "2026-09-18",
-   "entrega": "",
+   "entrega": "2028-11",
    "quartos": "Studios e Double Suítes",
    "area": "33,46 e 70,05 m²",
    "vagas": "sem vagas",
@@ -530,7 +645,7 @@
    "img": "emp-img/sawala/2334.webp",
    "url": "ficha-be-in-rio-barao-de-jaguaripe-225.html",
    "hero": null,
-   "preco": null,
+   "preco": 1616000.0,
    "rank": 6
   },
   {
@@ -542,7 +657,7 @@
    "fase": "Lançamento",
    "status": "Lançamento",
    "lancamento": "2026-09-17",
-   "entrega": "",
+   "entrega": "2029-12",
    "quartos": "Studios",
    "area": "30 a 38 m²",
    "vagas": "sem vaga",
@@ -553,7 +668,7 @@
    "img": "emp-img/sawala/2304.webp",
    "url": "ficha-q-studios.html",
    "hero": null,
-   "preco": null,
+   "preco": 369825.0,
    "rank": 7
   },
   {
@@ -568,8 +683,8 @@
    "entrega": "2029-09",
    "quartos": "4 quartos",
    "area": "135,76 a 289,26m²",
-   "vagas": "2 a 4 vagas",
-   "endereco": "Avenida Sobral Pinto",
+   "vagas": "2 a 3 vagas nos aptos; 4 nas coberturas",
+   "endereco": "Avenida Sobral Pinto, 4.225 (Posto 6)",
    "descricao": "No Quadrilátero mais charmoso da Orla da Praia da Barra",
    "lat": -23.006826,
    "lng": -43.343241,
@@ -577,7 +692,30 @@
    "url": "ficha-marino-by-breton.html",
    "hero": "emp-img/sawala/1527-hero.webp",
    "preco": null,
-   "rank": 8
+   "rank": 8,
+   "diferenciais": [
+    "47 unidades, 3 aptos por andar",
+    "Primeiro branded residence da Breton no Brasil",
+    "Vista 360° (Recreio, Quebra-Mar, Lagoa, Pedra da Gávea e mar)",
+    "Perto da praia e do Metrô Jardim Oceânico",
+    "Coberturas com piscina privativa e churrasqueira a carvão",
+    "Certificação EDGE",
+    "Segurança 24h com biometria facial e CFTV"
+   ],
+   "lazer": [
+    "Piscina adulta e infantil",
+    "Academia e Smart Bike",
+    "Spa com hidromassagem",
+    "Sauna e sala de massagem",
+    "Espaço gourmet",
+    "Espaço kids e teen",
+    "Pet care",
+    "Meeting room",
+    "Estúdio de podcast",
+    "Coworking",
+    "Minimercado"
+   ],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2303,
@@ -588,9 +726,9 @@
    "fase": "Lançamento",
    "status": "Lançamento",
    "lancamento": "2026-08-29",
-   "entrega": "2029-08",
+   "entrega": "2029-10",
    "quartos": "2 a 4 quartos",
-   "area": "78 a 287m²",
+   "area": "77 a 147m² (coberturas até 301m²)",
    "vagas": "até 2 vagas",
    "endereco": "Avenida Afonso Arinos de Melo Franco",
    "descricao": "Um Lugar onde o tempo não tem pressa",
@@ -599,8 +737,31 @@
    "img": "emp-img/sawala/2303.webp",
    "url": "ficha-kronos.html",
    "hero": "emp-img/sawala/2303-hero.webp",
-   "preco": null,
-   "rank": 9
+   "preco": 1400000.0,
+   "rank": 9,
+   "diferenciais": [
+    "Ao lado da ABM (Associação Bosque Marapendi)",
+    "A poucos passos do Posto 5 da praia",
+    "Paisagismo integrado à arquitetura"
+   ],
+   "lazer": [
+    "Playground",
+    "Salão de festas",
+    "Bosque",
+    "Lounge",
+    "Churrasqueira",
+    "Quadra de areia",
+    "Bar da piscina",
+    "Brinquedoteca",
+    "Piscina indoor",
+    "Academia",
+    "Pomar",
+    "Piscina adulto e infantil",
+    "Fitness externo",
+    "Rooftop",
+    "Pet place"
+   ],
+   "fonteDet": "sawala.com.br (consulta 15/10/2026)"
   },
   {
    "id": 2274,
@@ -622,7 +783,7 @@
    "img": "emp-img/sawala/2274.webp",
    "url": "ficha-vista-joa.html",
    "hero": null,
-   "preco": null,
+   "preco": 896640.0,
    "rank": 10
   }
  ],

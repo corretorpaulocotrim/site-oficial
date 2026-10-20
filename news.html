@@ -9,7 +9,7 @@ main{max-width:980px;margin:0 auto;padding:20px 16px 90px}h1{font-size:26px;marg
 .btn{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 18px;border-radius:99px;border:0;background:var(--a);color:#1b1304;font-weight:700;text-decoration:none;cursor:pointer;font-size:15px}.btn.s{background:transparent;border:1px solid var(--l);color:var(--t)}
 .m{color:var(--m);font-size:14px}.g{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(280px,1fr))}input,select,textarea{width:100%;min-height:44px;padding:8px 12px;border-radius:10px;border:1px solid var(--l);background:var(--c);color:var(--t);font:inherit}
 .urg{border-left:4px solid #d64545}.wa{position:fixed;right:14px;bottom:14px;z-index:9}footer{text-align:center;color:var(--m);font-size:13px;padding:20px 16px}</style></head><body>
-<header><a class="b" href="index.html">PAULO COTRIM</a><nav><a href="empreendimentos.html">Lançamentos</a><a href="news.html">News</a><a href="escola-investidor.html">Escola do Investidor</a><a href="central.html" title="Área restrita">🔒 CRM</a></nav></header><main>
+<header><a class="b" href="index.html">PAULO COTRIM</a><nav><a href="empreendimentos.html">Lançamentos</a><a href="oportunidades.html">Oportunidades</a><a href="news.html">News</a><a href="escola-investidor.html">Escola do Investidor</a><a href="central.html" title="Área restrita">🔒 CRM</a></nav></header><main>
 <h1>News e Oportunidades do dia</h1><p class="m">Atualizações de lançamentos e condições. Tudo aqui vem direto das construtoras e é conferido antes de publicar.</p>
 <div class="card" id="login"><b>Receba os alertas primeiro</b><p class="m">Entre com Google e eu te aviso no WhatsApp quando sair condição nova.</p><div data-google-login-btn></div><p class="m" id="ola"></p>
 <button class="btn s" id="inst" style="display:none">Baixar o app</button></div>
@@ -24,4 +24,4 @@ $('lista').innerHTML='<div class="g">'+a.map(function(x){var u=x.prazo?' urg':''
 document.addEventListener('googleLoginSucesso',function(e){$('ola').textContent='Olá, '+(e.detail.given_name||e.detail.name||'')+'! Você está na lista de alertas.';try{localStorage.setItem('pc_user',JSON.stringify({n:e.detail.name,e:e.detail.email}))}catch(x){}});
 var dp;addEventListener('beforeinstallprompt',function(e){e.preventDefault();dp=e;$('inst').style.display='inline-flex'});$('inst').onclick=function(){if(dp)dp.prompt()};
 if(!(window.SOCIAL_LOGIN_CONFIG&&SOCIAL_LOGIN_CONFIG.googleClientId)){$('login').querySelector('[data-google-login-btn]').outerHTML='<a class="btn" target="_blank" rel="noopener" href="https://wa.me/5521989150864?text=Quero%20receber%20os%20alertas">Receber alertas no WhatsApp</a>'}
-})();</script><script src="pc-alertas.js" defer></script></body></html>
+})();</script><script src="pc-alertas.js" defer></script><script src="pc-mercado.js" defer></script></body></html>

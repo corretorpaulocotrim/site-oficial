@@ -975,13 +975,14 @@ render();
     const det = {}; ['destaques', 'semestre', 'embreve'].forEach(k => (pr[k] || []).forEach(x => det[x.id] = x));
     const have = S.emps.map(e => norm(e.nome));
     let add = 0;
+    S.emps.forEach(e => { const m = String(e.id).match(/^site-(\d+)$/); const d = m && det[m[1]]; if (d && d.diferenciais && !e._det) { e._det = 1; e.diferenciais = [e.diferenciais, ...d.diferenciais, d.lazer && d.lazer.length ? 'Lazer: ' + d.lazer.join(', ') : ''].filter(Boolean).join('\n'); if (d.endereco) e.endereco = d.endereco; add += 0; save(); } });
     (cat.itens || []).forEach(c => {
       const id = 'site-' + (c.sid || norm(c.nome).replace(/ /g, '-'));
       if (S.emps.some(e => e.id === id)) return;
       const n = norm(c.nome); if (!n) return;
       if (have.some(h => h && (h === n || h.includes(n) || n.includes(h)))) return;
       const d = det[c.sid] || {}; const nums = String(c.plantas || d.area || '').match(/\d+(?:,\d+)?/g) || [];
-      const dif = [d.descricao, d.vagas && 'Vagas: ' + d.vagas, d.quartos && 'Quartos: ' + d.quartos].filter(Boolean).join('\n');
+      const dif = [d.descricao, d.vagas && 'Vagas: ' + d.vagas, d.quartos && 'Quartos: ' + d.quartos].concat(d.diferenciais || [], d.lazer && d.lazer.length ? ['Lazer: ' + d.lazer.join(', ')] : []).filter(Boolean).join('\n');
       const e = mk({ id, nome: c.nome, construtora: c.incorporadora || '', bairro: c.local || c.regiao || '', endereco: [d.endereco, d.cidade].filter(Boolean).join(', '), tipologia: c.plantas || d.quartos || '', estagio: c.status || '', entrega: d.entrega || '', perfis: /Ipanema|Leblon|Copacabana|Botafogo|Laranjeiras|Gávea|Lagoa|Arpoador|Zona Sul/i.test((c.local || '') + (c.regiao || '')) ? ['uhnw', 'inv'] : ['inv'],
         metragemMin: nums[0] || '', metragemMax: nums.length > 1 ? nums[nums.length - 1].replace(/\s/g, '') : '', diferenciais: dif, foto: c.img ? '/' + c.img : '', fonte: 'Site paulocotrim.com (catálogo Sawala). Preço e tabela: preencher quando a construtora confirmar.', alerta: c.preco ? '' : 'Preço: Consulte. Sem tabela confirmada no site.' });
       S.emps.push(e); have.push(n); add++;
@@ -990,4 +991,23 @@ render();
   }).catch(() => {});
 })();
 
+
+(function(){ // Oportunidades Sawala out/2026: preço, entrega e bairro
+  const norm = x => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9]+/g, ' ').trim();
+  const root = /\/treinador\//.test(location.pathname) ? '../' : '';
+  const wait = setInterval(() => { if (typeof S === 'undefined' || !S.emps) return; clearInterval(wait);
+    fetch(root + 'data/sawala-oportunidades.json').then(r => r.json()).then(j => {
+      let n = 0;
+      (j.itens || []).forEach(o => {
+        const k = norm(o.nome);
+        let e = S.emps.find(x => { const a = norm(x.nome); return a === k || (k.length > 5 && (a.includes(k) || k.includes(a))); });
+        if (e) { if (!e._opp) { e._opp = 1; e.precoDe = String(o.preco); if (o.entrega) e.entrega = o.entrega; n++; } return; }
+        const id = 'opp-' + k.replace(/ /g, '-'); if (S.emps.some(x => x.id === id)) return;
+        S.emps.push(mk({ id, nome: o.nome, construtora: 'Sawala (confirmar)', bairro: o.bairro, tipologia: '', perfis: o.preco >= 3000000 ? ['uhnw', 'inv'] : ['inv'], estagio: o.status === 'Pronto' ? 'Pronto' : 'Lançamento', entrega: o.entrega || '', precoDe: String(o.preco), fonte: 'Oportunidades Sawala out/2026 (valor a partir de, sujeito a alteração)', alerta: 'Só bairro, entrega e valor a partir de. Completar ficha com tabela e diferenciais.' }));
+        n++;
+      });
+      if (n) { save(); render(); toast(n + ' oportunidades Sawala atualizadas no Treinador'); }
+    }).catch(() => {});
+  }, 400);
+})();
 </script></body></html>

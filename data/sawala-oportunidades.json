@@ -1,0 +1,684 @@
+{
+ "gerado": "2026-10-20",
+ "fonte": "Oportunidades Sawala, outubro/2026. Valores e disponibilidade sujeitos a alteração.",
+ "total": 84,
+ "itens": [
+  {
+   "nome": "Arte Botânica",
+   "bairro": "Barra Olímpica",
+   "preco": 510160.0,
+   "entrega": "2028-05",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Arte Design",
+   "bairro": "Barra Olímpica",
+   "preco": 381245.0,
+   "entrega": "2028-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Arte Wave",
+   "bairro": "Barra Olímpica",
+   "preco": 393090.0,
+   "entrega": "2029-07",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Arte Wood",
+   "bairro": "Barra Olímpica",
+   "preco": 451945.0,
+   "entrega": "2030-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Astra - Ilha Pura",
+   "bairro": "Barra Olímpica",
+   "preco": 858344.0,
+   "entrega": "2027-03",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Breeze Inspire Residence",
+   "bairro": "Barra Olímpica",
+   "preco": 728967.0,
+   "entrega": "2029-04",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Grand Quartier Rio2",
+   "bairro": "Barra Olímpica",
+   "preco": 823896.0,
+   "entrega": "2027-05",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Ilha Pura Elos",
+   "bairro": "Barra Olímpica",
+   "preco": 1212572.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Ilha Pura Viure",
+   "bairro": "Barra Olímpica",
+   "preco": 890000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Milenio Ilha Pura",
+   "bairro": "Barra Olímpica",
+   "preco": 821762.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Vitale Arbore",
+   "bairro": "Barra Olímpica",
+   "preco": 305000.0,
+   "entrega": "2028-10",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "All Jardim Oceânico",
+   "bairro": "Barra da Tijuca",
+   "preco": 1889300.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Atlantico Golf",
+   "bairro": "Barra da Tijuca",
+   "preco": 3139000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Atto Design by Pininfarina",
+   "bairro": "Barra da Tijuca",
+   "preco": 20240000.0,
+   "entrega": "2027-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "BHD",
+   "bairro": "Barra da Tijuca",
+   "preco": 2905000.0,
+   "entrega": "2028-10",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Be Peninsula",
+   "bairro": "Barra da Tijuca",
+   "preco": 3626653.22,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Clarés",
+   "bairro": "Barra da Tijuca",
+   "preco": 3500000.0,
+   "entrega": "2026-11",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Cyano",
+   "bairro": "Barra da Tijuca",
+   "preco": 13900000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Gaea",
+   "bairro": "Barra da Tijuca",
+   "preco": 2300000.0,
+   "entrega": "2027-04",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Gran Thai Peninsula",
+   "bairro": "Barra da Tijuca",
+   "preco": 2100000.0,
+   "entrega": "2028-08",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Green View",
+   "bairro": "Barra da Tijuca",
+   "preco": 1198000.0,
+   "entrega": "2028-09",
+   "status": "Em obras/na planta",
+   "url": "ficha-green-park-barra-green-view.html",
+   "img": "emp-img/sawala/2129.webp",
+   "tip": [
+    "2",
+    "3",
+    "4"
+   ],
+   "plantas": "2 a 4 quartos · 64 a 265 m²"
+  },
+  {
+   "nome": "Icon Golf Residence",
+   "bairro": "Barra da Tijuca",
+   "preco": 1672000.0,
+   "entrega": "2027-11",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Insigna Peninsula",
+   "bairro": "Barra da Tijuca",
+   "preco": 2890000.0,
+   "entrega": "2027-10",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Kronos",
+   "bairro": "Barra da Tijuca",
+   "preco": 1400000.0,
+   "entrega": "2029-10",
+   "status": "Em obras/na planta",
+   "url": "ficha-kronos.html",
+   "img": "emp-img/sawala/2303.webp",
+   "tip": [
+    "2",
+    "3",
+    "4"
+   ],
+   "plantas": "2 a 4 quartos · 78 a 287 m²"
+  },
+  {
+   "nome": "Oceana Golf",
+   "bairro": "Barra da Tijuca",
+   "preco": 3849000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Playa",
+   "bairro": "Barra da Tijuca",
+   "preco": 3490000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Signature",
+   "bairro": "Barra da Tijuca",
+   "preco": 2650000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Singular Peninsula",
+   "bairro": "Barra da Tijuca",
+   "preco": 3400000.0,
+   "entrega": "2028-08",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Wave by Yoo",
+   "bairro": "Barra da Tijuca",
+   "preco": 6900000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Épic Golf",
+   "bairro": "Barra da Tijuca",
+   "preco": 1499000.0,
+   "entrega": "2029-03",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "ARQ Life Design Botafogo",
+   "bairro": "Botafogo",
+   "preco": 2081778.54,
+   "entrega": "2027-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Gois 44",
+   "bairro": "Botafogo",
+   "preco": 1484321.0,
+   "entrega": "2027-03",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Guima Botafogo",
+   "bairro": "Botafogo",
+   "preco": 919800.12,
+   "entrega": "2029-05",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "MO.DO Botafogo",
+   "bairro": "Botafogo",
+   "preco": 1514000.0,
+   "entrega": "2028-07",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Teto",
+   "bairro": "Botafogo",
+   "preco": 624060.0,
+   "entrega": "2029-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Villa Visconti",
+   "bairro": "Botafogo",
+   "preco": 1497000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "ARB 26",
+   "bairro": "Centro",
+   "preco": 486000.0,
+   "entrega": "2029-03",
+   "status": "Em obras/na planta",
+   "url": "empreendimento.html?id=2293",
+   "img": "emp-img/sawala/2293.webp",
+   "tip": [
+    "S",
+    "1"
+   ],
+   "plantas": "Studios e 1 quarto · 23 a 94 m²"
+  },
+  {
+   "nome": "Carioca Lapa",
+   "bairro": "Centro",
+   "preco": 443800.0,
+   "entrega": "2028-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Connect Square",
+   "bairro": "Centro",
+   "preco": 393471.0,
+   "entrega": "2031-01",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Cores de Fátima",
+   "bairro": "Centro",
+   "preco": 477000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Cores do Rio",
+   "bairro": "Centro",
+   "preco": 298000.0,
+   "status": "Pronto",
+   "url": "emp-cores-do-rio.html",
+   "img": "emp-img/cores-do-rio.jpg",
+   "tip": [
+    "S",
+    "1",
+    "2"
+   ],
+   "plantas": "Studios, 1 e 2 quartos"
+  },
+  {
+   "nome": "Edifício A Noite",
+   "bairro": "Centro",
+   "preco": 1316594.0,
+   "entrega": "2028-02",
+   "status": "Em obras/na planta",
+   "url": "emp-a-noite.html",
+   "img": "emp-img/a-noite.jpg",
+   "tip": [
+    "S"
+   ],
+   "plantas": "Studio (44 m²) e duplex com suíte (70 m²)"
+  },
+  {
+   "nome": "Q Studios",
+   "bairro": "Centro",
+   "preco": 369825.0,
+   "entrega": "2029-12",
+   "status": "Em obras/na planta",
+   "url": "ficha-q-studios.html",
+   "img": "emp-img/sawala/2304.webp",
+   "tip": [
+    "S"
+   ],
+   "plantas": "Studios · 30 a 38 m²"
+  },
+  {
+   "nome": "Soul Rio Nossa Sra. de Fátima",
+   "bairro": "Centro",
+   "preco": 418000.0,
+   "entrega": "2028-08",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "ARPX",
+   "bairro": "Copacabana",
+   "preco": 2049000.0,
+   "entrega": "2028-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Be in Rio Pompeu Loureiro",
+   "bairro": "Copacabana",
+   "preco": 1337000.0,
+   "entrega": "2028-08",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Be in Rio Tonelero",
+   "bairro": "Copacabana",
+   "preco": 1667900.0,
+   "entrega": "2026-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Soul Rio Barata Ribeiro",
+   "bairro": "Copacabana",
+   "preco": 949000.0,
+   "entrega": "2028-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Soul Rio Cinco de Julho",
+   "bairro": "Copacabana",
+   "preco": 1110400.0,
+   "entrega": "2027-06",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Soul Rio Barão de Icaraí",
+   "bairro": "Flamengo",
+   "preco": 755800.0,
+   "entrega": "2029-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Soul Rio Princesa Januária",
+   "bairro": "Flamengo",
+   "preco": 816700.0,
+   "entrega": "2028-08",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Symphony",
+   "bairro": "Flamengo",
+   "preco": 837839.0,
+   "entrega": "2029-10",
+   "status": "Em obras/na planta",
+   "url": "ficha-symphony-residences-tgb.html",
+   "img": "emp-img/sawala/2231.webp",
+   "tip": [
+    "1",
+    "2",
+    "3",
+    "4"
+   ],
+   "plantas": "1 a 4 quartos · 41 a 111 m²"
+  },
+  {
+   "nome": "Gávea 99",
+   "bairro": "Gávea",
+   "preco": 914390.18,
+   "entrega": "2027-11",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Parque Sustentável da Gávea",
+   "bairro": "Gávea",
+   "preco": 910000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Almar",
+   "bairro": "Ipanema",
+   "preco": 5489000.0,
+   "entrega": "2028-06",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Be Rio Nascimento Silva",
+   "bairro": "Ipanema",
+   "preco": 1598000.0,
+   "entrega": "2028-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Be in Rio Barão da Torre",
+   "bairro": "Ipanema",
+   "preco": 1643000.0,
+   "entrega": "2027-07",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Be in Rio Barão de Jaguaripe 225",
+   "bairro": "Ipanema",
+   "preco": 1616000.0,
+   "entrega": "2028-11",
+   "status": "Em obras/na planta",
+   "url": "ficha-be-in-rio-barao-de-jaguaripe-225.html",
+   "img": "emp-img/sawala/2334.webp",
+   "tip": [
+    "S"
+   ],
+   "plantas": "Studios e double suítes · 33 a 70 m²"
+  },
+  {
+   "nome": "Be in Rio Barão de Jaguaripe 404",
+   "bairro": "Ipanema",
+   "preco": 1572700.0,
+   "entrega": "2028-11",
+   "status": "Em obras/na planta",
+   "url": "empreendimento.html?id=2313",
+   "img": "emp-img/sawala/2313.webp",
+   "tip": [
+    "1"
+   ],
+   "plantas": "1 quarto e double suítes · 32 a 74 m²"
+  },
+  {
+   "nome": "Be in Rio Praia de Ipanema",
+   "bairro": "Ipanema",
+   "preco": 7561000.0,
+   "entrega": "2027-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Jaguaripe 289",
+   "bairro": "Ipanema",
+   "preco": 1405000.0,
+   "entrega": "2029-04",
+   "status": "Em obras/na planta",
+   "url": "ficha-jaguaripe-289-piimo.html",
+   "img": "emp-img/sawala/2300.webp",
+   "tip": [
+    "S",
+    "1"
+   ],
+   "plantas": "1 quarto e studios · 29 a 73 m²"
+  },
+  {
+   "nome": "Parque Studios",
+   "bairro": "Ipanema",
+   "preco": 1599000.0,
+   "entrega": "2029-04",
+   "status": "Em obras/na planta",
+   "tip": [
+    "S"
+   ],
+   "plantas": "Studios"
+  },
+  {
+   "nome": "Soul Rio Alberto de Campos",
+   "bairro": "Ipanema",
+   "preco": 1250000.0,
+   "entrega": "2027-10",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "VIE",
+   "bairro": "Ipanema",
+   "preco": 26000000.0,
+   "entrega": "2029-04",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Vista Ipanema",
+   "bairro": "Ipanema",
+   "preco": 6780000.0,
+   "status": "A confirmar"
+  },
+  {
+   "nome": "Vitale Walk",
+   "bairro": "Jacarepaguá",
+   "preco": 295000.0,
+   "entrega": "2027-12",
+   "status": "Em obras/na planta",
+   "url": "emp-vitale-wilk.html",
+   "img": "emp-img/vitale-wilk.jpg",
+   "tip": [
+    "1",
+    "2"
+   ],
+   "plantas": "1 e 2 quartos, com suíte e vaga"
+  },
+  {
+   "nome": "Soul Rio Gago Coutinho",
+   "bairro": "Laranjeiras",
+   "preco": 681400.0,
+   "entrega": "2028-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Arti Leblon",
+   "bairro": "Leblon",
+   "preco": 2140000.0,
+   "entrega": "2028-10",
+   "status": "Em obras/na planta",
+   "url": "ficha-arti-leblon.html",
+   "img": "emp-img/sawala/2237.webp",
+   "tip": [
+    "S",
+    "1"
+   ],
+   "plantas": "Studios e 1 quarto · 36 a 72 m²"
+  },
+  {
+   "nome": "Azuis",
+   "bairro": "Leblon",
+   "preco": 12900000.0,
+   "entrega": "2026-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Bruna",
+   "bairro": "Leblon",
+   "preco": 13065000.0,
+   "entrega": "2029-10",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Dias Ferreira",
+   "bairro": "Leblon",
+   "preco": 2490000.0,
+   "entrega": "2028-10",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Estância Pernambuco",
+   "bairro": "Leblon",
+   "preco": 27133164.92,
+   "status": "Conforme projeto"
+  },
+  {
+   "nome": "Guilhem",
+   "bairro": "Leblon",
+   "preco": 2883000.0,
+   "entrega": "2029-02",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Mar Delfim Moreira",
+   "bairro": "Leblon",
+   "preco": 35000000.0,
+   "entrega": "2026-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Paradis",
+   "bairro": "Leblon",
+   "preco": 3073000.0,
+   "entrega": "2028-10",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Bothanica Park",
+   "bairro": "Recreio dos Bandeirantes",
+   "preco": 855972.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Feel Sun",
+   "bairro": "Recreio dos Bandeirantes",
+   "preco": 289910.0,
+   "entrega": "2030-09",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Orla Bothanica",
+   "bairro": "Recreio dos Bandeirantes",
+   "preco": 801585.06,
+   "entrega": "2028-12",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Tide",
+   "bairro": "Recreio dos Bandeirantes",
+   "preco": 420000.0,
+   "entrega": "2029-03",
+   "status": "Em obras/na planta"
+  },
+  {
+   "nome": "Vista Joá",
+   "bairro": "São Conrado",
+   "preco": 896640.0,
+   "status": "A confirmar",
+   "url": "ficha-vista-joa.html",
+   "img": "emp-img/sawala/2274.webp",
+   "tip": [
+    "S",
+    "1",
+    "2"
+   ],
+   "plantas": "Studios, 1 a 2 quartos · 47 a 244 m²"
+  },
+  {
+   "nome": "Cores da Tijuca",
+   "bairro": "Tijuca",
+   "preco": 449000.0,
+   "entrega": "2027-05",
+   "status": "Em obras/na planta",
+   "url": "ficha-cores-da-tijuca.html",
+   "img": "emp-img/sawala/2046.webp",
+   "tip": [
+    "S",
+    "1",
+    "2"
+   ],
+   "plantas": "Studios a 2 quartos · 34 a 180 m²"
+  },
+  {
+   "nome": "Type",
+   "bairro": "Tijuca",
+   "preco": 930000.0,
+   "status": "Pronto"
+  },
+  {
+   "nome": "Ciclo Bandeirantes Lotes",
+   "bairro": "Vargem Grande / Pequena",
+   "preco": 329000.0,
+   "entrega": "2027-01",
+   "status": "Em obras/na planta",
+   "tip": [
+    "L"
+   ],
+   "plantas": "Lotes"
+  },
+  {
+   "nome": "Horizon",
+   "bairro": "Vargem Grande / Pequena",
+   "preco": 664000.0,
+   "entrega": "2027-06",
+   "status": "Em obras/na planta"
+  }
+ ]
+}
