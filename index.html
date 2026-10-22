@@ -383,6 +383,35 @@ body{padding-bottom:50px}
   </div>
   <div class="scrollcue">Role para descobrir</div>
 </section>
+<section class="bh-sec" id="busca"><style>
+.bh-sec{padding:56px 0 48px;background:radial-gradient(120% 80% at 85% 0%,#163c45 0%,#0f2e36 45%,#050b0c 100%);color:#f4efe6}
+.bh-sec .bh-w{max-width:1180px;margin:0 auto;padding:0 16px}
+.bh-sec .bh-eye{display:block;font-size:11px;letter-spacing:.32em;text-transform:uppercase;color:#cf9f4f;font-weight:600;margin-bottom:8px}
+.bh-sec h2{font-family:Fraunces,Georgia,serif;font-style:italic;font-weight:600;font-size:clamp(30px,5vw,46px);line-height:1.05;color:#e6c581;margin:0 0 8px}
+.bh-sec .bh-sub{color:#cfd6d4;margin:0 0 22px;font-size:15px}
+.bh-f{display:grid;grid-template-columns:1fr 1fr;gap:10px;background:rgba(244,239,230,.06);border:1px solid rgba(230,197,129,.35);border-radius:16px;padding:12px;backdrop-filter:blur(6px)}
+.bh-f label{display:flex;flex-direction:column;gap:5px;min-width:0}
+.bh-f span{font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:#cf9f4f;font-weight:600}
+.bh-f select{width:100%;min-width:0;border:1px solid rgba(230,197,129,.35);border-radius:10px;padding:12px 10px;font:inherit;font-size:15px;background:#0b2228;color:#f4efe6;appearance:auto}
+.bh-ck{display:flex;align-items:center;gap:8px;margin:12px 2px 0;font-size:13px;color:#aebcbb;cursor:pointer}
+.bh-ck input{accent-color:#cf9f4f;width:16px;height:16px}
+.bh-n{margin:18px 2px 12px;color:#e6c581;font-weight:600;letter-spacing:.02em}
+.bh-g{display:grid;grid-template-columns:1fr;gap:14px}
+.bh-c{display:flex;flex-direction:column;background:#f4efe6;border-radius:16px;overflow:hidden;text-decoration:none;color:#0f2e36;box-shadow:0 10px 30px rgba(0,0,0,.35);transition:transform .25s,box-shadow .25s}
+.bh-c:hover{transform:translateY(-3px);box-shadow:0 16px 40px rgba(0,0,0,.45)}
+.bh-ph{display:block;aspect-ratio:16/10;background:#0b2228 center/cover no-repeat}
+.bh-tx{display:flex;flex-direction:column;gap:4px;padding:14px 16px 16px;min-width:0}
+.bh-tx b{font-family:Fraunces,Georgia,serif;font-weight:600;font-size:20px;line-height:1.15}
+.bh-tx small{color:#6b7774;font-size:13px}
+.bh-tx em{font-style:normal;font-size:13.5px;color:#2c3a38;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bh-tg{align-self:flex-start;font-size:10.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;background:#0f2e36;color:#e6c581;border-radius:20px;padding:4px 10px;margin-top:4px}
+.bh-pr{margin-top:6px;font-family:Fraunces,Georgia,serif;font-weight:600;font-size:19px;color:#8a6a2f}
+.bh-mais[hidden]{display:none}
+.bh-mais{display:block;margin:22px auto 0;background:#1a8f4c;color:#fff;border:0;border-radius:30px;padding:14px 32px;font:inherit;font-weight:600;cursor:pointer;box-shadow:0 8px 20px rgba(26,143,76,.35)}
+@media(min-width:700px){.bh-f{grid-template-columns:repeat(5,1fr);padding:14px}.bh-g{grid-template-columns:1fr 1fr}}
+@media(min-width:1100px){.bh-g{grid-template-columns:repeat(3,1fr)}}
+</style><div class="bh-w"><span class="bh-eye">Busca Paulo Cotrim</span><h2>Encontre seu imóvel</h2><p class="bh-sub">Filtre por bairro, tipo de unidade, tamanho, prazo de entrega e valor.</p><div id="busca-home"></div></div></section>
+<script src="busca-home.js" defer></script>
 <div class="trust"><div class="wrap">
   <span><b>18 anos</b> no mercado do Rio</span>
   <span><b>CRECI-RJ</b> 77.677</span>
@@ -515,7 +544,7 @@ body{padding-bottom:50px}
 function heroBuscar(e){ if(e)e.preventDefault();
   var reg='', q=(document.getElementById('hs-q')||{}).value||'';
   if(window.pcFilter) window.pcFilter(reg,q);
-  var el=document.getElementById('portfolio'); if(el) el.scrollIntoView({behavior:'smooth'});
+  var el=document.getElementById('busca')||document.getElementById('portfolio'); if(el) el.scrollIntoView({behavior:'smooth'});
   return false; }
 (function(){
   var H=[{"src": "emp-img/sawala/2303-hero.webp", "n": "Kronos", "b": "Barra da Tijuca", "u": "ficha-kronos.html"}, {"src": "emp-img/sawala/2199-hero.webp", "n": "Riio by Lissoni", "b": "Barra da Tijuca", "u": "ficha-riio-by-lissoni.html"}, {"src": "emp-img/sawala/1527-hero.webp", "n": "Marino by Breton", "b": "Barra da Tijuca", "u": "ficha-marino-by-breton.html"}, {"src": "emp-img/sawala/2148-hero.webp", "n": "Ilha Pura · Oro by Ornare", "b": "Barra Olímpica", "u": "empreendimento.html?id=2148"}, {"src": "emp-img/sawala/2163-hero.webp", "n": "Peninsula Collection · Gran Thai", "b": "Barra da Tijuca", "u": "empreendimento.html?id=2163"}, {"src": "emp-img/sawala/2140-hero.webp", "n": "Brasil Surfe Clube · Aretê Búzios", "b": "Búzios", "u": "ficha-brasil-surfe-clube-arete-buzios.html"}];
