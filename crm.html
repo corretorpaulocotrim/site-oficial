@@ -628,7 +628,7 @@ try{if(sessionStorage.getItem("crm_u")){var _o=document.getElementById("pc-login
   var N=function(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g," ").trim()};
   var REG={"Centro":"Centro e Porto","Tijuca":"Zona Norte"},ZO=["Barra Olímpica","Barra da Tijuca","Recreio dos Bandeirantes","Vargem Grande / Pequena","Jacarepaguá"];
   var MS=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
-  setTimeout(function(){fetch("data/sawala-oportunidades.json").then(function(r){return r.json()}).then(function(j){
+  setTimeout(function(){fetch("/data/sawala-oportunidades.json").then(function(r){return r.json()}).then(function(j){
     var im=getImoveis(),max=im.reduce(function(m,x){return Math.max(m,+x.id||0)},0),add=0,upd=0;
     (j.itens||[]).forEach(function(o){
       var preco="A partir de R$ "+Math.round(o.preco).toLocaleString("pt-BR")+" (Sawala out/26)";
