@@ -217,6 +217,7 @@ button{cursor:pointer}
     <div class="sb-sec">Captacao</div>
     <div class="sb-link" onclick="goPage('novo-lead')"><span class="sb-icon">&#9998;</span> Novo Lead</div>
     <div class="sb-link" onclick="goPage('discador')"><span class="sb-icon">&#128222;</span> Discador</div>
+    <div class="sb-link" onclick="abrirImportVcf()"><span class="sb-icon">&#128101;</span> Importar contatos (.vcf)</div>
     <div class="sb-link" onclick="abrirImportFoto()"><span class="sb-icon">&#128247;</span> Importar de Foto</div>
     <div class="sb-sec">Relatorios</div>
     <div class="sb-link" onclick="goPage('metricas')"><span class="sb-icon">&#128200;</span> Metricas</div>
@@ -498,16 +499,16 @@ function renderLeads(){
   var data=leads.filter(function(l){return(f==="todos"||l.temp===f)&&(!o||l.origem===o)});
   var tb=document.getElementById("leads-tbody");if(!tb)return;
   if(!data.length){tb.innerHTML="<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128101;</div><p>Nenhum lead encontrado</p><small>Cadastre um novo lead</small></div></td></tr>";return}
-  tb.innerHTML=data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td style='font-size:12px'>"+(l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td style='font-size:11px;color:var(--muted)'>"+(l.data||"—")+" "+(l.hora||"")+"</td><td><div style='display:flex;gap:5px'><button class='btn-sm green' onclick='ligar("+l.id+")'>&#128222;</button><button class='btn-sm' onclick='verPerfil("+l.id+")'>&#128100;</button><button class='btn-sm' onclick='zap("+l.id+")'>&#128172;</button><button class='btn-sm red' onclick='del("+l.id+")'>&#128465;</button></div></td></tr>"}).join("");
+  tb.innerHTML=data.slice(0,300).map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td style='font-size:12px'>"+(l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td style='font-size:11px;color:var(--muted)'>"+(l.data||"—")+" "+(l.hora||"")+"</td><td><div style='display:flex;gap:5px'><button class='btn-sm green' onclick='ligar("+l.id+")'>&#128222;</button><button class='btn-sm' onclick='verPerfil("+l.id+")'>&#128100;</button><button class='btn-sm' onclick='zap("+l.id+")'>&#128172;</button><button class='btn-sm red' onclick='del("+l.id+")'>&#128465;</button></div></td></tr>"}).join("");
 }
 function filtrar(t,el){document.querySelectorAll(".filter-btn").forEach(function(b){b.classList.remove("active")});el.classList.add("active");currentFilter=t;renderLeads()}
 function sLbl(s){return{novo:"Novo",contato:"Contatado",proposta:"Proposta",visita:"Visita",fechado:"Fechado",perdido:"Perdido"}[s]||"Novo"}
 function searchLeads(v){
   if(!v.trim()){renderLeads();return}
-  var data=getLeads().filter(function(l){return l.nome.toLowerCase().includes(v.toLowerCase())||l.tel.includes(v)||(l.interesse||"").toLowerCase().includes(v.toLowerCase())});
+  var _n=function(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"")},_q=_n(v.trim()),_d=v.replace(/\D/g,"");var data=getLeads().filter(function(l){var h=_n([l.nome,l.email,l.interesse,l.origem,l.obs,l.orcamento,l.status,l.temp,(l.hist||[]).map(function(x){return x.a+" "+(x.d||"")}).join(" ")].join(" "));return h.indexOf(_q)>-1||(_d.length>=4&&String(l.tel||"").replace(/\D/g,"").indexOf(_d)>-1)});
   goPage("leads");
   var tb=document.getElementById("leads-tbody");if(!tb)return;
-  tb.innerHTML=data.length?data.map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td>"+( l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td>"+(l.data||"—")+"</td><td><button class='btn-sm' onclick='verPerfil("+l.id+")'>Ver</button></td></tr>"}).join(""):"<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128269;</div><p>Sem resultados para "+v+"</p></div></td></tr>";
+  tb.innerHTML=data.length?data.slice(0,300).map(function(l){return"<tr><td><div class='lead-name'>"+l.nome+"</div><div class='lead-phone'>"+l.tel+"</div></td><td><span class='temp-badge temp-"+l.temp+"'>"+(l.temp==="quente"?"&#128293; Quente":l.temp==="morno"?"&#9898; Morno":"&#10052; Frio")+"</span></td><td>"+( l.interesse||"—")+"</td><td><span class='origin-tag'>"+(l.origem||"—")+"</span></td><td><span class='status-badge status-"+(l.status||"novo")+"'>"+ sLbl(l.status)+"</span></td><td>"+(l.data||"—")+"</td><td><button class='btn-sm' onclick='verPerfil("+l.id+")'>Ver</button></td></tr>"}).join(""):"<tr><td colspan='7'><div class='empty-state'><div class='icon'>&#128269;</div><p>Sem resultados para "+v+"</p></div></td></tr>";
 }
 
 // LEAD ACTIONS
@@ -608,10 +609,72 @@ function toast(msg){clearTimeout(toastTimer);var t=document.getElementById("toas
 function pcLogin(){
   var u=(document.getElementById("pc-u").value||"").trim().toLowerCase();
   var p=(document.getElementById("pc-p").value||"").trim();
-  if(u==="cotrim"&&p==="1234"){localStorage.setItem("crm_auth","1");document.getElementById("pc-login").style.display="none";}
-  else{document.getElementById("pc-err").textContent="Usuário ou senha incorretos.";}
+  var er=document.getElementById("pc-err");er.textContent="Verificando…";
+  if(!window.crmBackendLogin){er.textContent="Backend do CRM não configurado.";return;}
+  crmBackendLogin(u,p).then(function(ok){
+    if(!ok){er.textContent="Usuário ou senha incorretos.";return;}
+    try{sessionStorage.setItem("crm_u",u);sessionStorage.setItem("crm_p",p);}catch(e){}
+    localStorage.setItem("crm_auth","1");document.getElementById("pc-login").style.display="none";
+    if(window.crmSync)crmSync(true);
+  });
 }
-if(localStorage.getItem("crm_auth")==="1"){var _o=document.getElementById("pc-login");if(_o)_o.style.display="none";}
+try{if(sessionStorage.getItem("crm_u")){var _o=document.getElementById("pc-login");if(_o)_o.style.display="none";}}catch(e){}
+
+// 84 OPORTUNIDADES SAWALA (out/26): atualiza valores/prazos e inclui as que faltam no cadastro de imoveis
+(function(){
+  if(localStorage.getItem("crm_op84_ver")==="sawala84-2026-10")return;
+  var N=function(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"").replace(/[^a-z0-9]+/g," ").trim()};
+  var REG={"Centro":"Centro e Porto","Tijuca":"Zona Norte"},ZO=["Barra Olímpica","Barra da Tijuca","Recreio dos Bandeirantes","Vargem Grande / Pequena","Jacarepaguá"];
+  var MS=["jan","fev","mar","abr","mai","jun","jul","ago","set","out","nov","dez"];
+  setTimeout(function(){fetch("data/sawala-oportunidades.json").then(function(r){return r.json()}).then(function(j){
+    var im=getImoveis(),max=im.reduce(function(m,x){return Math.max(m,+x.id||0)},0),add=0,upd=0;
+    (j.itens||[]).forEach(function(o){
+      var preco="A partir de R$ "+Math.round(o.preco).toLocaleString("pt-BR")+" (Sawala out/26)";
+      var st=o.status==="Pronto"?"Pronto":(o.entrega?"Entrega "+MS[+o.entrega.slice(5,7)-1]+"/"+o.entrega.slice(0,4):"Lançamento");
+      var k=N(o.nome),x=im.find(function(i){var n=N(i.nome);return n===k||(k.length>4&&(n.indexOf(k)===0||k.indexOf(n)===0))});
+      if(x){x.preco=preco;x.status=st;x.urg="Oportunidade fim de ano";if((x.tags||[]).indexOf("Sawala out/26")<0)x.tags=(x.tags||[]).concat("Sawala out/26");if(!x.url&&o.url)x.url=o.url;upd++}
+      else{im.push({id:++max,nome:o.nome,loc:o.bairro,regiao:REG[o.bairro]||(ZO.indexOf(o.bairro)>-1?"Barra e Zona Oeste":"Zona Sul"),status:st,badge:o.status==="Pronto"?"ib-pronto":"ib-lanc",preco:preco,roi:o.plantas||"",urg:"Oportunidade fim de ano",tags:["Sawala out/26"],icon:"&#127970;",rendaMin:null,end:o.bairro,url:o.url||"oportunidades.html",img:o.img||""});add++}
+    });
+    saveImoveis(im);localStorage.setItem("crm_op84_ver","sawala84-2026-10");
+    if(typeof renderImoveis==="function")renderImoveis();
+    if(typeof toast==="function")toast("84 oportunidades: "+upd+" atualizadas, "+add+" novas no cadastro.");
+  }).catch(function(){})},6000);
+})();
+
+// IMPORTAR CONTATOS DA AGENDA (.vcf) — lido so no navegador; duplicados por telefone sao ignorados
+function abrirImportVcf(){
+  var i=document.createElement("input");i.type="file";i.accept=".vcf,text/vcard,text/x-vcard";
+  i.onchange=function(){var f=i.files[0];if(!f)return;var r=new FileReader();r.onload=function(){importarVcf(String(r.result||""))};r.readAsText(f,"utf-8")};
+  i.click();
+}
+function _qp(s){try{return decodeURIComponent(s.replace(/=\r?\n/g,"").replace(/%/g,"%25").replace(/=([0-9A-F]{2})/gi,"%$1"))}catch(e){return s}}
+function importarVcf(txt){
+  var cards=txt.split(/BEGIN:VCARD/i).slice(1),leads=getLeads(),vistos={},novos=[],hoje=new Date().toLocaleDateString("pt-BR"),agora=new Date().toLocaleString("pt-BR");
+  leads.forEach(function(l){var d=String(l.tel||"").replace(/\D/g,"").slice(-10);if(d)vistos[d]=1});
+  cards.forEach(function(c,k){
+    var linhas=c.replace(/\r?\n[ \t]/g,"").split(/\r?\n/),nome="",tel="",email="",obs=[];
+    linhas.forEach(function(L){
+      var i=L.indexOf(":");if(i<0)return;var cab=L.slice(0,i).toUpperCase(),val=L.slice(i+1).trim();
+      if(/QUOTED-PRINTABLE/.test(cab))val=_qp(val);
+      var p=cab.split(";")[0];
+      if(p==="FN"&&!nome)nome=val;
+      else if(p==="N"&&!nome)nome=val.split(";").filter(Boolean).reverse().join(" ");
+      else if(p==="TEL"&&!tel)tel=val;
+      else if(p==="EMAIL"&&!email)email=val;
+      else if(p==="ORG"&&val)obs.push(val.replace(/;/g," "));
+      else if(p==="NOTE"&&val)obs.push(val);
+    });
+    var d=tel.replace(/\D/g,"");if(!d||d.length<8)return;var key=d.slice(-10);if(vistos[key])return;vistos[key]=1;
+    novos.push({id:Date.now()*1000+k,nome:nome||("Contato "+d.slice(-4)),tel:tel,email:email,origem:"Agenda do celular",interesse:"",temp:"frio",status:"novo",orcamento:"",obs:obs.join(" · "),data:hoje,hist:[{a:"Importado da agenda (.vcf)",d:"",t:agora}]});
+  });
+  if(!novos.length){toast("Nenhum contato novo (todos já estavam no CRM).");return}
+  saveLeads(novos.concat(leads));if(typeof renderLeads==="function")renderLeads();if(typeof updateBadge==="function")updateBadge();
+  toast(novos.length+" contatos importados ("+(cards.length-novos.length)+" repetidos ou sem telefone).");
+  if(!window.crmBackendImport)return;
+  var lote=novos.map(function(l){return{id:l.id,nome:l.nome,tel:l.tel,email:l.email,origem:l.origem,temp:l.temp,status:l.status,obs:l.obs}}),env=0;
+  (function prox(){var b=lote.splice(0,300);if(!b.length){toast(env+" contatos salvos na planilha do CRM.");return}
+    crmBackendImport(b).then(function(n){env+=n;if(!n){toast("Contatos salvos só neste aparelho. Entre com seu login para enviar à planilha.");return}prox()})})();
+}
 
 // IMPORTAR DE FOTO (OCR)
 function abrirImportFoto(){

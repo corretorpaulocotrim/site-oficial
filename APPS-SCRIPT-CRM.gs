@@ -44,6 +44,17 @@ function doPost(e) {
   try {
     var d = JSON.parse(e.postData.contents);
     if (d.acao === 'atualizacao') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _addFeed(d); }
+    // CRM: login, leitura e importacao em lote — sempre com usuario/senha conferidos aqui no servidor
+    if (d.acao === 'login') return _json({ ok: _auth(d.usuario, d.senha) });
+    if (d.acao === 'leads') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _json({ ok: true, leads: _leads() }); }
+    if (d.acao === 'importar') {
+      if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' });
+      var arr = (d.leads || []).map(function (x) {
+        return [x.id || Date.now(), new Date(), x.nome || '', x.tel || '', x.email || '', x.interesse || '', x.renda || '', x.regiao || '', x.origem || 'Agenda do celular', x.status || 'novo', x.temp || 'frio', x.obs || '', ''];
+      });
+      if (arr.length) { var sh0 = _sheet(); sh0.getRange(sh0.getLastRow() + 1, 1, arr.length, arr[0].length).setValues(arr); }
+      return _json({ ok: true, n: arr.length });
+    }
     if (TOKEN && d.token !== TOKEN) return _json({ ok: false, err: 'token' });
     var sh = _sheet();
     var id = d.id || Date.now();
@@ -66,14 +77,16 @@ function doGet(e) {
     if (!_auth(e.parameter.usuario, e.parameter.senha)) return _json({ ok: false, err: 'login' });
     return _feed(true);
   }
-  if (TOKEN && (!e.parameter || e.parameter.token !== TOKEN)) return _json({ ok: false, err: 'token' });
-  var sh = _sheet();
-  var rows = sh.getDataRange().getValues();
+  // Leitura dos leads NAO e mais publica: so via POST {acao:'leads'} com login (o token fica visivel no site)
+  return _json({ ok: false, err: 'login' });
+}
+
+function _leads() {
+  var rows = _sheet().getDataRange().getValues();
   var head = rows.shift() || [];
-  var out = rows.map(function (r) {
+  return rows.map(function (r) {
     var o = {}; head.forEach(function (h, i) { o[h] = r[i]; }); return o;
   });
-  return _json({ ok: true, leads: out });
 }
 
 

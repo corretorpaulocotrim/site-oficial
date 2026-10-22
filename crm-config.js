@@ -61,11 +61,22 @@ window.enviarLeadCRM = function (lead) {
 /**
  * Busca todos os leads do backend (o CRM usa pra sincronizar celular/PC).
  */
-window.crmBackendGet = function () {
+// Leitura/importacao exigem login conferido no Apps Script (credenciais so na sessao do navegador)
+function crmPost(body) {
   var cfg = window.CRM_CONFIG || {};
   if (!cfg.webhookUrl) return Promise.resolve(null);
-  var url = cfg.webhookUrl + (cfg.webhookUrl.indexOf('?') >= 0 ? '&' : '?') + 'token=' + encodeURIComponent(cfg.authToken || '');
-  return fetch(url).then(function (r) { return r.json(); })
-    .then(function (j) { return (j && j.ok) ? j.leads : null; })
-    .catch(function () { return null; });
+  return fetch(cfg.webhookUrl, { method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: JSON.stringify(body) })
+    .then(function (r) { return r.json(); }).catch(function () { return null; });
+}
+function crmCred() { try { return { usuario: sessionStorage.getItem('crm_u') || '', senha: sessionStorage.getItem('crm_p') || '' }; } catch (e) { return { usuario: '', senha: '' }; } }
+window.crmBackendLogin = function (u, p) {
+  return crmPost({ acao: 'login', usuario: u, senha: p }).then(function (j) { return !!(j && j.ok); });
+};
+window.crmBackendGet = function () {
+  var c = crmCred(); if (!c.usuario) return Promise.resolve(null);
+  return crmPost({ acao: 'leads', usuario: c.usuario, senha: c.senha }).then(function (j) { return (j && j.ok) ? j.leads : null; });
+};
+window.crmBackendImport = function (leads) {
+  var c = crmCred();
+  return crmPost({ acao: 'importar', usuario: c.usuario, senha: c.senha, leads: leads }).then(function (j) { return (j && j.ok) ? j.n : 0; });
 };
