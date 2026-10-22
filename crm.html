@@ -611,8 +611,10 @@ function pcLogin(){
   var p=(document.getElementById("pc-p").value||"").trim();
   var er=document.getElementById("pc-err");er.textContent="Verificando…";
   if(!window.crmBackendLogin){er.textContent="Backend do CRM não configurado.";return;}
-  crmBackendLogin(u,p).then(function(ok){
-    if(!ok){er.textContent="Usuário ou senha incorretos.";return;}
+  crmBackendLogin(u,p).then(function(st){
+    var legado=st==="antigo"&&((u==="paulo"||u==="cotrim")&&p==="1234");
+    if(st!=="ok"&&!legado){er.textContent="Usuário ou senha incorretos.";return;}
+    try{sessionStorage.setItem("crm_legado",legado?"1":"0");}catch(e){}
     try{sessionStorage.setItem("crm_u",u);sessionStorage.setItem("crm_p",p);}catch(e){}
     localStorage.setItem("crm_auth","1");document.getElementById("pc-login").style.display="none";
     if(window.crmSync)crmSync(true);

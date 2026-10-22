@@ -69,10 +69,17 @@ function crmPost(body) {
     .then(function (r) { return r.json(); }).catch(function () { return null; });
 }
 function crmCred() { try { return { usuario: sessionStorage.getItem('crm_u') || '', senha: sessionStorage.getItem('crm_p') || '' }; } catch (e) { return { usuario: '', senha: '' }; } }
+// Devolve 'ok' | 'antigo' (Apps Script ainda na versao antiga, sem login no servidor) | 'erro'
 window.crmBackendLogin = function (u, p) {
-  return crmPost({ acao: 'login', usuario: u, senha: p }).then(function (j) { return !!(j && j.ok); });
+  return crmPost({ acao: 'login', usuario: u, senha: p }).then(function (j) { return (j && j.ok) ? 'ok' : (j && j.err === 'token') ? 'antigo' : 'erro'; });
 };
 window.crmBackendGet = function () {
+  var cfg = window.CRM_CONFIG || {};
+  var legado = false; try { legado = sessionStorage.getItem('crm_legado') === '1'; } catch (e) {}
+  if (legado && cfg.webhookUrl) { // modo antigo: so enquanto o Apps Script nao for atualizado
+    var url = cfg.webhookUrl + (cfg.webhookUrl.indexOf('?') >= 0 ? '&' : '?') + 'token=' + encodeURIComponent(cfg.authToken || '');
+    return fetch(url).then(function (r) { return r.json(); }).then(function (j) { return (j && j.ok) ? j.leads : null; }).catch(function () { return null; });
+  }
   var c = crmCred(); if (!c.usuario) return Promise.resolve(null);
   return crmPost({ acao: 'leads', usuario: c.usuario, senha: c.senha }).then(function (j) { return (j && j.ok) ? j.leads : null; });
 };
