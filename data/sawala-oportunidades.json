@@ -79,7 +79,8 @@
    "preco": 305000,
    "entrega": "2028-10",
    "status": "Em obras/na planta",
-   "url": "ficha-vitale-arbore.html"
+   "url": "ficha-vitale-arbore.html",
+   "img": "emp-img/extra/vitale-arbore.jpg"
   },
   {
    "nome": "All Jardim Oceânico",
@@ -250,7 +251,8 @@
    "preco": 1514000,
    "entrega": "2028-07",
    "status": "Em obras/na planta",
-   "url": "ficha-modo-design-living-botafogo.html"
+   "url": "ficha-modo-design-living-botafogo.html",
+   "img": "emp-img/extra/modo-design-living-botafogo.jpg"
   },
   {
    "nome": "Teto",
@@ -374,7 +376,8 @@
    "preco": 949000,
    "entrega": "2028-02",
    "status": "Em obras/na planta",
-   "url": "ficha-soul-rio-barata-ribeiro.html"
+   "url": "ficha-soul-rio-barata-ribeiro.html",
+   "img": "emp-img/extra/soul-rio-barata-ribeiro.jpg"
   },
   {
    "nome": "Soul Rio Cinco de Julho",
@@ -419,7 +422,8 @@
    "preco": 914390.18,
    "entrega": "2027-11",
    "status": "Em obras/na planta",
-   "url": "ficha-gavea-99.html"
+   "url": "ficha-gavea-99.html",
+   "img": "emp-img/extra/gavea-99.jpg"
   },
   {
    "nome": "Parque Sustentável da Gávea",
@@ -481,7 +485,8 @@
    "preco": 7561000,
    "entrega": "2027-02",
    "status": "Em obras/na planta",
-   "url": "ficha-be-in-rio-praia-de-ipanema.html"
+   "url": "ficha-be-in-rio-praia-de-ipanema.html",
+   "img": "emp-img/extra/be-in-rio-praia-de-ipanema.jpg"
   },
   {
    "nome": "Jaguaripe 289",
@@ -596,7 +601,8 @@
    "preco": 2883000,
    "entrega": "2029-02",
    "status": "Em obras/na planta",
-   "url": "ficha-guilhem-mozak.html"
+   "url": "ficha-guilhem-mozak.html",
+   "img": "emp-img/extra/guilhem-mozak.jpg"
   },
   {
    "nome": "Mar Delfim Moreira",
@@ -684,7 +690,8 @@
     "L"
    ],
    "plantas": "Lotes",
-   "url": "ficha-ciclo-lotes-vargem-pequena.html"
+   "url": "ficha-ciclo-lotes-vargem-pequena.html",
+   "img": "emp-img/extra/ciclo-lotes-vargem-pequena.jpg"
   },
   {
    "nome": "Horizon",
