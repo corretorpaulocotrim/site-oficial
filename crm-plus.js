@@ -48,3 +48,22 @@
     };
   };
 })();
+
+/* CONTADOR DE ATENDIMENTO: ligacoes e mensagens por cliente (fica na ficha e no historico) */
+(function(){
+  function conta(id,tipo){
+    try{var L=getLeads(),x=L.find(function(y){return y.id===id});if(!x)return;
+      x.cont=x.cont||{l:0,m:0};x.cont[tipo]++;
+      (x.hist=x.hist||[]).unshift({a:tipo==='l'?'Ligou':'Enviou mensagem',d:'',t:new Date().toLocaleString('pt-BR')});
+      saveLeads(L);}catch(e){}
+  }
+  var oL=window.ligar,oZ=window.zap;
+  if(typeof oL==='function')window.ligar=function(id){conta(id,'l');return oL.apply(this,arguments)};
+  if(typeof oZ==='function')window.zap=function(id){conta(id,'m');return oZ.apply(this,arguments)};
+  var oV=window.verPerfil;
+  if(typeof oV==='function')window.verPerfil=function(id){oV.apply(this,arguments);
+    var l=(getLeads()||[]).find(function(x){return x.id===id});var b=document.getElementById('p-ops');
+    if(!l||!b)return;var c=l.cont||{l:0,m:0};
+    var d=document.createElement('div');d.style.cssText='margin:0 0 8px;font-weight:600;color:#0f2e36';
+    d.textContent='📞 '+c.l+' ligações · 💬 '+c.m+' mensagens';b.insertBefore(d,b.firstChild);};
+})();
