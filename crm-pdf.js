@@ -23,10 +23,38 @@
   function marcados(){return [].slice.call(document.querySelectorAll('#pdf-l input:checked')).map(function(c){return FIL[+c.value]})}
   function gerarPdf(){
     var sel=marcados();if(!sel.length){alert('Marque ao menos um imóvel.');return}
-    var t=val('pdf-t')||'Seleção de imóveis', base=location.origin;
-    var cards=sel.map(function(o){return '<div class="c"><div class="ph" style="background-image:url(\''+base+'/'+E(o.img)+'\')"></div><div class="tx"><h3>'+E(o.nome)+'</h3><p>'+E(o.bairro)+' · '+E(ent(o))+'</p><p>'+E(o.plantas||'')+'</p><p class="pr">'+(o.preco?'a partir de '+R(o.preco):'Valor sob consulta')+'</p><p class="lk">'+E(url(o))+'</p></div></div>'}).join('');
-    var h='<!doctype html><html><head><meta charset="utf-8"><title>'+E(t)+'</title><style>@page{size:A4;margin:14mm}body{font-family:Inter,Arial,sans-serif;color:#0f2e36;margin:0}h1{font-family:Fraunces,Georgia,serif;font-style:italic;color:#8a6a2f;font-size:28px;margin:0}.hd{border-bottom:2px solid #cf9f4f;padding-bottom:10px;margin-bottom:16px;font-size:12px}.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}.c{border:1px solid #e3d9c6;border-radius:10px;overflow:hidden;break-inside:avoid}.ph{height:120px;background:#e9e3d6 center/cover}.tx{padding:10px}.tx h3{font-family:Fraunces,Georgia,serif;margin:0 0 4px;font-size:17px}.tx p{margin:3px 0;font-size:12px}.pr{color:#8a6a2f;font-weight:700;font-size:14px}.lk{color:#6b7774;word-break:break-all;font-size:10px}.ft{margin-top:14px;font-size:10px;color:#6b7774}</style></head><body><div class="hd"><h1>'+E(t)+'</h1>Paulo Cotrim · CRECI-RJ 77677-F · (21) 98915-0864 · paulocotrim.com</div><div class="g">'+cards+'</div><p class="ft">Valores de referência Oportunidades Sawala (out/2026), sujeitos a alteração e disponibilidade. Imagens ilustrativas.</p><script>onload=function(){print()}<\/script></body></html>';
-    var w=window.open('','_blank');w.document.write(h);w.document.close();
+    var t=val('pdf-t')||'Seleção de imóveis',sub=val('pdf-ped')||'',base=location.origin,hoje=new Date().toLocaleDateString('pt-BR');
+    function img(o){return o.img?(/^https?:/.test(o.img)?o.img:base+'/'+String(o.img).replace(/^\//,'')):''}
+    var linhas=sel.map(function(o,i){return '<tr><td>'+(i+1)+'</td><td><b>'+E(o.nome)+'</b></td><td>'+E(o.bairro)+'</td><td>'+E(o.plantas||'—')+'</td><td>'+E(ent(o))+'</td><td class="v">'+(o.preco?R(o.preco):'Sob consulta')+'</td></tr>'}).join('');
+    var pags=sel.map(function(o,i){return '<section class="pg emp"><div class="ph" style="background-image:url(\''+E(img(o))+'\')"><span class="nr">'+String(i+1).padStart(2,'0')+'</span></div>'+
+      '<div class="bd"><span class="ey">'+E(o.bairro)+'</span><h2>'+E(o.nome)+'</h2>'+
+      '<div class="gr"><div><small>A partir de</small><b>'+(o.preco?R(o.preco):'Sob consulta')+'</b></div><div><small>Plantas</small><b>'+E(o.plantas||'Consulte')+'</b></div><div><small>Prazo</small><b>'+E(ent(o))+'</b></div><div><small>Bairro</small><b>'+E(o.bairro)+'</b></div></div>'+
+      '<p class="lk">Ficha completa, fotos e plantas: <a href="'+E(url(o))+'">'+E(url(o).replace('https://',''))+'</a></p></div>'+
+      '<div class="ft">Paulo Cotrim · CRECI-RJ 77677-F · (21) 98915-0864</div></section>'}).join('');
+    var h='<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>'+E(t)+'</title><style>'+
+      '@page{size:A4;margin:0}*{box-sizing:border-box;margin:0;padding:0}body{font-family:Inter,Arial,sans-serif;color:#0f2e36;-webkit-print-color-adjust:exact;print-color-adjust:exact}'+
+      '.pg{width:210mm;height:297mm;position:relative;overflow:hidden;page-break-after:always;break-after:page}.pg:last-child{page-break-after:auto}'+
+      '.cv{background:radial-gradient(120% 80% at 80% 0%,#163c45,#0f2e36 45%,#050b0c);color:#f4efe6;padding:28mm 20mm}.cv .ey,.ey{font:600 9pt Inter,Arial;letter-spacing:.3em;text-transform:uppercase;color:#cf9f4f}'+
+      '.cv h1{font:italic 600 40pt/1.05 Georgia,serif;color:#e6c581;margin:10mm 0 6mm}.cv p{font-size:13pt;color:#d9d3c7;max-width:150mm}.cv .ln{width:24mm;height:1.5px;background:#cf9f4f;margin:10mm 0}'+
+      '.cv .rd{position:absolute;left:20mm;right:20mm;bottom:18mm;border-top:1px solid rgba(230,197,129,.4);padding-top:6mm;display:flex;justify-content:space-between;font-size:9.5pt;color:#cfc6b6}'+
+      '.rs{padding:20mm 16mm;background:#f4efe6}.rs h2{font:600 24pt Georgia,serif;margin:3mm 0 8mm}table{width:100%;border-collapse:collapse;font-size:9.5pt;background:#fff}'+
+      'th{background:#0f2e36;color:#e6c581;text-align:left;padding:3mm;font-size:8pt;letter-spacing:.12em;text-transform:uppercase}td{padding:3mm;border-bottom:1px solid #e3d9c6;vertical-align:top}td.v{color:#8a6a2f;font-weight:700;white-space:nowrap}'+
+      '.rs .nt{margin-top:6mm;font-size:8pt;color:#6b7774}'+
+      '.emp{background:#f4efe6}.emp .ph{height:140mm;background:#0b2228 center/cover no-repeat;position:relative}.emp .nr{position:absolute;left:14mm;top:12mm;background:#0f2e36;color:#e6c581;font:600 14pt Georgia,serif;padding:2mm 4mm;border-radius:2mm}'+
+      '.emp .bd{padding:10mm 16mm}.emp h2{font:italic 600 26pt Georgia,serif;color:#0f2e36;margin:2mm 0 7mm}.gr{display:grid;grid-template-columns:1fr 1fr;gap:4mm}'+
+      '.gr div{background:#fff;border:1px solid #e3d9c6;border-radius:3mm;padding:4mm 5mm}.gr small{display:block;font-size:7.5pt;letter-spacing:.2em;text-transform:uppercase;color:#8a6a2f}.gr b{display:block;font-size:12pt;margin-top:1mm}'+
+      '.lk{margin-top:7mm;font-size:9.5pt;color:#2c3a38}.lk a{color:#0f2e36;font-weight:600;word-break:break-all}'+
+      '.ft{position:absolute;left:16mm;right:16mm;bottom:9mm;border-top:1px solid #d9cdb6;padding-top:3mm;font-size:8pt;letter-spacing:.12em;text-transform:uppercase;color:#8a7f6c}'+
+      '.fim{background:radial-gradient(120% 80% at 80% 0%,#163c45,#0f2e36 45%,#050b0c);color:#f4efe6;padding:40mm 20mm;text-align:center}.fim h2{font:italic 600 30pt Georgia,serif;color:#e6c581;margin:8mm 0}.fim p{font-size:12pt;color:#d9d3c7;margin:3mm 0}.fim .bt{display:inline-block;margin-top:10mm;background:#1a8f4c;color:#fff;padding:4mm 9mm;border-radius:20mm;font-weight:700;font-size:12pt}'+
+      '</style></head><body>'+
+      '<section class="pg cv"><span class="ey">Seleção exclusiva · Paulo Cotrim</span><div class="ln"></div><h1>'+E(t)+'</h1>'+(sub&&sub!==t?'<p>'+E(sub)+'</p>':'')+'<p style="margin-top:6mm">'+sel.length+' empreendimento(s) selecionado(s) para você</p>'+
+        '<div class="rd"><span>Paulo Cotrim · Corretor de Imóveis<br>CRECI-RJ 77677-F</span><span style="text-align:right">'+hoje+'<br>(21) 98915-0864 · paulocotrim.com</span></div></section>'+
+      '<section class="pg rs"><span class="ey">Visão geral</span><h2>Resumo da seleção</h2><table><thead><tr><th>#</th><th>Empreendimento</th><th>Bairro</th><th>Plantas</th><th>Prazo</th><th>A partir de</th></tr></thead><tbody>'+linhas+'</tbody></table>'+
+        '<p class="nt">Valores de referência (Oportunidades Sawala, out/2026), sujeitos a alteração e disponibilidade. Confirme a tabela vigente. Imagens ilustrativas.</p><div class="ft">Paulo Cotrim · CRECI-RJ 77677-F · (21) 98915-0864</div></section>'+
+      pags+
+      '<section class="pg fim"><span class="ey">Próximo passo</span><h2>Vamos encontrar o seu?</h2><p>Simulação de financiamento CAIXA, análise de crédito e visita agendada.</p><p>Tudo comigo, do primeiro contato até a chave.</p><span class="bt">WhatsApp (21) 98915-0864</span><p style="margin-top:14mm;color:#cfc6b6">Paulo Cotrim · CRECI-RJ 77677-F · paulocotrim.com</p></section>'+
+      '<script>window.onload=function(){var im=[].slice.call(document.querySelectorAll(".ph"));setTimeout(function(){print()},im.length?1500:300)}<\/script></body></html>';
+    var w=window.open('','_blank');if(!w){alert('Permita pop-ups para gerar o PDF.');return}w.document.write(h);w.document.close();
   }
   function enviar(tipo){
     var qv=val('pdf-lead');if(!qv){alert('Digite o nome ou telefone do cliente.');return}
