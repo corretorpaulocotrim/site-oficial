@@ -80,3 +80,25 @@
   }
   setTimeout(limpa,800);setTimeout(limpa,2500);
 })();
+
+/* LEMBRETES DE RETORNO: data de retorno por cliente + contador "Retornos de hoje" na lateral */
+(function(){
+  var HOJE=function(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
+  function vencidos(){return (getLeads()||[]).filter(function(l){return l.retorno&&l.retorno<=HOJE()}).length}
+  function badge(){
+    var b=document.getElementById('pc-retornos');
+    if(!b){b=document.createElement('div');b.id='pc-retornos';b.style.cssText='margin:10px 14px;padding:10px 12px;border:1px solid #cf9f4f;border-radius:12px;color:#e6c581;font:600 13px Inter,Arial,sans-serif;cursor:pointer';var side=document.querySelector('aside')||document.querySelector('nav')||document.body;side.insertBefore(b,side.firstChild);b.onclick=function(){if(typeof renderHoje==='function'){goPage&&goPage('hoje')}}}
+    var n=vencidos();b.textContent=n?('🔔 '+n+' retorno(s) para hoje'):'🔔 Nenhum retorno para hoje';
+  }
+  var oV=window.verPerfil;
+  if(typeof oV==='function')window.verPerfil=function(id){oV.apply(this,arguments);
+    var b=document.getElementById('p-ops');var l=(getLeads()||[]).find(function(x){return x.id===id});if(!b||!l)return;
+    var w=document.createElement('div');w.style.cssText='margin:10px 0;display:flex;gap:8px;align-items:center;font:600 13px Inter,Arial,sans-serif;color:#0f2e36';
+    w.innerHTML='Retornar em: <input type="date" value="'+(l.retorno||'')+'" style="padding:6px;border:1px solid #e3d9c6;border-radius:8px"> <button type="button" style="background:#0f2e36;color:#e6c581;border:0;border-radius:20px;padding:6px 12px;cursor:pointer">Salvar</button>';
+    b.insertBefore(w,b.firstChild);
+    w.querySelector('button').onclick=function(){var v=w.querySelector('input').value;var L=getLeads(),x=L.find(function(y){return y.id===id});if(x){x.retorno=v;saveLeads(L);badge();toast&&toast(v?'Retorno marcado para '+v.split('-').reverse().join('/'):'Retorno removido')}};
+  };
+  var ESC=['RELATÓRIOS','RELATORIOS','MÉTRICAS','METRICAS','CAMPANHAS','SIMULADOR','CORRETOR','PERFORMANCE','TREINADOR','IMPORTAR DE FOTO','CENTRAL'];
+  function limpa(){document.querySelectorAll('a,div,span').forEach(function(el){if(el.children.length>1)return;var t=(el.textContent||'').trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');if(t&&t.length<=40&&ESC.some(function(k){return t===k||t===k.normalize('NFD').replace(/[̀-ͯ]/g,'')})){var r=el.closest('.sb-link,[onclick],a')||el;r.style.display='none'}})}
+  setTimeout(function(){limpa();badge()},1200);setTimeout(function(){limpa();badge()},3000);
+})();
