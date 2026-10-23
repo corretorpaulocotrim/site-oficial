@@ -68,19 +68,6 @@
     d.textContent='📞 '+c.l+' ligações · 💬 '+c.m+' mensagens';b.insertBefore(d,b.firstChild);};
 })();
 
-/* LATERAL ENXUTA: so o essencial para atender (o resto continua acessivel pela busca/atalhos) */
-(function(){
-  var ESCONDER=['CENTRAL DE VENDAS','PERFORMANCE','TREINADOR','CENTRAL (NEWS','TABELAS DE PRECOS','TABELAS DE PREÇOS','CADASTRAR IMOVEL','CADASTRAR IMÓVEL','INTELIGÊNCIA','INTELIGENCIA','CAPTAÇÃO','CAPTACAO','PORTFÓLIO','PORTFOLIO'];
-  function limpa(){
-    document.querySelectorAll('[onclick*="goPage"], .sb-link, .sb-item, nav a, aside a, aside div, nav div').forEach(function(el){
-      var t=(el.textContent||'').trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
-      if(!t||t.length>40)return;
-      if(ESCONDER.some(function(h){var k=h.toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');return t===k||t.indexOf(k)===0})){el.style.display='none'}
-    });
-  }
-  setTimeout(limpa,800);setTimeout(limpa,2500);
-})();
-
 /* LEMBRETES DE RETORNO: data de retorno por cliente + contador "Retornos de hoje" na lateral */
 (function(){
   var HOJE=function(){var d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0')};
@@ -98,7 +85,43 @@
     b.insertBefore(w,b.firstChild);
     w.querySelector('button').onclick=function(){var v=w.querySelector('input').value;var L=getLeads(),x=L.find(function(y){return y.id===id});if(x){x.retorno=v;saveLeads(L);badge();toast&&toast(v?'Retorno marcado para '+v.split('-').reverse().join('/'):'Retorno removido')}};
   };
-  var ESC=['RELATÓRIOS','RELATORIOS','MÉTRICAS','METRICAS','CAMPANHAS','SIMULADOR','CORRETOR','PERFORMANCE','TREINADOR','IMPORTAR DE FOTO','CENTRAL'];
-  function limpa(){document.querySelectorAll('a,div,span').forEach(function(el){if(el.children.length>1)return;var t=(el.textContent||'').trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');if(t&&t.length<=40&&ESC.some(function(k){return t===k||t===k.normalize('NFD').replace(/[̀-ͯ]/g,'')})){var r=el.closest('.sb-link,[onclick],a')||el;r.style.display='none'}})}
-  setTimeout(function(){limpa();badge()},1200);setTimeout(function(){limpa();badge()},3000);
+  setTimeout(badge,1200);setTimeout(badge,3000);
+})();
+
+/* QUADRO DE LEADS (etapas): Novo > Contatado > Proposta > Visita > Fechado, com ligar/WhatsApp direto no card */
+(function(){
+  var COL=[['novo','Novo'],['contato','Contatado'],['proposta','Proposta'],['visita','Visita'],['fechado','Fechado'],['perdido','Perdido']];
+  function ab(){
+    var pg=document.getElementById('pc-quadro');if(pg)return pg.style.display='flex';
+    pg=document.createElement('div');pg.id='pc-quadro';
+    pg.style.cssText='position:fixed;inset:0;z-index:9990;background:#f4efe6;display:flex;flex-direction:column;font:14px Inter,Arial,sans-serif;color:#0f2e36';
+    pg.innerHTML='<div style="display:flex;justify-content:space-between;align-items:center;padding:14px 18px;background:#0f2e36;color:#e6c581"><b style="font:600 20px Fraunces,Georgia,serif">Quadro de leads</b><button type="button" id="pcq-x" style="background:none;border:0;color:#e6c581;font-size:26px;cursor:pointer">×</button></div><div id="pcq-b" style="flex:1;overflow:auto;display:flex;gap:10px;padding:12px;align-items:flex-start"></div>';
+    document.body.appendChild(pg);document.getElementById('pcq-x').onclick=function(){pg.style.display='none'};
+    draw();
+  }
+  function st(l){return l.status||'novo'}
+  function mover(id,to){var L=getLeads(),x=L.find(function(y){return y.id===id});if(!x)return;x.status=to;(x.hist=x.hist||[]).unshift({a:'Etapa: '+to,d:'',t:new Date().toLocaleString('pt-BR')});saveLeads(L);draw()}
+  function draw(){
+    var box=document.getElementById('pcq-b');if(!box)return;var L=getLeads()||[];
+    box.innerHTML=COL.map(function(c){
+      var list=L.filter(function(l){return st(l)===c[0]});
+      return '<div style="min-width:220px;flex:1;background:#fff;border:1px solid #e3d9c6;border-radius:14px;padding:10px"><div style="font:600 15px Fraunces,Georgia,serif;margin-bottom:8px">'+c[1]+' <span style="color:#8a6a2f">('+list.length+')</span></div>'+
+        list.map(function(l){var i=COL.findIndex(function(z){return z[0]===st(l)});
+          return '<div style="border:1px solid #e3d9c6;border-radius:10px;padding:8px;margin-bottom:8px"><b>'+(l.nome||'')+'</b><div style="color:#6b7774;font-size:12px">'+(l.tel||'')+(l.interesse?' · '+l.interesse:'')+'</div>'+
+          (l.retorno?'<div style="font-size:12px;color:#8a6a2f">Retorno: '+l.retorno.split('-').reverse().join('/')+'</div>':'')+
+          '<div style="display:flex;gap:4px;margin-top:6px;flex-wrap:wrap"><button data-m="'+l.id+'|'+(COL[i-1]||[''])[0]+'" '+(i<=0?'disabled':'')+'>‹</button><button data-m="'+l.id+'|'+(COL[i+1]||[''])[0]+'" '+(i>=COL.length-1?'disabled':'')+'>›</button><button data-l="'+l.id+'">Ligar</button><button data-w="'+l.id+'">WhatsApp</button><button data-p="'+l.id+'">Ficha</button></div></div>'}).join('')+'</div>';
+      }).join('');
+    box.querySelectorAll('button').forEach(function(b){b.style.cssText='background:#0f2e36;color:#e6c581;border:0;border-radius:14px;padding:4px 8px;font-size:12px;cursor:pointer';if(b.disabled)b.style.opacity='.35'});
+    box.onclick=function(e){var b=e.target.closest('button');if(!b||b.disabled)return;
+      if(b.dataset.m){var p=b.dataset.m.split('|');mover(+p[0]||p[0],p[1]);return}
+      var id=b.dataset.l||b.dataset.w||b.dataset.p;var x=(getLeads()||[]).find(function(y){return String(y.id)===String(id)});if(!x)return;
+      if(b.dataset.l&&typeof ligar==='function')ligar(x.id);
+      else if(b.dataset.w&&typeof zap==='function')zap(x.id);
+      else if(b.dataset.p&&typeof verPerfil==='function'){document.getElementById('pc-quadro').style.display='none';verPerfil(x.id)}
+    };
+  }
+  var hdr=document.querySelector('header,.topbar,.top-bar')||document.body;
+  var b=document.createElement('button');b.type='button';b.textContent='Quadro';
+  b.style.cssText='position:fixed;right:16px;top:12px;z-index:9991;background:#fff;color:#0f2e36;border:1px solid #cf9f4f;border-radius:30px;padding:9px 16px;font:600 13px Inter,Arial,sans-serif;cursor:pointer';
+  b.onclick=ab;document.body.appendChild(b);
 })();
