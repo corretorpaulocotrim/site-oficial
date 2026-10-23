@@ -58,7 +58,5 @@
     document.getElementById('pdf-lead').innerHTML='<option value="">Enviar para o lead…</option>'+ls.map(function(l){return '<option value="'+E(l.id)+'">'+E(l.nome)+' · '+E(l.tel)+'</option>'}).join('');
     filtrar();
   }
-  var b=document.createElement('button');b.type='button';b.textContent='📄 Montar PDF';
-  b.style.cssText='position:fixed;left:18px;bottom:150px;z-index:9998;width:260px;background:#0f2e36;color:#e6c581;border:1px solid #cf9f4f;border-radius:30px;padding:12px 18px;font:600 14px Inter,Arial,sans-serif;box-shadow:0 8px 22px rgba(0,0,0,.3);cursor:pointer';
-  b.onclick=abrir;document.body.appendChild(b);
+  window.pcAbrirPdf=abrir;
 })();

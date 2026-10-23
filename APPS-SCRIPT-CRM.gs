@@ -20,19 +20,43 @@
  */
 
 var SHEET_NAME = 'Leads';
-var CRM_USER = 'paulocotrim';
+var CRM_USER = 'paulo';
 var CRM_PASS = 'TROQUE_AQUI'; // digite SUA senha aqui, só no Apps Script (nunca no GitHub)
 function _auth(u, p) { return CRM_PASS !== 'TROQUE_AQUI' && String(u).toLowerCase() === CRM_USER && String(p) === CRM_PASS; }
 var TOKEN = 'pcotrim2026'; // troque se quiser — use a MESMA no crm-config.js
 
+var COLS = ['id','data','nome','telefone','email','interesse','renda','regiao','origem','status','temp','obs','pagina','dados','upd'];
 function _sheet() {
   var ss = SpreadsheetApp.getActiveSpreadsheet();
   var sh = ss.getSheetByName(SHEET_NAME);
-  if (!sh) {
-    sh = ss.insertSheet(SHEET_NAME);
-    sh.appendRow(['id','data','nome','telefone','email','interesse','renda','regiao','origem','status','temp','obs','pagina']);
-  }
+  if (!sh) { sh = ss.insertSheet(SHEET_NAME); sh.appendRow(COLS); }
+  else if (sh.getLastColumn() < COLS.length) sh.getRange(1, 1, 1, COLS.length).setValues([COLS]);
   return sh;
+}
+
+// Sincronizacao completa do CRM (PC e celular): grava/atualiza/apaga leads pelo id
+function _row(x) {
+  return [x.id, x.data || '', x.nome || '', x.tel || x.telefone || '', x.email || '', x.interesse || '', x.orcamento || x.renda || '',
+    x.regiao || '', x.origem || '', x.status || 'novo', x.temp || '', x.obs || '', x.pagina || '', JSON.stringify(x), x.upd || Date.now()];
+}
+function _salvar(list) {
+  var lock = LockService.getScriptLock(); lock.waitLock(25000);
+  try {
+    var sh = _sheet(), v = sh.getDataRange().getValues(); v.shift();
+    var pos = {}, del = {};
+    v.forEach(function (r, i) { var k = String(r[0]); if (!k) { del[i] = 1; return; } if (pos[k] !== undefined) del[i] = 1; else pos[k] = i; });
+    list.forEach(function (x) {
+      var k = String(x.id);
+      if (x._del) { if (pos[k] !== undefined) del[pos[k]] = 1; return; }
+      var row = _row(x);
+      if (pos[k] !== undefined) v[pos[k]] = row; else { pos[k] = v.length; v.push(row); }
+    });
+    v = v.filter(function (r, i) { return !del[i]; }).map(function (r) { r = r.slice(0, COLS.length); while (r.length < COLS.length) r.push(''); return r; });
+    var old = sh.getLastRow() - 1;
+    if (old > 0) sh.getRange(2, 1, old, COLS.length).clearContent();
+    if (v.length) sh.getRange(2, 1, v.length, COLS.length).setValues(v);
+    return _json({ ok: true, n: list.length });
+  } finally { lock.releaseLock(); }
 }
 
 function _json(obj) {
@@ -46,6 +70,7 @@ function doPost(e) {
     if (d.acao === 'atualizacao') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _addFeed(d); }
     // CRM: login, leitura e importacao em lote — sempre com usuario/senha conferidos aqui no servidor
     if (d.acao === 'login') return _json({ ok: _auth(d.usuario, d.senha) });
+    if (d.acao === 'salvar') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _salvar(d.leads || []); }
     if (d.acao === 'leads') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _json({ ok: true, leads: _leads() }); }
     if (d.acao === 'importar') {
       if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' });
@@ -56,13 +81,16 @@ function doPost(e) {
       return _json({ ok: true, n: arr.length });
     }
     if (TOKEN && d.token !== TOKEN) return _json({ ok: false, err: 'token' });
-    var sh = _sheet();
-    var id = d.id || Date.now();
-    sh.appendRow([
-      id, new Date(), d.nome || '', d.telefone || d.tel || '', d.email || '',
-      d.interesse || '', d.renda || '', d.regiao || '', d.origem || '',
-      d.status || 'novo', d.temp || 'morno', d.obs || '', d.pagina || ''
-    ]);
+    var lk = LockService.getScriptLock(); lk.waitLock(25000); // nao colide com a sincronizacao do CRM
+    try {
+      var sh = _sheet();
+      var id = d.id || Date.now();
+      sh.appendRow([
+        id, new Date(), d.nome || '', d.telefone || d.tel || '', d.email || '',
+        d.interesse || '', d.renda || '', d.regiao || '', d.origem || '',
+        d.status || 'novo', d.temp || 'morno', d.obs || '', d.pagina || ''
+      ]);
+    } finally { lk.releaseLock(); }
     return _json({ ok: true, id: id });
   } catch (err) {
     return _json({ ok: false, err: String(err) });
@@ -84,7 +112,7 @@ function doGet(e) {
 function _leads() {
   var rows = _sheet().getDataRange().getValues();
   var head = rows.shift() || [];
-  return rows.map(function (r) {
+  return rows.filter(function (r) { return r[0] !== '' && r[0] != null; }).map(function (r) {
     var o = {}; head.forEach(function (h, i) { o[h] = r[i]; }); return o;
   });
 }
