@@ -3,8 +3,8 @@
   var OP=[],FIL=[],MS=['jan','fev','mar','abr','mai','jun','jul','ago','set','out','nov','dez'];
   function N0(s){return String(s||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9]+/g,' ').trim()}
   Promise.all([fetch('/data/sawala-oportunidades.json').then(function(r){return r.json()}).catch(function(){return{}}),fetch('/data/flow-catalogo.json').then(function(r){return r.json()}).catch(function(){return{}})]).then(function(a){
-    var S=(a[0].itens||[]),vis={};S.forEach(function(o){vis[N0(o.nome)]=1});
-    var F=(a[1].itens||[]).filter(function(x){return x.u&&x.n&&!vis[N0(x.n)]}).map(function(x){return{nome:x.n,bairro:x.b||'',preco:x.p||0,entrega:x.e||'',status:'',url:x.u,img:x.img||'',plantas:[x.q&&x.q!=='0'?x.q:'',x.a&&x.a!=='0'?x.a:''].filter(Boolean).join(' · ')}});
+    var S=(a[0].itens||[]),vis={},CO={};(a[1].itens||[]).forEach(function(x){if(x.la&&x.lo)CO[N0(x.n)]=[x.la,x.lo]});S.forEach(function(o){var k=N0(o.nome);vis[k]=1;var c=CO[k]||CO[Object.keys(CO).find(function(z){return k.length>4&&(z.indexOf(k)===0||k.indexOf(z)===0)})];if(c){o.la=c[0];o.lo=c[1]}});
+    var F=(a[1].itens||[]).filter(function(x){return x.u&&x.n&&!vis[N0(x.n)]}).map(function(x){return{nome:x.n,bairro:x.b||'',preco:x.p||0,entrega:x.e||'',status:'',url:x.u,img:x.img||'',la:x.la||0,lo:x.lo||0,plantas:[x.q&&x.q!=='0'?x.q:'',x.a&&x.a!=='0'?x.a:''].filter(Boolean).join(' · ')}});
     OP=S.concat(F);
   });
   function E(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
@@ -41,11 +41,48 @@
     window.open('https://wa.me/'+tel+'?text='+encodeURIComponent(msg),'_blank');
     try{var L=getLeads(),x=L.find(function(y){return String(y.id)===id});if(x){(x.hist=x.hist||[]).unshift({a:'Enviou '+sel.length+' opção(ões)',d:'Montado no CRM',t:new Date().toLocaleString('pt-BR')});saveLeads(L)}}catch(e){}
   }
+  
+  /* ---- PEDIDO EM TEXTO: "melhores opções perto do Norte Shopping, 2 quartos até 400 mil" ---- */
+  var PONTOS={'norte shopping':[-22.8866,-43.2826],'nova america':[-22.8786,-43.2717],'shopping tijuca':[-22.9238,-43.2357],'madureira shopping':[-22.8722,-43.3366],'carioca shopping':[-22.8449,-43.3061],'barrashopping':[-22.9998,-43.3593],'barra shopping':[-22.9998,-43.3593],'village mall':[-22.9994,-43.3622],'metropolitano':[-22.975,-43.397],'shopping leblon':[-22.9837,-43.2172],'botafogo praia shopping':[-22.9476,-43.1825],'recreio shopping':[-23.0129,-43.4641],'maracana':[-22.9122,-43.2302],'engenhao':[-22.8932,-43.2922],'praca maua':[-22.8967,-43.1803],'central do brasil':[-22.9035,-43.1912],'aeroporto santos dumont':[-22.9105,-43.1631],'jardim oceanico':[-23.0067,-43.3115]};
+  var REG={'zona norte':['tijuca','meier','cachambi','del castilho','engenho de dentro','engenho novo','madureira','pilares','piedade','todos os santos','inhauma','riachuelo','rocha','sao cristovao','vila isabel','grajau','andarai','maracana','penha','olaria','ramos','bonsucesso','iraja','vila da penha','vista alegre','campinho','cascadura','abolicao','lins','higienopolis','maria da graca','benfica','vicente de carvalho','quintino','encantado','agua santa','jacarezinho','manguinhos','bento ribeiro','oswaldo cruz','marechal hermes','rocha miranda','coelho neto','pavuna','guadalupe','anchieta','ricardo de albuquerque'],
+    'zona sul':['ipanema','leblon','copacabana','botafogo','flamengo','laranjeiras','gavea','sao conrado','lagoa','jardim botanico','humaita','urca','leme','catete','gloria','cosme velho'],
+    'barra':['barra da tijuca','barra olimpica','recreio dos bandeirantes','jacarepagua','vargem grande','vargem pequena','camorim','itanhanga','joa','freguesia','pechincha','taquara','curicica'],
+    'centro':['centro','lapa','santo cristo','gamboa','saude','cidade nova','estacio','catumbi','santa teresa','rio comprido','porto maravilha']};
+  function km(a,b,c,d){var R=6371,x=(c-a)*Math.PI/180,y=(d-b)*Math.PI/180,s=Math.sin(x/2)*Math.sin(x/2)+Math.cos(a*Math.PI/180)*Math.cos(c*Math.PI/180)*Math.sin(y/2)*Math.sin(y/2);return 2*R*Math.asin(Math.sqrt(s))}
+  function pedir(){
+    var txt=val('pdf-ped');if(!txt){alert('Escreva o que você quer. Ex.: melhores opções perto do Norte Shopping, 2 quartos até 400 mil');return}
+    var t=N(txt).replace(/[^a-z0-9 ,.$]/g,' '),res=OP.slice(),motivo=[];
+    // local: ponto de referencia (raio 4 km), regiao ou bairro citado
+    var pt=null;Object.keys(PONTOS).some(function(k){if(t.indexOf(k)>-1){pt=[k,PONTOS[k]];return true}});
+    if(pt){res=res.filter(function(o){return o.la&&km(pt[1][0],pt[1][1],o.la,o.lo)<=4});res.forEach(function(o){o._d=km(pt[1][0],pt[1][1],o.la,o.lo)});motivo.push('até 4 km de '+pt[0].replace(/\b\w/g,function(c){return c.toUpperCase()}))}
+    else{var rg=null;Object.keys(REG).some(function(k){if(t.indexOf(k)>-1){rg=k;return true}});
+      if(rg){res=res.filter(function(o){return REG[rg].some(function(b){return N(o.bairro).indexOf(b)>-1})});motivo.push(rg)}
+      else{var bs={};OP.forEach(function(o){if(o.bairro)bs[N(o.bairro)]=1});var hit=Object.keys(bs).filter(function(b){return b.length>3&&t.indexOf(b)>-1});
+        if(hit.length){res=res.filter(function(o){return hit.indexOf(N(o.bairro))>-1});motivo.push(hit.join(', '))}}}
+    // quartos
+    var mq=t.match(/(\d)\s*(q\b|qts?|quartos?|dorm)/);if(/studio|estudio|loft/.test(t))mq=[0,'0'];
+    if(mq){var q=+mq[1]>=4?'4':String(mq[1]);res=res.filter(function(o){return qts(o).indexOf(q)>-1});motivo.push(q==='0'?'studio':q+' quartos')}
+    // valor maximo
+    var mv=t.match(/(ate|max(imo)?|abaixo de|menos de)\s*r?\$?\s*([\d.,]+)\s*(milhoes|milhao|mil|mi|k)?/);
+    if(mv){var v=parseFloat(mv[3].replace(/\./g,'').replace(',','.'));if(/^(mil|k)$/.test(mv[4]||''))v*=1000;else if(/^mi/.test(mv[4]||''))v*=1e6;else if(v<10000)v*=1000;var pr=res.filter(function(o){return o.preco&&o.preco<=v});if(pr.length){res=pr;motivo.push('até '+R(v))}else{res=res.filter(function(o){return !o.preco});motivo.push('nenhum com valor publicado até '+R(v)+' — estes estão sob consulta, confirme a tabela')}}
+    // prazo
+    if(/pronto|pra morar|imediat/.test(t)){res=res.filter(function(o){return ent(o)==='Pronto para morar'});motivo.push('prontos')}
+    else if(/planta|lancamento/.test(t)){res=res.filter(function(o){return ent(o)!=='Pronto para morar'});motivo.push('na planta')}
+    var mn=t.match(/(\d{1,2})\s*(opcoes|imoveis|empreendimentos|melhores)/),qtd=mn?Math.min(+mn[1],20):8;
+    res.sort(function(a,c){return (a.preco?0:1)-(c.preco?0:1)||(a._d||0)-(c._d||0)||a.preco-c.preco});
+    res=res.slice(0,qtd);OP.forEach(function(o){delete o._d});
+    if(!res.length){alert('Não encontrei imóveis para: '+txt+'\n\nTente outro ponto, bairro ou valor.');return}
+    FIL=res;
+    document.getElementById('pdf-l').innerHTML=FIL.map(function(o,i){return '<label class="pi"><input type="checkbox" checked value="'+i+'"><span><b>'+E(o.nome)+'</b><small>'+E(o.bairro)+' · '+R(o.preco)+' · '+E(ent(o))+'</small></span></label>'}).join('');
+    document.getElementById('pdf-n').textContent=FIL.length+' escolhidos para: '+(motivo.join(' · ')||txt)+' — desmarque o que não quiser';
+    var ti=document.getElementById('pdf-t');if(!ti.value)ti.value=txt.charAt(0).toUpperCase()+txt.slice(1);
+  }
+
   function abrir(){
     var m=document.getElementById('pdf-m');
     if(!m){
       m=document.createElement('div');m.id='pdf-m';
-      m.innerHTML='<div class="pdf-box"><div class="pdf-hd"><b>Montar PDF e enviar</b><button type="button" id="pdf-x">×</button></div>'+
+      m.innerHTML='<div class="pdf-box"><div class="pdf-hd"><b>Montar PDF e enviar</b><button type="button" id="pdf-x">×</button></div>'+'<div class="pdf-f"><input id="pdf-ped" placeholder="Peça em texto: melhores opções perto do Norte Shopping, 2 quartos até 400 mil"><button type="button" id="pdf-ped-go">Escolher</button></div>'+
         '<div class="pdf-f"><input id="pdf-s" placeholder="Buscar nome ou bairro"><select id="pdf-b"><option value="">Todos os bairros</option></select><select id="pdf-q"><option value="">Qualquer quarto</option><option value="0">Studio</option><option value="1">1 quarto</option><option value="2">2 quartos</option><option value="3">3 quartos</option><option value="4">4+ quartos</option></select><select id="pdf-v"><option value="">Qualquer valor</option><option value="500000">Até R$ 500 mil</option><option value="1000000">Até R$ 1 mi</option><option value="2000000">Até R$ 2 mi</option><option value="5000000">Até R$ 5 mi</option></select></div>'+
         '<div class="pdf-n" id="pdf-n"></div><div class="pdf-l" id="pdf-l"></div>'+
         '<div class="pdf-f"><input id="pdf-t" placeholder="Título do PDF (ex.: Melhores oportunidades Zona Norte 2 quartos)"></div>'+
@@ -54,7 +91,7 @@
       document.body.appendChild(m);
       var st=document.createElement('style');st.textContent='#pdf-m{position:fixed;inset:0;background:rgba(5,11,12,.6);z-index:9999;display:flex;align-items:flex-end;justify-content:center}.pdf-box{background:#f4efe6;width:100%;max-width:640px;max-height:92vh;overflow:auto;border-radius:18px 18px 0 0;padding:16px;color:#0f2e36;font-family:Inter,Arial,sans-serif}.pdf-hd{display:flex;justify-content:space-between;align-items:center;font-family:Fraunces,Georgia,serif;font-size:20px;margin-bottom:10px}.pdf-hd button{background:none;border:0;font-size:26px;cursor:pointer}.pdf-f{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0}.pdf-f input,.pdf-f select{flex:1 1 140px;padding:10px;border:1px solid #e3d9c6;border-radius:10px;font:inherit;background:#fff}.pdf-f button,.pdf-box button{background:#1a8f4c;color:#fff;border:0;border-radius:20px;padding:10px 16px;font-weight:600;cursor:pointer}.pdf-n{font-weight:600;margin:6px 0}.pdf-l{max-height:340px;overflow:auto;border:1px solid #e3d9c6;border-radius:12px;background:#fff}.pi{display:flex;gap:10px;align-items:flex-start;padding:10px;border-bottom:1px solid #efe9df;cursor:pointer}.pi input{margin-top:4px;accent-color:#cf9f4f;width:18px;height:18px}.pi b{display:block;font-size:14px}.pi small{color:#6b7774;font-size:12px}.pdf-tip{font-size:12px;color:#6b7774}';document.head.appendChild(st);
       document.getElementById('pdf-x').onclick=function(){m.remove()};
-      document.getElementById('pdf-gen').onclick=gerarPdf;
+      document.getElementById('pdf-gen').onclick=gerarPdf;document.getElementById('pdf-ped-go').onclick=pedir;document.getElementById('pdf-ped').onkeydown=function(e){if(e.key==='Enter')pedir()};
       document.getElementById('pdf-wa').onclick=function(){enviar('wa')};
       document.getElementById('pdf-call').onclick=function(){enviar('ligar')};
       ['pdf-s','pdf-b','pdf-q','pdf-v'].forEach(function(i){document.getElementById(i).addEventListener(i==='pdf-s'?'input':'change',filtrar)});
