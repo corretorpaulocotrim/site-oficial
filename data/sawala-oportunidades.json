@@ -6,100 +6,104 @@
   {
    "nome": "Arte Botânica",
    "bairro": "Barra Olímpica",
-   "preco": 510160.0,
+   "preco": 510160,
    "entrega": "2028-05",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Arte Design",
    "bairro": "Barra Olímpica",
-   "preco": 381245.0,
+   "preco": 381245,
    "entrega": "2028-12",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Arte Wave",
    "bairro": "Barra Olímpica",
-   "preco": 393090.0,
+   "preco": 393090,
    "entrega": "2029-07",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Arte Wood",
    "bairro": "Barra Olímpica",
-   "preco": 451945.0,
+   "preco": 451945,
    "entrega": "2030-02",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Astra - Ilha Pura",
    "bairro": "Barra Olímpica",
-   "preco": 858344.0,
+   "preco": 858344,
    "entrega": "2027-03",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "emp-ilha-pura-astra.html"
   },
   {
    "nome": "Breeze Inspire Residence",
    "bairro": "Barra Olímpica",
-   "preco": 728967.0,
+   "preco": 728967,
    "entrega": "2029-04",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Grand Quartier Rio2",
    "bairro": "Barra Olímpica",
-   "preco": 823896.0,
+   "preco": 823896,
    "entrega": "2027-05",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Ilha Pura Elos",
    "bairro": "Barra Olímpica",
-   "preco": 1212572.0,
+   "preco": 1212572,
    "status": "Pronto"
   },
   {
    "nome": "Ilha Pura Viure",
    "bairro": "Barra Olímpica",
-   "preco": 890000.0,
-   "status": "Pronto"
+   "preco": 890000,
+   "status": "Pronto",
+   "url": "ficha-ilha-pura-viure.html"
   },
   {
    "nome": "Milenio Ilha Pura",
    "bairro": "Barra Olímpica",
-   "preco": 821762.0,
-   "status": "Pronto"
+   "preco": 821762,
+   "status": "Pronto",
+   "url": "ficha-millenio-ilha-pura.html"
   },
   {
    "nome": "Vitale Arbore",
    "bairro": "Barra Olímpica",
-   "preco": 305000.0,
+   "preco": 305000,
    "entrega": "2028-10",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-vitale-arbore.html"
   },
   {
    "nome": "All Jardim Oceânico",
    "bairro": "Barra da Tijuca",
-   "preco": 1889300.0,
+   "preco": 1889300,
    "status": "Pronto"
   },
   {
    "nome": "Atlantico Golf",
    "bairro": "Barra da Tijuca",
-   "preco": 3139000.0,
+   "preco": 3139000,
    "status": "Pronto"
   },
   {
    "nome": "Atto Design by Pininfarina",
    "bairro": "Barra da Tijuca",
-   "preco": 20240000.0,
+   "preco": 20240000,
    "entrega": "2027-12",
    "status": "Em obras/na planta"
   },
   {
    "nome": "BHD",
    "bairro": "Barra da Tijuca",
-   "preco": 2905000.0,
+   "preco": 2905000,
    "entrega": "2028-10",
    "status": "Em obras/na planta"
   },
@@ -112,34 +116,35 @@
   {
    "nome": "Clarés",
    "bairro": "Barra da Tijuca",
-   "preco": 3500000.0,
+   "preco": 3500000,
    "entrega": "2026-11",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Cyano",
    "bairro": "Barra da Tijuca",
-   "preco": 13900000.0,
+   "preco": 13900000,
    "status": "Pronto"
   },
   {
    "nome": "Gaea",
    "bairro": "Barra da Tijuca",
-   "preco": 2300000.0,
+   "preco": 2300000,
    "entrega": "2027-04",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Gran Thai Peninsula",
    "bairro": "Barra da Tijuca",
-   "preco": 2100000.0,
+   "preco": 2100000,
    "entrega": "2028-08",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "empreendimento.html?id=2163"
   },
   {
    "nome": "Green View",
    "bairro": "Barra da Tijuca",
-   "preco": 1198000.0,
+   "preco": 1198000,
    "entrega": "2028-09",
    "status": "Em obras/na planta",
    "url": "ficha-green-park-barra-green-view.html",
@@ -154,21 +159,21 @@
   {
    "nome": "Icon Golf Residence",
    "bairro": "Barra da Tijuca",
-   "preco": 1672000.0,
+   "preco": 1672000,
    "entrega": "2027-11",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Insigna Peninsula",
    "bairro": "Barra da Tijuca",
-   "preco": 2890000.0,
+   "preco": 2890000,
    "entrega": "2027-10",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Kronos",
    "bairro": "Barra da Tijuca",
-   "preco": 1400000.0,
+   "preco": 1400000,
    "entrega": "2029-10",
    "status": "Em obras/na planta",
    "url": "ficha-kronos.html",
@@ -183,38 +188,38 @@
   {
    "nome": "Oceana Golf",
    "bairro": "Barra da Tijuca",
-   "preco": 3849000.0,
+   "preco": 3849000,
    "status": "Pronto"
   },
   {
    "nome": "Playa",
    "bairro": "Barra da Tijuca",
-   "preco": 3490000.0,
+   "preco": 3490000,
    "status": "Pronto"
   },
   {
    "nome": "Signature",
    "bairro": "Barra da Tijuca",
-   "preco": 2650000.0,
+   "preco": 2650000,
    "status": "Pronto"
   },
   {
    "nome": "Singular Peninsula",
    "bairro": "Barra da Tijuca",
-   "preco": 3400000.0,
+   "preco": 3400000,
    "entrega": "2028-08",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Wave by Yoo",
    "bairro": "Barra da Tijuca",
-   "preco": 6900000.0,
+   "preco": 6900000,
    "status": "Pronto"
   },
   {
    "nome": "Épic Golf",
    "bairro": "Barra da Tijuca",
-   "preco": 1499000.0,
+   "preco": 1499000,
    "entrega": "2029-03",
    "status": "Em obras/na planta"
   },
@@ -228,7 +233,7 @@
   {
    "nome": "Gois 44",
    "bairro": "Botafogo",
-   "preco": 1484321.0,
+   "preco": 1484321,
    "entrega": "2027-03",
    "status": "Em obras/na planta"
   },
@@ -242,27 +247,28 @@
   {
    "nome": "MO.DO Botafogo",
    "bairro": "Botafogo",
-   "preco": 1514000.0,
+   "preco": 1514000,
    "entrega": "2028-07",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-modo-design-living-botafogo.html"
   },
   {
    "nome": "Teto",
    "bairro": "Botafogo",
-   "preco": 624060.0,
+   "preco": 624060,
    "entrega": "2029-02",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Villa Visconti",
    "bairro": "Botafogo",
-   "preco": 1497000.0,
+   "preco": 1497000,
    "status": "Pronto"
   },
   {
    "nome": "ARB 26",
    "bairro": "Centro",
-   "preco": 486000.0,
+   "preco": 486000,
    "entrega": "2029-03",
    "status": "Em obras/na planta",
    "url": "empreendimento.html?id=2293",
@@ -276,27 +282,27 @@
   {
    "nome": "Carioca Lapa",
    "bairro": "Centro",
-   "preco": 443800.0,
+   "preco": 443800,
    "entrega": "2028-12",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Connect Square",
    "bairro": "Centro",
-   "preco": 393471.0,
+   "preco": 393471,
    "entrega": "2031-01",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Cores de Fátima",
    "bairro": "Centro",
-   "preco": 477000.0,
+   "preco": 477000,
    "status": "Pronto"
   },
   {
    "nome": "Cores do Rio",
    "bairro": "Centro",
-   "preco": 298000.0,
+   "preco": 298000,
    "status": "Pronto",
    "url": "emp-cores-do-rio.html",
    "img": "emp-img/cores-do-rio.jpg",
@@ -310,7 +316,7 @@
   {
    "nome": "Edifício A Noite",
    "bairro": "Centro",
-   "preco": 1316594.0,
+   "preco": 1316594,
    "entrega": "2028-02",
    "status": "Em obras/na planta",
    "url": "emp-a-noite.html",
@@ -323,7 +329,7 @@
   {
    "nome": "Q Studios",
    "bairro": "Centro",
-   "preco": 369825.0,
+   "preco": 369825,
    "entrega": "2029-12",
    "status": "Em obras/na planta",
    "url": "ficha-q-studios.html",
@@ -336,63 +342,65 @@
   {
    "nome": "Soul Rio Nossa Sra. de Fátima",
    "bairro": "Centro",
-   "preco": 418000.0,
+   "preco": 418000,
    "entrega": "2028-08",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-soul-rio-bairro-de-fatima.html"
   },
   {
    "nome": "ARPX",
    "bairro": "Copacabana",
-   "preco": 2049000.0,
+   "preco": 2049000,
    "entrega": "2028-02",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Be in Rio Pompeu Loureiro",
    "bairro": "Copacabana",
-   "preco": 1337000.0,
+   "preco": 1337000,
    "entrega": "2028-08",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Be in Rio Tonelero",
    "bairro": "Copacabana",
-   "preco": 1667900.0,
+   "preco": 1667900,
    "entrega": "2026-12",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Soul Rio Barata Ribeiro",
    "bairro": "Copacabana",
-   "preco": 949000.0,
+   "preco": 949000,
    "entrega": "2028-02",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-soul-rio-barata-ribeiro.html"
   },
   {
    "nome": "Soul Rio Cinco de Julho",
    "bairro": "Copacabana",
-   "preco": 1110400.0,
+   "preco": 1110400,
    "entrega": "2027-06",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Soul Rio Barão de Icaraí",
    "bairro": "Flamengo",
-   "preco": 755800.0,
+   "preco": 755800,
    "entrega": "2029-02",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Soul Rio Princesa Januária",
    "bairro": "Flamengo",
-   "preco": 816700.0,
+   "preco": 816700,
    "entrega": "2028-08",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Symphony",
    "bairro": "Flamengo",
-   "preco": 837839.0,
+   "preco": 837839,
    "entrega": "2029-10",
    "status": "Em obras/na planta",
    "url": "ficha-symphony-residences-tgb.html",
@@ -410,39 +418,41 @@
    "bairro": "Gávea",
    "preco": 914390.18,
    "entrega": "2027-11",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-gavea-99.html"
   },
   {
    "nome": "Parque Sustentável da Gávea",
    "bairro": "Gávea",
-   "preco": 910000.0,
+   "preco": 910000,
    "status": "Pronto"
   },
   {
    "nome": "Almar",
    "bairro": "Ipanema",
-   "preco": 5489000.0,
+   "preco": 5489000,
    "entrega": "2028-06",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Be Rio Nascimento Silva",
    "bairro": "Ipanema",
-   "preco": 1598000.0,
+   "preco": 1598000,
    "entrega": "2028-02",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-be-in-rio-nascimento-silva.html"
   },
   {
    "nome": "Be in Rio Barão da Torre",
    "bairro": "Ipanema",
-   "preco": 1643000.0,
+   "preco": 1643000,
    "entrega": "2027-07",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Be in Rio Barão de Jaguaripe 225",
    "bairro": "Ipanema",
-   "preco": 1616000.0,
+   "preco": 1616000,
    "entrega": "2028-11",
    "status": "Em obras/na planta",
    "url": "ficha-be-in-rio-barao-de-jaguaripe-225.html",
@@ -455,7 +465,7 @@
   {
    "nome": "Be in Rio Barão de Jaguaripe 404",
    "bairro": "Ipanema",
-   "preco": 1572700.0,
+   "preco": 1572700,
    "entrega": "2028-11",
    "status": "Em obras/na planta",
    "url": "empreendimento.html?id=2313",
@@ -468,14 +478,15 @@
   {
    "nome": "Be in Rio Praia de Ipanema",
    "bairro": "Ipanema",
-   "preco": 7561000.0,
+   "preco": 7561000,
    "entrega": "2027-02",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-be-in-rio-praia-de-ipanema.html"
   },
   {
    "nome": "Jaguaripe 289",
    "bairro": "Ipanema",
-   "preco": 1405000.0,
+   "preco": 1405000,
    "entrega": "2029-04",
    "status": "Em obras/na planta",
    "url": "ficha-jaguaripe-289-piimo.html",
@@ -489,7 +500,7 @@
   {
    "nome": "Parque Studios",
    "bairro": "Ipanema",
-   "preco": 1599000.0,
+   "preco": 1599000,
    "entrega": "2029-04",
    "status": "Em obras/na planta",
    "tip": [
@@ -500,27 +511,27 @@
   {
    "nome": "Soul Rio Alberto de Campos",
    "bairro": "Ipanema",
-   "preco": 1250000.0,
+   "preco": 1250000,
    "entrega": "2027-10",
    "status": "Em obras/na planta"
   },
   {
    "nome": "VIE",
    "bairro": "Ipanema",
-   "preco": 26000000.0,
+   "preco": 26000000,
    "entrega": "2029-04",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Vista Ipanema",
    "bairro": "Ipanema",
-   "preco": 6780000.0,
+   "preco": 6780000,
    "status": "A confirmar"
   },
   {
    "nome": "Vitale Walk",
    "bairro": "Jacarepaguá",
-   "preco": 295000.0,
+   "preco": 295000,
    "entrega": "2027-12",
    "status": "Em obras/na planta",
    "url": "emp-vitale-wilk.html",
@@ -534,14 +545,14 @@
   {
    "nome": "Soul Rio Gago Coutinho",
    "bairro": "Laranjeiras",
-   "preco": 681400.0,
+   "preco": 681400,
    "entrega": "2028-12",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Arti Leblon",
    "bairro": "Leblon",
-   "preco": 2140000.0,
+   "preco": 2140000,
    "entrega": "2028-10",
    "status": "Em obras/na planta",
    "url": "ficha-arti-leblon.html",
@@ -555,21 +566,21 @@
   {
    "nome": "Azuis",
    "bairro": "Leblon",
-   "preco": 12900000.0,
+   "preco": 12900000,
    "entrega": "2026-12",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Bruna",
    "bairro": "Leblon",
-   "preco": 13065000.0,
+   "preco": 13065000,
    "entrega": "2029-10",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Dias Ferreira",
    "bairro": "Leblon",
-   "preco": 2490000.0,
+   "preco": 2490000,
    "entrega": "2028-10",
    "status": "Em obras/na planta"
   },
@@ -582,34 +593,35 @@
   {
    "nome": "Guilhem",
    "bairro": "Leblon",
-   "preco": 2883000.0,
+   "preco": 2883000,
    "entrega": "2029-02",
-   "status": "Em obras/na planta"
+   "status": "Em obras/na planta",
+   "url": "ficha-guilhem-mozak.html"
   },
   {
    "nome": "Mar Delfim Moreira",
    "bairro": "Leblon",
-   "preco": 35000000.0,
+   "preco": 35000000,
    "entrega": "2026-12",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Paradis",
    "bairro": "Leblon",
-   "preco": 3073000.0,
+   "preco": 3073000,
    "entrega": "2028-10",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Bothanica Park",
    "bairro": "Recreio dos Bandeirantes",
-   "preco": 855972.0,
+   "preco": 855972,
    "status": "Pronto"
   },
   {
    "nome": "Feel Sun",
    "bairro": "Recreio dos Bandeirantes",
-   "preco": 289910.0,
+   "preco": 289910,
    "entrega": "2030-09",
    "status": "Em obras/na planta"
   },
@@ -623,14 +635,14 @@
   {
    "nome": "Tide",
    "bairro": "Recreio dos Bandeirantes",
-   "preco": 420000.0,
+   "preco": 420000,
    "entrega": "2029-03",
    "status": "Em obras/na planta"
   },
   {
    "nome": "Vista Joá",
    "bairro": "São Conrado",
-   "preco": 896640.0,
+   "preco": 896640,
    "status": "A confirmar",
    "url": "ficha-vista-joa.html",
    "img": "emp-img/sawala/2274.webp",
@@ -644,7 +656,7 @@
   {
    "nome": "Cores da Tijuca",
    "bairro": "Tijuca",
-   "preco": 449000.0,
+   "preco": 449000,
    "entrega": "2027-05",
    "status": "Em obras/na planta",
    "url": "ficha-cores-da-tijuca.html",
@@ -659,24 +671,25 @@
   {
    "nome": "Type",
    "bairro": "Tijuca",
-   "preco": 930000.0,
+   "preco": 930000,
    "status": "Pronto"
   },
   {
    "nome": "Ciclo Bandeirantes Lotes",
    "bairro": "Vargem Grande / Pequena",
-   "preco": 329000.0,
+   "preco": 329000,
    "entrega": "2027-01",
    "status": "Em obras/na planta",
    "tip": [
     "L"
    ],
-   "plantas": "Lotes"
+   "plantas": "Lotes",
+   "url": "ficha-ciclo-lotes-vargem-pequena.html"
   },
   {
    "nome": "Horizon",
    "bairro": "Vargem Grande / Pequena",
-   "preco": 664000.0,
+   "preco": 664000,
    "entrega": "2027-06",
    "status": "Em obras/na planta"
   }
