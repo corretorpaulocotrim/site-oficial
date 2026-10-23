@@ -67,3 +67,16 @@
     var d=document.createElement('div');d.style.cssText='margin:0 0 8px;font-weight:600;color:#0f2e36';
     d.textContent='📞 '+c.l+' ligações · 💬 '+c.m+' mensagens';b.insertBefore(d,b.firstChild);};
 })();
+
+/* LATERAL ENXUTA: so o essencial para atender (o resto continua acessivel pela busca/atalhos) */
+(function(){
+  var ESCONDER=['CENTRAL DE VENDAS','PERFORMANCE','TREINADOR','CENTRAL (NEWS','TABELAS DE PRECOS','TABELAS DE PREÇOS','CADASTRAR IMOVEL','CADASTRAR IMÓVEL','INTELIGÊNCIA','INTELIGENCIA','CAPTAÇÃO','CAPTACAO','PORTFÓLIO','PORTFOLIO'];
+  function limpa(){
+    document.querySelectorAll('[onclick*="goPage"], .sb-link, .sb-item, nav a, aside a, aside div, nav div').forEach(function(el){
+      var t=(el.textContent||'').trim().toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+      if(!t||t.length>40)return;
+      if(ESCONDER.some(function(h){var k=h.toUpperCase().normalize('NFD').replace(/[̀-ͯ]/g,'');return t===k||t.indexOf(k)===0})){el.style.display='none'}
+    });
+  }
+  setTimeout(limpa,800);setTimeout(limpa,2500);
+})();
