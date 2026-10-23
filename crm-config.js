@@ -7,7 +7,7 @@
  */
 window.CRM_CONFIG = {
   // URL /exec do Apps Script (backend do CRM):
-  webhookUrl: 'https://script.google.com/macros/s/AKfycbwAl107wFuwn54xIBG1fu49pVzt45GxYVJHkrQ-n961y8NDR3JAYK_buMmyV20__z70zw/exec',
+  webhookUrl: 'https://script.google.com/macros/s/AKfycbyoG_7C4Iwb9vSDfa-LBYls7oGCs8X3qz0POF-Tc4vo3ASYyYCJ2ewD971xfcJC7eh1nQ/exec',
   // Mesma senha do arquivo APPS-SCRIPT-CRM.gs (campo TOKEN):
   authToken: 'pcotrim2026',
   source: 'site-paulocotrim',
