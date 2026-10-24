@@ -2,6 +2,9 @@
 
 > Este arquivo é lido primeiro em toda sessão. Ele existe para a IA **navegar sem reler o site inteiro** (economiza tokens) e **não repetir erros**. Aplica o ensinamento dos vídeos: índice/navegação (graphity), regras anti-erro (Karpathy) e mentalidade de review/segurança (plugins).
 
+## REGRA DO PAULO — ECONOMIA DE TOKENS
+Render o máximo com o mínimo de tokens: ler só o necessário (grep/trechos), agir direto sem perguntar o que já foi pedido, respostas curtas, sem repetir explicações, testar e publicar em lote.
+
 ## 0. REGRAS DE OURO (não quebrar nunca)
 1. **NÃO marque tarefa como feita sem ter feito e verificado.** Prove com `grep`/render/`node --check`.
 2. **NÃO invente** arquivo, função, empreendimento, valor, telefone, API ou dado de imóvel. Se não existe/você não sabe: pergunte ou use "consulte disponibilidade". Fonte real sempre (books, tabelas, sites oficiais).
