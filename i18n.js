@@ -150,12 +150,12 @@
     if(!rb){rb=document.createElement('div');rb.id='pc-ribbon';
       rb.setAttribute('style','position:fixed;top:0;left:0;right:0;height:4px;z-index:70;pointer-events:none');
       document.body.appendChild(rb);}
-    rb.style.background='linear-gradient(90deg,'+cf.c1+' 0 50%,'+cf.c2+' 50% 100%)';
+    rb.style.background='linear-gradient(90deg,#cf9f4f,#e6c581,#cf9f4f)';
     var wash=document.getElementById('pc-wash');
     if(!wash){wash=document.createElement('div');wash.id='pc-wash';
       wash.setAttribute('style','position:fixed;inset:0;z-index:-1;pointer-events:none');
       document.body.insertBefore(wash,document.body.firstChild);}
-    wash.style.background='radial-gradient(60% 50% at 0% 0%,'+cf.c1+'14,transparent 60%),radial-gradient(60% 50% at 100% 100%,'+cf.c2+'12,transparent 60%)';
+    wash.style.background='none';
   }
   function apply(lang){
     var cf=CONF[lang]||CONF.pt;
