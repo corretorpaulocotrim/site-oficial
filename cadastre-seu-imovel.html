@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Cadastre seu imóvel · Paulo Cotrim</title>
+<meta name="description" content="Quer vender ou alugar seu imóvel no Rio? Cadastre com fotos e descrição. Paulo Cotrim (CRECI-RJ 77677-F) analisa e entra em contato.">
+<link rel="canonical" href="https://www.paulocotrim.com/cadastre-seu-imovel.html">
+<link rel="icon" href="favicon.ico">
+<style>
+:root{--pet:#0f2e36;--ab:#050b0c;--ouro:#cf9f4f;--ouro2:#e6c581;--creme:#f4efe6;--verde:#1a8f4c}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 Inter,Segoe UI,Arial,sans-serif;color:var(--pet);background:var(--creme)}
+a{color:inherit}.w{max-width:1040px;margin:0 auto;padding:0 16px}
+.hd{background:radial-gradient(120% 90% at 85% 0%,#163c45,var(--pet) 45%,var(--ab));color:var(--creme);padding:22px 0 56px}
+.hd .top{display:flex;justify-content:space-between;align-items:center}.hd .top a{text-decoration:none;font:600 13px Inter,Arial;letter-spacing:.12em;text-transform:uppercase;color:var(--ouro2)}
+.ey{display:block;font:600 11px Inter,Arial;letter-spacing:.3em;text-transform:uppercase;color:var(--ouro);margin:34px 0 8px}
+h1{font:italic 600 clamp(32px,5.5vw,52px)/1.05 Fraunces,Georgia,serif;color:var(--ouro2);margin:0 0 12px}.hd p{color:#d9d3c7;max-width:620px;margin:0}
+.pass{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:22px}.pass div{border:1px solid rgba(230,197,129,.35);border-radius:14px;padding:12px}.pass b{display:block;color:var(--ouro2);font:600 18px Fraunces,Georgia,serif}.pass small{color:#cfd6d4}
+form{background:#fff;border:1px solid #e3d9c6;border-radius:18px;padding:20px;margin:-34px auto 28px;box-shadow:0 14px 40px rgba(15,46,54,.12)}
+.g{display:grid;grid-template-columns:1fr 1fr;gap:12px}.g .f{grid-column:1/-1}label{display:flex;flex-direction:column;gap:5px;font-weight:600;font-size:13px}
+input,select,textarea{padding:12px;border:1px solid #e3d9c6;border-radius:11px;font:inherit;background:#fff;min-width:0}textarea{min-height:120px}
+h2{font:600 22px Fraunces,Georgia,serif;margin:18px 0 10px}.pv{display:flex;gap:8px;flex-wrap:wrap}.pv img{width:96px;height:96px;object-fit:cover;border-radius:10px}
+.priv{background:#f4efe6;border-radius:12px;padding:10px 12px;font-size:13px;color:#5b6563;margin-top:6px}
+.bt{background:var(--verde);color:#fff;border:0;border-radius:28px;padding:14px 26px;font:700 15px Inter,Arial;cursor:pointer;margin-top:16px}.bt[disabled]{opacity:.6}
+.ok{display:none;text-align:center;padding:30px 10px}.ok h2{font-size:28px}
+.ls{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;margin:10px 0 50px}.cd{background:#fff;border:1px solid #e3d9c6;border-radius:16px;overflow:hidden}
+.cd .ph{aspect-ratio:16/10;background:#e3d9c6 center/cover}.cd .tx{padding:12px 14px}.cd b{font:600 17px Fraunces,Georgia,serif;display:block}.cd small{color:#6b7774}.cd .pr{color:#8a6a2f;font-weight:700;margin-top:4px}
+.cd a.z{display:inline-block;margin-top:8px;background:var(--verde);color:#fff;text-decoration:none;border-radius:20px;padding:8px 14px;font-weight:600;font-size:13px}
+@media(max-width:640px){.g{grid-template-columns:1fr}.pass{grid-template-columns:1fr}}
+</style></head><body>
+<header class="hd"><div class="w"><div class="top"><a href="index.html">Paulo Cotrim</a><a href="https://wa.me/5521989150864" target="_blank" rel="noopener">WhatsApp</a></div>
+<span class="ey">Venda ou alugue com quem entende do Rio</span><h1>Cadastre seu imóvel</h1>
+<p>Conte tudo sobre o seu imóvel e envie as fotos. Eu analiso, confiro as informações e entro em contato. Depois de validado, ele aparece aqui no site para milhares de compradores.</p>
+<div class="pass"><div><b>1. Cadastre</b><small>Fotos, descrição e valor</small></div><div><b>2. Análise</b><small>Eu confiro e falo com você</small></div><div><b>3. No ar</b><small>Seu imóvel visível no site</small></div></div></div></header>
+<main class="w">
+<form id="f">
+<h2>O imóvel</h2>
+<div class="g">
+<label class="f">Título do anúncio<input name="titulo" required maxlength="90" placeholder="Ex.: 2 quartos com varanda perto do metrô"></label>
+<label>Tipo<select name="tipo"><option>Apartamento</option><option>Cobertura</option><option>Casa</option><option>Studio / Loft</option><option>Sala comercial</option><option>Terreno / Lote</option></select></label>
+<label>Bairro<input name="bairro" required placeholder="Ex.: Tijuca"></label>
+<label>Valor pedido (R$)<input name="preco" inputmode="numeric" placeholder="Ex.: 450.000"></label>
+<label>Área (m²)<input name="area" inputmode="numeric" placeholder="Ex.: 68"></label>
+<label>Quartos<select name="quartos"><option value="">—</option><option>Studio</option><option>1</option><option>2</option><option>3</option><option>4+</option></select></label>
+<label>Vagas<select name="vagas"><option value="">—</option><option>0</option><option>1</option><option>2</option><option>3+</option></select></label>
+<label class="f">Descrição<textarea name="descricao" required maxlength="1500" placeholder="Andar, sol, condomínio, lazer, reformas, IPTU, se aceita financiamento, se está quitado…"></textarea></label>
+<label class="f">Fotos (até 3)<input type="file" id="fx" accept="image/*" multiple></label><div class="pv f" id="pv"></div>
+</div>
+<h2>Seu contato</h2>
+<div class="g">
+<label>Nome<input name="nome" required></label>
+<label>WhatsApp<input name="tel" required inputmode="tel" placeholder="(21) 9…"></label>
+<label class="f">E-mail (opcional)<input name="email" type="email"></label>
+</div>
+<p class="priv">🔒 Seu nome, telefone e e-mail ficam visíveis só para o corretor Paulo Cotrim. Nada disso é publicado no site.</p>
+<label style="flex-direction:row;align-items:center;gap:8px;font-weight:500;margin-top:10px"><input type="checkbox" required style="width:18px;height:18px"> Autorizo o contato e confirmo que sou proprietário(a) ou responsável pelo imóvel.</label>
+<button class="bt" id="bt">Enviar para análise</button>
+<div class="ok" id="ok"><h2>Recebido! ✓</h2><p>Seu imóvel está em análise. Eu entro em contato pelo WhatsApp em breve.</p><p><a href="index.html">Voltar ao site</a></p></div>
+</form>
+<h2 id="vit">Imóveis de proprietários</h2><p style="color:#6b7774;margin-top:0">Imóveis cadastrados e validados por Paulo Cotrim · CRECI-RJ 77677-F.</p>
+<div class="ls" id="ls"><p style="color:#6b7774">Carregando…</p></div>
+</main>
+<script src="crm-config.js"></script>
+<script>
+(function(){
+  var F=[],cfg=window.CRM_CONFIG||{},url=cfg.webhookUrl;
+  function E(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  document.getElementById('fx').onchange=function(){F=[];var pv=document.getElementById('pv');pv.innerHTML='';[].slice.call(this.files,0,3).forEach(function(f){var r=new FileReader();r.onload=function(){var im=new Image();im.onload=function(){var k=Math.min(1,640/Math.max(im.width,im.height)),c=document.createElement('canvas');c.width=im.width*k;c.height=im.height*k;c.getContext('2d').drawImage(im,0,0,c.width,c.height);var u=c.toDataURL('image/jpeg',.6);F.push(u);var i=document.createElement('img');i.src=u;pv.appendChild(i)};im.src=r.result};r.readAsDataURL(f)})};
+  document.getElementById('f').onsubmit=function(e){e.preventDefault();if(!url){alert('Envio indisponível no momento. Fale comigo pelo WhatsApp.');return}
+    var d={acao:'imovel',token:cfg.authToken||''};new FormData(this).forEach(function(v,k){d[k]=String(v).slice(0,1500)});F.forEach(function(u,i){d['f'+(i+1)]=u});
+    var b=document.getElementById('bt');b.disabled=true;b.textContent='Enviando…';
+    fetch(url,{method:'POST',headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify(d)}).then(function(r){return r.json()}).then(function(j){
+      if(!j||!j.ok)throw 0;[].forEach.call(document.querySelectorAll('#f > *:not(#ok)'),function(x){x.style.display='none'});document.getElementById('ok').style.display='block';scrollTo(0,0)
+    }).catch(function(){b.disabled=false;b.textContent='Enviar para análise';alert('Não consegui enviar agora. Tente de novo ou me chame no WhatsApp (21) 98915-0864.')})};
+  if(url)fetch(url+'?action=imoveis').then(function(r){return r.json()}).then(function(j){var L=(j&&j.itens)||[],ls=document.getElementById('ls');
+    ls.innerHTML=L.length?L.map(function(x){return '<div class="cd"><div class="ph" style="background-image:url(\''+E(x.f1)+'\')"></div><div class="tx"><b>'+E(x.titulo)+'</b><small>'+E([x.tipo,x.bairro,x.area?x.area+' m²':'',x.quartos?x.quartos+' qto(s)':''].filter(Boolean).join(' · '))+'</small>'+(x.preco?'<div class="pr">R$ '+E(x.preco)+'</div>':'')+'<a class="z" target="_blank" rel="noopener" href="https://wa.me/5521989150864?text='+encodeURIComponent('Olá Paulo, tenho interesse no imóvel: '+x.titulo+' ('+x.bairro+')')+'">Tenho interesse</a></div></div>'}).join(''):'<p style="color:#6b7774">Em breve, novos imóveis de proprietários.</p>'}).catch(function(){document.getElementById('ls').innerHTML=''});
+})();
+</script>
+</body></html>

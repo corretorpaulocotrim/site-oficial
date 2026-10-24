@@ -148,3 +148,38 @@
   function menu(){var ref=document.getElementById('pc-ma');if(!ref||document.getElementById('pc-mz'))return;var d=ref.cloneNode(false);d.id='pc-mz';d.innerHTML='<span class="sb-icon">💬</span> Atualizar pelo WhatsApp';d.onclick=abrir;ref.parentNode.insertBefore(d,ref.nextSibling)}
   [1200,3000].forEach(function(t){setTimeout(menu,t)});
 })();
+
+/* IMOVEIS CADASTRADOS PELO PUBLICO: analisar, ver contato, aprovar (vai para o site) ou recusar */
+(function(){
+  function E(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+  function cred(){return typeof crmCred==='function'?crmCred():{}}
+  function abrir(){
+    var m=document.getElementById('pci');
+    if(!m){m=document.createElement('div');m.id='pci';m.style.cssText='position:fixed;inset:0;z-index:9993;background:#f4efe6;display:flex;flex-direction:column;font:14px Inter,Arial,sans-serif;color:#0f2e36';
+      m.innerHTML='<div style="display:flex;align-items:center;padding:12px 16px;background:#0f2e36;color:#e6c581"><b style="font:italic 600 22px Fraunces,Georgia,serif;margin-right:auto">Imóveis cadastrados</b><a href="cadastre-seu-imovel.html" target="_blank" style="color:#e6c581;margin-right:14px">ver página</a><button type="button" id="pci-x" style="background:none;border:0;color:#e6c581;font-size:28px;cursor:pointer">×</button></div><div id="pci-b" style="flex:1;overflow:auto;padding:14px 16px;max-width:900px;width:100%;margin:0 auto"></div>';
+      document.body.appendChild(m);document.getElementById('pci-x').onclick=function(){m.style.display='none'};
+      m.addEventListener('click',function(e){var b=e.target.closest('button[data-st]');if(!b)return;var c=cred();b.disabled=true;
+        crmPost({acao:'aprovar',usuario:c.usuario,senha:c.senha,id:b.dataset.id,status:b.dataset.st}).then(function(j){if(typeof toast==='function')toast(j&&j.ok?(b.dataset.st==='aprovado'?'Aprovado: já aparece no site':'Atualizado'):'Erro: atualize o Apps Script');carrega()})});
+    }
+    m.style.display='flex';carrega();
+  }
+  function carrega(){var b=document.getElementById('pci-b'),c=cred();b.innerHTML='<p>Carregando…</p>';
+    if(typeof crmPost!=='function'||!c.usuario){b.innerHTML='<p>Entre no CRM com seu login para ver os cadastros.</p>';return}
+    crmPost({acao:'imoveis_adm',usuario:c.usuario,senha:c.senha}).then(function(j){
+      if(!j||!j.ok){b.innerHTML='<p>'+(j&&j.err==='login'?'Entre de novo no CRM.':'Atualize o Apps Script com o código novo para ativar os cadastros.')+'</p>';return}
+      var L=j.itens||[],pend=L.filter(function(x){return x.status==='analise'}).length;
+      b.innerHTML='<p><b>'+pend+'</b> em análise · '+L.length+' no total</p>'+L.map(function(x){var t=String(x.tel||'').replace(/\D/g,'');if(t&&t.length<=11)t='55'+t;
+        return '<div style="background:#fff;border:1px solid #e3d9c6;border-left:5px solid '+(x.status==='aprovado'?'#1a8f4c':x.status==='recusado'?'#b4441d':'#cf9f4f')+';border-radius:14px;padding:12px 14px;margin-bottom:10px">'+
+          '<div style="display:flex;gap:10px;flex-wrap:wrap">'+[x.f1,x.f2,x.f3].filter(Boolean).map(function(f){return '<img src="'+f+'" style="width:90px;height:90px;object-fit:cover;border-radius:10px">'}).join('')+'</div>'+
+          '<b style="display:block;font:600 17px Fraunces,Georgia,serif;margin-top:8px">'+E(x.titulo)+'</b><small>'+E([x.tipo,x.bairro,x.area&&x.area+' m²',x.quartos&&x.quartos+' qto(s)',x.vagas&&x.vagas+' vaga(s)',x.preco&&'R$ '+x.preco].filter(Boolean).join(' · '))+'</small>'+
+          '<p style="margin:8px 0;white-space:pre-wrap">'+E(x.descricao)+'</p>'+
+          '<p style="background:#f4efe6;border-radius:10px;padding:8px 10px;margin:6px 0">🔒 <b>'+E(x.nome)+'</b> · '+E(x.tel)+(x.email?' · '+E(x.email):'')+'</p>'+
+          '<div style="display:flex;gap:8px;flex-wrap:wrap">'+(t?'<a href="https://wa.me/'+t+'?text='+encodeURIComponent('Olá '+String(x.nome||'').split(' ')[0]+', aqui é o Paulo Cotrim. Recebi o cadastro do seu imóvel ('+x.titulo+'). Podemos conversar?')+'" target="_blank" style="background:#1a8f4c;color:#fff;text-decoration:none;border-radius:20px;padding:8px 14px;font-weight:600">WhatsApp</a>':'')+
+          (x.status!=='aprovado'?'<button type="button" data-st="aprovado" data-id="'+E(x.id)+'" style="background:#0f2e36;color:#e6c581;border:0;border-radius:20px;padding:8px 14px;font-weight:600;cursor:pointer">Aprovar e publicar</button>':'<button type="button" data-st="analise" data-id="'+E(x.id)+'" style="background:#e6c581;color:#0f2e36;border:0;border-radius:20px;padding:8px 14px;font-weight:600;cursor:pointer">Tirar do site</button>')+
+          (x.status!=='recusado'?'<button type="button" data-st="recusado" data-id="'+E(x.id)+'" style="background:none;color:#b4441d;border:1px solid #b4441d;border-radius:20px;padding:8px 14px;cursor:pointer">Recusar</button>':'')+'</div></div>'}).join('');
+    });
+  }
+  window.pcAbrirImoveisCad=abrir;
+  function menu(){var ref=document.getElementById('pc-ma');if(!ref||document.getElementById('pc-mi'))return;var d=ref.cloneNode(false);d.id='pc-mi';d.innerHTML='<span class="sb-icon">🏠</span> Imóveis cadastrados';d.onclick=abrir;ref.parentNode.insertBefore(d,ref.nextSibling)}
+  [1400,3200].forEach(function(t){setTimeout(menu,t)});
+})();

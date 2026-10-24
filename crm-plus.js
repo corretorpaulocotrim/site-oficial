@@ -223,10 +223,10 @@
     c.innerHTML='<div class="card-header"><div class="card-title">Montar minha fila de ligações</div></div><div class="card-body">'+
       '<div class="dq-f"><input id="dq-s" type="search" placeholder="Buscar nome, telefone ou interesse"><select id="dq-t"><option value="">Todas as temperaturas</option><option value="quente">Quentes</option><option value="morno">Mornos</option><option value="frio">Frios</option></select>'+
       '<select id="dq-e"><option value="">Todas as etapas</option><option value="novo">Novo</option><option value="contato">Contatado</option><option value="proposta">Proposta</option><option value="visita">Visita</option></select>'+
-      '<select id="dq-r"><option value="">Todos</option><option value="ret">Retorno hoje / atrasado</option><option value="nunca">Nunca liguei</option></select></div>'+
+      '<select id="dq-p"><option value="">Todos os perfis</option><option value="mcmv">MCMV / Zona Norte e Oeste</option><option value="lux">Alto padrão / Zona Sul e Barra</option></select><select id="dq-r"><option value="">Todos</option><option value="ret">Retorno hoje / atrasado</option><option value="nunca">Nunca liguei</option></select></div>'+
       '<div class="dq-a"><label><input type="checkbox" id="dq-all"> Marcar todos da lista</label><span id="dq-n"></span><button type="button" id="dq-go">Iniciar fila</button></div><div class="dq-l" id="dq-l"></div></div>';
     pg.insertBefore(c,pg.children[1]||null);
-    ['dq-s','dq-t','dq-e','dq-r'].forEach(function(i){document.getElementById(i).addEventListener(i==='dq-s'?'input':'change',lista)});
+    ['dq-s','dq-t','dq-e','dq-r','dq-p'].forEach(function(i){document.getElementById(i).addEventListener(i==='dq-s'?'input':'change',lista)});
     document.getElementById('dq-all').onchange=function(){var on=this.checked;VIS.forEach(function(l){if(on)SEL[l.id]=1;else delete SEL[l.id]});lista()};
     document.getElementById('dq-l').onclick=function(e){var it=e.target.closest('.dq-i');if(!it)return;var cb=it.querySelector('input');if(e.target!==cb){e.preventDefault();cb.checked=!cb.checked}if(cb.checked)SEL[it.dataset.id]=1;else delete SEL[it.dataset.id];conta()};
     document.getElementById('dq-go').onclick=iniciar;
@@ -236,12 +236,14 @@
     var sv=(document.getElementById('dq-s')||{}).value||'',q=N(sv).trim(),dg=sv.replace(/\D/g,''),t=document.getElementById('dq-t').value,e=document.getElementById('dq-e').value,r=document.getElementById('dq-r').value;
     VIS=(getLeads()||[]).filter(function(l){
       if(['fechado','perdido'].indexOf(l.status)>-1)return false;if(t&&l.temp!==t)return false;if(e&&(l.status||'novo')!==e)return false;
-      if(r==='ret'&&!(l.retorno&&l.retorno<=hoje()))return false;if(r==='nunca'&&l.cont&&l.cont.l)return false;
+      var pf=(document.getElementById('dq-p')||{}).value;if(pf&&perfil(l)!==pf)return false;if(r==='ret'&&!(l.retorno&&l.retorno<=hoje()))return false;if(r==='nunca'&&l.cont&&l.cont.l)return false;
       if(q&&N(l.nome+' '+l.interesse).indexOf(q)<0&&!(dg.length>=3&&String(l.tel||'').replace(/\D/g,'').indexOf(dg)>-1))return false;return true});
     document.getElementById('dq-l').innerHTML=VIS.slice(0,300).map(function(l){var k=l.cont||{l:0};
       return '<label class="dq-i" data-id="'+E(l.id)+'"><input type="checkbox"'+(SEL[l.id]?' checked':'')+'><span><b>'+E(l.nome)+'</b><small>'+E(l.tel)+(l.interesse?' · '+E(l.interesse):'')+'</small></span><em>'+(k.l?k.l+' lig.':'nunca ligou')+'</em></label>'}).join('')+(VIS.length>300?'<div style="padding:10px;color:#6b7774;font-size:12px">Mostrando 300 de '+VIS.length+'. Use a busca ou os filtros.</div>':'');
     conta();
   }
+  function perfil(l){var s=N([l.interesse,l.obs,l.bairro].join(' ')),v=parseFloat(String(l.orcamento||'').replace(/[^d,]/g,'').replace(',','.'))||0;
+    if(/ipanema|leblon|lagoa|gavea|jardim botanico|copacabana|botafogo|flamengo|laranjeiras|barra da tijuca|barra olimpica|recreio|sao conrado|joa|alto padrao|cobertura|frente mar/.test(s)||v>=900000)return 'lux';return 'mcmv'}
   function conta(){document.getElementById('dq-n').textContent=Object.keys(SEL).length+' selecionado(s) · '+VIS.length+' na lista'}
   function iniciar(){
     var ord=(getLeads()||[]).filter(function(l){return SEL[l.id]});

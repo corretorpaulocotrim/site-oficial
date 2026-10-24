@@ -70,6 +70,20 @@ function doPost(e) {
     if (d.acao === 'atualizacao') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _addFeed(d); }
     // CRM: login, leitura e importacao em lote — sempre com usuario/senha conferidos aqui no servidor
     if (d.acao === 'login') return _json({ ok: _auth(d.usuario, d.senha) });
+    // IMOVEIS CADASTRADOS PELO PUBLICO: entram em analise; contato so aparece no CRM
+    if (d.acao === 'imovel') {
+      if (TOKEN && d.token !== TOKEN) return _json({ ok: false, err: 'token' });
+      var si = _imSheet(), idi = Date.now();
+      si.appendRow([idi, new Date(), 'analise', d.titulo || '', d.tipo || '', d.bairro || '', d.preco || '', d.area || '', d.quartos || '', d.vagas || '', d.descricao || '', d.nome || '', d.tel || '', d.email || '', d.f1 || '', d.f2 || '', d.f3 || '']);
+      return _json({ ok: true, id: idi });
+    }
+    if (d.acao === 'imoveis_adm') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _json({ ok: true, itens: _imRows(true) }); }
+    if (d.acao === 'aprovar') {
+      if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' });
+      var sa = _imSheet(), va = sa.getDataRange().getValues();
+      for (var ia = 1; ia < va.length; ia++) if (String(va[ia][0]) === String(d.id)) sa.getRange(ia + 1, 3).setValue(d.status || 'aprovado');
+      return _json({ ok: true });
+    }
     if (d.acao === 'salvar') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _salvar(d.leads || []); }
     if (d.acao === 'leads') { if (!_auth(d.usuario, d.senha)) return _json({ ok: false, err: 'login' }); return _json({ ok: true, leads: _leads() }); }
     if (d.acao === 'importar') {
@@ -100,13 +114,29 @@ function doPost(e) {
 // Devolve todos os leads (GET) — o CRM usa isso pra sincronizar
 function doGet(e) {
   var act = e.parameter && e.parameter.action;
-  if (act === 'news') return _feed(false);                       // PÚBLICO: só itens publico=sim, sem comissão
+  if (act === 'news') return _feed(false);
+  if (act === 'imoveis') return _json({ ok: true, itens: _imRows(false) }); // PUBLICO: so aprovados, sem contato                       // PÚBLICO: só itens publico=sim, sem comissão
   if (act === 'feed') {                                          // PRIVADO: tudo, exige token
     if (!_auth(e.parameter.usuario, e.parameter.senha)) return _json({ ok: false, err: 'login' });
     return _feed(true);
   }
   // Leitura dos leads NAO e mais publica: so via POST {acao:'leads'} com login (o token fica visivel no site)
   return _json({ ok: false, err: 'login' });
+}
+
+var IM_HEAD = ['id','data','status','titulo','tipo','bairro','preco','area','quartos','vagas','descricao','nome','tel','email','f1','f2','f3'];
+function _imSheet() {
+  var ss = SpreadsheetApp.getActiveSpreadsheet(), sh = ss.getSheetByName('Imoveis');
+  if (!sh) { sh = ss.insertSheet('Imoveis'); sh.appendRow(IM_HEAD); }
+  return sh;
+}
+function _imRows(adm) {
+  var v = _imSheet().getDataRange().getValues(); v.shift();
+  return v.filter(function (r) { return r[0] !== '' && (adm || r[2] === 'aprovado'); }).map(function (r) {
+    var o = {}; IM_HEAD.forEach(function (h, i) { o[h] = r[i]; });
+    if (!adm) { delete o.nome; delete o.tel; delete o.email; }
+    return o;
+  }).reverse();
 }
 
 function _leads() {
