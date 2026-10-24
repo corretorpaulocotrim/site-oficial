@@ -51,6 +51,7 @@
       (j.leads||[]).forEach(function(r){
         if(r.id===''||r.id==null||DEL[r.id])return;var x=null;
         if(r.dados){try{x=JSON.parse(r.dados)}catch(e){}}
+        if(String(r.id)==='pc-agenda'){if(x&&window.pcAgendaRemota)pcAgendaRemota(x);return}
         if(x)rem[x.id]=1;
         if(!x)x={id:Number(r.id)||r.id,nome:r.nome||'Lead',tel:String(r.telefone||''),email:r.email||'',origem:r.origem||'Site',interesse:r.interesse||'',temp:r.temp||'morno',status:r.status||'novo',orcamento:r.renda||'',obs:r.obs||'',data:r.data?new Date(r.data).toLocaleDateString('pt-BR'):'',hist:[{a:'Lead do site',d:r.origem||'',t:r.data?new Date(r.data).toLocaleString('pt-BR'):''}],upd:0};
         var i=idx[x.id];
