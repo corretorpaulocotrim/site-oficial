@@ -97,3 +97,54 @@
   window.pcAbrirRotina=abrir;
   setInterval(painel,60000);[800,2600].forEach(function(t){setTimeout(function(){menu();painel()},t)});
 })();
+
+/* =====================================================
+   ATUALIZAR PELO WHATSAPP: cole o relatorio das conversas
+   (uma linha por cliente: telefone | nome | etapa | resumo | proximo passo | data | mensagem sugerida)
+   e o CRM atualiza etapa, historico, retorno e cria a pendencia na Rotina do dia.
+   ===================================================== */
+(function(){
+  var ET={novo:'novo',contato:'contato',contatado:'contato',conversa:'contato',proposta:'proposta',visita:'visita',fechado:'fechado',vendido:'fechado',perdido:'perdido',frio:'perdido'};
+  function D(t){return String(t||'').replace(/\D/g,'').slice(-10)}
+  function data(s){s=String(s||'').trim();var m=s.match(/(\d{1,2})\/(\d{1,2})(?:\/(\d{2,4}))?/);if(m){var y=m[3]?(m[3].length===2?'20'+m[3]:m[3]):new Date().getFullYear();return y+'-'+String(m[2]).padStart(2,'0')+'-'+String(m[1]).padStart(2,'0')}
+    var d=new Date();if(/amanh/i.test(s))d.setDate(d.getDate()+1);else if(!/hoje/i.test(s))return '';return d.toISOString().slice(0,10)}
+  function aplicar(txt){
+    var L=getLeads()||[],n=0,novos=0,tarefas=[],linhas=txt.split(/\r?\n/).map(function(l){return l.trim()}).filter(function(l){return l&&l.indexOf('|')>-1&&!/^telefone\s*\|/i.test(l)&&!/^[-|\s]+$/.test(l)});
+    linhas.forEach(function(l){
+      var c=l.replace(/^\||\|$/g,'').split('|').map(function(x){return x.trim()}),tel=c[0],nome=c[1],et=ET[String(c[2]||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').split(' ')[0]],res=c[3]||'',prox=c[4]||'',dt=data(c[5]),msg=c[6]||'';
+      var d=D(tel);if(d.length<8)return;
+      var x=L.find(function(q){return D(q.tel)===d});
+      if(!x){x={id:Date.now()*1000+n,nome:nome||('Contato '+d.slice(-4)),tel:tel,origem:'WhatsApp',temp:'morno',status:'contato',hist:[],data:new Date().toLocaleDateString('pt-BR')};L.unshift(x);novos++}
+      if(et)x.status=et;if(et==='proposta'||et==='visita')x.temp='quente';
+      if(dt)x.retorno=dt;if(msg)x.zapMsg=msg;
+      (x.hist=x.hist||[]).unshift({a:'WhatsApp: '+(res||'conversa revisada'),d:prox,t:new Date().toLocaleString('pt-BR')});
+      if(prox)tarefas.push({id:Date.now()+n,x:prox,a:'Retornar',c:'cliente',dt:dt||new Date().toISOString().slice(0,10),lid:x.id,ln:x.nome});
+      n++;
+    });
+    if(!n){alert('Nenhuma linha reconhecida. Cada linha precisa começar com o telefone e usar | entre as colunas.');return}
+    saveLeads(L);
+    try{var A=JSON.parse(localStorage.getItem('crm_agenda'))||{t:[],i:[]};A.t=A.t.concat(tarefas);A.upd=Date.now();localStorage.setItem('crm_agenda',JSON.stringify(A))}catch(e){}
+    if(typeof toast==='function')toast(n+' cliente(s) atualizados'+(novos?' ('+novos+' novos)':'')+' · '+tarefas.length+' pendência(s) na Rotina');
+    if(window.pcRefresh)pcRefresh();
+  }
+  // WhatsApp do lead usa a mensagem sugerida, se houver
+  var oZ=window.zap;
+  if(typeof oZ==='function')window.zap=function(id){var l=(getLeads()||[]).find(function(x){return x.id===id});if(l&&l.zapMsg){var t=String(l.tel||'').replace(/\D/g,'');if(t.length<=11)t='55'+t;window.open('https://wa.me/'+t+'?text='+encodeURIComponent(l.zapMsg),'_blank');var L=getLeads(),y=L.find(function(q){return q.id===id});y.cont=y.cont||{l:0,m:0};y.cont.m++;(y.hist=y.hist||[]).unshift({a:'Enviou mensagem',d:'mensagem sugerida',t:new Date().toLocaleString('pt-BR')});delete y.zapMsg;saveLeads(L);return}return oZ.apply(this,arguments)};
+  function abrir(){
+    var m=document.getElementById('pcz');
+    if(!m){m=document.createElement('div');m.id='pcz';m.style.cssText='position:fixed;inset:0;z-index:9993;background:rgba(5,11,12,.6);display:flex;align-items:center;justify-content:center;padding:16px';
+      m.innerHTML='<div style="background:#f4efe6;color:#0f2e36;border-radius:16px;max-width:720px;width:100%;padding:18px;font:14px Inter,Arial,sans-serif"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font:italic 600 21px Fraunces,Georgia,serif">Atualizar pelo WhatsApp</b><button type="button" id="pcz-x" style="background:none;border:0;font-size:26px;cursor:pointer">×</button></div>'+
+       '<p style="color:#6b7774;margin:8px 0">Cole o relatório das conversas (uma linha por cliente):<br><code>telefone | nome | etapa | resumo | próximo passo | data | mensagem sugerida</code></p>'+
+       '<textarea id="pcz-t" style="width:100%;min-height:220px;padding:10px;border:1px solid #e3d9c6;border-radius:10px;font:13px monospace"></textarea>'+
+       '<div style="display:flex;gap:8px;margin-top:10px;flex-wrap:wrap"><button type="button" id="pcz-go" style="background:#1a8f4c;color:#fff;border:0;border-radius:22px;padding:11px 20px;font-weight:700;cursor:pointer">Atualizar CRM</button><button type="button" id="pcz-cp" style="background:#0f2e36;color:#e6c581;border:0;border-radius:22px;padding:11px 16px;font-weight:600;cursor:pointer">Copiar pedido para o Claude do Chrome</button></div></div>';
+      document.body.appendChild(m);
+      document.getElementById('pcz-x').onclick=function(){m.style.display='none'};
+      document.getElementById('pcz-go').onclick=function(){aplicar(document.getElementById('pcz-t').value);m.style.display='none'};
+      document.getElementById('pcz-cp').onclick=function(){var p='Leia minhas conversas do WhatsApp Web dos últimos 30 dias com clientes de imóveis (ignore grupos, família e fornecedores). Para cada cliente, devolva UMA linha neste formato, sem texto extra:\ntelefone | nome | etapa (novo, contato, proposta, visita, fechado ou perdido) | resumo de 1 frase | próximo passo | data do retorno (dd/mm ou hoje/amanhã) | mensagem sugerida para eu enviar agora, curta e natural, assinada Paulo Cotrim\nNão envie nenhuma mensagem: só me devolva a lista.';navigator.clipboard.writeText(p).then(function(){if(typeof toast==='function')toast('Pedido copiado. Cole no Claude do Chrome.')})};
+    }
+    m.style.display='flex';
+  }
+  window.pcAbrirZap=abrir;
+  function menu(){var ref=document.getElementById('pc-ma');if(!ref||document.getElementById('pc-mz'))return;var d=ref.cloneNode(false);d.id='pc-mz';d.innerHTML='<span class="sb-icon">💬</span> Atualizar pelo WhatsApp';d.onclick=abrir;ref.parentNode.insertBefore(d,ref.nextSibling)}
+  [1200,3000].forEach(function(t){setTimeout(menu,t)});
+})();
