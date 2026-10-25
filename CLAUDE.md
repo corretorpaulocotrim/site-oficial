@@ -42,7 +42,7 @@ Render o máximo com o mínimo de tokens: ler só o necessário (grep/trechos), 
 ## 3. IDENTIDADE / REGRAS DE MARCA
 - Clicáveis/CTA de ação = **VERDE #1a8f4c** + fonte **Fraunces** (títulos). Corpo = Inter. Petróleo #0f2e36.
 - **DECISÃO NOVA do Paulo (substitui o dourado):** o dourado **#b8873a → azul Caixa #0058A3** em todo o site. Paleta agora = petróleo + verde + **azul Caixa** + neutro (sem dourado, sem amarelo). Aplicar via transform no publish (replace `#b8873a`/`#B8873A` → `#0058A3` em todos os arquivos). O amarelo do chip "99" também virou azul Caixa.
-- **Logo oficial em vídeo/peças novas (decisão 2026-10):** usar o monograma **PC** do site (`logo-round-gold.svg`; assinatura `logo-premium-light.svg`), não o favicon da chave. Editor de vídeo: `editor-video-ia/` (ver LEIA-ME e ESTUDO-E-ROTEIROS).
+- **Logo oficial em vídeo/peças novas (decisão 2026-10):** usar o monograma **PC** do site (`logo-round-gold.svg`; assinatura `logo-premium-light.svg`), não o favicon da chave. Editor de vídeo = **Paulo Cotrim AI Studio** em `editor-video-ia/` (README + docs/; `npm test`). Identidade do estúdio segue o site atual: marfim/tinta/ouro #B0895B, Cormorant Garamond + Inter.
 - **EXCEÇÃO (decisão final):** a **CHAVE (logo) permanece DOURADA** — é o único item dourado que o Paulo quer manter ("a chave adorada"). Todo o resto azul. Nas peças de marketing e favicon, a chave = dourado #b8873a; fundo/CTAs = azul Caixa.
 - **DOMÍNIO:** o Paulo usa **paulocotrim.com** (sem .br) nas peças/comunicação.
 - **Sem verde antigo #3E8E5A, sem roxo, sem rosa/arco-íris.** Paleta = petróleo + verde + dourado + neutro.

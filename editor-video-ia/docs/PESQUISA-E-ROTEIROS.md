@@ -1,12 +1,17 @@
-# Estudo: o que prende o cliente em vídeo imobiliário (e como o app aplica)
+# Pesquisa: o que prende o cliente em vídeo imobiliário (e como o estúdio aplica)
 
-Este estudo saiu dos 3 vídeos que você mandou e dos formatos que mais funcionam hoje em Reels e TikTok. Os links do Instagram (Bruno Cassarolla e o reel) não abriram no ambiente onde o app foi montado, porque o Instagram bloqueia esse acesso. Os padrões abaixo são os que corretores de alta performance usam, sem copiar ninguém.
+**Data da pesquisa:** 25/10/2026. **Fontes analisadas:** 3 vídeos de referência enviados pelo Paulo (formato "corretor + IA" com etiquetas de capítulo e legenda; tutorial de edição com legenda palavra a palavra e cortes de pausa; drone com marcação de terreno e virada para casa pronta), o site paulocotrim.com e os books oficiais na pasta `apresentacoes/`.
+
+**Limitações (registradas por honestidade):**
+- O Instagram (perfil @brunocassarolla e o reel enviado) e a Biblioteca de Anúncios da Meta **não estavam acessíveis** no ambiente de desenvolvimento (bloqueio de rede). Por isso nenhum número de desempenho deles foi usado.
+- Os padrões abaixo são princípios recorrentes do formato vertical. Não são comparações de conversão: **visualização não é venda**. Meça no seu funil (seção 4).
+- A biblioteca de presets (pasta `presets/`) é onde novos padrões entram sem mexer no motor.
 
 ## 1. Padrões que funcionam → o que o app faz sozinho
 | Padrão do mercado | Por que retém | No app |
 |---|---|---|
 | Gancho escrito nos primeiros 3s | Quem rola o feed decide em 1,5s se para | Campo **Gancho** + sugestões automáticas a partir do catálogo |
-| Legenda grande, palavra a palavra, com destaque | 85% assistem sem som | Legenda IA local com a palavra ativa em verde e FGTS/Caixa/números coloridos |
+| Legenda grande, palavra a palavra, com destaque | O feed começa sem som: sem legenda, a mensagem se perde | Legenda IA local com a palavra falada no dourado da marca e palavras-chave/números destacados |
 | Corte seco sem pausas + zoom alternado | Ritmo rápido sem parecer cortado | Corte de pausas + zoom de 12% em um corte sim, outro não |
 | Corretor em círculo sobre o material | Une rosto (confiança) e imóvel (desejo) | **Modo Apresentação** com você em círculo e aro dourado |
 | Material aparece quando o corretor fala dele | Parece editado à mão, frase a frase | O app ouve "planta", "lazer", "metrô"... e põe a cena certa nesse segundo |
@@ -15,7 +20,7 @@ Este estudo saiu dos 3 vídeos que você mandou e dos formatos que mais funciona
 | Etiqueta de capítulo ("● LAZER") | Organiza o tour e dá sensação de conteúdo completo | Etiqueta automática a partir do PDF ou digitada por você |
 | Fichas com dados (quartos, m², construtora) | Qualifica o lead antes do WhatsApp | Fichas animadas com dados **reais** do catálogo Sawala + PDF |
 | Transições com som (whoosh) | Marcam a troca de cena e prendem a atenção | 8 transições rotativas, cada uma com efeito sonoro |
-| Barra de progresso | O cliente vê que falta pouco e fica até o fim | Barra verde no topo |
+| Barra de progresso | O cliente vê que falta pouco e fica até o fim | Barra dourada no topo |
 | Fechamento com marca e CTA | Converte a atenção em conversa | Cartão final com logo oficial, WhatsApp, site e CRECI |
 | Preço escondido | Gera a conversa no WhatsApp (sua regra de captação) | Páginas de tabela de preço ficam **fora** do vídeo automaticamente |
 
@@ -30,18 +35,19 @@ Grave **uma fala de 30 a 50 s** seguindo o roteiro abaixo. Diga as **palavras em
 4. **Localização**: "Ele **fica** a X **minutos** do **metrô**/VLT..." → entra a página de **localização**
 5. **Planta**: "A **planta** tem [1 e 2] **quartos**, com **varanda**..." → entra a **planta** com aproximação
 6. **Lazer**: "No **lazer** tem **piscina**, **academia**..." → entra o **lazer**
-7. **Condição**: "Dá pra usar o **FGTS** na **entrada** e financiar pela **Caixa**." → ficha "Financiamento CAIXA"
+7. **Condição**: "Dá pra usar o **FGTS** na **entrada** e financiar pela **Caixa**." → texto de tela "FGTS + Financiamento CAIXA" (em lançamentos econômicos)
 8. **CTA (últimos 3 s)**: "Comenta **QUERO** ou me chama no WhatsApp que eu te mando a simulação." → cartão final
 
 ## 3. Os 4 vídeos de cada lançamento (1 gravação = 1 semana de conteúdo)
-| Dia | Modelo no app | Material | Objetivo |
+| Dia | Como fazer no estúdio | Material | Objetivo |
 |---|---|---|---|
-| Seg | Apresentação | Sua fala + book PDF + capa | Lead qualificado |
-| Qua | Tour do imóvel | Vídeos do decorado + fotos | Desejo |
-| Sex | Só fotos | Book/planta/fotos + música | Alcance |
-| Dom | Paulo falando | Resposta a uma dúvida ("dá pra usar FGTS?") | Autoridade |
+| Seg | Auto Edit · objetivo "interesse" · preset do posicionamento | Sua fala + book PDF + capa do site | Lead qualificado |
+| Qua | Auto Edit · objetivo "desejo" · edição criativa | Vídeos do decorado + fotos | Desejo |
+| Sex | PDF Intelligence → roteiro → "Montar no editor" (sem apresentador) | Book/planta/fotos + música | Alcance |
+| Dom | Auto Edit · objetivo "objeções" · preset Clean Corporate | Sua resposta a uma dúvida ("dá pra usar FGTS?") | Autoridade |
 
 ## 4. O que medir (toda semana)
+As metas abaixo são pontos de partida, não dados de mercado: ajuste com os seus números depois de 4 semanas.
 - **Retenção de 3 s** acima de 60% → o gancho funciona. Se ficar abaixo, troque o gancho.
 - **Assistiu até o fim** acima de 30% → o ritmo funciona.
 - **Mensagens no WhatsApp por vídeo** → a métrica que paga a conta. Meta: 3 ou mais.

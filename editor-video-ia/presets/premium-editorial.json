@@ -1,0 +1,171 @@
+{
+ "cor": {
+  "contraste": 1.04,
+  "saturacao": 1.05,
+  "brilho": 0.01,
+  "gamma": 1.02,
+  "nitidez": 0.6,
+  "vinheta": 0.25
+ },
+ "ritmo": {
+  "cortarPausas": true,
+  "pausaMinima": 0.45,
+  "margem": 0.12,
+  "punchIn": 1,
+  "velocidadeTour": 1,
+  "minCena": 1.6,
+  "maxCena": 5.5
+ },
+ "movimento": {
+  "intensidade": 0.06,
+  "fotos": "kenburns",
+  "planta": 0.3,
+  "pdf": "cartao"
+ },
+ "transicoes": {
+  "lista": [
+   "fade",
+   "dissolve",
+   "smoothup"
+  ],
+  "dur": 0.6,
+  "entreFalas": "corte"
+ },
+ "legenda": {
+  "fonte": "Inter",
+  "negrito": false,
+  "tamanho": 0.056,
+  "cor": "#FFFFFF",
+  "destaque": "#B0895B",
+  "destacarAtiva": true,
+  "contorno": "#000000",
+  "espessura": 0,
+  "sombra": 0.004,
+  "fundo": "",
+  "fundoOpacidade": 0.55,
+  "caixaAlta": false,
+  "palavras": 4,
+  "maxCaracteres": 28,
+  "animacao": "fade",
+  "posicaoY": 0.78,
+  "emojis": false,
+  "palavrasDestaque": [
+   "fgts",
+   "caixa",
+   "entrada",
+   "parcela",
+   "financiamento",
+   "lazer",
+   "metrô",
+   "vlt",
+   "praia",
+   "vista",
+   "varanda",
+   "suíte",
+   "lançamento",
+   "planta",
+   "m²",
+   "r$",
+   "mil",
+   "vaga",
+   "piscina",
+   "rooftop",
+   "exclusivo"
+  ]
+ },
+ "titulos": {
+  "gancho": {
+   "fonte": "Cormorant Garamond SemiBold",
+   "tamanho": 0.072,
+   "cor": "#FFFFFF",
+   "fundo": "",
+   "fundoOpacidade": 0,
+   "caixaAlta": false,
+   "posicaoY": 0.14,
+   "animacao": "fade",
+   "duracao": 3
+  },
+  "ficha": {
+   "fonte": "Cormorant Garamond SemiBold",
+   "tamanho": 0.062,
+   "cor": "#FFFFFF",
+   "fundo": "#1A1A19",
+   "fundoOpacidade": 0.7,
+   "caixaAlta": false,
+   "posicaoY": 0.14,
+   "animacao": "subir",
+   "duracao": 2
+  },
+  "impacto": {
+   "fonte": "Cormorant Garamond SemiBold",
+   "tamanho": 0.11,
+   "cor": "#FFFFFF",
+   "fundo": "",
+   "fundoOpacidade": 0,
+   "caixaAlta": false,
+   "posicaoY": 0.45,
+   "animacao": "pop",
+   "duracao": 1.5
+  },
+  "rotulo": {
+   "fonte": "Inter",
+   "tamanho": 0.03,
+   "cor": "#FFFFFF",
+   "fundo": "#000000",
+   "fundoOpacidade": 0.45,
+   "caixaAlta": true,
+   "posicaoY": 0.065,
+   "animacao": "fade",
+   "duracao": 3
+  },
+  "cta": {
+   "fonte": "Inter",
+   "tamanho": 0.05,
+   "cor": "#1A1A19",
+   "fundo": "#B0895B",
+   "fundoOpacidade": 1,
+   "caixaAlta": false,
+   "posicaoY": 0.6,
+   "animacao": "pop",
+   "duracao": 3
+  }
+ },
+ "audio": {
+  "limparVoz": true,
+  "musicaVolume": 0.22,
+  "ducking": true,
+  "sfxVolume": 0.18,
+  "sfx": {
+   "transicao": "swoosh-suave",
+   "gancho": "",
+   "ficha": "",
+   "cta": "",
+   "broll": "swoosh-suave"
+  }
+ },
+ "marca": {
+  "marcaDagua": true,
+  "opacidade": 0.85,
+  "tamanho": 0.09,
+  "telaFinal": true,
+  "duracaoTelaFinal": 3.5,
+  "barraProgresso": true,
+  "corBarra": "#B0895B"
+ },
+ "export": {
+  "crf": 19,
+  "fps": 30,
+  "preset": "veryfast",
+  "audioKbps": 192
+ },
+ "id": "premium-editorial",
+ "nome": "Premium Editorial",
+ "descricao": "Tipografia refinada (Cormorant + Inter), movimento discreto, poucos elementos, sem emojis. Para médio-alto e alto padrão.",
+ "posicionamento": [
+  "medio-alto",
+  "luxo",
+  "institucional"
+ ],
+ "versao": 1,
+ "oficial": true
+}

@@ -1,0 +1,13 @@
+services:
+  studio:
+    build: .
+    image: paulocotrim-ai-studio
+    restart: unless-stopped
+    ports:
+      - "3333:3333"
+    env_file: .env          # precisa ter APP_SENHA (o container escuta na rede)
+    environment:
+      HOST: 0.0.0.0
+      DADOS_DIR: /app/dados
+    volumes:
+      - ./dados:/app/dados  # projetos, mídias, renders, modelos — faça backup

@@ -1,0 +1,170 @@
+{
+ "cor": {
+  "contraste": 1.03,
+  "saturacao": 1.05,
+  "brilho": 0.01,
+  "gamma": 1.02,
+  "nitidez": 0.6,
+  "vinheta": 0.15
+ },
+ "ritmo": {
+  "cortarPausas": true,
+  "pausaMinima": 0.45,
+  "margem": 0.12,
+  "punchIn": 1.06,
+  "velocidadeTour": 1.25,
+  "minCena": 1.6,
+  "maxCena": 4.5
+ },
+ "movimento": {
+  "intensidade": 0.08,
+  "fotos": "pan",
+  "planta": 0.3,
+  "pdf": "cartao"
+ },
+ "transicoes": {
+  "lista": [
+   "fade",
+   "smoothleft"
+  ],
+  "dur": 0.4,
+  "entreFalas": "corte"
+ },
+ "legenda": {
+  "fonte": "Inter SemiBold",
+  "negrito": false,
+  "tamanho": 0.055,
+  "cor": "#FFFFFF",
+  "destaque": "#B0895B",
+  "destacarAtiva": true,
+  "contorno": "#000000",
+  "espessura": 0,
+  "sombra": 0,
+  "fundo": "#1A1A19",
+  "fundoOpacidade": 0.6,
+  "caixaAlta": false,
+  "palavras": 5,
+  "maxCaracteres": 32,
+  "animacao": "fade",
+  "posicaoY": 0.74,
+  "emojis": false,
+  "palavrasDestaque": [
+   "fgts",
+   "caixa",
+   "entrada",
+   "parcela",
+   "financiamento",
+   "lazer",
+   "metrô",
+   "vlt",
+   "praia",
+   "vista",
+   "varanda",
+   "suíte",
+   "lançamento",
+   "planta",
+   "m²",
+   "r$",
+   "mil",
+   "vaga",
+   "piscina",
+   "rooftop",
+   "exclusivo"
+  ]
+ },
+ "titulos": {
+  "gancho": {
+   "fonte": "Inter",
+   "tamanho": 0.06,
+   "cor": "#FFFFFF",
+   "fundo": "#1A1A19",
+   "fundoOpacidade": 0.85,
+   "caixaAlta": false,
+   "posicaoY": 0.14,
+   "animacao": "subir",
+   "duracao": 3
+  },
+  "ficha": {
+   "fonte": "Cormorant Garamond SemiBold",
+   "tamanho": 0.062,
+   "cor": "#FFFFFF",
+   "fundo": "#1A1A19",
+   "fundoOpacidade": 0.7,
+   "caixaAlta": false,
+   "posicaoY": 0.14,
+   "animacao": "subir",
+   "duracao": 2
+  },
+  "impacto": {
+   "fonte": "Inter Black",
+   "tamanho": 0.11,
+   "cor": "#FFFFFF",
+   "fundo": "",
+   "fundoOpacidade": 0,
+   "caixaAlta": true,
+   "posicaoY": 0.45,
+   "animacao": "pop",
+   "duracao": 1.5
+  },
+  "rotulo": {
+   "fonte": "Inter",
+   "tamanho": 0.03,
+   "cor": "#FFFFFF",
+   "fundo": "#000000",
+   "fundoOpacidade": 0.45,
+   "caixaAlta": true,
+   "posicaoY": 0.065,
+   "animacao": "fade",
+   "duracao": 3
+  },
+  "cta": {
+   "fonte": "Inter",
+   "tamanho": 0.05,
+   "cor": "#1A1A19",
+   "fundo": "#B0895B",
+   "fundoOpacidade": 1,
+   "caixaAlta": false,
+   "posicaoY": 0.6,
+   "animacao": "pop",
+   "duracao": 3
+  }
+ },
+ "audio": {
+  "limparVoz": true,
+  "musicaVolume": 0.18,
+  "ducking": true,
+  "sfxVolume": 0.2,
+  "sfx": {
+   "transicao": "clique",
+   "gancho": "",
+   "ficha": "",
+   "cta": "",
+   "broll": "clique"
+  }
+ },
+ "marca": {
+  "marcaDagua": true,
+  "opacidade": 0.85,
+  "tamanho": 0.09,
+  "telaFinal": true,
+  "duracaoTelaFinal": 3.5,
+  "barraProgresso": true,
+  "corBarra": "#B0895B"
+ },
+ "export": {
+  "crf": 19,
+  "fps": 30,
+  "preset": "veryfast",
+  "audioKbps": 192
+ },
+ "id": "clean-corporate",
+ "nome": "Clean Corporate",
+ "descricao": "Objetivo e legível: legenda com fundo, animações moderadas, sem emojis. Para apresentação institucional e tira-dúvidas.",
+ "posicionamento": [
+  "institucional",
+  "medio-alto",
+  "economico"
+ ],
+ "versao": 1,
+ "oficial": true
+}

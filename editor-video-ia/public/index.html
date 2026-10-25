@@ -1,140 +1,36 @@
 <!doctype html>
-<html lang="pt-BR"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Atlas Editor de Vídeo</title>
-<style>
-:root{--pet:#0f2e36;--verde:#1a8f4c;--azul:#0058A3;--ouro:#b8873a;--bg:#f4f6f6;--card:#fff;--tx:#14262b;--mut:#5d6f74;--ln:#dde4e5}
-*{box-sizing:border-box}body{margin:0;font:15px/1.45 Inter,system-ui,Segoe UI,Arial,sans-serif;background:var(--bg);color:var(--tx)}
-header{background:var(--pet);color:#fff;padding:18px 20px;display:flex;align-items:center;gap:12px}
-header b{font-family:Fraunces,Georgia,serif;font-size:22px}header small{opacity:.75;display:block}
-main{max-width:1100px;margin:0 auto;padding:16px;display:grid;grid-template-columns:1fr 1fr;gap:16px}
-@media(max-width:820px){main{grid-template-columns:1fr}}
-.card{background:var(--card);border:1px solid var(--ln);border-radius:14px;padding:16px}
-h2{font-family:Fraunces,Georgia,serif;font-size:18px;margin:0 0 10px;color:var(--pet)}
-label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
-input[type=text],select,textarea{width:100%;padding:10px;border:1px solid var(--ln);border-radius:9px;font:inherit;background:#fff}
-.drop{border:2px dashed var(--azul);border-radius:12px;padding:26px;text-align:center;color:var(--azul);cursor:pointer;background:#f3f8fd}
-.drop.on{background:#e3effa}
-.arq{display:grid;grid-template-columns:24px 1fr 120px auto;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--ln);font-size:13px}
-.arq span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.arq input{padding:6px;font-size:12px}
-.mini{border:1px solid var(--ln);background:#fff;border-radius:6px;cursor:pointer;padding:3px 7px}
-.chk{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:6px}.chk label{display:flex;gap:6px;align-items:center;margin:0;color:var(--tx)}
-.btn{background:var(--verde);color:#fff;border:0;border-radius:10px;padding:14px 18px;font:600 16px Fraunces,Georgia,serif;cursor:pointer;width:100%;margin-top:14px}
-.btn:disabled{opacity:.5;cursor:wait}.btn.azul{background:var(--azul)}
-.barra{height:12px;background:var(--ln);border-radius:9px;overflow:hidden;margin:8px 0}.barra i{display:block;height:100%;width:0;background:var(--verde);transition:width .4s}
-pre{background:#0b1f24;color:#cfe;padding:10px;border-radius:9px;max-height:220px;overflow:auto;font-size:12px;white-space:pre-wrap}
-.saidas{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
-.saidas div{border:1px solid var(--ln);border-radius:10px;padding:6px;font-size:12px;text-align:center}
-.saidas video,.saidas img{width:100%;max-height:220px;object-fit:contain;background:#000;border-radius:6px}
-.saidas a{color:var(--verde);font-weight:700;text-decoration:none;display:block;margin-top:4px}
-.dica{font-size:12px;color:var(--mut)}
-</style></head><body>
-<header><img src="/assets/logo.png" width="46" height="46" alt="">
-<div><b>Atlas Editor de Vídeo</b><small>Grave → envie → receba pronto em Reels, TikTok, Shorts, Feed e YouTube</small></div></header>
-<main>
-<section class="card">
-  <h2>1. Seus arquivos</h2>
-  <div class="drop" id="drop">Arraste vídeos, fotos e PDF (book, decorado, planta, tabela)<br><small>ou clique para escolher (a ordem da lista = ordem do vídeo)</small></div>
-  <input type="file" id="file" multiple accept="video/*,image/*,application/pdf,.pdf" hidden>
-  <div id="lista"></div>
-  <p class="dica">🎙 = o vídeo em que você fala (no modo Apresentação, o resto entra por cima quando você cita o assunto). Etiqueta (opcional) aparece no canto do trecho: FACHADA, LAZER, PLANTA, VISTA, DECORADO...</p>
-
-  <h2 style="margin-top:16px">2. Roteiro na tela</h2>
-  <label>Modelo</label>
-  <select id="modelo"><option value="apresentacao">Apresentação: eu falo e o PDF/fotos entram quando eu cito (recomendado)</option><option value="tour">Tour do imóvel (vídeos + fotos, música)</option><option value="fala">Paulo falando (corta pausas + legenda)</option><option value="fotos">Só fotos → vídeo</option></select>
-  <label>Empreendimento do site (catálogo Sawala) — puxa nome, bairro, plantas, construtora e capa</label>
-  <input type="text" id="cat" list="dlCat" placeholder="Digite para buscar... ex.: Saudosa"><datalist id="dlCat"></datalist>
-  <label>Gancho (primeiros 3s — o que segura o cliente)</label>
-  <input type="text" id="gancho" placeholder="Ex.: Apartamento no Porto usando o FGTS de entrada"><div id="sug" class="chk" style="margin-top:6px"></div>
-  <label>Empreendimento</label><input type="text" id="titulo" placeholder="Ex.: Farol da Guanabara">
-  <label>Bairro</label><input type="text" id="bairro" placeholder="Ex.: Porto Maravilha">
-  <label>Preço (só se for real e atualizado)</label><input type="text" id="preco" placeholder="Ex.: R$ 289 mil — ou deixe vazio">
-</section>
-
-<section class="card">
-  <h2>3. Acabamento</h2>
-  <label>Música de fundo (coloque .mp3 na pasta <b>musicas</b>)</label>
-  <select id="musica"><option value="">Sem música</option></select>
-  <label>Volume da música: <span id="vv">22%</span></label><input type="range" id="vol" min="5" max="60" value="22" style="width:100%">
-  <label>Formatos</label><div class="chk" id="formatos"></div>
-  <label>Opções</label>
-  <div class="chk">
-    <label><input type="checkbox" id="cortarPausas" checked> Cortar pausas</label>
-    <label><input type="checkbox" id="legendas" checked> Legenda automática</label>
-    <label><input type="checkbox" id="revisar" checked> Revisar legenda antes</label>
-    <label><input type="checkbox" id="acelerarTour" checked> Tour dinâmico (1.25x)</label>
-    <label><input type="checkbox" id="transicoes" checked> Transições</label>
-    <label><input type="checkbox" id="barraProgresso" checked> Barra de progresso</label>
-    <label><input type="checkbox" id="estabilizar"> Estabilizar tremido</label>
-    <label><input type="checkbox" id="cartaoFinal" checked> Cartão final (WhatsApp)</label>
-    <label><input type="checkbox" id="caixaAlta" checked> Legenda em CAIXA ALTA</label>
-  </div>
-  <label>Páginas do PDF (vazio = automático, até 12) — ex.: 1-4,7</label><input type="text" id="paginasPdf" placeholder="automático">
-  <div class="chk" style="margin-top:8px">
-    <label><input type="checkbox" id="pip" checked> Eu em círculo sobre o material</label>
-    <label><input type="checkbox" id="ocultarTabela" checked> Ocultar tabela de preço (valor só no WhatsApp)</label>
-    <label><input type="checkbox" id="efeitosSonoros" checked> Som nas transições</label>
-    <label><input type="checkbox" id="capaSite" checked> Usar capa do site</label>
-    <label><input type="checkbox" id="estiloCartao"> Fotos em cartão (estilo Apple)</label>
-  </div>
-  <label>Palavras por legenda</label><select id="ppl"><option>2</option><option selected>3</option><option>4</option></select>
-  <button class="btn" id="go">🎬 Editar meu vídeo</button>
-
-  <div id="status" hidden>
-    <h2 style="margin-top:18px">4. Progresso</h2>
-    <div class="barra"><i id="bar"></i></div><pre id="log"></pre>
-  </div>
-  <div id="rev" hidden>
-    <h2>✍ Revisar legendas</h2><p class="dica">Uma linha = uma legenda na tela. Corrija nomes (Cury, FGTS, bairros). Apague a linha para remover. Não junte linhas.</p>
-    <textarea id="revtx" rows="10"></textarea>
-    <button class="btn azul" id="render">✅ Renderizar todos os formatos</button>
-  </div>
-  <div id="res" hidden><h2 style="margin-top:18px">5. Prontos para postar</h2><div class="saidas" id="saidas"></div>
-    <button class="btn azul" id="abrir">📂 Abrir pasta dos vídeos</button></div>
-</section>
-</main>
-<script>
-var $=function(i){return document.getElementById(i)};var arqs=[],job=null,timer=null;
-fetch('/api/config').then(function(r){return r.json()}).then(function(d){
-  d.musicas.forEach(function(m){var o=document.createElement('option');o.value=o.textContent=m;$('musica').appendChild(o)});
-  if(d.musicas.length)$('musica').value=d.musicas[0];
-  Object.keys(d.formatos).forEach(function(k){$('formatos').insertAdjacentHTML('beforeend','<label><input type="checkbox" value="'+k+'" checked> '+k.replace('x',':')+' '+d.formatos[k].nome+'</label>')});
-});
-var CAT=[],EMP=null;
-fetch('/api/catalogo').then(function(r){return r.json()}).then(function(c){CAT=c;$('dlCat').innerHTML=c.map(function(e){return '<option value="'+e.nome.replace(/"/g,'')+'">'+(e.local||'')+' · '+(e.incorporadora||'')+'</option>'}).join('')});
-$('cat').onchange=function(){var v=this.value;EMP=CAT.find(function(e){return e.nome===v})||null;if(!EMP)return;
-  $('titulo').value=EMP.nome;$('bairro').value=EMP.local||'';var q=(EMP.plantas||'').split('·')[0].trim(),l=EMP.local||'Rio';
-  var g=[(q?q+' em '+l:'Lançamento em '+l)+' — veja por dentro','O lançamento em '+l+' que pouca gente conhece','Dá pra morar em '+l+' usando o FGTS?',EMP.nome+': vale a pena? Te mostro tudo'];
-  $('sug').innerHTML=g.map(function(x){return '<button class="mini" type="button">'+x+'</button>'}).join('')};
-$('sug').onclick=function(e){if(e.target.tagName==='BUTTON')$('gancho').value=e.target.textContent};
-$('vol').oninput=function(){$('vv').textContent=this.value+'%'};
-$('modelo').onchange=function(){var m=this.value;$('pip').checked=m==='apresentacao';$('cortarPausas').checked=m!=='fotos';$('legendas').checked=m!=='fotos';$('revisar').checked=m!=='fotos';$('acelerarTour').checked=m!=='fala'};
-var drop=$('drop');drop.onclick=function(){$('file').click()};
-$('file').onchange=function(){add(this.files);this.value=''};
-drop.ondragover=function(e){e.preventDefault();drop.classList.add('on')};drop.ondragleave=function(){drop.classList.remove('on')};
-drop.ondrop=function(e){e.preventDefault();drop.classList.remove('on');add(e.dataTransfer.files)};
-function add(fs){for(var i=0;i<fs.length;i++){var v=fs[i].type.indexOf('video')===0;arqs.push({f:fs[i],et:'',narr:v&&!arqs.some(function(a){return a.narr})})}desenha()}
-function desenha(){$('lista').innerHTML=arqs.map(function(a,i){return '<div class="arq"><b>'+(i+1)+'</b><span title="'+a.f.name+'">'+(/pdf$/i.test(a.f.name)?'📄 ':a.f.type.indexOf('image')===0?'🖼 ':'🎞 ')+a.f.name+'</span><input data-i="'+i+'" placeholder="etiqueta" value="'+a.et.replace(/"/g,'')+'"><span><button class="mini" title="este é o vídeo em que eu falo" data-n="'+i+'" style="'+(a.narr?'background:#1a8f4c;color:#fff':'')+'">🎙</button> <button class="mini" data-m="'+i+'">↑</button> <button class="mini" data-x="'+i+'">✕</button></span></div>'}).join('');}
-$('lista').oninput=function(e){if(e.target.dataset.i)arqs[e.target.dataset.i].et=e.target.value};
-$('lista').onclick=function(e){var d=e.target.dataset;if(d.m>0){var i=+d.m;arqs.splice(i-1,0,arqs.splice(i,1)[0]);desenha()}if(d.x!==undefined){arqs.splice(+d.x,1);desenha()}if(d.n!==undefined){arqs.forEach(function(a,j){a.narr=j==d.n&&!a.narr});desenha()}};
-function op(){return{gancho:$('gancho').value.trim(),titulo:$('titulo').value.trim(),bairro:$('bairro').value.trim(),preco:$('preco').value.trim(),musica:$('musica').value,volumeMusica:$('vol').value/100,
-  formatos:[].slice.call(document.querySelectorAll('#formatos input:checked')).map(function(c){return c.value}),
-  cortarPausas:$('cortarPausas').checked,legendas:$('legendas').checked,revisar:$('revisar').checked,acelerarTour:$('acelerarTour').checked,estabilizar:$('estabilizar').checked,
-  cartaoFinal:$('cartaoFinal').checked,modo:$('modelo').value,emp:EMP,paginasPdf:$('paginasPdf').value.trim(),pip:$('pip').checked,ocultarTabela:$('ocultarTabela').checked,efeitosSonoros:$('efeitosSonoros').checked,capaSite:$('capaSite').checked,estiloCartao:$('estiloCartao').checked,transicoes:$('transicoes').checked,barraProgresso:$('barraProgresso').checked,maxPaginasPdf:12,caixaAlta:$('caixaAlta').checked,palavrasPorLegenda:+$('ppl').value,tempoFoto:3.2}}
-$('go').onclick=async function(){
-  if(!arqs.length)return alert('Adicione pelo menos um vídeo ou foto.');
-  this.disabled=true;$('status').hidden=false;$('res').hidden=true;$('rev').hidden=true;$('log').textContent='';
-  job=(await (await fetch('/api/job',{method:'POST'})).json()).id;
-  for(var i=0;i<arqs.length;i++){$('log').textContent+='⬆ enviando '+arqs[i].f.name+'\n';
-    await fetch('/api/job/'+job+'/upload?ordem='+i+'&nome='+encodeURIComponent(arqs[i].f.name)+'&etiqueta='+encodeURIComponent(arqs[i].et)+'&narracao='+(arqs[i].narr?1:0),{method:'POST',body:arqs[i].f});
-    $('bar').style.width=(5*(i+1)/arqs.length)+'%'}
-  await fetch('/api/job/'+job+'/iniciar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(op())});
-  timer=setInterval(poll,1500)};
-async function poll(){var s=await (await fetch('/api/job/'+job)).json();$('bar').style.width=s.progresso+'%';$('log').textContent=s.log.join('\n');$('log').scrollTop=1e9;
-  if(s.fase==='revisao'){clearInterval(timer);$('rev').hidden=false;$('revtx').value=s.grupos.join('\n')}
-  if(s.fase==='pronto'||s.fase==='erro'){clearInterval(timer);$('go').disabled=false}
-  if(s.fase==='pronto'){$('res').hidden=false;$('saidas').innerHTML=s.saidas.map(function(n){var u='/saida/'+job+'/'+encodeURIComponent(n);
-    var prev=/\.mp4$/.test(n)?'<video src="'+u+'" controls muted playsinline></video>':/\.jpg$/.test(n)?'<img src="'+u+'">':'📝';
-    return '<div>'+prev+'<div>'+n.replace(/^[^_]*_/,'')+'</div><a href="'+u+'?dl=1" download>⬇ Baixar</a></div>'}).join('')}}
-$('render').onclick=async function(){$('rev').hidden=true;await fetch('/api/job/'+job+'/legendas',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({linhas:$('revtx').value.split('\n')})});timer=setInterval(poll,1500)};
-$('abrir').onclick=function(){fetch('/api/job/'+job+'/abrir')};
-</script></body></html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Paulo Cotrim AI Studio</title>
+<link rel="icon" href="/api/marca/logo/monograma">
+<link rel="stylesheet" href="/css/app.css">
+</head>
+<body>
+<div class="app">
+  <nav class="lado" id="nav">
+    <div class="marca"><img src="/api/marca/logo/monograma" alt=""><div><b>Paulo Cotrim</b><small>AI Studio</small></div></div>
+    <a href="#/inicio" data-r="inicio">◐ <span>Início</span></a>
+    <a href="#/novo" data-r="novo">＋ <span>Novo projeto</span></a>
+    <a href="#/autoedit" data-r="autoedit">✦ <span>Auto Edit</span></a>
+    <a href="#/pdf" data-r="pdf">▤ <span>PDF Intelligence</span></a>
+    <a href="#/presenter" data-r="presenter">◉ <span>AI Presenter</span></a>
+    <div class="sep"></div>
+    <a href="#/projetos" data-r="projetos">▦ <span>Projetos</span></a>
+    <a href="#/presets" data-r="presets">❖ <span>Presets</span></a>
+    <a href="#/efeitos" data-r="efeitos">✺ <span>Efeitos</span></a>
+    <a href="#/render" data-r="render">▶ <span>Renderizações</span></a>
+    <a href="#/config" data-r="config">⚙ <span>Configurações</span></a>
+    <div class="rodape" id="rodape">paulocotrim.com</div>
+  </nav>
+  <main id="vista"></main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="/js/modelo.js"></script>
+<script src="/js/api.js"></script>
+<script src="/js/preview.js"></script>
+<script src="/js/editor.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>
