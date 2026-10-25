@@ -1,0 +1,14 @@
+{
+  "name": "atlas-editor-video",
+  "version": "1.0.0",
+  "description": "Editor de video imobiliario automatico (Paulo Cotrim) - roda local, offline apos 1a vez",
+  "engines": { "node": ">=20" },
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "@huggingface/transformers": "^3.1.0",
+    "ffmpeg-static": "^5.2.0",
+    "ffprobe-static": "^3.1.0",
+    "pdf-to-img": "^7.0.1"
+  }
+}

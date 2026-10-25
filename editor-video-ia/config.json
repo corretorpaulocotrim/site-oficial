@@ -1,0 +1,13 @@
+{
+  "nome": "Paulo Cotrim",
+  "creci": "CRECI-RJ 77677-F",
+  "whatsapp": "(21) 98915-0864",
+  "site": "paulocotrim.com",
+  "instagram": "@corretor.paulocotrim",
+  "cores": { "petroleo": "#0f2e36", "verde": "#1a8f4c", "azul": "#0058A3", "destaque": "#2bd46f" },
+  "fonteLegenda": "Arial Black",
+  "fonteTitulo": "Georgia",
+  "modeloWhisper": "onnx-community/whisper-base_timestamped",
+  "palavrasDestaque": ["fgts","caixa","entrada","parcela","mcmv","financiamento","subsídio","subsidio","lazer","metrô","metro","vlt","praia","vista","varanda","suíte","suite","lançamento","planta","pronto","desconto","oportunidade","r$","mil","grátis","zero"],
+  "correcoes": { "fgts": "FGTS", "caixa": "Caixa", "mcmv": "MCMV", "cury": "Cury", "vlt": "VLT", "creci": "CRECI", "paulo cotrim": "Paulo Cotrim" }
+}

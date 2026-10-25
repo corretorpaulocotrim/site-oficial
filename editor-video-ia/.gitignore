@@ -1,0 +1,5 @@
+node_modules/
+saida/*
+!saida/.gitkeep
+.modelos/
+musicas/*.mp3
