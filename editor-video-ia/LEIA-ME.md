@@ -25,11 +25,20 @@ Os arquivos prontos ficam na pasta `saida/`.
 | Legenda IA | Palavra a palavra, palavra ativa em verde, FGTS/Caixa/valores destacados | 85% assistem sem som |
 | Revisão | Você corrige a legenda antes de exportar | Nada de "Curi" ou "efe gê tê esse" |
 | Áudio | Tira ruído, nivela o volume em -14 LUFS e baixa a música quando você fala | Som limpo em qualquer celular |
-| Marca | Chave dourada no canto, barra de progresso verde, cartão final com WhatsApp/site/CRECI | Identidade e prova de credibilidade |
+| Marca | Logo oficial (monograma PC) no canto, barra de progresso verde, cartão final com WhatsApp/site/CRECI | Identidade e prova de credibilidade |
 | Formatos | 9:16 (Reels/TikTok/Shorts), 4:5 (Feed), 1:1, 16:9 (YouTube) | Um vídeo vira 4 publicações |
 | Extras | Capa .jpg, legenda .srt e **texto do post pronto** com CTA e hashtags | Posta em 1 minuto |
 
-## Os 3 modelos
+## Novidades da versão 2
+- **Modo Apresentação** (recomendado): marque 🎙 no vídeo em que você fala. O app ouve a sua fala e coloca cada material (PDF, foto, vídeo) **no segundo em que você cita o assunto**, com você em círculo dourado por cima.
+- **PDF inteligente**: lê o texto de cada página, identifica PLANTA / LAZER / LOCALIZAÇÃO / FICHA TÉCNICA / FACHADA, coloca a etiqueta, tira quartos e m² e **esconde a tabela de preço** (o valor fica para o WhatsApp).
+- **Catálogo do site (Sawala)**: busque o empreendimento e o app preenche nome, bairro, plantas, construtora, status e usa a **capa do site**. Ele também sugere 4 ganchos.
+- **Estilo Apple**: PDF e fotos em cartão com cantos arredondados e sombra, fichas animadas, efeito sonoro nas transições.
+- **Logo oficial** (monograma PC do site) no canto e no cartão final.
+- Roteiro pronto para gravar: veja **ESTUDO-E-ROTEIROS.md**.
+
+## Os modelos
+- **Apresentação** — você fala; PDF, fotos e vídeos entram por cima no momento certo.
 - **Tour do imóvel** — vídeos do decorado/obra + fotos + book. Música e transições.
 - **Paulo falando** — corta pausas, zoom nos cortes, legenda palavra a palavra.
 - **Só fotos** — fotos e PDF viram vídeo com movimento e música.

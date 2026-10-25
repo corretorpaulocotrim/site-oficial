@@ -10,6 +10,18 @@ const PORTA = process.env.PORT || 3333;
 const SAIDA = path.join(__dirname, 'saida');
 const cfg = () => JSON.parse(fs.readFileSync(path.join(__dirname, 'config.json'), 'utf8'));
 const jobs = {};
+// Catalogo de empreendimentos do site (Sawala): copia do repo > copia do app; atualiza do site em segundo plano
+let _cat = null;
+function catalogo() {
+  if (_cat) return _cat;
+  for (const f of [path.join(__dirname, '..', 'data', 'catalogo.json'), path.join(__dirname, 'catalogo.json')]) {
+    try { _cat = JSON.parse(fs.readFileSync(f, 'utf8')).itens || []; if (_cat.length) return _cat; } catch {}
+  }
+  return _cat = [];
+}
+fetch('https://paulocotrim.com.br/data/catalogo.json').then(r => r.ok && r.json()).then(d => {
+  if (d && d.itens && d.itens.length) { _cat = d.itens; fs.writeFileSync(path.join(__dirname, 'catalogo.json'), JSON.stringify(d)); }
+}).catch(() => {});
 let fila = Promise.resolve(); // um video por vez (ffmpeg ja usa todos os nucleos)
 
 const json = (res, obj, code = 200) => { res.writeHead(code, { 'Content-Type': 'application/json; charset=utf-8' }); res.end(JSON.stringify(obj)); };
@@ -46,6 +58,8 @@ http.createServer(async (req, res) => {
       res.writeHead(200, { 'Content-Type': 'text/html; charset=utf-8' }); return fs.createReadStream(path.join(__dirname, 'public', 'index.html')).pipe(res);
     }
     if (p === '/api/config') return json(res, { config: cfg(), musicas: fs.readdirSync(path.join(__dirname, 'musicas')).filter(f => /\.(mp3|m4a|wav|aac)$/i.test(f)), formatos: motor.FORMATOS });
+    if (/^\/assets\/[\w-]+\.png$/.test(p)) { res.writeHead(200, { 'Content-Type': 'image/png' }); return fs.createReadStream(path.join(__dirname, p)).pipe(res); }
+    if (p === '/api/catalogo') return json(res, catalogo());
     if (p === '/api/job' && req.method === 'POST') return json(res, { id: novoJob().id });
     let m = p.match(/^\/api\/job\/([\w-]+)(\/\w+)?$/);
     if (m) {
@@ -55,7 +69,7 @@ http.createServer(async (req, res) => {
         const nome = path.basename(u.searchParams.get('nome') || 'arquivo').replace(/[^\w.\-]/g, '_');
         const destino = path.join(job.dir, 'entrada', `${String(job.arquivos.length).padStart(3, '0')}_${nome}`);
         await new Promise((ok, fail) => req.pipe(fs.createWriteStream(destino)).on('finish', ok).on('error', fail));
-        job.arquivos.push({ arquivo: destino, ordem: +u.searchParams.get('ordem') || job.arquivos.length, etiqueta: u.searchParams.get('etiqueta') || '' });
+        job.arquivos.push({ arquivo: destino, ordem: +u.searchParams.get('ordem') || job.arquivos.length, etiqueta: u.searchParams.get('etiqueta') || '', narracao: u.searchParams.get('narracao') === '1' });
         return json(res, { ok: true });
       }
       if (acao === '/iniciar' && req.method === 'POST') { job.opcoes = await corpo(req); executar(job, 'preparar'); return json(res, { ok: true }); }

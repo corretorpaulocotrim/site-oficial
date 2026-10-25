@@ -14,7 +14,7 @@ label{display:block;font-size:13px;color:var(--mut);margin:10px 0 4px}
 input[type=text],select,textarea{width:100%;padding:10px;border:1px solid var(--ln);border-radius:9px;font:inherit;background:#fff}
 .drop{border:2px dashed var(--azul);border-radius:12px;padding:26px;text-align:center;color:var(--azul);cursor:pointer;background:#f3f8fd}
 .drop.on{background:#e3effa}
-.arq{display:grid;grid-template-columns:24px 1fr 130px auto;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--ln);font-size:13px}
+.arq{display:grid;grid-template-columns:24px 1fr 120px auto;gap:6px;align-items:center;padding:6px 0;border-bottom:1px solid var(--ln);font-size:13px}
 .arq span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.arq input{padding:6px;font-size:12px}
 .mini{border:1px solid var(--ln);background:#fff;border-radius:6px;cursor:pointer;padding:3px 7px}
 .chk{display:flex;flex-wrap:wrap;gap:8px 16px;margin-top:6px}.chk label{display:flex;gap:6px;align-items:center;margin:0;color:var(--tx)}
@@ -28,7 +28,7 @@ pre{background:#0b1f24;color:#cfe;padding:10px;border-radius:9px;max-height:220p
 .saidas a{color:var(--verde);font-weight:700;text-decoration:none;display:block;margin-top:4px}
 .dica{font-size:12px;color:var(--mut)}
 </style></head><body>
-<header><svg width="26" height="40" viewBox="0 0 26 40"><circle cx="13" cy="9" r="7" fill="none" stroke="#b8873a" stroke-width="3.5"/><path d="M13 16v20h6M13 28h5" stroke="#b8873a" stroke-width="3.5" fill="none"/></svg>
+<header><img src="/assets/logo.png" width="46" height="46" alt="">
 <div><b>Atlas Editor de Vídeo</b><small>Grave → envie → receba pronto em Reels, TikTok, Shorts, Feed e YouTube</small></div></header>
 <main>
 <section class="card">
@@ -36,13 +36,15 @@ pre{background:#0b1f24;color:#cfe;padding:10px;border-radius:9px;max-height:220p
   <div class="drop" id="drop">Arraste vídeos, fotos e PDF (book, decorado, planta, tabela)<br><small>ou clique para escolher (a ordem da lista = ordem do vídeo)</small></div>
   <input type="file" id="file" multiple accept="video/*,image/*,application/pdf,.pdf" hidden>
   <div id="lista"></div>
-  <p class="dica">Etiqueta (opcional) aparece no canto do trecho: FACHADA, LAZER, PLANTA, VISTA, DECORADO...</p>
+  <p class="dica">🎙 = o vídeo em que você fala (no modo Apresentação, o resto entra por cima quando você cita o assunto). Etiqueta (opcional) aparece no canto do trecho: FACHADA, LAZER, PLANTA, VISTA, DECORADO...</p>
 
   <h2 style="margin-top:16px">2. Roteiro na tela</h2>
   <label>Modelo</label>
-  <select id="modelo"><option value="tour">Tour do imóvel (vídeos + fotos, música)</option><option value="fala">Paulo falando (corta pausas + legenda)</option><option value="fotos">Só fotos → vídeo</option></select>
+  <select id="modelo"><option value="apresentacao">Apresentação: eu falo e o PDF/fotos entram quando eu cito (recomendado)</option><option value="tour">Tour do imóvel (vídeos + fotos, música)</option><option value="fala">Paulo falando (corta pausas + legenda)</option><option value="fotos">Só fotos → vídeo</option></select>
+  <label>Empreendimento do site (catálogo Sawala) — puxa nome, bairro, plantas, construtora e capa</label>
+  <input type="text" id="cat" list="dlCat" placeholder="Digite para buscar... ex.: Saudosa"><datalist id="dlCat"></datalist>
   <label>Gancho (primeiros 3s — o que segura o cliente)</label>
-  <input type="text" id="gancho" placeholder="Ex.: Apartamento no Porto usando o FGTS de entrada">
+  <input type="text" id="gancho" placeholder="Ex.: Apartamento no Porto usando o FGTS de entrada"><div id="sug" class="chk" style="margin-top:6px"></div>
   <label>Empreendimento</label><input type="text" id="titulo" placeholder="Ex.: Farol da Guanabara">
   <label>Bairro</label><input type="text" id="bairro" placeholder="Ex.: Porto Maravilha">
   <label>Preço (só se for real e atualizado)</label><input type="text" id="preco" placeholder="Ex.: R$ 289 mil — ou deixe vazio">
@@ -65,6 +67,14 @@ pre{background:#0b1f24;color:#cfe;padding:10px;border-radius:9px;max-height:220p
     <label><input type="checkbox" id="estabilizar"> Estabilizar tremido</label>
     <label><input type="checkbox" id="cartaoFinal" checked> Cartão final (WhatsApp)</label>
     <label><input type="checkbox" id="caixaAlta" checked> Legenda em CAIXA ALTA</label>
+  </div>
+  <label>Páginas do PDF (vazio = automático, até 12) — ex.: 1-4,7</label><input type="text" id="paginasPdf" placeholder="automático">
+  <div class="chk" style="margin-top:8px">
+    <label><input type="checkbox" id="pip" checked> Eu em círculo sobre o material</label>
+    <label><input type="checkbox" id="ocultarTabela" checked> Ocultar tabela de preço (valor só no WhatsApp)</label>
+    <label><input type="checkbox" id="efeitosSonoros" checked> Som nas transições</label>
+    <label><input type="checkbox" id="capaSite" checked> Usar capa do site</label>
+    <label><input type="checkbox" id="estiloCartao"> Fotos em cartão (estilo Apple)</label>
   </div>
   <label>Palavras por legenda</label><select id="ppl"><option>2</option><option selected>3</option><option>4</option></select>
   <button class="btn" id="go">🎬 Editar meu vídeo</button>
@@ -89,26 +99,33 @@ fetch('/api/config').then(function(r){return r.json()}).then(function(d){
   if(d.musicas.length)$('musica').value=d.musicas[0];
   Object.keys(d.formatos).forEach(function(k){$('formatos').insertAdjacentHTML('beforeend','<label><input type="checkbox" value="'+k+'" checked> '+k.replace('x',':')+' '+d.formatos[k].nome+'</label>')});
 });
+var CAT=[],EMP=null;
+fetch('/api/catalogo').then(function(r){return r.json()}).then(function(c){CAT=c;$('dlCat').innerHTML=c.map(function(e){return '<option value="'+e.nome.replace(/"/g,'')+'">'+(e.local||'')+' · '+(e.incorporadora||'')+'</option>'}).join('')});
+$('cat').onchange=function(){var v=this.value;EMP=CAT.find(function(e){return e.nome===v})||null;if(!EMP)return;
+  $('titulo').value=EMP.nome;$('bairro').value=EMP.local||'';var q=(EMP.plantas||'').split('·')[0].trim(),l=EMP.local||'Rio';
+  var g=[(q?q+' em '+l:'Lançamento em '+l)+' — veja por dentro','O lançamento em '+l+' que pouca gente conhece','Dá pra morar em '+l+' usando o FGTS?',EMP.nome+': vale a pena? Te mostro tudo'];
+  $('sug').innerHTML=g.map(function(x){return '<button class="mini" type="button">'+x+'</button>'}).join('')};
+$('sug').onclick=function(e){if(e.target.tagName==='BUTTON')$('gancho').value=e.target.textContent};
 $('vol').oninput=function(){$('vv').textContent=this.value+'%'};
-$('modelo').onchange=function(){var m=this.value;$('cortarPausas').checked=m!=='fotos';$('legendas').checked=m!=='fotos';$('revisar').checked=m!=='fotos';$('acelerarTour').checked=m!=='fala'};
+$('modelo').onchange=function(){var m=this.value;$('pip').checked=m==='apresentacao';$('cortarPausas').checked=m!=='fotos';$('legendas').checked=m!=='fotos';$('revisar').checked=m!=='fotos';$('acelerarTour').checked=m!=='fala'};
 var drop=$('drop');drop.onclick=function(){$('file').click()};
 $('file').onchange=function(){add(this.files);this.value=''};
 drop.ondragover=function(e){e.preventDefault();drop.classList.add('on')};drop.ondragleave=function(){drop.classList.remove('on')};
 drop.ondrop=function(e){e.preventDefault();drop.classList.remove('on');add(e.dataTransfer.files)};
-function add(fs){for(var i=0;i<fs.length;i++)arqs.push({f:fs[i],et:''});desenha()}
-function desenha(){$('lista').innerHTML=arqs.map(function(a,i){return '<div class="arq"><b>'+(i+1)+'</b><span title="'+a.f.name+'">'+(/pdf$/i.test(a.f.name)?'📄 ':a.f.type.indexOf('image')===0?'🖼 ':'🎞 ')+a.f.name+'</span><input data-i="'+i+'" placeholder="etiqueta" value="'+a.et.replace(/"/g,'')+'"><span><button class="mini" data-m="'+i+'">↑</button> <button class="mini" data-x="'+i+'">✕</button></span></div>'}).join('');}
+function add(fs){for(var i=0;i<fs.length;i++){var v=fs[i].type.indexOf('video')===0;arqs.push({f:fs[i],et:'',narr:v&&!arqs.some(function(a){return a.narr})})}desenha()}
+function desenha(){$('lista').innerHTML=arqs.map(function(a,i){return '<div class="arq"><b>'+(i+1)+'</b><span title="'+a.f.name+'">'+(/pdf$/i.test(a.f.name)?'📄 ':a.f.type.indexOf('image')===0?'🖼 ':'🎞 ')+a.f.name+'</span><input data-i="'+i+'" placeholder="etiqueta" value="'+a.et.replace(/"/g,'')+'"><span><button class="mini" title="este é o vídeo em que eu falo" data-n="'+i+'" style="'+(a.narr?'background:#1a8f4c;color:#fff':'')+'">🎙</button> <button class="mini" data-m="'+i+'">↑</button> <button class="mini" data-x="'+i+'">✕</button></span></div>'}).join('');}
 $('lista').oninput=function(e){if(e.target.dataset.i)arqs[e.target.dataset.i].et=e.target.value};
-$('lista').onclick=function(e){var d=e.target.dataset;if(d.m>0){var i=+d.m;arqs.splice(i-1,0,arqs.splice(i,1)[0]);desenha()}if(d.x!==undefined){arqs.splice(+d.x,1);desenha()}};
+$('lista').onclick=function(e){var d=e.target.dataset;if(d.m>0){var i=+d.m;arqs.splice(i-1,0,arqs.splice(i,1)[0]);desenha()}if(d.x!==undefined){arqs.splice(+d.x,1);desenha()}if(d.n!==undefined){arqs.forEach(function(a,j){a.narr=j==d.n&&!a.narr});desenha()}};
 function op(){return{gancho:$('gancho').value.trim(),titulo:$('titulo').value.trim(),bairro:$('bairro').value.trim(),preco:$('preco').value.trim(),musica:$('musica').value,volumeMusica:$('vol').value/100,
   formatos:[].slice.call(document.querySelectorAll('#formatos input:checked')).map(function(c){return c.value}),
   cortarPausas:$('cortarPausas').checked,legendas:$('legendas').checked,revisar:$('revisar').checked,acelerarTour:$('acelerarTour').checked,estabilizar:$('estabilizar').checked,
-  cartaoFinal:$('cartaoFinal').checked,transicoes:$('transicoes').checked,barraProgresso:$('barraProgresso').checked,maxPaginasPdf:12,caixaAlta:$('caixaAlta').checked,palavrasPorLegenda:+$('ppl').value,tempoFoto:3.2}}
+  cartaoFinal:$('cartaoFinal').checked,modo:$('modelo').value,emp:EMP,paginasPdf:$('paginasPdf').value.trim(),pip:$('pip').checked,ocultarTabela:$('ocultarTabela').checked,efeitosSonoros:$('efeitosSonoros').checked,capaSite:$('capaSite').checked,estiloCartao:$('estiloCartao').checked,transicoes:$('transicoes').checked,barraProgresso:$('barraProgresso').checked,maxPaginasPdf:12,caixaAlta:$('caixaAlta').checked,palavrasPorLegenda:+$('ppl').value,tempoFoto:3.2}}
 $('go').onclick=async function(){
   if(!arqs.length)return alert('Adicione pelo menos um vídeo ou foto.');
   this.disabled=true;$('status').hidden=false;$('res').hidden=true;$('rev').hidden=true;$('log').textContent='';
   job=(await (await fetch('/api/job',{method:'POST'})).json()).id;
   for(var i=0;i<arqs.length;i++){$('log').textContent+='⬆ enviando '+arqs[i].f.name+'\n';
-    await fetch('/api/job/'+job+'/upload?ordem='+i+'&nome='+encodeURIComponent(arqs[i].f.name)+'&etiqueta='+encodeURIComponent(arqs[i].et),{method:'POST',body:arqs[i].f});
+    await fetch('/api/job/'+job+'/upload?ordem='+i+'&nome='+encodeURIComponent(arqs[i].f.name)+'&etiqueta='+encodeURIComponent(arqs[i].et)+'&narracao='+(arqs[i].narr?1:0),{method:'POST',body:arqs[i].f});
     $('bar').style.width=(5*(i+1)/arqs.length)+'%'}
   await fetch('/api/job/'+job+'/iniciar',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(op())});
   timer=setInterval(poll,1500)};

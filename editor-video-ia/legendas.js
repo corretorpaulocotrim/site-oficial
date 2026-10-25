@@ -80,10 +80,13 @@ function gerarASS(job, cfg, w, h, FIM) {
 
   // 1) Gancho (primeiros segundos) - o que segura o espectador
   if (op.gancho) add(0, Math.min(3.2, fimConteudo), 'Gancho', `{\\fad(120,200)}${esc(op.gancho.toUpperCase())}`);
-  // 2) Ficha do imovel
-  const linha2 = [op.bairro, op.preco ? 'a partir de ' + op.preco : ''].filter(Boolean).join(' • ');
-  if (op.titulo) add(op.gancho ? 3.3 : 0.3, Math.min((op.gancho ? 3.3 : 0.3) + 4.5, fimConteudo), 'Ficha',
-    `{\\fad(200,250)}${esc(op.titulo.toUpperCase())}${linha2 ? `\\N{\\fs${Math.round(s * 0.036)}\\b0}${esc(linha2)}` : ''}`);
+  // 2) Fichas animadas estilo keynote (dados reais do catalogo/PDF), uma apos a outra
+  const t0 = op.gancho ? 3.3 : 0.4, yF = Math.round(h * (vert ? 0.14 : 0.08)), xF = Math.round(w / 2);
+  (job.fichas || []).forEach((f, k) => {
+    const a = t0 + k * 2.1, b = Math.min(a + 2.0, fimConteudo);
+    const caixa = /CAIXA/.test(f.t) ? `\\3c${cor(C.azul)}` : '';
+    add(a, b, 'Ficha', `{\\an8\\move(${xF},${yF + 40},${xF},${yF},0,220)\\fad(180,180)${caixa}}${esc(f.t)}${f.s ? `\\N{\\fs${Math.round(s * 0.036)}\\b0}${esc(f.s)}` : ''}`);
+  });
   // 3) Etiquetas de capitulo (ex.: FACHADA, LAZER, PLANTA) no canto superior
   for (const m of job.marcas || []) add(m.ini + 0.1, Math.min(m.fim, fimConteudo), 'Etiqueta', `{\\fad(150,150)}● ${esc(m.texto.toUpperCase())}`);
   // 4) Legenda palavra a palavra com destaque
@@ -125,7 +128,7 @@ ScaledBorderAndShadow: yes
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
 ${st('Leg', fL, s * 0.082, B, P, '&H80000000&', -1, 1, s * 0.0065, s * 0.003, 2, w * 0.07, w * 0.07, mvLeg)}
 ${st('Gancho', fT, s * 0.07, B, cor(C.petroleo), P, -1, 3, s * 0.022, 0, 8, w * 0.07, w * 0.07, h * (vert ? 0.13 : 0.07))}
-${st('Ficha', fT, s * 0.058, B, cor(C.azul), P, -1, 3, s * 0.02, 0, 8, w * 0.07, w * 0.07, h * (vert ? 0.13 : 0.07))}
+${st('Ficha', fT, s * 0.058, B, cor(C.petroleo).replace('&H00', '&H20'), P, -1, 3, s * 0.02, 0, 8, w * 0.07, w * 0.07, h * (vert ? 0.13 : 0.07))}
 ${st('Etiqueta', 'Arial', s * 0.03, B, '&H50000000&', P, -1, 3, s * 0.012, 0, 7, w * 0.05, w * 0.05, h * (h / w > 1.6 ? 0.06 : 0.04))}
 ${st('FimNome', fT, s * 0.075, B, P, P, -1, 1, 0, 0, 8, 0, 0, 0)}
 ${st('FimCta', 'Arial', s * 0.052, B, cor(C.verde), P, -1, 3, s * 0.02, 0, 8, 0, 0, 0)}
