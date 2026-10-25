@@ -1,0 +1,170 @@
+{
+ "cor": {
+  "contraste": 1.1,
+  "saturacao": 0.95,
+  "brilho": 0.01,
+  "gamma": 0.98,
+  "nitidez": 0.4,
+  "vinheta": 0.5,
+  "cinema": 0.1
+ },
+ "ritmo": {
+  "cortarPausas": true,
+  "pausaMinima": 0.45,
+  "margem": 0.12,
+  "punchIn": 1,
+  "velocidadeTour": 0.9,
+  "minCena": 2.5,
+  "maxCena": 6
+ },
+ "movimento": {
+  "intensidade": 0.05,
+  "fotos": "kenburns",
+  "planta": 0.3,
+  "pdf": "cartao"
+ },
+ "transicoes": {
+  "lista": [
+   "fadeblack",
+   "dissolve",
+   "smoothright"
+  ],
+  "dur": 0.8,
+  "entreFalas": "dissolve"
+ },
+ "legenda": {
+  "fonte": "Inter",
+  "negrito": false,
+  "tamanho": 0.05,
+  "cor": "#FFFFFF",
+  "destaque": "#B0895B",
+  "destacarAtiva": false,
+  "contorno": "#000000",
+  "espessura": 0,
+  "sombra": 0.005,
+  "fundo": "",
+  "fundoOpacidade": 0.55,
+  "caixaAlta": false,
+  "palavras": 5,
+  "maxCaracteres": 34,
+  "animacao": "fade",
+  "posicaoY": 0.8,
+  "emojis": false,
+  "palavrasDestaque": [
+   "fgts",
+   "caixa",
+   "entrada",
+   "parcela",
+   "financiamento",
+   "lazer",
+   "metrô",
+   "vlt",
+   "praia",
+   "vista",
+   "varanda",
+   "suíte",
+   "lançamento",
+   "planta",
+   "m²",
+   "r$",
+   "mil",
+   "vaga",
+   "piscina",
+   "rooftop",
+   "exclusivo"
+  ]
+ },
+ "titulos": {
+  "gancho": {
+   "fonte": "Cormorant Garamond SemiBold",
+   "tamanho": 0.08,
+   "cor": "#FFFFFF",
+   "fundo": "",
+   "fundoOpacidade": 0,
+   "caixaAlta": false,
+   "posicaoY": 0.42,
+   "animacao": "fade",
+   "duracao": 3.5
+  },
+  "ficha": {
+   "fonte": "Cormorant Garamond SemiBold",
+   "tamanho": 0.062,
+   "cor": "#FFFFFF",
+   "fundo": "",
+   "fundoOpacidade": 0,
+   "caixaAlta": false,
+   "posicaoY": 0.42,
+   "animacao": "subir",
+   "duracao": 2
+  },
+  "impacto": {
+   "fonte": "Inter Black",
+   "tamanho": 0.11,
+   "cor": "#FFFFFF",
+   "fundo": "",
+   "fundoOpacidade": 0,
+   "caixaAlta": true,
+   "posicaoY": 0.45,
+   "animacao": "pop",
+   "duracao": 1.5
+  },
+  "rotulo": {
+   "fonte": "Inter",
+   "tamanho": 0.03,
+   "cor": "#FFFFFF",
+   "fundo": "#000000",
+   "fundoOpacidade": 0.45,
+   "caixaAlta": true,
+   "posicaoY": 0.065,
+   "animacao": "fade",
+   "duracao": 3
+  },
+  "cta": {
+   "fonte": "Inter",
+   "tamanho": 0.05,
+   "cor": "#1A1A19",
+   "fundo": "#B0895B",
+   "fundoOpacidade": 1,
+   "caixaAlta": false,
+   "posicaoY": 0.6,
+   "animacao": "pop",
+   "duracao": 3
+  }
+ },
+ "audio": {
+  "limparVoz": true,
+  "musicaVolume": 0.28,
+  "ducking": true,
+  "sfxVolume": 0.2,
+  "sfx": {
+   "transicao": "grave",
+   "gancho": "grave",
+   "ficha": "",
+   "cta": "",
+   "broll": ""
+  }
+ },
+ "marca": {
+  "marcaDagua": true,
+  "opacidade": 0.85,
+  "tamanho": 0.08,
+  "telaFinal": true,
+  "duracaoTelaFinal": 3.5,
+  "barraProgresso": false,
+  "corBarra": "#B0895B"
+ },
+ "export": {
+  "crf": 19,
+  "fps": 30,
+  "preset": "veryfast",
+  "audioKbps": 192
+ },
+ "id": "cinematic-luxury",
+ "nome": "Cinematic Luxury",
+ "descricao": "Transições lentas, cor cinematográfica, faixas de cinema, tipografia editorial. Para lançamentos de luxo (Ipanema, Leblon, Barra).",
+ "posicionamento": [
+  "luxo"
+ ],
+ "versao": 1,
+ "oficial": true
+}

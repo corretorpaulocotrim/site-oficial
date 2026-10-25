@@ -1,0 +1,173 @@
+{
+ "cor": {
+  "contraste": 1.07,
+  "saturacao": 1.15,
+  "brilho": 0.01,
+  "gamma": 1.02,
+  "nitidez": 0.6,
+  "vinheta": 0.3
+ },
+ "ritmo": {
+  "cortarPausas": true,
+  "pausaMinima": 0.45,
+  "margem": 0.12,
+  "punchIn": 1.12,
+  "velocidadeTour": 1.25,
+  "minCena": 1.6,
+  "maxCena": 4.5
+ },
+ "movimento": {
+  "intensidade": 0.08,
+  "fotos": "pan",
+  "planta": 0.3,
+  "pdf": "cartao"
+ },
+ "transicoes": {
+  "lista": [
+   "smoothleft",
+   "circleopen",
+   "slideup",
+   "zoomin",
+   "wipeleft",
+   "smoothup"
+  ],
+  "dur": 0.35,
+  "entreFalas": "corte"
+ },
+ "legenda": {
+  "fonte": "Inter",
+  "negrito": true,
+  "tamanho": 0.078,
+  "cor": "#FFFFFF",
+  "destaque": "#B0895B",
+  "destacarAtiva": true,
+  "contorno": "#000000",
+  "espessura": 0.0065,
+  "sombra": 0.003,
+  "fundo": "",
+  "fundoOpacidade": 0.55,
+  "caixaAlta": true,
+  "palavras": 3,
+  "maxCaracteres": 22,
+  "animacao": "pop",
+  "posicaoY": 0.74,
+  "emojis": true,
+  "palavrasDestaque": [
+   "fgts",
+   "caixa",
+   "entrada",
+   "parcela",
+   "financiamento",
+   "lazer",
+   "metrô",
+   "vlt",
+   "praia",
+   "vista",
+   "varanda",
+   "suíte",
+   "lançamento",
+   "planta",
+   "m²",
+   "r$",
+   "mil",
+   "vaga",
+   "piscina",
+   "rooftop",
+   "exclusivo"
+  ]
+ },
+ "titulos": {
+  "gancho": {
+   "fonte": "Inter Black",
+   "tamanho": 0.068,
+   "cor": "#FFFFFF",
+   "fundo": "#1A1A19",
+   "fundoOpacidade": 0.85,
+   "caixaAlta": true,
+   "posicaoY": 0.14,
+   "animacao": "subir",
+   "duracao": 3
+  },
+  "ficha": {
+   "fonte": "Cormorant Garamond SemiBold",
+   "tamanho": 0.062,
+   "cor": "#FFFFFF",
+   "fundo": "#1A1A19",
+   "fundoOpacidade": 0.7,
+   "caixaAlta": false,
+   "posicaoY": 0.14,
+   "animacao": "subir",
+   "duracao": 2
+  },
+  "impacto": {
+   "fonte": "Inter Black",
+   "tamanho": 0.11,
+   "cor": "#FFFFFF",
+   "fundo": "",
+   "fundoOpacidade": 0,
+   "caixaAlta": true,
+   "posicaoY": 0.45,
+   "animacao": "pop",
+   "duracao": 1.5
+  },
+  "rotulo": {
+   "fonte": "Inter",
+   "tamanho": 0.03,
+   "cor": "#FFFFFF",
+   "fundo": "#000000",
+   "fundoOpacidade": 0.45,
+   "caixaAlta": true,
+   "posicaoY": 0.065,
+   "animacao": "fade",
+   "duracao": 3
+  },
+  "cta": {
+   "fonte": "Inter",
+   "tamanho": 0.05,
+   "cor": "#1A1A19",
+   "fundo": "#B0895B",
+   "fundoOpacidade": 1,
+   "caixaAlta": false,
+   "posicaoY": 0.6,
+   "animacao": "pop",
+   "duracao": 3
+  }
+ },
+ "audio": {
+  "limparVoz": true,
+  "musicaVolume": 0.18,
+  "ducking": true,
+  "sfxVolume": 0.35,
+  "sfx": {
+   "transicao": "whoosh",
+   "gancho": "impacto",
+   "ficha": "pop",
+   "cta": "riser",
+   "broll": "whoosh"
+  }
+ },
+ "marca": {
+  "marcaDagua": true,
+  "opacidade": 0.85,
+  "tamanho": 0.09,
+  "telaFinal": true,
+  "duracaoTelaFinal": 3.5,
+  "barraProgresso": true,
+  "corBarra": "#B0895B"
+ },
+ "export": {
+  "crf": 19,
+  "fps": 30,
+  "preset": "veryfast",
+  "audioKbps": 192
+ },
+ "id": "social-performance",
+ "nome": "Social Performance",
+ "descricao": "Gancho forte, legenda marcante palavra a palavra, emojis do assunto, cortes rápidos e CTA visível. Para Reels/TikTok de captação.",
+ "posicionamento": [
+  "economico",
+  "medio-alto"
+ ],
+ "versao": 1,
+ "oficial": true
+}
