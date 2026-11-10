@@ -2,7 +2,7 @@
 
 Ambiente: Linux, Node 22.22, FFmpeg 6.1 (`ffmpeg-static`), Chromium/Playwright para a interface. Data: 25/10/2026.
 
-## Automatizados (`npm test`): 10/10 passando
+## Automatizados (`npm test`): 15/15 passando (atualizado em 10/11/2026)
 | Teste | Resultado |
 |---|---|
 | layout: sobreposição exata nas transições, velocidade 2x | ok |
@@ -14,6 +14,11 @@ Ambiente: Linux, Node 22.22, FFmpeg 6.1 (`ffmpeg-static`), Chromium/Playwright p
 | edição manual + render prévia 9:16 e final 1:1 validados (resolução, duração, H.264/AAC, capa) | ok |
 | cancelamento de renderização | ok |
 | salvar, versionar, reabrir, duplicar | ok |
+| limite de corte: com 10%, corta no máximo ~0,8 s de um vídeo de 8 s | ok |
+| formatos: bairro com dado real do Porto Maravilha (VLT), condição sem preço inventado, compraria, palavra-código, bairro desconhecido gera aviso | ok |
+| comparativo com empreendimentos reais do catálogo e capas importadas | ok |
+| variações: 4 ângulos, 4 ganchos e 4 palavras-código diferentes, mídia por hard link | ok |
+| fundo verde: fundo trocado pela cor da marca e apresentador recortado visível durante a sobreposição (checagem de pixel); VTT gerado | ok |
 | API HTTP: status, criar, upload, salvar, render, Range 206, path traversal bloqueado | ok |
 
 ## Manuais com material real

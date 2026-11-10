@@ -33,14 +33,7 @@ jobs.registrar('tts', async ({ projetoId, texto }, ctx) => {
   return { midia: m.id };
 });
 
-// ---------- catalogo do site ----------
-let _cat = null;
-function catalogo() {
-  if (_cat) return _cat;
-  for (const f of [cfg.CATALOGO_LOCAL, path.join(cfg.RAIZ, 'catalogo.json')]) { try { _cat = JSON.parse(fs.readFileSync(f, 'utf8')).itens || []; if (_cat.length) return _cat; } catch {} }
-  return _cat = [];
-}
-fetch(cfg.SITE + 'data/catalogo.json').then(r => r.ok && r.json()).then(d => { if (d && d.itens && d.itens.length) { _cat = d.itens; fs.writeFileSync(path.join(cfg.RAIZ, 'catalogo.json'), JSON.stringify(d)); } }).catch(() => {});
+const { catalogo } = require('./catalogo');
 
 // ---------- autenticacao (obrigatoria fora do localhost) ----------
 const sessoes = new Map();
@@ -184,6 +177,12 @@ rota('POST', /^\/api\/projetos\/(\w+)\/roteiro$/, async (req, res, m) => {
   const rot = await diretor.gerarRoteiro(p, b);
   await projetos.alterar(m[1], pp => { pp.roteiro = rot; });
   json(res, rot);
+});
+rota('POST', /^\/api\/projetos\/(\w+)\/variacoes$/, async (req, res, m) => {
+  projetoOk(m[1]); const b = await corpo(req);
+  const vs = diretor.gerarVariacoes(m[1], b);
+  if (b.renderizar) for (const v of vs) for (const f of (b.formatos && b.formatos.length ? b.formatos : [projetos.ler(v.id).formato]).filter(x => Modelo.FORMATOS[x])) v.tarefas = [...(v.tarefas || []), jobs.criar('render', { projetoId: v.id, formato: f, qualidade: 'final' }, `Variação ${f}: ${v.nome}`).id];
+  json(res, vs);
 });
 rota('POST', /^\/api\/projetos\/(\w+)\/aplicar-roteiro$/, async (req, res, m) => {
   projetoOk(m[1]); const b = await corpo(req);

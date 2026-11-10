@@ -65,8 +65,17 @@ function listar() {
 function duplicar(id) {
   const p = ler(id), novo = criar({ nome: p.nome + ' (cópia)', formato: p.formato, presetId: p.presetId });
   const c = { ...Modelo.clone(p), id: novo.id, nome: novo.nome, criado: novo.criado, exportacoes: [] };
-  fs.cpSync(arq(id, 'midia'), arq(novo.id, 'midia'), { recursive: true });
+  ligarOuCopiar(arq(id, 'midia'), arq(novo.id, 'midia'));
   gravar(c); return c;
+}
+// Midia duplicada por hard link (nao ocupa disco de novo); se o sistema nao permitir, copia
+function ligarOuCopiar(de, para) {
+  fs.mkdirSync(para, { recursive: true });
+  for (const n of fs.readdirSync(de)) {
+    const a = path.join(de, n), b = path.join(para, n);
+    if (fs.statSync(a).isDirectory()) ligarOuCopiar(a, b);
+    else { try { fs.linkSync(a, b); } catch { fs.copyFileSync(a, b); } }
+  }
 }
 function excluir(id) { fs.rmSync(dir(id), { recursive: true, force: true }); }
 const versoes = id => fs.readdirSync(arq(id, 'versoes')).sort().reverse().map(v => ({ id: v.replace('.json', ''), data: fs.statSync(arq(id, 'versoes', v)).mtime }));

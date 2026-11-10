@@ -51,7 +51,7 @@ table.t{width:100%;border-collapse:collapse;font-size:13px}table.t td,table.t th
 .ed-topo .nome{font:600 18px var(--ser);background:none;border:0;width:260px;padding:4px}
 .ed-meio{display:grid;grid-template-columns:260px minmax(0,1fr) 290px;min-height:0;min-width:0}
 .painel{border-right:1px solid var(--linha);overflow:auto;background:var(--tinta2);min-height:0}.painel.dir{border-right:0;border-left:1px solid var(--linha)}
-.abas{display:flex;border-bottom:1px solid var(--linha);position:sticky;top:0;background:var(--tinta2);z-index:2}.abas button{flex:1;background:none;border:0;padding:10px 4px;color:var(--mut);cursor:pointer;font-size:12px;border-bottom:2px solid transparent}.abas button.on{color:var(--marfim);border-bottom-color:var(--ouro)}
+.abas{display:flex;border-bottom:1px solid var(--linha);position:sticky;top:0;background:var(--tinta2);z-index:2}.abas button{flex:1;background:none;border:0;padding:10px 2px;color:var(--mut);cursor:pointer;font-size:11px;white-space:nowrap;border-bottom:2px solid transparent}.abas button.on{color:var(--marfim);border-bottom-color:var(--ouro)}
 .bin{display:grid;grid-template-columns:1fr 1fr;gap:8px;padding:10px}
 .mi{background:var(--tinta3);border:1px solid var(--linha);border-radius:8px;overflow:hidden;cursor:grab;position:relative;font-size:11px}
 .mi .im{aspect-ratio:16/10;background:#000 center/cover}.mi span{display:block;padding:4px 6px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}

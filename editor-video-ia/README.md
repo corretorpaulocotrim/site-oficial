@@ -37,6 +37,14 @@ O navegador abre em **http://localhost:3333**. Na primeira legenda automática, 
 - Inspetor: entrada e duração, velocidade, volume, zoom, enquadramento (preencher, inteiro com fundo desfocado ou cartão), **ponto de foco** (reenquadra cada formato sem cortar o apresentador), movimento, transição, brilho, contraste e saturação.
 - O projeto salva sozinho a cada alteração. Uma versão é guardada a cada 2 minutos e antes de cada exportação (botão **Versões**).
 
+### Formatos e variações (padrões de 2026)
+- **Formato do vídeo**: padrão, tour com curiosidade, 3 motivos para morar no bairro (dados reais do site), condição (entrada → obra → chaves), "você compraria?" e comparativo de lançamentos da região (catálogo do site).
+- **Palavra-código no CTA**: "Comente PLANTA que eu te mando…". Com uma palavra diferente por vídeo, você sabe de onde veio o lead.
+- **Variações** (botão no editor): o mesmo vídeo em 4 ângulos de promessa (localização, planta, condição, prova social), cada um com gancho e CTA próprios, já renderizados. As mídias não são duplicadas no disco.
+- **Edição pelo texto** (aba Transcrição): marque frases e corte. O vídeo, as legendas e os textos se ajustam.
+- **Fundo verde**: grave com tela verde e marque "Gravado com fundo verde" no clipe. Você aparece recortado sobre o material. A prévia ao vivo mostra o círculo; a prévia renderizada mostra o recorte.
+- Exportação com **.srt, .vtt e capítulos** para o YouTube.
+
 ### PDF Intelligence
 - Extrai o texto de cada página. Página escaneada passa por OCR em português, que roda offline.
 - Extrai as fotos embutidas do book em resolução original e descarta fundos e molduras repetidos.
@@ -86,7 +94,7 @@ As correções de palavras na legenda (ex.: `fgts` → `FGTS`) ficam em `config.
 ```
 npm test
 ```
-São 10 testes, que geram os próprios arquivos de teste sem dados pessoais. Eles cobrem a matemática da linha do tempo, as legendas, o PDF Intelligence, o fluxo importar → Auto Edit → editar → renderizar 9:16 e 1:1 com validação → cancelar → salvar/reabrir/duplicar, e a API HTTP (upload, render, Range e bloqueio de path traversal). Os resultados estão em `docs/TESTES.md`.
+São 15 testes, que geram os próprios arquivos de teste sem dados pessoais. Eles cobrem os formatos de roteiro, o limite de corte, as variações, o fundo verde com checagem de pixel, a matemática da linha do tempo, as legendas, o PDF Intelligence, o fluxo importar → Auto Edit → editar → renderizar 9:16 e 1:1 com validação → cancelar → salvar/reabrir/duplicar, e a API HTTP (upload, render, Range e bloqueio de path traversal). Os resultados estão em `docs/TESTES.md`.
 
 ## 6. Documentação
 - `docs/IMPLANTACAO.md`: servidor próprio, Docker, HTTPS, atualização.

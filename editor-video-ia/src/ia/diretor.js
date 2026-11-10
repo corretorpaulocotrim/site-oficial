@@ -15,7 +15,7 @@ const r1 = n => Math.round(n * 10) / 10;
 const norm = PDF.norm;
 
 // ---------- deteccao de fala e de cenas ----------
-async function detectarFala(arquivo, dur, pausaMin, margem, sinal) {
+async function detectarFala(arquivo, dur, pausaMin, margem, sinal, maxCorte = 0.35) {
   const log = await ff(['-i', arquivo, '-vn', '-af', `silencedetect=noise=-33dB:d=${pausaMin}`, '-f', 'null', '-'], { tag: 'pausas', sinal });
   const sil = []; let ini = null;
   for (const l of log.split('\n')) {
@@ -23,13 +23,20 @@ async function detectarFala(arquivo, dur, pausaMin, margem, sinal) {
     m = l.match(/silence_end: ([\d.]+)/); if (m && ini !== null) { sil.push([ini, +m[1]]); ini = null; }
   }
   if (ini !== null) sil.push([ini, dur]);
+  const todas = sil.length;
+  // limite: remove as pausas mais longas primeiro e para ao atingir maxCorte do video (protege contra edicao excessiva)
+  if (maxCorte < 1) {
+    let soma = 0; const ok = new Set();
+    sil.map((x, i) => [x[1] - x[0], i]).sort((a, b) => b[0] - a[0]).forEach(([d, i]) => { if (soma + d <= maxCorte * dur) { soma += d; ok.add(i); } });
+    for (let i = sil.length - 1; i >= 0; i--) if (!ok.has(i)) sil.splice(i, 1);
+  }
   const manter = []; let t = 0;
   for (const [a, b] of sil) { if (a - t > 0.05) manter.push([Math.max(0, t - margem), Math.min(dur, a + margem)]); t = b; }
   if (dur - t > 0.05) manter.push([Math.max(0, t - margem), dur]);
   // junta trechos minusculos para nao gerar micro-cortes
   const j = [];
   for (const k of manter) { const u = j[j.length - 1]; if (u && (k[0] - u[1] < 0.15 || k[1] - k[0] < 0.6)) u[1] = Math.max(u[1], k[1]); else j.push([...k]); }
-  return { manter: j, falado: j.reduce((s, [a, b]) => s + b - a, 0), pausas: sil.length };
+  return { manter: j, falado: j.reduce((s, [a, b]) => s + b - a, 0), pausas: sil.length, pausasTotais: todas };
 }
 async function detectarCenas(arquivo, dur, sinal) {
   const log = await ff(['-i', arquivo, '-an', '-vf', "scale=320:-2,select='gt(scene,0.32)',showinfo", '-f', 'null', '-'], { tag: 'cenas', sinal }).catch(() => '');
@@ -78,8 +85,23 @@ function gerarRoteiroBase(p, o) {
     luxo: [nome, bairro].filter(Boolean).join('. ') + '.',
     institucional: marca.slogan
   };
+  // Angulos de promessa (lote de variacoes): localizacao, planta/uso, condicao, prova social
+  const ANG = {
+    localizacao: { g: bairro ? `Por que tanta gente quer morar no ${bairro}?` : 'A localização que faz diferença no dia a dia', ordem: ['localizacao', 'fachada', 'planta', 'lazer'], palavra: 'BAIRRO', oque: 'o mapa do dia a dia do bairro' },
+    planta: { g: tip ? `${tip}: repara como essa planta foi pensada` : 'Repara como essa planta foi pensada', ordem: ['planta', 'decorado', 'fachada', 'lazer'], palavra: 'PLANTA', oque: 'a planta completa' },
+    condicao: { g: 'Como funciona o pagamento de um apê na planta, sem surpresa', ordem: ['condicoes', 'fachada', 'planta', 'localizacao'], palavra: 'SIMULA', oque: 'a sua simulação' },
+    prova: { g: `${nome || 'Esse lançamento'}: o que mais me perguntam`, ordem: ['fachada', 'lazer', 'planta', 'localizacao'], palavra: 'QUERO', oque: 'todos os detalhes' }
+  };
+  const ang = ANG[o.angulo] || null;
+  const FORM = {
+    tour: { g: `Vem comigo conhecer ${tip ? 'esse ' + tip.toLowerCase().replace(/^(\d)/, '$1') : 'esse apê'}${bairro ? ' no ' + bairro : ''} — repara no final`, ordem: ['fachada', 'decorado', 'planta', 'lazer', 'localizacao'] },
+    compraria: { g: `Você compraria ${nome ? 'o ' + nome : 'esse apê'}${bairro ? ' no ' + bairro : ''}? Comenta SIM ou NÃO`, ordem: ['fachada', 'planta', 'lazer', 'localizacao'] },
+    condicao: { g: 'Entrada, obra e chaves: como você paga um apê na planta', ordem: ['condicoes', 'planta', 'fachada'] },
+    bairro: { g: bairro ? `3 motivos para morar no ${bairro}` : '3 motivos para morar aqui', ordem: ['localizacao', 'fachada', 'lazer'] }
+  };
+  const form = FORM[o.formato] || null;
   const objetivoGancho = { objecoes: `${nome || 'Esse lançamento'}: as 3 dúvidas que todo mundo me faz`, diferenciais: `O que ${nome || 'esse lançamento'} tem que os outros não têm` };
-  const gancho = o.gancho || objetivoGancho[o.objetivo] || ganchos[pos] || ganchos['medio-alto'];
+  const gancho = o.gancho || (form && form.g) || (ang && ang.g) || objetivoGancho[o.objetivo] || ganchos[pos] || ganchos['medio-alto'];
   const FALA = {
     fachada: () => ({ fala: `Esse é o ${nome || 'empreendimento'}${e.construtora ? ', da ' + e.construtora : ''}${bairro ? ', no ' + bairro : ''}.`, tela: nome || 'O projeto', fonte: e.nome ? (e.fonte === 'catalogo' ? 'catálogo do site' : 'informado') : '' }),
     localizacao: () => ({ fala: dist ? `A localização: ${dist.valor}.` : bairro ? `Olha a localização no ${bairro}.` : 'Agora a localização.', tela: dist ? dist.valor.slice(0, 32) : (bairro || 'Localização'), fonte: fonte(dist) }),
@@ -95,6 +117,7 @@ function gerarRoteiroBase(p, o) {
   let ordem = (ORDEM[pos] || ORDEM['medio-alto']).slice();
   if (o.objetivo === 'diferenciais') ordem = ['fachada', 'lazer', 'planta', 'localizacao', 'ficha', 'decorado'];
   if (o.objetivo === 'desejo') ordem = ['decorado', 'fachada', 'lazer', 'planta', 'localizacao'];
+  if (ang) ordem = ang.ordem; if (form) ordem = form.ordem;
   const n = NCENAS[D] || Math.max(3, Math.round(D / 6));
   const cenas = []; let k = 0, voltas = 0;
   while (cenas.length < n && voltas < 3) {
@@ -106,20 +129,67 @@ function gerarRoteiroBase(p, o) {
     }
     k++; if (k % ordem.length === 0) voltas++;
   }
+  // Formato "3 motivos para morar no bairro": dados reais do site (No dia a dia do bairro)
+  if (o.formato === 'bairro') {
+    const bi = require('./bairro').buscar(bairro);
+    if (bi) {
+      const loc = cenas.filter(c => c.midia), linhas = [['Transporte', bi.transporte], ['Lazer', bi.lazer], ['Compras', bi.compras], ['Saúde', bi.saude], ['Educação', bi.educacao]].filter(x => x[1] && x[1].length).slice(0, 3);
+      cenas.length = 0;
+      linhas.forEach(([rot, l], i) => cenas.push({ ordem: i + 1, categoria: 'localizacao', rotulo: `${i + 1}. ${rot.toUpperCase()}`, midia: (loc[i] || loc[0] || {}).midia || null, fala: `Motivo ${i + 1}: ${l[0]}.`, textoTela: l[0].split(/[—,(]/)[0].trim().slice(0, 42), fonte: 'site: No dia a dia do bairro' }));
+    } else avisos.push(`Sem dados de "dia a dia" para o bairro "${bairro || '?'}" no site: formato bairro usou o roteiro padrão.`);
+  }
+  // Formato "condição como previsibilidade": estrutura geral da compra na planta, sem valor sem fonte
+  if (o.formato === 'condicao' || (ang && o.angulo === 'condicao')) {
+    const est = [['ENTRADA', 'Uma parte de entrada, que pode usar o FGTS conforme as regras do seu enquadramento.', 'Entrada (pode usar FGTS)'], ['DURANTE A OBRA', 'Parcelas durante a obra, conforme a tabela vigente da construtora.', 'Parcelas na obra'], ['NAS CHAVES', 'E o saldo financiado na entrega das chaves, com análise de crédito.', 'Financiamento nas chaves']];
+    const base = cenas.filter(c => c.categoria !== 'condicoes');
+    cenas.length = 0;
+    est.forEach(([rot, fala, tela], i) => cenas.push({ ordem: i + 1, categoria: 'condicoes', rotulo: rot, midia: (base[i] || {}).midia || null, fala, textoTela: tela, fonte: 'estrutura geral de compra na planta — valores e regras confirmados no WhatsApp' }));
+    if (e.preco) cenas.push({ ordem: 4, categoria: 'condicoes', rotulo: 'A PARTIR DE', midia: null, fala: `Valores a partir de ${e.preco}, conforme tabela vigente.`, textoTela: `a partir de ${e.preco}`, fonte: 'informado no projeto' });
+  }
   // materiais que sobraram (fotos do usuario) completam
   for (const m of mats) { if (cenas.length >= n) break; if (!usados.has(m.midia.id)) { usados.add(m.midia.id); cenas.push({ ordem: cenas.length + 1, categoria: m.categoria, rotulo: m.rotulo, midia: m.midia.id, fala: '', textoTela: '', fonte: '' }); } }
   const corpo = Math.max(3, D - 3 - 3.5), dCena = r1(Math.min(6, Math.max(1.8, corpo / Math.max(1, cenas.length))));
   cenas.forEach(c => { c.duracao = dCena; });
   if (!mats.length) avisos.push('Nenhum material visual (PDF, fotos, vídeos) no projeto: o roteiro ficou só com falas.');
   if ((p.pdfs || []).some(d => (d.analise.alertas || []).length)) avisos.push('O PDF tem alertas (veja PDF Intelligence) — revise antes de publicar.');
-  const cta = pos === 'luxo' ? 'Agende uma apresentação privada' : pos === 'institucional' ? 'Fale comigo no WhatsApp' : 'Chama no WhatsApp para simular';
+  // CTA com palavra-codigo no comentario (gera conversa e permite saber de qual video veio o lead)
+  const palavra = String(o.palavraCta || (ang && ang.palavra) || (o.formato === 'bairro' ? 'BAIRRO' : o.formato === 'condicao' ? 'SIMULA' : pos === 'luxo' ? '' : 'QUERO')).toUpperCase().replace(/[^A-Z0-9À-Ú]/g, '').slice(0, 14);
+  const cta = pos === 'luxo' && !o.palavraCta ? 'Agende uma apresentação privada' : palavra ? `Comente ${palavra} que eu te mando ${(ang && ang.oque) || (o.formato === 'condicao' ? 'a sua simulação' : o.formato === 'bairro' ? 'o mapa do bairro' : 'os detalhes')}` : 'Fale comigo no WhatsApp';
   const tags = ['#imoveisrj', '#lancamentoimobiliario', '#riodejaneiro', '#corretordeimoveis', bairro && '#' + norm(bairro).replace(/\W/g, ''), nome && '#' + norm(nome).replace(/\W/g, '')].filter(Boolean);
   const legendaPost = `${gancho}\n\n${nome ? '🏢 ' + nome + (bairro ? ' — ' + bairro : '') + '\n' : ''}${tip ? '📐 ' + [tip, met].filter(Boolean).join(' · ') + '\n' : ''}${lazer.length ? '✨ ' + lazer.join(', ') + '\n' : ''}\n👉 ${cta}: ${marca.telefone}\n🌐 ${marca.site}\n\n${marca.nome} • ${marca.creci}\n\n${tags.join(' ')}`;
-  return { origem: 'regras', posicionamento: pos, objetivo: o.objetivo || 'interesse', duracao: D, gancho, cenas, cta, legendaPost, avisos, criado: new Date().toISOString() };
+  return { origem: 'regras', posicionamento: pos, objetivo: o.objetivo || 'interesse', formato: o.formato || 'padrao', angulo: o.angulo || null, palavraCta: palavra, duracao: D, gancho, cenas, cta, legendaPost, avisos, criado: new Date().toISOString() };
+}
+
+// Formato "comparativo": 2-3 empreendimentos do catalogo do site na mesma regiao, com a capa oficial de cada um
+async function roteiroComparativo(p, o) {
+  const cat = o.catalogo || require('../catalogo').catalogo(), e = p.empreendimento || {}, nn = x => norm(x || '');
+  const atual = cat.find(x => nn(x.nome) === nn(e.nome));
+  const regiao = (atual && atual.regiao) || '', local = e.bairro || (atual && atual.local) || '';
+  const comImg = x => x.img && fs.existsSync(path.join(cfg.RAIZ, '..', x.img));
+  const outros = cat.filter(x => x !== atual && comImg(x) && (nn(x.local) === nn(local) || (regiao && x.regiao === regiao)))
+    .sort((a, b) => (nn(b.local) === nn(local)) - (nn(a.local) === nn(local)));
+  const lista = [atual && comImg(atual) ? atual : null, ...outros].filter(Boolean).slice(0, 3);
+  if (lista.length < 2) return null;
+  const cenas = [];
+  for (const [i, x] of lista.entries()) {
+    const f = path.join(cfg.RAIZ, '..', x.img);
+    const m = p.midias.find(y => y.origemCatalogo === x.img) || await projetos.importar(p.id, path.basename(x.img), fs.createReadStream(f), 50e6);
+    if (!m.origemCatalogo) await projetos.alterar(p.id, pp => { const y = pp.midias.find(z => z.id === m.id); if (y) { y.origemCatalogo = x.img; y.categoria = 'fachada'; y.nome = x.nome; } });
+    cenas.push({ ordem: i + 1, categoria: 'fachada', rotulo: `OPÇÃO ${i + 1}`, midia: m.id, fala: `Opção ${i + 1}: ${x.nome}, ${x.local || ''}${x.plantas ? ' — ' + x.plantas : ''}${x.status ? ', ' + x.status.toLowerCase() : ''}.`, textoTela: x.nome, sub: [x.plantas, x.incorporadora].filter(Boolean).join(' · '), fonte: 'catálogo do site' });
+  }
+  return { cenas, local: local || regiao, n: lista.length };
 }
 
 async function gerarRoteiro(p, o, log) {
-  const base = gerarRoteiroBase(p, o);
+  let base = gerarRoteiroBase(p, o);
+  if (o.formato === 'comparativo') {
+    const c = await roteiroComparativo(p, o);
+    if (c) {
+      const dC = r1(Math.max(2.5, ((+o.duracao || 30) - 6.5) / c.n));
+      base = { ...base, gancho: o.gancho || `${c.n} lançamentos ${c.local ? 'no ' + c.local : 'na mesma região'}: qual combina com você?`, cenas: c.cenas.map(x => ({ ...x, duracao: dC })) };
+      base.legendaPost = base.legendaPost.replace(/^[^\n]*/, base.gancho);
+    } else base.avisos.push('Comparativo precisa de pelo menos 2 empreendimentos do catálogo com capa na mesma região: usei o roteiro padrão.');
+  }
   if (o.usarIA && llm.disponivel()) {
     try {
       const fatos = fatosDe(p).map(f => ({ campo: f.campo, valor: f.valor, pagina: f.pagina, status: f.confirmar ? 'confirmar' : 'extraido' }));
@@ -142,7 +212,7 @@ function aplicarRoteiro(p, rot, preset) {
   }
   const lay = Modelo.layout({ ...p, principal: novo.principal, telaFinal: false }, preset);
   novo.textos.push({ id: Modelo.uid('x'), tipo: 'gancho', texto: rot.gancho, inicio: 0, duracao: preset.titulos.gancho.duracao });
-  lay.clips.forEach((lc, i) => { const c = rot.cenas.filter(c => c.midia && Modelo.midiaDe(p, c.midia))[i]; if (c && c.textoTela && i > 0) novo.textos.push({ id: Modelo.uid('x'), tipo: 'ficha', texto: c.textoTela, sub: c.fonte && !/regra geral|informado/.test(c.fonte) ? '' : '', inicio: r1(lc.ini + 0.3), duracao: r1(Math.min(2.2, lc.dur - 0.4)) }); });
+  lay.clips.forEach((lc, i) => { const c = rot.cenas.filter(c => c.midia && Modelo.midiaDe(p, c.midia))[i]; if (c && c.textoTela && i > 0) novo.textos.push({ id: Modelo.uid('x'), tipo: 'ficha', texto: c.textoTela, sub: c.sub || '', inicio: r1(lc.ini + 0.3), duracao: r1(Math.min(2.2, lc.dur - 0.4)) }); });
   if (lay.total > 4) novo.textos.push({ id: Modelo.uid('x'), tipo: 'cta', texto: rot.cta, inicio: r1(Math.max(0, lay.total - 3)), duracao: 3 });
   return novo;
 }
@@ -161,7 +231,7 @@ async function autoEdit(params, ctx) {
   let narr = null, cortes = null;
   const pausaMin = conservador ? 0.8 : preset.ritmo.pausaMinima, margem = conservador ? 0.2 : preset.ritmo.margem;
   for (const v of videos) {
-    const f = await detectarFala(projetos.arq(projetoId, v.arquivo), v.dur, pausaMin, margem, ctx.sinal);
+    const f = await detectarFala(projetos.arq(projetoId, v.arquivo), v.dur, pausaMin, margem, ctx.sinal, conservador ? 0.2 : (preset.ritmo.maxCorte ?? 0.35));
     v._fala = f;
     if (f.falado >= v.dur * 0.4 && (!narr || f.falado > narr._fala.falado)) narr = v;
   }
@@ -174,7 +244,7 @@ async function autoEdit(params, ctx) {
   if (narr) {
     log(`Apresentador: ${narr.nome} (${r1(narr._fala ? narr._fala.falado : narr.dur)}s de fala)`);
     cortes = preset.ritmo.cortarPausas && params.cortarPausas !== false ? narr._fala.manter : [[0, narr.dur]];
-    if (cortes.length > 1) sug.push({ tipo: 'corte', texto: `${narr._fala.pausas} pausas removidas: ${r1(narr.dur)}s → ${r1(narr._fala.falado)}s. Revise na faixa principal.` });
+    if (cortes.length > 1) sug.push({ tipo: 'corte', texto: `${narr._fala.pausas} pausas removidas: ${r1(narr.dur)}s → ${r1(narr._fala.falado)}s${narr._fala.pausasTotais > narr._fala.pausas ? ` (${narr._fala.pausasTotais - narr._fala.pausas} pausas curtas mantidas pelo limite de corte)` : ''}. Revise na faixa principal.` });
     p.midias.forEach(m => { m.narracao = m.id === narr.id; });
     const principal = cortes.map(([a, b], k) => ({ id: Modelo.uid('c'), midia: narr.id, entrada: +a.toFixed(3), duracao: +(b - a).toFixed(3), fala: true, zoom: !conservador && k % 2 ? preset.ritmo.punchIn : 1, transicao: { tipo: 'auto' }, enquadramento: 'auto', movimento: 'nenhum', volume: 1 }));
     const lay = Modelo.layout({ ...p, principal, telaFinal: false }, preset);
@@ -311,4 +381,24 @@ async function transcreverProjeto({ projetoId }, ctx) {
   return { legendas: grupos.length };
 }
 
-module.exports = { gerarRoteiro, gerarRoteiroBase, aplicarRoteiro, autoEdit, processarPdf, transcreverProjeto, detectarFala, detectarCenas, materiais };
+// LOTE DE VARIACOES: o mesmo material com angulos de promessa diferentes (testar qual gera mais conversa)
+const ANGULOS = { localizacao: 'Localização', planta: 'Planta e uso', condicao: 'Condição', prova: 'Prova social' };
+function gerarVariacoes(projetoId, { angulos, formatos }) {
+  const p = projetos.ler(projetoId), lista = (angulos && angulos.length ? angulos : Object.keys(ANGULOS)).filter(a => ANGULOS[a]);
+  if (!p.principal.length) throw Object.assign(new Error('Monte o vídeo (Auto Edit ou editor) antes de gerar variações'), { status: 400 });
+  const base = p.roteiro || {};
+  return lista.map(angulo => {
+    const d = projetos.duplicar(projetoId);
+    const rot = gerarRoteiroBase(d, { posicionamento: base.posicionamento, objetivo: base.objetivo, duracao: base.duracao, formato: base.formato === 'padrao' ? undefined : base.formato, angulo, ocultarTabela: true });
+    d.nome = `${p.nome} · ${ANGULOS[angulo]}`;
+    d.textos = (d.textos || []).map(t => t.tipo === 'gancho' ? { ...t, texto: rot.gancho } : t.tipo === 'cta' ? { ...t, texto: rot.cta } : t);
+    if (!d.textos.some(t => t.tipo === 'gancho')) d.textos.unshift({ id: Modelo.uid('x'), tipo: 'gancho', texto: rot.gancho, inicio: 0, duracao: 3 });
+    d.roteiro = { ...base, ...rot, cenas: base.cenas || rot.cenas, variacaoDe: projetoId };
+    if (formatos && formatos.length) d.formatosExport = formatos.filter(f => Modelo.FORMATOS[f]);
+    d.sugestoes = [{ id: Modelo.uid('s'), tipo: 'variação', texto: `Variação "${ANGULOS[angulo]}": gancho "${rot.gancho}" e CTA "${rot.cta}". Meça os comentários com a palavra ${rot.palavraCta || '—'}.`, data: new Date().toISOString() }];
+    projetos.salvar(d.id, d);
+    return { id: d.id, nome: d.nome, angulo, gancho: rot.gancho, cta: rot.cta, palavraCta: rot.palavraCta };
+  });
+}
+
+module.exports = { gerarVariacoes, ANGULOS, gerarRoteiro, gerarRoteiroBase, aplicarRoteiro, autoEdit, processarPdf, transcreverProjeto, detectarFala, detectarCenas, materiais };

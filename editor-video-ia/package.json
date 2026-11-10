@@ -8,7 +8,7 @@
   "main": "src/server.js",
   "scripts": {
     "start": "node src/server.js",
-    "test": "node --test --test-concurrency=1 test/modelo.test.js test/pdf.test.js test/fluxo.test.js test/servidor.test.js"
+    "test": "node --test --test-concurrency=1 test/modelo.test.js test/pdf.test.js test/fluxo.test.js test/formatos.test.js test/servidor.test.js"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^1.3.0",

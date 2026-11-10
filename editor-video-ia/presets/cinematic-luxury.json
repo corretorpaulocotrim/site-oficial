@@ -15,7 +15,8 @@
   "punchIn": 1,
   "velocidadeTour": 0.9,
   "minCena": 2.5,
-  "maxCena": 6
+  "maxCena": 6,
+  "maxCorte": 0.2
  },
  "movimento": {
   "intensidade": 0.05,

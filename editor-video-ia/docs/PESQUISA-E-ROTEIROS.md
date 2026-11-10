@@ -7,6 +7,35 @@
 - Os padrões abaixo são princípios recorrentes do formato vertical. Não são comparações de conversão: **visualização não é venda**. Meça no seu funil (seção 4).
 - A biblioteca de presets (pasta `presets/`) é onde novos padrões entram sem mexer no motor.
 
+## 0. Atualização da pesquisa (10/11/2026)
+
+**Fontes consultadas** (a maioria é blog de ferramenta de vídeo ou de quem vende serviço; os números delas não foram auditados e não são usados como promessa):
+- Rafael Terra, *15 tendências de marketing digital para o mercado imobiliário em 2026* (rafaelterra.com.br): lote mensal de **12 variações por empreendimento**, cruzando 4 ângulos de promessa (localização, planta/uso, condição financeira, prova social) com 3 formatos; Reels de 20 a 35 s; condição de pagamento contada como **previsibilidade**, não como "a partir de".
+- BIGVU, *Creator Decoder: how top realtors get views in 2026* e *25 real estate video ideas* (bigvu.tv): ganchos de afirmação ousada, cortes frequentes, **CTA de comentário com palavra-código**, rosto do corretor em cena (amostra pequena), guias de bairro/mudança e comparativos "o que esse valor compra".
+- Luxury Presence, Krista Mashore, videoguru.ai e vprop.ai (guias de Reels 2026): 15 a 60 s, legenda sempre, CTA específico ("siga para mais" raramente gera lead), enquete "você compraria?".
+- Portas: o "corretor creator"; YouTube de 8 a 12 min para lead mais quente.
+- GitHub, editores de vídeo com IA de código aberto:
+  - **vidpipe** (htekdev, ISC): corte de pausas com limite de 20%, legenda karaokê palavra a palavra, capítulos;
+  - **CutScript** e **Rescript**: editar o vídeo apagando o texto da transcrição;
+  - **Auto-Cut AI** (faster-whisper).
+
+**Limitações:** os sites bigvu.tv e rafaelterra.com.br foram lidos só pelo resumo da busca, porque o ambiente de desenvolvimento bloqueia o acesso direto. O Instagram e a Biblioteca de Anúncios da Meta continuam inacessíveis daqui. A estatística "403% mais contatos com vídeo", muito repetida, **não foi confirmada** em fonte primária e não é usada.
+
+**O que virou função no estúdio (nesta versão):**
+| Padrão encontrado | Função |
+|---|---|
+| Lote de variações por ângulo (Rafael Terra) | **Variações**, no editor: 4 ângulos de promessa, cada um com gancho, CTA e palavra-código próprios, já na fila de render |
+| CTA de comentário com palavra-código (BIGVU) | Campo **palavra-código** (ex.: "Comente PLANTA que eu te mando a planta completa"), que também mostra de qual vídeo veio cada lead |
+| Guia de bairro / "por que morar aqui" | Formato **3 motivos para morar no bairro**, com os dados reais do site (`bairro-info.js`, 36 bairros); sem dado do bairro, o estúdio avisa e não inventa |
+| Condição como previsibilidade | Formato **Entrada → obra → chaves**: mostra a estrutura sem valor; preço só aparece se estiver informado no projeto |
+| "O que esse valor compra" / comparativo | Formato **comparativo**: 2 ou 3 lançamentos da mesma região, tirados do catálogo do site, com a capa oficial de cada um |
+| Enquete "você compraria?" | Formato **Você compraria?**: o gancho pede SIM ou NÃO nos comentários |
+| Tour com gancho de curiosidade | Formato **tour (POV)** |
+| Limite de corte (vidpipe) | **Corte máximo de pausas** no preset (padrão 35%; 20% na edição conservadora): tira primeiro as pausas mais longas e para no limite |
+| Editar pelo texto (CutScript, Rescript) | Aba **Transcrição** no editor: marque frases → "Cortar" → o vídeo, as legendas e os textos se ajustam sozinhos |
+| Corretor na frente do material (chroma) | **Fundo verde**: grave com tela verde, marque a opção e você aparece recortado sobre o book ou as fotos, em vez de num círculo |
+| Capítulos (vidpipe) | Arquivo **capítulos** para a descrição do YouTube (vídeos com 30 s ou mais e 3 ou mais cenas) e legenda **.vtt** além da .srt |
+
 ## 1. Padrões que funcionam → o que o app faz sozinho
 | Padrão do mercado | Por que retém | No app |
 |---|---|---|

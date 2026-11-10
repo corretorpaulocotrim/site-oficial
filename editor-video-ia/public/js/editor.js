@@ -49,6 +49,7 @@ const Editor = (() => {
         <button class="btn pq" id="ed-versoes" title="Versões salvas">Versões</button>
         <button class="btn pq" id="ed-transcrever" title="Gerar legendas da fala (IA local)">✎ Legendas IA</button>
         <button class="btn pq" id="ed-autoedit" title="Montagem automática">✦ Auto Edit</button>
+        <button class="btn pq" id="ed-var" title="Gerar o mesmo vídeo com ganchos e CTAs de 4 ângulos diferentes">⧉ Variações</button>
         <button class="btn pq" id="ed-previa" title="Renderizar prévia rápida com transições e cor finais">▶ Prévia renderizada</button>
         <button class="btn pri" id="ed-exportar">Exportar</button>
       </div>
@@ -103,7 +104,7 @@ const Editor = (() => {
   function desenharEsquerda() {
     const el = $('#ed-esq'), p = E.p;
     const aba = (id, n) => `<button class="${E.aba === id ? 'on' : ''}" data-aba="${id}">${n}</button>`;
-    let h = `<div class="abas">${aba('midia', 'Mídia')}${aba('texto', 'Texto')}${aba('sug', 'Sugestões' + (p.sugestoes && p.sugestoes.length ? ' •' : ''))}${aba('rot', 'Roteiro')}</div>`;
+    let h = `<div class="abas">${aba('midia', 'Mídia')}${aba('texto', 'Texto')}${aba('trans', 'Transcrição')}${aba('sug', 'Sugestões' + (p.sugestoes && p.sugestoes.length ? ' •' : ''))}${aba('rot', 'Roteiro')}</div>`;
     if (E.aba === 'midia') {
       h += `<div style="padding:10px"><div class="drop" id="ed-drop">Arraste vídeos, fotos, PDF ou música<br><small>ou clique para escolher</small></div><input type="file" id="ed-file" multiple hidden accept="video/*,image/*,audio/*,application/pdf,.pdf,.heic,.mov"></div><div id="ed-up"></div>`;
       const grupos = [['Vídeos', m => m.tipo === 'video'], ['Imagens', m => m.tipo === 'imagem'], ['Páginas de PDF', m => m.tipo === 'pagina'], ['Áudio', m => m.tipo === 'audio'], ['PDFs', m => m.tipo === 'pdf']];
@@ -122,6 +123,12 @@ const Editor = (() => {
         <h3>Legendas</h3><label class="linha"><input type="checkbox" id="ed-legon" ${p.legendas.ativas ? 'checked' : ''}> Mostrar legendas</label>
         <p class="sub" style="margin:8px 0">${p.legendas.grupos.length} blocos ${p.legendas.origem ? '(' + p.legendas.origem + ')' : ''}. Clique num bloco da faixa Legendas para corrigir o texto.</p>
         <button class="btn" id="ed-leg-add" style="width:100%">＋ Bloco de legenda no cursor</button></div>`;
+    } else if (E.aba === 'trans') {
+      const gs = p.legendas.grupos;
+      h += gs.length ? `<div style="padding:12px"><p class="sub" style="margin:0 0 8px;font-size:12px">Edite o vídeo pelo texto: marque as frases que quer tirar e clique em cortar. Clique numa frase para ir até ela.</p>
+        <div id="ed-trans" style="line-height:1.9">${gs.map(g => `<label style="display:inline;cursor:pointer;border-radius:4px;padding:1px 2px;${E.t >= g.ini && E.t < g.fim ? 'background:#b0895b44' : ''}" data-ir="${g.ini}"><input type="checkbox" data-corte="${g.id}" style="vertical-align:middle"> ${esc(g.palavras.map(q => q.t).join(' '))}</label> `).join('')}</div>
+        <button class="btn" id="ed-cortar" style="width:100%;margin-top:10px">✂ Cortar frases marcadas do vídeo</button></div>`
+        : '<div class="vazio" style="margin:10px">Sem transcrição. Clique em "Legendas IA" no topo para transcrever a sua fala.</div>';
     } else if (E.aba === 'sug') {
       const s = p.sugestoes || [];
       h += s.length ? s.map(x => `<div class="sug"><span class="chip ${x.tipo === 'aviso' ? 'er' : 'av'}">${esc(x.tipo)}</span>${esc(x.texto)}</div>`).join('') + '<div style="padding:10px"><button class="btn pq" id="ed-sug-limpar">Marcar como revisadas</button></div>' : '<div class="vazio" style="margin:10px">Sem sugestões. O Auto Edit registra aqui cada decisão automática para você revisar.</div>';
@@ -145,6 +152,14 @@ const Editor = (() => {
     const lo = $('#ed-legon', el); if (lo) lo.onchange = () => alterar(p => { p.legendas.ativas = lo.checked; });
     const la = $('#ed-leg-add', el); if (la) la.onclick = () => { const g = { id: Modelo.uid('g'), ini: r2(E.t), fim: r2(E.t + 1.5), palavras: [{ t: 'Texto', ini: E.t, fim: E.t + 1.5 }] }; alterar(p => { p.legendas.grupos.push(g); p.legendas.grupos.sort((a, b) => a.ini - b.ini); }); E.sel = { faixa: 'legendas', id: g.id }; desenharInspetor(); };
     const sl = $('#ed-sug-limpar', el); if (sl) sl.onclick = () => alterar(p => { p.sugestoes = []; });
+    $$('[data-ir]', el).forEach(l => l.onclick = e => { if (e.target.tagName !== 'INPUT') irPara(+l.dataset.ir + 0.01); });
+    const ct = $('#ed-cortar', el); if (ct) ct.onclick = () => {
+      const ids = new Set($$('[data-corte]:checked', el).map(c => c.dataset.corte)); if (!ids.size) return toast('Marque as frases que quer cortar');
+      // junta frases vizinhas marcadas e corta do fim para o comeco (os tempos anteriores nao mudam)
+      const iv = []; for (const g of E.p.legendas.grupos.filter(g => ids.has(g.id))) { const u = iv[iv.length - 1]; if (u && g.ini - u[1] < 0.3) u[1] = g.fim; else iv.push([g.ini, g.fim]); }
+      alterar(p => { for (const [a, b] of iv.reverse()) removerIntervalo(p, a, b); });
+      toast(`${iv.length} trecho(s) cortado(s)`);
+    };
   }
 
   async function enviar(arqs) {
@@ -215,7 +230,7 @@ const Editor = (() => {
     if (m) h += `<p class="sub" style="margin:4px 0 0;font-size:12px">${esc(m.nome)}${m.pagina ? ' · página ' + m.pagina : ''}</p>`;
     if (f === 'principal' || f === 'broll') {
       if (f === 'broll') h += campo('Início (s)', num('inicio', it.inicio)) + `<label class="linha" style="margin-top:8px"><input type="checkbox" data-k="pip" ${it.pip !== false ? 'checked' : ''}> Apresentador em círculo por cima</label>`;
-      if (m && m.tipo === 'video') h += campo('Entrada no vídeo (s)', num('entrada', r2(it.entrada || 0), 0.05, 0, m.dur)) + campo('Duração do trecho (s)', num('duracao', r2(it.duracao), 0.05, 0.2, m.dur)) + campo('Velocidade', sel('velocidade', it.velocidade || 1, [0.5, 0.75, 1, 1.25, 1.5, 2])) + (f === 'principal' ? campo('Volume', rng('volume', it.volume ?? 1, 0, 2, 0.05)) : '') + campo('Zoom (punch-in)', sel('zoom', it.zoom || 1, [[1, 'nenhum'], [1.06, '6%'], [1.12, '12%'], [1.2, '20%']]));
+      if (m && m.tipo === 'video') h += `<label class="linha" style="margin-top:8px"><input type="checkbox" id="ed-verde" ${m.fundoVerde ? 'checked' : ''}> Gravado com fundo verde (recortar o apresentador)</label>` + campo('Entrada no vídeo (s)', num('entrada', r2(it.entrada || 0), 0.05, 0, m.dur)) + campo('Duração do trecho (s)', num('duracao', r2(it.duracao), 0.05, 0.2, m.dur)) + campo('Velocidade', sel('velocidade', it.velocidade || 1, [0.5, 0.75, 1, 1.25, 1.5, 2])) + (f === 'principal' ? campo('Volume', rng('volume', it.volume ?? 1, 0, 2, 0.05)) : '') + campo('Zoom (punch-in)', sel('zoom', it.zoom || 1, [[1, 'nenhum'], [1.06, '6%'], [1.12, '12%'], [1.2, '20%']]));
       else h += campo('Duração (s)', num('duracao', r2(it.duracao), 0.1, 0.3));
       h += campo('Enquadramento', sel('enquadramento', it.enquadramento || 'auto', [['auto', 'Automático'], ['preencher', 'Preencher (corta pelo foco)'], ['ajustar', 'Inteiro + fundo desfocado'], ['cartao', 'Cartão (estilo Apple)']]));
       h += campo('Movimento', sel('movimento', it.movimento || 'auto', [['auto', 'Automático'], ['nenhum', 'Nenhum'], ['zoomin', 'Aproximar'], ['zoomout', 'Afastar'], ['panesq', 'Panorâmica ←'], ['pandir', 'Panorâmica →'], ['subir', 'Subir'], ['descer', 'Descer']]));
@@ -242,6 +257,7 @@ const Editor = (() => {
         E._ultimoRange = c.type === 'range' ? k : null;
       };
     });
+    const vd = $('#ed-verde', el); if (vd) vd.onchange = () => alterar(p => { const mm = p.midias.find(x => x.id === it.midia); if (mm) mm.fundoVerde = vd.checked; });
     const lt = $('#ed-legtx', el); if (lt) lt.onchange = () => alterar(p => { const i = p.legendas.grupos.findIndex(g => g.id === E.sel.id); const n = Modelo.reescrever(p.legendas.grupos[i], lt.value); if (n) p.legendas.grupos[i] = n; else { p.legendas.grupos.splice(i, 1); E.sel = null; } });
   }
   function apagarSel() {
@@ -275,6 +291,23 @@ const Editor = (() => {
       else { b.duracao = r2(a.duracao - corte); a.duracao = r2(corte); }
       p.principal.splice(i + 1, 0, b);
     });
+  }
+
+  // Remove [a,b] da linha do tempo: corta os clipes da faixa principal e puxa tudo o que vem depois
+  function removerIntervalo(p, a, b) {
+    const lay = Modelo.layout(p, E.preset), novo = [], D = b - a;
+    for (const lc of lay.clips) {
+      const c = lc.clip; if (c.tipo === 'telaFinal') continue;
+      if (b <= lc.ini + 0.02 || a >= lc.fim - 0.02) { novo.push(c); continue; }
+      const video = lc.midia && lc.midia.tipo === 'video', vel = c.velocidade || 1;
+      if (a > lc.ini + 0.1) { const L = JSON.parse(JSON.stringify(c)); L.duracao = r2((a - lc.ini) * (video ? vel : 1)); novo.push(L); }
+      if (b < lc.fim - 0.1) { const R = JSON.parse(JSON.stringify(c)); R.id = Modelo.uid('c'); const d = b - lc.ini; if (video) { R.entrada = r2((c.entrada || 0) + d * vel); R.duracao = r2(c.duracao - d * vel); } else R.duracao = r2(c.duracao - d); R.transicao = { tipo: 'corte' }; novo.push(R); }
+    }
+    p.principal = novo;
+    const mover = t => t >= b ? r2(t - D) : t;
+    p.legendas.grupos = p.legendas.grupos.filter(g => !(g.ini >= a - 0.01 && g.fim <= b + 0.01)).map(g => g.ini >= b - 0.01 ? { ...g, ini: g.ini - D, fim: g.fim - D, palavras: g.palavras.map(q => ({ ...q, ini: q.ini - D, fim: q.fim - D })) } : g);
+    for (const f of ['broll', 'textos']) p[f] = p[f].filter(x => !(x.inicio >= a && x.inicio < b)).map(x => ({ ...x, inicio: mover(x.inicio) }));
+    p.audios = p.audios.map(x => x.inicio >= b ? { ...x, inicio: mover(x.inicio) } : x);
   }
 
   // ---------- linha do tempo ----------
@@ -378,6 +411,7 @@ const Editor = (() => {
     $('#ed-transcrever').onclick = async () => { if (E.sujo) await salvar(); const j = await API.post(`/api/projetos/${E.p.id}/transcrever`); toast('Gerando legendas da fala (IA local)…'); API.esperar(j.id).then(async r => { toast(r.estado === 'concluido' ? `Legendas prontas: ${r.resultado.legendas} blocos` : 'Legendas: ' + (r.erro || r.estado), r.estado !== 'concluido'); await recarregar(); }); };
     $('#ed-autoedit').onclick = async () => { if (E.sujo) await salvar(); location.hash = '#/autoedit/' + E.p.id; };
     $('#ed-versoes').onclick = versoes;
+    $('#ed-var').onclick = variacoes;
   }
   async function renderizar(qualidade, formatos) {
     if (!E.p.principal.length) return toast('Adicione clipes na faixa principal primeiro', true);
@@ -391,10 +425,30 @@ const Editor = (() => {
       $('#mlist', caixa).appendChild(d); $('.cx', d).onclick = () => API.post(`/api/tarefas/${j.id}/cancelar`);
       API.esperar(j.id, x => { $('i', d).style.width = x.progresso + '%'; $('.st', d).innerHTML = chipEstado(x.estado); }).then(x => {
         $('.cx', d).remove();
-        if (x.estado === 'concluido') { const r = x.resultado, u = API.arq(E.p.id, r.arquivo); $('.res', d).innerHTML = `<video src="${u}" controls style="width:100%;max-height:60vh;margin-top:10px;background:#000;border-radius:8px"></video><div class="linha" style="margin-top:8px"><span class="chip ${r.validacao.ok ? 'ok' : 'er'}">${r.validacao.ok ? 'validado' : 'verificar'}: ${r.validacao.largura}×${r.validacao.altura} · ${r.validacao.duracao}s · ${r.validacao.video}/${r.validacao.audio}</span><span class="esp"></span>${qualidade === 'final' ? `<a class="btn pq pri" href="${u}?baixar">⬇ Baixar MP4</a>${r.srt ? `<a class="btn pq" href="${API.arq(E.p.id, r.srt)}?baixar">SRT</a>` : ''}${r.capa ? `<a class="btn pq" href="${API.arq(E.p.id, r.capa)}?baixar">Capa</a>` : ''}` : ''}</div>`; }
+        if (x.estado === 'concluido') { const r = x.resultado, u = API.arq(E.p.id, r.arquivo); $('.res', d).innerHTML = `<video src="${u}" controls style="width:100%;max-height:60vh;margin-top:10px;background:#000;border-radius:8px"></video><div class="linha" style="margin-top:8px"><span class="chip ${r.validacao.ok ? 'ok' : 'er'}">${r.validacao.ok ? 'validado' : 'verificar'}: ${r.validacao.largura}×${r.validacao.altura} · ${r.validacao.duracao}s · ${r.validacao.video}/${r.validacao.audio}</span><span class="esp"></span>${qualidade === 'final' ? `<a class="btn pq pri" href="${u}?baixar">⬇ Baixar MP4</a>${r.srt ? `<a class="btn pq" href="${API.arq(E.p.id, r.srt)}?baixar">SRT</a>` : ''}${r.capa ? `<a class="btn pq" href="${API.arq(E.p.id, r.capa)}?baixar">Capa</a>` : ''}${r.vtt ? `<a class="btn pq" href="${API.arq(E.p.id, r.vtt)}?baixar">VTT</a>` : ''}${r.capitulos ? `<a class="btn pq" href="${API.arq(E.p.id, r.capitulos)}?baixar">Capítulos</a>` : ''}` : ''}</div>`; }
         else $('.res', d).innerHTML = `<pre style="white-space:pre-wrap;font-size:11px;color:var(--erro)">${esc(x.erro || x.estado)}</pre>`;
       });
     }
+  }
+  async function variacoes() {
+    if (!E.p.principal.length) return toast('Monte o vídeo antes de gerar variações', true);
+    if (E.sujo) await salvar();
+    const c = document.createElement('div'); c.className = 'modal';
+    const ANG = [['localizacao', 'Localização'], ['planta', 'Planta e uso'], ['condicao', 'Condição de pagamento'], ['prova', 'Prova social / dúvidas']];
+    c.innerHTML = `<div style="width:min(560px,92vw)"><div class="linha"><h2 style="margin:0">Lote de variações</h2><span class="esp"></span><button class="btn pq" id="vrx">Fechar</button></div>
+      <p class="sub">O mesmo material com 4 ângulos de promessa: cada variação ganha um gancho, um CTA e uma palavra-código de comentário. Publique em dias diferentes e veja qual traz mais conversas.</p>
+      ${ANG.map(([k, n]) => `<label class="linha"><input type="checkbox" data-ang="${k}" checked> ${n}</label>`).join('')}
+      <h3>Formatos</h3><div class="linha">${Object.keys(Modelo.FORMATOS).map(k => `<label class="linha"><input type="checkbox" data-vf="${k}" ${k === E.p.formato ? 'checked' : ''}> ${k.replace('x', ':')}</label>`).join('')}</div>
+      <label class="linha" style="margin-top:10px"><input type="checkbox" id="vr-r" checked> Já renderizar (vai para a fila de Renderizações)</label>
+      <button class="btn pri" id="vr-go" style="margin-top:12px">Gerar variações</button><div id="vr-out" style="margin-top:12px"></div></div>`;
+    document.body.appendChild(c); $('#vrx', c).onclick = () => c.remove();
+    $('#vr-go', c).onclick = async () => {
+      $('#vr-go', c).disabled = true;
+      try {
+        const vs = await API.post(`/api/projetos/${E.p.id}/variacoes`, { angulos: $$('[data-ang]:checked', c).map(x => x.dataset.ang), formatos: $$('[data-vf]:checked', c).map(x => x.dataset.vf), renderizar: $('#vr-r', c).checked });
+        $('#vr-out', c).innerHTML = vs.map(v => `<div class="cartao" style="margin-bottom:8px"><b>${esc(v.nome)}</b><br><small>Gancho: ${esc(v.gancho)}<br>CTA: ${esc(v.cta)}</small><div class="linha" style="margin-top:6px"><a class="btn pq" href="#/editor/${v.id}">Abrir</a>${v.tarefas ? `<span class="chip av">${v.tarefas.length} render(s) na fila</span>` : ''}</div></div>`).join('');
+      } catch (e) { toast(e.message, true); $('#vr-go', c).disabled = false; }
+    };
   }
   async function versoes() {
     if (E.sujo) await salvar();

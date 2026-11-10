@@ -64,7 +64,7 @@ async function trecho(p, item, ctxR, comAudio) {
   if (item.tipo !== 'telaFinal' && !m) throw new Error('Mídia não encontrada no projeto: ' + item.midia);
   const D = Modelo.duracaoClip(item, m);
   const src = m && projetos.arq(p.id, m.arquivo);
-  const chave = hash({ v: 4, item, D, W, H, previa, cor: preset.cor, mov: preset.movimento, a: comAudio, src: m && [m.arquivo, fs.statSync(src).mtimeMs], marca: item.tipo === 'telaFinal' ? [marca.cores, marca.logos] : 0 });
+  const chave = hash({ v: 4, item, D, W, H, previa, cor: preset.cor, mov: preset.movimento, a: comAudio, src: m && [m.arquivo, fs.statSync(src).mtimeMs, m.fundoVerde, m.corChroma], marca: item.tipo === 'telaFinal' ? [marca.cores, marca.logos] : 0 });
   const out = projetos.arq(p.id, 'cache', `t_${chave}.mp4`);
   if (fs.existsSync(out)) return out;
   const tmp = out.replace('.mp4', '.tmp.mp4');
@@ -110,6 +110,8 @@ async function trecho(p, item, ctxR, comAudio) {
     let vf = `fps=${FPS},setpts=(PTS-STARTPTS)/${vel},${enquadrar(modo, W, H, fx, fy)}`;
     const zoom = num(item.zoom, 1);
     if (zoom > 1.001) vf += `,crop=iw/${zoom}:ih/${zoom}:(iw-iw/${zoom})*${fx}:(ih-ih/${zoom})*${fy},scale=${W}:${H}`;
+    // fundo verde: troca o chroma pelo fundo da marca (o recorte sobre o material e feito na composicao final)
+    if (m.fundoVerde) vf += `,chromakey=${(m.corChroma || '#00B140').replace('#', '0x')}:0.17:0.08,despill=type=green[fgk];color=c=${marca.cores.tinta}:s=${W}x${H}:r=${FPS},vignette=angle=PI/4[bgk];[bgk][fgk]overlay=0:0:shortest=1`;
     if (item.movimento === 'zoomin' || item.movimento === 'zoomout') {
       const I = num(item.intensidade, preset.movimento.intensidade), n = Math.round(D * FPS);
       vf += `,zoompan=z='${item.movimento === 'zoomin' ? `1+${I}*on/${n}` : `${1 + I}-${I}*on/${n}`}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s=${W}x${H}:fps=${FPS}`;
@@ -182,7 +184,22 @@ async function renderizar(id, opt, ctx) {
     fc.push(`[${i}:v]format=yuva420p,fade=in:st=0:d=${fd}:alpha=1,fade=out:st=${(d - fd).toFixed(3)}:d=${fd}:alpha=1,setpts=PTS-STARTPTS+${a.toFixed(3)}/TB[br${k}]`);
     fc.push(`${v}[br${k}]overlay=0:0:enable='between(t,${a.toFixed(3)},${(a + d).toFixed(3)})':eof_action=pass[vb${k}]`); v = `[vb${k}]`; k++;
   });
-  const pips = brolls.filter(x => x.b.pip !== false && Modelo.midiaDe(p, (lay.clips.find(c => c.ini <= x.b.inicio && c.fim > x.b.inicio) || {}).clip?.midia || '')?.tipo === 'video');
+  const apresentador = b => Modelo.midiaDe(p, (lay.clips.find(c => c.ini <= b.inicio && c.fim > b.inicio) || {}).clip?.midia || '');
+  const todosPip = brolls.filter(x => x.b.pip !== false && apresentador(x.b)?.tipo === 'video');
+  const janela = x => `between(t,${(+x.b.inicio).toFixed(3)},${(+x.b.inicio + Modelo.duracaoClip(x.b, Modelo.midiaDe(p, x.b.midia))).toFixed(3)})`;
+  // Fundo verde: o apresentador gravado em chroma entra RECORTADO (corpo inteiro) sobre o material, em vez do circulo
+  const recortes = todosPip.filter(x => apresentador(x.b).fundoVerde), pips = todosPip.filter(x => !apresentador(x.b).fundoVerde);
+  if (recortes.length) {
+    const alt = par(H * (H > W ? 0.58 : 0.82));
+    recortes.forEach((x, q) => {
+      // o recorte vem do ARQUIVO ORIGINAL no mesmo instante da fala (a faixa principal ja tem o fundo trocado)
+      const lc = lay.clips.find(c => c.ini <= x.b.inicio && c.fim > x.b.inicio), m = lc.midia, vel = lc.clip.velocidade || 1;
+      const ss = (lc.clip.entrada || 0) + (x.b.inicio - lc.ini) * vel, d = Modelo.duracaoClip(x.b, Modelo.midiaDe(p, x.b.midia));
+      const ir = entrada(['-ss', ss.toFixed(3), '-t', (d * vel + 0.5).toFixed(3), '-i', projetos.arq(p.id, m.arquivo)]);
+      fc.push(`[${ir}:v]fps=${FPS},setpts=(PTS-STARTPTS)/${vel}+${(+x.b.inicio).toFixed(3)}/TB,chromakey=${(m.corChroma || '#00B140').replace('#', '0x')}:0.17:0.08,despill=type=green,scale=-2:${alt},format=yuva420p[rk${q}]`);
+      fc.push(`${v}[rk${q}]overlay=W-w-${Math.round(W * 0.02)}:H-h:enable='${janela(x)}':eof_action=pass[vrk${q}]`); v = `[vrk${q}]`;
+    });
+  }
   if (pips.length) {
     const P = par(S * 0.34), lado = par(S * 0.9), cy = H > W ? Math.round(H * 0.07) : Math.round((H - lado) / 2);
     const mask = projetos.arq(p.id, 'cache', `mask_${P}.png`), aro = projetos.arq(p.id, 'cache', `aro_${P}_${marca.cores.ouro.slice(1)}.png`);
@@ -190,7 +207,7 @@ async function renderizar(id, opt, ctx) {
     const [r, g, bl] = [1, 3, 5].map(o => parseInt(marca.cores.ouro.slice(o, o + 2), 16)), A = P + Math.round(P * 0.06);
     if (!fs.existsSync(aro)) await ff(['-f', 'lavfi', '-i', `color=black:s=${A}x${A}`, '-vf', `format=rgba,geq=r=${r}:g=${g}:b=${bl}:a='if(between(hypot(X-${A / 2},Y-${A / 2}),${P / 2 - 2},${A / 2 - 1}),255,0)'`, '-frames:v', '1', aro], { tag: 'aro' });
     const im = entrada(['-loop', '1', '-i', mask]), ia = entrada(['-loop', '1', '-i', aro]);
-    const quando = pips.map(x => `between(t,${(+x.b.inicio).toFixed(3)},${(+x.b.inicio + Modelo.duracaoClip(x.b, Modelo.midiaDe(p, x.b.midia))).toFixed(3)})`).join('+');
+    const quando = pips.map(janela).join('+');
     const px = W - P - Math.round(W * 0.05), py = H > W ? Math.round(H * 0.5) : H - P - Math.round(H * 0.08);
     fc.push(`[0:v]crop=${lado}:${lado}:(iw-${lado})/2:${cy},scale=${P}:${P},format=yuva420p[pc0];[${im}:v]format=gray,scale=${P}:${P}[pm];[pc0][pm]alphamerge[pc]`);
     fc.push(`${v}[${ia}:v]overlay=${px - (A - P) / 2}:${py - (A - P) / 2}:enable='${quando}':shortest=1[vp1];[vp1][pc]overlay=${px}:${py}:enable='${quando}':shortest=1[vp2]`);
@@ -273,7 +290,14 @@ async function renderizar(id, opt, ctx) {
     const capa = destino.replace('.mp4', '_capa.jpg');
     await ff(['-ss', Math.min(1, lay.total / 3).toFixed(2), '-i', destino, '-frames:v', '1', '-q:v', '2', capa], { tag: 'capa' }).catch(() => {});
     if (fs.existsSync(capa)) extras.capa = path.relative(projetos.dir(id), capa).replace(/\\/g, '/');
-    if (p.legendas.grupos.length) { const s = destino.replace('.mp4', '.srt'); fs.writeFileSync(s, ASS.srt(p.legendas.grupos)); extras.srt = path.relative(projetos.dir(id), s).replace(/\\/g, '/'); }
+    if (p.legendas.grupos.length) {
+      const s = destino.replace('.mp4', '.srt'); fs.writeFileSync(s, ASS.srt(p.legendas.grupos)); extras.srt = path.relative(projetos.dir(id), s).replace(/\\/g, '/');
+      const vt = destino.replace('.mp4', '.vtt'); fs.writeFileSync(vt, 'WEBVTT\n\n' + ASS.srt(p.legendas.grupos).replace(/(\d\d:\d\d:\d\d),(\d\d\d)/g, '$1.$2')); extras.vtt = path.relative(projetos.dir(id), vt).replace(/\\/g, '/');
+    }
+    // capitulos (YouTube): rotulos das cenas na ordem do tempo, comecando em 00:00
+    const caps = [{ t: 0, n: 'Abertura' }, ...[...(p.broll || []).map(b => ({ t: +b.inicio, n: b.rotulo })), ...lay.clips.map(c => ({ t: c.ini, n: c.clip.rotulo || (c.clip.tipo === 'telaFinal' ? 'Contato' : '') }))].filter(c => c.n && c.t > 0.5).sort((a, b) => a.t - b.t)]
+      .filter((c, i, l) => i === 0 || (c.t - l[i - 1].t >= 10 && c.n !== l[i - 1].n));
+    if (caps.length >= 3 && lay.total >= 30) { const cf = destino.replace('.mp4', '_capitulos.txt'); fs.writeFileSync(cf, caps.map(c => `${String(Math.floor(c.t / 60)).padStart(2, '0')}:${String(Math.floor(c.t % 60)).padStart(2, '0')} ${c.n[0] + c.n.slice(1).toLowerCase()}`).join('\n') + '\n'); extras.capitulos = path.relative(projetos.dir(id), cf).replace(/\\/g, '/'); }
     await projetos.alterar(id, pp => { pp.exportacoes = pp.exportacoes || []; pp.exportacoes.unshift({ arquivo: rel, formato, criado: new Date().toISOString(), validacao, ...extras }); });
   }
   prog(100);

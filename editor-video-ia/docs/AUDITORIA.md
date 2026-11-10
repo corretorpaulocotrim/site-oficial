@@ -41,5 +41,12 @@ Legenda: ✅ implementada e testada · 🟡 implementada, não validada · 🟠 
 | Movimento | Ken Burns, panorâmica sem distorção, aproximação de planta, cartão | ✅ | |
 | Movimento | Parallax 2.5D / câmera generativa | ⬜ | evitado: deforma a arquitetura |
 | Mapas | Cena de mapa da localização | ⬜ | usa a página de localização do book; mapa gerado fica para a próxima fase |
+| Formatos 2026 | Bairro (dados do site), condição, compraria, tour, comparativo (catálogo), palavra-código | ✅ | teste `formatos` |
+| Formatos 2026 | Variações em lote por ângulo, com mídia por hard link | ✅ | teste `formatos` + navegador |
+| Editor | Edição pelo texto (cortar frases da transcrição) | ✅ | navegador: 2 frases cortadas, clipe dividido, legendas e textos deslocados |
+| Render | Fundo verde: apresentador recortado sobre o material | ✅ | teste com checagem de pixel; a prévia ao vivo ainda mostra o círculo (🟠) |
+| Render | Limite de corte de pausas | ✅ | teste `formatos` |
+| Render | Capítulos e .vtt | ✅ / 🟡 capítulos | VTT testado; capítulos só para vídeos de 30 s ou mais com 3 ou mais cenas |
+| Render | Recorte do apresentador SEM tela verde (IA de segmentação) | ⬜ | exige modelo de segmentação (download bloqueado aqui); próxima fase |
 | Segurança | Login obrigatório fora do localhost, cookie HttpOnly, bloqueio de path traversal, limite de upload, sem shell | ✅ | teste `servidor` (path traversal) |
 | Marca | Identidade central (logo, cores, contatos, tela final) editável | ✅ | |
