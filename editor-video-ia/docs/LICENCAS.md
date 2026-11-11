@@ -10,6 +10,10 @@
 | @huggingface/transformers | Apache 2.0 | execução do Whisper |
 | Modelo Whisper (OpenAI, conversão ONNX) | MIT | transcrição |
 | @anthropic-ai/sdk | MIT | opcional |
+| onnxruntime-node | MIT | executa os modelos ONNX |
+| Modelo RobustVideoMatting (`rvm_mobilenetv3_fp32.onnx`) | **GPL-3.0** | baixado do GitHub no 1º uso do recorte; uso interno sem obrigação extra. Para **distribuir/vender** o estúdio com esse recurso, o conjunto precisa respeitar a GPL-3.0 (ou trocar por um modelo de licença permissiva) |
+| Modelo RNNoise (`std.rnnn`, Xiph) | BSD-3-Clause | baixado do GitHub no 1º uso da limpeza de voz |
+| Looks de cor (LUT .cube) | gerados pelo próprio estúdio | sem direitos de terceiros |
 | Fontes Inter e Cormorant Garamond | SIL Open Font License 1.1 (`assets/fontes/OFL-*.txt`) | as mesmas fontes do site; podem ser embutidas nos vídeos |
 | Emojis Twemoji (`assets/emojis`) | CC-BY 4.0 (© Twitter/X e colaboradores) | exigem crédito: "Emoji graphics by Twemoji, CC-BY 4.0", que está nesta página e na tela Efeitos |
 | Efeitos sonoros | gerados pelo próprio estúdio (síntese FFmpeg) | sem direitos de terceiros |

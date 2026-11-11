@@ -11,12 +11,12 @@ function run(bin, args, opt = {}) {
   return new Promise((ok, fail) => {
     if (opt.sinal && opt.sinal.aborted) return fail(new Cancelado());
     const p = spawn(bin, args, { windowsHide: true });
-    let err = '', out = '';
+    let err = '', out = ''; const pedacos = [];
     const parar = () => { try { p.kill('SIGKILL'); } catch {} };
     if (opt.sinal) opt.sinal.addEventListener('abort', parar, { once: true });
     const timer = opt.timeoutMs ? setTimeout(parar, opt.timeoutMs) : null;
     if (opt.entrada) { p.stdin.on('error', () => {}); p.stdin.end(opt.entrada); }
-    p.stdout.on('data', d => { if (opt.stdout) out += d; });
+    p.stdout.on('data', d => { if (opt.binario) pedacos.push(d); else if (opt.stdout) out += d; });
     p.stderr.on('data', d => {
       const s = String(d); err += s; if (err.length > 400000) err = err.slice(-200000);
       if (opt.aoTempo) { const m = s.match(/time=(\d+):(\d+):([\d.]+)/g); if (m) { const t = m[m.length - 1].match(/(\d+):(\d+):([\d.]+)/); opt.aoTempo(+t[1] * 3600 + +t[2] * 60 + +t[3]); } }
@@ -26,7 +26,7 @@ function run(bin, args, opt = {}) {
       if (timer) clearTimeout(timer);
       if (opt.sinal) opt.sinal.removeEventListener('abort', parar);
       if (opt.sinal && opt.sinal.aborted) return fail(new Cancelado());
-      c === 0 ? ok(opt.stdout ? out : err) : fail(new Error((opt.tag || path.basename(bin)) + ' falhou (código ' + c + '):\n' + err.slice(-2000)));
+      c === 0 ? ok(opt.binario ? Buffer.concat(pedacos) : opt.stdout ? out : err) : fail(new Error((opt.tag || path.basename(bin)) + ' falhou (código ' + c + '):\n' + err.slice(-2000) + (process.env.DEBUG_FF ? '\nARGS: ' + JSON.stringify(args) : '')));
     });
   });
 }

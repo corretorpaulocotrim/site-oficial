@@ -9,6 +9,8 @@ const presets = require('../presets');
 const marcaMod = require('../marca');
 const ASS = require('./ass');
 const sfx = require('./sfx');
+const looks = require('./looks');
+const modelos = require('../ia/modelos');
 const { ff, probe } = require('../midia');
 
 const FPS = Modelo.FPS;
@@ -25,11 +27,16 @@ function codec(preset, previa) {
 const AAC = kbps => ['-c:a', 'aac', '-b:a', `${kbps || 192}k`, '-ar', '48000', '-ac', '2'];
 
 // Cor/nitidez do preset + ajustes do clipe
-function grade(preset, aj = {}) {
-  const c = preset.cor;
-  const f = [`eq=contrast=${(c.contraste * num(aj.contraste, 1)).toFixed(3)}:saturation=${(c.saturacao * num(aj.saturacao, 1)).toFixed(3)}:brightness=${(c.brilho + num(aj.brilho, 0)).toFixed(3)}:gamma=${c.gamma}`];
+function grade(preset, aj = {}, item = {}) {
+  const c = preset.cor, f = [];
+  // correcao automatica de cor/branco (normaliza niveis por canal, suavizado no tempo)
+  if (item.autoCor) f.push('normalize=blackpt=black:whitept=white:smoothing=24:independence=0.6:strength=0.6');
+  f.push(`eq=contrast=${(c.contraste * num(aj.contraste, 1)).toFixed(3)}:saturation=${(c.saturacao * num(aj.saturacao, 1)).toFixed(3)}:brightness=${(c.brilho + num(aj.brilho, 0)).toFixed(3)}:gamma=${c.gamma}`);
   if (c.nitidez > 0) f.push(`unsharp=5:5:${c.nitidez}:5:5:0`);
   if (c.vinheta > 0) f.push(`vignette=angle=${(Math.PI / 4 * c.vinheta).toFixed(3)}`);
+  // look de cor (LUT 3D gerada pelo estudio)
+  const look = item.look || c.look;
+  if (look && look !== 'nenhum') { const lut = looks.arquivo(look); if (lut) f.push(`lut3d=file='${escFiltro(lut)}':interp=tetrahedral`); }
   return f.join(',');
 }
 // Enquadramento: preencher (corta pelo ponto de foco), ajustar (inteiro sobre fundo desfocado)
@@ -101,13 +108,22 @@ async function trecho(p, item, ctxR, comAudio) {
       const z = mov === 'zoomout' ? `${1 + I}-${I}*on/${n}` : mov === 'nenhum' ? '1' : `1+${I}*on/${n}`;
       vf = `${pre},zoompan=z='${z}':x='(iw-iw/zoom)*${fx}':y='(ih-ih/zoom)*${fy}':d=${n}:s=${W}x${H}:fps=${FPS}`;
     }
-    const g = m.tipo === 'pagina' ? 'null' : grade(preset, item.ajustes);
+    const g = m.tipo === 'pagina' ? 'null' : grade(preset, item.ajustes, item);
     await ff([...loop, '-i', entrada, ...audio, '-filter_complex', `[0:v]${vf},${g},setsar=1,format=yuv420p[v]`, '-map', '[v]', '-map', '1:a', '-t', D.toFixed(3), ...enc, ...AAC(), tmp], { tag: 'imagem', sinal });
   } else {
     // Video: corte, velocidade, enquadramento, punch-in, movimento e cor
     const vel = Math.max(0.25, Math.min(4, num(item.velocidade, 1))), ent = num(item.entrada, 0), dur = num(item.duracao, m.dur);
     const modo = modoAuto(item, m, W, H);
-    let vf = `fps=${FPS},setpts=(PTS-STARTPTS)/${vel},${enquadrar(modo, W, H, fx, fy)}`;
+    // estabilizacao (vid.stab, 2 passadas): analisa o trecho e suaviza o tremido da camera na mao
+    let estab = '';
+    if (item.estabilizar) {
+      const trf = projetos.arq(p.id, 'cache', `s_${hash([m.arquivo, ent, dur])}.trf`);
+      if (!fs.existsSync(trf)) await ff(['-ss', ent.toFixed(3), '-t', dur.toFixed(3), '-i', src, '-an', '-vf', `vidstabdetect=shakiness=6:accuracy=15:result='${escFiltro(trf)}'`, '-f', 'null', '-'], { tag: 'estabilização', sinal });
+      estab = `vidstabtransform=input='${escFiltro(trf)}':smoothing=18:zoom=2:optzoom=0:interpol=bicubic,unsharp=5:5:0.5,`;
+    }
+    // camera lenta suave: cria quadros intermediarios (interpolacao por movimento) em vez de repetir quadros
+    const lenta = vel < 0.99 && item.suavizar;
+    let vf = `${estab}${lenta ? '' : `fps=${FPS},`}setpts=(PTS-STARTPTS)/${vel},${enquadrar(modo, W, H, fx, fy)}${lenta ? `,minterpolate=fps=${FPS}:mi_mode=mci:mc_mode=aobmc:me_mode=bidir:vsbmc=1` : ''}`;
     const zoom = num(item.zoom, 1);
     if (zoom > 1.001) vf += `,crop=iw/${zoom}:ih/${zoom}:(iw-iw/${zoom})*${fx}:(ih-ih/${zoom})*${fy},scale=${W}:${H}`;
     // fundo verde: troca o chroma pelo fundo da marca (o recorte sobre o material e feito na composicao final)
@@ -116,7 +132,7 @@ async function trecho(p, item, ctxR, comAudio) {
       const I = num(item.intensidade, preset.movimento.intensidade), n = Math.round(D * FPS);
       vf += `,zoompan=z='${item.movimento === 'zoomin' ? `1+${I}*on/${n}` : `${1 + I}-${I}*on/${n}`}':x='(iw-iw/zoom)/2':y='(ih-ih/zoom)/2':d=1:s=${W}x${H}:fps=${FPS}`;
     }
-    vf += `,${grade(preset, item.ajustes)},tpad=stop_mode=clone:stop_duration=2,setsar=1,format=yuv420p`;
+    vf += `,${grade(preset, item.ajustes, item)},tpad=stop_mode=clone:stop_duration=2,setsar=1,format=yuv420p`;
     const temAudio = comAudio && m.audio && num(item.volume, 1) > 0;
     let af = '';
     if (temAudio) { let v = vel; const at = []; while (v > 2) { at.push('atempo=2'); v /= 2; } while (v < 0.5) { at.push('atempo=0.5'); v /= 0.5; } at.push(`atempo=${v.toFixed(4)}`); af = `[0:a]asetpts=PTS-STARTPTS,${at.join(',')},volume=${num(item.volume, 1)},aresample=48000,aformat=channel_layouts=stereo,apad[a]`; }
@@ -188,7 +204,8 @@ async function renderizar(id, opt, ctx) {
   const todosPip = brolls.filter(x => x.b.pip !== false && apresentador(x.b)?.tipo === 'video');
   const janela = x => `between(t,${(+x.b.inicio).toFixed(3)},${(+x.b.inicio + Modelo.duracaoClip(x.b, Modelo.midiaDe(p, x.b.midia))).toFixed(3)})`;
   // Fundo verde: o apresentador gravado em chroma entra RECORTADO (corpo inteiro) sobre o material, em vez do circulo
-  const recortes = todosPip.filter(x => apresentador(x.b).fundoVerde), pips = todosPip.filter(x => !apresentador(x.b).fundoVerde);
+  const temRecorte = m => m && (m.fundoVerde || m.recorte);
+  const recortes = todosPip.filter(x => temRecorte(apresentador(x.b))), pips = todosPip.filter(x => !temRecorte(apresentador(x.b)));
   if (recortes.length) {
     const alt = par(H * (H > W ? 0.58 : 0.82));
     recortes.forEach((x, q) => {
@@ -196,7 +213,13 @@ async function renderizar(id, opt, ctx) {
       const lc = lay.clips.find(c => c.ini <= x.b.inicio && c.fim > x.b.inicio), m = lc.midia, vel = lc.clip.velocidade || 1;
       const ss = (lc.clip.entrada || 0) + (x.b.inicio - lc.ini) * vel, d = Modelo.duracaoClip(x.b, Modelo.midiaDe(p, x.b.midia));
       const ir = entrada(['-ss', ss.toFixed(3), '-t', (d * vel + 0.5).toFixed(3), '-i', projetos.arq(p.id, m.arquivo)]);
-      fc.push(`[${ir}:v]fps=${FPS},setpts=(PTS-STARTPTS)/${vel}+${(+x.b.inicio).toFixed(3)}/TB,chromakey=${(m.corChroma || '#00B140').replace('#', '0x')}:0.17:0.08,despill=type=green,scale=-2:${alt},format=yuva420p[rk${q}]`);
+      const tempo = `fps=${FPS},setpts=(PTS-STARTPTS)/${vel}+${(+x.b.inicio).toFixed(3)}/TB`, larg = par(alt * m.w / m.h);
+      if (m.fundoVerde) fc.push(`[${ir}:v]${tempo},chromakey=${(m.corChroma || '#00B140').replace('#', '0x')}:0.17:0.08,despill=type=green,scale=-2:${alt},format=yuva420p[rk${q}]`);
+      else {
+        // mascara gerada pela IA (RobustVideoMatting), no mesmo instante do video original
+        const im = entrada(['-ss', ss.toFixed(3), '-t', (d * vel + 0.5).toFixed(3), '-i', projetos.arq(p.id, m.recorte)]);
+        fc.push(`[${ir}:v]${tempo},scale=${larg}:${alt},format=yuva420p[rv${q}];[${im}:v]${tempo},scale=${larg}:${alt},format=gray[rm${q}];[rv${q}][rm${q}]alphamerge[rk${q}]`);
+      }
       fc.push(`${v}[rk${q}]overlay=W-w-${Math.round(W * 0.02)}:H-h:enable='${janela(x)}':eof_action=pass[vrk${q}]`); v = `[vrk${q}]`;
     });
   }
@@ -240,7 +263,9 @@ async function renderizar(id, opt, ctx) {
 
   // AUDIO: voz tratada + musica com abaixamento + efeitos sonoros nos eventos
   const A = preset.audio, mix = [];
-  fc.push(`[0:a]${A.limparVoz ? 'highpass=f=80,afftdn=nf=-25,acompressor=threshold=-18dB:ratio=3:attack=5:release=120,' : ''}aformat=channel_layouts=stereo,asplit=2[voz][voz_sc]`);
+  const rnn = A.limparVoz ? await modelos.garantir('rnnoise').catch(() => null) : null;
+  const limpa = rnn ? `highpass=f=70,arnndn=m='${escFiltro(rnn)}':mix=0.9,` : 'highpass=f=80,afftdn=nf=-25,';
+  fc.push(`[0:a]${A.limparVoz ? limpa + 'acompressor=threshold=-18dB:ratio=3:attack=5:release=120,' : ''}aformat=channel_layouts=stereo,asplit=2[voz][voz_sc]`);
   mix.push('[voz]');
   const musicas = (p.audios || []).filter(a => Modelo.midiaDe(p, a.midia) && +a.inicio < lay.total);
   musicas.forEach((a, j) => {
@@ -270,7 +295,7 @@ async function renderizar(id, opt, ctx) {
     evOk.forEach(([s, t], q) => { const ms = Math.round(t * 1000); fc.push(`[s_${s.replace(/\W/g, '')}_${usados[s]++}]adelay=${ms}|${ms}[sd${q}]`); });
     fc.push(`${evOk.map((_, q) => `[sd${q}]`).join('')}amix=inputs=${evOk.length}:normalize=0[sfx]`); mix.push('[sfx]');
   }
-  fc.push(`${mix.join('')}${mix.length > 1 ? `amix=inputs=${mix.length}:duration=first:normalize=0,` : ''}loudnorm=I=-14:TP=-1.5:LRA=11,aresample=48000,apad,atrim=0:${lay.total.toFixed(3)}[aout]`);
+  fc.push(`${mix.join('')}${mix.length > 1 ? `amix=inputs=${mix.length}:duration=first:normalize=0,` : ''}loudnorm=I=-14:TP=-1.5:LRA=11,aeval='if(isnan(val(ch))+isinf(val(ch)),0,val(ch))':c=same,aresample=48000,apad,atrim=0:${lay.total.toFixed(3)}[aout]`);
 
   const nome = previa ? `previa_${formato}.mp4` : `${slug(p.empreendimento.nome || p.nome)}_${formato}_${new Date().toISOString().slice(0, 16).replace(/[-:T]/g, '')}.mp4`;
   const destino = projetos.arq(p.id, previa ? 'cache' : 'export', nome);

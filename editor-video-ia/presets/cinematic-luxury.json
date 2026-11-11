@@ -6,7 +6,8 @@
   "gamma": 0.98,
   "nitidez": 0.4,
   "vinheta": 0.5,
-  "cinema": 0.1
+  "cinema": 0.1,
+  "look": "luxo-noturno"
  },
  "ritmo": {
   "cortarPausas": true,

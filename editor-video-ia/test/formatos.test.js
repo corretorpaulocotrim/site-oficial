@@ -81,7 +81,7 @@ test('fundo verde: apresentador recortado sobre o material e VTT na exportacao',
   const j = await jobs.aguardar(jobs.criar('render', { projetoId: p.id, formato: '9x16', qualidade: 'final' }).id);
   assert.strictEqual(j.estado, 'concluido', j.erro);
   assert.ok(j.resultado.vtt && fs.readFileSync(projetos.arq(p.id, j.resultado.vtt), 'utf8').startsWith('WEBVTT'));
-  const pix = async (t, x, y) => { const out = await run(FFMPEG, ['-v', 'error', '-ss', String(t), '-i', projetos.arq(p.id, j.resultado.arquivo), '-frames:v', '1', '-vf', `crop=4:4:${x}:${y},scale=1:1`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { stdout: true }); return [...Buffer.from(out, 'latin1')]; };
+  const pix = async (t, x, y) => { const out = await run(FFMPEG, ['-v', 'error', '-ss', String(t), '-i', projetos.arq(p.id, j.resultado.arquivo), '-frames:v', '1', '-vf', `crop=4:4:${x}:${y},scale=1:1`, '-f', 'rawvideo', '-pix_fmt', 'rgb24', '-'], { binario: true }); return [...out]; };
   const fora = await pix(0.5, 40, 300);       // sem sobreposicao: fundo trocado pela cor da marca (nao verde)
   assert.ok(!(fora[1] > 120 && fora[0] < 80), 'fundo verde removido: ' + fora);
   const corpo = await pix(2.2, 740, 1450);    // durante a sobreposicao: o recorte (vermelho) aparece no canto inferior direito

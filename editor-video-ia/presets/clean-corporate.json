@@ -5,7 +5,8 @@
   "brilho": 0.01,
   "gamma": 1.02,
   "nitidez": 0.6,
-  "vinheta": 0.15
+  "vinheta": 0.15,
+  "look": "natural"
  },
  "ritmo": {
   "cortarPausas": true,

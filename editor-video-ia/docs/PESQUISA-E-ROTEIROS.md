@@ -7,6 +7,29 @@
 - Os padrões abaixo são princípios recorrentes do formato vertical. Não são comparações de conversão: **visualização não é venda**. Meça no seu funil (seção 4).
 - A biblioteca de presets (pasta `presets/`) é onde novos padrões entram sem mexer no motor.
 
+## 00. Varredura de ferramentas de código aberto (GitHub, 11/11/2026)
+
+Busca na API do GitHub, ordenada por estrelas, com licença e data do último commit. Critério para entrar no estúdio: roda localmente, sem GPU e sem assinatura, é testável aqui e tem licença compatível.
+
+| Ferramenta (estrelas, licença) | O que faz | Decisão |
+|---|---|---|
+| PeterL1n/**RobustVideoMatting** (9,6 mil, GPL-3.0) | Recorte de pessoa em vídeo, sem tela verde | ✅ **Integrado**: modelo ONNX via onnxruntime-node (~30 ms/quadro no processador; vídeo de 30 s ≈ 30 s). Baixado do GitHub no 1º uso |
+| georgmartius/**vid.stab** (1 mil) | Estabilização de vídeo | ✅ **Integrado** (filtros vidstabdetect/vidstabtransform do FFmpeg, 2 passadas) |
+| xiph/**rnnoise** (6 mil, BSD-3) + richardpl/arnndn-models | Redução de ruído da voz por rede neural | ✅ **Integrado** (filtro arnndn; modelo `std.rnnn` original da Xiph) |
+| FFmpeg **minterpolate** (equivalente simples a RIFE/FILM) | Interpolação de quadros | ✅ **Integrado** como "câmera lenta suave" |
+| CPJKU/beat_this (MIT), mjhydri/BeatNet | Detecção de batida | ✅ **Implementado em JavaScript** (fluxo de energia + autocorrelação + regressão; 120 BPM detectado exato no teste). "Cortar as cenas no ritmo da música" |
+| Looks/LUT (.cube) | Correção de cor cinematográfica | ✅ **4 looks gerados pelo próprio estúdio** (sem licença de terceiros) + cor automática (filtro normalize) |
+| htekdev/**vidpipe** (ISC) | Legendas karaokê, limite de corte, capítulos | ✅ Ideias integradas na versão anterior |
+| CutScript / Rescript | Editar o vídeo pelo texto | ✅ Integrado na versão anterior (aba Transcrição) |
+| WyattBlue/**auto-editor** (5,8 mil, Unlicense) | Cortes automáticos por áudio e movimento | ✅ A ideia já está no corte de pausas; detecção de trechos parados (freezedetect) fica como próximo passo |
+| m-bain/**whisperX** (25 mil, BSD-2), SYSTRAN/**faster-whisper** (26,6 mil, MIT) | Transcrição com tempo por palavra | 🟡 Mais precisos que o Whisper do estúdio, mas exigem Python. O estúdio usa o Whisper em JavaScript (`_timestamped`) |
+| remotion-dev/template-tiktok | Legendas estilo TikTok | Referência visual; o estúdio já faz com libass |
+| gl-transitions (2,2 mil), scriptituk/xfade-easing (MIT) | Transições GLSL e suavização (easing) | 🟠 Exigem FFmpeg recompilado ou expressões muito pesadas; o estúdio usa as 18 transições nativas do xfade |
+| k4yt3x/video2x (22 mil, AGPL-3.0), Real-ESRGAN | Aumento de resolução por IA | ⬜ Pedem GPU e binário externo; fica fora |
+| Depth-Anything V2/3 (Apache-2.0) | Profundidade para efeito parallax 2.5D | ⬜ Fica fora por decisão: distorce a arquitetura (regra do estúdio: nunca alterar o imóvel) |
+| openhouse-3d, snapstager, decor8ai | Decoração virtual / 3D a partir de fotos | ⬜ Generativo; só com aviso de "imagem ilustrativa" e serviço pago. Não integrado |
+| gyroflow (9,7 mil, GPL-3.0) | Estabilização por giroscópio | ⬜ Exige dados de giroscópio da câmera; o vid.stab cobre celular comum |
+
 ## 0. Atualização da pesquisa (10/11/2026)
 
 **Fontes consultadas** (a maioria é blog de ferramenta de vídeo ou de quem vende serviço; os números delas não foram auditados e não são usados como promessa):

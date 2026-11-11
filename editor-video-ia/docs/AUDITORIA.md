@@ -47,6 +47,10 @@ Legenda: ✅ implementada e testada · 🟡 implementada, não validada · 🟠 
 | Render | Fundo verde: apresentador recortado sobre o material | ✅ | teste com checagem de pixel; a prévia ao vivo ainda mostra o círculo (🟠) |
 | Render | Limite de corte de pausas | ✅ | teste `formatos` |
 | Render | Capítulos e .vtt | ✅ / 🟡 capítulos | VTT testado; capítulos só para vídeos de 30 s ou mais com 3 ou mais cenas |
-| Render | Recorte do apresentador SEM tela verde (IA de segmentação) | ⬜ | exige modelo de segmentação (download bloqueado aqui); próxima fase |
+| Render | Recorte do apresentador SEM tela verde (RobustVideoMatting) | ✅ | teste + vídeo real: 858 quadros em 31 s, recorte limpo sobre a fachada; a prévia ao vivo mostra o círculo (🟠) |
+| Render | Estabilização (vid.stab), câmera lenta suave (minterpolate) | ✅ | teste `efeitos` |
+| Render | Looks de cor (LUT) e cor automática | ✅ | teste `efeitos` |
+| Áudio | Voz limpa com RNNoise (fallback afftdn) | ✅ | teste `efeitos`; corrigido NaN do loudnorm em vídeo todo em silêncio |
+| Ritmo | Cortes na batida da música | ✅ | teste: 120 BPM exato, cortes a menos de 60 ms da batida |
 | Segurança | Login obrigatório fora do localhost, cookie HttpOnly, bloqueio de path traversal, limite de upload, sem shell | ✅ | teste `servidor` (path traversal) |
 | Marca | Identidade central (logo, cores, contatos, tela final) editável | ✅ | |

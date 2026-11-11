@@ -22,6 +22,7 @@ jobs.registrar('render', (p, ctx) => renderizar(p.projetoId, p, ctx));
 jobs.registrar('autoedit', diretor.autoEdit);
 jobs.registrar('pdf', diretor.processarPdf);
 jobs.registrar('transcrever', diretor.transcreverProjeto);
+jobs.registrar('recorte', require('./ia/recorte').recortar);
 jobs.registrar('proxy', (p, ctx) => projetos.gerarProxy(p.projetoId, p.midiaId, ctx));
 jobs.registrar('tts', async ({ projetoId, texto }, ctx) => {
   const rel = `midia/tts_${Date.now()}.mp3`;
@@ -96,6 +97,7 @@ rota('GET', /^\/api\/status$/, async (req, res) => {
       roteiroIA: { ativo: llm.disponivel(), tipo: 'Claude (opcional, pago por uso)', modelo: cfg.ANTHROPIC_MODELO },
       vozIA: { ativo: tts.disponivel(), tipo: 'ElevenLabs (opcional, pago)' }
     },
+    modelos: require('./ia/modelos').lista(),
     fornecedores: tts.FORNECEDORES
   });
 });
@@ -120,7 +122,7 @@ rota('POST', /^\/api\/presets\/([\w-]+)\/duplicar$/, (req, res, m) => json(res, 
 rota('DELETE', /^\/api\/presets\/([\w-]+)$/, (req, res, m) => { presets.excluir(m[1]); json(res, { ok: true }); });
 rota('GET', /^\/api\/efeitos$/, (req, res) => json(res, {
   transicoes: Modelo.TRANSICOES, movimentos: Modelo.MOVIMENTOS, enquadramentos: Modelo.ENQUADRAMENTOS, sons: sfx.lista(),
-  animacoes: ['pop', 'subir', 'fade', 'nenhuma'], textos: Modelo.TEXTO_TIPOS, emojis: Modelo.EMOJIS.map(([ws, c]) => ({ codigo: c, palavras: ws })),
+  animacoes: ['pop', 'subir', 'fade', 'nenhuma'], looks: require('./render/looks').lista(), textos: Modelo.TEXTO_TIPOS, emojis: Modelo.EMOJIS.map(([ws, c]) => ({ codigo: c, palavras: ws })),
   favoritos: (() => { try { return JSON.parse(fs.readFileSync(path.join(cfg.DADOS, 'favoritos.json'), 'utf8')); } catch { return []; } })()
 }));
 rota('PUT', /^\/api\/efeitos\/favoritos$/, async (req, res) => { const f = await corpo(req); exige(Array.isArray(f), 'lista esperada'); fs.writeFileSync(path.join(cfg.DADOS, 'favoritos.json'), JSON.stringify(f.slice(0, 200))); json(res, f); });
@@ -177,6 +179,23 @@ rota('POST', /^\/api\/projetos\/(\w+)\/roteiro$/, async (req, res, m) => {
   const rot = await diretor.gerarRoteiro(p, b);
   await projetos.alterar(m[1], pp => { pp.roteiro = rot; });
   json(res, rot);
+});
+rota('POST', /^\/api\/projetos\/(\w+)\/midia\/(\w+)\/recorte$/, (req, res, m) => {
+  projetoOk(m[1]); const md = projetos.ler(m[1]).midias.find(x => x.id === m[2]);
+  exige(md && md.tipo === 'video', 'Escolha um vídeo');
+  json(res, jobs.criar('recorte', { projetoId: m[1], midiaId: m[2] }, `Recorte do apresentador (IA): ${md.nome}`));
+});
+// Cortes no ritmo: analisa a musica escolhida e encaixa os cortes da faixa principal nas batidas
+rota('POST', /^\/api\/projetos\/(\w+)\/batida$/, async (req, res, m) => {
+  projetoOk(m[1]); const b = await corpo(req), p0 = projetos.ler(m[1]);
+  const aud = (p0.audios || []).find(a => !b.midiaId || a.midia === b.midiaId), md = aud && p0.midias.find(x => x.id === aud.midia);
+  exige(md, 'Adicione uma música na faixa de áudio primeiro');
+  const batida = require('./ia/batida'), r = await batida.analisar(projetos.arq(m[1], md.arquivo));
+  exige(r.batidas.length >= 4, 'Não foi possível detectar o ritmo desta música');
+  const off = (aud.entrada || 0) - (aud.inicio || 0), bt = r.batidas.map(t => +(t - off).toFixed(3)).filter(t => t > 0);
+  let n = 0;
+  const p = await projetos.alterar(m[1], pp => { n = batida.encaixar(pp, presets.obter(pp.presetId), Modelo, bt, b); pp.sugestoes = [{ id: Modelo.uid('s'), tipo: 'ritmo', texto: `Música a ${r.bpm} BPM: ${n} corte(s) da faixa principal encaixado(s) na batida.`, data: new Date().toISOString() }, ...(pp.sugestoes || [])]; });
+  json(res, { bpm: r.bpm, ajustados: n, atualizado: p.atualizado });
 });
 rota('POST', /^\/api\/projetos\/(\w+)\/variacoes$/, async (req, res, m) => {
   projetoOk(m[1]); const b = await corpo(req);

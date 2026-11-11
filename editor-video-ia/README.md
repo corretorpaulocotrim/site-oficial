@@ -45,6 +45,13 @@ O navegador abre em **http://localhost:3333**. Na primeira legenda automática, 
 - **Fundo verde**: grave com tela verde e marque "Gravado com fundo verde" no clipe. Você aparece recortado sobre o material. A prévia ao vivo mostra o círculo; a prévia renderizada mostra o recorte.
 - Exportação com **.srt, .vtt e capítulos** para o YouTube.
 
+### Acabamento profissional (ferramentas abertas do GitHub)
+- **Recorte do apresentador sem tela verde** (RobustVideoMatting): no vídeo da biblioteca, clique em ✂. Nas sobreposições, você aparece recortado sobre o book ou as fotos.
+- **Estabilizar** (vid.stab), **câmera lenta suave** (interpolação de quadros), **correção automática de cor** e **look de cor** (Natural, Quente Rio, Luxo noturno, Branco clean): no inspetor do clipe.
+- **Voz limpa com RNNoise**: automática quando o estilo pede limpeza de voz.
+- **Cortes no ritmo da música**: selecione a música na faixa de áudio e clique em "Cortar as cenas no ritmo desta música".
+- Os modelos de IA são baixados do GitHub no primeiro uso, ficam em `dados/modelos` e depois funcionam sem internet.
+
 ### PDF Intelligence
 - Extrai o texto de cada página. Página escaneada passa por OCR em português, que roda offline.
 - Extrai as fotos embutidas do book em resolução original e descarta fundos e molduras repetidos.
@@ -94,7 +101,7 @@ As correções de palavras na legenda (ex.: `fgts` → `FGTS`) ficam em `config.
 ```
 npm test
 ```
-São 15 testes, que geram os próprios arquivos de teste sem dados pessoais. Eles cobrem os formatos de roteiro, o limite de corte, as variações, o fundo verde com checagem de pixel, a matemática da linha do tempo, as legendas, o PDF Intelligence, o fluxo importar → Auto Edit → editar → renderizar 9:16 e 1:1 com validação → cancelar → salvar/reabrir/duplicar, e a API HTTP (upload, render, Range e bloqueio de path traversal). Os resultados estão em `docs/TESTES.md`.
+São 19 testes, que geram os próprios arquivos de teste sem dados pessoais. Eles cobrem os formatos de roteiro, o limite de corte, as variações, o fundo verde com checagem de pixel, a matemática da linha do tempo, as legendas, o PDF Intelligence, o fluxo importar → Auto Edit → editar → renderizar 9:16 e 1:1 com validação → cancelar → salvar/reabrir/duplicar, e a API HTTP (upload, render, Range e bloqueio de path traversal). Os resultados estão em `docs/TESTES.md`.
 
 ## 6. Documentação
 - `docs/IMPLANTACAO.md`: servidor próprio, Docker, HTTPS, atualização.

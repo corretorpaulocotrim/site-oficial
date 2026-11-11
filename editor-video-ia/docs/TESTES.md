@@ -2,7 +2,7 @@
 
 Ambiente: Linux, Node 22.22, FFmpeg 6.1 (`ffmpeg-static`), Chromium/Playwright para a interface. Data: 25/10/2026.
 
-## Automatizados (`npm test`): 15/15 passando (atualizado em 10/11/2026)
+## Automatizados (`npm test`): 19/19 passando (atualizado em 11/11/2026)
 | Teste | Resultado |
 |---|---|
 | layout: sobreposição exata nas transições, velocidade 2x | ok |
@@ -19,6 +19,10 @@ Ambiente: Linux, Node 22.22, FFmpeg 6.1 (`ffmpeg-static`), Chromium/Playwright p
 | comparativo com empreendimentos reais do catálogo e capas importadas | ok |
 | variações: 4 ângulos, 4 ganchos e 4 palavras-código diferentes, mídia por hard link | ok |
 | fundo verde: fundo trocado pela cor da marca e apresentador recortado visível durante a sobreposição (checagem de pixel); VTT gerado | ok |
+| batida: clique sintético a 120 BPM detectado como 120; cortes encaixados a menos de 60 ms da batida | ok |
+| looks: 4 LUTs válidas (33³) + render com look e cor automática | ok |
+| estabilização vid.stab (2 passadas), câmera lenta 0,5x com interpolação (duração dobra), voz com RNNoise | ok |
+| recorte por IA: modelo baixado do GitHub, máscara cobrindo o vídeo inteiro, composição validada | ok |
 | API HTTP: status, criar, upload, salvar, render, Range 206, path traversal bloqueado | ok |
 
 ## Manuais com material real
@@ -27,6 +31,9 @@ Ambiente: Linux, Node 22.22, FFmpeg 6.1 (`ffmpeg-static`), Chromium/Playwright p
 - Login com `APP_SENHA`: sem login 401; senha errada 401; login 200 com cookie HttpOnly/SameSite=Strict; com login 200; servidor recusa iniciar em `HOST=0.0.0.0` sem senha.
 - Extração de imagens do book Beon Porto: 48 fotos reais (vista aérea, VLT, mapa, fachadas); fundos repetidos e lisos descartados; 92 s para 31 páginas com OCR.
 - Interface no Chromium: todas as páginas carregam sem erro de JavaScript; no editor, dividir (S), desfazer, refazer e novo texto foram persistidos no servidor.
+
+## Recorte por IA com vídeo real
+- Vídeo de referência de 28,6 s (pessoa falando): 858 quadros recortados em 31 s no processador (4 núcleos). Render 9:16 validado. Com a pessoa de frente, ela aparece recortada sobre a foto aérea da fachada, sem tela verde.
 
 ## Não testado neste ambiente (depende de rede ou credencial)
 - Download do modelo Whisper (HuggingFace bloqueado aqui). Sem ele, o app registra a sugestão "Legenda automática não gerada" e segue.

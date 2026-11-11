@@ -112,9 +112,9 @@ const Editor = (() => {
         const ms = p.midias.filter(f); if (!ms.length) continue;
         h += `<h3 style="margin:10px 12px 0">${nome} (${ms.length})</h3><div class="bin">${ms.map(m => `<div class="mi" draggable="${m.tipo !== 'pdf'}" data-mid="${m.id}" title="${esc(m.nome)}">
           <div class="im" style="${m.thumb ? `background-image:url('${API.arq(p.id, m.thumb)}')` : ''}">${m.tipo === 'audio' ? '<div style="padding:18px;text-align:center">♪</div>' : m.tipo === 'pdf' ? '<div style="padding:18px;text-align:center">PDF</div>' : ''}</div>
-          ${m.categoria ? `<span class="tag">${esc((m.categoria || '').toUpperCase())}</span>` : m.narracao ? '<span class="tag">FALA</span>' : ''}
+          ${m.categoria ? `<span class="tag">${esc((m.categoria || '').toUpperCase())}</span>` : m.recorte ? '<span class="tag">RECORTE IA</span>' : m.narracao ? '<span class="tag">FALA</span>' : ''}
           <span>${esc(m.nome)}${m.dur ? ' · ' + Modelo.fmtTempo(m.dur) : ''}</span>
-          <div class="ad">${m.tipo !== 'pdf' ? `<button data-add="${m.id}" title="Adicionar ao fim da faixa ${m.tipo === 'audio' ? 'de áudio' : 'principal'}">＋</button>` : ''}${['imagem', 'pagina', 'video'].includes(m.tipo) ? `<button data-sob="${m.id}" title="Sobrepor no cursor (com você em círculo)">⧉</button>` : ''}<button data-rm="${m.id}" title="Remover do projeto">✕</button></div></div>`).join('')}</div>`;
+          <div class="ad">${m.tipo !== 'pdf' ? `<button data-add="${m.id}" title="Adicionar ao fim da faixa ${m.tipo === 'audio' ? 'de áudio' : 'principal'}">＋</button>` : ''}${m.tipo === 'video' ? `<button data-rec="${m.id}" title="Recortar o apresentador com IA (sem tela verde)">✂</button>` : ''}${['imagem', 'pagina', 'video'].includes(m.tipo) ? `<button data-sob="${m.id}" title="Sobrepor no cursor (com você em círculo)">⧉</button>` : ''}<button data-rm="${m.id}" title="Remover do projeto">✕</button></div></div>`).join('')}</div>`;
       }
       if (!p.midias.length) h += '<div class="vazio" style="margin:10px">Nenhuma mídia ainda.</div>';
     } else if (E.aba === 'texto') {
@@ -147,6 +147,12 @@ const Editor = (() => {
     $$('.mi[draggable=true]', el).forEach(d => d.ondragstart = e => e.dataTransfer.setData('text/midia', d.dataset.mid));
     $$('[data-add]', el).forEach(b => b.onclick = e => { e.stopPropagation(); adicionar(b.dataset.add, null); });
     $$('[data-sob]', el).forEach(b => b.onclick = e => { e.stopPropagation(); adicionar(b.dataset.sob, 'broll', E.t); });
+    $$('[data-rec]', el).forEach(b => b.onclick = async e => {
+      e.stopPropagation(); if (E.sujo) await salvar();
+      const j = await API.post(`/api/projetos/${E.p.id}/midia/${b.dataset.rec}/recorte`);
+      toast('Recortando o apresentador com IA… (acompanhe em Renderizações)');
+      API.esperar(j.id).then(async r => { toast(r.estado === 'concluido' ? 'Recorte pronto: nas sobreposições você aparece recortado sobre o material' : 'Recorte: ' + (r.erro || r.estado), r.estado !== 'concluido'); if (E) await recarregar(); });
+    });
     $$('[data-rm]', el).forEach(b => b.onclick = async e => { e.stopPropagation(); if (!confirm('Remover esta mídia do projeto?')) return; try { if (E.sujo) await salvar(); await API.del(`/api/projetos/${E.p.id}/midia/${b.dataset.rm}`); await recarregar(); } catch (x) { toast(x.message, true); } });
     $$('[data-txt]', el).forEach(b => b.onclick = () => { const tipo = b.dataset.txt, T = E.preset.titulos[tipo]; const id = Modelo.uid('x'); alterar(p => p.textos.push({ id, tipo, texto: tipo === 'cta' ? 'Chama no WhatsApp' : tipo === 'gancho' ? 'Seu gancho aqui' : 'Texto', inicio: r2(E.t), duracao: T ? T.duracao : 2 })); E.sel = { faixa: 'textos', id }; desenharInspetor(); });
     const lo = $('#ed-legon', el); if (lo) lo.onchange = () => alterar(p => { p.legendas.ativas = lo.checked; });
@@ -232,6 +238,8 @@ const Editor = (() => {
       if (f === 'broll') h += campo('Início (s)', num('inicio', it.inicio)) + `<label class="linha" style="margin-top:8px"><input type="checkbox" data-k="pip" ${it.pip !== false ? 'checked' : ''}> Apresentador em círculo por cima</label>`;
       if (m && m.tipo === 'video') h += `<label class="linha" style="margin-top:8px"><input type="checkbox" id="ed-verde" ${m.fundoVerde ? 'checked' : ''}> Gravado com fundo verde (recortar o apresentador)</label>` + campo('Entrada no vídeo (s)', num('entrada', r2(it.entrada || 0), 0.05, 0, m.dur)) + campo('Duração do trecho (s)', num('duracao', r2(it.duracao), 0.05, 0.2, m.dur)) + campo('Velocidade', sel('velocidade', it.velocidade || 1, [0.5, 0.75, 1, 1.25, 1.5, 2])) + (f === 'principal' ? campo('Volume', rng('volume', it.volume ?? 1, 0, 2, 0.05)) : '') + campo('Zoom (punch-in)', sel('zoom', it.zoom || 1, [[1, 'nenhum'], [1.06, '6%'], [1.12, '12%'], [1.2, '20%']]));
       else h += campo('Duração (s)', num('duracao', r2(it.duracao), 0.1, 0.3));
+      h += `<h3>Tratamento</h3>` + (m && m.tipo === 'video' ? `<label class="linha"><input type="checkbox" data-k="estabilizar" ${it.estabilizar ? 'checked' : ''}> Estabilizar (câmera na mão)</label><label class="linha"><input type="checkbox" data-k="suavizar" ${it.suavizar ? 'checked' : ''} ${(it.velocidade || 1) < 1 ? '' : 'disabled title="use com velocidade abaixo de 1x"'}> Câmera lenta suave (interpola quadros)</label>` : '')
+        + `<label class="linha"><input type="checkbox" data-k="autoCor" ${it.autoCor ? 'checked' : ''}> Correção automática de cor e branco</label>` + campo('Look de cor', sel('look', it.look || '', [['', 'Do estilo (preset)'], ['nenhum', 'Nenhum'], ['natural', 'Natural imobiliário'], ['quente-rio', 'Quente Rio'], ['luxo-noturno', 'Luxo noturno'], ['branco-clean', 'Branco clean']]));
       h += campo('Enquadramento', sel('enquadramento', it.enquadramento || 'auto', [['auto', 'Automático'], ['preencher', 'Preencher (corta pelo foco)'], ['ajustar', 'Inteiro + fundo desfocado'], ['cartao', 'Cartão (estilo Apple)']]));
       h += campo('Movimento', sel('movimento', it.movimento || 'auto', [['auto', 'Automático'], ['nenhum', 'Nenhum'], ['zoomin', 'Aproximar'], ['zoomout', 'Afastar'], ['panesq', 'Panorâmica ←'], ['pandir', 'Panorâmica →'], ['subir', 'Subir'], ['descer', 'Descer']]));
       h += campo('Ponto de foco (reenquadramento)', `<div class="linha"><span style="font-size:11px">X</span>${rng('focoX', it.focoX ?? 0.5, 0, 1, 0.05)}</div><div class="linha"><span style="font-size:11px">Y</span>${rng('focoY', it.focoY ?? (m && m.tipo === 'video' ? 0.4 : 0.5), 0, 1, 0.05)}</div>`);
@@ -243,7 +251,7 @@ const Editor = (() => {
     } else if (f === 'legendas') {
       h += campo('Texto (a palavra em destaque segue o tempo)', `<textarea id="ed-legtx" rows="3">${esc(it.palavras.map(q => q.t).join(' '))}</textarea>`) + campo('Início (s)', num('ini', r2(it.ini))) + campo('Fim (s)', num('fim', r2(it.fim))) + campo('Emoji', `<select data-k="emoji"><option value="">nenhum</option>${Modelo.EMOJIS.map(([w, c]) => `<option value="${c}" ${it.emoji === c ? 'selected' : ''}>${w[0]}</option>`).join('')}</select>`);
     } else if (f === 'audios') {
-      h += campo('Tipo', sel('tipo', it.tipo || 'musica', [['musica', 'Música (repete até o fim)'], ['narracao', 'Narração'], ['sfx', 'Efeito']])) + campo('Início (s)', num('inicio', it.inicio)) + campo('Entrada no arquivo (s)', num('entrada', it.entrada || 0)) + campo('Duração (s)', num('duracao', it.duracao)) + campo('Volume', rng('volume', it.volume ?? 1, 0, 1.5, 0.01)) + `<label class="linha" style="margin-top:8px"><input type="checkbox" data-k="ducking" ${it.ducking !== false ? 'checked' : ''}> Abaixar quando houver fala</label>`;
+      h += campo('Tipo', sel('tipo', it.tipo || 'musica', [['musica', 'Música (repete até o fim)'], ['narracao', 'Narração'], ['sfx', 'Efeito']])) + campo('Início (s)', num('inicio', it.inicio)) + campo('Entrada no arquivo (s)', num('entrada', it.entrada || 0)) + campo('Duração (s)', num('duracao', it.duracao)) + campo('Volume', rng('volume', it.volume ?? 1, 0, 1.5, 0.01)) + `<label class="linha" style="margin-top:8px"><input type="checkbox" data-k="ducking" ${it.ducking !== false ? 'checked' : ''}> Abaixar quando houver fala</label>` + (it.tipo !== 'narracao' ? `<button class="btn" id="ed-batida" style="width:100%;margin-top:12px">♪ Cortar as cenas no ritmo desta música</button><p class="sub" style="font-size:11px;margin-top:6px">Ajusta a duração das cenas sem fala para cada corte cair numa batida.</p>` : '');
     }
     el.innerHTML = h;
     $('#ed-del', el).onclick = apagarSel; $('#ed-dup', el).onclick = duplicarSel;
@@ -257,6 +265,7 @@ const Editor = (() => {
         E._ultimoRange = c.type === 'range' ? k : null;
       };
     });
+    const bt = $('#ed-batida', el); if (bt) bt.onclick = async () => { bt.disabled = true; try { if (E.sujo) await salvar(); const r = await API.post(`/api/projetos/${E.p.id}/batida`, { midiaId: it.midia }); await recarregar(); toast(`${r.bpm} BPM · ${r.ajustados} corte(s) na batida`); } catch (e) { toast(e.message, true); } bt.disabled = false; };
     const vd = $('#ed-verde', el); if (vd) vd.onchange = () => alterar(p => { const mm = p.midias.find(x => x.id === it.midia); if (mm) mm.fundoVerde = vd.checked; });
     const lt = $('#ed-legtx', el); if (lt) lt.onchange = () => alterar(p => { const i = p.legendas.grupos.findIndex(g => g.id === E.sel.id); const n = Modelo.reescrever(p.legendas.grupos[i], lt.value); if (n) p.legendas.grupos[i] = n; else { p.legendas.grupos.splice(i, 1); E.sel = null; } });
   }
